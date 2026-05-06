@@ -1,0 +1,434 @@
+{
+  "schema": 1,
+  "kind": "usb",
+  "version": "v1",
+  "blocks": {
+    "USB": {
+      "name": "USB",
+      "description": "Universal serial bus full-speed device interface",
+      "extends": null,
+      "registers": [
+        {
+          "name": "EPR",
+          "offset": 0,
+          "size": 32,
+          "description": "endpoint register",
+          "array_len": 8,
+          "array_stride": 4,
+          "fieldset_description": "endpoint register",
+          "fields": [
+            {
+              "name": "EA",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "EA",
+              "enum": null
+            },
+            {
+              "name": "STAT_TX",
+              "bit_offset": 4,
+              "bit_width": 2,
+              "description": "STAT_TX",
+              "enum": "STAT"
+            },
+            {
+              "name": "DTOG_TX",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "DTOG_TX",
+              "enum": null
+            },
+            {
+              "name": "CTR_TX",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "CTR_TX",
+              "enum": null
+            },
+            {
+              "name": "EP_KIND",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "EP_KIND",
+              "enum": null
+            },
+            {
+              "name": "EP_TYPE",
+              "bit_offset": 9,
+              "bit_width": 2,
+              "description": "EPTYPE",
+              "enum": "EP_TYPE"
+            },
+            {
+              "name": "SETUP",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "SETUP",
+              "enum": null
+            },
+            {
+              "name": "STAT_RX",
+              "bit_offset": 12,
+              "bit_width": 2,
+              "description": "STAT_RX",
+              "enum": "STAT"
+            },
+            {
+              "name": "DTOG_RX",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "DTOG_RX",
+              "enum": null
+            },
+            {
+              "name": "CTR_RX",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "CTR_RX",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CNTR",
+          "offset": 64,
+          "size": 32,
+          "description": "control register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "control register",
+          "fields": [
+            {
+              "name": "FRES",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Force a reset of the USB peripheral, exactly like a RESET signaling on the USB",
+              "enum": null
+            },
+            {
+              "name": "PDWN",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Enter power down mode",
+              "enum": null
+            },
+            {
+              "name": "LPMODE",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Enter low-power mode",
+              "enum": null
+            },
+            {
+              "name": "FSUSP",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Enter suspend mode. Clocks and static power dissipation in the analog transceiver are left unaffected",
+              "enum": null
+            },
+            {
+              "name": "RESUME",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Resume request",
+              "enum": null
+            },
+            {
+              "name": "ESOFM",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "ESOF Interrupt enabled, an interrupt request is generated when the corresponding bit in the USB_ISTR register is set",
+              "enum": null
+            },
+            {
+              "name": "SOFM",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "SOF Interrupt enabled, an interrupt request is generated when the corresponding bit in the USB_ISTR register is set",
+              "enum": null
+            },
+            {
+              "name": "RESETM",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "RESET Interrupt enabled, an interrupt request is generated when the corresponding bit in the USB_ISTR register is set",
+              "enum": null
+            },
+            {
+              "name": "SUSPM",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "SUSP Interrupt enabled, an interrupt request is generated when the corresponding bit in the USB_ISTR register is set",
+              "enum": null
+            },
+            {
+              "name": "WKUPM",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "WKUP Interrupt enabled, an interrupt request is generated when the corresponding bit in the USB_ISTR register is set",
+              "enum": null
+            },
+            {
+              "name": "ERRM",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "ERR Interrupt enabled, an interrupt request is generated when the corresponding bit in the USB_ISTR register is set",
+              "enum": null
+            },
+            {
+              "name": "PMAOVRM",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "PMAOVR Interrupt enabled, an interrupt request is generated when the corresponding bit in the USB_ISTR register is set",
+              "enum": null
+            },
+            {
+              "name": "CTRM",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "CTR Interrupt enabled, an interrupt request is generated when the corresponding bit in the USB_ISTR register is set",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "ISTR",
+          "offset": 68,
+          "size": 32,
+          "description": "interrupt status register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "interrupt status register",
+          "fields": [
+            {
+              "name": "EP_ID",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "EP_ID",
+              "enum": null
+            },
+            {
+              "name": "DIR",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "DIR",
+              "enum": "DIR"
+            },
+            {
+              "name": "ESOF",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "an SOF packet is expected but not received",
+              "enum": null
+            },
+            {
+              "name": "SOF",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "beginning of a new USB frame and it is set when a SOF packet arrives through the USB bus",
+              "enum": null
+            },
+            {
+              "name": "RESET",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "peripheral detects an active USB RESET signal at its inputs",
+              "enum": null
+            },
+            {
+              "name": "SUSP",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "no traffic has been received for 3 ms, indicating a suspend mode request from the USB bus",
+              "enum": null
+            },
+            {
+              "name": "WKUP",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "activity is detected that wakes up the USB peripheral",
+              "enum": null
+            },
+            {
+              "name": "ERR",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "One of No ANSwer, Cyclic Redundancy Check, Bit Stuffing or Framing format Violation error occurred",
+              "enum": null
+            },
+            {
+              "name": "PMAOVR",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "microcontroller has not been able to respond in time to an USB memory request",
+              "enum": null
+            },
+            {
+              "name": "CTR",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "endpoint has successfully completed a transaction",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "FNR",
+          "offset": 72,
+          "size": 32,
+          "description": "frame number register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "frame number register",
+          "fields": [
+            {
+              "name": "FN",
+              "bit_offset": 0,
+              "bit_width": 11,
+              "description": "FN",
+              "enum": null
+            },
+            {
+              "name": "LSOF",
+              "bit_offset": 11,
+              "bit_width": 2,
+              "description": "LSOF",
+              "enum": null
+            },
+            {
+              "name": "LCK",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "the frame timer remains in this state until an USB reset or USB suspend event occurs",
+              "enum": null
+            },
+            {
+              "name": "RXDM",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "received data minus upstream port data line",
+              "enum": null
+            },
+            {
+              "name": "RXDP",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "received data plus upstream port data line",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "DADDR",
+          "offset": 76,
+          "size": 32,
+          "description": "device address",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "device address",
+          "fields": [
+            {
+              "name": "ADD",
+              "bit_offset": 0,
+              "bit_width": 7,
+              "description": "device address",
+              "enum": null
+            },
+            {
+              "name": "EF",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "USB device enabled",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "BTABLE",
+          "offset": 80,
+          "size": 32,
+          "description": "Buffer table address",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Buffer table address",
+          "fields": [
+            {
+              "name": "BTABLE",
+              "bit_offset": 3,
+              "bit_width": 13,
+              "description": "BTABLE",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "DIR": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "To",
+          "value": 0,
+          "description": "data transmitted by the USB peripheral to the host PC"
+        },
+        {
+          "name": "From",
+          "value": 1,
+          "description": "data received by the USB peripheral from the host PC"
+        }
+      ]
+    },
+    "EP_TYPE": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Bulk",
+          "value": 0,
+          "description": "Bulk endpoint"
+        },
+        {
+          "name": "Control",
+          "value": 1,
+          "description": "Control endpoint"
+        },
+        {
+          "name": "Iso",
+          "value": 2,
+          "description": "Iso endpoint"
+        },
+        {
+          "name": "Interrupt",
+          "value": 3,
+          "description": "Interrupt endpoint"
+        }
+      ]
+    },
+    "STAT": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Disabled",
+          "value": 0,
+          "description": "all requests addressed to this endpoint are ignored"
+        },
+        {
+          "name": "Stall",
+          "value": 1,
+          "description": "the endpoint is stalled and all requests result in a STALL handshake"
+        },
+        {
+          "name": "Nak",
+          "value": 2,
+          "description": "the endpoint is naked and all requests result in a NAK handshake"
+        },
+        {
+          "name": "Valid",
+          "value": 3,
+          "description": "this endpoint is enabled, requests are ACKed"
+        }
+      ]
+    }
+  }
+}

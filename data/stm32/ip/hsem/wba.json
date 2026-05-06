@@ -1,0 +1,344 @@
+{
+  "schema": 1,
+  "kind": "hsem",
+  "version": "wba",
+  "blocks": {
+    "HSEM": {
+      "name": "HSEM",
+      "description": "Hardware semaphore (HSEM), STM32WBA.",
+      "extends": null,
+      "registers": [
+        {
+          "name": "R",
+          "offset": 0,
+          "size": 32,
+          "description": "HSEM 2-step write lock and read-back registers R0–R15.",
+          "array_len": 16,
+          "array_stride": 4,
+          "fieldset_description": "HSEM semaphore register.",
+          "fields": [
+            {
+              "name": "PROCID",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "Semaphore process ID.",
+              "enum": null
+            },
+            {
+              "name": "COREID",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "Semaphore core ID.",
+              "enum": null
+            },
+            {
+              "name": "SEC",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "Semaphore secure bit.",
+              "enum": null
+            },
+            {
+              "name": "PRIV",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Semaphore privilege bit.",
+              "enum": null
+            },
+            {
+              "name": "LOCK",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "Lock indication.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "RLR",
+          "offset": 128,
+          "size": 32,
+          "description": "HSEM 1-step read lock registers RLR0–RLR15.",
+          "array_len": 16,
+          "array_stride": 4,
+          "fieldset_description": "HSEM read lock register.",
+          "fields": [
+            {
+              "name": "PROCID",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "Semaphore process ID.",
+              "enum": null
+            },
+            {
+              "name": "COREID",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "Semaphore core ID.",
+              "enum": null
+            },
+            {
+              "name": "SEC",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "Semaphore secure bit.",
+              "enum": null
+            },
+            {
+              "name": "PRIV",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Semaphore privilege bit.",
+              "enum": null
+            },
+            {
+              "name": "LOCK",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "Lock indication.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "IER",
+          "offset": 256,
+          "size": 32,
+          "description": "HSEM interrupt enable register.",
+          "array_len": 1,
+          "array_stride": 16,
+          "fieldset_description": "HSEM interrupt enable register.",
+          "fields": [
+            {
+              "name": "ISE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Interrupt semaphore n enable bit.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "ICR",
+          "offset": 260,
+          "size": 32,
+          "description": "HSEM interrupt clear register.",
+          "array_len": 1,
+          "array_stride": 16,
+          "fieldset_description": "HSEM interrupt clear register.",
+          "fields": [
+            {
+              "name": "ISC",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Interrupt semaphore n clear bit.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "ISR",
+          "offset": 264,
+          "size": 32,
+          "description": "HSEM interrupt status register.",
+          "array_len": 1,
+          "array_stride": 16,
+          "fieldset_description": "HSEM interrupt status register.",
+          "fields": [
+            {
+              "name": "ISF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Interrupt semaphore n status bit before enable (mask).",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "MISR",
+          "offset": 268,
+          "size": 32,
+          "description": "HSEM masked interrupt status register.",
+          "array_len": 1,
+          "array_stride": 16,
+          "fieldset_description": "HSEM masked interrupt status register.",
+          "fields": [
+            {
+              "name": "MISF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Masked interrupt semaphore n status bit after enable (mask).",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SIER",
+          "offset": 384,
+          "size": 32,
+          "description": "HSEM secure interrupt enable register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "HSEM secure interrupt enable register.",
+          "fields": [
+            {
+              "name": "ISE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Secure interrupt semaphore n enable bit.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SICR",
+          "offset": 388,
+          "size": 32,
+          "description": "HSEM secure interrupt clear register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "HSEM secure interrupt clear register.",
+          "fields": [
+            {
+              "name": "ISC",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Secure interrupt semaphore n clear bit.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SISR",
+          "offset": 392,
+          "size": 32,
+          "description": "HSEM secure interrupt status register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "HSEM secure interrupt status register.",
+          "fields": [
+            {
+              "name": "ISF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Secure interrupt semaphore n status bit before enable (mask).",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SMISR",
+          "offset": 396,
+          "size": 32,
+          "description": "HSEM secure masked interrupt status register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "HSEM secure masked interrupt status register.",
+          "fields": [
+            {
+              "name": "MISF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Secure masked interrupt semaphore n status bit after enable (mask).",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SECCFGR",
+          "offset": 512,
+          "size": 32,
+          "description": "HSEM security configuration register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "HSEM security configuration register.",
+          "fields": [
+            {
+              "name": "SEC",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Semaphore n secure attribute status bit.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "PRIVCFGR",
+          "offset": 528,
+          "size": 32,
+          "description": "HSEM privilege configuration register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "HSEM privilege configuration register.",
+          "fields": [
+            {
+              "name": "PRIV",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Semaphore n privilege attribute status bit.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CR",
+          "offset": 560,
+          "size": 32,
+          "description": "HSEM semaphore clear register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "HSEM semaphore clear register.",
+          "fields": [
+            {
+              "name": "COREID",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "COREID of semaphores to be cleared.",
+              "enum": null
+            },
+            {
+              "name": "SEC",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "SEC value of semaphores to be cleared.",
+              "enum": null
+            },
+            {
+              "name": "PRIV",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "PRIV value of semaphores to be cleared.",
+              "enum": null
+            },
+            {
+              "name": "KEY",
+              "bit_offset": 16,
+              "bit_width": 16,
+              "description": "Semaphore clear key.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "KEYR",
+          "offset": 564,
+          "size": 32,
+          "description": "HSEM semaphore clear key register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "HSEM semaphore clear key register.",
+          "fields": [
+            {
+              "name": "KEY",
+              "bit_offset": 16,
+              "bit_width": 16,
+              "description": "Semaphore clear key.",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {}
+}

@@ -1,0 +1,247 @@
+{
+  "schema": 1,
+  "kind": "comp",
+  "version": "v2",
+  "blocks": {
+    "COMP": {
+      "name": "COMP",
+      "description": "Comparator v2. (RM0440 24)",
+      "extends": null,
+      "registers": [
+        {
+          "name": "CSR",
+          "offset": 0,
+          "size": 32,
+          "description": "Comparator control and status register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Comparator control and status register.",
+          "fields": [
+            {
+              "name": "EN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "COMP enable bit.",
+              "enum": null
+            },
+            {
+              "name": "INMSEL",
+              "bit_offset": 4,
+              "bit_width": 3,
+              "description": "Comparator signal selector for inverting input INM. (RM0440 24.3.2 Table 197)",
+              "enum": "INM"
+            },
+            {
+              "name": "INPSEL",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Comparator signal selector for non-inverting input INP. (RM0440 24.3.2 Table 196)",
+              "enum": null
+            },
+            {
+              "name": "POLARITY",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Comparator polarity selector.",
+              "enum": "Polarity"
+            },
+            {
+              "name": "HYST",
+              "bit_offset": 16,
+              "bit_width": 3,
+              "description": "Comparator hysteresis selector.",
+              "enum": "Hysteresis"
+            },
+            {
+              "name": "BLANKSEL",
+              "bit_offset": 19,
+              "bit_width": 3,
+              "description": "Comparator blanking source selector. (RM0440 24.3.6 Table 198)",
+              "enum": "Blanking"
+            },
+            {
+              "name": "BRGEN",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "Vrefint resistor bridge enable. (RM0440 24.6)",
+              "enum": null
+            },
+            {
+              "name": "SCALEN",
+              "bit_offset": 23,
+              "bit_width": 1,
+              "description": "Vrefint scaled input enable. (RM0440 24.6)",
+              "enum": null
+            },
+            {
+              "name": "VALUE",
+              "bit_offset": 30,
+              "bit_width": 1,
+              "description": "Comparator output status. (READ ONLY)",
+              "enum": null
+            },
+            {
+              "name": "LOCK",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "CSR register lock.",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "Blanking": {
+      "bit_size": 3,
+      "variants": [
+        {
+          "name": "NoBlanking",
+          "value": 0,
+          "description": "No blanking."
+        },
+        {
+          "name": "Blank1",
+          "value": 1,
+          "description": "Check data sheet for blanking options"
+        },
+        {
+          "name": "Blank2",
+          "value": 2,
+          "description": "Check data sheet for blanking options"
+        },
+        {
+          "name": "Blank3",
+          "value": 3,
+          "description": "Check data sheet for blanking options"
+        },
+        {
+          "name": "Blank4",
+          "value": 4,
+          "description": "Check data sheet for blanking options"
+        },
+        {
+          "name": "Blank5",
+          "value": 5,
+          "description": "Check data sheet for blanking options"
+        },
+        {
+          "name": "Blank6",
+          "value": 6,
+          "description": "Check data sheet for blanking options"
+        },
+        {
+          "name": "Blank7",
+          "value": 7,
+          "description": "Check data sheet for blanking options"
+        }
+      ]
+    },
+    "Hysteresis": {
+      "bit_size": 3,
+      "variants": [
+        {
+          "name": "None",
+          "value": 0,
+          "description": null
+        },
+        {
+          "name": "Hyst10m",
+          "value": 1,
+          "description": "10mV hysteresis"
+        },
+        {
+          "name": "Hyst20m",
+          "value": 2,
+          "description": "20mV hysteresis"
+        },
+        {
+          "name": "Hyst30m",
+          "value": 3,
+          "description": "30mV hysteresis"
+        },
+        {
+          "name": "Hyst40m",
+          "value": 4,
+          "description": "40mV hysteresis"
+        },
+        {
+          "name": "Hyst50m",
+          "value": 5,
+          "description": "50mV hysteresis"
+        },
+        {
+          "name": "Hyst60m",
+          "value": 6,
+          "description": "60mV hysteresis"
+        },
+        {
+          "name": "Hyst70m",
+          "value": 7,
+          "description": "70mV hysteresis"
+        }
+      ]
+    },
+    "INM": {
+      "bit_size": 3,
+      "variants": [
+        {
+          "name": "QuarterVRef",
+          "value": 0,
+          "description": "Inverting input set to 1/4 VRef"
+        },
+        {
+          "name": "HalfVRef",
+          "value": 1,
+          "description": "Inverting input set to 1/2 VRef"
+        },
+        {
+          "name": "ThreeQuarterVRef",
+          "value": 2,
+          "description": "Inverting input set to 3/4 VRef"
+        },
+        {
+          "name": "VRef",
+          "value": 3,
+          "description": "Inverting input set to VRef"
+        },
+        {
+          "name": "DACA",
+          "value": 4,
+          "description": "Inverting input set to DAC output (RM0440 24.3.2 Table)"
+        },
+        {
+          "name": "DACB",
+          "value": 5,
+          "description": "Inverting input set to DAC output (RM0440 24.3.2 Table)"
+        },
+        {
+          "name": "INM1",
+          "value": 6,
+          "description": "Inverting input set to IO (RM0440 24.3.2 Table)"
+        },
+        {
+          "name": "INM2",
+          "value": 7,
+          "description": "Inverting input set to IO (RM0440 24.3.2 Table)"
+        }
+      ]
+    },
+    "Polarity": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "NotInverted",
+          "value": 0,
+          "description": "Output is not inverted."
+        },
+        {
+          "name": "Inverted",
+          "value": 1,
+          "description": "Output is inverted."
+        }
+      ]
+    }
+  }
+}

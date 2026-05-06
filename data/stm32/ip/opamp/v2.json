@@ -1,0 +1,309 @@
+{
+  "schema": 1,
+  "kind": "opamp",
+  "version": "v2",
+  "blocks": {
+    "OPAMP": {
+      "name": "OPAMP",
+      "description": "Operational amplifier",
+      "extends": null,
+      "registers": [
+        {
+          "name": "CSR",
+          "offset": 0,
+          "size": 32,
+          "description": "Control/status register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Control/status register",
+          "fields": [
+            {
+              "name": "OPAMPEN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Enable",
+              "enum": null
+            },
+            {
+              "name": "FORCE_VP",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Force internal reference on VP (reserved for test)",
+              "enum": null
+            },
+            {
+              "name": "VP_SEL",
+              "bit_offset": 2,
+              "bit_width": 2,
+              "description": "Non-inverting input selection",
+              "enum": "VP_SEL"
+            },
+            {
+              "name": "VM_SEL",
+              "bit_offset": 5,
+              "bit_width": 2,
+              "description": "Inverting input selection",
+              "enum": "VM_SEL"
+            },
+            {
+              "name": "TCM_EN",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Timer controlled Mux mode enable",
+              "enum": null
+            },
+            {
+              "name": "VMS_SEL",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Inverting input secondary selection",
+              "enum": "VMS_SEL"
+            },
+            {
+              "name": "VPS_SEL",
+              "bit_offset": 9,
+              "bit_width": 2,
+              "description": "Non-inverting input secondary selection",
+              "enum": "VPS_SEL"
+            },
+            {
+              "name": "CALON",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "Calibration mode enable",
+              "enum": null
+            },
+            {
+              "name": "CALSEL",
+              "bit_offset": 12,
+              "bit_width": 2,
+              "description": "Calibration selection",
+              "enum": "CALSEL"
+            },
+            {
+              "name": "PGA_GAIN",
+              "bit_offset": 14,
+              "bit_width": 4,
+              "description": "Gain in PGA mode",
+              "enum": "PGA_GAIN"
+            },
+            {
+              "name": "USERTRIM",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "User trimming enable",
+              "enum": null
+            },
+            {
+              "name": "TRIMOFFSETP",
+              "bit_offset": 19,
+              "bit_width": 5,
+              "description": "Offset trimming value (PMOS)",
+              "enum": null
+            },
+            {
+              "name": "TRIMOFFSETN",
+              "bit_offset": 24,
+              "bit_width": 5,
+              "description": "Offset trimming value (NMOS)",
+              "enum": null
+            },
+            {
+              "name": "TSTREF",
+              "bit_offset": 29,
+              "bit_width": 1,
+              "description": "Output the internal reference voltage",
+              "enum": null
+            },
+            {
+              "name": "CALOUT",
+              "bit_offset": 30,
+              "bit_width": 1,
+              "description": "Calibration output",
+              "enum": null
+            },
+            {
+              "name": "LOCK",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "OPAMP lock",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "CALSEL": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Percent3_3",
+          "value": 0,
+          "description": "VREFOPAMP = 3.3% VDDA"
+        },
+        {
+          "name": "Percent10",
+          "value": 1,
+          "description": "VREFOPAMP = 10% VDDA"
+        },
+        {
+          "name": "Percent50",
+          "value": 2,
+          "description": "VREFOPAMP = 50% VDDA"
+        },
+        {
+          "name": "Percent90",
+          "value": 3,
+          "description": "VREFOPAMP = 90% VDDA"
+        }
+      ]
+    },
+    "PGA_GAIN": {
+      "bit_size": 4,
+      "variants": [
+        {
+          "name": "Gain2",
+          "value": 0,
+          "description": "Gain 2"
+        },
+        {
+          "name": "Gain4",
+          "value": 1,
+          "description": "Gain 4"
+        },
+        {
+          "name": "Gain8",
+          "value": 2,
+          "description": "Gain 8"
+        },
+        {
+          "name": "Gain16",
+          "value": 4,
+          "description": "Gain 16"
+        },
+        {
+          "name": "Gain2_VM0",
+          "value": 8,
+          "description": "Gain 2, feedback connected to VM0"
+        },
+        {
+          "name": "Gain4_VM0",
+          "value": 9,
+          "description": "Gain 4, feedback connected to VM0"
+        },
+        {
+          "name": "Gain8_VM0",
+          "value": 10,
+          "description": "Gain 8, feedback connected to VM0"
+        },
+        {
+          "name": "Gain16_VM0",
+          "value": 11,
+          "description": "Gain 16, feedback connected to VM0"
+        },
+        {
+          "name": "Gain2_VM1",
+          "value": 12,
+          "description": "Gain 2, feedback connected to VM1"
+        },
+        {
+          "name": "Gain4_VM1",
+          "value": 13,
+          "description": "Gain 4, feedback connected to VM1"
+        },
+        {
+          "name": "Gain8_VM1",
+          "value": 14,
+          "description": "Gain 8, feedback connected to VM1"
+        },
+        {
+          "name": "Gain16_VM1",
+          "value": 15,
+          "description": "Gain 16, feedback connected to VM1"
+        }
+      ]
+    },
+    "VMS_SEL": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "PC5",
+          "value": 0,
+          "description": "PC5 (VM0) used as OPAMP2 inverting input when TCM_EN = 1"
+        },
+        {
+          "name": "PA5",
+          "value": 1,
+          "description": "PA5 (VM1) used as OPAMP2 inverting input when TCM_EN = 1"
+        }
+      ]
+    },
+    "VM_SEL": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "PC5",
+          "value": 0,
+          "description": "PC5 (VM0) used as OPAMP2 inverting input"
+        },
+        {
+          "name": "PA5",
+          "value": 1,
+          "description": "PA5 (VM1) used as OPAMP2 inverting input"
+        },
+        {
+          "name": "PGA",
+          "value": 2,
+          "description": "Resistor feedback output (PGA mode)"
+        },
+        {
+          "name": "Follower",
+          "value": 3,
+          "description": "Follower mode"
+        }
+      ]
+    },
+    "VPS_SEL": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "PB14",
+          "value": 1,
+          "description": "PB14 used as OPAMP2 non-inverting input when TCM_EN=1"
+        },
+        {
+          "name": "PB0",
+          "value": 2,
+          "description": "PB0 used as OPAMP2 non-inverting input when TCM_EN=1"
+        },
+        {
+          "name": "PA7",
+          "value": 3,
+          "description": "PA7 used as OPAMP2 non-inverting input when TCM_EN=1"
+        }
+      ]
+    },
+    "VP_SEL": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "PB14",
+          "value": 1,
+          "description": "PB14 used as OPAMP2 non-inverting input"
+        },
+        {
+          "name": "PB0",
+          "value": 2,
+          "description": "PB0 used as OPAMP2 non-inverting input"
+        },
+        {
+          "name": "PA7",
+          "value": 3,
+          "description": "PA7 used as OPAMP2 non-inverting input"
+        }
+      ]
+    }
+  }
+}

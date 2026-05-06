@@ -1,0 +1,302 @@
+{
+  "schema": 1,
+  "kind": "pwr",
+  "version": "l0",
+  "blocks": {
+    "PWR": {
+      "name": "PWR",
+      "description": "Power control",
+      "extends": null,
+      "registers": [
+        {
+          "name": "CR",
+          "offset": 0,
+          "size": 32,
+          "description": "power control register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "power control register",
+          "fields": [
+            {
+              "name": "LPSDSR",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Low-power deepsleep/Sleep/Low-power run",
+              "enum": "MODE"
+            },
+            {
+              "name": "PDDS",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Power down deepsleep",
+              "enum": "PDDS"
+            },
+            {
+              "name": "CWUF",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Clear wakeup flag",
+              "enum": null
+            },
+            {
+              "name": "CSBF",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Clear standby flag",
+              "enum": null
+            },
+            {
+              "name": "PVDE",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Power voltage detector enable",
+              "enum": null
+            },
+            {
+              "name": "PLS",
+              "bit_offset": 5,
+              "bit_width": 3,
+              "description": "PVD level selection",
+              "enum": "PLS"
+            },
+            {
+              "name": "DBP",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Disable backup domain write protection",
+              "enum": null
+            },
+            {
+              "name": "ULP",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Ultra-low-power mode",
+              "enum": null
+            },
+            {
+              "name": "FWU",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Fast wakeup",
+              "enum": null
+            },
+            {
+              "name": "VOS",
+              "bit_offset": 11,
+              "bit_width": 2,
+              "description": "Voltage scaling range selection",
+              "enum": "VOS"
+            },
+            {
+              "name": "DS_EE_KOFF",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Deep sleep mode with Flash memory kept off",
+              "enum": "DS_EE_KOFF"
+            },
+            {
+              "name": "LPRUN",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "Low power run mode",
+              "enum": "MODE"
+            },
+            {
+              "name": "LPDS",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Regulator in Low-power deepsleep mode",
+              "enum": "MODE"
+            }
+          ]
+        },
+        {
+          "name": "CSR",
+          "offset": 4,
+          "size": 32,
+          "description": "power control/status register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "power control/status register",
+          "fields": [
+            {
+              "name": "WUF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Wakeup flag",
+              "enum": null
+            },
+            {
+              "name": "SBF",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Standby flag",
+              "enum": null
+            },
+            {
+              "name": "PVDO",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "PVD output",
+              "enum": null
+            },
+            {
+              "name": "VREFINTRDYF",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Internal voltage reference ready flag",
+              "enum": null
+            },
+            {
+              "name": "VOSF",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Voltage Scaling select flag",
+              "enum": null
+            },
+            {
+              "name": "REGLPF",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Regulator LP flag",
+              "enum": null
+            },
+            {
+              "name": "EWUP1",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Enable WKUP pin 1",
+              "enum": null
+            },
+            {
+              "name": "EWUP2",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Enable WKUP pin 2",
+              "enum": null
+            },
+            {
+              "name": "EWUP3",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Enable WKUP pin 3",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "DS_EE_KOFF": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "NVMWakeUp",
+          "value": 0,
+          "description": "NVM woken up when exiting from Deepsleep mode even if the bit RUN_PD is set"
+        },
+        {
+          "name": "NVMSleep",
+          "value": 1,
+          "description": "NVM not woken up when exiting from low-power mode (if the bit RUN_PD is set)"
+        }
+      ]
+    },
+    "MODE": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "MAIN_MODE",
+          "value": 0,
+          "description": "Voltage regulator in Main mode"
+        },
+        {
+          "name": "LOW_POWER_MODE",
+          "value": 1,
+          "description": "Voltage regulator switches to low-power mode"
+        }
+      ]
+    },
+    "PDDS": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "STOP_MODE",
+          "value": 0,
+          "description": "Enter Stop mode when the CPU enters deepsleep"
+        },
+        {
+          "name": "STANDBY_MODE",
+          "value": 1,
+          "description": "Enter Standby mode when the CPU enters deepsleep"
+        }
+      ]
+    },
+    "PLS": {
+      "bit_size": 3,
+      "variants": [
+        {
+          "name": "V1_9",
+          "value": 0,
+          "description": "1.9 V"
+        },
+        {
+          "name": "V2_1",
+          "value": 1,
+          "description": "2.1 V"
+        },
+        {
+          "name": "V2_3",
+          "value": 2,
+          "description": "2.3 V"
+        },
+        {
+          "name": "V2_5",
+          "value": 3,
+          "description": "2.5 V"
+        },
+        {
+          "name": "V2_7",
+          "value": 4,
+          "description": "2.7 V"
+        },
+        {
+          "name": "V2_9",
+          "value": 5,
+          "description": "2.9 V"
+        },
+        {
+          "name": "V3_1",
+          "value": 6,
+          "description": "3.1 V"
+        },
+        {
+          "name": "External",
+          "value": 7,
+          "description": "External input analog voltage (Compare internally to VREFINT)"
+        }
+      ]
+    },
+    "VOS": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Range1",
+          "value": 1,
+          "description": "1.8 V (range 1)"
+        },
+        {
+          "name": "Range2",
+          "value": 2,
+          "description": "1.5 V (range 2)"
+        },
+        {
+          "name": "Range3",
+          "value": 3,
+          "description": "1.2 V (range 3)"
+        }
+      ]
+    }
+  }
+}

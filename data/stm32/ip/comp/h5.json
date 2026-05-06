@@ -1,0 +1,324 @@
+{
+  "schema": 1,
+  "kind": "comp",
+  "version": "h5",
+  "blocks": {
+    "COMP": {
+      "name": "COMP",
+      "description": "Comparator.",
+      "extends": null,
+      "registers": [
+        {
+          "name": "SR",
+          "offset": 0,
+          "size": 32,
+          "description": "Comparator status register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Comparator status register.",
+          "fields": [
+            {
+              "name": "CVAL",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "COMP Channel1 output status bit This bit is read-only. It reflects the current COMP Channel1 output taking into account POLARITY and BLANKING bits effect.",
+              "enum": null
+            },
+            {
+              "name": "CIF",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "COMP Channel1 interrupt flag This bit is set by hardware when the COMP Channel1 output is set This bit is cleared by software writing 1 the CC1IF bit in the COMP_ICFR register.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "ICFR",
+          "offset": 4,
+          "size": 32,
+          "description": "Comparator interrupt clear flag register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Comparator interrupt clear flag register.",
+          "fields": [
+            {
+              "name": "CCIF",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Clear COMP Channel1 interrupt flag Writing 1 clears the C1IF flag in the COMP_SR register.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CFGR1",
+          "offset": 12,
+          "size": 32,
+          "description": "Comparator configuration register 1.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Comparator configuration register 1.",
+          "fields": [
+            {
+              "name": "EN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "COMP Channel1 enable This bit is set and cleared by software (only if LOCK not set). It enables the COMP-Channel1.",
+              "enum": null
+            },
+            {
+              "name": "BRGEN",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Scaler bridge enable This bit is set and cleared by software (only if LOCK not set). This bit enables the bridge of the scaler. If SCALEN is set and BRGEN is reset, all four scaler outputs provide the same level V<sub>REF_COMP</sub> (similar to V<sub>REFINT</sub>). If SCALEN and BRGEN are set, the four scaler outputs provide V<sub>REF_COMP</sub>, 3/4-V<sub>REF_COMP</sub>, 1/2-V<sub>REF_COMP</sub> and 1/4-V<sub>REF_COMP</sub> levels, respectively.",
+              "enum": null
+            },
+            {
+              "name": "SCALEN",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Voltage scaler enable This bit is set and cleared by software (only if LOCK not set). This bit enables the V<sub>REFINT</sub> scaler for the COMP channels.",
+              "enum": null
+            },
+            {
+              "name": "POLARITY",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "COMP channel1 polarity selection This bit is set and cleared by software (only if LOCK not set). It inverts COMP channel1 polarity.",
+              "enum": null
+            },
+            {
+              "name": "ITEN",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "COMP channel1 interrupt enable This bit is set and cleared by software (only if LOCK not set). This bit enable the interrupt generation of the COMP channel1.",
+              "enum": null
+            },
+            {
+              "name": "HYST",
+              "bit_offset": 8,
+              "bit_width": 2,
+              "description": "COMP channel1 hysteresis selection These bits are set and cleared by software (only if LOCK not set). They select the hysteresis voltage of the COMP channel1.",
+              "enum": "HYST"
+            },
+            {
+              "name": "PWRMODE",
+              "bit_offset": 12,
+              "bit_width": 2,
+              "description": "Power mode of the COMP channel1 These bits are set and cleared by software (only if LOCK not set). They control the power/speed of the COMP channel1.",
+              "enum": "PWRMODE"
+            },
+            {
+              "name": "INMSEL",
+              "bit_offset": 16,
+              "bit_width": 4,
+              "description": "COMP channel1 inverting input selection These bits are set and cleared by software (only if LOCK not set). They select which input is connected to the input minus of the COMP channel. Note: See Table-146: COMP1 inverting input assignment for more details.",
+              "enum": "INMSEL"
+            },
+            {
+              "name": "INPSEL1",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "COMP noninverting input selection This bit is set and cleared by software (only if LOCK not set). They select which input is connected to the positive input of COMP channel. Note: See Table-145: COMP1 noninverting input assignment for more details.",
+              "enum": null
+            },
+            {
+              "name": "INPSEL2",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "COMP noninverting input selection This bit is set and cleared by software (only if LOCK not set). They select which input is connected to the positive input of the COMP channel. See Table-145: COMP1 noninverting input assignment for more details.",
+              "enum": null
+            },
+            {
+              "name": "BLANKING",
+              "bit_offset": 24,
+              "bit_width": 4,
+              "description": "COMP Channel1 blanking source selection Bits of this field are set and cleared by software (only if LOCK not set). The field selects the input source for COMP Channel1 output blanking: All other values: reserved.",
+              "enum": "BLANKING"
+            },
+            {
+              "name": "LOCK",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "Lock This bit is set by software and cleared by a hardware system reset. It locks the whole content of the COMP Channel1 configuration register COMP_CFGR1[31:0].",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CFGR2",
+          "offset": 16,
+          "size": 32,
+          "description": "Comparator configuration register 2.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Comparator configuration register 2.",
+          "fields": [
+            {
+              "name": "INPSEL0",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "COMP non-inverting input selection This bit is set and cleared by software (only if LOCK not set). They select which input is connected to the positive input of COMP channel. See Table-145: COMP1 noninverting input assignment for more details.",
+              "enum": null
+            },
+            {
+              "name": "LOCK",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "Lock This bit is set by software and cleared by a hardware system reset. It locks the whole content of the COMP Channel1 configuration register COMP_CFGR2[31:0].",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "BLANKING": {
+      "bit_size": 4,
+      "variants": [
+        {
+          "name": "NoBlanking",
+          "value": 0,
+          "description": null
+        },
+        {
+          "name": "Tim1Oc5",
+          "value": 1,
+          "description": null
+        },
+        {
+          "name": "Tim2Oc3",
+          "value": 2,
+          "description": null
+        },
+        {
+          "name": "Tim3Oc3",
+          "value": 3,
+          "description": null
+        },
+        {
+          "name": "Tim3Oc4",
+          "value": 4,
+          "description": null
+        },
+        {
+          "name": "Lptim1Ch2",
+          "value": 5,
+          "description": null
+        },
+        {
+          "name": "Lptim2Ch2",
+          "value": 6,
+          "description": null
+        }
+      ]
+    },
+    "HYST": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "None",
+          "value": 0,
+          "description": null
+        },
+        {
+          "name": "Low",
+          "value": 1,
+          "description": null
+        },
+        {
+          "name": "Medium",
+          "value": 2,
+          "description": null
+        },
+        {
+          "name": "High",
+          "value": 3,
+          "description": null
+        }
+      ]
+    },
+    "INMSEL": {
+      "bit_size": 4,
+      "variants": [
+        {
+          "name": "VRef_1over4",
+          "value": 0,
+          "description": null
+        },
+        {
+          "name": "VRef_1over2",
+          "value": 1,
+          "description": null
+        },
+        {
+          "name": "VRef_3over4",
+          "value": 2,
+          "description": null
+        },
+        {
+          "name": "VRef",
+          "value": 3,
+          "description": null
+        },
+        {
+          "name": "Dac1Out1",
+          "value": 4,
+          "description": null
+        },
+        {
+          "name": "Inm1",
+          "value": 5,
+          "description": null
+        },
+        {
+          "name": "Inm2",
+          "value": 6,
+          "description": null
+        },
+        {
+          "name": "Inm3",
+          "value": 7,
+          "description": null
+        },
+        {
+          "name": "VSense",
+          "value": 8,
+          "description": null
+        },
+        {
+          "name": "VBat_1over4",
+          "value": 9,
+          "description": null
+        }
+      ]
+    },
+    "PWRMODE": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "High",
+          "value": 0,
+          "description": "High speed / full power"
+        },
+        {
+          "name": "Medium",
+          "value": 1,
+          "description": "Medium speed / medium power"
+        },
+        {
+          "name": "MediumEither",
+          "value": 2,
+          "description": "Medium speed / medium power"
+        },
+        {
+          "name": "Low",
+          "value": 3,
+          "description": "Ultra low power / ultra-low-power"
+        }
+      ]
+    }
+  }
+}

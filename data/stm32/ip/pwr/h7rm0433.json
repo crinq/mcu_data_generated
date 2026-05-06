@@ -1,0 +1,456 @@
+{
+  "schema": 1,
+  "kind": "pwr",
+  "version": "h7rm0433",
+  "blocks": {
+    "PWR": {
+      "name": "PWR",
+      "description": "PWR",
+      "extends": null,
+      "registers": [
+        {
+          "name": "CR1",
+          "offset": 0,
+          "size": 32,
+          "description": "PWR control register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "PWR control register 1",
+          "fields": [
+            {
+              "name": "LPDS",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Low-power Deepsleep with SVOS3 (SVOS4 and SVOS5 always use low-power, regardless of the setting of this bit)",
+              "enum": null
+            },
+            {
+              "name": "PVDE",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Programmable voltage detector enable",
+              "enum": null
+            },
+            {
+              "name": "PLS",
+              "bit_offset": 5,
+              "bit_width": 3,
+              "description": "Programmable voltage detector level selection These bits select the voltage threshold detected by the PVD. Note: Refer to Section Electrical characteristics of the product datasheet for more details.",
+              "enum": null
+            },
+            {
+              "name": "DBP",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Disable backup domain write protection In reset state, the RCC_BDCR register, the RTC registers (including the backup registers), BREN and MOEN bits in PWR_CR2 register, are protected against parasitic write access. This bit must be set to enable write access to these registers.",
+              "enum": null
+            },
+            {
+              "name": "FLPS",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Flash low-power mode in DStop mode This bit allows to obtain the best trade-off between low-power consumption and restart time when exiting from DStop mode. When it is set, the Flash memory enters low-power mode when D1 domain is in DStop mode.",
+              "enum": null
+            },
+            {
+              "name": "SVOS",
+              "bit_offset": 14,
+              "bit_width": 2,
+              "description": "System Stop mode voltage scaling selection These bits control the VCORE voltage level in system Stop mode, to obtain the best trade-off between power consumption and performance.",
+              "enum": null
+            },
+            {
+              "name": "AVDEN",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Peripheral voltage monitor on VDDA enable",
+              "enum": null
+            },
+            {
+              "name": "ALS",
+              "bit_offset": 17,
+              "bit_width": 2,
+              "description": "Analog voltage detector level selection These bits select the voltage threshold detected by the AVD.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CSR1",
+          "offset": 4,
+          "size": 32,
+          "description": "PWR control status register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "PWR control status register 1",
+          "fields": [
+            {
+              "name": "PVDO",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Programmable voltage detect output This bit is set and cleared by hardware. It is valid only if the PVD has been enabled by the PVDE bit. Note: since the PVD is disabled in Standby mode, this bit is equal to 0 after Standby or reset until the PVDE bit is set.",
+              "enum": null
+            },
+            {
+              "name": "ACTVOSRDY",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Voltage levels ready bit for currently used VOS and SDLEVEL This bit is set to 1 by hardware when the voltage regulator and the SD converter are both disabled and Bypass mode is selected in PWR control register 3 (PWR_CR3).",
+              "enum": null
+            },
+            {
+              "name": "ACTVOS",
+              "bit_offset": 14,
+              "bit_width": 2,
+              "description": "VOS currently applied for VCORE voltage scaling selection. These bits reflect the last VOS value applied to the PMU.",
+              "enum": null
+            },
+            {
+              "name": "AVDO",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Analog voltage detector output on VDDA This bit is set and cleared by hardware. It is valid only if AVD on VDDA is enabled by the AVDEN bit. Note: Since the AVD is disabled in Standby mode, this bit is equal to 0 after Standby or reset until the AVDEN bit is set.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CR2",
+          "offset": 8,
+          "size": 32,
+          "description": "This register is not reset by wakeup from Standby mode, RESET signal and VDD POR. It is only reset by VSW POR and VSWRST reset. This register shall not be accessed when VSWRST bit in RCC_BDCR register resets the VSW domain.After reset, PWR_CR2 register is write-protected. Prior to modifying its content, the DBP bit in PWR_CR1 register must be set to disable the write protection.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "This register is not reset by wakeup from Standby mode, RESET signal and VDD POR. It is only reset by VSW POR and VSWRST reset. This register shall not be accessed when VSWRST bit in RCC_BDCR register resets the VSW domain.After reset, PWR_CR2 register is write-protected. Prior to modifying its content, the DBP bit in PWR_CR1 register must be set to disable the write protection.",
+          "fields": [
+            {
+              "name": "BREN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Backup regulator enable When set, the Backup regulator (used to maintain the backup RAM content in Standby and VBAT modes) is enabled. If BREN is reset, the backup regulator is switched off. The backup RAM can still be used in Run and Stop modes. However, its content will be lost in Standby and VBAT modes. If BREN is set, the application must wait till the Backup Regulator Ready flag (BRRDY) is set to indicate that the data written into the SRAM will be maintained in Standby and VBAT modes.",
+              "enum": null
+            },
+            {
+              "name": "MONEN",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "VBAT and temperature monitoring enable When set, the VBAT supply and temperature monitoring is enabled.",
+              "enum": null
+            },
+            {
+              "name": "BRRDY",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Backup regulator ready This bit is set by hardware to indicate that the Backup regulator is ready.",
+              "enum": null
+            },
+            {
+              "name": "VBATL",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "VBAT level monitoring versus low threshold",
+              "enum": null
+            },
+            {
+              "name": "VBATH",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "VBAT level monitoring versus high threshold",
+              "enum": null
+            },
+            {
+              "name": "TEMPL",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "Temperature level monitoring versus low threshold",
+              "enum": null
+            },
+            {
+              "name": "TEMPH",
+              "bit_offset": 23,
+              "bit_width": 1,
+              "description": "Temperature level monitoring versus high threshold",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CR3",
+          "offset": 12,
+          "size": 32,
+          "description": "Reset only by POR only, not reset by wakeup from Standby mode and RESET pad. The lower byte of this register is written once after POR and shall be written before changing VOS level or ck_sys clock frequency. No limitation applies to the upper bytes.Programming data corresponding to an invalid combination of SDLEVEL, SDEXTHP, SDEN, LDOEN and BYPASS bits (see Table9) will be ignored: data will not be written, the written-once mechanism will lock the register and any further write access will be ignored. The default supply configuration will be kept and the ACTVOSRDY bit in PWR control status register 1 (PWR_CSR1) will go on indicating invalid voltage levels. The system shall be power cycled before writing a new value.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Reset only by POR only, not reset by wakeup from Standby mode and RESET pad. The lower byte of this register is written once after POR and shall be written before changing VOS level or ck_sys clock frequency. No limitation applies to the upper bytes.Programming data corresponding to an invalid combination of SDLEVEL, SDEXTHP, SDEN, LDOEN and BYPASS bits (see Table9) will be ignored: data will not be written, the written-once mechanism will lock the register and any further write access will be ignored. The default supply configuration will be kept and the ACTVOSRDY bit in PWR control status register 1 (PWR_CSR1) will go on indicating invalid voltage levels. The system shall be power cycled before writing a new value.",
+          "fields": [
+            {
+              "name": "BYPASS",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Power management unit bypass",
+              "enum": null
+            },
+            {
+              "name": "LDOEN",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Low drop-out regulator enable",
+              "enum": null
+            },
+            {
+              "name": "SCUEN",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Supply configuration update enable",
+              "enum": null
+            },
+            {
+              "name": "VBE",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "VBAT charging enable",
+              "enum": null
+            },
+            {
+              "name": "VBRS",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "VBAT charging resistor selection",
+              "enum": null
+            },
+            {
+              "name": "USB33DEN",
+              "bit_offset": 24,
+              "bit_width": 1,
+              "description": "VDD33USB voltage level detector enable.",
+              "enum": null
+            },
+            {
+              "name": "USBREGEN",
+              "bit_offset": 25,
+              "bit_width": 1,
+              "description": "USB regulator enable.",
+              "enum": null
+            },
+            {
+              "name": "USB33RDY",
+              "bit_offset": 26,
+              "bit_width": 1,
+              "description": "USB supply ready.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CPUCR",
+          "offset": 16,
+          "size": 32,
+          "description": "This register allows controlling CPU1 power.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "This register allows controlling CPU1 power.",
+          "fields": [
+            {
+              "name": "PDDS_D1",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "D1 domain Power Down Deepsleep selection. This bit allows CPU1 to define the Deepsleep mode for D1 domain.",
+              "enum": null
+            },
+            {
+              "name": "PDDS_D2",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "D2 domain Power Down Deepsleep. This bit allows CPU1 to define the Deepsleep mode for D2 domain.",
+              "enum": null
+            },
+            {
+              "name": "PDDS_D3",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "System D3 domain Power Down Deepsleep. This bit allows CPU1 to define the Deepsleep mode for System D3 domain.",
+              "enum": null
+            },
+            {
+              "name": "STOPF",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "STOP flag This bit is set by hardware and cleared only by any reset or by setting the CPU1 CSSF bit.",
+              "enum": null
+            },
+            {
+              "name": "SBF",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "System Standby flag This bit is set by hardware and cleared only by a POR (Power-on Reset) or by setting the CPU1 CSSF bit",
+              "enum": null
+            },
+            {
+              "name": "SBF_D1",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "D1 domain DStandby flag This bit is set by hardware and cleared by any system reset or by setting the CPU1 CSSF bit. Once set, this bit can be cleared only when the D1 domain is no longer in DStandby mode.",
+              "enum": null
+            },
+            {
+              "name": "SBF_D2",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "D2 domain DStandby flag This bit is set by hardware and cleared by any system reset or by setting the CPU1 CSSF bit. Once set, this bit can be cleared only when the D2 domain is no longer in DStandby mode.",
+              "enum": null
+            },
+            {
+              "name": "CSSF",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Clear D1 domain CPU1 Standby, Stop and HOLD flags (always read as 0) This bit is cleared to 0 by hardware.",
+              "enum": null
+            },
+            {
+              "name": "RUN_D3",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "Keep system D3 domain in Run mode regardless of the CPU sub-systems modes",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "D3CR",
+          "offset": 24,
+          "size": 32,
+          "description": "This register allows controlling D3 domain power.Following reset VOSRDY will be read 1 by software",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "This register allows controlling D3 domain power.Following reset VOSRDY will be read 1 by software",
+          "fields": [
+            {
+              "name": "VOSRDY",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "VOS Ready bit for VCORE voltage scaling output selection. This bit is set to 1 by hardware when Bypass mode is selected in PWR control register 3 (PWR_CR3).",
+              "enum": null
+            },
+            {
+              "name": "VOS",
+              "bit_offset": 14,
+              "bit_width": 2,
+              "description": "Voltage scaling selection according to performance These bits control the VCORE voltage level and allow to obtains the best trade-off between power consumption and performance: When increasing the performance, the voltage scaling shall be changed before increasing the system frequency. When decreasing performance, the system frequency shall first be decreased before changing the voltage scaling.",
+              "enum": "VOS"
+            }
+          ]
+        },
+        {
+          "name": "WKUPCR",
+          "offset": 32,
+          "size": 32,
+          "description": "reset only by system reset, not reset by wakeup from Standby mode5 wait states are required when writing this register (when clearing a WKUPF bit in PWR_WKUPFR, the AHB write access will complete after the WKUPF has been cleared).",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "reset only by system reset, not reset by wakeup from Standby mode5 wait states are required when writing this register (when clearing a WKUPF bit in PWR_WKUPFR, the AHB write access will complete after the WKUPF has been cleared).",
+          "fields": [
+            {
+              "name": "WKUPC",
+              "bit_offset": 0,
+              "bit_width": 6,
+              "description": "Clear Wakeup pin flag for WKUP. These bits are always read as 0.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "WKUPFR",
+          "offset": 36,
+          "size": 32,
+          "description": "reset only by system reset, not reset by wakeup from Standby mode",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "reset only by system reset, not reset by wakeup from Standby mode",
+          "fields": [
+            {
+              "name": "WKUPF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Wakeup pin WKUPF flag. This bit is set by hardware and cleared only by a Reset pin or by setting the WKUPCn+1 bit in the PWR wakeup clear register (PWR_WKUPCR).",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "WKUPEPR",
+          "offset": 40,
+          "size": 32,
+          "description": "Reset only by system reset, not reset by wakeup from Standby mode",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Reset only by system reset, not reset by wakeup from Standby mode",
+          "fields": [
+            {
+              "name": "WKUPEN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Enable Wakeup Pin WKUPn+1 Each bit is set and cleared by software. Note: An additional wakeup event is detected if WKUPn+1 pin is enabled (by setting the WKUPENn+1 bit) when WKUPn+1 pin level is already high when WKUPPn+1 selects rising edge, or low when WKUPPn+1 selects falling edge.",
+              "enum": null
+            },
+            {
+              "name": "WKUPP",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Wakeup pin polarity bit for WKUPn-7 These bits define the polarity used for event detection on WKUPn-7 external wakeup pin.",
+              "enum": null
+            },
+            {
+              "name": "WKUPPUPD",
+              "bit_offset": 16,
+              "bit_width": 2,
+              "description": "Wakeup pin pull configuration",
+              "enum": "WKUPPUPD"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "VOS": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Scale3",
+          "value": 1,
+          "description": null
+        },
+        {
+          "name": "Scale2",
+          "value": 2,
+          "description": null
+        },
+        {
+          "name": "Scale1",
+          "value": 3,
+          "description": null
+        }
+      ]
+    },
+    "WKUPPUPD": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "NoPull",
+          "value": 0,
+          "description": "No pull-up."
+        },
+        {
+          "name": "PullUp",
+          "value": 1,
+          "description": "Pull-up."
+        },
+        {
+          "name": "PullDown",
+          "value": 2,
+          "description": "Pull-down."
+        }
+      ]
+    }
+  }
+}

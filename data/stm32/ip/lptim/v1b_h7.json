@@ -1,0 +1,561 @@
+{
+  "schema": 1,
+  "kind": "lptim",
+  "version": "v1b_h7",
+  "blocks": {
+    "LPTIM": {
+      "name": "LPTIM",
+      "description": "Low power timer with Output Compare",
+      "extends": null,
+      "registers": [
+        {
+          "name": "ISR",
+          "offset": 0,
+          "size": 32,
+          "description": "LPTIM interrupt and status register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "LPTIM interrupt and status register.",
+          "fields": [
+            {
+              "name": "CCIF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Compare 1 interrupt flag The CC1IF flag is set by hardware to inform application that LPTIM_CNT register value matches the compare register's value. The CC1IF flag can be cleared by writing 1 to the CC1CF bit in the LPTIM_ICR register.",
+              "enum": null
+            },
+            {
+              "name": "ARRM",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Autoreload match ARRM is set by hardware to inform application that LPTIM_CNT register’s value reached the LPTIM_ARR register’s value. ARRM flag can be cleared by writing 1 to the ARRMCF bit in the LPTIM_ICR register.",
+              "enum": null
+            },
+            {
+              "name": "EXTTRIG",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "External trigger edge event EXTTRIG is set by hardware to inform application that a valid edge on the selected external trigger input has occurred. If the trigger is ignored because the timer has already started, then this flag is not set. EXTTRIG flag can be cleared by writing 1 to the EXTTRIGCF bit in the LPTIM_ICR register.",
+              "enum": null
+            },
+            {
+              "name": "CMPOK",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Compare register 1 update OK CMP1OK is set by hardware to inform application that the APB bus write operation to the LPTIM_CCR1 register has been successfully completed. CMP1OK flag can be cleared by writing 1 to the CMP1OKCF bit in the LPTIM_ICR register.",
+              "enum": null
+            },
+            {
+              "name": "ARROK",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Autoreload register update OK ARROK is set by hardware to inform application that the APB bus write operation to the LPTIM_ARR register has been successfully completed. ARROK flag can be cleared by writing 1 to the ARROKCF bit in the LPTIM_ICR register.",
+              "enum": null
+            },
+            {
+              "name": "UP",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Counter direction change down to up In Encoder mode, UP bit is set by hardware to inform application that the counter direction has changed from down to up. UP flag can be cleared by writing 1 to the UPCF bit in the LPTIM_ICR register. Note: If the LPTIM does not support encoder mode feature, this bit is reserved. Please refer to.",
+              "enum": null
+            },
+            {
+              "name": "DOWN",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Counter direction change up to down In Encoder mode, DOWN bit is set by hardware to inform application that the counter direction has changed from up to down. DOWN flag can be cleared by writing 1 to the DOWNCF bit in the LPTIM_ICR register. Note: If the LPTIM does not support encoder mode feature, this bit is reserved. Please refer to.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "ICR",
+          "offset": 4,
+          "size": 32,
+          "description": "LPTIM interrupt clear register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "LPTIM interrupt clear register.",
+          "fields": [
+            {
+              "name": "CCCF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Capture/compare 1 clear flag Writing 1 to this bit clears the CC1IF flag in the LPTIM_ISR register.",
+              "enum": null
+            },
+            {
+              "name": "ARRMCF",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Autoreload match clear flag Writing 1 to this bit clears the ARRM flag in the LPTIM_ISR register.",
+              "enum": null
+            },
+            {
+              "name": "EXTTRIGCF",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "External trigger valid edge clear flag Writing 1 to this bit clears the EXTTRIG flag in the LPTIM_ISR register.",
+              "enum": null
+            },
+            {
+              "name": "CMPOKCF",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Compare register 1 update OK clear flag Writing 1 to this bit clears the CMP1OK flag in the LPTIM_ISR register.",
+              "enum": null
+            },
+            {
+              "name": "ARROKCF",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Autoreload register update OK clear flag Writing 1 to this bit clears the ARROK flag in the LPTIM_ISR register.",
+              "enum": null
+            },
+            {
+              "name": "UPCF",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Direction change to UP clear flag Writing 1 to this bit clear the UP flag in the LPTIM_ISR register. Note: If the LPTIM does not support encoder mode feature, this bit is reserved. Please refer to.",
+              "enum": null
+            },
+            {
+              "name": "DOWNCF",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Direction change to down clear flag Writing 1 to this bit clear the DOWN flag in the LPTIM_ISR register. Note: If the LPTIM does not support encoder mode feature, this bit is reserved. Please refer to.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "IER",
+          "offset": 8,
+          "size": 32,
+          "description": "LPTIM interrupt enable register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "LPTIM interrupt enable register.",
+          "fields": [
+            {
+              "name": "CCIE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Capture/compare 1 interrupt enable.",
+              "enum": null
+            },
+            {
+              "name": "ARRMIE",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Autoreload match Interrupt Enable.",
+              "enum": null
+            },
+            {
+              "name": "EXTTRIGIE",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "External trigger valid edge Interrupt Enable.",
+              "enum": null
+            },
+            {
+              "name": "CMPOKIE",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Compare register 1 update OK interrupt enable.",
+              "enum": null
+            },
+            {
+              "name": "ARROKIE",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Autoreload register update OK Interrupt Enable.",
+              "enum": null
+            },
+            {
+              "name": "UPIE",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Direction change to UP Interrupt Enable Note: If the LPTIM does not support encoder mode feature, this bit is reserved. Please refer to.",
+              "enum": null
+            },
+            {
+              "name": "DOWNIE",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Direction change to down Interrupt Enable Note: If the LPTIM does not support encoder mode feature, this bit is reserved. Please refer to.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CFGR",
+          "offset": 12,
+          "size": 32,
+          "description": "LPTIM configuration register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "LPTIM configuration register.",
+          "fields": [
+            {
+              "name": "CKSEL",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Clock selector The CKSEL bit selects which clock source the LPTIM uses:.",
+              "enum": "ClockSource"
+            },
+            {
+              "name": "CKPOL",
+              "bit_offset": 1,
+              "bit_width": 2,
+              "description": "Clock Polarity When the LPTIM is clocked by an external clock source, CKPOL bits is used to configure the active edge or edges used by the counter: If the LPTIM is configured in Encoder mode (ENC bit is set), the encoder sub-mode 1 is active. If the LPTIM is configured in Encoder mode (ENC bit is set), the encoder sub-mode 2 is active. Refer to for more details about Encoder mode sub-modes.",
+              "enum": "CKPOL"
+            },
+            {
+              "name": "CKFLT",
+              "bit_offset": 3,
+              "bit_width": 2,
+              "description": "Configurable digital filter for external clock The CKFLT value sets the number of consecutive equal samples that should be detected when a level change occurs on an external clock signal before it is considered as a valid level transition. An internal clock source must be present to use this feature.",
+              "enum": "Filter"
+            },
+            {
+              "name": "TRGFLT",
+              "bit_offset": 6,
+              "bit_width": 2,
+              "description": "Configurable digital filter for trigger The TRGFLT value sets the number of consecutive equal samples that should be detected when a level change occurs on an internal trigger before it is considered as a valid level transition. An internal clock source must be present to use this feature.",
+              "enum": "Filter"
+            },
+            {
+              "name": "PRESC",
+              "bit_offset": 9,
+              "bit_width": 3,
+              "description": "Clock prescaler The PRESC bits configure the prescaler division factor. It can be one among the following division factors:.",
+              "enum": "PRESC"
+            },
+            {
+              "name": "TRIGSEL",
+              "bit_offset": 13,
+              "bit_width": 3,
+              "description": "Trigger selector The TRIGSEL bits select the trigger source that serves as a trigger event for the LPTIM among the below 8 available sources: See for details.",
+              "enum": null
+            },
+            {
+              "name": "TRIGEN",
+              "bit_offset": 17,
+              "bit_width": 2,
+              "description": "Trigger enable and polarity The TRIGEN bits controls whether the LPTIM counter is started by an external trigger or not. If the external trigger option is selected, three configurations are possible for the trigger active edge:.",
+              "enum": "TRIGEN"
+            },
+            {
+              "name": "TIMOUT",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "Timeout enable The TIMOUT bit controls the Timeout feature.",
+              "enum": null
+            },
+            {
+              "name": "WAVE",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "Waveform shape The WAVE bit controls the output shape.",
+              "enum": null
+            },
+            {
+              "name": "WAVPOL",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "Waveform shape polarity The WAVEPOL bit controls the output polarity Note: If the LPTIM implements at least one capture/compare channel, this bit is reserved. Please refer to.",
+              "enum": "WAVPOL"
+            },
+            {
+              "name": "PRELOAD",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "Registers update mode The PRELOAD bit controls the LPTIM_ARR, LPTIM_RCR and the LPTIM_CCRx registers update modality.",
+              "enum": null
+            },
+            {
+              "name": "COUNTMODE",
+              "bit_offset": 23,
+              "bit_width": 1,
+              "description": "counter mode enabled The COUNTMODE bit selects which clock source is used by the LPTIM to clock the counter:.",
+              "enum": "ClockSource"
+            },
+            {
+              "name": "ENC",
+              "bit_offset": 24,
+              "bit_width": 1,
+              "description": "Encoder mode enable The ENC bit controls the Encoder mode Note: If the LPTIM does not support encoder mode feature, this bit is reserved. Please refer to.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CR",
+          "offset": 16,
+          "size": 32,
+          "description": "LPTIM control register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "LPTIM control register.",
+          "fields": [
+            {
+              "name": "ENABLE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "LPTIM enable The ENABLE bit is set and cleared by software.",
+              "enum": null
+            },
+            {
+              "name": "SNGSTRT",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "LPTIM start in Single mode This bit is set by software and cleared by hardware. In case of software start (TRIGEN[1:0] = ‘00’), setting this bit starts the LPTIM in single pulse mode. If the software start is disabled (TRIGEN[1:0] different than ‘00’), setting this bit starts the LPTIM in single pulse mode as soon as an external trigger is detected. If this bit is set when the LPTIM is in continuous counting mode, then the LPTIM stops at the following match between LPTIM_ARR and LPTIM_CNT registers. This bit can only be set when the LPTIM is enabled. It is automatically reset by hardware.",
+              "enum": null
+            },
+            {
+              "name": "CNTSTRT",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Timer start in Continuous mode This bit is set by software and cleared by hardware. In case of software start (TRIGEN[1:0] = ‘00’), setting this bit starts the LPTIM in Continuous mode. If the software start is disabled (TRIGEN[1:0] different than ‘00’), setting this bit starts the timer in Continuous mode as soon as an external trigger is detected. If this bit is set when a single pulse mode counting is ongoing, then the timer does not stop at the next match between the LPTIM_ARR and LPTIM_CNT registers and the LPTIM counter keeps counting in Continuous mode. This bit can be set only when the LPTIM is enabled. It is automatically reset by hardware.",
+              "enum": null
+            },
+            {
+              "name": "COUNTRST",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Counter reset This bit is set by software and cleared by hardware. When set to '1' this bit triggers a synchronous reset of the LPTIM_CNT counter register. Due to the synchronous nature of this reset, it only takes place after a synchronization delay of 3 LPTimer core clock cycles (LPTimer core clock may be different from APB clock). This bit can be set only when the LPTIM is enabled. It is automatically reset by hardware. COUNTRST must never be set to '1' by software before it is already cleared to '0' by hardware. Software should consequently check that COUNTRST bit is already cleared to '0' before attempting to set it to '1'.",
+              "enum": null
+            },
+            {
+              "name": "RSTARE",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Reset after read enable This bit is set and cleared by software. When RSTARE is set to '1', any read access to LPTIM_CNT register asynchronously resets LPTIM_CNT register content. This bit can be set only when the LPTIM is enabled.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CMP",
+          "offset": 20,
+          "size": 32,
+          "description": "LPTIM compare register 1.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "LPTIM compare register 1.",
+          "fields": [
+            {
+              "name": "CMP",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Capture/compare 1 value If channel CC1 is configured as output: CCR1 is the value to be loaded in the capture/compare 1 register. Depending on the PRELOAD option, the CCR1 register is immediately updated if the PRELOAD bit is reset and updated at next LPTIM update event if PREOAD bit is reset. The capture/compare register 1 contains the value to be compared to the counter LPTIM_CNT and signaled on OC1 output. If channel CC1 is configured as input: CCR1 contains the counter value transferred by the last input capture 1 event. The LPTIM_CCR1 register is read-only and cannot be programmed. If LPTIM does not implement any channel: The compare register 1 contains the value to be compared to the counter LPTIM_CNT and signaled on LPTIM output.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "ARR",
+          "offset": 24,
+          "size": 32,
+          "description": "LPTIM autoreload register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "LPTIM autoreload register.",
+          "fields": [
+            {
+              "name": "ARR",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Auto reload value ARR is the autoreload value for the LPTIM. This value must be strictly greater than the CCRx[15:0] value.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CNT",
+          "offset": 28,
+          "size": 32,
+          "description": "LPTIM counter register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "LPTIM counter register.",
+          "fields": [
+            {
+              "name": "CNT",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Counter value When the LPTIM is running with an asynchronous clock, reading the LPTIM_CNT register may return unreliable values. So in this case it is necessary to perform two consecutive read accesses and verify that the two returned values are identical.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CFGR2",
+          "offset": 36,
+          "size": 32,
+          "description": "LPTIM configuration register 2.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "LPTIM configuration register 2.",
+          "fields": [
+            {
+              "name": "INSEL",
+              "bit_offset": 0,
+              "bit_width": 2,
+              "description": "LPTIM input 1 selection The IN1SEL bits control the LPTIM input 1 multiplexer, which connects LPTIM input 1 to one of the available inputs. For connection details refer to.",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "CKPOL": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Rising",
+          "value": 0,
+          "description": "the rising edge is the active edge used for counting. If the LPTIM is configured in Encoder mode (ENC bit is set), the encoder sub-mode 1 is active."
+        },
+        {
+          "name": "Falling",
+          "value": 1,
+          "description": "the falling edge is the active edge used for counting. If the LPTIM is configured in Encoder mode (ENC bit is set), the encoder sub-mode 2 is active."
+        },
+        {
+          "name": "Both",
+          "value": 2,
+          "description": "both edges are active edges. When both external clock signal edges are considered active ones, the LPTIM must also be clocked by an internal clock source with a frequency equal to at least four times the external clock frequency. If the LPTIM is configured in Encoder mode (ENC bit is set), the encoder sub-mode 3 is active."
+        }
+      ]
+    },
+    "ClockSource": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Internal",
+          "value": 0,
+          "description": "clocked by internal clock source (APB clock or any of the embedded oscillators)"
+        },
+        {
+          "name": "External",
+          "value": 1,
+          "description": "clocked by an external clock source through the LPTIM external Input1"
+        }
+      ]
+    },
+    "Filter": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Count1",
+          "value": 0,
+          "description": null
+        },
+        {
+          "name": "Count2",
+          "value": 1,
+          "description": null
+        },
+        {
+          "name": "Count4",
+          "value": 2,
+          "description": null
+        },
+        {
+          "name": "Count8",
+          "value": 3,
+          "description": null
+        }
+      ]
+    },
+    "PRESC": {
+      "bit_size": 3,
+      "variants": [
+        {
+          "name": "Div1",
+          "value": 0,
+          "description": null
+        },
+        {
+          "name": "Div2",
+          "value": 1,
+          "description": null
+        },
+        {
+          "name": "Div4",
+          "value": 2,
+          "description": null
+        },
+        {
+          "name": "Div8",
+          "value": 3,
+          "description": null
+        },
+        {
+          "name": "Div16",
+          "value": 4,
+          "description": null
+        },
+        {
+          "name": "Div32",
+          "value": 5,
+          "description": null
+        },
+        {
+          "name": "Div64",
+          "value": 6,
+          "description": null
+        },
+        {
+          "name": "Div128",
+          "value": 7,
+          "description": null
+        }
+      ]
+    },
+    "TRIGEN": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Software",
+          "value": 0,
+          "description": "software trigger (counting start is initiated by software)"
+        },
+        {
+          "name": "RisingEdge",
+          "value": 1,
+          "description": "rising edge is the active edge"
+        },
+        {
+          "name": "FallingEdge",
+          "value": 2,
+          "description": "falling edge is the active edge"
+        },
+        {
+          "name": "BothEdge",
+          "value": 3,
+          "description": "both edges are active edges"
+        }
+      ]
+    },
+    "WAVPOL": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Positive",
+          "value": 0,
+          "description": "The LPTIM output reflects the compare results between LPTIM_ARR and LPTIM_CMP registers."
+        },
+        {
+          "name": "Negative",
+          "value": 1,
+          "description": "The LPTIM output reflects the inverse of the compare results between LPTIM_ARR and LPTIM_CMP registers."
+        }
+      ]
+    }
+  }
+}

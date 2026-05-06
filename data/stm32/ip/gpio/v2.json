@@ -1,0 +1,307 @@
+{
+  "schema": 1,
+  "kind": "gpio",
+  "version": "v2",
+  "blocks": {
+    "GPIO": {
+      "name": "GPIO",
+      "description": "General-purpose I/Os",
+      "extends": null,
+      "registers": [
+        {
+          "name": "MODER",
+          "offset": 0,
+          "size": 32,
+          "description": "GPIO port mode register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "GPIO port mode register",
+          "fields": [
+            {
+              "name": "MODER",
+              "bit_offset": 0,
+              "bit_width": 2,
+              "description": "Port x configuration bits (y = 0..15)",
+              "enum": "MODER"
+            }
+          ]
+        },
+        {
+          "name": "OTYPER",
+          "offset": 4,
+          "size": 32,
+          "description": "GPIO port output type register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "GPIO port output type register",
+          "fields": [
+            {
+              "name": "OT",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Port x configuration bits (y = 0..15)",
+              "enum": "OT"
+            }
+          ]
+        },
+        {
+          "name": "OSPEEDR",
+          "offset": 8,
+          "size": 32,
+          "description": "GPIO port output speed register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "GPIO port output speed register",
+          "fields": [
+            {
+              "name": "OSPEEDR",
+              "bit_offset": 0,
+              "bit_width": 2,
+              "description": "Port x configuration bits (y = 0..15)",
+              "enum": "OSPEEDR"
+            }
+          ]
+        },
+        {
+          "name": "PUPDR",
+          "offset": 12,
+          "size": 32,
+          "description": "GPIO port pull-up/pull-down register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "GPIO port pull-up/pull-down register",
+          "fields": [
+            {
+              "name": "PUPDR",
+              "bit_offset": 0,
+              "bit_width": 2,
+              "description": "Port x configuration bits (y = 0..15)",
+              "enum": "PUPDR"
+            }
+          ]
+        },
+        {
+          "name": "IDR",
+          "offset": 16,
+          "size": 32,
+          "description": "GPIO port input data register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "GPIO port input data register",
+          "fields": [
+            {
+              "name": "IDR",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Port input data (y = 0..15)",
+              "enum": "IDR"
+            }
+          ]
+        },
+        {
+          "name": "ODR",
+          "offset": 20,
+          "size": 32,
+          "description": "GPIO port output data register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "GPIO port output data register",
+          "fields": [
+            {
+              "name": "ODR",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Port output data (y = 0..15)",
+              "enum": "ODR"
+            }
+          ]
+        },
+        {
+          "name": "BSRR",
+          "offset": 24,
+          "size": 32,
+          "description": "GPIO port bit set/reset register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "GPIO port bit set/reset register",
+          "fields": [
+            {
+              "name": "BS",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Port x set bit y (y= 0..15)",
+              "enum": null
+            },
+            {
+              "name": "BR",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Port x set bit y (y= 0..15)",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "LCKR",
+          "offset": 28,
+          "size": 32,
+          "description": "GPIO port configuration lock register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "GPIO port configuration lock register",
+          "fields": [
+            {
+              "name": "LCK",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Port configuration locked",
+              "enum": null
+            },
+            {
+              "name": "LCKK",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Port configuration lock key active",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "AFR",
+          "offset": 32,
+          "size": 32,
+          "description": "GPIO alternate function registers. The register described in the datasheet as AFRL is index 0 in this array, and AFRH is index 1. Note that when operating on AFRH, you need to subtract 8 from any operations on the field array it contains -- the alternate function for pin 9 is at index 1, for instance.",
+          "array_len": 2,
+          "array_stride": 4,
+          "fieldset_description": "GPIO alternate function register. This contains an array of 8 fields, which correspond to pins 0-7 of the port (for AFRL) or pins 8-15 of the port (for AFRH).",
+          "fields": [
+            {
+              "name": "AFR",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "Alternate function selection for one of the pins controlled by this register (0-7).",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "IDR": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Low",
+          "value": 0,
+          "description": "Input is logic low"
+        },
+        {
+          "name": "High",
+          "value": 1,
+          "description": "Input is logic high"
+        }
+      ]
+    },
+    "MODER": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Input",
+          "value": 0,
+          "description": "Input mode (reset state)"
+        },
+        {
+          "name": "Output",
+          "value": 1,
+          "description": "General purpose output mode"
+        },
+        {
+          "name": "Alternate",
+          "value": 2,
+          "description": "Alternate function mode"
+        },
+        {
+          "name": "Analog",
+          "value": 3,
+          "description": "Analog mode"
+        }
+      ]
+    },
+    "ODR": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Low",
+          "value": 0,
+          "description": "Set output to logic low"
+        },
+        {
+          "name": "High",
+          "value": 1,
+          "description": "Set output to logic high"
+        }
+      ]
+    },
+    "OSPEEDR": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "LowSpeed",
+          "value": 0,
+          "description": "Low speed"
+        },
+        {
+          "name": "MediumSpeed",
+          "value": 1,
+          "description": "Medium speed"
+        },
+        {
+          "name": "HighSpeed",
+          "value": 2,
+          "description": "High speed"
+        },
+        {
+          "name": "VeryHighSpeed",
+          "value": 3,
+          "description": "Very high speed"
+        }
+      ]
+    },
+    "OT": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "PushPull",
+          "value": 0,
+          "description": "Output push-pull (reset state)"
+        },
+        {
+          "name": "OpenDrain",
+          "value": 1,
+          "description": "Output open-drain"
+        }
+      ]
+    },
+    "PUPDR": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Floating",
+          "value": 0,
+          "description": "No pull-up, pull-down"
+        },
+        {
+          "name": "PullUp",
+          "value": 1,
+          "description": "Pull-up"
+        },
+        {
+          "name": "PullDown",
+          "value": 2,
+          "description": "Pull-down"
+        }
+      ]
+    }
+  }
+}

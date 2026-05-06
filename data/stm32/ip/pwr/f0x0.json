@@ -1,0 +1,109 @@
+{
+  "schema": 1,
+  "kind": "pwr",
+  "version": "f0x0",
+  "blocks": {
+    "PWR": {
+      "name": "PWR",
+      "description": "Power control",
+      "extends": null,
+      "registers": [
+        {
+          "name": "CR",
+          "offset": 0,
+          "size": 32,
+          "description": "power control register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "power control register",
+          "fields": [
+            {
+              "name": "LPDS",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Low-power deep sleep",
+              "enum": null
+            },
+            {
+              "name": "PDDS",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Power down deepsleep",
+              "enum": "PDDS"
+            },
+            {
+              "name": "CWUF",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Clear wakeup flag",
+              "enum": null
+            },
+            {
+              "name": "CSBF",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Clear standby flag",
+              "enum": null
+            },
+            {
+              "name": "DBP",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Disable backup domain write protection",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CSR",
+          "offset": 4,
+          "size": 32,
+          "description": "power control/status register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "power control/status register",
+          "fields": [
+            {
+              "name": "WUF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Wakeup flag",
+              "enum": null
+            },
+            {
+              "name": "SBF",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Standby flag",
+              "enum": null
+            },
+            {
+              "name": "EWUP",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Enable WKUP pin 1",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "PDDS": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "STOP_MODE",
+          "value": 0,
+          "description": "Enter Stop mode when the CPU enters deepsleep"
+        },
+        {
+          "name": "STANDBY_MODE",
+          "value": 1,
+          "description": "Enter Standby mode when the CPU enters deepsleep"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,206 @@
+{
+  "schema": 1,
+  "kind": "gfxmmu",
+  "version": "v1",
+  "blocks": {
+    "GFXMMU": {
+      "name": "GFXMMU",
+      "description": "GFXMMU.",
+      "extends": null,
+      "registers": [
+        {
+          "name": "CR",
+          "offset": 0,
+          "size": 32,
+          "description": "GFXMMU configuration register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "GFXMMU configuration register.",
+          "fields": [
+            {
+              "name": "BOIE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Buffer overflow interrupt enable. This bit enables the buffer 0 overflow interrupt.",
+              "enum": null
+            },
+            {
+              "name": "AMEIE",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "AHB master error interrupt enable. This bit enables the AHB master error interrupt.",
+              "enum": null
+            },
+            {
+              "name": "BM",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "192 Block mode. This bit defines the number of blocks per line.",
+              "enum": "BM192"
+            }
+          ]
+        },
+        {
+          "name": "SR",
+          "offset": 4,
+          "size": 32,
+          "description": "GFXMMU status register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "GFXMMU status register.",
+          "fields": [
+            {
+              "name": "BOF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Buffer overflow flag. This bit is set when an overflow occurs during the offset calculation of the buffer 0. It is cleared by writing 1 to CB0OF.",
+              "enum": null
+            },
+            {
+              "name": "AMEF",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "AHB master error flag. This bit is set when an AHB error happens during a transaction. It is cleared by writing 1 to CAMEF.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "FCR",
+          "offset": 8,
+          "size": 32,
+          "description": "GFXMMU flag clear register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "GFXMMU flag clear register.",
+          "fields": [
+            {
+              "name": "CBOF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Clear buffer overflow flag. Writing 1 clears the buffer 0 overflow flag in the GFXMMU_SR register.",
+              "enum": null
+            },
+            {
+              "name": "CAMEF",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Clear AHB master error flag. Writing 1 clears the AHB master error flag in the GFXMMU_SR register.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "DVR",
+          "offset": 16,
+          "size": 32,
+          "description": "GFXMMU default value register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "GFXMMU default value register.",
+          "fields": [
+            {
+              "name": "DV",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Default value. This field indicates the default 32-bit value which is returned when a master accesses a virtual memory location not physically mapped.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "BCR",
+          "offset": 32,
+          "size": 32,
+          "description": "GFXMMU buffer 0 configuration register.",
+          "array_len": 4,
+          "array_stride": 4,
+          "fieldset_description": "GFXMMU buffer configuration register.",
+          "fields": [
+            {
+              "name": "PBO",
+              "bit_offset": 4,
+              "bit_width": 19,
+              "description": "Physical buffer offset. Offset of the physical buffer.",
+              "enum": null
+            },
+            {
+              "name": "PBBA",
+              "bit_offset": 23,
+              "bit_width": 9,
+              "description": "Physical buffer base address. Base address MSB of the physical buffer.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "LUTL",
+          "offset": 4096,
+          "size": 32,
+          "description": "GFXMMU LUT entry 0 low.",
+          "array_len": 1024,
+          "array_stride": 8,
+          "fieldset_description": "GFXMMU LUT entry low.",
+          "fields": [
+            {
+              "name": "EN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Line enable.",
+              "enum": null
+            },
+            {
+              "name": "FVB",
+              "bit_offset": 8,
+              "bit_width": 8,
+              "description": "First Valid Block. Number of the first valid block of line number x.",
+              "enum": null
+            },
+            {
+              "name": "LVB",
+              "bit_offset": 16,
+              "bit_width": 8,
+              "description": "Last Valid Block. Number of the last valid block of line number X.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "LUTH",
+          "offset": 4100,
+          "size": 32,
+          "description": "GFXMMU LUT entry 0 high.",
+          "array_len": 1024,
+          "array_stride": 8,
+          "fieldset_description": "GFXMMU LUT entry high.",
+          "fields": [
+            {
+              "name": "LO",
+              "bit_offset": 4,
+              "bit_width": 18,
+              "description": "Line offset. Line offset of line number x (i.e. offset of block 0 of line x).",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "BM192": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "256BlocksPerLine",
+          "value": 0,
+          "description": "256 blocks per line."
+        },
+        {
+          "name": "192BlocksPerLine",
+          "value": 1,
+          "description": "192 blocks per line."
+        }
+      ]
+    }
+  }
+}

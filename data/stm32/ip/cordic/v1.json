@@ -1,0 +1,330 @@
+{
+  "schema": 1,
+  "kind": "cordic",
+  "version": "v1",
+  "blocks": {
+    "CORDIC": {
+      "name": "CORDIC",
+      "description": "CORDIC co-processor.",
+      "extends": null,
+      "registers": [
+        {
+          "name": "CSR",
+          "offset": 0,
+          "size": 32,
+          "description": "Control and status register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Control and status register.",
+          "fields": [
+            {
+              "name": "FUNC",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "Function.",
+              "enum": "FUNC"
+            },
+            {
+              "name": "PRECISION",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "Precision required (number of iterations/cycles), where PRECISION = (number of iterations/4).",
+              "enum": "PRECISION"
+            },
+            {
+              "name": "SCALE",
+              "bit_offset": 8,
+              "bit_width": 3,
+              "description": "Scaling factor.\nInput value has been multiplied by 2^(-n) before for argument.\nOutput value will need to be multiplied by 2^n later for results.",
+              "enum": "Scale"
+            },
+            {
+              "name": "IEN",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Enable interrupt.",
+              "enum": null
+            },
+            {
+              "name": "DMAREN",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "Enable DMA wread channel.",
+              "enum": null
+            },
+            {
+              "name": "DMAWEN",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "Enable DMA write channel.",
+              "enum": null
+            },
+            {
+              "name": "NRES",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "Number of results in the RDATA register.",
+              "enum": "Num"
+            },
+            {
+              "name": "NARGS",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "Number of arguments expected by the WDATA register.",
+              "enum": "Num"
+            },
+            {
+              "name": "RESSIZE",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "Width of output data.",
+              "enum": "Size"
+            },
+            {
+              "name": "ARGSIZE",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "Width of input data.",
+              "enum": "Size"
+            },
+            {
+              "name": "RRDY",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "Result ready flag.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "WDATA",
+          "offset": 4,
+          "description": "Argument register.",
+          "array_len": null,
+          "array_stride": null,
+          "fields": []
+        },
+        {
+          "name": "RDATA",
+          "offset": 8,
+          "description": "Result register.",
+          "array_len": null,
+          "array_stride": null,
+          "fields": []
+        }
+      ]
+    }
+  },
+  "enums": {
+    "FUNC": {
+      "bit_size": 4,
+      "variants": [
+        {
+          "name": "Cosine",
+          "value": 0,
+          "description": "Cosine function."
+        },
+        {
+          "name": "Sine",
+          "value": 1,
+          "description": "Sine function."
+        },
+        {
+          "name": "Phase",
+          "value": 2,
+          "description": "Phase function."
+        },
+        {
+          "name": "Modulus",
+          "value": 3,
+          "description": "Modulus function."
+        },
+        {
+          "name": "Arctangent",
+          "value": 4,
+          "description": "Arctangent function."
+        },
+        {
+          "name": "HyperbolicCosine",
+          "value": 5,
+          "description": "Hyperbolic Cosine function."
+        },
+        {
+          "name": "HyperbolicSine",
+          "value": 6,
+          "description": "Hyperbolic Sine function."
+        },
+        {
+          "name": "Arctanh",
+          "value": 7,
+          "description": "Arctanh function."
+        },
+        {
+          "name": "NaturalLogarithm",
+          "value": 8,
+          "description": "Natural Logarithm function."
+        },
+        {
+          "name": "SquareRoot",
+          "value": 9,
+          "description": "Square Root function."
+        }
+      ]
+    },
+    "Num": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Num1",
+          "value": 0,
+          "description": "1 input/output"
+        },
+        {
+          "name": "Num2",
+          "value": 1,
+          "description": "2 input/output"
+        }
+      ]
+    },
+    "PRECISION": {
+      "bit_size": 4,
+      "variants": [
+        {
+          "name": "Iters4",
+          "value": 1,
+          "description": "4 iterations."
+        },
+        {
+          "name": "Iters8",
+          "value": 2,
+          "description": "8 iterations."
+        },
+        {
+          "name": "Iters12",
+          "value": 3,
+          "description": "12 iterations."
+        },
+        {
+          "name": "Iters16",
+          "value": 4,
+          "description": "16 iterations."
+        },
+        {
+          "name": "Iters20",
+          "value": 5,
+          "description": "20 iterations."
+        },
+        {
+          "name": "Iters24",
+          "value": 6,
+          "description": "24 iterations."
+        },
+        {
+          "name": "Iters28",
+          "value": 7,
+          "description": "28 iterations."
+        },
+        {
+          "name": "Iters32",
+          "value": 8,
+          "description": "32 iterations."
+        },
+        {
+          "name": "Iters36",
+          "value": 9,
+          "description": "36 iterations."
+        },
+        {
+          "name": "Iters40",
+          "value": 10,
+          "description": "40 iterations."
+        },
+        {
+          "name": "Iters44",
+          "value": 11,
+          "description": "44 iterations."
+        },
+        {
+          "name": "Iters48",
+          "value": 12,
+          "description": "48 iterations."
+        },
+        {
+          "name": "Iters52",
+          "value": 13,
+          "description": "52 iterations."
+        },
+        {
+          "name": "Iters56",
+          "value": 14,
+          "description": "56 iterations."
+        },
+        {
+          "name": "Iters60",
+          "value": 15,
+          "description": "60 iterations."
+        }
+      ]
+    },
+    "Scale": {
+      "bit_size": 3,
+      "variants": [
+        {
+          "name": "A1_R1",
+          "value": 0,
+          "description": "Argument multiplied by 1, result multiplied by 1"
+        },
+        {
+          "name": "A1o2_R2",
+          "value": 1,
+          "description": "Argument multiplied by 1/2, result multiplied by 2"
+        },
+        {
+          "name": "A1o4_R4",
+          "value": 2,
+          "description": "Argument multiplied by 1/4, result multiplied by 4"
+        },
+        {
+          "name": "A1o8_R8",
+          "value": 3,
+          "description": "Argument multiplied by 1/8, result multiplied by 8"
+        },
+        {
+          "name": "A1o16_R16",
+          "value": 4,
+          "description": "Argument multiplied by 1/16, result multiplied by 16"
+        },
+        {
+          "name": "A1o32_R32",
+          "value": 5,
+          "description": "Argument multiplied by 1/32, result multiplied by 32"
+        },
+        {
+          "name": "A1o64_R64",
+          "value": 6,
+          "description": "Argument multiplied by 1/64, result multiplied by 64"
+        },
+        {
+          "name": "A1o128_R128",
+          "value": 7,
+          "description": "Argument multiplied by 1/128, result multiplied by 128"
+        }
+      ]
+    },
+    "Size": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Bits32",
+          "value": 0,
+          "description": "Use 32 bit input/output values."
+        },
+        {
+          "name": "Bits16",
+          "value": 1,
+          "description": "Use 16 bit input/output values."
+        }
+      ]
+    }
+  }
+}

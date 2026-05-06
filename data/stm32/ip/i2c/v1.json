@@ -1,0 +1,687 @@
+{
+  "schema": 1,
+  "kind": "i2c",
+  "version": "v1",
+  "blocks": {
+    "I2C": {
+      "name": "I2C",
+      "description": "Inter-integrated circuit",
+      "extends": null,
+      "registers": [
+        {
+          "name": "CR1",
+          "offset": 0,
+          "size": 32,
+          "description": "Control register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Control register 1",
+          "fields": [
+            {
+              "name": "PE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Peripheral enable",
+              "enum": null
+            },
+            {
+              "name": "SMBUS",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "SMBus mode",
+              "enum": "SMBUS"
+            },
+            {
+              "name": "SMBTYPE",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "SMBus type",
+              "enum": "SMBTYPE"
+            },
+            {
+              "name": "ENARP",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "ARP enable",
+              "enum": null
+            },
+            {
+              "name": "ENPEC",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "PEC enable",
+              "enum": null
+            },
+            {
+              "name": "ENGC",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "General call enable",
+              "enum": null
+            },
+            {
+              "name": "NOSTRETCH",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Clock stretching disable (Slave mode)",
+              "enum": null
+            },
+            {
+              "name": "START",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Start generation",
+              "enum": null
+            },
+            {
+              "name": "STOP",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Stop generation",
+              "enum": null
+            },
+            {
+              "name": "ACK",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Acknowledge enable",
+              "enum": null
+            },
+            {
+              "name": "POS",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "Acknowledge/PEC Position (for data reception)",
+              "enum": "POS"
+            },
+            {
+              "name": "PEC",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "Packet error checking",
+              "enum": null
+            },
+            {
+              "name": "ALERT",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "SMBus alert",
+              "enum": null
+            },
+            {
+              "name": "SWRST",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Software reset",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CR2",
+          "offset": 4,
+          "size": 32,
+          "description": "Control register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Control register 2",
+          "fields": [
+            {
+              "name": "FREQ",
+              "bit_offset": 0,
+              "bit_width": 6,
+              "description": "Peripheral clock frequency",
+              "enum": null
+            },
+            {
+              "name": "ITERREN",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Error interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "ITEVTEN",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Event interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "ITBUFEN",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Buffer interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "DMAEN",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "DMA requests enable",
+              "enum": null
+            },
+            {
+              "name": "LAST",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "DMA last transfer",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "OAR1",
+          "offset": 8,
+          "size": 32,
+          "description": "Own address register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Own address register 1",
+          "fields": [
+            {
+              "name": "ADD",
+              "bit_offset": 0,
+              "bit_width": 10,
+              "description": "Interface address",
+              "enum": null
+            },
+            {
+              "name": "ADDMODE",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Addressing mode (slave mode)",
+              "enum": "ADDMODE"
+            }
+          ]
+        },
+        {
+          "name": "OAR2",
+          "offset": 12,
+          "size": 32,
+          "description": "Own address register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Own address register 2",
+          "fields": [
+            {
+              "name": "ENDUAL",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Dual addressing mode enable",
+              "enum": "ENDUAL"
+            },
+            {
+              "name": "ADD2",
+              "bit_offset": 1,
+              "bit_width": 7,
+              "description": "Interface address",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "DR",
+          "offset": 16,
+          "size": 32,
+          "description": "Data register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Data register",
+          "fields": [
+            {
+              "name": "DR",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "8-bit data register",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SR1",
+          "offset": 20,
+          "size": 32,
+          "description": "Status register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Status register 1",
+          "fields": [
+            {
+              "name": "START",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Start bit (Master mode)",
+              "enum": null
+            },
+            {
+              "name": "ADDR",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Address sent (master mode)/matched (slave mode)",
+              "enum": null
+            },
+            {
+              "name": "BTF",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Byte transfer finished",
+              "enum": null
+            },
+            {
+              "name": "ADD10",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "10-bit header sent (Master mode)",
+              "enum": null
+            },
+            {
+              "name": "STOPF",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Stop detection (slave mode)",
+              "enum": null
+            },
+            {
+              "name": "RXNE",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Data register not empty (receivers)",
+              "enum": null
+            },
+            {
+              "name": "TXE",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Data register empty (transmitters)",
+              "enum": null
+            },
+            {
+              "name": "BERR",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Bus error",
+              "enum": null
+            },
+            {
+              "name": "ARLO",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Arbitration lost (master mode)",
+              "enum": null
+            },
+            {
+              "name": "AF",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Acknowledge failure",
+              "enum": null
+            },
+            {
+              "name": "OVR",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "Overrun/Underrun",
+              "enum": null
+            },
+            {
+              "name": "PECERR",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "PEC Error in reception",
+              "enum": null
+            },
+            {
+              "name": "TIMEOUT",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "Timeout or t_low detection flag",
+              "enum": null
+            },
+            {
+              "name": "ALERT",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "SMBus alert",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SR2",
+          "offset": 24,
+          "size": 32,
+          "description": "Status register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Status register 2",
+          "fields": [
+            {
+              "name": "MSL",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Master/slave",
+              "enum": null
+            },
+            {
+              "name": "BUSY",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Bus busy",
+              "enum": null
+            },
+            {
+              "name": "TRA",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Transmitter/receiver",
+              "enum": null
+            },
+            {
+              "name": "GENCALL",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "General call address (Slave mode)",
+              "enum": null
+            },
+            {
+              "name": "SMBDEFAULT",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "SMBus device default address (Slave mode)",
+              "enum": null
+            },
+            {
+              "name": "SMBHOST",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "SMBus host header (Slave mode)",
+              "enum": null
+            },
+            {
+              "name": "DUALF",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Dual flag (Slave mode)",
+              "enum": null
+            },
+            {
+              "name": "PEC",
+              "bit_offset": 8,
+              "bit_width": 8,
+              "description": "Packet error checking register",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CCR",
+          "offset": 28,
+          "size": 32,
+          "description": "Clock control register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Clock control register",
+          "fields": [
+            {
+              "name": "CCR",
+              "bit_offset": 0,
+              "bit_width": 12,
+              "description": "Clock control register in Fast/Standard mode (Master mode)",
+              "enum": null
+            },
+            {
+              "name": "DUTY",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "Fast mode duty cycle",
+              "enum": "DUTY"
+            },
+            {
+              "name": "F_S",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "I2C master mode selection",
+              "enum": "F_S"
+            }
+          ]
+        },
+        {
+          "name": "TRISE",
+          "offset": 32,
+          "size": 32,
+          "description": "TRISE register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "TRISE register",
+          "fields": [
+            {
+              "name": "TRISE",
+              "bit_offset": 0,
+              "bit_width": 6,
+              "description": "Maximum rise time in Fast/Standard mode (Master mode)",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "FLTR",
+          "offset": 36,
+          "size": 32,
+          "description": "FLTR register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "FLTR register",
+          "fields": [
+            {
+              "name": "DNF",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "Digital noise filter",
+              "enum": "DNF"
+            },
+            {
+              "name": "ANOFF",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Analog noise filter",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "ADDMODE": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Bit7",
+          "value": 0,
+          "description": "7-bit addressing mode"
+        },
+        {
+          "name": "Bit10",
+          "value": 1,
+          "description": "10-bit addressing mode"
+        }
+      ]
+    },
+    "DNF": {
+      "bit_size": 4,
+      "variants": [
+        {
+          "name": "NoFilter",
+          "value": 0,
+          "description": "Digital filter disabled"
+        },
+        {
+          "name": "Filter1",
+          "value": 1,
+          "description": "Digital filter enabled and filtering capability up to 1 tI2CCLK"
+        },
+        {
+          "name": "Filter2",
+          "value": 2,
+          "description": "Digital filter enabled and filtering capability up to 2 tI2CCLK"
+        },
+        {
+          "name": "Filter3",
+          "value": 3,
+          "description": "Digital filter enabled and filtering capability up to 3 tI2CCLK"
+        },
+        {
+          "name": "Filter4",
+          "value": 4,
+          "description": "Digital filter enabled and filtering capability up to 4 tI2CCLK"
+        },
+        {
+          "name": "Filter5",
+          "value": 5,
+          "description": "Digital filter enabled and filtering capability up to 5 tI2CCLK"
+        },
+        {
+          "name": "Filter6",
+          "value": 6,
+          "description": "Digital filter enabled and filtering capability up to 6 tI2CCLK"
+        },
+        {
+          "name": "Filter7",
+          "value": 7,
+          "description": "Digital filter enabled and filtering capability up to 7 tI2CCLK"
+        },
+        {
+          "name": "Filter8",
+          "value": 8,
+          "description": "Digital filter enabled and filtering capability up to 8 tI2CCLK"
+        },
+        {
+          "name": "Filter9",
+          "value": 9,
+          "description": "Digital filter enabled and filtering capability up to 9 tI2CCLK"
+        },
+        {
+          "name": "Filter10",
+          "value": 10,
+          "description": "Digital filter enabled and filtering capability up to 10 tI2CCLK"
+        },
+        {
+          "name": "Filter11",
+          "value": 11,
+          "description": "Digital filter enabled and filtering capability up to 11 tI2CCLK"
+        },
+        {
+          "name": "Filter12",
+          "value": 12,
+          "description": "Digital filter enabled and filtering capability up to 12 tI2CCLK"
+        },
+        {
+          "name": "Filter13",
+          "value": 13,
+          "description": "Digital filter enabled and filtering capability up to 13 tI2CCLK"
+        },
+        {
+          "name": "Filter14",
+          "value": 14,
+          "description": "Digital filter enabled and filtering capability up to 14 tI2CCLK"
+        },
+        {
+          "name": "Filter15",
+          "value": 15,
+          "description": "Digital filter enabled and filtering capability up to 15 tI2CCLK"
+        }
+      ]
+    },
+    "DUTY": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Duty2_1",
+          "value": 0,
+          "description": "Duty cycle t_low/t_high = 2/1"
+        },
+        {
+          "name": "Duty16_9",
+          "value": 1,
+          "description": "Duty cycle t_low/t_high = 16/9"
+        }
+      ]
+    },
+    "ENDUAL": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Single",
+          "value": 0,
+          "description": "Single addressing mode"
+        },
+        {
+          "name": "Dual",
+          "value": 1,
+          "description": "Dual addressing mode"
+        }
+      ]
+    },
+    "F_S": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Standard",
+          "value": 0,
+          "description": "Standard mode I2C"
+        },
+        {
+          "name": "Fast",
+          "value": 1,
+          "description": "Fast mode I2C"
+        }
+      ]
+    },
+    "POS": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Current",
+          "value": 0,
+          "description": "ACK bit controls the (N)ACK of the current byte being received"
+        },
+        {
+          "name": "Next",
+          "value": 1,
+          "description": "ACK bit controls the (N)ACK of the next byte to be received"
+        }
+      ]
+    },
+    "SMBTYPE": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Device",
+          "value": 0,
+          "description": "SMBus Device"
+        },
+        {
+          "name": "Host",
+          "value": 1,
+          "description": "SMBus Host"
+        }
+      ]
+    },
+    "SMBUS": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "I2C",
+          "value": 0,
+          "description": "I2C Mode"
+        },
+        {
+          "name": "SMBus",
+          "value": 1,
+          "description": "SMBus"
+        }
+      ]
+    }
+  }
+}

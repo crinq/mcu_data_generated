@@ -1,0 +1,680 @@
+{
+  "schema": 1,
+  "kind": "ramcfg",
+  "version": "h5",
+  "blocks": {
+    "RAMCFG": {
+      "name": "RAMCFG",
+      "description": "RAMs configuration controller.",
+      "extends": null,
+      "registers": [
+        {
+          "name": "M1CR",
+          "offset": 0,
+          "size": 32,
+          "description": "RAMCFG memory 1 control register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "RAMCFG memory 1 control register.",
+          "fields": [
+            {
+              "name": "ECCE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "ECC enable. This bit reset value is defined by the user option bit configuration. When set, it can be cleared by software only after writing the unlock sequence in the MxECCKEYR register. Note: This bit is reserved and must be kept at reset value in SRAM1 control register.",
+              "enum": null
+            },
+            {
+              "name": "ALE",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Address latch enable Note: This bit is reserved and must be kept at reset value in SRAM1 control register.",
+              "enum": null
+            },
+            {
+              "name": "SRAMER",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "SRAM erase This bit can be set by software only after writing the unlock sequence in the ERASEKEY field of the MxERKEYR register. Setting this bit starts the SRAM erase. This bit is automatically cleared by hardware at the end of the erase operation.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "M1ISR",
+          "offset": 8,
+          "size": 32,
+          "description": "RAMCFG memory interrupt status register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "RAMCFG memory interrupt status register.",
+          "fields": [
+            {
+              "name": "SEDC",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "ECC single error detected and corrected Note: This bit is reserved and must be kept at reset value in SRAM1 interrupt status register.",
+              "enum": null
+            },
+            {
+              "name": "DED",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "ECC double error detected Note: This bit is reserved and must be kept at reset value in SRAM1 interrupt status register.",
+              "enum": null
+            },
+            {
+              "name": "SRAMBUSY",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "SRAM busy with erase operation Note: Depending on the SRAM, the erase operation can be performed due to software request, system reset if the option bit is enabled, tamper detection or product state regression. Refer to Table 9: Internal SRAMs features.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "M1ERKEYR",
+          "offset": 40,
+          "size": 32,
+          "description": "RAMCFG memory 1 erase key register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "RAMCFG memory 1 erase key register.",
+          "fields": [
+            {
+              "name": "ERASEKEY",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "Erase write protection key The following steps are required to unlock the write protection of the SRAMER bit in the MxCR register. 1) Write 0xCA into ERASEKEY[7:0]. 2) Write 0x53 into ERASEKEY[7:0]. Note: Writing a wrong key reactivates the write protection.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "M2CR",
+          "offset": 64,
+          "size": 32,
+          "description": "RAMCFG memory 2 control register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "RAMCFG memory 2 control register.",
+          "fields": [
+            {
+              "name": "ECCE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "ECC enable. This bit reset value is defined by the user option bit configuration. When set, it can be cleared by software only after writing the unlock sequence in the MxECCKEYR register. Note: This bit is reserved and must be kept at reset value in SRAM1 control register.",
+              "enum": null
+            },
+            {
+              "name": "ALE",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Address latch enable Note: This bit is reserved and must be kept at reset value in SRAM1 control register.",
+              "enum": null
+            },
+            {
+              "name": "SRAMER",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "SRAM erase This bit can be set by software only after writing the unlock sequence in the ERASEKEY field of the MxERKEYR register. Setting this bit starts the SRAM erase. This bit is automatically cleared by hardware at the end of the erase operation.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "M2IER",
+          "offset": 68,
+          "size": 32,
+          "description": "RAMCFG memory 2 interrupt enable register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "RAMCFG memory 2 interrupt enable register.",
+          "fields": [
+            {
+              "name": "SEIE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "ECC single error interrupt enable.",
+              "enum": null
+            },
+            {
+              "name": "DEIE",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "ECC double error interrupt enable.",
+              "enum": null
+            },
+            {
+              "name": "ECCNMI",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Double error NMI This bit is set by software and cleared only by a global RAMCFG reset. Note: if ECCNMI is set, the RAMCFG maskable interrupt is not generated whatever DEIE bit value.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "M2ISR",
+          "offset": 72,
+          "size": 32,
+          "description": "RAMCFG memory interrupt status register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "RAMCFG memory interrupt status register.",
+          "fields": [
+            {
+              "name": "SEDC",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "ECC single error detected and corrected Note: This bit is reserved and must be kept at reset value in SRAM1 interrupt status register.",
+              "enum": null
+            },
+            {
+              "name": "DED",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "ECC double error detected Note: This bit is reserved and must be kept at reset value in SRAM1 interrupt status register.",
+              "enum": null
+            },
+            {
+              "name": "SRAMBUSY",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "SRAM busy with erase operation Note: Depending on the SRAM, the erase operation can be performed due to software request, system reset if the option bit is enabled, tamper detection or product state regression. Refer to Table 9: Internal SRAMs features.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "M2SEAR",
+          "offset": 76,
+          "size": 32,
+          "description": "RAMCFG memory 2 ECC single error address register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "RAMCFG memory 2 ECC single error address register.",
+          "fields": [
+            {
+              "name": "ESEA",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "ECC single error address When the ALE bit is set in the MxCR register, this field is updated with the address corresponding to the ECC single error.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "M2DEAR",
+          "offset": 80,
+          "size": 32,
+          "description": "RAMCFG memory 2 ECC double error address register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "RAMCFG memory 2 ECC double error address register.",
+          "fields": [
+            {
+              "name": "EDEA",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "ECC double error address When the ALE bit is set in the MxCR register, this field is updated with the address corresponding to the ECC double error.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "M2ICR",
+          "offset": 84,
+          "size": 32,
+          "description": "RAMCFG memory 2 interrupt clear register 2.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "RAMCFG memory 2 interrupt clear register 2.",
+          "fields": [
+            {
+              "name": "CSEDC",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Clear ECC single error detected and corrected Writing 1 to this flag clears the SEDC bit in the MxISR register. Reading this flag returns the SEDC value.",
+              "enum": null
+            },
+            {
+              "name": "CDED",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Clear ECC double error detected Writing 1 to this flag clears the DED bit in the MxISR register. Reading this flag returns the DED value.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "M2WPR1",
+          "offset": 88,
+          "size": 32,
+          "description": "RAMCFG memory 2 write protection register 1.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "RAMCFG memory 2 write protection register 1.",
+          "fields": [
+            {
+              "name": "PWP",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "M2ECCKEYR",
+          "offset": 100,
+          "size": 32,
+          "description": "RAMCFG memory 2 ECC key register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "RAMCFG memory 2 ECC key register.",
+          "fields": [
+            {
+              "name": "ECCKEY",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "ECC write protection key The following steps are required to unlock the write protection of the ECCE bit in the MxCR register. 1) Write 0xAE into ECCKEY[7:0]. 2) Write 0x75 into ECCKEY[7:0]. Note: Writing a wrong key reactivates the write protection.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "M2ERKEYR",
+          "offset": 104,
+          "size": 32,
+          "description": "RAMCFG memory 2 erase key register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "RAMCFG memory 2 erase key register.",
+          "fields": [
+            {
+              "name": "ERASEKEY",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "Erase write protection key The following steps are required to unlock the write protection of the SRAMER bit in the MxCR register. 1) Write 0xCA into ERASEKEY[7:0]. 2) Write 0x53 into ERASEKEY[7:0]. Note: Writing a wrong key reactivates the write protection.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "M3IER",
+          "offset": 132,
+          "size": 32,
+          "description": "RAMCFG memory 3 interrupt enable register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "RAMCFG memory 3 interrupt enable register.",
+          "fields": [
+            {
+              "name": "SEIE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "ECC single error interrupt enable.",
+              "enum": null
+            },
+            {
+              "name": "DEIE",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "ECC double error interrupt enable.",
+              "enum": null
+            },
+            {
+              "name": "ECCNMI",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Double error NMI This bit is set by software and cleared only by a global RAMCFG reset. Note: if ECCNMI is set, the RAMCFG maskable interrupt is not generated whatever DEIE bit value.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "M3ISR",
+          "offset": 136,
+          "size": 32,
+          "description": "RAMCFG memory interrupt status register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "RAMCFG memory interrupt status register.",
+          "fields": [
+            {
+              "name": "SEDC",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "ECC single error detected and corrected Note: This bit is reserved and must be kept at reset value in SRAM1 interrupt status register.",
+              "enum": null
+            },
+            {
+              "name": "DED",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "ECC double error detected Note: This bit is reserved and must be kept at reset value in SRAM1 interrupt status register.",
+              "enum": null
+            },
+            {
+              "name": "SRAMBUSY",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "SRAM busy with erase operation Note: Depending on the SRAM, the erase operation can be performed due to software request, system reset if the option bit is enabled, tamper detection or product state regression. Refer to Table 9: Internal SRAMs features.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "M3SEAR",
+          "offset": 140,
+          "size": 32,
+          "description": "RAMCFG memory 3 ECC single error address register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "RAMCFG memory 3 ECC single error address register.",
+          "fields": [
+            {
+              "name": "ESEA",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "ECC single error address When the ALE bit is set in the MxCR register, this field is updated with the address corresponding to the ECC single error.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "M3DEAR",
+          "offset": 144,
+          "size": 32,
+          "description": "RAMCFG memory 3 ECC double error address register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "RAMCFG memory 3 ECC double error address register.",
+          "fields": [
+            {
+              "name": "EDEA",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "ECC double error address When the ALE bit is set in the MxCR register, this field is updated with the address corresponding to the ECC double error.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "M3ICR",
+          "offset": 148,
+          "size": 32,
+          "description": "RAMCFG memory 3 interrupt clear register 3.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "RAMCFG memory 3 interrupt clear register 3.",
+          "fields": [
+            {
+              "name": "CSEDC",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Clear ECC single error detected and corrected Writing 1 to this flag clears the SEDC bit in the MxISR register. Reading this flag returns the SEDC value.",
+              "enum": null
+            },
+            {
+              "name": "CDED",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Clear ECC double error detected Writing 1 to this flag clears the DED bit in the MxISR register. Reading this flag returns the DED value.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "M3ECCKEYR",
+          "offset": 164,
+          "size": 32,
+          "description": "RAMCFG memory 3 ECC key register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "RAMCFG memory 3 ECC key register.",
+          "fields": [
+            {
+              "name": "ECCKEY",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "ECC write protection key The following steps are required to unlock the write protection of the ECCE bit in the MxCR register. 1) Write 0xAE into ECCKEY[7:0]. 2) Write 0x75 into ECCKEY[7:0]. Note: Writing a wrong key reactivates the write protection.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "M3ERKEYR",
+          "offset": 168,
+          "size": 32,
+          "description": "RAMCFG memory 3 erase key register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "RAMCFG memory 3 erase key register.",
+          "fields": [
+            {
+              "name": "ERASEKEY",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "Erase write protection key The following steps are required to unlock the write protection of the SRAMER bit in the MxCR register. 1) Write 0xCA into ERASEKEY[7:0]. 2) Write 0x53 into ERASEKEY[7:0]. Note: Writing a wrong key reactivates the write protection.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "M4ERKEYR",
+          "offset": 232,
+          "size": 32,
+          "description": "RAMCFG memory 4 erase key register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "RAMCFG memory 4 erase key register.",
+          "fields": [
+            {
+              "name": "ERASEKEY",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "Erase write protection key The following steps are required to unlock the write protection of the SRAMER bit in the MxCR register. 1) Write 0xCA into ERASEKEY[7:0]. 2) Write 0x53 into ERASEKEY[7:0]. Note: Writing a wrong key reactivates the write protection.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "M5CR",
+          "offset": 256,
+          "size": 32,
+          "description": "RAMCFG memory 5 control register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "RAMCFG memory 5 control register.",
+          "fields": [
+            {
+              "name": "ECCE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "ECC enable. This bit reset value is defined by the user option bit configuration. When set, it can be cleared by software only after writing the unlock sequence in the MxECCKEYR register. Note: This bit is reserved and must be kept at reset value in SRAM1 control register.",
+              "enum": null
+            },
+            {
+              "name": "ALE",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Address latch enable Note: This bit is reserved and must be kept at reset value in SRAM1 control register.",
+              "enum": null
+            },
+            {
+              "name": "SRAMER",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "SRAM erase This bit can be set by software only after writing the unlock sequence in the ERASEKEY field of the MxERKEYR register. Setting this bit starts the SRAM erase. This bit is automatically cleared by hardware at the end of the erase operation.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "M5IER",
+          "offset": 260,
+          "size": 32,
+          "description": "RAMCFG memory 5 interrupt enable register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "RAMCFG memory 5 interrupt enable register.",
+          "fields": [
+            {
+              "name": "SEIE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "ECC single error interrupt enable.",
+              "enum": null
+            },
+            {
+              "name": "DEIE",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "ECC double error interrupt enable.",
+              "enum": null
+            },
+            {
+              "name": "ECCNMI",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Double error NMI This bit is set by software and cleared only by a global RAMCFG reset. Note: if ECCNMI is set, the RAMCFG maskable interrupt is not generated whatever DEIE bit value.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "M5ISR",
+          "offset": 264,
+          "size": 32,
+          "description": "RAMCFG memory interrupt status register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "RAMCFG memory interrupt status register.",
+          "fields": [
+            {
+              "name": "SEDC",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "ECC single error detected and corrected Note: This bit is reserved and must be kept at reset value in SRAM1 interrupt status register.",
+              "enum": null
+            },
+            {
+              "name": "DED",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "ECC double error detected Note: This bit is reserved and must be kept at reset value in SRAM1 interrupt status register.",
+              "enum": null
+            },
+            {
+              "name": "SRAMBUSY",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "SRAM busy with erase operation Note: Depending on the SRAM, the erase operation can be performed due to software request, system reset if the option bit is enabled, tamper detection or product state regression. Refer to Table 9: Internal SRAMs features.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "M5SEAR",
+          "offset": 268,
+          "size": 32,
+          "description": "RAMCFG memory 5 ECC single error address register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "RAMCFG memory 5 ECC single error address register.",
+          "fields": [
+            {
+              "name": "ESEA",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "ECC single error address When the ALE bit is set in the MxCR register, this field is updated with the address corresponding to the ECC single error.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "M5DEAR",
+          "offset": 272,
+          "size": 32,
+          "description": "RAMCFG memory 5 ECC double error address register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "RAMCFG memory 5 ECC double error address register.",
+          "fields": [
+            {
+              "name": "EDEA",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "ECC double error address When the ALE bit is set in the MxCR register, this field is updated with the address corresponding to the ECC double error.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "M5ICR",
+          "offset": 276,
+          "size": 32,
+          "description": "RAMCFG memory 5 interrupt clear register 5.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "RAMCFG memory 5 interrupt clear register 5.",
+          "fields": [
+            {
+              "name": "CSEDC",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Clear ECC single error detected and corrected Writing 1 to this flag clears the SEDC bit in the MxISR register. Reading this flag returns the SEDC value.",
+              "enum": null
+            },
+            {
+              "name": "CDED",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Clear ECC double error detected Writing 1 to this flag clears the DED bit in the MxISR register. Reading this flag returns the DED value.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "M5ECCKEYR",
+          "offset": 292,
+          "size": 32,
+          "description": "RAMCFG memory 5 ECC key register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "RAMCFG memory 5 ECC key register.",
+          "fields": [
+            {
+              "name": "ECCKEY",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "ECC write protection key The following steps are required to unlock the write protection of the ECCE bit in the MxCR register. 1) Write 0xAE into ECCKEY[7:0]. 2) Write 0x75 into ECCKEY[7:0]. Note: Writing a wrong key reactivates the write protection.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "M5ERKEYR",
+          "offset": 296,
+          "size": 32,
+          "description": "RAMCFG memory 5 erase key register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "RAMCFG memory 5 erase key register.",
+          "fields": [
+            {
+              "name": "ERASEKEY",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "Erase write protection key The following steps are required to unlock the write protection of the SRAMER bit in the MxCR register. 1) Write 0xCA into ERASEKEY[7:0]. 2) Write 0x53 into ERASEKEY[7:0]. Note: Writing a wrong key reactivates the write protection.",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {}
+}

@@ -1,0 +1,607 @@
+{
+  "schema": 1,
+  "kind": "syscfg",
+  "version": "h7rs",
+  "blocks": {
+    "SYSCFG": {
+      "name": "SYSCFG",
+      "description": "System configuration, boot and security.",
+      "extends": null,
+      "registers": [
+        {
+          "name": "BOOTSR",
+          "offset": 0,
+          "size": 32,
+          "description": "SBS boot status register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SBS boot status register.",
+          "fields": [
+            {
+              "name": "INITVTOR",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "initial vector for Cortex-M7 This register includes the physical boot address used by the Cortex-M7 after reset.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "HDPLCR",
+          "offset": 16,
+          "size": 32,
+          "description": "SBS hide protection control register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SBS hide protection control register.",
+          "fields": [
+            {
+              "name": "INCR_HDPL",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "increment HDPL Write 0x6A to increment device HDPL by one. After a write, the register value reverts to its default value (0xB4).",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "HDPLSR",
+          "offset": 20,
+          "size": 32,
+          "description": "SBS hide protection status register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SBS hide protection status register.",
+          "fields": [
+            {
+              "name": "HDPL",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "hide protection level This bitfield returns the current HDPL of the device. 0x6F and other codes: HDPL3, corresponding to non-boot application. Note: The device state (open/close) is defined in FLASH_NVSTATER register of the embedded Flash memory.",
+              "enum": "HDPL"
+            }
+          ]
+        },
+        {
+          "name": "DBGCR",
+          "offset": 32,
+          "size": 32,
+          "description": "SBS debug control register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SBS debug control register.",
+          "fields": [
+            {
+              "name": "AP_UNLOCK",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "access port unlock Write 0xB4 to this bitfield to open the device access port.",
+              "enum": null
+            },
+            {
+              "name": "DBG_UNLOCK",
+              "bit_offset": 8,
+              "bit_width": 8,
+              "description": "debug unlock Write 0xB4 to this bitfield to open the debug when HDPL in SBS_HDPLSR equals to DBG_AUTH_HDPL in this register.",
+              "enum": null
+            },
+            {
+              "name": "DBG_AUTH_HDPL",
+              "bit_offset": 16,
+              "bit_width": 8,
+              "description": "authenticated debug hide protection level Writing to this bitfield defines at which HDPL the authenticated debug opens. Note: Writing any other values is ignored. Reading any other value means the authenticated debug always fails.",
+              "enum": "DBG_AUTH_HDPL"
+            }
+          ]
+        },
+        {
+          "name": "DBGLOCKR",
+          "offset": 36,
+          "size": 32,
+          "description": "SBS debug lock register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SBS debug lock register.",
+          "fields": [
+            {
+              "name": "DBGCFG_LOCK",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "debug configuration lock Reading this bitfield returns 0x6A if the bitfield value is different from 0xB4. Other: Writes to SBS_DBGCR ignored Note: 0xC3 is the recommended value to lock the debug configuration using this bitfield.",
+              "enum": "DBGCFG_LOCK"
+            }
+          ]
+        },
+        {
+          "name": "RSSCMDR",
+          "offset": 52,
+          "size": 32,
+          "description": "SBS RSS command register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SBS RSS command register.",
+          "fields": [
+            {
+              "name": "RSSCMD",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "RSS command The application can use this bitfield to pass on a command to the RSS, executed at the next reset.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "PMCR",
+          "offset": 256,
+          "size": 32,
+          "description": "SBS product mode and configuration register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SBS product mode and configuration register.",
+          "fields": [
+            {
+              "name": "FMPLUS_PB6",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Fast-mode Plus on PB(6).",
+              "enum": null
+            },
+            {
+              "name": "FMPLUS_PB7",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Fast-mode Plus on PB(7).",
+              "enum": null
+            },
+            {
+              "name": "FMPLUS_PB8",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Fast-mode Plus on PB(8).",
+              "enum": null
+            },
+            {
+              "name": "FMPLUS_PB9",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Fast-mode Plus on PB(9).",
+              "enum": null
+            },
+            {
+              "name": "BOOSTEN",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "booster enable Set this bit to reduce the THD of the analog switches when the supply voltage is below 2.7 V. guaranteeing the same performance as with the full voltage range. To avoid current consumption due to booster activation when V<sub>DDA</sub> < 2.7 V and V<sub>DD</sub> > 2.7 V, V<sub>DD</sub> can be selected as supply voltage for analog switches by setting BOOSTVDDSEL bit in SBS_PMCR. In this case, the BOOSTEN bit must be cleared to avoid unwanted power consumption.",
+              "enum": null
+            },
+            {
+              "name": "BOOSTVDDSEL",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "booster V<sub>DD</sub> selection This bit selects the analog switch supply voltage, between V<sub>DD</sub>, V<sub>DDA</sub> and booster. To avoid current consumption due to booster activation when V<sub>DDA</sub> < 2.7 V and V<sub>DD</sub> > 2.7 V, V<sub>DD</sub> can be selected as supply voltage for analog switches. In this case, the BOOSTEN bit must be cleared to avoid unwanted power consumption. When both V<sub>DD and </sub>V<sub>DDA</sub> are below 2.7 V, the booster is still needed to obtain full AC performances from the I/O analog switches.",
+              "enum": null
+            },
+            {
+              "name": "ETH_SEL_PHY",
+              "bit_offset": 21,
+              "bit_width": 3,
+              "description": "Ethernet PHY interface selection.",
+              "enum": "ETH_SEL_PHY"
+            },
+            {
+              "name": "AXIRAM_WS",
+              "bit_offset": 28,
+              "bit_width": 1,
+              "description": "AXIRAM wait state Set this bit to add one wait state to all AXIRAMs when ECC = 0. When ECC = 1 there is one wait state by default.",
+              "enum": "AXIRAM_WS"
+            }
+          ]
+        },
+        {
+          "name": "FPUIMR",
+          "offset": 260,
+          "size": 32,
+          "description": "SBS FPU interrupt mask register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SBS FPU interrupt mask register.",
+          "fields": [
+            {
+              "name": "FPU_IE",
+              "bit_offset": 0,
+              "bit_width": 6,
+              "description": "FPU interrupt enable Set and cleared by software to enable the Cortex-M7 FPU interrupts xxxxx1: Invalid operation interrupt enabled (xxxxx0 to disable) xxxx1x: Divide-by-zero interrupt enabled (xxxx0x to disable) xxx1xx: Underflow interrupt enabled (xxx0xx to disable) xx1xxx: Overflow interrupt enabled (xx0xxx to disable) x1xxxx: Input denormal interrupt enabled (x0xxxx to disable) 1xxxxx: Inexact interrupt enabled (0xxxxx to disable), disabled by default.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "MESR",
+          "offset": 264,
+          "size": 32,
+          "description": "SBS memory erase status register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SBS memory erase status register.",
+          "fields": [
+            {
+              "name": "MEF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "memory erase flag This bit is set by hardware when BKPRAM and PKA SRAM erase is ongoing after a POWER ON reset or one tamper event (see Section 50: Tamper and backup registers (TAMP) for details). This bit is cleared when the erase is done.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CCCSR",
+          "offset": 272,
+          "size": 32,
+          "description": "SBS I/O compensation cell control and status register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SBS I/O compensation cell control and status register.",
+          "fields": [
+            {
+              "name": "COMP_EN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Compensation cell enable Set this bit to enable the compensation cell.",
+              "enum": null
+            },
+            {
+              "name": "COMP_CODESEL",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Compensation cell code selection This bit selects the code to be applied for the I/O compensation cell.",
+              "enum": null
+            },
+            {
+              "name": "OCTO1_COMP_EN",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "XSPIM_P1 compensation cell enable Set this bit to enable the XSPIM_P1 compensation cell.",
+              "enum": null
+            },
+            {
+              "name": "OCTO1_COMP_CODESEL",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "XSPIM_P1 compensation cell code selection This bit selects the code to be applied for the XSPIM_P1 I/O compensation cell.",
+              "enum": null
+            },
+            {
+              "name": "OCTO2_COMP_EN",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "XSPIM_P2 compensation cell enable Set this bit to enable the XSPIM_P2 compensation cell.",
+              "enum": null
+            },
+            {
+              "name": "OCTO2_COMP_CODESEL",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "XSPIM_P2 compensation cell code selection This bit selects the code to be applied for the XSPIM_P2 I/O compensation cell.",
+              "enum": null
+            },
+            {
+              "name": "COMP_RDY",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Compensation cell ready This bit provides the status of the compensation cell.",
+              "enum": null
+            },
+            {
+              "name": "OCTO1_COMP_RDY",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "XSPIM_P1 compensation cell ready This bit provides the status of the XSPIM_P1 compensation cell.",
+              "enum": null
+            },
+            {
+              "name": "OCTO2_COMP_RDY",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "XSPIM_P2 compensation cell ready This bit provides the status of the XSPIM_P2 compensation cell.",
+              "enum": null
+            },
+            {
+              "name": "IOHSLV",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "I/O high speed at low voltage When this bit is set, the speed of the I/Os is optimized when the device voltage is low. This bit is active only if VDDIO_HSLV user option bit is set in FLASH. It must be used only if the device supply voltage is below 2.7 V. Setting this bit when V<sub>DD</sub> is higher than 2.7 V may be destructive.",
+              "enum": null
+            },
+            {
+              "name": "OCTO1_IOHSLV",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "XSPIM_P1 I/O high speed at low voltage When this bit is set, the speed of the XSPIM_P1 I/Os is optimized when the device voltage is low. This bit is active only if OCTO1_HSLV user option bit is set in FLASH. This bit must be used only if the device supply voltage is below 2.7 V. Setting this bit when V<sub>DD</sub> is higher than 2.7 V may be destructive.",
+              "enum": null
+            },
+            {
+              "name": "OCTO2_IOHSLV",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "XSPIM_P2 I/O high speed at low voltage When this bit is set, the speed of the XSPIM_P2 I/Os is optimized when the device voltage is low. This bit is active only if OCTO2_HSLV user option bit is set in FLASH. This bit must be used only if the device supply voltage is below 2.7 V. Setting this bit when V<sub>DD</sub> is higher than 2.7 V may be destructive.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CCVALR",
+          "offset": 276,
+          "size": 32,
+          "description": "SBS compensation cell for I/Os value register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SBS compensation cell for I/Os value register.",
+          "fields": [
+            {
+              "name": "NSRC",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "NMOS transistors slew-rate compensation This bitfield returns the NMOS transistors slew-rate compensation value computed by the cell. It is interpreted to compensate the NMOS transistors slew rate in the functional range if COMP_CODESEL = 0 in SBS_CCCSR register.",
+              "enum": null
+            },
+            {
+              "name": "PSRC",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "PMOS transistors slew-rate compensation This bitfield returns the PMOS transistors slew-rate compensation value computed by the cell. It is interpreted to compensate the PMOS transistors slew rate in the functional range if COMP_CODESEL = 0 in SBS_CCCSR register.",
+              "enum": null
+            },
+            {
+              "name": "OCTO1_NSRC",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "XSPIM_P1 NMOS transistors slew-rate compensation This bitfield returns the NMOS transistors slew-rate compensation value computed by the cell. It is interpreted by XSPIM_P1 to compensate the NMOS transistors slew rate in the functional range if OCTO1_COMP_CODESEL = 0 in SBS_CCCSR register.",
+              "enum": null
+            },
+            {
+              "name": "OCTO1_PSRC",
+              "bit_offset": 12,
+              "bit_width": 4,
+              "description": "XSPIM_P1 PMOS transistors slew-rate compensation This bitfield returns the PMOS transistors slew-rate compensation value computed by the cell. It is interpreted by XSPIM_P1 to compensate the PMOS transistors slew rate in the functional range if OCTO1_COMP_CODESEL = 0 in SBS_CCCSR register.",
+              "enum": null
+            },
+            {
+              "name": "OCTO2_NSRC",
+              "bit_offset": 16,
+              "bit_width": 4,
+              "description": "XSPIM_P2 NMOS transistors slew-rate compensation This bitfield returns the NMOS transistors slew-rate compensation value computed by the cell. It is interpreted by XSPIM_P2 to compensate the NMOS transistors slew rate in the functional range if OCTO2_COMP_CODESEL = 0 in SBS_CCCSR register.",
+              "enum": null
+            },
+            {
+              "name": "OCTO2_PSRC",
+              "bit_offset": 20,
+              "bit_width": 4,
+              "description": "XSPIM_P2 PMOS transistors slew-rate compensation This bitfield returns the PMOS transistors slew-rate compensation value computed by the cell. It is interpreted by XSPIM_P2 to compensate the PMOS transistors slew rate in the functional range if OCTO2_COMP_CODESEL = 0 in SBS_CCCSR register.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CCSWVALR",
+          "offset": 280,
+          "size": 32,
+          "description": "SBS compensation cell for I/Os software value register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SBS compensation cell for I/Os software value register.",
+          "fields": [
+            {
+              "name": "SW_NSRC",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "Software NMOS transistors slew-rate compensation This bitfield returns the NMOS transistors slew-rate compensation value computed by the cell. It is interpreted to compensate the NMOS transistors slew rate in the functional range if COMP_CODESEL = 1 in SBS_CCCSR register.",
+              "enum": null
+            },
+            {
+              "name": "SW_PSRC",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "Software PMOS transistors slew-rate compensation This bitfield returns the PMOS transistors slew-rate compensation value computed by the cell. It is interpreted to compensate the PMOS transistors slew rate in the functional range if COMP_CODESEL = 1 in SBS_CCCSR register.",
+              "enum": null
+            },
+            {
+              "name": "OCTO1_SW_NSRC",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "XSPIM_P1 software NMOS transistors slew-rate compensation This bitfield returns the NMOS transistors slew -ate compensation value computed by the cell. It is interpreted by XSPIM_P1 to compensate the NMOS transistors slew rate in the functional range if OCTO1_COMP_CODESEL = 1 in SBS_CCCSR register.",
+              "enum": null
+            },
+            {
+              "name": "OCTO1_SW_PSRC",
+              "bit_offset": 12,
+              "bit_width": 4,
+              "description": "XSPIM_P1 software PMOS transistors slew-rate compensation This bitfield returns the PMOS transistors slew-rate compensation value computed by the cell. It is interpreted by XSPIM_P1 to compensate the PMOS transistors slew rate in the functional range if OCTO1_COMP_CODESEL = 1 in SBS_CCCSR register.",
+              "enum": null
+            },
+            {
+              "name": "OCTO2_SW_NSRC",
+              "bit_offset": 16,
+              "bit_width": 4,
+              "description": "XSPIM_P2 software NMOS transistors slew-rate compensation This bitfield returns the NMOS transistors slew-rate compensation value computed by the cell. It is interpreted by XSPIM_P2 to compensate the NMOS transistors slew rate in the functional range if OCTO2_COMP_CODESEL = 1 in SBS_CCCSR register.",
+              "enum": null
+            },
+            {
+              "name": "OCTO2_SW_PSRC",
+              "bit_offset": 20,
+              "bit_width": 4,
+              "description": "XSPIM_P2 software PMOS transistors slew-rate compensation This bitfield returns the PMOS transistors slew-rate compensation value computed by the cell. It is interpreted by XSPIM_P2 to compensate the PMOS transistors slew rate in the functional range if OCTO2_COMP_CODESEL = 1 in SBS_CCCSR register.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "BKLOCKR",
+          "offset": 288,
+          "size": 32,
+          "description": "SBS break lockup register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SBS break lockup register.",
+          "fields": [
+            {
+              "name": "PVD_BL",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "PVD break lock This bit is set by SW and cleared only by a system reset. it can be used to enable and lock the connection to TIM1/8/15/16/17Break input as well as the PVDE and PLS[2:0] bitfields in the PWR_CR1 register. Once set, this bit is cleared only by a system reset.",
+              "enum": null
+            },
+            {
+              "name": "FLASHECC_BL",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Flash ECC error break lock Set this bit to enable and lock the connection between embedded flash memory ECC double error detection flag and break inputs of TIM1/15/16/17 peripherals. Once set, this bit is cleared only by a system reset.",
+              "enum": null
+            },
+            {
+              "name": "CM7LCKUP_BL",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Cortex-M7 lockup break lock Set this bit to enable and lock the connection between the Cortex-M7 lockup (HardFault) output and break inputs of TIM1/15/16/17 peripherals. Once set, this bit is cleared only by a system reset.",
+              "enum": null
+            },
+            {
+              "name": "BKRAMECC_BL",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Backup RAM ECC error break lock Set this bit to enable and lock the connection between backup RAM ECC double error detection flag and break inputs of TIM1/15/16/17 peripherals. Once set, this bit is cleared only by a system reset.",
+              "enum": null
+            },
+            {
+              "name": "DTCMECC_BL",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "DTCM ECC error break lock Set this bit to enable and lock the connection between DTCM ECC double error detection flag and break inputs of TIM1/15/16/17 peripherals. Once set, this bit is cleared only by a system reset. Note: The DTCM0 and DTCM1 are Ored to give DTCMECC.",
+              "enum": null
+            },
+            {
+              "name": "ITCMECC_BL",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "ITCM ECC error break lock Set this bit to enable and lock the connection between ITCM ECC double error detection flag and break inputs of TIM1/15/16/17 peripherals. Once set, this bit is cleared only by a system reset.",
+              "enum": null
+            },
+            {
+              "name": "ARAM3ECC_BL",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "AXIRAM3 ECC error break lock Set this bit to enable and lock the connection between AXIRAM3 ECC double error detection flag and break inputs of TIM1/15/16/17 peripherals. Once set this bit is cleared only by a system reset.",
+              "enum": null
+            },
+            {
+              "name": "ARAM1ECC_BL",
+              "bit_offset": 23,
+              "bit_width": 1,
+              "description": "AXIRAM1 ECC error break lock Set this bit to enable and lock the connection between AXIRAM1 ECC double error detection flag and break inputs of TIM1/15/16/17 peripherals. Once set, this bit is cleared only by a system reset.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "EXTICR",
+          "offset": 304,
+          "size": 32,
+          "description": "external interrupt configuration register",
+          "array_len": 4,
+          "array_stride": 4,
+          "fieldset_description": "external interrupt configuration register 2",
+          "fields": [
+            {
+              "name": "EXTI",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 4 to 7)",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "AXIRAM_WS": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Ws0",
+          "value": 0,
+          "description": "No wait state added when accessing any AXIRAM with ECC = 0."
+        },
+        {
+          "name": "Ws1",
+          "value": 1,
+          "description": "One wait state added when accessing any AXIRAM with ECC = 0. In this case, Fmax = 500 MHz is not guaranteed. (TBC)."
+        }
+      ]
+    },
+    "DBGCFG_LOCK": {
+      "bit_size": 8,
+      "variants": [
+        {
+          "name": "Unlock",
+          "value": 180,
+          "description": "Writes to SBS_DBGCR allowed (default)."
+        }
+      ]
+    },
+    "DBG_AUTH_HDPL": {
+      "bit_size": 8,
+      "variants": [
+        {
+          "name": "HDPL1",
+          "value": 81,
+          "description": "HDPL1."
+        },
+        {
+          "name": "HDPL3",
+          "value": 111,
+          "description": "HDPL3."
+        },
+        {
+          "name": "HDPL2",
+          "value": 138,
+          "description": "HDPL2."
+        }
+      ]
+    },
+    "ETH_SEL_PHY": {
+      "bit_size": 3,
+      "variants": [
+        {
+          "name": "MII_GMII",
+          "value": 0,
+          "description": "GMII or MII"
+        },
+        {
+          "name": "RMII",
+          "value": 4,
+          "description": "RMII"
+        }
+      ]
+    },
+    "HDPL": {
+      "bit_size": 8,
+      "variants": [
+        {
+          "name": "HDPL1",
+          "value": 81,
+          "description": "HDPL1."
+        },
+        {
+          "name": "HDPL2",
+          "value": 138,
+          "description": "HDPL2."
+        },
+        {
+          "name": "HDPL0",
+          "value": 180,
+          "description": "HDPL0, corresponding to ST-RSS (default when device is close)."
+        }
+      ]
+    }
+  }
+}

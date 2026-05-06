@@ -1,0 +1,403 @@
+{
+  "schema": 1,
+  "kind": "opamp",
+  "version": "v5",
+  "blocks": {
+    "OPAMP": {
+      "name": "OPAMP",
+      "description": "Operational amplifier",
+      "extends": null,
+      "registers": [
+        {
+          "name": "CSR",
+          "offset": 0,
+          "size": 32,
+          "description": "Control/status register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Control/status register",
+          "fields": [
+            {
+              "name": "OPAMPEN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Enable",
+              "enum": null
+            },
+            {
+              "name": "FORCE_VP",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Force internal reference on VP (reserved for test)",
+              "enum": null
+            },
+            {
+              "name": "VP_SEL",
+              "bit_offset": 2,
+              "bit_width": 2,
+              "description": "Non-inverting input selection",
+              "enum": "VP_SEL"
+            },
+            {
+              "name": "USERTRIM",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "User trimming enable",
+              "enum": null
+            },
+            {
+              "name": "VM_SEL",
+              "bit_offset": 5,
+              "bit_width": 2,
+              "description": "Inverting input selection",
+              "enum": "VM_SEL"
+            },
+            {
+              "name": "OPAHSM",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "High-speed mode enable",
+              "enum": null
+            },
+            {
+              "name": "OPAINTOEN",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Internal output enable",
+              "enum": null
+            },
+            {
+              "name": "CALON",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "Calibration mode enable",
+              "enum": null
+            },
+            {
+              "name": "CALSEL",
+              "bit_offset": 12,
+              "bit_width": 2,
+              "description": "Calibration selection",
+              "enum": "CALSEL"
+            },
+            {
+              "name": "PGA_GAIN",
+              "bit_offset": 14,
+              "bit_width": 5,
+              "description": "Gain in PGA mode",
+              "enum": "PGA_GAIN"
+            },
+            {
+              "name": "TRIMOFFSETP",
+              "bit_offset": 19,
+              "bit_width": 5,
+              "description": "Offset trimming value (PMOS)",
+              "enum": null
+            },
+            {
+              "name": "TRIMOFFSETN",
+              "bit_offset": 24,
+              "bit_width": 5,
+              "description": "Offset trimming value (NMOS)",
+              "enum": null
+            },
+            {
+              "name": "CALOUT",
+              "bit_offset": 30,
+              "bit_width": 1,
+              "description": "OPAMP ouput status flag",
+              "enum": null
+            },
+            {
+              "name": "LOCK",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "LOCK",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "TCMR",
+          "offset": 24,
+          "size": 32,
+          "description": "Control/status register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "OPAMP timer controlled mode register",
+          "fields": [
+            {
+              "name": "VMS_SEL",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Inverting input secondary selection",
+              "enum": null
+            },
+            {
+              "name": "VPS_SEL",
+              "bit_offset": 1,
+              "bit_width": 2,
+              "description": "Non-inverting input secondary selection",
+              "enum": "VPS_SEL"
+            },
+            {
+              "name": "T1CM_EN",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "TIM1 controlled mux mode enable",
+              "enum": null
+            },
+            {
+              "name": "T8CM_EN",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "TIM8 controlled mux mode enable",
+              "enum": null
+            },
+            {
+              "name": "T20CM_EN",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "TIM20 controlled mux mode enable",
+              "enum": null
+            },
+            {
+              "name": "LOCK",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "Configure this register as read-only",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "CALSEL": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Percent3_3",
+          "value": 0,
+          "description": "VREFOPAMP = 3.3% VDDA"
+        },
+        {
+          "name": "Percent10",
+          "value": 1,
+          "description": "VREFOPAMP = 10% VDDA"
+        },
+        {
+          "name": "Percent50",
+          "value": 2,
+          "description": "VREFOPAMP = 50% VDDA"
+        },
+        {
+          "name": "Percent90",
+          "value": 3,
+          "description": "VREFOPAMP = 90% VDDA"
+        }
+      ]
+    },
+    "PGA_GAIN": {
+      "bit_size": 5,
+      "variants": [
+        {
+          "name": "Gain2",
+          "value": 0,
+          "description": "Gain 2"
+        },
+        {
+          "name": "Gain4",
+          "value": 1,
+          "description": "Gain 4"
+        },
+        {
+          "name": "Gain8",
+          "value": 2,
+          "description": "Gain 8"
+        },
+        {
+          "name": "Gain16",
+          "value": 3,
+          "description": "Gain 16"
+        },
+        {
+          "name": "Gain32",
+          "value": 4,
+          "description": "Gain 32"
+        },
+        {
+          "name": "Gain64",
+          "value": 5,
+          "description": "Gain 64"
+        },
+        {
+          "name": "Gain2_InputVINM0",
+          "value": 8,
+          "description": "Gain 2, input/bias connected to VINM0 or inverting gain"
+        },
+        {
+          "name": "Gain4_InputVINM0",
+          "value": 9,
+          "description": "Gain 4, input/bias connected to VINM0 or inverting gain"
+        },
+        {
+          "name": "Gain8_InputVINM0",
+          "value": 10,
+          "description": "Gain 8, input/bias connected to VINM0 or inverting gain"
+        },
+        {
+          "name": "Gain16_InputVINM0",
+          "value": 11,
+          "description": "Gain 16, input/bias connected to VINM0 or inverting gain"
+        },
+        {
+          "name": "Gain32_InputVINM0",
+          "value": 12,
+          "description": "Gain 32, input/bias connected to VINM0 or inverting gain"
+        },
+        {
+          "name": "Gain64_InputVINM0",
+          "value": 13,
+          "description": "Gain 64, input/bias connected to VINM0 or inverting gain"
+        },
+        {
+          "name": "Gain2_FilteringVINM0",
+          "value": 16,
+          "description": "Gain 2, with filtering on VINM0"
+        },
+        {
+          "name": "Gain4_FilteringVINM0",
+          "value": 17,
+          "description": "Gain 4, with filtering on VINM0"
+        },
+        {
+          "name": "Gain8_FilteringVINM0",
+          "value": 18,
+          "description": "Gain 8, with filtering on VINM0"
+        },
+        {
+          "name": "Gain16_FilteringVINM0",
+          "value": 19,
+          "description": "Gain 16, with filtering on VINM0"
+        },
+        {
+          "name": "Gain32_FilteringVINM0",
+          "value": 20,
+          "description": "Gain 32, with filtering on VINM0"
+        },
+        {
+          "name": "Gain64_FilteringVINM0",
+          "value": 21,
+          "description": "Gain 64, with filtering on VINM0"
+        },
+        {
+          "name": "Gain2_InputVINM0FilteringVINM1",
+          "value": 24,
+          "description": "Gain 2, input/bias connected to VINM0 with filtering on VINM1 or inverting gain"
+        },
+        {
+          "name": "Gain4_InputVINM0FilteringVINM1",
+          "value": 25,
+          "description": "Gain 4, input/bias connected to VINM0 with filtering on VINM1 or inverting gain"
+        },
+        {
+          "name": "Gain8_InputVINM0FilteringVINM1",
+          "value": 26,
+          "description": "Gain 8, input/bias connected to VINM0 with filtering on VINM1 or inverting gain"
+        },
+        {
+          "name": "Gain16_InputVINM0FilteringVINM1",
+          "value": 27,
+          "description": "Gain 16, input/bias connected to VINM0 with filtering on VINM1 or inverting gain"
+        },
+        {
+          "name": "Gain32_InputVINM0FilteringVINM1",
+          "value": 28,
+          "description": "Gain 32, input/bias connected to VINM0 with filtering on VINM1 or inverting gain"
+        },
+        {
+          "name": "Gain64_InputVINM0FilteringVINM1",
+          "value": 29,
+          "description": "Gain 64, input/bias connected to VINM0 with filtering on VINM1 or inverting gain"
+        }
+      ]
+    },
+    "VM_SEL": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "VINM0",
+          "value": 0,
+          "description": "VINM0 connected to VINM input"
+        },
+        {
+          "name": "VINM1",
+          "value": 1,
+          "description": "VINM1 connected to VINM input"
+        },
+        {
+          "name": "PGA",
+          "value": 2,
+          "description": "Feedback resistor connected to VINM (PGA mode)"
+        },
+        {
+          "name": "Output",
+          "value": 3,
+          "description": "OpAmp output connected to VINM (Follower mode)"
+        }
+      ]
+    },
+    "VPS_SEL": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "VINP0",
+          "value": 0,
+          "description": "VINP0 connected to VINP input"
+        },
+        {
+          "name": "VINP1",
+          "value": 1,
+          "description": "VINP1 connected to VINP input"
+        },
+        {
+          "name": "VINP2",
+          "value": 2,
+          "description": "VINP2 connected to VINP input"
+        },
+        {
+          "name": "DAC3_CH1",
+          "value": 3,
+          "description": "DAC3_CH1 connected to VINP input"
+        }
+      ]
+    },
+    "VP_SEL": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "VINP0",
+          "value": 0,
+          "description": "VINP0 connected to VINP input"
+        },
+        {
+          "name": "VINP1",
+          "value": 1,
+          "description": "VINP1 connected to VINP input"
+        },
+        {
+          "name": "VINP2",
+          "value": 2,
+          "description": "VINP2 connected to VINP input"
+        },
+        {
+          "name": "DAC3_CH1",
+          "value": 3,
+          "description": "DAC3_CH1 connected to VINP input"
+        }
+      ]
+    }
+  }
+}

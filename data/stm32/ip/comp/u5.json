@@ -1,0 +1,264 @@
+{
+  "schema": 1,
+  "kind": "comp",
+  "version": "u5",
+  "blocks": {
+    "COMP": {
+      "name": "COMP",
+      "description": "Comparator.",
+      "extends": null,
+      "registers": [
+        {
+          "name": "CSR",
+          "offset": 0,
+          "size": 32,
+          "description": "Comparator control and status register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "control and status register.",
+          "fields": [
+            {
+              "name": "EN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Enable",
+              "enum": null
+            },
+            {
+              "name": "INMSEL",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "Input minus selection bits.",
+              "enum": "INM"
+            },
+            {
+              "name": "INPSEL",
+              "bit_offset": 8,
+              "bit_width": 3,
+              "description": "Input plus selection bits.",
+              "enum": null
+            },
+            {
+              "name": "WINMODE",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "Comparator noninverting input selector for window mode.",
+              "enum": "WindowMode"
+            },
+            {
+              "name": "WINOUT",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "Comparator 1 output selector.",
+              "enum": "WindowOut"
+            },
+            {
+              "name": "POLARITY",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Polarity selection bit.",
+              "enum": "Polarity"
+            },
+            {
+              "name": "HYST",
+              "bit_offset": 16,
+              "bit_width": 2,
+              "description": "Hysteresis selection bits.",
+              "enum": "Hysteresis"
+            },
+            {
+              "name": "PWRMODE",
+              "bit_offset": 18,
+              "bit_width": 2,
+              "description": "Power Mode.",
+              "enum": "PowerMode"
+            },
+            {
+              "name": "BLANKSEL",
+              "bit_offset": 20,
+              "bit_width": 5,
+              "description": "Blanking source selection bits.",
+              "enum": "Blanking"
+            },
+            {
+              "name": "VALUE",
+              "bit_offset": 30,
+              "bit_width": 1,
+              "description": "Output status bit.",
+              "enum": null
+            },
+            {
+              "name": "LOCK",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "Register lock bit.",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "Blanking": {
+      "bit_size": 5,
+      "variants": [
+        {
+          "name": "NoBlanking",
+          "value": 0,
+          "description": "No blanking."
+        },
+        {
+          "name": "Blank1",
+          "value": 1,
+          "description": "Check data sheet for blanking options"
+        },
+        {
+          "name": "Blank2",
+          "value": 2,
+          "description": "Check data sheet for blanking options"
+        },
+        {
+          "name": "Blank3",
+          "value": 4,
+          "description": "Check data sheet for blanking options"
+        }
+      ]
+    },
+    "Hysteresis": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "None",
+          "value": 0,
+          "description": null
+        },
+        {
+          "name": "Low",
+          "value": 1,
+          "description": null
+        },
+        {
+          "name": "Medium",
+          "value": 2,
+          "description": null
+        },
+        {
+          "name": "High",
+          "value": 3,
+          "description": null
+        }
+      ]
+    },
+    "INM": {
+      "bit_size": 4,
+      "variants": [
+        {
+          "name": "QuarterVRef",
+          "value": 0,
+          "description": "Inverting input set to 1/4 VRef"
+        },
+        {
+          "name": "HalfVRef",
+          "value": 1,
+          "description": "Inverting input set to 1/2 VRef"
+        },
+        {
+          "name": "ThreeQuarterVRef",
+          "value": 2,
+          "description": "Inverting input set to 3/4 VRef"
+        },
+        {
+          "name": "VRef",
+          "value": 3,
+          "description": "Inverting input set to VRef"
+        },
+        {
+          "name": "DAC1",
+          "value": 4,
+          "description": "Inverting input set to DAC1 output"
+        },
+        {
+          "name": "DAC2",
+          "value": 5,
+          "description": "Inverting input set to DAC2 output"
+        },
+        {
+          "name": "INM1",
+          "value": 6,
+          "description": "Inverting input set to IO1 (PB7)"
+        },
+        {
+          "name": "INM2",
+          "value": 7,
+          "description": "Inverting input set to IO2 (PB3)"
+        }
+      ]
+    },
+    "Polarity": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "NotInverted",
+          "value": 0,
+          "description": "Output is not inverted."
+        },
+        {
+          "name": "Inverted",
+          "value": 1,
+          "description": "Output is inverted."
+        }
+      ]
+    },
+    "PowerMode": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "HighSpeed",
+          "value": 0,
+          "description": "High speed / full power."
+        },
+        {
+          "name": "MediumSpeed",
+          "value": 1,
+          "description": "Medium speed / medium power."
+        },
+        {
+          "name": "UltraLow",
+          "value": 3,
+          "description": "Very-low speed / ultra-low power."
+        }
+      ]
+    },
+    "WindowMode": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "ThisInpsel",
+          "value": 0,
+          "description": "Signal selected with INPSEL[2:0] bitfield of this register."
+        },
+        {
+          "name": "OtherInpsel",
+          "value": 1,
+          "description": "Signal selected with INPSEL[2:0] bitfield of the other register (required for window mode)."
+        }
+      ]
+    },
+    "WindowOut": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "COMP1_VALUE",
+          "value": 0,
+          "description": "Comparator 1 value."
+        },
+        {
+          "name": "COMP1_VALUE XOR COMP2_VALUE",
+          "value": 1,
+          "description": "Comparator 1 value XOR comparator 2 value (required for window mode)."
+        }
+      ]
+    }
+  }
+}

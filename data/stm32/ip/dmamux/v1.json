@@ -1,0 +1,219 @@
+{
+  "schema": 1,
+  "kind": "dmamux",
+  "version": "v1",
+  "blocks": {
+    "DMAMUX": {
+      "name": "DMAMUX",
+      "description": "DMAMUX",
+      "extends": null,
+      "registers": [
+        {
+          "name": "CCR",
+          "offset": 0,
+          "size": 32,
+          "description": "DMAMux - DMA request line multiplexer channel x control register",
+          "array_len": 16,
+          "array_stride": 4,
+          "fieldset_description": "DMAMux - DMA request line multiplexer channel x control register",
+          "fields": [
+            {
+              "name": "DMAREQ_ID",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "Input DMA request line selected",
+              "enum": null
+            },
+            {
+              "name": "SOIE",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Interrupt enable at synchronization event overrun",
+              "enum": null
+            },
+            {
+              "name": "EGE",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Event generation enable/disable",
+              "enum": null
+            },
+            {
+              "name": "SE",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Synchronous operating mode enable/disable",
+              "enum": null
+            },
+            {
+              "name": "SPOL",
+              "bit_offset": 17,
+              "bit_width": 2,
+              "description": "Synchronization event type selector Defines the synchronization event on the selected synchronization input:",
+              "enum": "POL"
+            },
+            {
+              "name": "NBREQ",
+              "bit_offset": 19,
+              "bit_width": 5,
+              "description": "Number of DMA requests to forward Defines the number of DMA requests forwarded before output event is generated. In synchronous mode, it also defines the number of DMA requests to forward after a synchronization event, then stop forwarding. The actual number of DMA requests forwarded is NBREQ+1. Note: This field can only be written when both SE and EGE bits are reset.",
+              "enum": null
+            },
+            {
+              "name": "SYNC_ID",
+              "bit_offset": 24,
+              "bit_width": 5,
+              "description": "Synchronization input selected",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CSR",
+          "offset": 128,
+          "size": 32,
+          "description": "DMAMUX request line multiplexer interrupt channel status register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "DMAMUX request line multiplexer interrupt channel status register",
+          "fields": [
+            {
+              "name": "SOF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Synchronization overrun event flag",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CFR",
+          "offset": 132,
+          "size": 32,
+          "description": "DMAMUX request line multiplexer interrupt clear flag register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "DMAMUX request line multiplexer interrupt channel status register",
+          "fields": [
+            {
+              "name": "SOF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Synchronization overrun event flag",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "RGCR",
+          "offset": 256,
+          "size": 32,
+          "description": "DMAMux - DMA request generator channel x control register",
+          "array_len": 8,
+          "array_stride": 4,
+          "fieldset_description": "DMAMux - DMA request generator channel x control register",
+          "fields": [
+            {
+              "name": "SIG_ID",
+              "bit_offset": 0,
+              "bit_width": 5,
+              "description": "DMA request trigger input selected",
+              "enum": null
+            },
+            {
+              "name": "OIE",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Interrupt enable at trigger event overrun",
+              "enum": null
+            },
+            {
+              "name": "GE",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "DMA request generator channel enable/disable",
+              "enum": null
+            },
+            {
+              "name": "GPOL",
+              "bit_offset": 17,
+              "bit_width": 2,
+              "description": "DMA request generator trigger event type selection Defines the trigger event on the selected DMA request trigger input",
+              "enum": "POL"
+            },
+            {
+              "name": "GNBREQ",
+              "bit_offset": 19,
+              "bit_width": 5,
+              "description": "Number of DMA requests to generate Defines the number of DMA requests generated after a trigger event, then stop generating. The actual number of generated DMA requests is GNBREQ+1. Note: This field can only be written when GE bit is reset.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "RGSR",
+          "offset": 320,
+          "size": 32,
+          "description": "DMAMux - DMA request generator status register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "DMAMux - DMA request generator status register",
+          "fields": [
+            {
+              "name": "OF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Trigger event overrun flag The flag is set when a trigger event occurs on DMA request generator channel x, while the DMA request generator counter value is lower than GNBREQ. The flag is cleared by writing 1 to the corresponding COFx bit in DMAMUX_RGCFR register.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "RGCFR",
+          "offset": 324,
+          "size": 32,
+          "description": "DMAMux - DMA request generator clear flag register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "DMAMux - DMA request generator status register",
+          "fields": [
+            {
+              "name": "OF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Trigger event overrun flag The flag is set when a trigger event occurs on DMA request generator channel x, while the DMA request generator counter value is lower than GNBREQ. The flag is cleared by writing 1 to the corresponding COFx bit in DMAMUX_RGCFR register.",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "POL": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "NoEdge",
+          "value": 0,
+          "description": "No event, i.e. no synchronization nor detection"
+        },
+        {
+          "name": "RisingEdge",
+          "value": 1,
+          "description": "Rising edge"
+        },
+        {
+          "name": "FallingEdge",
+          "value": 2,
+          "description": "Falling edge"
+        },
+        {
+          "name": "BothEdges",
+          "value": 3,
+          "description": "Rising and falling edges"
+        }
+      ]
+    }
+  }
+}

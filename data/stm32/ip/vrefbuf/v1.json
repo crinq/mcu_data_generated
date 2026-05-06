@@ -1,0 +1,103 @@
+{
+  "schema": 1,
+  "kind": "vrefbuf",
+  "version": "v1",
+  "blocks": {
+    "VREFBUF": {
+      "name": "VREFBUF",
+      "description": "Voltage reference buffer.",
+      "extends": null,
+      "registers": [
+        {
+          "name": "CSR",
+          "offset": 0,
+          "size": 32,
+          "description": "control and status register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "control and status register.",
+          "fields": [
+            {
+              "name": "ENVR",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Voltage reference buffer mode enable.",
+              "enum": null
+            },
+            {
+              "name": "HIZ",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "High impedance mode.",
+              "enum": "HIZ"
+            },
+            {
+              "name": "VRS",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Voltage reference scale.",
+              "enum": "VRS"
+            },
+            {
+              "name": "VRR",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Voltage reference buffer ready.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CCR",
+          "offset": 4,
+          "size": 32,
+          "description": "calibration control register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "calibration control register.",
+          "fields": [
+            {
+              "name": "TRIM",
+              "bit_offset": 0,
+              "bit_width": 6,
+              "description": "Trimming code.",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "HIZ": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Connected",
+          "value": 0,
+          "description": "VREF+ pin is internally connected to the voltage reference buffer output."
+        },
+        {
+          "name": "HighZ",
+          "value": 1,
+          "description": "VREF+ pin is high impedance."
+        }
+      ]
+    },
+    "VRS": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Vref0",
+          "value": 0,
+          "description": "Voltage reference set to around 2.048 V."
+        },
+        {
+          "name": "Vref1",
+          "value": 1,
+          "description": "Voltage reference set to around 2.5 V."
+        }
+      ]
+    }
+  }
+}

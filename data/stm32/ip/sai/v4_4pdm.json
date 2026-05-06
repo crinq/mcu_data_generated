@@ -1,0 +1,1262 @@
+{
+  "schema": 1,
+  "kind": "sai",
+  "version": "v4_4pdm",
+  "blocks": {
+    "CH": {
+      "name": "CH",
+      "description": "Cluster CH%s, containing ?CR1, ?CR2, ?FRCR, ?SLOTR, ?IM, ?SR, ?CLRFR, ?DR",
+      "extends": null,
+      "registers": [
+        {
+          "name": "CR1",
+          "offset": 0,
+          "size": 32,
+          "description": "Configuration register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Configuration register 1",
+          "fields": [
+            {
+              "name": "MODE",
+              "bit_offset": 0,
+              "bit_width": 2,
+              "description": "SAIx audio block mode immediately",
+              "enum": "MODE"
+            },
+            {
+              "name": "PRTCFG",
+              "bit_offset": 2,
+              "bit_width": 2,
+              "description": "Protocol configuration. These bits are set and cleared by software. These bits have to be configured when the audio block is disabled.",
+              "enum": "PRTCFG"
+            },
+            {
+              "name": "DS",
+              "bit_offset": 5,
+              "bit_width": 3,
+              "description": "Data size. These bits are set and cleared by software. These bits are ignored when the SPDIF protocols are selected (bit PRTCFG[1:0]), because the frame and the data size are fixed in such case. When the companding mode is selected through COMP[1:0] bits, DS[1:0] are ignored since the data size is fixed to 8 bits by the algorithm. These bits must be configured when the audio block is disabled.",
+              "enum": "DS"
+            },
+            {
+              "name": "LSBFIRST",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Least significant bit first. This bit is set and cleared by software. It must be configured when the audio block is disabled. This bit has no meaning in AC97 audio protocol since AC97 data are always transferred with the MSB first. This bit has no meaning in SPDIF audio protocol since in SPDIF data are always transferred with LSB first.",
+              "enum": "LSBFIRST"
+            },
+            {
+              "name": "CKSTR",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Clock strobing edge. This bit is set and cleared by software. It must be configured when the audio block is disabled. This bit has no meaning in SPDIF audio protocol.",
+              "enum": "CKSTR"
+            },
+            {
+              "name": "SYNCEN",
+              "bit_offset": 10,
+              "bit_width": 2,
+              "description": "Synchronization enable. These bits are set and cleared by software. They must be configured when the audio sub-block is disabled. Note: The audio sub-block should be configured as asynchronous when SPDIF mode is enabled.",
+              "enum": "SYNCEN"
+            },
+            {
+              "name": "MONO",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "Mono mode. This bit is set and cleared by software. It is meaningful only when the number of slots is equal to 2. When the mono mode is selected, slot 0 data are duplicated on slot 1 when the audio block operates as a transmitter. In reception mode, the slot1 is discarded and only the data received from slot 0 are stored. Refer to Section: Mono/stereo mode for more details.",
+              "enum": "MONO"
+            },
+            {
+              "name": "OUTDRIV",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Output drive. This bit is set and cleared by software. Note: This bit has to be set before enabling the audio block and after the audio block configuration.",
+              "enum": "OUTDRIV"
+            },
+            {
+              "name": "SAIEN",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Audio block enable where x is A or B. This bit is set by software. To switch off the audio block, the application software must program this bit to 0 and poll the bit till it reads back 0, meaning that the block is completely disabled. Before setting this bit to 1, check that it is set to 0, otherwise the enable command will not be taken into account. This bit allows to control the state of SAIx audio block. If it is disabled when an audio frame transfer is ongoing, the ongoing transfer completes and the cell is fully disabled at the end of this audio frame transfer. Note: When SAIx block is configured in master mode, the clock must be present on the input of SAIx before setting SAIXEN bit.",
+              "enum": null
+            },
+            {
+              "name": "DMAEN",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "DMA enable. This bit is set and cleared by software. Note: Since the audio block defaults to operate as a transmitter after reset, the MODE[1:0] bits must be configured before setting DMAEN to avoid a DMA request in receiver mode.",
+              "enum": null
+            },
+            {
+              "name": "NODIV",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "No fixed divider between MCLK and FS",
+              "enum": null
+            },
+            {
+              "name": "MCKDIV",
+              "bit_offset": 20,
+              "bit_width": 6,
+              "description": "Master clock divider. These bits are set and cleared by software. These bits are meaningless when the audio block operates in slave mode. They have to be configured when the audio block is disabled. Others: the master clock frequency is calculated accordingly to the following formula:",
+              "enum": "MCKDIV"
+            },
+            {
+              "name": "OSR",
+              "bit_offset": 26,
+              "bit_width": 1,
+              "description": "Oversampling ratio for master clock",
+              "enum": null
+            },
+            {
+              "name": "MCKEN",
+              "bit_offset": 27,
+              "bit_width": 1,
+              "description": "Master clock generation enable",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CR2",
+          "offset": 4,
+          "size": 32,
+          "description": "Configuration register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Configuration register 2",
+          "fields": [
+            {
+              "name": "FTH",
+              "bit_offset": 0,
+              "bit_width": 3,
+              "description": "FIFO threshold. This bit is set and cleared by software.",
+              "enum": "FTH"
+            },
+            {
+              "name": "FFLUSH",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "FIFO flush. This bit is set by software. It is always read as 0. This bit should be configured when the SAI is disabled.",
+              "enum": null
+            },
+            {
+              "name": "TRIS",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Tristate management on data line. This bit is set and cleared by software. It is meaningful only if the audio block is configured as a transmitter. This bit is not used when the audio block is configured in SPDIF mode. It should be configured when SAI is disabled. Refer to Section: Output data line management on an inactive slot for more details.",
+              "enum": null
+            },
+            {
+              "name": "MUTE",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Mute. This bit is set and cleared by software. It is meaningful only when the audio block operates as a transmitter. The MUTE value is linked to value of MUTEVAL if the number of slots is lower or equal to 2, or equal to 0 if it is greater than 2. Refer to Section: Mute mode for more details. Note: This bit is meaningless and should not be used for SPDIF audio blocks.",
+              "enum": null
+            },
+            {
+              "name": "MUTEVAL",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Mute value. This bit is set and cleared by software.It must be written before enabling the audio block: SAIXEN. This bit is meaningful only when the audio block operates as a transmitter, the number of slots is lower or equal to 2 and the MUTE bit is set. If more slots are declared, the bit value sent during the transmission in mute mode is equal to 0, whatever the value of MUTEVAL. if the number of slot is lower or equal to 2 and MUTEVAL = 1, the MUTE value transmitted for each slot is the one sent during the previous frame. Refer to Section: Mute mode for more details. Note: This bit is meaningless and should not be used for SPDIF audio blocks.",
+              "enum": "MUTEVAL"
+            },
+            {
+              "name": "MUTECNT",
+              "bit_offset": 7,
+              "bit_width": 6,
+              "description": "Mute counter. These bits are set and cleared by software. They are used only in reception mode. The value set in these bits is compared to the number of consecutive mute frames detected in reception. When the number of mute frames is equal to this value, the flag MUTEDET will be set and an interrupt will be generated if bit MUTEDETIE is set. Refer to Section: Mute mode for more details.",
+              "enum": null
+            },
+            {
+              "name": "CPL",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Complement bit. This bit is set and cleared by software. It defines the type of complement to be used for companding mode Note: This bit has effect only when the companding mode is -Law algorithm or A-Law algorithm.",
+              "enum": "CPL"
+            },
+            {
+              "name": "COMP",
+              "bit_offset": 14,
+              "bit_width": 2,
+              "description": "Companding mode. These bits are set and cleared by software. The -Law and the A-Law log are a part of the CCITT G.711 recommendation, the type of complement that will be used depends on CPL bit. The data expansion or data compression are determined by the state of bit MODE[0]. The data compression is applied if the audio block is configured as a transmitter. The data expansion is automatically applied when the audio block is configured as a receiver. Refer to Section: Companding mode for more details. Note: Companding mode is applicable only when TDM is selected.",
+              "enum": "COMP"
+            }
+          ]
+        },
+        {
+          "name": "FRCR",
+          "offset": 8,
+          "size": 32,
+          "description": "This register has no meaning in AC97 and SPDIF audio protocol",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "This register has no meaning in AC97 and SPDIF audio protocol",
+          "fields": [
+            {
+              "name": "FRL",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "Frame length. These bits are set and cleared by software. They define the audio frame length expressed in number of SCK clock cycles: the number of bits in the frame is equal to FRL[7:0] + 1. The minimum number of bits to transfer in an audio frame must be equal to 8, otherwise the audio block will behaves in an unexpected way. This is the case when the data size is 8 bits and only one slot 0 is defined in NBSLOT[4:0] of SAI_xSLOTR register (NBSLOT[3:0] = 0000). In master mode, if the master clock (available on MCLK_x pin) is used, the frame length should be aligned with a number equal to a power of 2, ranging from 8 to 256. When the master clock is not used (NODIV = 1), it is recommended to program the frame length to an value ranging from 8 to 256. These bits are meaningless and are not used in AC97 or SPDIF audio block configuration.",
+              "enum": null
+            },
+            {
+              "name": "FSALL",
+              "bit_offset": 8,
+              "bit_width": 7,
+              "description": "Frame synchronization active level length. These bits are set and cleared by software. They specify the length in number of bit clock (SCK) + 1 (FSALL[6:0] + 1) of the active level of the FS signal in the audio frame These bits are meaningless and are not used in AC97 or SPDIF audio block configuration. They must be configured when the audio block is disabled.",
+              "enum": null
+            },
+            {
+              "name": "FSDEF",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Frame synchronization definition. This bit is set and cleared by software. When the bit is set, the number of slots defined in the SAI_xSLOTR register has to be even. It means that half of this number of slots will be dedicated to the left channel and the other slots for the right channel (e.g: this bit has to be set for I2S or MSB/LSB-justified protocols...). This bit is meaningless and is not used in AC97 or SPDIF audio block configuration. It must be configured when the audio block is disabled.",
+              "enum": null
+            },
+            {
+              "name": "FSPOL",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "Frame synchronization polarity. This bit is set and cleared by software. It is used to configure the level of the start of frame on the FS signal. It is meaningless and is not used in AC97 or SPDIF audio block configuration. This bit must be configured when the audio block is disabled.",
+              "enum": "FSPOL"
+            },
+            {
+              "name": "FSOFF",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "Frame synchronization offset. This bit is set and cleared by software. It is meaningless and is not used in AC97 or SPDIF audio block configuration. This bit must be configured when the audio block is disabled.",
+              "enum": "FSOFF"
+            }
+          ]
+        },
+        {
+          "name": "SLOTR",
+          "offset": 12,
+          "size": 32,
+          "description": "This register has no meaning in AC97 and SPDIF audio protocol",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "This register has no meaning in AC97 and SPDIF audio protocol",
+          "fields": [
+            {
+              "name": "FBOFF",
+              "bit_offset": 0,
+              "bit_width": 5,
+              "description": "First bit offset These bits are set and cleared by software. The value set in this bitfield defines the position of the first data transfer bit in the slot. It represents an offset value. In transmission mode, the bits outside the data field are forced to 0. In reception mode, the extra received bits are discarded. These bits must be set when the audio block is disabled. They are ignored in AC97 or SPDIF mode.",
+              "enum": null
+            },
+            {
+              "name": "SLOTSZ",
+              "bit_offset": 6,
+              "bit_width": 2,
+              "description": "Slot size This bits is set and cleared by software. The slot size must be higher or equal to the data size. If this condition is not respected, the behavior of the SAI will be undetermined. Refer to Section: Output data line management on an inactive slot for information on how to drive SD line. These bits must be set when the audio block is disabled. They are ignored in AC97 or SPDIF mode.",
+              "enum": "SLOTSZ"
+            },
+            {
+              "name": "NBSLOT",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "Number of slots in an audio frame. These bits are set and cleared by software. The value set in this bitfield represents the number of slots + 1 in the audio frame (including the number of inactive slots). The maximum number of slots is 16. The number of slots should be even if FSDEF bit in the SAI_xFRCR register is set. The number of slots must be configured when the audio block is disabled. They are ignored in AC97 or SPDIF mode.",
+              "enum": null
+            },
+            {
+              "name": "SLOTEN",
+              "bit_offset": 16,
+              "bit_width": 16,
+              "description": "Slot enable. These bits are set and cleared by software. Each SLOTEN bit corresponds to a slot position from 0 to 15 (maximum 16 slots). The slot must be enabled when the audio block is disabled. They are ignored in AC97 or SPDIF mode.",
+              "enum": "SLOTEN"
+            }
+          ]
+        },
+        {
+          "name": "IM",
+          "offset": 16,
+          "size": 32,
+          "description": "Interrupt mask register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Interrupt mask register 2",
+          "fields": [
+            {
+              "name": "OVRUDRIE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Overrun/underrun interrupt enable. This bit is set and cleared by software. When this bit is set, an interrupt is generated if the OVRUDR bit in the SAI_xSR register is set.",
+              "enum": null
+            },
+            {
+              "name": "MUTEDETIE",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Mute detection interrupt enable. This bit is set and cleared by software. When this bit is set, an interrupt is generated if the MUTEDET bit in the SAI_xSR register is set. This bit has a meaning only if the audio block is configured in receiver mode.",
+              "enum": null
+            },
+            {
+              "name": "WCKCFGIE",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Wrong clock configuration interrupt enable. This bit is set and cleared by software. This bit is taken into account only if the audio block is configured as a master (MODE[1] = 0) and NODIV = 0. It generates an interrupt if the WCKCFG flag in the SAI_xSR register is set. Note: This bit is used only in TDM mode and is meaningless in other modes.",
+              "enum": null
+            },
+            {
+              "name": "FREQIE",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "FIFO request interrupt enable. This bit is set and cleared by software. When this bit is set, an interrupt is generated if the FREQ bit in the SAI_xSR register is set. Since the audio block defaults to operate as a transmitter after reset, the MODE bit must be configured before setting FREQIE to avoid a parasitic interruption in receiver mode,",
+              "enum": null
+            },
+            {
+              "name": "CNRDYIE",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Codec not ready interrupt enable (AC97). This bit is set and cleared by software. When the interrupt is enabled, the audio block detects in the slot 0 (tag0) of the AC97 frame if the Codec connected to this line is ready or not. If it is not ready, the CNRDY flag in the SAI_xSR register is set and an interruption i generated. This bit has a meaning only if the AC97 mode is selected through PRTCFG[1:0] bits and the audio block is operates as a receiver.",
+              "enum": null
+            },
+            {
+              "name": "AFSDETIE",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Anticipated frame synchronization detection interrupt enable. This bit is set and cleared by software. When this bit is set, an interrupt will be generated if the AFSDET bit in the SAI_xSR register is set. This bit is meaningless in AC97, SPDIF mode or when the audio block operates as a master.",
+              "enum": null
+            },
+            {
+              "name": "LFSDETIE",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Late frame synchronization detection interrupt enable. This bit is set and cleared by software. When this bit is set, an interrupt will be generated if the LFSDET bit is set in the SAI_xSR register. This bit is meaningless in AC97, SPDIF mode or when the audio block operates as a master.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SR",
+          "offset": 20,
+          "size": 32,
+          "description": "Status register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Status register",
+          "fields": [
+            {
+              "name": "OVRUDR",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Overrun / underrun. This bit is read only. The overrun and underrun conditions can occur only when the audio block is configured as a receiver and a transmitter, respectively. It can generate an interrupt if OVRUDRIE bit is set in SAI_xIM register. This flag is cleared when the software sets COVRUDR bit in SAI_xCLRFR register.",
+              "enum": null
+            },
+            {
+              "name": "MUTEDET",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Mute detection. This bit is read only. This flag is set if consecutive 0 values are received in each slot of a given audio frame and for a consecutive number of audio frames (set in the MUTECNT bit in the SAI_xCR2 register). It can generate an interrupt if MUTEDETIE bit is set in SAI_xIM register. This flag is cleared when the software sets bit CMUTEDET in the SAI_xCLRFR register.",
+              "enum": null
+            },
+            {
+              "name": "WCKCFG",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Wrong clock configuration flag. This bit is read only. This bit is used only when the audio block operates in master mode (MODE[1] = 0) and NODIV = 0. It can generate an interrupt if WCKCFGIE bit is set in SAI_xIM register. This flag is cleared when the software sets CWCKCFG bit in SAI_xCLRFR register.",
+              "enum": "WCKCFG"
+            },
+            {
+              "name": "FREQ",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "FIFO request. This bit is read only. The request depends on the audio block configuration: If the block is configured in transmission mode, the FIFO request is related to a write request operation in the SAI_xDR. If the block configured in reception, the FIFO request related to a read request operation from the SAI_xDR. This flag can generate an interrupt if FREQIE bit is set in SAI_xIM register.",
+              "enum": null
+            },
+            {
+              "name": "CNRDY",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Codec not ready. This bit is read only. This bit is used only when the AC97 audio protocol is selected in the SAI_xCR1 register and configured in receiver mode. It can generate an interrupt if CNRDYIE bit is set in SAI_xIM register. This flag is cleared when the software sets CCNRDY bit in SAI_xCLRFR register.",
+              "enum": "CNRDY"
+            },
+            {
+              "name": "AFSDET",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Anticipated frame synchronization detection. This bit is read only. This flag can be set only if the audio block is configured in slave mode. It is not used in AC97or SPDIF mode. It can generate an interrupt if AFSDETIE bit is set in SAI_xIM register. This flag is cleared when the software sets CAFSDET bit in SAI_xCLRFR register.",
+              "enum": null
+            },
+            {
+              "name": "LFSDET",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Late frame synchronization detection. This bit is read only. This flag can be set only if the audio block is configured in slave mode. It is not used in AC97 or SPDIF mode. It can generate an interrupt if LFSDETIE bit is set in the SAI_xIM register. This flag is cleared when the software sets bit CLFSDET in SAI_xCLRFR register",
+              "enum": null
+            },
+            {
+              "name": "FLVL",
+              "bit_offset": 16,
+              "bit_width": 3,
+              "description": "FIFO level threshold. This bit is read only. The FIFO level threshold flag is managed only by hardware and its setting depends on SAI block configuration (transmitter or receiver mode). If the SAI block is configured as transmitter: If SAI block is configured as receiver:",
+              "enum": "FLVL"
+            }
+          ]
+        },
+        {
+          "name": "CLRFR",
+          "offset": 24,
+          "size": 32,
+          "description": "Clear flag register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Clear flag register",
+          "fields": [
+            {
+              "name": "COVRUDR",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Clear overrun / underrun. This bit is write only. Programming this bit to 1 clears the OVRUDR flag in the SAI_xSR register. Reading this bit always returns the value 0.",
+              "enum": null
+            },
+            {
+              "name": "CMUTEDET",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Mute detection flag. This bit is write only. Programming this bit to 1 clears the MUTEDET flag in the SAI_xSR register. Reading this bit always returns the value 0.",
+              "enum": null
+            },
+            {
+              "name": "CWCKCFG",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Clear wrong clock configuration flag. This bit is write only. Programming this bit to 1 clears the WCKCFG flag in the SAI_xSR register. This bit is used only when the audio block is set as master (MODE[1] = 0) and NODIV = 0 in the SAI_xCR1 register. Reading this bit always returns the value 0.",
+              "enum": null
+            },
+            {
+              "name": "CCNRDY",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Clear Codec not ready flag. This bit is write only. Programming this bit to 1 clears the CNRDY flag in the SAI_xSR register. This bit is used only when the AC97 audio protocol is selected in the SAI_xCR1 register. Reading this bit always returns the value 0.",
+              "enum": null
+            },
+            {
+              "name": "CAFSDET",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Clear anticipated frame synchronization detection flag. This bit is write only. Programming this bit to 1 clears the AFSDET flag in the SAI_xSR register. It is not used in AC97or SPDIF mode. Reading this bit always returns the value 0.",
+              "enum": null
+            },
+            {
+              "name": "CLFSDET",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Clear late frame synchronization detection flag. This bit is write only. Programming this bit to 1 clears the LFSDET flag in the SAI_xSR register. This bit is not used in AC97or SPDIF mode Reading this bit always returns the value 0.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "DR",
+          "offset": 28,
+          "size": 32,
+          "description": "Data register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Data register",
+          "fields": [
+            {
+              "name": "DATA",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Data A write to this register loads the FIFO provided the FIFO is not full. A read from this register empties the FIFO if the FIFO is not empty.",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    },
+    "SAI": {
+      "name": "SAI",
+      "description": "Serial audio interface",
+      "extends": null,
+      "registers": [
+        {
+          "name": "GCR",
+          "offset": 0,
+          "size": 32,
+          "description": "Global configuration register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Global configuration register",
+          "fields": [
+            {
+              "name": "SYNCIN",
+              "bit_offset": 0,
+              "bit_width": 2,
+              "description": "Synchronization inputs",
+              "enum": null
+            },
+            {
+              "name": "SYNCOUT",
+              "bit_offset": 4,
+              "bit_width": 2,
+              "description": "Synchronization outputs These bits are set and cleared by software.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CH",
+          "offset": 4,
+          "description": "Cluster CH%s, containing ?CR1, ?CR2, ?FRCR, ?SLOTR, ?IM, ?SR, ?CLRFR, ?DR",
+          "array_len": 2,
+          "array_stride": 32,
+          "fields": []
+        },
+        {
+          "name": "PDMCR",
+          "offset": 68,
+          "size": 32,
+          "description": "PDM control register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "PDM control register",
+          "fields": [
+            {
+              "name": "PDMEN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "PDM enable",
+              "enum": null
+            },
+            {
+              "name": "MICNBR",
+              "bit_offset": 4,
+              "bit_width": 2,
+              "description": "Number of microphones",
+              "enum": null
+            },
+            {
+              "name": "CKEN",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Clock enable of bitstream clock number 1",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "PDMDLY",
+          "offset": 72,
+          "size": 32,
+          "description": "PDM delay register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "PDM delay register",
+          "fields": [
+            {
+              "name": "DLYML",
+              "bit_offset": 0,
+              "bit_width": 3,
+              "description": "Delay line adjust for first microphone of pair 1",
+              "enum": null
+            },
+            {
+              "name": "DLYMR",
+              "bit_offset": 4,
+              "bit_width": 3,
+              "description": "Delay line adjust for second microphone of pair 1",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "CKSTR": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "FallingEdge",
+          "value": 0,
+          "description": "Data strobing edge is falling edge of SCK"
+        },
+        {
+          "name": "RisingEdge",
+          "value": 1,
+          "description": "Data strobing edge is rising edge of SCK"
+        }
+      ]
+    },
+    "CNRDY": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Ready",
+          "value": 0,
+          "description": "External AC’97 Codec is ready"
+        },
+        {
+          "name": "NotReady",
+          "value": 1,
+          "description": "External AC’97 Codec is not ready"
+        }
+      ]
+    },
+    "COMP": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "NoCompanding",
+          "value": 0,
+          "description": "No companding algorithm"
+        },
+        {
+          "name": "MuLaw",
+          "value": 2,
+          "description": "μ-Law algorithm"
+        },
+        {
+          "name": "ALaw",
+          "value": 3,
+          "description": "A-Law algorithm"
+        }
+      ]
+    },
+    "CPL": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "OnesComplement",
+          "value": 0,
+          "description": "1’s complement representation"
+        },
+        {
+          "name": "TwosComplement",
+          "value": 1,
+          "description": "2’s complement representation"
+        }
+      ]
+    },
+    "DS": {
+      "bit_size": 3,
+      "variants": [
+        {
+          "name": "Bit8",
+          "value": 2,
+          "description": "8 bits"
+        },
+        {
+          "name": "Bit10",
+          "value": 3,
+          "description": "10 bits"
+        },
+        {
+          "name": "Bit16",
+          "value": 4,
+          "description": "16 bits"
+        },
+        {
+          "name": "Bit20",
+          "value": 5,
+          "description": "20 bits"
+        },
+        {
+          "name": "Bit24",
+          "value": 6,
+          "description": "24 bits"
+        },
+        {
+          "name": "Bit32",
+          "value": 7,
+          "description": "32 bits"
+        }
+      ]
+    },
+    "FLVL": {
+      "bit_size": 3,
+      "variants": [
+        {
+          "name": "Empty",
+          "value": 0,
+          "description": "FIFO empty"
+        },
+        {
+          "name": "Quarter1",
+          "value": 1,
+          "description": "FIFO <= 1⁄4 but not empty"
+        },
+        {
+          "name": "Quarter2",
+          "value": 2,
+          "description": "1⁄4 < FIFO <= 1⁄2"
+        },
+        {
+          "name": "Quarter3",
+          "value": 3,
+          "description": "1⁄2 < FIFO <= 3⁄4"
+        },
+        {
+          "name": "Quarter4",
+          "value": 4,
+          "description": "3⁄4 < FIFO but not full"
+        },
+        {
+          "name": "Full",
+          "value": 5,
+          "description": "FIFO full"
+        }
+      ]
+    },
+    "FSOFF": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "OnFirst",
+          "value": 0,
+          "description": "FS is asserted on the first bit of the slot 0"
+        },
+        {
+          "name": "BeforeFirst",
+          "value": 1,
+          "description": "FS is asserted one bit before the first bit of the slot 0"
+        }
+      ]
+    },
+    "FSPOL": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "FallingEdge",
+          "value": 0,
+          "description": "FS is active low (falling edge)"
+        },
+        {
+          "name": "RisingEdge",
+          "value": 1,
+          "description": "FS is active high (rising edge)"
+        }
+      ]
+    },
+    "FTH": {
+      "bit_size": 3,
+      "variants": [
+        {
+          "name": "Empty",
+          "value": 0,
+          "description": "FIFO empty"
+        },
+        {
+          "name": "Quarter1",
+          "value": 1,
+          "description": "1⁄4 FIFO"
+        },
+        {
+          "name": "Quarter2",
+          "value": 2,
+          "description": "1⁄2 FIFO"
+        },
+        {
+          "name": "Quarter3",
+          "value": 3,
+          "description": "3⁄4 FIFO"
+        },
+        {
+          "name": "Full",
+          "value": 4,
+          "description": "FIFO full"
+        }
+      ]
+    },
+    "LSBFIRST": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "MsbFirst",
+          "value": 0,
+          "description": "Data are transferred with MSB first"
+        },
+        {
+          "name": "LsbFirst",
+          "value": 1,
+          "description": "Data are transferred with LSB first"
+        }
+      ]
+    },
+    "MCKDIV": {
+      "bit_size": 6,
+      "variants": [
+        {
+          "name": "Div1",
+          "value": 1,
+          "description": null
+        },
+        {
+          "name": "Div2",
+          "value": 2,
+          "description": null
+        },
+        {
+          "name": "Div3",
+          "value": 3,
+          "description": null
+        },
+        {
+          "name": "Div4",
+          "value": 4,
+          "description": null
+        },
+        {
+          "name": "Div5",
+          "value": 5,
+          "description": null
+        },
+        {
+          "name": "Div6",
+          "value": 6,
+          "description": null
+        },
+        {
+          "name": "Div7",
+          "value": 7,
+          "description": null
+        },
+        {
+          "name": "Div8",
+          "value": 8,
+          "description": null
+        },
+        {
+          "name": "Div9",
+          "value": 9,
+          "description": null
+        },
+        {
+          "name": "Div10",
+          "value": 10,
+          "description": null
+        },
+        {
+          "name": "Div11",
+          "value": 11,
+          "description": null
+        },
+        {
+          "name": "Div12",
+          "value": 12,
+          "description": null
+        },
+        {
+          "name": "Div13",
+          "value": 13,
+          "description": null
+        },
+        {
+          "name": "Div14",
+          "value": 14,
+          "description": null
+        },
+        {
+          "name": "Div15",
+          "value": 15,
+          "description": null
+        },
+        {
+          "name": "Div16",
+          "value": 16,
+          "description": null
+        },
+        {
+          "name": "Div17",
+          "value": 17,
+          "description": null
+        },
+        {
+          "name": "Div18",
+          "value": 18,
+          "description": null
+        },
+        {
+          "name": "Div19",
+          "value": 19,
+          "description": null
+        },
+        {
+          "name": "Div20",
+          "value": 20,
+          "description": null
+        },
+        {
+          "name": "Div21",
+          "value": 21,
+          "description": null
+        },
+        {
+          "name": "Div22",
+          "value": 22,
+          "description": null
+        },
+        {
+          "name": "Div23",
+          "value": 23,
+          "description": null
+        },
+        {
+          "name": "Div24",
+          "value": 24,
+          "description": null
+        },
+        {
+          "name": "Div25",
+          "value": 25,
+          "description": null
+        },
+        {
+          "name": "Div26",
+          "value": 26,
+          "description": null
+        },
+        {
+          "name": "Div27",
+          "value": 27,
+          "description": null
+        },
+        {
+          "name": "Div28",
+          "value": 28,
+          "description": null
+        },
+        {
+          "name": "Div29",
+          "value": 29,
+          "description": null
+        },
+        {
+          "name": "Div30",
+          "value": 30,
+          "description": null
+        },
+        {
+          "name": "Div31",
+          "value": 31,
+          "description": null
+        },
+        {
+          "name": "Div32",
+          "value": 32,
+          "description": null
+        },
+        {
+          "name": "Div33",
+          "value": 33,
+          "description": null
+        },
+        {
+          "name": "Div34",
+          "value": 34,
+          "description": null
+        },
+        {
+          "name": "Div35",
+          "value": 35,
+          "description": null
+        },
+        {
+          "name": "Div36",
+          "value": 36,
+          "description": null
+        },
+        {
+          "name": "Div37",
+          "value": 37,
+          "description": null
+        },
+        {
+          "name": "Div38",
+          "value": 38,
+          "description": null
+        },
+        {
+          "name": "Div39",
+          "value": 39,
+          "description": null
+        },
+        {
+          "name": "Div40",
+          "value": 40,
+          "description": null
+        },
+        {
+          "name": "Div41",
+          "value": 41,
+          "description": null
+        },
+        {
+          "name": "Div42",
+          "value": 42,
+          "description": null
+        },
+        {
+          "name": "Div43",
+          "value": 43,
+          "description": null
+        },
+        {
+          "name": "Div44",
+          "value": 44,
+          "description": null
+        },
+        {
+          "name": "Div45",
+          "value": 45,
+          "description": null
+        },
+        {
+          "name": "Div46",
+          "value": 46,
+          "description": null
+        },
+        {
+          "name": "Div47",
+          "value": 47,
+          "description": null
+        },
+        {
+          "name": "Div48",
+          "value": 48,
+          "description": null
+        },
+        {
+          "name": "Div49",
+          "value": 49,
+          "description": null
+        },
+        {
+          "name": "Div50",
+          "value": 50,
+          "description": null
+        },
+        {
+          "name": "Div51",
+          "value": 51,
+          "description": null
+        },
+        {
+          "name": "Div52",
+          "value": 52,
+          "description": null
+        },
+        {
+          "name": "Div53",
+          "value": 53,
+          "description": null
+        },
+        {
+          "name": "Div54",
+          "value": 54,
+          "description": null
+        },
+        {
+          "name": "Div55",
+          "value": 55,
+          "description": null
+        },
+        {
+          "name": "Div56",
+          "value": 56,
+          "description": null
+        },
+        {
+          "name": "Div57",
+          "value": 57,
+          "description": null
+        },
+        {
+          "name": "Div58",
+          "value": 58,
+          "description": null
+        },
+        {
+          "name": "Div59",
+          "value": 59,
+          "description": null
+        },
+        {
+          "name": "Div60",
+          "value": 60,
+          "description": null
+        },
+        {
+          "name": "Div61",
+          "value": 61,
+          "description": null
+        },
+        {
+          "name": "Div62",
+          "value": 62,
+          "description": null
+        },
+        {
+          "name": "Div63",
+          "value": 63,
+          "description": null
+        }
+      ]
+    },
+    "MODE": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "MasterTx",
+          "value": 0,
+          "description": "Master transmitter"
+        },
+        {
+          "name": "MasterRx",
+          "value": 1,
+          "description": "Master receiver"
+        },
+        {
+          "name": "SlaveTx",
+          "value": 2,
+          "description": "Slave transmitter"
+        },
+        {
+          "name": "SlaveRx",
+          "value": 3,
+          "description": "Slave receiver"
+        }
+      ]
+    },
+    "MONO": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Stereo",
+          "value": 0,
+          "description": "Stereo mode"
+        },
+        {
+          "name": "Mono",
+          "value": 1,
+          "description": "Mono mode"
+        }
+      ]
+    },
+    "MUTEVAL": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "SendZero",
+          "value": 0,
+          "description": "Bit value 0 is sent during the mute mode"
+        },
+        {
+          "name": "SendLast",
+          "value": 1,
+          "description": "Last values are sent during the mute mode"
+        }
+      ]
+    },
+    "OUTDRIV": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "OnStart",
+          "value": 0,
+          "description": "Audio block output driven when SAIEN is set"
+        },
+        {
+          "name": "Immediately",
+          "value": 1,
+          "description": "Audio block output driven immediately after the setting of this bit"
+        }
+      ]
+    },
+    "PRTCFG": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Free",
+          "value": 0,
+          "description": "Free protocol. Free protocol allows to use the powerful configuration of the audio block to address a specific audio protocol"
+        },
+        {
+          "name": "Spdif",
+          "value": 1,
+          "description": "SPDIF protocol"
+        },
+        {
+          "name": "Ac97",
+          "value": 2,
+          "description": "AC’97 protocol"
+        }
+      ]
+    },
+    "SLOTEN": {
+      "bit_size": 16,
+      "variants": [
+        {
+          "name": "Inactive",
+          "value": 0,
+          "description": "Inactive slot"
+        },
+        {
+          "name": "Active",
+          "value": 1,
+          "description": "Active slot"
+        }
+      ]
+    },
+    "SLOTSZ": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "DataSize",
+          "value": 0,
+          "description": "The slot size is equivalent to the data size (specified in DS[3:0] in the SAI_xCR1 register)"
+        },
+        {
+          "name": "Bit16",
+          "value": 1,
+          "description": "16-bit"
+        },
+        {
+          "name": "Bit32",
+          "value": 2,
+          "description": "32-bit"
+        }
+      ]
+    },
+    "SYNCEN": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Asynchronous",
+          "value": 0,
+          "description": "audio sub-block in asynchronous mode"
+        },
+        {
+          "name": "Internal",
+          "value": 1,
+          "description": "audio sub-block is synchronous with the other internal audio sub-block. In this case, the audio sub-block must be configured in slave mode"
+        },
+        {
+          "name": "External",
+          "value": 2,
+          "description": "audio sub-block is synchronous with an external SAI embedded peripheral. In this case the audio sub-block should be configured in Slave mode"
+        }
+      ]
+    },
+    "WCKCFG": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Correct",
+          "value": 0,
+          "description": "Clock configuration is correct"
+        },
+        {
+          "name": "Wrong",
+          "value": 1,
+          "description": "Clock configuration does not respect the rule concerning the frame length specification"
+        }
+      ]
+    }
+  }
+}

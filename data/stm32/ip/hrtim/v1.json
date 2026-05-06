@@ -1,0 +1,2780 @@
+{
+  "schema": 1,
+  "kind": "hrtim",
+  "version": "v1",
+  "blocks": {
+    "HRTIM": {
+      "name": "HRTIM",
+      "description": "High Resolution Timer",
+      "extends": null,
+      "registers": [
+        {
+          "name": "MCR",
+          "offset": 0,
+          "size": 32,
+          "description": "Master Timer Control Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Master Timer Control Register",
+          "fields": [
+            {
+              "name": "CKPSC",
+              "bit_offset": 0,
+              "bit_width": 3,
+              "description": "HRTIM Master Clock prescaler",
+              "enum": null
+            },
+            {
+              "name": "CONT",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Master Continuous mode",
+              "enum": null
+            },
+            {
+              "name": "RETRIG",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Master Re-triggerable mode",
+              "enum": null
+            },
+            {
+              "name": "HALF",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Half mode enable",
+              "enum": null
+            },
+            {
+              "name": "SYNCIN",
+              "bit_offset": 8,
+              "bit_width": 2,
+              "description": "Synchronization input",
+              "enum": "SYNCIN"
+            },
+            {
+              "name": "SYNCRSTM",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Synchronization Resets Master",
+              "enum": null
+            },
+            {
+              "name": "SYNCSTRTM",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "Synchronization Starts Master",
+              "enum": null
+            },
+            {
+              "name": "SYNCOUT",
+              "bit_offset": 12,
+              "bit_width": 2,
+              "description": "Synchronization output",
+              "enum": "SYNCOUT"
+            },
+            {
+              "name": "SYNCSRC",
+              "bit_offset": 14,
+              "bit_width": 2,
+              "description": "Synchronization source",
+              "enum": "SYNCSRC"
+            },
+            {
+              "name": "MCEN",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Master Counter enable",
+              "enum": null
+            },
+            {
+              "name": "TCEN",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "Timer X counter enable",
+              "enum": null
+            },
+            {
+              "name": "DACSYNC",
+              "bit_offset": 25,
+              "bit_width": 2,
+              "description": "AC Synchronization",
+              "enum": "DACSYNC"
+            },
+            {
+              "name": "PREEN",
+              "bit_offset": 27,
+              "bit_width": 1,
+              "description": "Preload enable",
+              "enum": null
+            },
+            {
+              "name": "MREPU",
+              "bit_offset": 29,
+              "bit_width": 1,
+              "description": "Master Timer Repetition update",
+              "enum": null
+            },
+            {
+              "name": "BRSTDMA",
+              "bit_offset": 30,
+              "bit_width": 2,
+              "description": "Burst DMA Update",
+              "enum": "BRSTDMA"
+            }
+          ]
+        },
+        {
+          "name": "MISR",
+          "offset": 4,
+          "size": 32,
+          "description": "Master Timer Interrupt Status Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Master Timer Interrupt Status Register",
+          "fields": [
+            {
+              "name": "MCMP",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Master Compare X Interrupt Flag",
+              "enum": null
+            },
+            {
+              "name": "MREP",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Master Repetition Interrupt Flag",
+              "enum": null
+            },
+            {
+              "name": "SYNC",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Sync Input Interrupt Flag",
+              "enum": null
+            },
+            {
+              "name": "MUPD",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Master Update Interrupt Flag",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "MICR",
+          "offset": 8,
+          "size": 32,
+          "description": "Master Timer Interrupt Clear Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Master Timer Interrupt Clear Register",
+          "fields": [
+            {
+              "name": "MCMPC",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Master Compare X Interrupt flag clear",
+              "enum": null
+            },
+            {
+              "name": "MREPC",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Repetition Interrupt flag clear",
+              "enum": null
+            },
+            {
+              "name": "SYNCC",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Sync Input Interrupt flag clear",
+              "enum": null
+            },
+            {
+              "name": "MUPDC",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Master update Interrupt flag clear",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "MDIER",
+          "offset": 12,
+          "size": 32,
+          "description": "Master Timer DMA / Interrupt Enable Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Master Timer DMA / Interrupt Enable Register",
+          "fields": [
+            {
+              "name": "MCMPIE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Master Compare X Interrupt Enable",
+              "enum": null
+            },
+            {
+              "name": "MREPIE",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Master Repetition Interrupt Enable",
+              "enum": null
+            },
+            {
+              "name": "SYNCIE",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Sync Input Interrupt Enable",
+              "enum": null
+            },
+            {
+              "name": "MUPDIE",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Master Update Interrupt Enable",
+              "enum": null
+            },
+            {
+              "name": "MCMPDE",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Master Compare X DMA request Enable",
+              "enum": null
+            },
+            {
+              "name": "MREPDE",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "Master Repetition DMA request Enable",
+              "enum": null
+            },
+            {
+              "name": "SYNCDE",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "Sync Input DMA request Enable",
+              "enum": null
+            },
+            {
+              "name": "MUPDDE",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "Master Update DMA request Enable",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "MCNTR",
+          "offset": 16,
+          "size": 32,
+          "description": "Master Timer Counter Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Master Timer Counter Register",
+          "fields": [
+            {
+              "name": "MCNT",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Counter value",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "MPER",
+          "offset": 20,
+          "size": 32,
+          "description": "Master Timer Period Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Master Timer Period Register",
+          "fields": [
+            {
+              "name": "MPER",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Master Timer Period value",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "MREP",
+          "offset": 24,
+          "size": 32,
+          "description": "Master Timer Repetition Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Master Timer Repetition Register",
+          "fields": [
+            {
+              "name": "MREP",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "Master Timer Repetition counter value",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "MCMP",
+          "offset": 28,
+          "size": 32,
+          "description": "Master Timer Compare X Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Master Timer Compare X Register",
+          "fields": [
+            {
+              "name": "MCMP",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Master Timer Compare X value",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "TIM",
+          "offset": 128,
+          "description": "High Resolution Timer: Timing Unit",
+          "array_len": 5,
+          "array_stride": 128,
+          "fields": []
+        },
+        {
+          "name": "CR1",
+          "offset": 896,
+          "size": 32,
+          "description": "High Resolution Timer: Control Register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "High Resolution Timer: Control Register 1",
+          "fields": [
+            {
+              "name": "MUDIS",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Master Update Disable",
+              "enum": null
+            },
+            {
+              "name": "TUDIS",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Timer X Update Disable",
+              "enum": null
+            },
+            {
+              "name": "ADUSRC",
+              "bit_offset": 16,
+              "bit_width": 3,
+              "description": "ADC Trigger X Update Source",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CR2",
+          "offset": 900,
+          "size": 32,
+          "description": "High Resolution Timer: Control Register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "High Resolution Timer: Control Register 2",
+          "fields": [
+            {
+              "name": "MSWU",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Master Timer Software Update",
+              "enum": null
+            },
+            {
+              "name": "TSWU",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Timer X Software Update",
+              "enum": null
+            },
+            {
+              "name": "MRST",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Master Counter Software Reset",
+              "enum": null
+            },
+            {
+              "name": "TRST",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Timer X Counter Software Reset",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "ISR",
+          "offset": 904,
+          "size": 32,
+          "description": "High Resolution Timer: Interrupt Status Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "High Resolution Timer: Interrupt Status Register",
+          "fields": [
+            {
+              "name": "FLT",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Fault X Interrupt Flag",
+              "enum": null
+            },
+            {
+              "name": "SYSFLT",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "System Fault Interrupt Flag",
+              "enum": null
+            },
+            {
+              "name": "DLLRDY",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "DLL Ready Interrupt Flag",
+              "enum": null
+            },
+            {
+              "name": "BMPER",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "Burst Mode Period Interrupt Flag",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "ICR",
+          "offset": 908,
+          "size": 32,
+          "description": "High Resolution Timer: Interrupt Clear Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "High Resolution Timer: Interrupt Clear Register",
+          "fields": [
+            {
+              "name": "FLT",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Fault X Interrupt Flag Clear",
+              "enum": null
+            },
+            {
+              "name": "SYSFLT",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "System Fault Interrupt Flag Clear",
+              "enum": null
+            },
+            {
+              "name": "DLLRDY",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "DLL Ready Interrupt Flag Clear",
+              "enum": null
+            },
+            {
+              "name": "BMPER",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "Burst Mode Period Interrupt Flag Clear",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "IER",
+          "offset": 912,
+          "size": 32,
+          "description": "High Resolution Timer: Interrupt Enable Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "High Resolution Timer: Interrupt Enable Register",
+          "fields": [
+            {
+              "name": "FLT",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Fault X Interrupt Flag Enable",
+              "enum": null
+            },
+            {
+              "name": "SYSFLT",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "System Fault Interrupt Flag Enable",
+              "enum": null
+            },
+            {
+              "name": "DLLRDY",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "DLL Ready Interrupt Flag Enable",
+              "enum": null
+            },
+            {
+              "name": "BMPER",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "Burst Mode Period Interrupt Flag Enable",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "OENR",
+          "offset": 916,
+          "size": 32,
+          "description": "High Resolution Timer: Output Enable Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "High Resolution Timer: Output Enable Register",
+          "fields": [
+            {
+              "name": "T1OEN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Timer X Output Enable",
+              "enum": null
+            },
+            {
+              "name": "T2OEN",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Timer X Complementary Output Enable",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "ODISR",
+          "offset": 920,
+          "size": 32,
+          "description": "High Resolution Timer: Output Disable Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "High Resolution Timer: Output Disable Register",
+          "fields": [
+            {
+              "name": "T1ODIS",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Timer X Output Disable",
+              "enum": null
+            },
+            {
+              "name": "T2ODIS",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Timer X Complementary Output Disable",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "ODSR",
+          "offset": 924,
+          "size": 32,
+          "description": "High Resolution Timer: Output Disable Status Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "High Resolution Timer: Output Disable Status Register",
+          "fields": [
+            {
+              "name": "T1ODIS",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Timer X Output Disable Status",
+              "enum": null
+            },
+            {
+              "name": "T2ODIS",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Timer X Complementary Output Disable Status",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "BMCR",
+          "offset": 928,
+          "size": 32,
+          "description": "High Resolution Timer: Burst Mode Control Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "High Resolution Timer: Burst Mode Control Register",
+          "fields": [
+            {
+              "name": "BME",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Burst Mode Enable",
+              "enum": null
+            },
+            {
+              "name": "BMOM",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Burst Mode Operating Mode",
+              "enum": null
+            },
+            {
+              "name": "BMCLK",
+              "bit_offset": 2,
+              "bit_width": 3,
+              "description": "Burst Mode Clock source",
+              "enum": null
+            },
+            {
+              "name": "BMPRSC",
+              "bit_offset": 6,
+              "bit_width": 3,
+              "description": "Burst Mode Prescaler",
+              "enum": null
+            },
+            {
+              "name": "BMPREN",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Burst Mode Preload Enable",
+              "enum": null
+            },
+            {
+              "name": "MTBM",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Master Timer Burst Mode",
+              "enum": null
+            },
+            {
+              "name": "TBM",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "Timer X Burst Mode",
+              "enum": null
+            },
+            {
+              "name": "BMSTAT",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": null,
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "BMTRGR",
+          "offset": 932,
+          "size": 32,
+          "description": "High Resolution Timer: Burst Mode Trigger Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "High Resolution Timer: Burst Mode Trigger Register",
+          "fields": [
+            {
+              "name": "SW",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Software start",
+              "enum": null
+            },
+            {
+              "name": "MSTRST",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Master reset or roll-over",
+              "enum": null
+            },
+            {
+              "name": "MSTREP",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Master repetition",
+              "enum": null
+            },
+            {
+              "name": "MSTCMP",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Master Compare X",
+              "enum": null
+            },
+            {
+              "name": "TRST",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Timer X reset or roll-over",
+              "enum": null
+            },
+            {
+              "name": "TREP",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Timer X repetition",
+              "enum": null
+            },
+            {
+              "name": "TCMP1",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Timer X compare 1 event",
+              "enum": null
+            },
+            {
+              "name": "TCMP2",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Timer X compare 2 event",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "BMCMPR",
+          "offset": 936,
+          "size": 32,
+          "description": "High Resolution Timer: Burst Mode Compare Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "High Resolution Timer: Burst Mode Compare Register",
+          "fields": [
+            {
+              "name": "BMCMP",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Burst mode compare value",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "BMPER",
+          "offset": 940,
+          "size": 32,
+          "description": "High Resolution Timer: Burst Mode Period Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "High Resolution Timer: Burst Mode Period Register",
+          "fields": [
+            {
+              "name": "BMPER",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Burst mode period value",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "EECR1",
+          "offset": 944,
+          "size": 32,
+          "description": "High Resolution Timer: External Event Control Register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "High Resolution Timer: External Events Control Register 1",
+          "fields": [
+            {
+              "name": "EESRC",
+              "bit_offset": 0,
+              "bit_width": 2,
+              "description": "External Event X Source",
+              "enum": null
+            },
+            {
+              "name": "EEPOL",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "External Event X Polarity",
+              "enum": null
+            },
+            {
+              "name": "EESNS",
+              "bit_offset": 3,
+              "bit_width": 2,
+              "description": "External Event X Sensitivity",
+              "enum": null
+            },
+            {
+              "name": "EEFAST",
+              "bit_offset": 5,
+              "bit_width": 2,
+              "description": "External Event X Fast Mode",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "EECR2",
+          "offset": 948,
+          "size": 32,
+          "description": "High Resolution Timer: External Event Control Register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "High Resolution Timer: External Events Control Register 2",
+          "fields": [
+            {
+              "name": "EESRC",
+              "bit_offset": 0,
+              "bit_width": 2,
+              "description": "External Event X Source",
+              "enum": null
+            },
+            {
+              "name": "EEPOL",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "External Event X Polarity",
+              "enum": null
+            },
+            {
+              "name": "EESNS",
+              "bit_offset": 3,
+              "bit_width": 2,
+              "description": "External Event X Sensitivity",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "EECR3",
+          "offset": 952,
+          "size": 32,
+          "description": "High Resolution Timer: External Event Control Register 3",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "High Resolution Timer: External Events Control Register 2",
+          "fields": [
+            {
+              "name": "EEF",
+              "bit_offset": 0,
+              "bit_width": 3,
+              "description": "External Event X filter",
+              "enum": null
+            },
+            {
+              "name": "EEVSD",
+              "bit_offset": 30,
+              "bit_width": 2,
+              "description": "External Event Sampling Clock Division",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "ADC1R",
+          "offset": 956,
+          "size": 32,
+          "description": "High Resolution Timer: ADC Trigger [1, 3] Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "High Resolution Timer: ADC Trigger 1 Register",
+          "fields": [
+            {
+              "name": "ADCMC",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "ADC trigger X on Master Compare Y",
+              "enum": null
+            },
+            {
+              "name": "ADCMPER",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "ADC trigger X on Master Period",
+              "enum": null
+            },
+            {
+              "name": "ADCEEV",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "ADC trigger X on External Event Y",
+              "enum": null
+            },
+            {
+              "name": "ADCTC2",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "ADC trigger X on Timer Y Compare 2",
+              "enum": null
+            },
+            {
+              "name": "ADCTC3",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "ADC trigger X on Timer Y Compare 3",
+              "enum": null
+            },
+            {
+              "name": "ADCTC4",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "ADC trigger X on Timer Y Compare 3",
+              "enum": null
+            },
+            {
+              "name": "ADCTPER",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "ADC trigger X on Timer Y Period",
+              "enum": null
+            },
+            {
+              "name": "ADCTRST",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "ADC trigger X on Timer Y Reset",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "ADC2R",
+          "offset": 960,
+          "size": 32,
+          "description": "High Resolution Timer: ADC Trigger [2, 4] Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "High Resolution Timer: ADC Trigger 2 Register",
+          "fields": [
+            {
+              "name": "ADCMC",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "ADC trigger X on Master Compare Y",
+              "enum": null
+            },
+            {
+              "name": "ADCMPER",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "ADC trigger X on Master Period",
+              "enum": null
+            },
+            {
+              "name": "ADCEEV",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "ADC trigger X on External Event Y",
+              "enum": null
+            },
+            {
+              "name": "ADCTC2",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "ADC trigger X on Timer Y Compare 2",
+              "enum": null
+            },
+            {
+              "name": "ADCTC3",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "ADC trigger X on Timer Y Compare 3",
+              "enum": null
+            },
+            {
+              "name": "ADCTC4",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "ADC trigger X on Timer Y Compare 3",
+              "enum": null
+            },
+            {
+              "name": "ADCTPER",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "ADC trigger X on Timer Y Period",
+              "enum": null
+            },
+            {
+              "name": "ADCTRST",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "ADC trigger X on Timer Y Reset",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "DLLCR",
+          "offset": 972,
+          "size": 32,
+          "description": "High Resolution Timer: DLL Control Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "High Resolution Timer: DLL Control Register",
+          "fields": [
+            {
+              "name": "CAL",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "DLL Calibration Start",
+              "enum": null
+            },
+            {
+              "name": "CALEN",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "DLL Calibration Enable",
+              "enum": null
+            },
+            {
+              "name": "CALRTE",
+              "bit_offset": 2,
+              "bit_width": 2,
+              "description": "DLL Calibration Rate",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "FLTINR1",
+          "offset": 976,
+          "size": 32,
+          "description": "High Resolution Timer: Fault Input Register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "High Resolution Timer: Fault Input Register 1",
+          "fields": [
+            {
+              "name": "FLTE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Fault X enable",
+              "enum": null
+            },
+            {
+              "name": "FLTP",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Fault X polarity",
+              "enum": null
+            },
+            {
+              "name": "FLTSRC",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Fault X source",
+              "enum": null
+            },
+            {
+              "name": "FLTF",
+              "bit_offset": 3,
+              "bit_width": 4,
+              "description": "Fault X filter",
+              "enum": null
+            },
+            {
+              "name": "FLTLCK",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Fault X Lock",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "FLTINR2",
+          "offset": 976,
+          "size": 32,
+          "description": "High Resolution Timer: Fault Input Register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "High Resolution Timer: Fault Input Register 2",
+          "fields": [
+            {
+              "name": "FLTE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Fault X enable",
+              "enum": null
+            },
+            {
+              "name": "FLTP",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Fault X polarity",
+              "enum": null
+            },
+            {
+              "name": "FLTSRC",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Fault X source",
+              "enum": null
+            },
+            {
+              "name": "FLTF",
+              "bit_offset": 3,
+              "bit_width": 4,
+              "description": "Fault X filter",
+              "enum": null
+            },
+            {
+              "name": "FLTLCK",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Fault X Lock",
+              "enum": null
+            },
+            {
+              "name": "FLTSD",
+              "bit_offset": 24,
+              "bit_width": 2,
+              "description": "Fault Sampling clock division",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "BDMUPR",
+          "offset": 984,
+          "size": 32,
+          "description": "High Resolution Timer: Burst DMA Master timer update Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "High Resolution Timer: Burst DMA Master timer update Register",
+          "fields": [
+            {
+              "name": "MCR",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "MCR register update enable",
+              "enum": null
+            },
+            {
+              "name": "MICR",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "MICR register update enable",
+              "enum": null
+            },
+            {
+              "name": "MDIER",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "MDIER register update enable",
+              "enum": null
+            },
+            {
+              "name": "MCNT",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "MCNT register update enable",
+              "enum": null
+            },
+            {
+              "name": "MPER",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "MPER register update enable",
+              "enum": null
+            },
+            {
+              "name": "MREP",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "MREP register update enable",
+              "enum": null
+            },
+            {
+              "name": "MCMP",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "MCMP register X update enable",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "BDTUPR",
+          "offset": 988,
+          "size": 32,
+          "description": "High Resolution Timer: Burst DMA Timer X update Register",
+          "array_len": 5,
+          "array_stride": 4,
+          "fieldset_description": "High Resolution Timer: Burst DMA Master timer update Register",
+          "fields": [
+            {
+              "name": "CR",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "CR register update enable",
+              "enum": null
+            },
+            {
+              "name": "ICR",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "ICR register update enable",
+              "enum": null
+            },
+            {
+              "name": "DIER",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "DIER register update enable",
+              "enum": null
+            },
+            {
+              "name": "CNT",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "CNT register update enable",
+              "enum": null
+            },
+            {
+              "name": "PER",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "PER register update enable",
+              "enum": null
+            },
+            {
+              "name": "REP",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "REP register update enable",
+              "enum": null
+            },
+            {
+              "name": "CMP",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "CMP register X update enable",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "BDMADR",
+          "offset": 1008,
+          "size": 32,
+          "description": "High Resolution Timer: Burst DMA Data Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "High Resolution Timer:  Burst DMA Data Register",
+          "fields": [
+            {
+              "name": "BDMADR",
+              "bit_offset": 0,
+              "bit_width": 31,
+              "description": "Burst DMA Data register",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    },
+    "HRTIM_TIMX": {
+      "name": "HRTIM_TIMX",
+      "description": "High Resolution Timer: Timing Unit",
+      "extends": null,
+      "registers": [
+        {
+          "name": "CR",
+          "offset": 0,
+          "size": 32,
+          "description": "Timer X Control Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Timerx Control Register",
+          "fields": [
+            {
+              "name": "CKPSC",
+              "bit_offset": 0,
+              "bit_width": 3,
+              "description": "HRTIM Timer x Clock prescaler",
+              "enum": null
+            },
+            {
+              "name": "CONT",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Continuous mode",
+              "enum": null
+            },
+            {
+              "name": "RETRIG",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Re-triggerable mode",
+              "enum": null
+            },
+            {
+              "name": "HALF",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Half mode enable",
+              "enum": null
+            },
+            {
+              "name": "PSHPLL",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Push-Pull mode enable",
+              "enum": null
+            },
+            {
+              "name": "SYNCRST",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Synchronization Resets Timer X",
+              "enum": null
+            },
+            {
+              "name": "SYNCSTRT",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "Synchronization Starts Timer X",
+              "enum": null
+            },
+            {
+              "name": "DELCMP2",
+              "bit_offset": 12,
+              "bit_width": 2,
+              "description": "Delayed CMP2 mode",
+              "enum": "DELCMP"
+            },
+            {
+              "name": "DELCMP4",
+              "bit_offset": 14,
+              "bit_width": 2,
+              "description": "Delayed CMP4 mode",
+              "enum": "DELCMP"
+            },
+            {
+              "name": "REPU",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "Timer X Repetition update",
+              "enum": null
+            },
+            {
+              "name": "RSTU",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "Timer X reset update",
+              "enum": null
+            },
+            {
+              "name": "TU",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "Timer X update",
+              "enum": null
+            },
+            {
+              "name": "MSTU",
+              "bit_offset": 24,
+              "bit_width": 1,
+              "description": "Master Timer update",
+              "enum": null
+            },
+            {
+              "name": "DACSYNC",
+              "bit_offset": 25,
+              "bit_width": 2,
+              "description": "AC Synchronization",
+              "enum": "DACSYNC"
+            },
+            {
+              "name": "PREEN",
+              "bit_offset": 27,
+              "bit_width": 1,
+              "description": "Preload enable",
+              "enum": null
+            },
+            {
+              "name": "UPDGAT",
+              "bit_offset": 28,
+              "bit_width": 4,
+              "description": "Update Gating",
+              "enum": "UPDGAT"
+            }
+          ]
+        },
+        {
+          "name": "ISR",
+          "offset": 4,
+          "size": 32,
+          "description": "Timer X Interrupt Status Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Timerx Interrupt Status Register",
+          "fields": [
+            {
+              "name": "CMP",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Compare X Interrupt Flag",
+              "enum": null
+            },
+            {
+              "name": "REP",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Repetition Interrupt Flag",
+              "enum": null
+            },
+            {
+              "name": "UPD",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Update Interrupt Flag",
+              "enum": null
+            },
+            {
+              "name": "CPT",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Capture X Interrupt Flag",
+              "enum": null
+            },
+            {
+              "name": "SETR",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Output X Set Interrupt Flag",
+              "enum": null
+            },
+            {
+              "name": "RSTR",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Output X Reset Interrupt Flag",
+              "enum": null
+            },
+            {
+              "name": "RST",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Reset Interrupt Flag",
+              "enum": null
+            },
+            {
+              "name": "DLYPRT",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "Delayed Protection Flag",
+              "enum": null
+            },
+            {
+              "name": "CPPSTAT",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Current Push Pull Status",
+              "enum": "CPPSTAT"
+            },
+            {
+              "name": "IPPSTAT",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "Idle Push Pull Status",
+              "enum": "IPPSTAT"
+            },
+            {
+              "name": "OSTAT",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "Output X State",
+              "enum": null
+            },
+            {
+              "name": "OCPY",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "Output X Copy",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "ICR",
+          "offset": 8,
+          "size": 32,
+          "description": "Timer X Interrupt Clear Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Timerx Interrupt Clear Register",
+          "fields": [
+            {
+              "name": "CMPC",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Compare X Interrupt flag Clear",
+              "enum": null
+            },
+            {
+              "name": "REPC",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Repetition Interrupt flag Clear",
+              "enum": null
+            },
+            {
+              "name": "UPDC",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Update Interrupt flag Clear",
+              "enum": null
+            },
+            {
+              "name": "CPTC",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Capture X Interrupt flag Clear",
+              "enum": null
+            },
+            {
+              "name": "SETRC",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Output X Set flag Clear",
+              "enum": null
+            },
+            {
+              "name": "RSTRC",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Output X Reset flag Clear",
+              "enum": null
+            },
+            {
+              "name": "RSTC",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Reset Interrupt flag Clear",
+              "enum": null
+            },
+            {
+              "name": "DLYPRTC",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "Delayed Protection Flag Clear",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "DIER",
+          "offset": 12,
+          "size": 32,
+          "description": "Timer X DMA / Interrupt Enable Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Timerx DMA / Interrupt Enable Register",
+          "fields": [
+            {
+              "name": "CMPIE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Compare X Interrupt Enable",
+              "enum": null
+            },
+            {
+              "name": "REPIE",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Repetition Interrupt Enable",
+              "enum": null
+            },
+            {
+              "name": "UPDIE",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Update Interrupt Enable",
+              "enum": null
+            },
+            {
+              "name": "CPTIE",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Capture Interrupt Enable",
+              "enum": null
+            },
+            {
+              "name": "SETRIE",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Output X Set Interrupt Enable",
+              "enum": null
+            },
+            {
+              "name": "RSTRIE",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Output X Reset Interrupt Enable",
+              "enum": null
+            },
+            {
+              "name": "RSTIE",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Reset/roll-over Interrupt Enable",
+              "enum": null
+            },
+            {
+              "name": "DLYPRTIE",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "Delayed Protection Interrupt Enable",
+              "enum": null
+            },
+            {
+              "name": "CMPDE",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Compare X DMA request Enable",
+              "enum": null
+            },
+            {
+              "name": "REPDE",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "Repetition DMA request Enable",
+              "enum": null
+            },
+            {
+              "name": "UPDDE",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "Update DMA request Enable",
+              "enum": null
+            },
+            {
+              "name": "CPTDE",
+              "bit_offset": 23,
+              "bit_width": 1,
+              "description": "Capture X DMA request Enable",
+              "enum": null
+            },
+            {
+              "name": "SETRDE",
+              "bit_offset": 25,
+              "bit_width": 1,
+              "description": "Output X Set DMA request Enable",
+              "enum": null
+            },
+            {
+              "name": "RSTRDE",
+              "bit_offset": 26,
+              "bit_width": 1,
+              "description": "Output X Reset DMA request Enable",
+              "enum": null
+            },
+            {
+              "name": "RSTDE",
+              "bit_offset": 29,
+              "bit_width": 1,
+              "description": "Reset/roll-over DMA request Enable",
+              "enum": null
+            },
+            {
+              "name": "DLYPRTDE",
+              "bit_offset": 30,
+              "bit_width": 1,
+              "description": "Delayed Protection DMA request Enable",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CNT",
+          "offset": 16,
+          "size": 32,
+          "description": "Timer X Counter Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Timerx Counter Register",
+          "fields": [
+            {
+              "name": "CNT",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Timerx Counter value",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "PER",
+          "offset": 20,
+          "size": 32,
+          "description": "Timer X Period Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Timerx Period Register",
+          "fields": [
+            {
+              "name": "PER",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Timerx Period value",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "REP",
+          "offset": 24,
+          "size": 32,
+          "description": "Timer X Repetition Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Timerx Repetition Register",
+          "fields": [
+            {
+              "name": "REP",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "Timerx Repetition counter value",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CMP",
+          "offset": 28,
+          "size": 32,
+          "description": "Timer X Compare X Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Timerx Compare X Register",
+          "fields": [
+            {
+              "name": "CMP",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Timerx Compare X value",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CMPC",
+          "offset": 32,
+          "size": 32,
+          "description": "Timer X Compare X Compound Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Timerx Compare X Compound Register",
+          "fields": [
+            {
+              "name": "CMP",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Timerx Compare X value",
+              "enum": null
+            },
+            {
+              "name": "REP",
+              "bit_offset": 16,
+              "bit_width": 8,
+              "description": "Timerx Repetition value (aliased from HRTIM_REPx register)",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CPT",
+          "offset": 48,
+          "size": 32,
+          "description": "Timer X Capture X Register",
+          "array_len": 2,
+          "array_stride": 4,
+          "fieldset_description": "Timerx Capture X Register",
+          "fields": [
+            {
+              "name": "CPT",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Timerx Capture X value",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "DT",
+          "offset": 56,
+          "size": 32,
+          "description": "Timer X Deadtime Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Timerx Deadtime Register",
+          "fields": [
+            {
+              "name": "DTR",
+              "bit_offset": 0,
+              "bit_width": 9,
+              "description": "Deadtime Rising value",
+              "enum": null
+            },
+            {
+              "name": "SDTR",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Sign Deadtime Rising value",
+              "enum": "SDT"
+            },
+            {
+              "name": "DTPRSC",
+              "bit_offset": 10,
+              "bit_width": 3,
+              "description": "Deadtime Prescaler",
+              "enum": null
+            },
+            {
+              "name": "DTRSLK",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "Deadtime Rising Sign Lock",
+              "enum": null
+            },
+            {
+              "name": "DTRLK",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Deadtime Rising Lock",
+              "enum": null
+            },
+            {
+              "name": "DTF",
+              "bit_offset": 16,
+              "bit_width": 9,
+              "description": "Deadtime Falling value",
+              "enum": null
+            },
+            {
+              "name": "SDTF",
+              "bit_offset": 25,
+              "bit_width": 1,
+              "description": "Sign Deadtime Falling value",
+              "enum": "SDT"
+            },
+            {
+              "name": "DTFSLK",
+              "bit_offset": 30,
+              "bit_width": 1,
+              "description": "Deadtime Falling Sign Lock",
+              "enum": null
+            },
+            {
+              "name": "DTFLK",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "Deadtime Falling Lock",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SETR",
+          "offset": 60,
+          "size": 32,
+          "description": "Timer X Output X Set Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Timerx OutputX Set Register",
+          "fields": [
+            {
+              "name": "SST",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Software Set trigger",
+              "enum": null
+            },
+            {
+              "name": "RESYNC",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Timer X resynchronizaton",
+              "enum": null
+            },
+            {
+              "name": "PER",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Timer X Period",
+              "enum": null
+            },
+            {
+              "name": "CMP",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Timer X compare X",
+              "enum": null
+            },
+            {
+              "name": "MSTPER",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Master Period",
+              "enum": null
+            },
+            {
+              "name": "MSTCMPX",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Master Compare X",
+              "enum": null
+            },
+            {
+              "name": "TIMEVNT",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "Timer Event X",
+              "enum": null
+            },
+            {
+              "name": "EXTEVNT",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "External Event X",
+              "enum": null
+            },
+            {
+              "name": "UPDATE",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "Registers update (transfer preload to active)",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "RSTR",
+          "offset": 64,
+          "size": 32,
+          "description": "Timer X Output X Reset Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Timerx OutputX Reset Register",
+          "fields": [
+            {
+              "name": "SRT",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Software Reset trigger",
+              "enum": null
+            },
+            {
+              "name": "RESYNC",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Timer X resynchronizaton",
+              "enum": null
+            },
+            {
+              "name": "PER",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Timer X Period",
+              "enum": null
+            },
+            {
+              "name": "CMP",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Timer X compare X",
+              "enum": null
+            },
+            {
+              "name": "MSTPER",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Master Period",
+              "enum": null
+            },
+            {
+              "name": "MSTCMP",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Master Compare X",
+              "enum": null
+            },
+            {
+              "name": "TIMEVNT",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "Timer Event X",
+              "enum": null
+            },
+            {
+              "name": "EXTEVNT",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "External Event X",
+              "enum": null
+            },
+            {
+              "name": "UPDATE",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "Registers update (transfer preload to active)",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "EEF",
+          "offset": 76,
+          "size": 32,
+          "description": "Timer X External Event Filtering Register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Timer X External Event Filtering Register",
+          "fields": [
+            {
+              "name": "LTCH",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "External Event X latch",
+              "enum": null
+            },
+            {
+              "name": "FLTR",
+              "bit_offset": 1,
+              "bit_width": 4,
+              "description": "External Event X filter",
+              "enum": "EEFLTR"
+            }
+          ]
+        },
+        {
+          "name": "RST",
+          "offset": 84,
+          "size": 32,
+          "description": "Timer X Reset Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Timerx Reset Register",
+          "fields": [
+            {
+              "name": "UPDT",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Timer X Update reset",
+              "enum": null
+            },
+            {
+              "name": "CMP",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Timer X compare X reset",
+              "enum": null
+            },
+            {
+              "name": "MSTPER",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Master timer Period",
+              "enum": null
+            },
+            {
+              "name": "MSTCMP",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Master compare X",
+              "enum": null
+            },
+            {
+              "name": "EXTEVNT",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "External Event X",
+              "enum": null
+            },
+            {
+              "name": "TCMP1",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "Timer X compare 1 event",
+              "enum": null
+            },
+            {
+              "name": "TCMP2",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "Timer X compare 2 event",
+              "enum": null
+            },
+            {
+              "name": "TCMP4",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "Timer X compare 4 event",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CHP",
+          "offset": 88,
+          "size": 32,
+          "description": "Timer X Chopper Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Timerx Chopper Register",
+          "fields": [
+            {
+              "name": "CARFRQ",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "Timerx carrier frequency value",
+              "enum": null
+            },
+            {
+              "name": "CARDTY",
+              "bit_offset": 4,
+              "bit_width": 3,
+              "description": "Timerx chopper duty cycle value",
+              "enum": null
+            },
+            {
+              "name": "STRTPW",
+              "bit_offset": 7,
+              "bit_width": 4,
+              "description": "Timerx start pulsewidth",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CCR",
+          "offset": 92,
+          "size": 32,
+          "description": "Timer X Capture X Control Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Timerx Capture 2 Control Register",
+          "fields": [
+            {
+              "name": "SWCPT",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Software Capture",
+              "enum": null
+            },
+            {
+              "name": "UPDCPT",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Update Capture",
+              "enum": null
+            },
+            {
+              "name": "EXEVCPT",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "External Event X Capture",
+              "enum": null
+            },
+            {
+              "name": "TXSET",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Timer X output Set",
+              "enum": null
+            },
+            {
+              "name": "TXRST",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "Timer X output Reset",
+              "enum": null
+            },
+            {
+              "name": "TXCMP",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "Timer X Compare X",
+              "enum": null
+            },
+            {
+              "name": "TYSET",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "Timer Y output Set",
+              "enum": null
+            },
+            {
+              "name": "TYRST",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "Timer Y output Reset",
+              "enum": null
+            },
+            {
+              "name": "TYCMP",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "Timer Y Compare X",
+              "enum": null
+            },
+            {
+              "name": "TZSET",
+              "bit_offset": 24,
+              "bit_width": 1,
+              "description": "Timer Z output Set",
+              "enum": null
+            },
+            {
+              "name": "TZRST",
+              "bit_offset": 25,
+              "bit_width": 1,
+              "description": "Timer Z output Reset",
+              "enum": null
+            },
+            {
+              "name": "TZCMP",
+              "bit_offset": 26,
+              "bit_width": 1,
+              "description": "Timer Z Compare X",
+              "enum": null
+            },
+            {
+              "name": "TTSET",
+              "bit_offset": 28,
+              "bit_width": 1,
+              "description": "Timer T output Set",
+              "enum": null
+            },
+            {
+              "name": "TTRST",
+              "bit_offset": 29,
+              "bit_width": 1,
+              "description": "Timer T output Reset",
+              "enum": null
+            },
+            {
+              "name": "TTCMP",
+              "bit_offset": 30,
+              "bit_width": 1,
+              "description": "Timer T Compare X",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "OUTR",
+          "offset": 100,
+          "size": 32,
+          "description": "Timer X Output Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Timerx Output Register",
+          "fields": [
+            {
+              "name": "POL",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Output 1 polarity",
+              "enum": "POL"
+            },
+            {
+              "name": "IDLEM",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Output X Idle mode",
+              "enum": null
+            },
+            {
+              "name": "IDLES",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Output X Idle State",
+              "enum": null
+            },
+            {
+              "name": "FAULT",
+              "bit_offset": 4,
+              "bit_width": 2,
+              "description": "Output X Fault state",
+              "enum": "FAULT"
+            },
+            {
+              "name": "CHP",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Output X Chopper enable",
+              "enum": null
+            },
+            {
+              "name": "DIDL",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Output X Deadtime upon burst mode Idle entry",
+              "enum": null
+            },
+            {
+              "name": "DTEN",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Deadtime enable",
+              "enum": null
+            },
+            {
+              "name": "DLYPRTEN",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Delayed Protection Enable",
+              "enum": null
+            },
+            {
+              "name": "DLYPRT",
+              "bit_offset": 10,
+              "bit_width": 3,
+              "description": "Delayed Protection",
+              "enum": "DLYPRT"
+            }
+          ]
+        },
+        {
+          "name": "FLT",
+          "offset": 104,
+          "size": 32,
+          "description": "Timer X Fault Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Timerx Fault Register",
+          "fields": [
+            {
+              "name": "FLTEN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Fault X enable",
+              "enum": null
+            },
+            {
+              "name": "FLTLCK",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "Fault sources Lock",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "BRSTDMA": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Independent",
+          "value": 0,
+          "description": "Update done independently from the DMA burst transfer completion"
+        },
+        {
+          "name": "Completion",
+          "value": 1,
+          "description": "Update done when the DMA burst transfer is completed"
+        },
+        {
+          "name": "Rollover",
+          "value": 2,
+          "description": "Update done on master timer roll-over following a DMA burst transfer completion"
+        }
+      ]
+    },
+    "CPPSTAT": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Output1Active",
+          "value": 0,
+          "description": "Signal applied on output 1 and output 2 forced inactive"
+        },
+        {
+          "name": "Output2Active",
+          "value": 1,
+          "description": "Signal applied on output 2 and output 1 forced inactive"
+        }
+      ]
+    },
+    "DACSYNC": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Disabled",
+          "value": 0,
+          "description": "No DAC trigger generated"
+        },
+        {
+          "name": "DACSync1",
+          "value": 1,
+          "description": "Trigger generated on DACSync1"
+        },
+        {
+          "name": "DACSync2",
+          "value": 2,
+          "description": "Trigger generated on DACSync2"
+        },
+        {
+          "name": "DACSync3",
+          "value": 3,
+          "description": "Trigger generated on DACSync3"
+        }
+      ]
+    },
+    "DELCMP": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Standard",
+          "value": 0,
+          "description": "CMP register is always active (standard compare mode)"
+        },
+        {
+          "name": "Capture1",
+          "value": 1,
+          "description": "CMP is recomputed and is active following a capture 1 event"
+        },
+        {
+          "name": "CaptureX_Compare1",
+          "value": 2,
+          "description": "CMP is recomputed and is active following a capture 1 event or a Compare 1 match"
+        },
+        {
+          "name": "CaptureX_Compare3",
+          "value": 3,
+          "description": "CMP is recomputed and is active following a capture 1 event or a Compare 3 match"
+        }
+      ]
+    },
+    "DLYPRT": {
+      "bit_size": 3,
+      "variants": [
+        {
+          "name": "Output1_EE6",
+          "value": 0,
+          "description": "Output 1 delayed idle on external event 6"
+        },
+        {
+          "name": "Output2_EE6",
+          "value": 1,
+          "description": "Output 2 delayed idle on external event 6"
+        },
+        {
+          "name": "Output1_2_EE6",
+          "value": 2,
+          "description": "Output 1 and 2 delayed idle on external event 6"
+        },
+        {
+          "name": "Balanced_EE6",
+          "value": 3,
+          "description": "Balanced idle on external event 6"
+        },
+        {
+          "name": "Output1_EE7",
+          "value": 4,
+          "description": "Output 1 delayed idle on external event 7"
+        },
+        {
+          "name": "Output2_EE7",
+          "value": 5,
+          "description": "Output 2 delayed idle on external event 7"
+        },
+        {
+          "name": "Output1_2_EE7",
+          "value": 6,
+          "description": "Output 1 and 2 delayed idle on external event 7"
+        },
+        {
+          "name": "Balanced_EE7",
+          "value": 7,
+          "description": "Balanced idle on external event 7"
+        }
+      ]
+    },
+    "EEFLTR": {
+      "bit_size": 4,
+      "variants": [
+        {
+          "name": "Disabled",
+          "value": 0,
+          "description": "No filtering"
+        },
+        {
+          "name": "BlankResetToCompare1",
+          "value": 1,
+          "description": "Blanking from counter reset/roll-over to Compare 1"
+        },
+        {
+          "name": "BlankResetToCompare2",
+          "value": 2,
+          "description": "Blanking from counter reset/roll-over to Compare 2"
+        },
+        {
+          "name": "BlankResetToCompare3",
+          "value": 3,
+          "description": "Blanking from counter reset/roll-over to Compare 3"
+        },
+        {
+          "name": "BlankResetToCompare4",
+          "value": 4,
+          "description": "Blanking from counter reset/roll-over to Compare 4"
+        },
+        {
+          "name": "BlankTIMFLTR1",
+          "value": 5,
+          "description": "Blanking from another timing unit: TIMFLTR1 source"
+        },
+        {
+          "name": "BlankTIMFLTR2",
+          "value": 6,
+          "description": "Blanking from another timing unit: TIMFLTR2 source"
+        },
+        {
+          "name": "BlankTIMFLTR3",
+          "value": 7,
+          "description": "Blanking from another timing unit: TIMFLTR3 source"
+        },
+        {
+          "name": "BlankTIMFLTR4",
+          "value": 8,
+          "description": "Blanking from another timing unit: TIMFLTR4 source"
+        },
+        {
+          "name": "BlankTIMFLTR5",
+          "value": 9,
+          "description": "Blanking from another timing unit: TIMFLTR5 source"
+        },
+        {
+          "name": "BlankTIMFLTR6",
+          "value": 10,
+          "description": "Blanking from another timing unit: TIMFLTR6 source"
+        },
+        {
+          "name": "BlankTIMFLTR7",
+          "value": 11,
+          "description": "Blanking from another timing unit: TIMFLTR7 source"
+        },
+        {
+          "name": "BlankTIMFLTR8",
+          "value": 12,
+          "description": "Blanking from another timing unit: TIMFLTR8 source"
+        },
+        {
+          "name": "WindowResetToCompare2",
+          "value": 13,
+          "description": "Windowing from counter reset/roll-over to compare 2"
+        },
+        {
+          "name": "WindowResetToCompare3",
+          "value": 14,
+          "description": "Windowing from counter reset/roll-over to compare 3"
+        },
+        {
+          "name": "WindowTIMWIN",
+          "value": 15,
+          "description": "Windowing from another timing unit: TIMWIN source"
+        }
+      ]
+    },
+    "FAULT": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Disabled",
+          "value": 0,
+          "description": "No action: the output is not affected by the fault input and stays in run mode"
+        },
+        {
+          "name": "SetActive",
+          "value": 1,
+          "description": "Output goes to active state after a fault event"
+        },
+        {
+          "name": "SetInactive",
+          "value": 2,
+          "description": "Output goes to inactive state after a fault event"
+        },
+        {
+          "name": "SetHighZ",
+          "value": 3,
+          "description": "Output goes to high-z state after a fault event"
+        }
+      ]
+    },
+    "IPPSTAT": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Output1Active",
+          "value": 0,
+          "description": "Protection occurred when the output 1 was active and output 2 forced inactive"
+        },
+        {
+          "name": "Output2Active",
+          "value": 1,
+          "description": "Protection occurred when the output 2 was active and output 1 forced inactive"
+        }
+      ]
+    },
+    "POL": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "ActiveHigh",
+          "value": 0,
+          "description": "Positive polarity (output active high)"
+        },
+        {
+          "name": "ActiveLow",
+          "value": 1,
+          "description": "Negative polarity (output active low)"
+        }
+      ]
+    },
+    "SDT": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Positive",
+          "value": 0,
+          "description": "Positive deadtime (both outputs inactive during deadtime)"
+        },
+        {
+          "name": "Negative",
+          "value": 1,
+          "description": "Negative deadtime (both outputs active during deadtime)"
+        }
+      ]
+    },
+    "SYNCIN": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Disabled",
+          "value": 0,
+          "description": "Disabled. HRTIM is not synchronized and runs in standalone mode"
+        },
+        {
+          "name": "Internal",
+          "value": 2,
+          "description": "Internal event: the HRTIM is synchronized with the on-chip timer"
+        },
+        {
+          "name": "External",
+          "value": 3,
+          "description": "External event: a positive pulse on HRTIM_SCIN input triggers the HRTIM"
+        }
+      ]
+    },
+    "SYNCOUT": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Disabled",
+          "value": 0,
+          "description": "Disabled"
+        },
+        {
+          "name": "PositivePulse",
+          "value": 2,
+          "description": "Positive pulse on SCOUT output (16x f_HRTIM clock cycles)"
+        },
+        {
+          "name": "NegativePulse",
+          "value": 3,
+          "description": "Negative pulse on SCOUT output (16x f_HRTIM clock cycles)"
+        }
+      ]
+    },
+    "SYNCSRC": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "MasterStart",
+          "value": 0,
+          "description": "Master timer Start"
+        },
+        {
+          "name": "MasterCompare1",
+          "value": 1,
+          "description": "Master timer Compare 1 event"
+        },
+        {
+          "name": "TimerAStart",
+          "value": 2,
+          "description": "Timer A start/reset"
+        },
+        {
+          "name": "TimerACompare1",
+          "value": 3,
+          "description": "Timer A Compare 1 event"
+        }
+      ]
+    },
+    "UPDGAT": {
+      "bit_size": 4,
+      "variants": [
+        {
+          "name": "Independent",
+          "value": 0,
+          "description": "Update occurs independently from the DMA burst transfer"
+        },
+        {
+          "name": "DMABurst",
+          "value": 1,
+          "description": "Update occurs when the DMA burst transfer is completed"
+        },
+        {
+          "name": "DMABurst_Update",
+          "value": 2,
+          "description": "Update occurs on the update event following DMA burst transfer completion"
+        },
+        {
+          "name": "Input1",
+          "value": 3,
+          "description": "Update occurs on a rising edge of HRTIM update enable input 1"
+        },
+        {
+          "name": "Input2",
+          "value": 4,
+          "description": "Update occurs on a rising edge of HRTIM update enable input 2"
+        },
+        {
+          "name": "Input3",
+          "value": 5,
+          "description": "Update occurs on a rising edge of HRTIM update enable input 3"
+        },
+        {
+          "name": "Input1_Update",
+          "value": 6,
+          "description": "Update occurs on the update event following a rising edge of HRTIM update enable input 1"
+        },
+        {
+          "name": "Input2_Update",
+          "value": 7,
+          "description": "Update occurs on the update event following a rising edge of HRTIM update enable input 2"
+        },
+        {
+          "name": "Input3_Update",
+          "value": 8,
+          "description": "Update occurs on the update event following a rising edge of HRTIM update enable input 3"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,1035 @@
+{
+  "schema": 1,
+  "kind": "adc",
+  "version": "wba",
+  "blocks": {
+    "ADC4": {
+      "name": "ADC4",
+      "description": "ADC register block.",
+      "extends": null,
+      "registers": [
+        {
+          "name": "ISR",
+          "offset": 0,
+          "size": 32,
+          "description": "ADC interrupt and status register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "ADC interrupt and status register.",
+          "fields": [
+            {
+              "name": "ADRDY",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "ADC ready This bit is set by hardware after the ADC has been enabled (ADEN = 1) and when the ADC reaches a state where it is ready to accept conversion requests. It is cleared by software writing 1 to it.",
+              "enum": null
+            },
+            {
+              "name": "EOSMP",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "End of sampling flag This bit is set by hardware during the conversion, at the end of the sampling phase.It is cleared by software by writing 1 to it.",
+              "enum": null
+            },
+            {
+              "name": "EOC",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "End of conversion flag This bit is set by hardware at the end of each conversion of a channel when a new data result is available in the DR register. It is cleared by software writing 1 to it or by reading the ADC_DR register.",
+              "enum": null
+            },
+            {
+              "name": "EOS",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "End of sequence flag This bit is set by hardware at the end of the conversion of a sequence of channels selected by the CHSEL bits. It is cleared by software writing 1 to it.",
+              "enum": null
+            },
+            {
+              "name": "OVR",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "ADC overrun This bit is set by hardware when an overrun occurs, meaning that a new conversion has complete while the EOC flag was already set. It is cleared by software writing 1 to it.",
+              "enum": null
+            },
+            {
+              "name": "AWD",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Analog watchdog 1 flag This bit is set by hardware when the converted voltage crosses the values programmed in TR1 and ADC_HR1 registers. It is cleared by software by writing 1 to it.",
+              "enum": null
+            },
+            {
+              "name": "EOCAL",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "End of calibration flag This bit is set by hardware when calibration is complete. It is cleared by software writing 1 to it.",
+              "enum": null
+            },
+            {
+              "name": "LDORDY",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "LDO ready This bit is set by hardware. It indicates that the ADC internal LDO output is ready. It is cleared by software by writing 1 to it.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "IER",
+          "offset": 4,
+          "size": 32,
+          "description": "ADC interrupt enable register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "ADC interrupt enable register.",
+          "fields": [
+            {
+              "name": "ADRDYIE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "ADC ready interrupt enable This bit is set and cleared by software to enable/disable the ADC Ready interrupt. Note: The software is allowed to write this bit only when ADSTART bit is cleared to 0 by writing ADSTP to 1 (this ensures that no conversion is ongoing).",
+              "enum": null
+            },
+            {
+              "name": "EOSMPIE",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "End of sampling flag interrupt enable This bit is set and cleared by software to enable/disable the end of the sampling phase interrupt. Note: The software is allowed to write this bit only when ADSTART bit is cleared to 0 by writing ADSTP to 1 (this ensures that no conversion is ongoing).",
+              "enum": null
+            },
+            {
+              "name": "EOCIE",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "End of conversion interrupt enable This bit is set and cleared by software to enable/disable the end of conversion interrupt. Note: The software is allowed to write this bit only when ADSTART bit is cleared to 0 by writing ADSTP to 1 (this ensures that no conversion is ongoing).",
+              "enum": null
+            },
+            {
+              "name": "EOSIE",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "End of conversion sequence interrupt enable This bit is set and cleared by software to enable/disable the end of sequence of conversions interrupt. Note: The software is allowed to write this bit only when ADSTART bit is cleared to 0 by writing ADSTP to 1 (this ensures that no conversion is ongoing).",
+              "enum": null
+            },
+            {
+              "name": "OVRIE",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Overrun interrupt enable This bit is set and cleared by software to enable/disable the overrun interrupt. Note: The software is allowed to write this bit only when ADSTART bit is cleared to 0 by writing ADSTP to 1 (this ensures that no conversion is ongoing).",
+              "enum": null
+            },
+            {
+              "name": "EOCALIE",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "End of calibration interrupt enable This bit is set and cleared by software to enable/disable the end of calibration interrupt. Note: The software is allowed to write this bit only when ADSTART bit is cleared to 0 by writing ADSTP to 1 (this ensures that no conversion is ongoing).",
+              "enum": null
+            },
+            {
+              "name": "LDORDYIE",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "LDO ready interrupt enable This bit is set and cleared by software. It is used to enable/disable the LDORDY interrupt. Note: The software is allowed to write this bit only when ADSTART bit is cleared to 0 by writing ADSTP to 1 (this ensure that no conversion is ongoing).",
+              "enum": null
+            },
+            {
+              "name": "AWDIE",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Analog watchdog 1 interrupt enable This bit is set and cleared by software to enable/disable the analog watchdog interrupt. Note: The Software is allowed to write this bit only when ADSTART bit is cleared to 0 by writing ADSTP to 1 (this ensures that no conversion is ongoing).",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CR",
+          "offset": 8,
+          "size": 32,
+          "description": "ADC control register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "ADC control register.",
+          "fields": [
+            {
+              "name": "ADEN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "ADC enable command This bit is set by software to enable the ADC. The ADC is effectively ready to operate once the ADRDY flag has been set. It is cleared by hardware when the ADC is disabled, after the execution of the ADDIS command. Note: The software is allowed to set ADEN only when all bits of CR registers are 0 (ADCAL = 0, ADSTP = 0, ADSTART = 0, ADDIS = 0 and ADEN = 0).",
+              "enum": null
+            },
+            {
+              "name": "ADDIS",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "ADC disable command This bit is set by software to disable the ADC (ADDIS command) and put it into power-down state (OFF state). It is cleared by hardware once the ADC is effectively disabled (ADEN is also cleared by hardware at this time). Note: Setting ADDIS to 1 is only effective when ADEN = 1 and ADSTART = 0 (which ensures that no conversion is ongoing).",
+              "enum": null
+            },
+            {
+              "name": "ADSTART",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "ADC start conversion command This bit is set by software to start ADC conversion. Depending on the EXTEN [1:0] configuration bits, a conversion either starts immediately (software trigger configuration) or once a hardware trigger event occurs (hardware trigger configuration). It is cleared by hardware: In single conversion mode (CONT = 0, DISCEN = 0), when software trigger is selected (EXTEN = 00): at the assertion of the end of Conversion Sequence (EOS) flag. In discontinuous conversion mode(CONT=0, DISCEN = 1), when the software trigger is selected (EXTEN = 00): at the assertion of the end of Conversion (EOC) flag. In all other cases: after the execution of the ADSTP command, at the same time as the ADSTP bit is cleared by hardware. Note: The software is allowed to set ADSTART only when ADEN = 1 and ADDIS = 0 (ADC is enabled and there is no pending request to disable the ADC).",
+              "enum": null
+            },
+            {
+              "name": "ADSTP",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "ADC stop conversion command This bit is set by software to stop and discard an ongoing conversion (ADSTP Command). It is cleared by hardware when the conversion is effectively discarded and the ADC is ready to accept a new start conversion command. Note: To clear the A/D converter state, ADSTP must be set to 1 even if ADSTART is cleared to 0 after the software trigger A/D conversion. It is recommended to set ADSTP to 1 whenever the configuration needs to be modified.",
+              "enum": null
+            },
+            {
+              "name": "ADVREGEN",
+              "bit_offset": 28,
+              "bit_width": 1,
+              "description": "ADC voltage regulator enable This bit is set by software, to enable the ADC internal voltage regulator. The voltage regulator output is available after tsubADCVREG_SETUP/sub. It is cleared by software to disable the voltage regulator. It can be cleared only if ADEN is et to 0. Note: The software is allowed to program this bit field only when the ADC is disabled (ADCAL = 0, ADSTART = 0, ADSTP = 0, ADDIS = 0 and ADEN = 0).",
+              "enum": null
+            },
+            {
+              "name": "ADCAL",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "ADC calibration This bit is set by software to start the calibration of the ADC. It is cleared by hardware after calibration is complete. Note: The software is allowed to set ADCAL only when the ADC is disabled (ADCAL = 0, ADSTART = 0, ADSTP = 0, ADDIS = 0, AUTOFF = 0, and ADEN = 0). Note: The software is allowed to update the calibration factor by writing CALFACT only when ADEN is set to 1 and ADSTART is cleared to 0 by writing ADSTP to 1 (ADC enabled and no conversion is ongoing).",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CFGR1",
+          "offset": 12,
+          "size": 32,
+          "description": "ADC configuration register 1.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "ADC configuration register 1.",
+          "fields": [
+            {
+              "name": "DMAEN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Direct memory access enable This bit is set and cleared by software to enable the generation of DMA requests. This allows the automatic management of the converted data by the DMA controller. For more details, refer to Section : Managing converted data using the DMA on page 632. Note: The software is allowed to write this bit only when ADSTART bit is cleared to 0 by writing ADSTP to 1 (this ensures that no conversion is ongoing).",
+              "enum": null
+            },
+            {
+              "name": "DMACFG",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Direct memory access configuration This bit is set and cleared by software to select between two DMA modes of operation and is effective only when DMAEN = 1. For more details, refer to Section : Managing converted data using the DMA on page 632 Note: The software is allowed to write this bit only when ADSTART bit is cleared to 0 by writing ADSTP to 1 (this ensures that no conversion is ongoing).",
+              "enum": "DMACFG"
+            },
+            {
+              "name": "RES",
+              "bit_offset": 2,
+              "bit_width": 2,
+              "description": "Data resolution These bits are written by software to select the resolution of the conversion. Note: The software is allowed to write these bits only when ADSTART bit is cleared to 0 by writing ADSTP to 1 (this ensures that no conversion is ongoing).",
+              "enum": "RES"
+            },
+            {
+              "name": "SCANDIR",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Scan sequence direction This bit is set and cleared by software to select the direction in which the channels is scanned in the sequence. It is effective only if CHSELRMOD bit is cleared to 0. Note: The software is allowed to write this bit only when ADSTART bit is cleared to 0 by writing ADSTP to 1 (this ensures that no conversion is ongoing).",
+              "enum": "SCANDIR"
+            },
+            {
+              "name": "ALIGN",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Data alignment This bit is set and cleared by software to select right or left alignment. Refer to Figure 78: Data alignment and resolution (oversampling disabled: OVSE = 0) on page 631 Note: The software is allowed to write this bit only when ADSTART bit is cleared to 0 by writing ADSTP to 1 (this ensures that no conversion is ongoing).",
+              "enum": "ALIGN"
+            },
+            {
+              "name": "EXTSEL",
+              "bit_offset": 6,
+              "bit_width": 3,
+              "description": "External trigger selection These bits select the external event used to trigger the start of conversion (refer to table ADC interconnection in Section 20.4.2: ADC pins and internal signals for details): Note: The software is allowed to write this bit only when ADSTART bit is cleared to 0 by writing ADSTP to 1 (this ensures that no conversion is ongoing).",
+              "enum": "EXTSEL"
+            },
+            {
+              "name": "EXTEN",
+              "bit_offset": 10,
+              "bit_width": 2,
+              "description": "External trigger enable and polarity selection These bits are set and cleared by software to select the external trigger polarity and enable the trigger. Note: The software is allowed to write this bit only when ADSTART bit is cleared to 0 by writing ADSTP to 1 (this ensures that no conversion is ongoing).",
+              "enum": "EXTEN"
+            },
+            {
+              "name": "OVRMOD",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "Overrun management mode This bit is set and cleared by software and configure the way data overruns are managed. Note: The software is allowed to write this bit only when ADSTART bit is cleared to 0 by writing ADSTP to 1 (this ensures that no conversion is ongoing).",
+              "enum": "OVRMOD"
+            },
+            {
+              "name": "CONT",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Single / continuous conversion mode This bit is set and cleared by software. If it is set, conversion takes place continuously until it is cleared. Note: It is not possible to have both discontinuous mode and continuous mode enabled: it is forbidden to set both bits DISCEN = 1 and CONT = 1. Note: The software is allowed to write this bit only when ADSTART bit is cleared to 0 by writing ADSTP to 1 (this ensures that no conversion is ongoing).",
+              "enum": null
+            },
+            {
+              "name": "WAIT",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "Wait conversion mode This bit is set and cleared by software to enable/disable wait conversion mode.sup./sup Note: The software is allowed to write this bit only when ADSTART bit is cleared to 0 by writing ADSTP to 1 (this ensures that no conversion is ongoing).",
+              "enum": null
+            },
+            {
+              "name": "DISCEN",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Discontinuous mode This bit is set and cleared by software to enable/disable discontinuous mode. Note: It is not possible to have both discontinuous mode and continuous mode enabled: it is forbidden to set both bits DISCEN = 1 and CONT = 1. Note: The software is allowed to write this bit only when ADSTART bit is cleared to 0 by writing ADSTP to 1 (this ensures that no conversion is ongoing).",
+              "enum": null
+            },
+            {
+              "name": "CHSELRMOD",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "Mode selection of the CHSELR register This bit is set and cleared by software to control the ADC_CHSELR feature: Note: The software is allowed to write this bit only when ADSTART bit is cleared to 0 by writing ADSTP to 1 (this ensures that no conversion is ongoing).",
+              "enum": null
+            },
+            {
+              "name": "AWD1SGL",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "Enable the watchdog on a single channel or on all channels This bit is set and cleared by software to enable the analog watchdog on the channel identified by the AWDCH[4:0] bits or on all the channels Note: The software is allowed to write this bit only when ADSTART bit is cleared to 0 by writing ADSTP to 1 (this ensures that no conversion is ongoing).",
+              "enum": "AWD1SGL"
+            },
+            {
+              "name": "AWD1EN",
+              "bit_offset": 23,
+              "bit_width": 1,
+              "description": "Analog watchdog enable This bit is set and cleared by software. Note: The software is allowed to write this bit only when ADSTART bit is cleared to 0 by writing ADSTP to 1 (this ensures that no conversion is ongoing).",
+              "enum": null
+            },
+            {
+              "name": "AWD1CH",
+              "bit_offset": 26,
+              "bit_width": 5,
+              "description": "Analog watchdog channel selection These bits are set and cleared by software. They select the input channel to be guarded by the analog watchdog. ..... Others: Reserved The channel selected by the AWDCH[4:0] bits must be also set into the CHSELR register. Note: The software is allowed to write this bit only when ADSTART bit is cleared to 0 by writing ADSTP to 1 (this ensures that no conversion is ongoing).",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CFGR2",
+          "offset": 16,
+          "size": 32,
+          "description": "ADC configuration register 2.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "ADC configuration register 2.",
+          "fields": [
+            {
+              "name": "OVSE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Oversampler Enable This bit is set and cleared by software. Note: Software is allowed to write this bit only when ADSTART is cleared to 0 by writing ADSTP to 1 (which ensures that no conversion is ongoing).",
+              "enum": null
+            },
+            {
+              "name": "OVSR",
+              "bit_offset": 2,
+              "bit_width": 3,
+              "description": "Oversampling ratio This bit filed defines the number of oversampling ratio. Note: The software is allowed to write this bit only when ADSTART is cleared to 0 by writing ADSTP to 1 (which ensures that no conversion is ongoing).",
+              "enum": "OVERSAMPLING_RATIO"
+            },
+            {
+              "name": "OVSS",
+              "bit_offset": 5,
+              "bit_width": 4,
+              "description": "Oversampling shift This bit is set and cleared by software. Others: Reserved Note: The software is allowed to write this bit only when ADSTART is cleared to 0 by writing ADSTP to 1(which ensures that no conversion is ongoing).",
+              "enum": "OVSS"
+            },
+            {
+              "name": "TOVS",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Triggered Oversampling This bit is set and cleared by software. Note: The software is allowed to write this bit only when ADSTART is cleared to 0 by writing ADSTP to 1 (which ensures that no conversion is ongoing).",
+              "enum": "TOVS"
+            },
+            {
+              "name": "LFTRIG",
+              "bit_offset": 29,
+              "bit_width": 1,
+              "description": "Low frequency trigger mode enable This bit must be set by software. Note: The software is allowed to write this bit only when ADSTART bit is cleared to 0 by writing ADSTP to 1 (this ensures that no conversion is ongoing).",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SMPR",
+          "offset": 20,
+          "size": 32,
+          "description": "ADC sampling time register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "ADC sampling time register.",
+          "fields": [
+            {
+              "name": "SMP",
+              "bit_offset": 0,
+              "bit_width": 3,
+              "description": "Sampling time selection 1 These bits are written by software to select the sampling time that applies to all channels. Note: The software is allowed to write this bit only when ADSTART is cleared to 0 by writing ADSTP to 1 (which ensures that no conversion is ongoing).",
+              "enum": "SAMPLE_TIME"
+            },
+            {
+              "name": "SMPSEL",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Channel-x sampling time selection These bits are written by software to define which sampling time is used. Note: The software is allowed to write this bit only when ADSTART is cleared to 0 by writing ADSTP to 1 (which ensures that no conversion is ongoing).",
+              "enum": "SMPSEL"
+            }
+          ]
+        },
+        {
+          "name": "AWD1TR",
+          "offset": 32,
+          "size": 32,
+          "description": "ADC watchdog threshold register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "ADC watchdog threshold register.",
+          "fields": [
+            {
+              "name": "LT1",
+              "bit_offset": 0,
+              "bit_width": 12,
+              "description": "Analog watchdog 1 lower threshold These bits are written by software to define the lower threshold for the analog watchdog. Refer to Section 20.4.25: Analog window watchdog on page 638.",
+              "enum": null
+            },
+            {
+              "name": "HT1",
+              "bit_offset": 16,
+              "bit_width": 12,
+              "description": "Analog watchdog 1 higher threshold These bits are written by software to define the higher threshold for the analog watchdog. Refer to Section 20.4.25: Analog window watchdog on page 638.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "AWD2TR",
+          "offset": 36,
+          "size": 32,
+          "description": "ADC watchdog threshold register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "ADC watchdog threshold register.",
+          "fields": [
+            {
+              "name": "LT2",
+              "bit_offset": 0,
+              "bit_width": 12,
+              "description": "Analog watchdog 2 lower threshold These bits are written by software to define the lower threshold for the analog watchdog. Refer to Section 20.4.25: Analog window watchdog on page 638.",
+              "enum": null
+            },
+            {
+              "name": "HT2",
+              "bit_offset": 16,
+              "bit_width": 12,
+              "description": "Analog watchdog 2 higher threshold These bits are written by software to define the higher threshold for the analog watchdog. Refer to Section 20.4.25: Analog window watchdog on page 638.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CHSELR",
+          "offset": 40,
+          "size": 32,
+          "description": "ADC channel selection register [alternate].",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "ADC channel selection register [alternate].",
+          "fields": [
+            {
+              "name": "CHSEL0",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Channel x selection These bits are written by software and define which channels are part of the sequence of channels to be converted. Note: The software is allowed to write this bit only when ADSTART is cleared to 0 by writing ADSTP to 1 (which ensures that no conversion is ongoing).",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CHSELR_ALTERNATE",
+          "offset": 40,
+          "size": 32,
+          "description": "ADC channel selection register [alternate].",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "ADC channel selection register [alternate].",
+          "fields": [
+            {
+              "name": "SQ",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "1st conversion of the sequence These bits are programmed by software with the channel number assigned to the 1st conversion of the sequence. 0b1111 indicates end of the sequence. When 0b1111 (end of sequence) is programmed to the lower sequence channels, these bits are ignored. Refer to SQ8[3:0] for a definition of channel selection. Note: The software is allowed to write this bit only when ADSTART is cleared to 0 by writing ADSTP to 1 (which ensures that no conversion is ongoing).",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "AWD3TR",
+          "offset": 44,
+          "size": 32,
+          "description": "ADC watchdog threshold register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "ADC watchdog threshold register.",
+          "fields": [
+            {
+              "name": "LT3",
+              "bit_offset": 0,
+              "bit_width": 12,
+              "description": "Analog watchdog 3lower threshold These bits are written by software to define the lower threshold for the analog watchdog. Refer to Section 20.4.25: Analog window watchdog on page 638.",
+              "enum": null
+            },
+            {
+              "name": "HT3",
+              "bit_offset": 16,
+              "bit_width": 12,
+              "description": "Analog watchdog 3 higher threshold These bits are written by software to define the higher threshold for the analog watchdog. Refer to Section 20.4.25: Analog window watchdog on page 638.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "DR",
+          "offset": 64,
+          "size": 32,
+          "description": "ADC data register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "ADC data register.",
+          "fields": [
+            {
+              "name": "DATA",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Converted data These bits are read-only. They contain the conversion result from the last converted channel. The data are left- or right-aligned as shown in Figure 78: Data alignment and resolution (oversampling disabled: OVSE = 0) on page 631. Just after a calibration is complete, DATA[6:0] contains the calibration factor.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "PWR",
+          "offset": 68,
+          "size": 32,
+          "description": "ADC Power register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "ADC Power register.",
+          "fields": [
+            {
+              "name": "AUTOFF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Auto-off mode bit This bit is set and cleared by software. it is used to enable/disable the Auto-off mode. Note: The software is allowed to write this bit only when ADEN bit is cleared to 0 (this ensures that no conversion is ongoing).",
+              "enum": null
+            },
+            {
+              "name": "DPD",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Deep-power-down mode bit This bit is set and cleared by software. It is used to enable/disable Deep-power-down mode in Autonomous mode when the ADC is not used. Note: The software is allowed to write this bit only when ADEN bit is cleared to 0 (this ensures that no conversion is ongoing). Note: Setting DPD in Auto-off mode automatically disables the LDO.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "AWD2CR",
+          "offset": 160,
+          "size": 32,
+          "description": "ADC Analog Watchdog 2 Configuration register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "ADC Analog Watchdog 2 Configuration register.",
+          "fields": [
+            {
+              "name": "AWD2CH",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Analog watchdog channel selection These bits are set and cleared by software. They enable and select the input channels to be guarded by analog watchdog 2 (AWD2). Note: The channels selected through AWD2CR must be also configured into the ADC_CHSELR registers. Refer to SQ8[3:0] for a definition of channel selection. The software is allowed to write this bit only when ADSTART is cleared to 0 by writing ADSTP to 1 (which ensures that no conversion is ongoing).",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "AWD3CR",
+          "offset": 164,
+          "size": 32,
+          "description": "ADC Analog Watchdog 3 Configuration register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "ADC Analog Watchdog 3 Configuration register.",
+          "fields": [
+            {
+              "name": "AWD3CH",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Analog watchdog channel selection These bits are set and cleared by software. They enable and select the input channels to be guarded by analog watchdog 3 (AWD3). Note: The channels selected through AWD3CR must be also configured into the ADC_CHSELR registers. Refer to SQ8[3:0] for a definition of channel selection. The software is allowed to write this bit only when ADSTART is cleared to 0 by writing ADSTP to 1 (which ensures that no conversion is ongoing).",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CALFACT",
+          "offset": 196,
+          "size": 32,
+          "description": "ADC Calibration factor.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "ADC Calibration factor.",
+          "fields": [
+            {
+              "name": "CALFACT",
+              "bit_offset": 0,
+              "bit_width": 7,
+              "description": "Calibration factor These bits are written by hardware or by software. Once a calibration is complete, they are updated by hardware with the calibration factors. Software can write these bits with a new calibration factor. If the new calibration factor is different from the current one stored into the analog ADC, it is then applied once a new calibration is launched. Just after a calibration is complete, DATA[6:0] contains the calibration factor. Note: Software can write these bits only when ADEN = 1 (ADC is enabled and no calibration is ongoing and no conversion is ongoing).",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CCR",
+          "offset": 776,
+          "size": 32,
+          "description": "ADC common configuration register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "ADC common configuration register.",
+          "fields": [
+            {
+              "name": "PRESC",
+              "bit_offset": 18,
+              "bit_width": 4,
+              "description": "ADC prescaler Set and cleared by software to select the frequency of the clock to the ADC. Other: Reserved Note: Software is allowed to write these bits only when the ADC is disabled (ADCAL = 0, ADSTART = 0, ADSTP = 0, ADDIS = 0 and ADEN = 0).",
+              "enum": "PRESC"
+            },
+            {
+              "name": "VREFEN",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "VsubREFINT/sub enable This bit is set and cleared by software to enable/disable the VsubREFINT/sub buffer. Note: Software is allowed to write this bit only when ADSTART is cleared to 0 by writing ADSTP to 1 (which ensures that no conversion is ongoing).",
+              "enum": null
+            },
+            {
+              "name": "VSENSESEL",
+              "bit_offset": 23,
+              "bit_width": 1,
+              "description": "Temperature sensor selection This bit is set and cleared by software to enable/disable the temperature sensor. Note: Software is allowed to write this bit only when ADSTART is cleared to 0 by writing ADSTP to 1 (which ensures that no conversion is ongoing).",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "ALIGN": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Right",
+          "value": 0,
+          "description": "Right alignment."
+        },
+        {
+          "name": "Left",
+          "value": 1,
+          "description": "Left alignment."
+        }
+      ]
+    },
+    "AWD1SGL": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "AllChannels",
+          "value": 0,
+          "description": "Analog watchdog 1 enabled on all channels."
+        },
+        {
+          "name": "SingleChannel",
+          "value": 1,
+          "description": "Analog watchdog 1 enabled on a single channel."
+        }
+      ]
+    },
+    "DMACFG": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "OneShot",
+          "value": 0,
+          "description": "DMA One Shot mode selected."
+        },
+        {
+          "name": "Circular",
+          "value": 1,
+          "description": "DMA Circular mode selected."
+        }
+      ]
+    },
+    "EXTEN": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Disabled",
+          "value": 0,
+          "description": "Trigger detection disabled"
+        },
+        {
+          "name": "RisingEdge",
+          "value": 1,
+          "description": "Trigger detection on the rising edge"
+        },
+        {
+          "name": "FallingEdge",
+          "value": 2,
+          "description": "Trigger detection on the falling edge"
+        },
+        {
+          "name": "BothEdges",
+          "value": 3,
+          "description": "Trigger detection on both the rising and falling edges"
+        }
+      ]
+    },
+    "EXTSEL": {
+      "bit_size": 3,
+      "variants": [
+        {
+          "name": "Trg0",
+          "value": 0,
+          "description": "adc_trg0."
+        },
+        {
+          "name": "Trg1",
+          "value": 1,
+          "description": "adc_trg1."
+        },
+        {
+          "name": "Trg2",
+          "value": 2,
+          "description": "adc_trg2."
+        },
+        {
+          "name": "Trg3",
+          "value": 3,
+          "description": "adc_trg3."
+        },
+        {
+          "name": "Trg4",
+          "value": 4,
+          "description": "adc_trg4."
+        },
+        {
+          "name": "Trg5",
+          "value": 5,
+          "description": "adc_trg5."
+        },
+        {
+          "name": "Trg6",
+          "value": 6,
+          "description": "adc_trg6."
+        },
+        {
+          "name": "Trg7",
+          "value": 7,
+          "description": "adc_trg7."
+        }
+      ]
+    },
+    "OVERSAMPLING_RATIO": {
+      "bit_size": 3,
+      "variants": [
+        {
+          "name": "Oversample2x",
+          "value": 0,
+          "description": "Oversample 2 times"
+        },
+        {
+          "name": "Oversample4x",
+          "value": 1,
+          "description": "Oversample 4 times"
+        },
+        {
+          "name": "Oversample8x",
+          "value": 2,
+          "description": "Oversample 8 times"
+        },
+        {
+          "name": "Oversample16x",
+          "value": 3,
+          "description": "Oversample 16 times"
+        },
+        {
+          "name": "Oversample32x",
+          "value": 4,
+          "description": "Oversample 32 times"
+        },
+        {
+          "name": "Oversample64x",
+          "value": 5,
+          "description": "Oversample 64 times"
+        },
+        {
+          "name": "Oversample128x",
+          "value": 6,
+          "description": "Oversample 128 times"
+        },
+        {
+          "name": "Oversample256x",
+          "value": 7,
+          "description": "Oversample 256 times"
+        }
+      ]
+    },
+    "OVRMOD": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Preserve",
+          "value": 0,
+          "description": "DR register is preserved with the old data when an overrun is detected."
+        },
+        {
+          "name": "Overwrite",
+          "value": 1,
+          "description": "DR register is overwritten with the last conversion result when an overrun is detected."
+        }
+      ]
+    },
+    "OVSS": {
+      "bit_size": 4,
+      "variants": [
+        {
+          "name": "Shift0",
+          "value": 0,
+          "description": "No shift."
+        },
+        {
+          "name": "Shift1",
+          "value": 1,
+          "description": "Shift 1-bit."
+        },
+        {
+          "name": "Shift2",
+          "value": 2,
+          "description": "Shift 2-bits."
+        },
+        {
+          "name": "Shift3",
+          "value": 3,
+          "description": "Shift 3-bits."
+        },
+        {
+          "name": "Shift4",
+          "value": 4,
+          "description": "Shift 4-bits."
+        },
+        {
+          "name": "Shift5",
+          "value": 5,
+          "description": "Shift 5-bits."
+        },
+        {
+          "name": "Shift6",
+          "value": 6,
+          "description": "Shift 6-bits."
+        },
+        {
+          "name": "Shift7",
+          "value": 7,
+          "description": "Shift 7-bits."
+        },
+        {
+          "name": "Shift8",
+          "value": 8,
+          "description": "Shift 8-bits."
+        }
+      ]
+    },
+    "PRESC": {
+      "bit_size": 4,
+      "variants": [
+        {
+          "name": "Div1",
+          "value": 0,
+          "description": "input ADC clock not divided."
+        },
+        {
+          "name": "Div2",
+          "value": 1,
+          "description": "input ADC clock divided by 2."
+        },
+        {
+          "name": "Div4",
+          "value": 2,
+          "description": "input ADC clock divided by 4."
+        },
+        {
+          "name": "Div6",
+          "value": 3,
+          "description": "input ADC clock divided by 6."
+        },
+        {
+          "name": "Div8",
+          "value": 4,
+          "description": "input ADC clock divided by 8."
+        },
+        {
+          "name": "Div10",
+          "value": 5,
+          "description": "input ADC clock divided by 10."
+        },
+        {
+          "name": "Div12",
+          "value": 6,
+          "description": "input ADC clock divided by 12."
+        },
+        {
+          "name": "Div16",
+          "value": 7,
+          "description": "input ADC clock divided by 16."
+        },
+        {
+          "name": "Div32",
+          "value": 8,
+          "description": "input ADC clock divided by 32."
+        },
+        {
+          "name": "Div64",
+          "value": 9,
+          "description": "input ADC clock divided by 64."
+        },
+        {
+          "name": "Div128",
+          "value": 10,
+          "description": "input ADC clock divided by 128."
+        },
+        {
+          "name": "Div256",
+          "value": 11,
+          "description": "input ADC clock divided by 256."
+        }
+      ]
+    },
+    "RES": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Bits12",
+          "value": 0,
+          "description": "12-bit resolution"
+        },
+        {
+          "name": "Bits10",
+          "value": 1,
+          "description": "10-bit resolution"
+        },
+        {
+          "name": "Bits8",
+          "value": 2,
+          "description": "8-bit resolution"
+        },
+        {
+          "name": "Bits6",
+          "value": 3,
+          "description": "6-bit resolution"
+        }
+      ]
+    },
+    "SAMPLE_TIME": {
+      "bit_size": 3,
+      "variants": [
+        {
+          "name": "Cycles1_5",
+          "value": 0,
+          "description": "1.5 ADC cycles"
+        },
+        {
+          "name": "Cycles3_5",
+          "value": 1,
+          "description": "3.5 ADC cycles"
+        },
+        {
+          "name": "Cycles7_5",
+          "value": 2,
+          "description": "7.5 ADC cycles"
+        },
+        {
+          "name": "Cycles12_5",
+          "value": 3,
+          "description": "12.5 ADC cycles"
+        },
+        {
+          "name": "Cycles19_5",
+          "value": 4,
+          "description": "19.5 ADC cycles"
+        },
+        {
+          "name": "Cycles39_5",
+          "value": 5,
+          "description": "39.5 ADC cycles"
+        },
+        {
+          "name": "Cycles79_5",
+          "value": 6,
+          "description": "79.5 ADC cycles"
+        },
+        {
+          "name": "Cycles814_5",
+          "value": 7,
+          "description": "814.5 ADC cycles"
+        }
+      ]
+    },
+    "SCANDIR": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Upwards",
+          "value": 0,
+          "description": "Upward scan (from CHSEL0 to CHSEL11)."
+        },
+        {
+          "name": "Backwards",
+          "value": 1,
+          "description": "Backward scan (from CHSEL11 to CHSEL0)."
+        }
+      ]
+    },
+    "SMPSEL": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "SMP1",
+          "value": 0,
+          "description": "Sampling time of CHANNELx use the setting of SMP1[2:0] register."
+        },
+        {
+          "name": "SMP2",
+          "value": 1,
+          "description": "Sampling time of CHANNELx use the setting of SMP2[2:0] register."
+        }
+      ]
+    },
+    "TOVS": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "AllAfterTrigger",
+          "value": 0,
+          "description": "All oversampled conversions for a channel are done consecutively after a trigger."
+        },
+        {
+          "name": "EachAfterTrigger",
+          "value": 1,
+          "description": "Each oversampled conversion for a channel needs a trigger."
+        }
+      ]
+    }
+  }
+}

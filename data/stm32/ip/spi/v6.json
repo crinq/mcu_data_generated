@@ -1,0 +1,1138 @@
+{
+  "schema": 1,
+  "kind": "spi",
+  "version": "v6",
+  "blocks": {
+    "SPI": {
+      "name": "SPI",
+      "description": "Serial peripheral interface",
+      "extends": null,
+      "registers": [
+        {
+          "name": "CR1",
+          "offset": 0,
+          "size": 32,
+          "description": "control register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "control register 1",
+          "fields": [
+            {
+              "name": "SPE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Serial Peripheral Enable",
+              "enum": null
+            },
+            {
+              "name": "MASRX",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Master automatic SUSP in Receive mode",
+              "enum": null
+            },
+            {
+              "name": "CSTART",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Master transfer start",
+              "enum": null
+            },
+            {
+              "name": "CSUSP",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Master SUSPend request",
+              "enum": null
+            },
+            {
+              "name": "HDDIR",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "Rx/Tx direction at Half-duplex mode",
+              "enum": "HDDIR"
+            },
+            {
+              "name": "SSI",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "Internal SS signal input level",
+              "enum": null
+            },
+            {
+              "name": "CRC33_17",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Full size (33-bit or 17-bit) CRC polynomial is used",
+              "enum": null
+            },
+            {
+              "name": "RCRCINI",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "CRC calculation initialization pattern control for receiver",
+              "enum": "RCRCINI"
+            },
+            {
+              "name": "TCRCINI",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "CRC calculation initialization pattern control for transmitter",
+              "enum": "TCRCINI"
+            },
+            {
+              "name": "IOLOCK",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Locking the AF configuration of associated IOs",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CR2",
+          "offset": 4,
+          "size": 32,
+          "description": "control register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "control register 2",
+          "fields": [
+            {
+              "name": "TSIZE",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Number of data at current transfer",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CFG1",
+          "offset": 8,
+          "size": 32,
+          "description": "configuration register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "configuration register 1",
+          "fields": [
+            {
+              "name": "DSIZE",
+              "bit_offset": 0,
+              "bit_width": 5,
+              "description": "Number of bits in at single SPI data frame",
+              "enum": null
+            },
+            {
+              "name": "FTHLV",
+              "bit_offset": 5,
+              "bit_width": 4,
+              "description": "threshold level",
+              "enum": "FTHLV"
+            },
+            {
+              "name": "UDRCFG",
+              "bit_offset": 9,
+              "bit_width": 2,
+              "description": "Behavior of slave transmitter at underrun condition",
+              "enum": "UDRCFG"
+            },
+            {
+              "name": "RXDMAEN",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "Rx DMA stream enable",
+              "enum": null
+            },
+            {
+              "name": "TXDMAEN",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Tx DMA stream enable",
+              "enum": null
+            },
+            {
+              "name": "CRCSIZE",
+              "bit_offset": 16,
+              "bit_width": 5,
+              "description": "Length of CRC frame to be transacted and compared",
+              "enum": null
+            },
+            {
+              "name": "CRCEN",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "Hardware CRC computation enable",
+              "enum": null
+            },
+            {
+              "name": "MBR",
+              "bit_offset": 28,
+              "bit_width": 3,
+              "description": "Master baud rate",
+              "enum": "MBR"
+            },
+            {
+              "name": "BPASS",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "bypass of the prescaler at master baud rate clock generator",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CFG2",
+          "offset": 12,
+          "size": 32,
+          "description": "configuration register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "configuration register 2",
+          "fields": [
+            {
+              "name": "MSSI",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "Master SS Idleness",
+              "enum": null
+            },
+            {
+              "name": "MIDI",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "Master Inter-Data Idleness",
+              "enum": null
+            },
+            {
+              "name": "RDIOM",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "RDY signal input/output management\n Note: When DSIZE at the CFG1 register is configured shorter than 8-bit, the RDIOM bit has to be kept at zero.",
+              "enum": "RDIOM"
+            },
+            {
+              "name": "RDIOP",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "RDY signal input/output polarity",
+              "enum": "RDIOP"
+            },
+            {
+              "name": "IOSWP",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Swap functionality of MISO and MOSI pins",
+              "enum": null
+            },
+            {
+              "name": "COMM",
+              "bit_offset": 17,
+              "bit_width": 2,
+              "description": "SPI Communication Mode",
+              "enum": "COMM"
+            },
+            {
+              "name": "SP",
+              "bit_offset": 19,
+              "bit_width": 3,
+              "description": "Serial Protocol",
+              "enum": "SP"
+            },
+            {
+              "name": "MASTER",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "SPI Master",
+              "enum": "MASTER"
+            },
+            {
+              "name": "LSBFIRST",
+              "bit_offset": 23,
+              "bit_width": 1,
+              "description": "Data frame format",
+              "enum": "LSBFIRST"
+            },
+            {
+              "name": "CPHA",
+              "bit_offset": 24,
+              "bit_width": 1,
+              "description": "Clock phase",
+              "enum": "CPHA"
+            },
+            {
+              "name": "CPOL",
+              "bit_offset": 25,
+              "bit_width": 1,
+              "description": "Clock polarity",
+              "enum": "CPOL"
+            },
+            {
+              "name": "SSM",
+              "bit_offset": 26,
+              "bit_width": 1,
+              "description": "Software management of SS signal input",
+              "enum": null
+            },
+            {
+              "name": "SSIOP",
+              "bit_offset": 28,
+              "bit_width": 1,
+              "description": "SS input/output polarity",
+              "enum": "SSIOP"
+            },
+            {
+              "name": "SSOE",
+              "bit_offset": 29,
+              "bit_width": 1,
+              "description": "SS output enable",
+              "enum": null
+            },
+            {
+              "name": "SSOM",
+              "bit_offset": 30,
+              "bit_width": 1,
+              "description": "SS output management in master mode",
+              "enum": "SSOM"
+            },
+            {
+              "name": "AFCNTR",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "Alternate function always control GPIOs",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "IER",
+          "offset": 16,
+          "size": 32,
+          "description": "Interrupt Enable Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Interrupt Enable Register",
+          "fields": [
+            {
+              "name": "RXPIE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "RXP Interrupt Enable",
+              "enum": null
+            },
+            {
+              "name": "TXPIE",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "TXP interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "DXPIE",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "DXP interrupt enabled",
+              "enum": null
+            },
+            {
+              "name": "EOTIE",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "EOT, SUSP and TXC interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "TXTFIE",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "TXTFIE interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "UDRIE",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "UDR interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "OVRIE",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "OVR interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "CRCEIE",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "CRC Interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "TIFREIE",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "TIFRE interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "MODFIE",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Mode Fault interrupt enable",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SR",
+          "offset": 20,
+          "size": 32,
+          "description": "Status Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Status Register",
+          "fields": [
+            {
+              "name": "RXP",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Rx-Packet available",
+              "enum": null
+            },
+            {
+              "name": "TXP",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Tx-Packet space available",
+              "enum": null
+            },
+            {
+              "name": "DXP",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Duplex Packet",
+              "enum": null
+            },
+            {
+              "name": "EOT",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "End Of Transfer",
+              "enum": null
+            },
+            {
+              "name": "TXTF",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Transmission Transfer Filled",
+              "enum": null
+            },
+            {
+              "name": "UDR",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Underrun at slave transmission mode",
+              "enum": null
+            },
+            {
+              "name": "OVR",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Overrun",
+              "enum": null
+            },
+            {
+              "name": "CRCE",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "CRC Error",
+              "enum": null
+            },
+            {
+              "name": "TIFRE",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "TI frame format error",
+              "enum": null
+            },
+            {
+              "name": "MODF",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Mode Fault",
+              "enum": null
+            },
+            {
+              "name": "SUSP",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "SUSPend",
+              "enum": null
+            },
+            {
+              "name": "TXC",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "TxFIFO transmission complete",
+              "enum": null
+            },
+            {
+              "name": "RXPLVL",
+              "bit_offset": 13,
+              "bit_width": 2,
+              "description": "RxFIFO Packing LeVeL",
+              "enum": "RXPLVL"
+            },
+            {
+              "name": "RXWNE",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "RxFIFO Word Not Empty",
+              "enum": "RXWNE"
+            },
+            {
+              "name": "CTSIZE",
+              "bit_offset": 16,
+              "bit_width": 16,
+              "description": "Number of data frames remaining in current TSIZE session",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "IFCR",
+          "offset": 24,
+          "size": 32,
+          "description": "Interrupt/Status Flags Clear Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Interrupt/Status Flags Clear Register",
+          "fields": [
+            {
+              "name": "EOTC",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "End Of Transfer flag clear",
+              "enum": null
+            },
+            {
+              "name": "TXTFC",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Transmission Transfer Filled flag clear",
+              "enum": null
+            },
+            {
+              "name": "UDRC",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Underrun flag clear",
+              "enum": null
+            },
+            {
+              "name": "OVRC",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Overrun flag clear",
+              "enum": null
+            },
+            {
+              "name": "CRCEC",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "CRC Error flag clear",
+              "enum": null
+            },
+            {
+              "name": "TIFREC",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "TI frame format error flag clear",
+              "enum": null
+            },
+            {
+              "name": "MODFC",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Mode Fault flag clear",
+              "enum": null
+            },
+            {
+              "name": "SUSPC",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "SUSPend flag clear",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "AUTOCR",
+          "offset": 28,
+          "size": 32,
+          "description": null,
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": null,
+          "fields": [
+            {
+              "name": "TRIGSEL",
+              "bit_offset": 16,
+              "bit_width": 4,
+              "description": "trigger selection (refer ).\n ...\n Note: these bits can be written only when SPE = 0.",
+              "enum": null
+            },
+            {
+              "name": "TRIGPOL",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "trigger polarity\n Note: This bit can be written only when SPE = 0.",
+              "enum": "TRIGPOL"
+            },
+            {
+              "name": "TRIGEN",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "trigger of CSTART control enable\n Note: if user can't prevent trigger event during write, the TRIGEN has to be changed when SPI is disabled",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "TXDR16",
+          "offset": 32,
+          "description": "Transmit Data Register - half-word sized",
+          "array_len": null,
+          "array_stride": null,
+          "fields": []
+        },
+        {
+          "name": "TXDR32",
+          "offset": 32,
+          "description": "Transmit Data Register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": []
+        },
+        {
+          "name": "TXDR8",
+          "offset": 32,
+          "description": "Transmit Data Register - byte sized",
+          "array_len": null,
+          "array_stride": null,
+          "fields": []
+        },
+        {
+          "name": "RXDR16",
+          "offset": 48,
+          "description": "Receive Data Register - half-word sized",
+          "array_len": null,
+          "array_stride": null,
+          "fields": []
+        },
+        {
+          "name": "RXDR32",
+          "offset": 48,
+          "description": "Receive Data Register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": []
+        },
+        {
+          "name": "RXDR8",
+          "offset": 48,
+          "description": "Receive Data Register - byte sized",
+          "array_len": null,
+          "array_stride": null,
+          "fields": []
+        },
+        {
+          "name": "CRCPOLY",
+          "offset": 64,
+          "size": 32,
+          "description": "Polynomial Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Polynomial Register",
+          "fields": [
+            {
+              "name": "CRCPOLY",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "CRC polynomial register",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "TXCRC",
+          "offset": 68,
+          "size": 32,
+          "description": "Transmitter CRC Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Transmitter CRC Register",
+          "fields": [
+            {
+              "name": "TXCRC",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "CRC register for transmitter",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "RXCRC",
+          "offset": 72,
+          "size": 32,
+          "description": "Receiver CRC Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Receiver CRC Register",
+          "fields": [
+            {
+              "name": "RXCRC",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "CRC register for receiver",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "UDRDR",
+          "offset": 76,
+          "size": 32,
+          "description": "Underrun Data Register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Underrun Data Register",
+          "fields": [
+            {
+              "name": "UDRDR",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Data at slave underrun condition",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "COMM": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "FullDuplex",
+          "value": 0,
+          "description": "Full duplex"
+        },
+        {
+          "name": "Transmitter",
+          "value": 1,
+          "description": "Simplex transmitter only"
+        },
+        {
+          "name": "Receiver",
+          "value": 2,
+          "description": "Simplex receiver only"
+        },
+        {
+          "name": "HalfDuplex",
+          "value": 3,
+          "description": "Half duplex"
+        }
+      ]
+    },
+    "CPHA": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "FirstEdge",
+          "value": 0,
+          "description": "The first clock transition is the first data capture edge"
+        },
+        {
+          "name": "SecondEdge",
+          "value": 1,
+          "description": "The second clock transition is the first data capture edge"
+        }
+      ]
+    },
+    "CPOL": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "IdleLow",
+          "value": 0,
+          "description": "CK to 0 when idle"
+        },
+        {
+          "name": "IdleHigh",
+          "value": 1,
+          "description": "CK to 1 when idle"
+        }
+      ]
+    },
+    "FTHLV": {
+      "bit_size": 4,
+      "variants": [
+        {
+          "name": "OneFrame",
+          "value": 0,
+          "description": "1 frame"
+        },
+        {
+          "name": "TwoFrames",
+          "value": 1,
+          "description": "2 frames"
+        },
+        {
+          "name": "ThreeFrames",
+          "value": 2,
+          "description": "3 frames"
+        },
+        {
+          "name": "FourFrames",
+          "value": 3,
+          "description": "4 frames"
+        },
+        {
+          "name": "FiveFrames",
+          "value": 4,
+          "description": "5 frames"
+        },
+        {
+          "name": "SixFrames",
+          "value": 5,
+          "description": "6 frames"
+        },
+        {
+          "name": "SevenFrames",
+          "value": 6,
+          "description": "7 frames"
+        },
+        {
+          "name": "EightFrames",
+          "value": 7,
+          "description": "8 frames"
+        },
+        {
+          "name": "NineFrames",
+          "value": 8,
+          "description": "9 frames"
+        },
+        {
+          "name": "TenFrames",
+          "value": 9,
+          "description": "10 frames"
+        },
+        {
+          "name": "ElevenFrames",
+          "value": 10,
+          "description": "11 frames"
+        },
+        {
+          "name": "TwelveFrames",
+          "value": 11,
+          "description": "12 frames"
+        },
+        {
+          "name": "ThirteenFrames",
+          "value": 12,
+          "description": "13 frames"
+        },
+        {
+          "name": "FourteenFrames",
+          "value": 13,
+          "description": "14 frames"
+        },
+        {
+          "name": "FifteenFrames",
+          "value": 14,
+          "description": "15 frames"
+        },
+        {
+          "name": "SixteenFrames",
+          "value": 15,
+          "description": "16 frames"
+        }
+      ]
+    },
+    "HDDIR": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Receiver",
+          "value": 0,
+          "description": "Receiver in half duplex mode"
+        },
+        {
+          "name": "Transmitter",
+          "value": 1,
+          "description": "Transmitter in half duplex mode"
+        }
+      ]
+    },
+    "LSBFIRST": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "MSBFirst",
+          "value": 0,
+          "description": "Data is transmitted/received with the MSB first"
+        },
+        {
+          "name": "LSBFirst",
+          "value": 1,
+          "description": "Data is transmitted/received with the LSB first"
+        }
+      ]
+    },
+    "MASTER": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Slave",
+          "value": 0,
+          "description": "Slave configuration"
+        },
+        {
+          "name": "Master",
+          "value": 1,
+          "description": "Master configuration"
+        }
+      ]
+    },
+    "MBR": {
+      "bit_size": 3,
+      "variants": [
+        {
+          "name": "Div2",
+          "value": 0,
+          "description": "f_spi_ker_ck / 2"
+        },
+        {
+          "name": "Div4",
+          "value": 1,
+          "description": "f_spi_ker_ck / 4"
+        },
+        {
+          "name": "Div8",
+          "value": 2,
+          "description": "f_spi_ker_ck / 8"
+        },
+        {
+          "name": "Div16",
+          "value": 3,
+          "description": "f_spi_ker_ck / 16"
+        },
+        {
+          "name": "Div32",
+          "value": 4,
+          "description": "f_spi_ker_ck / 32"
+        },
+        {
+          "name": "Div64",
+          "value": 5,
+          "description": "f_spi_ker_ck / 64"
+        },
+        {
+          "name": "Div128",
+          "value": 6,
+          "description": "f_spi_ker_ck / 128"
+        },
+        {
+          "name": "Div256",
+          "value": 7,
+          "description": "f_spi_ker_ck / 256"
+        }
+      ]
+    },
+    "RCRCINI": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "AllZeros",
+          "value": 0,
+          "description": "All zeros RX CRC initialization pattern"
+        },
+        {
+          "name": "AllOnes",
+          "value": 1,
+          "description": "All ones RX CRC initialization pattern"
+        }
+      ]
+    },
+    "RDIOM": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "PermanentlyActive",
+          "value": 0,
+          "description": "RDY signal is defined internally fixed as permanently active (RDIOP setting has no effect)"
+        },
+        {
+          "name": "FromInput",
+          "value": 1,
+          "description": "RDY signal is overtaken from alternate function input (at master case) or output (at slave case) of the dedicated pin (RDIOP setting takes effect)"
+        }
+      ]
+    },
+    "RDIOP": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "ReadyHigh",
+          "value": 0,
+          "description": "high level of the signal means the slave is ready for communication"
+        },
+        {
+          "name": "ReadyLow",
+          "value": 1,
+          "description": "low level of the signal means the slave is ready for communication"
+        }
+      ]
+    },
+    "RXPLVL": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "ZeroFrames",
+          "value": 0,
+          "description": "Zero frames beyond packing ratio available"
+        },
+        {
+          "name": "OneFrame",
+          "value": 1,
+          "description": "One frame beyond packing ratio available"
+        },
+        {
+          "name": "TwoFrames",
+          "value": 2,
+          "description": "Two frame beyond packing ratio available"
+        },
+        {
+          "name": "ThreeFrames",
+          "value": 3,
+          "description": "Three frame beyond packing ratio available"
+        }
+      ]
+    },
+    "RXWNE": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "LessThan32",
+          "value": 0,
+          "description": "Less than 32-bit data frame received"
+        },
+        {
+          "name": "AtLeast32",
+          "value": 1,
+          "description": "At least 32-bit data frame received"
+        }
+      ]
+    },
+    "SP": {
+      "bit_size": 3,
+      "variants": [
+        {
+          "name": "Motorola",
+          "value": 0,
+          "description": "Motorola SPI protocol"
+        },
+        {
+          "name": "TI",
+          "value": 1,
+          "description": "TI SPI protocol"
+        }
+      ]
+    },
+    "SSIOP": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "ActiveLow",
+          "value": 0,
+          "description": "Low level is active for SS signal"
+        },
+        {
+          "name": "ActiveHigh",
+          "value": 1,
+          "description": "High level is active for SS signal"
+        }
+      ]
+    },
+    "SSOM": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Asserted",
+          "value": 0,
+          "description": "SS is asserted until data transfer complete"
+        },
+        {
+          "name": "NotAsserted",
+          "value": 1,
+          "description": "Data frames interleaved with SS not asserted during MIDI"
+        }
+      ]
+    },
+    "TCRCINI": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "AllZeros",
+          "value": 0,
+          "description": "All zeros TX CRC initialization pattern"
+        },
+        {
+          "name": "AllOnes",
+          "value": 1,
+          "description": "All ones TX CRC initialization pattern"
+        }
+      ]
+    },
+    "TRIGPOL": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "RisingEdge",
+          "value": 0,
+          "description": "trigger is active on raising edge"
+        },
+        {
+          "name": "FallingEdge",
+          "value": 1,
+          "description": "trigger is active on falling edge"
+        }
+      ]
+    },
+    "UDRCFG": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Constant",
+          "value": 0,
+          "description": "Slave sends a constant underrun pattern"
+        },
+        {
+          "name": "RepeatReceived",
+          "value": 1,
+          "description": "Slave repeats last received data frame from master"
+        },
+        {
+          "name": "RepeatTransmitted",
+          "value": 2,
+          "description": "Slave repeats last transmitted data frame"
+        }
+      ]
+    }
+  }
+}

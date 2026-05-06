@@ -1,0 +1,282 @@
+{
+  "schema": 1,
+  "kind": "adccommon",
+  "version": "v2",
+  "blocks": {
+    "ADC_COMMON": {
+      "name": "ADC_COMMON",
+      "description": "ADC common registers",
+      "extends": null,
+      "registers": [
+        {
+          "name": "CSR",
+          "offset": 0,
+          "size": 32,
+          "description": "ADC Common status register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "ADC common status register",
+          "fields": [
+            {
+              "name": "AWD",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Analog watchdog event occurred",
+              "enum": null
+            },
+            {
+              "name": "EOC",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "End of conversion of ADC",
+              "enum": null
+            },
+            {
+              "name": "JEOC",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Injected channel end of conversion of ADC",
+              "enum": null
+            },
+            {
+              "name": "JSTRT",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Injected channel conversion started",
+              "enum": null
+            },
+            {
+              "name": "STRT",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "regular channel conversion started",
+              "enum": null
+            },
+            {
+              "name": "OVR",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Overrun occurred",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CCR",
+          "offset": 4,
+          "size": 32,
+          "description": "ADC common control register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "ADC common control register",
+          "fields": [
+            {
+              "name": "MULTI",
+              "bit_offset": 0,
+              "bit_width": 5,
+              "description": "Multi ADC mode selection",
+              "enum": "MULTI"
+            },
+            {
+              "name": "DELAY",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "Delay between 2 sampling phases",
+              "enum": null
+            },
+            {
+              "name": "DDS",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "DMA disable selection for multi-ADC mode",
+              "enum": "DDS"
+            },
+            {
+              "name": "DMA",
+              "bit_offset": 14,
+              "bit_width": 2,
+              "description": "Direct memory access mode for multi ADC mode",
+              "enum": "DMA"
+            },
+            {
+              "name": "ADCPRE",
+              "bit_offset": 16,
+              "bit_width": 2,
+              "description": "ADC prescaler",
+              "enum": "ADCPRE"
+            },
+            {
+              "name": "VBATE",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "VBAT enable",
+              "enum": null
+            },
+            {
+              "name": "TSVREFE",
+              "bit_offset": 23,
+              "bit_width": 1,
+              "description": "Temperature sensor and VREFINT enable",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CDR",
+          "offset": 8,
+          "size": 32,
+          "description": "ADC common regular data register for dual and triple modes",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "ADC common regular data register for dual and triple modes",
+          "fields": [
+            {
+              "name": "DATA",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "1st data item of a pair of regular conversions",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "ADCPRE": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Div2",
+          "value": 0,
+          "description": "PCLK2 divided by 2"
+        },
+        {
+          "name": "Div4",
+          "value": 1,
+          "description": "PCLK2 divided by 4"
+        },
+        {
+          "name": "Div6",
+          "value": 2,
+          "description": "PCLK2 divided by 6"
+        },
+        {
+          "name": "Div8",
+          "value": 3,
+          "description": "PCLK2 divided by 8"
+        }
+      ]
+    },
+    "DDS": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Single",
+          "value": 0,
+          "description": "No new DMA request is issued after the last transfer"
+        },
+        {
+          "name": "Continuous",
+          "value": 1,
+          "description": "DMA requests are issued as long as data are converted and DMA=01, 10 or 11"
+        }
+      ]
+    },
+    "DMA": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Disabled",
+          "value": 0,
+          "description": "DMA mode disabled"
+        },
+        {
+          "name": "Mode1",
+          "value": 1,
+          "description": "DMA mode 1 enabled (2 / 3 half-words one by one - 1 then 2 then 3)"
+        },
+        {
+          "name": "Mode2",
+          "value": 2,
+          "description": "DMA mode 2 enabled (2 / 3 half-words by pairs - 2&1 then 1&3 then 3&2)"
+        },
+        {
+          "name": "Mode3",
+          "value": 3,
+          "description": "DMA mode 3 enabled (2 / 3 half-words by pairs - 2&1 then 1&3 then 3&2)"
+        }
+      ]
+    },
+    "MULTI": {
+      "bit_size": 5,
+      "variants": [
+        {
+          "name": "Independent",
+          "value": 0,
+          "description": "All the ADCs independent: independent mode"
+        },
+        {
+          "name": "DualRJ",
+          "value": 1,
+          "description": "Dual ADC1 and ADC2, combined regular and injected simultaneous mode"
+        },
+        {
+          "name": "DualRA",
+          "value": 2,
+          "description": "Dual ADC1 and ADC2, combined regular and alternate trigger mode"
+        },
+        {
+          "name": "DualJ",
+          "value": 5,
+          "description": "Dual ADC1 and ADC2, injected simultaneous mode only"
+        },
+        {
+          "name": "DualR",
+          "value": 6,
+          "description": "Dual ADC1 and ADC2, regular simultaneous mode only"
+        },
+        {
+          "name": "DualI",
+          "value": 7,
+          "description": "Dual ADC1 and ADC2, interleaved mode only"
+        },
+        {
+          "name": "DualA",
+          "value": 9,
+          "description": "Dual ADC1 and ADC2, alternate trigger mode only"
+        },
+        {
+          "name": "TripleRJ",
+          "value": 17,
+          "description": "Triple ADC, regular and injected simultaneous mode"
+        },
+        {
+          "name": "TripleRA",
+          "value": 18,
+          "description": "Triple ADC, regular and alternate trigger mode"
+        },
+        {
+          "name": "TripleJ",
+          "value": 21,
+          "description": "Triple ADC, injected simultaneous mode only"
+        },
+        {
+          "name": "TripleR",
+          "value": 22,
+          "description": "Triple ADC, regular simultaneous mode only"
+        },
+        {
+          "name": "TripleI",
+          "value": 23,
+          "description": "Triple ADC, interleaved mode only"
+        },
+        {
+          "name": "TripleA",
+          "value": 24,
+          "description": "Triple ADC, alternate trigger mode only"
+        }
+      ]
+    }
+  }
+}

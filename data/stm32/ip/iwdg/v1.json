@@ -1,0 +1,160 @@
+{
+  "schema": 1,
+  "kind": "iwdg",
+  "version": "v1",
+  "blocks": {
+    "IWDG": {
+      "name": "IWDG",
+      "description": "Independent watchdog",
+      "extends": null,
+      "registers": [
+        {
+          "name": "KR",
+          "offset": 0,
+          "size": 32,
+          "description": "Key register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Key register",
+          "fields": [
+            {
+              "name": "KEY",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Key value (write only, read 0000h)",
+              "enum": "KEY"
+            }
+          ]
+        },
+        {
+          "name": "PR",
+          "offset": 4,
+          "size": 32,
+          "description": "Prescaler register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Prescaler register",
+          "fields": [
+            {
+              "name": "PR",
+              "bit_offset": 0,
+              "bit_width": 3,
+              "description": "Prescaler divider",
+              "enum": "PR"
+            }
+          ]
+        },
+        {
+          "name": "RLR",
+          "offset": 8,
+          "size": 32,
+          "description": "Reload register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Reload register",
+          "fields": [
+            {
+              "name": "RL",
+              "bit_offset": 0,
+              "bit_width": 12,
+              "description": "Watchdog counter reload value",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SR",
+          "offset": 12,
+          "size": 32,
+          "description": "Status register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Status register",
+          "fields": [
+            {
+              "name": "PVU",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Watchdog prescaler value update",
+              "enum": null
+            },
+            {
+              "name": "RVU",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Watchdog counter reload value update",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "KEY": {
+      "bit_size": 16,
+      "variants": [
+        {
+          "name": "Enable",
+          "value": 21845,
+          "description": "Enable access to PR, RLR and WINR registers (0x5555)"
+        },
+        {
+          "name": "Reset",
+          "value": 43690,
+          "description": "Reset the watchdog value (0xAAAA)"
+        },
+        {
+          "name": "Start",
+          "value": 52428,
+          "description": "Start the watchdog (0xCCCC)"
+        }
+      ]
+    },
+    "PR": {
+      "bit_size": 3,
+      "variants": [
+        {
+          "name": "DivideBy4",
+          "value": 0,
+          "description": "Divider /4"
+        },
+        {
+          "name": "DivideBy8",
+          "value": 1,
+          "description": "Divider /8"
+        },
+        {
+          "name": "DivideBy16",
+          "value": 2,
+          "description": "Divider /16"
+        },
+        {
+          "name": "DivideBy32",
+          "value": 3,
+          "description": "Divider /32"
+        },
+        {
+          "name": "DivideBy64",
+          "value": 4,
+          "description": "Divider /64"
+        },
+        {
+          "name": "DivideBy128",
+          "value": 5,
+          "description": "Divider /128"
+        },
+        {
+          "name": "DivideBy256",
+          "value": 6,
+          "description": "Divider /256"
+        },
+        {
+          "name": "DivideBy256bis",
+          "value": 7,
+          "description": "Divider /256"
+        }
+      ]
+    }
+  }
+}

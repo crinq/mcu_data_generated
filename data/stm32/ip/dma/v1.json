@@ -1,0 +1,558 @@
+{
+  "schema": 1,
+  "kind": "dma",
+  "version": "v1",
+  "blocks": {
+    "DMA": {
+      "name": "DMA",
+      "description": "DMA controller",
+      "extends": null,
+      "registers": [
+        {
+          "name": "ISR",
+          "offset": 0,
+          "size": 32,
+          "description": "low interrupt status register",
+          "array_len": 2,
+          "array_stride": 4,
+          "fieldset_description": "interrupt register",
+          "fields": [
+            {
+              "name": "FEIF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Stream x FIFO error interrupt flag (x=3..0)",
+              "enum": null
+            },
+            {
+              "name": "DMEIF",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Stream x direct mode error interrupt flag (x=3..0)",
+              "enum": null
+            },
+            {
+              "name": "TEIF",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Stream x transfer error interrupt flag (x=3..0)",
+              "enum": null
+            },
+            {
+              "name": "HTIF",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Stream x half transfer interrupt flag (x=3..0)",
+              "enum": null
+            },
+            {
+              "name": "TCIF",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Stream x transfer complete interrupt flag (x = 3..0)",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "IFCR",
+          "offset": 8,
+          "size": 32,
+          "description": "low interrupt flag clear register",
+          "array_len": 2,
+          "array_stride": 4,
+          "fieldset_description": "interrupt register",
+          "fields": [
+            {
+              "name": "FEIF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Stream x FIFO error interrupt flag (x=3..0)",
+              "enum": null
+            },
+            {
+              "name": "DMEIF",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Stream x direct mode error interrupt flag (x=3..0)",
+              "enum": null
+            },
+            {
+              "name": "TEIF",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Stream x transfer error interrupt flag (x=3..0)",
+              "enum": null
+            },
+            {
+              "name": "HTIF",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Stream x half transfer interrupt flag (x=3..0)",
+              "enum": null
+            },
+            {
+              "name": "TCIF",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Stream x transfer complete interrupt flag (x = 3..0)",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "ST",
+          "offset": 16,
+          "description": "Stream cluster: S?CR, S?NDTR, S?M0AR, S?M1AR and S?FCR registers",
+          "array_len": 8,
+          "array_stride": 24,
+          "fields": []
+        }
+      ]
+    },
+    "ST": {
+      "name": "ST",
+      "description": "Stream cluster: S?CR, S?NDTR, S?M0AR, S?M1AR and S?FCR registers",
+      "extends": null,
+      "registers": [
+        {
+          "name": "CR",
+          "offset": 0,
+          "size": 32,
+          "description": "stream x configuration register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "stream x configuration register",
+          "fields": [
+            {
+              "name": "EN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Stream enable / flag stream ready when read low",
+              "enum": null
+            },
+            {
+              "name": "DMEIE",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Direct mode error interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "TEIE",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Transfer error interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "HTIE",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Half transfer interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "TCIE",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Transfer complete interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "PFCTRL",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Peripheral flow controller",
+              "enum": "PFCTRL"
+            },
+            {
+              "name": "DIR",
+              "bit_offset": 6,
+              "bit_width": 2,
+              "description": "Data transfer direction",
+              "enum": "DIR"
+            },
+            {
+              "name": "CIRC",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Circular mode enabled",
+              "enum": null
+            },
+            {
+              "name": "PINC",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Peripheral increment mode enabled",
+              "enum": null
+            },
+            {
+              "name": "MINC",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Memory increment mode enabled",
+              "enum": null
+            },
+            {
+              "name": "PSIZE",
+              "bit_offset": 11,
+              "bit_width": 2,
+              "description": "Peripheral data size",
+              "enum": "SIZE"
+            },
+            {
+              "name": "MSIZE",
+              "bit_offset": 13,
+              "bit_width": 2,
+              "description": "Memory data size",
+              "enum": "SIZE"
+            },
+            {
+              "name": "PINCOS",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Peripheral increment offset size",
+              "enum": "PINCOS"
+            },
+            {
+              "name": "PL",
+              "bit_offset": 16,
+              "bit_width": 2,
+              "description": "Priority level",
+              "enum": "PL"
+            },
+            {
+              "name": "DBM",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "Double buffer mode enabled",
+              "enum": null
+            },
+            {
+              "name": "CT",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "Current target (only in double buffer mode)",
+              "enum": "CT"
+            },
+            {
+              "name": "TRBUFF",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "Enable bufferable transfers",
+              "enum": null
+            },
+            {
+              "name": "PBURST",
+              "bit_offset": 21,
+              "bit_width": 2,
+              "description": "Peripheral burst transfer configuration",
+              "enum": "BURST"
+            },
+            {
+              "name": "MBURST",
+              "bit_offset": 23,
+              "bit_width": 2,
+              "description": "Memory burst transfer configuration",
+              "enum": "BURST"
+            }
+          ]
+        },
+        {
+          "name": "NDTR",
+          "offset": 4,
+          "size": 32,
+          "description": "stream x number of data register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "stream x number of data register",
+          "fields": [
+            {
+              "name": "NDT",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Number of data items to transfer",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "PAR",
+          "offset": 8,
+          "description": "stream x peripheral address register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": []
+        },
+        {
+          "name": "M0AR",
+          "offset": 12,
+          "description": "stream x memory 0 address register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": []
+        },
+        {
+          "name": "M1AR",
+          "offset": 16,
+          "description": "stream x memory 1 address register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": []
+        },
+        {
+          "name": "FCR",
+          "offset": 20,
+          "size": 32,
+          "description": "stream x FIFO control register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "stream x FIFO control register",
+          "fields": [
+            {
+              "name": "FTH",
+              "bit_offset": 0,
+              "bit_width": 2,
+              "description": "FIFO threshold selection",
+              "enum": "FTH"
+            },
+            {
+              "name": "DMDIS",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Direct mode disable",
+              "enum": "DMDIS"
+            },
+            {
+              "name": "FS",
+              "bit_offset": 3,
+              "bit_width": 3,
+              "description": "FIFO status",
+              "enum": "FS"
+            },
+            {
+              "name": "FEIE",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "FIFO error interrupt enable",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "BURST": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Single",
+          "value": 0,
+          "description": "Single transfer"
+        },
+        {
+          "name": "INCR4",
+          "value": 1,
+          "description": "Incremental burst of 4 beats"
+        },
+        {
+          "name": "INCR8",
+          "value": 2,
+          "description": "Incremental burst of 8 beats"
+        },
+        {
+          "name": "INCR16",
+          "value": 3,
+          "description": "Incremental burst of 16 beats"
+        }
+      ]
+    },
+    "CT": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Memory0",
+          "value": 0,
+          "description": "The current target memory is Memory 0"
+        },
+        {
+          "name": "Memory1",
+          "value": 1,
+          "description": "The current target memory is Memory 1"
+        }
+      ]
+    },
+    "DIR": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "PeripheralToMemory",
+          "value": 0,
+          "description": "Peripheral-to-memory"
+        },
+        {
+          "name": "MemoryToPeripheral",
+          "value": 1,
+          "description": "Memory-to-peripheral"
+        },
+        {
+          "name": "MemoryToMemory",
+          "value": 2,
+          "description": "Memory-to-memory"
+        }
+      ]
+    },
+    "DMDIS": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Enabled",
+          "value": 0,
+          "description": "Direct mode is enabled"
+        },
+        {
+          "name": "Disabled",
+          "value": 1,
+          "description": "Direct mode is disabled"
+        }
+      ]
+    },
+    "FS": {
+      "bit_size": 3,
+      "variants": [
+        {
+          "name": "Quarter1",
+          "value": 0,
+          "description": "0 < fifo_level < 1/4"
+        },
+        {
+          "name": "Quarter2",
+          "value": 1,
+          "description": "1/4 <= fifo_level < 1/2"
+        },
+        {
+          "name": "Quarter3",
+          "value": 2,
+          "description": "1/2 <= fifo_level < 3/4"
+        },
+        {
+          "name": "Quarter4",
+          "value": 3,
+          "description": "3/4 <= fifo_level < full"
+        },
+        {
+          "name": "Empty",
+          "value": 4,
+          "description": "FIFO is empty"
+        },
+        {
+          "name": "Full",
+          "value": 5,
+          "description": "FIFO is full"
+        }
+      ]
+    },
+    "FTH": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Quarter",
+          "value": 0,
+          "description": "1/4 full FIFO"
+        },
+        {
+          "name": "Half",
+          "value": 1,
+          "description": "1/2 full FIFO"
+        },
+        {
+          "name": "ThreeQuarters",
+          "value": 2,
+          "description": "3/4 full FIFO"
+        },
+        {
+          "name": "Full",
+          "value": 3,
+          "description": "Full FIFO"
+        }
+      ]
+    },
+    "PFCTRL": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "DMA",
+          "value": 0,
+          "description": "The DMA is the flow controller"
+        },
+        {
+          "name": "Peripheral",
+          "value": 1,
+          "description": "The peripheral is the flow controller"
+        }
+      ]
+    },
+    "PINCOS": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "PSIZE",
+          "value": 0,
+          "description": "The offset size for the peripheral address calculation is linked to the PSIZE"
+        },
+        {
+          "name": "Fixed4",
+          "value": 1,
+          "description": "The offset size for the peripheral address calculation is fixed to 4 (32-bit alignment)"
+        }
+      ]
+    },
+    "PL": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Low",
+          "value": 0,
+          "description": "Low"
+        },
+        {
+          "name": "Medium",
+          "value": 1,
+          "description": "Medium"
+        },
+        {
+          "name": "High",
+          "value": 2,
+          "description": "High"
+        },
+        {
+          "name": "VeryHigh",
+          "value": 3,
+          "description": "Very high"
+        }
+      ]
+    },
+    "SIZE": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Bits8",
+          "value": 0,
+          "description": "Byte (8-bit)"
+        },
+        {
+          "name": "Bits16",
+          "value": 1,
+          "description": "Half-word (16-bit)"
+        },
+        {
+          "name": "Bits32",
+          "value": 2,
+          "description": "Word (32-bit)"
+        }
+      ]
+    }
+  }
+}

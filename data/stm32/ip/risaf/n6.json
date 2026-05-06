@@ -1,0 +1,233 @@
+{
+  "schema": 1,
+  "kind": "risaf",
+  "version": "n6",
+  "blocks": {
+    "RISAF": {
+      "name": "RISAF",
+      "description": "Resource isolation slave unit for address space protection.",
+      "extends": null,
+      "registers": [
+        {
+          "name": "CR",
+          "offset": 0,
+          "size": 32,
+          "description": "RISAF configuration register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "RISAF configuration register.",
+          "fields": [
+            {
+              "name": "GLOCK",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Global lock. When set, writes to RISAF registers are ignored except for IACR and region configuration registers.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "IASR",
+          "offset": 8,
+          "size": 32,
+          "description": "RISAF illegal access status register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "RISAF illegal access status register.",
+          "fields": [
+            {
+              "name": "CAEF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Configuration access error flag.",
+              "enum": null
+            },
+            {
+              "name": "IAEF",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Illegal access error flag.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "IACR",
+          "offset": 12,
+          "size": 32,
+          "description": "RISAF illegal access clear register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "RISAF illegal access clear register.",
+          "fields": [
+            {
+              "name": "CAEF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Clear configuration access error flag.",
+              "enum": null
+            },
+            {
+              "name": "IAEF",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Clear illegal access error flag.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "IAESR",
+          "offset": 32,
+          "size": 32,
+          "description": "RISAF illegal access error status register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "RISAF illegal access error status register.",
+          "fields": [
+            {
+              "name": "IACID",
+              "bit_offset": 0,
+              "bit_width": 3,
+              "description": "Illegal access compartment ID.",
+              "enum": null
+            },
+            {
+              "name": "IAPRIV",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Illegal access was privileged.",
+              "enum": null
+            },
+            {
+              "name": "IASEC",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Illegal access was secure.",
+              "enum": null
+            },
+            {
+              "name": "IANRW",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Illegal access was a write (0 = read/fetch, 1 = write).",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "IADDR",
+          "offset": 36,
+          "size": 32,
+          "description": "RISAF illegal address register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "RISAF illegal address register.",
+          "fields": [
+            {
+              "name": "IADD",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Illegal access address.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "REG_CFGR",
+          "offset": 64,
+          "size": 32,
+          "description": "RISAF region configuration register.",
+          "array_len": 4,
+          "array_stride": 64,
+          "fieldset_description": "RISAF region configuration register.",
+          "fields": [
+            {
+              "name": "BREN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Base region enable.",
+              "enum": null
+            },
+            {
+              "name": "SEC",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Secure region. When set, only secure requests can access this region.",
+              "enum": null
+            },
+            {
+              "name": "PRIVC",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Privileged access for compartment y. When set, compartment y can only access in privileged mode.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "REG_STARTR",
+          "offset": 68,
+          "size": 32,
+          "description": "RISAF region start address register.",
+          "array_len": 4,
+          "array_stride": 64,
+          "fieldset_description": "RISAF region start address register.",
+          "fields": [
+            {
+              "name": "BADDSTART",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Base region start address.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "REG_ENDR",
+          "offset": 72,
+          "size": 32,
+          "description": "RISAF region end address register.",
+          "array_len": 4,
+          "array_stride": 64,
+          "fieldset_description": "RISAF region end address register.",
+          "fields": [
+            {
+              "name": "BADDEND",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Base region end address.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "REG_CIDCFGR",
+          "offset": 76,
+          "size": 32,
+          "description": "RISAF region CID configuration register.",
+          "array_len": 4,
+          "array_stride": 64,
+          "fieldset_description": "RISAF region CID configuration register.",
+          "fields": [
+            {
+              "name": "RDENC",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Read enable for compartment y.",
+              "enum": null
+            },
+            {
+              "name": "WRENC",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Write enable for compartment y.",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {}
+}

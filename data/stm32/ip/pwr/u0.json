@@ -1,0 +1,1686 @@
+{
+  "schema": 1,
+  "kind": "pwr",
+  "version": "u0",
+  "blocks": {
+    "PWR": {
+      "name": "PWR",
+      "description": "PWR register block",
+      "extends": null,
+      "registers": [
+        {
+          "name": "CR1",
+          "offset": 0,
+          "size": 32,
+          "description": "Power control register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Power control register 1",
+          "fields": [
+            {
+              "name": "LPMS",
+              "bit_offset": 0,
+              "bit_width": 3,
+              "description": "Low-power mode selection These bits select the low-power mode entered when CPU enters the deepsleep mode. 1xx: Shutdown mode Note: If LPR bit is set, Stop 2 mode cannot be selected and Stop 1 mode shall be entered instead of Stop 2. Note: In Standby mode, SRAM2 can be preserved or not, depending on RRS bit configuration in PWR_CR3.",
+              "enum": "LPMS"
+            },
+            {
+              "name": "FPD_STOP",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Flash memory powered down during Stop mode. This bit determines whether the flash memory is put in power-down mode or remains in idle mode when the device enters Stop mode.",
+              "enum": null
+            },
+            {
+              "name": "FPD_LPRUN",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Flash memory powered down during Low-power run mode. This bit determines whether the flash memory is put in power-down mode or remains in idle mode when the device enters Low-power sleep mode.",
+              "enum": null
+            },
+            {
+              "name": "FPD_LPSLP",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Flash memory powered down during Low-power sleep mode. This bit determines whether the flash memory is put in power-down mode or remains in idle mode when the device enters Low-power sleep mode.",
+              "enum": null
+            },
+            {
+              "name": "DBP",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Disable backup domain write protection In reset state, the RTC and backup registers are protected against parasitic write access. This bit must be set to enable write access to these registers.",
+              "enum": null
+            },
+            {
+              "name": "VOS",
+              "bit_offset": 9,
+              "bit_width": 2,
+              "description": "Voltage scaling range selection",
+              "enum": "VOS"
+            },
+            {
+              "name": "LPR",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "Low-power run When this bit is set, the regulator is switched from main mode (MR) to low-power mode (LPR). Note: Stop 2 mode cannot be entered when LPR bit is set. Stop 1 is entered instead.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CR2",
+          "offset": 4,
+          "size": 32,
+          "description": "Power control register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Power control register 2",
+          "fields": [
+            {
+              "name": "PVDE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Programmable voltage detector enable Note: This bit is write-protected when the bit PVDL (PVD Lock) is set in the SYSCFG_CBR register. Note: This bit is reset only by a system reset.",
+              "enum": null
+            },
+            {
+              "name": "PLS",
+              "bit_offset": 1,
+              "bit_width": 3,
+              "description": "Programmable voltage detector level selection. These bits select the voltage threshold detected by the programmable voltage detector: Note: These bits are write-protected when the bit PVDL (PVD Lock) is set in the SYSCFG_CBR register. Note: These bits are reset only by a system reset.",
+              "enum": "PLS"
+            },
+            {
+              "name": "PVME1",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Peripheral voltage monitoring 1 enable: V<sub>DDUSB</sub> vs. 1.21V",
+              "enum": null
+            },
+            {
+              "name": "PVME3",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Peripheral voltage monitoring 3 enable: V<sub>DDA</sub> vs. 1.621V",
+              "enum": null
+            },
+            {
+              "name": "PVME4",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Peripheral voltage monitoring 4 enable: V<sub>DDA</sub> vs. 1.861V",
+              "enum": null
+            },
+            {
+              "name": "USV",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "V<sub>DDUSB</sub> USB supply valid This bit is used to validate the V<sub>DDUSB</sub> supply for electrical and logical isolation purpose. Setting this bit is mandatory to use the USB FS peripheral. If V<sub>DDUSB</sub> is not always present in the application, the PVM can be used to determine whether this supply is ready or not.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CR3",
+          "offset": 8,
+          "size": 32,
+          "description": "Power control register 3",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Power control register 3",
+          "fields": [
+            {
+              "name": "EWUP1",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Enable Wake-up pin WKUP1 When this bit is set, the external wake-up pin WKUP1 is enabled and triggers a wake-up from Standby or Shutdown event when a rising or a falling edge occurs. The active edge is configured via the WP1 bit in the PWR_CR4 register.",
+              "enum": null
+            },
+            {
+              "name": "EWUP2",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Enable Wake-up pin WKUP2 When this bit is set, the external wake-up pin WKUP2 is enabled and triggers a wake-up from Standby or Shutdown event when a rising or a falling edge occurs. The active edge is configured via the WP2 bit in the PWR_CR4 register.",
+              "enum": null
+            },
+            {
+              "name": "EWUP3",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Enable Wake-up pin WKUP3 When this bit is set, the external wake-up pin WKUP3 is enabled and triggers a wake-up from Standby or Shutdown event when a rising or a falling edge occurs. The active edge is configured via the WP3 bit in the PWR_CR4 register.",
+              "enum": null
+            },
+            {
+              "name": "EWUP4",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Enable Wake-up pin WKUP4 When this bit is set, the external wake-up pin WKUP4 is enabled and triggers a wake-up from Standby or Shutdown event when a rising or a falling edge occurs. The active edge is configured via the WP4 bit in the PWR_CR4 register.",
+              "enum": null
+            },
+            {
+              "name": "EWUP5",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Enable Wake-up pin WKUP5 When this bit is set, the external wake-up pin WKUP5 is enabled and triggers a wake-up from Standby or Shutdown event when a rising or a falling edge occurs.The active edge is configured via the WP5 bit in the PWR_CR4 register.",
+              "enum": null
+            },
+            {
+              "name": "EWUP7",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Enable Wake-up pin WKUP7. When this bit is set, the external wake-up pin WKUP7 is enabled and triggers a wake-up from Standby or Shutdown event when a rising or a falling edge occurs.The active edge is configured via the WP7 bit in the PWR_CR4 register.",
+              "enum": null
+            },
+            {
+              "name": "RRS",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "SRAM2 retention in Standby mode",
+              "enum": null
+            },
+            {
+              "name": "ENULP",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Enable ULP sampling When this bit is set, the BORL, BORH and PVD are periodically sampled instead continuous monitoring to reduce power consumption. Fast supply drop between two sample/compare phases is not detected in this mode. This bit has impact only on STOP2, Standby and shutdown low power modes.",
+              "enum": null
+            },
+            {
+              "name": "APC",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Apply pull-up and pull-down configuration When this bit is set, the I/O pull-up and pull-down configurations defined in the PWR_PUCRx and PWR_PDCRx registers are applied. When this bit is cleared, the PWR_PUCRx and PWR_PDCRx registers are not applied to the I/Os, instead the I/Os are in floating mode during Standby or configured according GPIO controller GPIOx_PUPDR register during RUN mode.",
+              "enum": null
+            },
+            {
+              "name": "EIWUL",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Enable internal wake-up line",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CR4",
+          "offset": 12,
+          "size": 32,
+          "description": "Power control register 4",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Power control register 4",
+          "fields": [
+            {
+              "name": "WP1",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Wake-up pin WKUP1 polarity This bit defines the polarity used for an event detection on external wake-up pin, WKUP1",
+              "enum": null
+            },
+            {
+              "name": "WP2",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Wake-up pin WKUP2 polarity This bit defines the polarity used for an event detection on external wake-up pin, WKUP2",
+              "enum": null
+            },
+            {
+              "name": "WP3",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Wake-up pin WKUP3 polarity This bit defines the polarity used for an event detection on external wake-up pin, WKUP3",
+              "enum": null
+            },
+            {
+              "name": "WP4",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Wake-up pin WKUP4 polarity This bit defines the polarity used for an event detection on external wake-up pin, WKUP4",
+              "enum": null
+            },
+            {
+              "name": "WP5",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Wake-up pin WKUP5 polarity This bit defines the polarity used for an event detection on external wake-up pin, WKUP5",
+              "enum": null
+            },
+            {
+              "name": "WP7",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Wake-up pin WKUP7 polarity This bit defines the polarity used for an event detection on external wake-up pin, WKUP7",
+              "enum": null
+            },
+            {
+              "name": "VBE",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "V<sub>BAT</sub> battery charging enable",
+              "enum": null
+            },
+            {
+              "name": "VBRS",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "V<sub>BAT</sub> battery charging resistor selection",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SR1",
+          "offset": 16,
+          "size": 32,
+          "description": "Power status register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Power status register 1",
+          "fields": [
+            {
+              "name": "WUF1",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Wake-up flag 1 This bit is set when a wake-up event is detected on wake-up pin, WKUP1. It is cleared by writing 1 in the CWUF1 bit of the PWR_SCR register.",
+              "enum": null
+            },
+            {
+              "name": "WUF2",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Wake-up flag 2 This bit is set when a wake-up event is detected on wake-up pin, WKUP2. It is cleared by writing 1 in the CWUF2 bit of the PWR_SCR register.",
+              "enum": null
+            },
+            {
+              "name": "WUF3",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Wake-up flag 3 This bit is set when a wake-up event is detected on wake-up pin, WKUP3. It is cleared by writing 1 in the CWUF3 bit of the PWR_SCR register.",
+              "enum": null
+            },
+            {
+              "name": "WUF4",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Wake-up flag 4 This bit is set when a wake-up event is detected on wake-up pin,WKUP4. It is cleared by writing 1 in the CWUF4 bit of the PWR_SCR register.",
+              "enum": null
+            },
+            {
+              "name": "WUF5",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Wake-up flag 5 This bit is set when a wake-up event is detected on wake-up pin, WKUP5. It is cleared by writing 1 in the CWUF5 bit of the PWR_SCR register.",
+              "enum": null
+            },
+            {
+              "name": "WUF7",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Wake-up flag 7 This bit is set when a wake-up event is detected on wake-up pin, WKUP7. It is cleared by writing 1 in the CWUF7 bit of the PWR_SCR register.",
+              "enum": null
+            },
+            {
+              "name": "SBF",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Standby flag This bit is set by hardware when the device enters the Standby mode and is cleared by setting the CSBF bit in the PWR_SCR register, or by a power-on reset. It is not cleared by the system reset.",
+              "enum": null
+            },
+            {
+              "name": "STOPF",
+              "bit_offset": 9,
+              "bit_width": 3,
+              "description": "Stop Flags These bits are set by hardware when the device enters any stop mode and are cleared by setting the CSBF bit in the PWR_SCR register, or by a power-on reset. It is not cleared by the system reset.",
+              "enum": "STOPF"
+            },
+            {
+              "name": "WUFI",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Wake-up flag internal This bit is set when a wake-up is detected on the internal wake-up line. It is cleared when all internal wake-up sources are cleared.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SR2",
+          "offset": 20,
+          "size": 32,
+          "description": "Power status register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Power status register 2",
+          "fields": [
+            {
+              "name": "FLASH_RDY",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Flash ready flag This bit is set by hardware to indicate when the flash memory is readey to be accessed after wake-up from power-down. To place the flash memory in power-down, set either FPD_LPRUN, FPD_LPSLP or FPD_STP bits. Note : If the system boots from SRAM, the user application must wait until the FLASH_RDY bit is set, prior to jumping to flash memory.",
+              "enum": null
+            },
+            {
+              "name": "REGLPS",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Low-power regulator started This bit provides the information whether the low-power regulator is ready after a power-on reset or a Standby/Shutdown. If the Standby mode is entered while REGLPS bit is still cleared, the wake-up from Standby mode time may be increased.",
+              "enum": null
+            },
+            {
+              "name": "REGLPF",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Low-power regulator flag This bit is set by hardware when the MCU is in Low-power run mode. When the MCU exits from the Low-power run mode, this bit remains at 1 until the regulator is ready in main mode. A polling on this bit must be done before increasing the product frequency. This bit is cleared by hardware when the regulator is ready.",
+              "enum": null
+            },
+            {
+              "name": "VOSF",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Voltage scaling flag A delay is required for the internal regulator to be ready after the voltage scaling has been changed. VOSF indicates that the regulator reached the voltage level defined with VOS bits of the PWR_CR1 register.",
+              "enum": null
+            },
+            {
+              "name": "PVDO",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "Programmable voltage detector output",
+              "enum": null
+            },
+            {
+              "name": "PVMO1",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "Peripheral voltage monitoring output: V<sub>DDUSB</sub> vs. 1.2 V Note: PVMO1 is cleared when PVM1 is disabled (PVME1 = 0). After enabling PVM1, the PVM1 output is valid after the PVM1 wake-up time.",
+              "enum": null
+            },
+            {
+              "name": "PVMO3",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "Peripheral voltage monitoring output: V<sub>DDA</sub> vs. 1.621V Note: PVMO3 is cleared when PVM3 is disabled (PVME3 = 0). After enabling PVM3, the PVM3 output is valid after the PVM3 wake-up time.",
+              "enum": null
+            },
+            {
+              "name": "PVMO4",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Peripheral voltage monitoring output: V<sub>DDA</sub> vs. 2.21V Note: PVMO4 is cleared when PVM4 is disabled (PVME4 = 0). After enabling PVM4, the PVM4 output is valid after the PVM4 wake-up time.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SCR",
+          "offset": 24,
+          "size": 32,
+          "description": "Power status clear register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Power status clear register",
+          "fields": [
+            {
+              "name": "CWUF1",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Clear wake-up flag 1 Setting this bit clears the WUF1 flag in the PWR_SR1 register.",
+              "enum": null
+            },
+            {
+              "name": "CWUF2",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Clear wake-up flag 2 Setting this bit clears the WUF2 flag in the PWR_SR1 register.",
+              "enum": null
+            },
+            {
+              "name": "CWUF3",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Clear wake-up flag 3 Setting this bit clears the WUF3 flag in the PWR_SR1 register.",
+              "enum": null
+            },
+            {
+              "name": "CWUF4",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Clear wake-up flag 4 Setting this bit clears the WUF4 flag in the PWR_SR1 register.",
+              "enum": null
+            },
+            {
+              "name": "CWUF5",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Clear wake-up flag 5 Setting this bit clears the WUF5 flag in the PWR_SR1 register.",
+              "enum": null
+            },
+            {
+              "name": "CWUF7",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Clear wake-up flag 7 Setting this bit clears the WUF7 flag in the PWR_SR1 register.",
+              "enum": null
+            },
+            {
+              "name": "CSBF",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Clear standby flag Setting this bit clears the SBF flag in the PWR_SR1 register.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "PUCRA",
+          "offset": 32,
+          "size": 32,
+          "description": "Power Port A pull-up control register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Power Port A pull-up control register",
+          "fields": [
+            {
+              "name": "PU0",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Port A pull-up bit y (y1=115 to 0) When set, this bit activates the pull-up on PA[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU1",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Port A pull-up bit y (y1=115 to 0) When set, this bit activates the pull-up on PA[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU2",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Port A pull-up bit y (y1=115 to 0) When set, this bit activates the pull-up on PA[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU3",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Port A pull-up bit y (y1=115 to 0) When set, this bit activates the pull-up on PA[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU4",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Port A pull-up bit y (y1=115 to 0) When set, this bit activates the pull-up on PA[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU5",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Port A pull-up bit y (y1=115 to 0) When set, this bit activates the pull-up on PA[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU6",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Port A pull-up bit y (y1=115 to 0) When set, this bit activates the pull-up on PA[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU7",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Port A pull-up bit y (y1=115 to 0) When set, this bit activates the pull-up on PA[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU8",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Port A pull-up bit y (y1=115 to 0) When set, this bit activates the pull-up on PA[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU9",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Port A pull-up bit y (y1=115 to 0) When set, this bit activates the pull-up on PA[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU10",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Port A pull-up bit y (y1=115 to 0) When set, this bit activates the pull-up on PA[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU11",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "Port A pull-up bit y (y1=115 to 0) When set, this bit activates the pull-up on PA[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU12",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "Port A pull-up bit y (y1=115 to 0) When set, this bit activates the pull-up on PA[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU13",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Port A pull-up bit y (y1=115 to 0) When set, this bit activates the pull-up on PA[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU14",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "Port A pull-up bit y (y1=115 to 0) When set, this bit activates the pull-up on PA[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU15",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Port A pull-up bit y (y1=115 to 0) When set, this bit activates the pull-up on PA[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "PDCRA",
+          "offset": 36,
+          "size": 32,
+          "description": "Power Port A pull-down control register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Power Port A pull-down control register",
+          "fields": [
+            {
+              "name": "PD0",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Port A pull-down bit y When set, this bit activates the pull-down on PA[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD1",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Port A pull-down bit y When set, this bit activates the pull-down on PA[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD2",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Port A pull-down bit y When set, this bit activates the pull-down on PA[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD3",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Port A pull-down bit y When set, this bit activates the pull-down on PA[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD4",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Port A pull-down bit y When set, this bit activates the pull-down on PA[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD5",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Port A pull-down bit y When set, this bit activates the pull-down on PA[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD6",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Port A pull-down bit y When set, this bit activates the pull-down on PA[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD7",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Port A pull-down bit y When set, this bit activates the pull-down on PA[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD8",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Port A pull-down bit y When set, this bit activates the pull-down on PA[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD9",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Port A pull-down bit y When set, this bit activates the pull-down on PA[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD10",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Port A pull-down bit y When set, this bit activates the pull-down on PA[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD11",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "Port A pull-down bit y When set, this bit activates the pull-down on PA[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD12",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "Port A pull-down bit y When set, this bit activates the pull-down on PA[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD13",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Port A pull-down bit y When set, this bit activates the pull-down on PA[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD14",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "Port A pull-down bit y When set, this bit activates the pull-down on PA[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD15",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Port A pull-down bit y When set, this bit activates the pull-down on PA[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "PUCRB",
+          "offset": 40,
+          "size": 32,
+          "description": "Power Port B pull-up control register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Power Port B pull-up control register",
+          "fields": [
+            {
+              "name": "PU0",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Port B pull-up bit y When set, this bit activates the pull-up on PB[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PU1",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Port B pull-up bit y When set, this bit activates the pull-up on PB[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PU2",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Port B pull-up bit y When set, this bit activates the pull-up on PB[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PU3",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Port B pull-up bit y When set, this bit activates the pull-up on PB[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PU4",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Port B pull-up bit y When set, this bit activates the pull-up on PB[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PU5",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Port B pull-up bit y When set, this bit activates the pull-up on PB[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PU6",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Port B pull-up bit y When set, this bit activates the pull-up on PB[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PU7",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Port B pull-up bit y When set, this bit activates the pull-up on PB[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PU8",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Port B pull-up bit y When set, this bit activates the pull-up on PB[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PU9",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Port B pull-up bit y When set, this bit activates the pull-up on PB[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PU10",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Port B pull-up bit y When set, this bit activates the pull-up on PB[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PU11",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "Port B pull-up bit y When set, this bit activates the pull-up on PB[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PU12",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "Port B pull-up bit y When set, this bit activates the pull-up on PB[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PU13",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Port B pull-up bit y When set, this bit activates the pull-up on PB[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PU14",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "Port B pull-up bit y When set, this bit activates the pull-up on PB[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PU15",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Port B pull-up bit y When set, this bit activates the pull-up on PB[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "PDCRB",
+          "offset": 44,
+          "size": 32,
+          "description": "Power Port B pull-down control register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Power Port B pull-down control register",
+          "fields": [
+            {
+              "name": "PD0",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Port B pull-down bit y When set, this bit activates the pull-down on PB[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD1",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Port B pull-down bit y When set, this bit activates the pull-down on PB[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD2",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Port B pull-down bit y When set, this bit activates the pull-down on PB[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD3",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Port B pull-down bit y When set, this bit activates the pull-down on PB[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD4",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Port B pull-down bit y When set, this bit activates the pull-down on PB[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD5",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Port B pull-down bit y When set, this bit activates the pull-down on PB[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD6",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Port B pull-down bit y When set, this bit activates the pull-down on PB[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD7",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Port B pull-down bit y When set, this bit activates the pull-down on PB[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD8",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Port B pull-down bit y When set, this bit activates the pull-down on PB[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD9",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Port B pull-down bit y When set, this bit activates the pull-down on PB[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD10",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Port B pull-down bit y When set, this bit activates the pull-down on PB[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD11",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "Port B pull-down bit y When set, this bit activates the pull-down on PB[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD12",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "Port B pull-down bit y When set, this bit activates the pull-down on PB[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD13",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Port B pull-down bit y When set, this bit activates the pull-down on PB[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD14",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "Port B pull-down bit y When set, this bit activates the pull-down on PB[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD15",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Port B pull-down bit y When set, this bit activates the pull-down on PB[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "PUCRC",
+          "offset": 48,
+          "size": 32,
+          "description": "Power Port C pull-up control register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Power Port C pull-up control register",
+          "fields": [
+            {
+              "name": "PU0",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Port C pull-up bit y When set, this bit activates the pull-up on PC[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU1",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Port C pull-up bit y When set, this bit activates the pull-up on PC[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU2",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Port C pull-up bit y When set, this bit activates the pull-up on PC[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU3",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Port C pull-up bit y When set, this bit activates the pull-up on PC[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU4",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Port C pull-up bit y When set, this bit activates the pull-up on PC[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU5",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Port C pull-up bit y When set, this bit activates the pull-up on PC[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU6",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Port C pull-up bit y When set, this bit activates the pull-up on PC[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU7",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Port C pull-up bit y When set, this bit activates the pull-up on PC[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU8",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Port C pull-up bit y When set, this bit activates the pull-up on PC[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU9",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Port C pull-up bit y When set, this bit activates the pull-up on PC[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU10",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Port C pull-up bit y When set, this bit activates the pull-up on PC[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU11",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "Port C pull-up bit y When set, this bit activates the pull-up on PC[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU12",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "Port C pull-up bit y When set, this bit activates the pull-up on PC[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU13",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Port C pull-up bit y When set, this bit activates the pull-up on PC[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU14",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "Port C pull-up bit y When set, this bit activates the pull-up on PC[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU15",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Port C pull-up bit y When set, this bit activates the pull-up on PC[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "PDCRC",
+          "offset": 52,
+          "size": 32,
+          "description": "Power Port C pull-down control register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Power Port C pull-down control register",
+          "fields": [
+            {
+              "name": "PD0",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Port C pull-down bit y When set, this bit activates the pull-down on PC[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD1",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Port C pull-down bit y When set, this bit activates the pull-down on PC[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD2",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Port C pull-down bit y When set, this bit activates the pull-down on PC[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD3",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Port C pull-down bit y When set, this bit activates the pull-down on PC[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD4",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Port C pull-down bit y When set, this bit activates the pull-down on PC[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD5",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Port C pull-down bit y When set, this bit activates the pull-down on PC[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD6",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Port C pull-down bit y When set, this bit activates the pull-down on PC[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD7",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Port C pull-down bit y When set, this bit activates the pull-down on PC[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD8",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Port C pull-down bit y When set, this bit activates the pull-down on PC[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD9",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Port C pull-down bit y When set, this bit activates the pull-down on PC[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD10",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Port C pull-down bit y When set, this bit activates the pull-down on PC[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD11",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "Port C pull-down bit y When set, this bit activates the pull-down on PC[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD12",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "Port C pull-down bit y When set, this bit activates the pull-down on PC[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD13",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Port C pull-down bit y When set, this bit activates the pull-down on PC[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD14",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "Port C pull-down bit y When set, this bit activates the pull-down on PC[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD15",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Port C pull-down bit y When set, this bit activates the pull-down on PC[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "PUCRD",
+          "offset": 56,
+          "size": 32,
+          "description": "Power Port D pull-up control register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Power Port D pull-up control register",
+          "fields": [
+            {
+              "name": "PU0",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Port D pull-up bit y When set, this bit activates the pull-up on PD[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU1",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Port D pull-up bit y When set, this bit activates the pull-up on PD[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU2",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Port D pull-up bit y When set, this bit activates the pull-up on PD[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU3",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Port D pull-up bit y When set, this bit activates the pull-up on PD[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU4",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Port D pull-up bit y When set, this bit activates the pull-up on PD[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU5",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Port D pull-up bit y When set, this bit activates the pull-up on PD[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU6",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Port D pull-up bit y When set, this bit activates the pull-up on PD[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU8",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Port D pull-up bit y When set, this bit activates the pull-up on PD[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU9",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Port D pull-up bit y When set, this bit activates the pull-up on PD[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU10",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Port D pull-up bit y When set, this bit activates the pull-up on PD[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU11",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "Port D pull-up bit y When set, this bit activates the pull-up on PD[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU12",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "Port D pull-up bit y When set, this bit activates the pull-up on PD[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU13",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Port D pull-up bit y When set, this bit activates the pull-up on PD[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "PDCRD",
+          "offset": 60,
+          "size": 32,
+          "description": "Power Port D pull-down control register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Power Port D pull-down control register",
+          "fields": [
+            {
+              "name": "PD0",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Port D pull-down bit y When set, this bit activates the pull-down on PD[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD1",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Port D pull-down bit y When set, this bit activates the pull-down on PD[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD2",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Port D pull-down bit y When set, this bit activates the pull-down on PD[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD3",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Port D pull-down bit y When set, this bit activates the pull-down on PD[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD4",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Port D pull-down bit y When set, this bit activates the pull-down on PD[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD5",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Port D pull-down bit y When set, this bit activates the pull-down on PD[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD6",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Port D pull-down bit y When set, this bit activates the pull-down on PD[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD8",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Port D pull-down bit y When set, this bit activates the pull-down on PD[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD9",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Port D pull-down bit y When set, this bit activates the pull-down on PD[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD10",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Port D pull-down bit y When set, this bit activates the pull-down on PD[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD11",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "Port D pull-down bit y When set, this bit activates the pull-down on PD[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD12",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "Port D pull-down bit y When set, this bit activates the pull-down on PD[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD13",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Port D pull-down bit y When set, this bit activates the pull-down on PD[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "PUCRE",
+          "offset": 64,
+          "size": 32,
+          "description": "Power Port E pull-up control register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Power Port E pull-up control register",
+          "fields": [
+            {
+              "name": "PU3",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Port E pull-up bit 3 When set, this bit activates the pull-up on PE[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU7",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Port E pull-up bit y When set, this bit activates the pull-up on PE[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU8",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Port E pull-up bit y When set, this bit activates the pull-up on PE[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU9",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Port E pull-up bit y When set, this bit activates the pull-up on PE[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "PDCRE",
+          "offset": 68,
+          "size": 32,
+          "description": "Power Port E pull-down control register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Power Port E pull-down control register",
+          "fields": [
+            {
+              "name": "PD3",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Port E pull-down bit 3 When set, this bit activates the pull-down on PE[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD7",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Port E pull-down bit y When set, this bit activates the pull-down on PE[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD8",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Port E pull-down bit y When set, this bit activates the pull-down on PE[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD9",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Port E pull-down bit y When set, this bit activates the pull-down on PE[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "PUCRF",
+          "offset": 72,
+          "size": 32,
+          "description": "Power Port F pull-up control register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Power Port F pull-up control register",
+          "fields": [
+            {
+              "name": "PU0",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Port F pull-up bit y When set, this bit activates the pull-up on PH[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU1",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Port F pull-up bit y When set, this bit activates the pull-up on PH[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU2",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Port F pull-up bit y When set, this bit activates the pull-up on PH[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            },
+            {
+              "name": "PU3",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Port F pull-up bit y When set, this bit activates the pull-up on PH[y] when APC bit is set in PWR_CR3 register. If the corresponding PDy bit is also set, the pull-up is not activated and the pull-down is activated instead with highest priority.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "PDCRF",
+          "offset": 76,
+          "size": 32,
+          "description": "Power Port F pull-down control register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Power Port F pull-down control register",
+          "fields": [
+            {
+              "name": "PD0",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Port F pull-down bit y When set, this bit activates the pull-down on PH[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD1",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Port F pull-down bit y When set, this bit activates the pull-down on PH[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD2",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Port F pull-down bit y When set, this bit activates the pull-down on PH[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            },
+            {
+              "name": "PD3",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Port F pull-down bit y When set, this bit activates the pull-down on PH[y] when APC bit is set in PWR_CR3 register.",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "LPMS": {
+      "bit_size": 3,
+      "variants": [
+        {
+          "name": "Stop0",
+          "value": 0,
+          "description": "Stop 0 mode"
+        },
+        {
+          "name": "Stop1",
+          "value": 1,
+          "description": "Stop 1 mode"
+        },
+        {
+          "name": "Stop2",
+          "value": 2,
+          "description": "Stop 2 mode"
+        },
+        {
+          "name": "Standby",
+          "value": 3,
+          "description": "Standby mode"
+        }
+      ]
+    },
+    "PLS": {
+      "bit_size": 3,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "V<sub>PVD0</sub> around 2.01V"
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "V<sub>PVD1</sub> around 2.21V"
+        },
+        {
+          "name": "B_0x2",
+          "value": 2,
+          "description": "V<sub>PVD2</sub> around 2.41V"
+        },
+        {
+          "name": "B_0x3",
+          "value": 3,
+          "description": "V<sub>PVD3</sub> around 2.51V"
+        },
+        {
+          "name": "B_0x4",
+          "value": 4,
+          "description": "V<sub>PVD4</sub> around 2.61V"
+        },
+        {
+          "name": "B_0x5",
+          "value": 5,
+          "description": "V<sub>PVD5</sub> around 2.81V"
+        },
+        {
+          "name": "B_0x6",
+          "value": 6,
+          "description": "V<sub>PVD6</sub> around 2.91V"
+        },
+        {
+          "name": "B_0x7",
+          "value": 7,
+          "description": "External input analog voltage PVD_IN (compared internally to VREFINT)"
+        }
+      ]
+    },
+    "STOPF": {
+      "bit_size": 3,
+      "variants": [
+        {
+          "name": "None",
+          "value": 0,
+          "description": "The device did not enter any Stop mode."
+        },
+        {
+          "name": "Stop0",
+          "value": 4,
+          "description": "The device entered in Stop 0 mode."
+        },
+        {
+          "name": "Stop1",
+          "value": 5,
+          "description": "The device entered in Stop 1 mode."
+        },
+        {
+          "name": "Stop2",
+          "value": 6,
+          "description": "The device entered in Stop 2 mode."
+        }
+      ]
+    },
+    "VOS": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Range1",
+          "value": 1,
+          "description": "Range 1"
+        },
+        {
+          "name": "Range2",
+          "value": 2,
+          "description": "Range 2"
+        }
+      ]
+    }
+  }
+}

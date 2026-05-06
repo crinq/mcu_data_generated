@@ -1,0 +1,395 @@
+{
+  "schema": 1,
+  "kind": "aes",
+  "version": "v3a",
+  "blocks": {
+    "AES": {
+      "name": "AES",
+      "description": "Advanced encryption standard hardware accelerator",
+      "extends": null,
+      "registers": [
+        {
+          "name": "CR",
+          "offset": 0,
+          "size": 32,
+          "description": "Control register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Control register",
+          "fields": [
+            {
+              "name": "EN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "AES enable",
+              "enum": null
+            },
+            {
+              "name": "DATATYPE",
+              "bit_offset": 1,
+              "bit_width": 2,
+              "description": "Data type selection",
+              "enum": "DATATYPE"
+            },
+            {
+              "name": "MODE",
+              "bit_offset": 3,
+              "bit_width": 2,
+              "description": "Operating mode",
+              "enum": "MODE"
+            },
+            {
+              "name": "CHMOD",
+              "bit_offset": [
+                {
+                  "start": 5,
+                  "end": 6
+                },
+                {
+                  "start": 16,
+                  "end": 16
+                }
+              ],
+              "bit_width": 3,
+              "description": "Chaining mode selection",
+              "enum": "CHMOD"
+            },
+            {
+              "name": "DMAINEN",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "Enable DMA management of data input phase",
+              "enum": null
+            },
+            {
+              "name": "DMAOUTEN",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "Enable DMA management of data output phase",
+              "enum": null
+            },
+            {
+              "name": "GCMPH",
+              "bit_offset": 13,
+              "bit_width": 2,
+              "description": "GCM or CCM phase selection",
+              "enum": "GCMPH"
+            },
+            {
+              "name": "KEYSIZE",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "Key size selection",
+              "enum": null
+            },
+            {
+              "name": "NPBLB",
+              "bit_offset": 20,
+              "bit_width": 4,
+              "description": "Number of padding bytes in last block of payload",
+              "enum": null
+            },
+            {
+              "name": "KMOD",
+              "bit_offset": 24,
+              "bit_width": 2,
+              "description": "Key mode selection",
+              "enum": null
+            },
+            {
+              "name": "IPRST",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "AES peripheral software reset",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SR",
+          "offset": 4,
+          "size": 32,
+          "description": "Status register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Status register",
+          "fields": [
+            {
+              "name": "CCF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Computation complete flag",
+              "enum": null
+            },
+            {
+              "name": "RDERR",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Read error flag",
+              "enum": null
+            },
+            {
+              "name": "WRERR",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Write error flag",
+              "enum": null
+            },
+            {
+              "name": "BUSY",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Busy flag",
+              "enum": null
+            },
+            {
+              "name": "KEYVALID",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Key valid flag",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "DINR",
+          "offset": 8,
+          "description": "Data input register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": []
+        },
+        {
+          "name": "DOUTR",
+          "offset": 12,
+          "description": "Data output register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": []
+        },
+        {
+          "name": "KEYR",
+          "offset": 16,
+          "description": "Key register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": []
+        },
+        {
+          "name": "IVR",
+          "offset": 32,
+          "description": "Initialization vector register",
+          "array_len": 4,
+          "array_stride": 4,
+          "fields": []
+        },
+        {
+          "name": "SUSPR",
+          "offset": 64,
+          "description": "Suspend register",
+          "array_len": 8,
+          "array_stride": 4,
+          "fields": []
+        },
+        {
+          "name": "IER",
+          "offset": 768,
+          "size": 32,
+          "description": "interrupt enable register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Interrupt enable register",
+          "fields": [
+            {
+              "name": "CCFIE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Computation complete flag interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "RWEIE",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Read or write error interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "KEIE",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Key error interrupt enable",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "ISR",
+          "offset": 772,
+          "size": 32,
+          "description": "interrupt status register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Interrupt status register",
+          "fields": [
+            {
+              "name": "CCF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Computation complete flag",
+              "enum": null
+            },
+            {
+              "name": "RWEIF",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Read or write error interrupt flag",
+              "enum": null
+            },
+            {
+              "name": "KEIF",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Key error interrupt flag",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "ICR",
+          "offset": 776,
+          "size": 32,
+          "description": "interrupt clear register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Interrupt clear register",
+          "fields": [
+            {
+              "name": "CCF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Computation complete flag clear",
+              "enum": null
+            },
+            {
+              "name": "RWEIF",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Read or write error interrupt flag clear",
+              "enum": null
+            },
+            {
+              "name": "KEIF",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Key error interrupt flag clear",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "CHMOD": {
+      "bit_size": 3,
+      "variants": [
+        {
+          "name": "ECB",
+          "value": 0,
+          "description": "Electronic codebook"
+        },
+        {
+          "name": "CBC",
+          "value": 1,
+          "description": "Cipher-block chaining"
+        },
+        {
+          "name": "CTR",
+          "value": 2,
+          "description": "Counter mode"
+        },
+        {
+          "name": "GCM_GMAC",
+          "value": 3,
+          "description": "Galois counter mode and Galois message authentication code"
+        },
+        {
+          "name": "CCM",
+          "value": 4,
+          "description": "Counter with CBC-MAC"
+        }
+      ]
+    },
+    "DATATYPE": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "None",
+          "value": 0,
+          "description": "Word"
+        },
+        {
+          "name": "HalfWord",
+          "value": 1,
+          "description": "Half-word (16-bit)"
+        },
+        {
+          "name": "Byte",
+          "value": 2,
+          "description": "Byte (8-bit)"
+        },
+        {
+          "name": "Bit",
+          "value": 3,
+          "description": "Bit"
+        }
+      ]
+    },
+    "GCMPH": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Init phase",
+          "value": 0,
+          "description": "Init phase"
+        },
+        {
+          "name": "Header phase",
+          "value": 1,
+          "description": "Header phase"
+        },
+        {
+          "name": "Payload phase",
+          "value": 2,
+          "description": "Payload phase"
+        },
+        {
+          "name": "Final phase",
+          "value": 3,
+          "description": "Final phase"
+        }
+      ]
+    },
+    "MODE": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Mode1",
+          "value": 0,
+          "description": "Encryption"
+        },
+        {
+          "name": "Mode2",
+          "value": 1,
+          "description": "Key derivation (or key preparation for ECB/CBC decryption)"
+        },
+        {
+          "name": "Mode3",
+          "value": 2,
+          "description": "Decryption"
+        }
+      ]
+    }
+  }
+}

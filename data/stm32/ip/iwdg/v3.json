@@ -1,0 +1,236 @@
+{
+  "schema": 1,
+  "kind": "iwdg",
+  "version": "v3",
+  "blocks": {
+    "IWDG": {
+      "name": "IWDG",
+      "description": "Independent watchdog",
+      "extends": null,
+      "registers": [
+        {
+          "name": "KR",
+          "offset": 0,
+          "size": 32,
+          "description": "Key register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Key register",
+          "fields": [
+            {
+              "name": "KEY",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Key value (write only, read 0000h)",
+              "enum": "KEY"
+            }
+          ]
+        },
+        {
+          "name": "PR",
+          "offset": 4,
+          "size": 32,
+          "description": "Prescaler register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Prescaler register",
+          "fields": [
+            {
+              "name": "PR",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "Prescaler divider",
+              "enum": "PR"
+            }
+          ]
+        },
+        {
+          "name": "RLR",
+          "offset": 8,
+          "size": 32,
+          "description": "Reload register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Reload register",
+          "fields": [
+            {
+              "name": "RL",
+              "bit_offset": 0,
+              "bit_width": 12,
+              "description": "Watchdog counter reload value",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SR",
+          "offset": 12,
+          "size": 32,
+          "description": "Status register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Status register",
+          "fields": [
+            {
+              "name": "PVU",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Watchdog prescaler value update",
+              "enum": null
+            },
+            {
+              "name": "RVU",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Watchdog counter reload value update",
+              "enum": null
+            },
+            {
+              "name": "WVU",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Watchdog counter window value update",
+              "enum": null
+            },
+            {
+              "name": "EWU",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Watchdog interrupt comparator value update This bit is set by hardware to indicate that an update of the interrupt comparator value (EWIT[11:0]) or an update of the EWIE is ongoing. It is reset by hardware when the update operation is completed in the VDD voltage domain (takes up to three periods of the IWDG kernel clock iwdg_ker_ck). The EWIT[11:0] and EWIE fields can be updated only when EWU bit is reset.",
+              "enum": null
+            },
+            {
+              "name": "EWIF",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "Watchdog early interrupt flag This bit is set to ‘1’ by hardware in order to indicate that an early interrupt is pending. This bit must be cleared by the software by writing the bit EWIC of IWDG_EWCR register to ‘1’.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "WINR",
+          "offset": 16,
+          "size": 32,
+          "description": "Window register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Window register",
+          "fields": [
+            {
+              "name": "WIN",
+              "bit_offset": 0,
+              "bit_width": 12,
+              "description": "Watchdog counter window value",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "EWCR",
+          "offset": 20,
+          "size": 32,
+          "description": "IWDG early wakeup interrupt register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "IWDG early wakeup interrupt register.",
+          "fields": [
+            {
+              "name": "EWIT",
+              "bit_offset": 0,
+              "bit_width": 12,
+              "description": "Watchdog counter window value These bits are write access protected (see ). They are written by software to define at which position of the IWDCNT down-counter the early wakeup interrupt must be generated. The early interrupt is generated when the IWDCNT is lower or equal to EWIT[11:0] - 1. EWIT[11:0] must be bigger than 1. An interrupt is generated only if EWIE = 1. The EWU bit in the must be reset to be able to change the reload value. Note: Reading this register returns the Early wakeup comparator value and the Interrupt enable bit from the VDD voltage domain. This value may not be up to date/valid if a write operation to this register is ongoing, hence the value read from this register is valid only when the EWU bit in the is reset.",
+              "enum": null
+            },
+            {
+              "name": "EWIC",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "Watchdog early interrupt acknowledge The software must write a 1 into this bit in order to acknowledge the early wakeup interrupt and to clear the EWIF flag. Writing 0 has not effect, reading this flag returns a 0.",
+              "enum": null
+            },
+            {
+              "name": "EWIE",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Watchdog early interrupt enable Set and reset by software. The EWU bit in the must be reset to be able to change the value of this bit.",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "KEY": {
+      "bit_size": 16,
+      "variants": [
+        {
+          "name": "Enable",
+          "value": 21845,
+          "description": "Enable access to PR, RLR and WINR registers (0x5555)"
+        },
+        {
+          "name": "Reset",
+          "value": 43690,
+          "description": "Reset the watchdog value (0xAAAA)"
+        },
+        {
+          "name": "Start",
+          "value": 52428,
+          "description": "Start the watchdog (0xCCCC)"
+        }
+      ]
+    },
+    "PR": {
+      "bit_size": 4,
+      "variants": [
+        {
+          "name": "DivideBy4",
+          "value": 0,
+          "description": "Divider /4"
+        },
+        {
+          "name": "DivideBy8",
+          "value": 1,
+          "description": "Divider /8"
+        },
+        {
+          "name": "DivideBy16",
+          "value": 2,
+          "description": "Divider /16"
+        },
+        {
+          "name": "DivideBy32",
+          "value": 3,
+          "description": "Divider /32"
+        },
+        {
+          "name": "DivideBy64",
+          "value": 4,
+          "description": "Divider /64"
+        },
+        {
+          "name": "DivideBy128",
+          "value": 5,
+          "description": "Divider /128"
+        },
+        {
+          "name": "DivideBy256",
+          "value": 6,
+          "description": "Divider /256"
+        },
+        {
+          "name": "DivideBy512",
+          "value": 7,
+          "description": "Divider /512"
+        },
+        {
+          "name": "DivideBy1024",
+          "value": 8,
+          "description": "Divider /1024"
+        }
+      ]
+    }
+  }
+}

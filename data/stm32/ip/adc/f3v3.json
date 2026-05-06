@@ -1,0 +1,886 @@
+{
+  "schema": 1,
+  "kind": "adc",
+  "version": "f3v3",
+  "blocks": {
+    "ADC": {
+      "name": "ADC",
+      "description": "Analog-to-Digital Converter",
+      "extends": null,
+      "registers": [
+        {
+          "name": "SR",
+          "offset": 0,
+          "size": 32,
+          "description": "status register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "status register",
+          "fields": [
+            {
+              "name": "AWD",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "analog watchdog flag",
+              "enum": null
+            },
+            {
+              "name": "EOC",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "end of conversion",
+              "enum": null
+            },
+            {
+              "name": "JEOC",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "injected channel end of conversion",
+              "enum": null
+            },
+            {
+              "name": "JSTRT",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "injected channel start flag",
+              "enum": null
+            },
+            {
+              "name": "STRT",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "regular channel start flag",
+              "enum": null
+            },
+            {
+              "name": "OVR",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "overrun",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CR1",
+          "offset": 4,
+          "size": 32,
+          "description": "control register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "control register 1",
+          "fields": [
+            {
+              "name": "AWDCH",
+              "bit_offset": 0,
+              "bit_width": 5,
+              "description": "analog watchdog channel select bits",
+              "enum": null
+            },
+            {
+              "name": "EOCIE",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "interrupt enable for EOC",
+              "enum": null
+            },
+            {
+              "name": "AWDIE",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "analog watchdog interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "JEOCIE",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "interrupt enable for injected channels",
+              "enum": null
+            },
+            {
+              "name": "SCAN",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "scan mode",
+              "enum": null
+            },
+            {
+              "name": "AWDSGL",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "enable the watchdog on a single channel in scan mode",
+              "enum": null
+            },
+            {
+              "name": "JAUTO",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "automatic injected group conversion",
+              "enum": null
+            },
+            {
+              "name": "DISCEN",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "discontinuous mode on regular channels",
+              "enum": null
+            },
+            {
+              "name": "JDISCEN",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "discontinuous mode on injected channels",
+              "enum": null
+            },
+            {
+              "name": "DISCNUM",
+              "bit_offset": 13,
+              "bit_width": 3,
+              "description": "discontinuous mode channel count",
+              "enum": "DISCNUM"
+            },
+            {
+              "name": "JAWDEN",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "analog watchdog enable on injected channels",
+              "enum": null
+            },
+            {
+              "name": "AWDEN",
+              "bit_offset": 23,
+              "bit_width": 1,
+              "description": "analog watchdog enable on regular channels",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CR2",
+          "offset": 8,
+          "size": 32,
+          "description": "control register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "control register 2",
+          "fields": [
+            {
+              "name": "ADON",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "A/D converter ON / OFF",
+              "enum": null
+            },
+            {
+              "name": "CONT",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Continuous conversion",
+              "enum": null
+            },
+            {
+              "name": "CAL",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "A/D calibration",
+              "enum": null
+            },
+            {
+              "name": "RSTCAL",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "reset calibration",
+              "enum": null
+            },
+            {
+              "name": "DMA",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "DMA disable selection (for single ADC mode)",
+              "enum": null
+            },
+            {
+              "name": "ALIGN",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "data alignment",
+              "enum": null
+            },
+            {
+              "name": "JEXTSEL",
+              "bit_offset": 12,
+              "bit_width": 3,
+              "description": "external event select for injected group",
+              "enum": null
+            },
+            {
+              "name": "JEXTTRIG",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "external trigger conversion mode for injected channels",
+              "enum": null
+            },
+            {
+              "name": "EXTSEL",
+              "bit_offset": 17,
+              "bit_width": 3,
+              "description": "external event select for regular group",
+              "enum": null
+            },
+            {
+              "name": "EXTTRIG",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "external trigger conversion mode for regular channels",
+              "enum": null
+            },
+            {
+              "name": "JSWSTART",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "start conversion of injected channels",
+              "enum": null
+            },
+            {
+              "name": "SWSTART",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "start conversion of regular channels",
+              "enum": null
+            },
+            {
+              "name": "TSVREFE",
+              "bit_offset": 23,
+              "bit_width": 1,
+              "description": "temperature sensor and VREFINT enable",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SMPR1",
+          "offset": 12,
+          "size": 32,
+          "description": "sample time register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "sample time register 1",
+          "fields": [
+            {
+              "name": "SMP10",
+              "bit_offset": 0,
+              "bit_width": 3,
+              "description": "channel 10 sampling time selection",
+              "enum": "SAMPLE_TIME"
+            },
+            {
+              "name": "SMP11",
+              "bit_offset": 3,
+              "bit_width": 3,
+              "description": "channel 11 sampling time selection",
+              "enum": "SAMPLE_TIME"
+            },
+            {
+              "name": "SMP12",
+              "bit_offset": 6,
+              "bit_width": 3,
+              "description": "channel 12 sampling time selection",
+              "enum": "SAMPLE_TIME"
+            },
+            {
+              "name": "SMP13",
+              "bit_offset": 9,
+              "bit_width": 3,
+              "description": "channel 13 sampling time selection",
+              "enum": "SAMPLE_TIME"
+            },
+            {
+              "name": "SMP14",
+              "bit_offset": 12,
+              "bit_width": 3,
+              "description": "channel 14 sampling time selection",
+              "enum": "SAMPLE_TIME"
+            },
+            {
+              "name": "SMP15",
+              "bit_offset": 15,
+              "bit_width": 3,
+              "description": "channel 15 sampling time selection",
+              "enum": "SAMPLE_TIME"
+            },
+            {
+              "name": "SMP16",
+              "bit_offset": 18,
+              "bit_width": 3,
+              "description": "channel 16 sampling time selection",
+              "enum": "SAMPLE_TIME"
+            },
+            {
+              "name": "SMP17",
+              "bit_offset": 21,
+              "bit_width": 3,
+              "description": "channel 17 sampling time selection",
+              "enum": "SAMPLE_TIME"
+            },
+            {
+              "name": "SMP18",
+              "bit_offset": 24,
+              "bit_width": 3,
+              "description": "channel 18 sampling time selection",
+              "enum": "SAMPLE_TIME"
+            }
+          ]
+        },
+        {
+          "name": "SMPR2",
+          "offset": 16,
+          "size": 32,
+          "description": "sample time register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "sample time register 2",
+          "fields": [
+            {
+              "name": "SMP0",
+              "bit_offset": 0,
+              "bit_width": 3,
+              "description": "channel 0 sampling time selection",
+              "enum": "SAMPLE_TIME"
+            },
+            {
+              "name": "SMP1",
+              "bit_offset": 3,
+              "bit_width": 3,
+              "description": "channel 1 sampling time selection",
+              "enum": "SAMPLE_TIME"
+            },
+            {
+              "name": "SMP2",
+              "bit_offset": 6,
+              "bit_width": 3,
+              "description": "channel 2 sampling time selection",
+              "enum": "SAMPLE_TIME"
+            },
+            {
+              "name": "SMP3",
+              "bit_offset": 9,
+              "bit_width": 3,
+              "description": "channel 3 sampling time selection",
+              "enum": "SAMPLE_TIME"
+            },
+            {
+              "name": "SMP4",
+              "bit_offset": 12,
+              "bit_width": 3,
+              "description": "channel 4 sampling time selection",
+              "enum": "SAMPLE_TIME"
+            },
+            {
+              "name": "SMP5",
+              "bit_offset": 15,
+              "bit_width": 3,
+              "description": "channel 5 sampling time selection",
+              "enum": "SAMPLE_TIME"
+            },
+            {
+              "name": "SMP6",
+              "bit_offset": 18,
+              "bit_width": 3,
+              "description": "channel 6 sampling time selection",
+              "enum": "SAMPLE_TIME"
+            },
+            {
+              "name": "SMP7",
+              "bit_offset": 21,
+              "bit_width": 3,
+              "description": "channel 7 sampling time selection",
+              "enum": "SAMPLE_TIME"
+            },
+            {
+              "name": "SMP8",
+              "bit_offset": 24,
+              "bit_width": 3,
+              "description": "channel 8 sampling time selection",
+              "enum": "SAMPLE_TIME"
+            },
+            {
+              "name": "SMP9",
+              "bit_offset": 27,
+              "bit_width": 3,
+              "description": "channel 9 sampling time selection",
+              "enum": "SAMPLE_TIME"
+            }
+          ]
+        },
+        {
+          "name": "JOFR1",
+          "offset": 20,
+          "size": 32,
+          "description": "injected channel data offset register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "injected channel data offset register 1",
+          "fields": [
+            {
+              "name": "JOFFSET1",
+              "bit_offset": 0,
+              "bit_width": 12,
+              "description": "data offset for injected channel 1",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "JOFR2",
+          "offset": 24,
+          "size": 32,
+          "description": "injected channel data offset register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "injected channel data offset register 2",
+          "fields": [
+            {
+              "name": "JOFFSET2",
+              "bit_offset": 0,
+              "bit_width": 12,
+              "description": "data offset for injected channel 2",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "JOFR3",
+          "offset": 28,
+          "size": 32,
+          "description": "injected channel data offset register 3",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "injected channel data offset register 3",
+          "fields": [
+            {
+              "name": "JOFFSET3",
+              "bit_offset": 0,
+              "bit_width": 12,
+              "description": "data offset for injected channel 3",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "JOFR4",
+          "offset": 32,
+          "size": 32,
+          "description": "injected channel data offset register 4",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "injected channel data offset register 4",
+          "fields": [
+            {
+              "name": "JOFFSET4",
+              "bit_offset": 0,
+              "bit_width": 12,
+              "description": "data offset for injected channel 4",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "HTR",
+          "offset": 36,
+          "size": 32,
+          "description": "watchdog higher threshold register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "watchdog higher threshold register",
+          "fields": [
+            {
+              "name": "HT",
+              "bit_offset": 0,
+              "bit_width": 12,
+              "description": "Analog watchdog high threshold",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "LTR",
+          "offset": 40,
+          "size": 32,
+          "description": "watchdog lower threshold register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "watchdog lower threshold register",
+          "fields": [
+            {
+              "name": "LT",
+              "bit_offset": 0,
+              "bit_width": 12,
+              "description": "Analog watchdog low threshold",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SQR1",
+          "offset": 44,
+          "size": 32,
+          "description": "regular sequence register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "regular sequence register 1",
+          "fields": [
+            {
+              "name": "SQ13",
+              "bit_offset": 0,
+              "bit_width": 5,
+              "description": "13th conversion in regular sequence",
+              "enum": null
+            },
+            {
+              "name": "SQ14",
+              "bit_offset": 5,
+              "bit_width": 5,
+              "description": "14th conversion in regular sequence",
+              "enum": null
+            },
+            {
+              "name": "SQ15",
+              "bit_offset": 10,
+              "bit_width": 5,
+              "description": "15th conversion in regular sequence",
+              "enum": null
+            },
+            {
+              "name": "SQ16",
+              "bit_offset": 15,
+              "bit_width": 5,
+              "description": "16th conversion in regular sequence",
+              "enum": null
+            },
+            {
+              "name": "L",
+              "bit_offset": 20,
+              "bit_width": 4,
+              "description": "regular channel sequence length",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SQR2",
+          "offset": 48,
+          "size": 32,
+          "description": "regular sequence register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "regular sequence register 2",
+          "fields": [
+            {
+              "name": "SQ7",
+              "bit_offset": 0,
+              "bit_width": 5,
+              "description": "7th conversion in regular sequence",
+              "enum": null
+            },
+            {
+              "name": "SQ8",
+              "bit_offset": 5,
+              "bit_width": 5,
+              "description": "8th conversion in regular sequence",
+              "enum": null
+            },
+            {
+              "name": "SQ9",
+              "bit_offset": 10,
+              "bit_width": 5,
+              "description": "9th conversion in regular sequence",
+              "enum": null
+            },
+            {
+              "name": "SQ10",
+              "bit_offset": 15,
+              "bit_width": 5,
+              "description": "10th conversion in regular sequence",
+              "enum": null
+            },
+            {
+              "name": "SQ11",
+              "bit_offset": 20,
+              "bit_width": 5,
+              "description": "11th conversion in regular sequence",
+              "enum": null
+            },
+            {
+              "name": "SQ12",
+              "bit_offset": 25,
+              "bit_width": 5,
+              "description": "12th conversion in regular sequence",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SQR3",
+          "offset": 52,
+          "size": 32,
+          "description": "regular sequence register 3",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "regular sequence register 3",
+          "fields": [
+            {
+              "name": "SQ1",
+              "bit_offset": 0,
+              "bit_width": 5,
+              "description": "1st conversion in regular sequence",
+              "enum": null
+            },
+            {
+              "name": "SQ2",
+              "bit_offset": 5,
+              "bit_width": 5,
+              "description": "2nd conversion in regular sequence",
+              "enum": null
+            },
+            {
+              "name": "SQ3",
+              "bit_offset": 10,
+              "bit_width": 5,
+              "description": "3rd conversion in regular sequence",
+              "enum": null
+            },
+            {
+              "name": "SQ4",
+              "bit_offset": 15,
+              "bit_width": 5,
+              "description": "4th conversion in regular sequence",
+              "enum": null
+            },
+            {
+              "name": "SQ5",
+              "bit_offset": 20,
+              "bit_width": 5,
+              "description": "5th conversion in regular sequence",
+              "enum": null
+            },
+            {
+              "name": "SQ6",
+              "bit_offset": 25,
+              "bit_width": 5,
+              "description": "6th conversion in regular sequence",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "JSQR",
+          "offset": 56,
+          "size": 32,
+          "description": "injected sequence register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "injected sequence register",
+          "fields": [
+            {
+              "name": "JSQ",
+              "bit_offset": 0,
+              "bit_width": 5,
+              "description": "conversion in injected sequence",
+              "enum": null
+            },
+            {
+              "name": "JL",
+              "bit_offset": 20,
+              "bit_width": 2,
+              "description": "injected sequence length",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "JDR1",
+          "offset": 60,
+          "size": 32,
+          "description": "injected data register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "injected data register 1",
+          "fields": [
+            {
+              "name": "JDATA1",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Injected data",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "JDR2",
+          "offset": 64,
+          "size": 32,
+          "description": "injected data register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "injected data register 2",
+          "fields": [
+            {
+              "name": "JDATA2",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Injected data",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "JDR3",
+          "offset": 68,
+          "size": 32,
+          "description": "injected data register 3",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "injected data register 3",
+          "fields": [
+            {
+              "name": "JDATA3",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Injected data",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "JDR4",
+          "offset": 72,
+          "size": 32,
+          "description": "injected data register 4",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "injected data register 4",
+          "fields": [
+            {
+              "name": "JDATA4",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Injected data",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "DR",
+          "offset": 76,
+          "size": 32,
+          "description": "regular data register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "regular data register",
+          "fields": [
+            {
+              "name": "DATA",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Regular data",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "DISCNUM": {
+      "bit_size": 3,
+      "variants": [
+        {
+          "name": "DISCNUM_1",
+          "value": 0,
+          "description": "1 conversions are discontinued and the conversion is carried out on one channel"
+        },
+        {
+          "name": "DISCNUM_2",
+          "value": 1,
+          "description": "2 conversion is discontinued and the conversions are carried out on 2 channels"
+        },
+        {
+          "name": "DISCNUM_3",
+          "value": 2,
+          "description": "3 conversions are discontinued and the conversions are carried out on 3 channels"
+        },
+        {
+          "name": "DISCNUM_4",
+          "value": 3,
+          "description": "4 conversions are discontinued and the conversions are carried out on 4 channels"
+        },
+        {
+          "name": "DISCNUM_5",
+          "value": 4,
+          "description": "5 conversions are discontinued and the conversions are carried out on 5 channels"
+        },
+        {
+          "name": "DISCNUM_6",
+          "value": 5,
+          "description": "6 conversions are discontinued and the conversions are carried out on 6 channels"
+        },
+        {
+          "name": "DISCNUM_7",
+          "value": 6,
+          "description": "7 conversions are discontinued and the conversions are carried out on 7 channels"
+        },
+        {
+          "name": "DISCNUM_8",
+          "value": 7,
+          "description": "8 conversions are discontinued and the conversions are carried out on 8 channels"
+        }
+      ]
+    },
+    "SAMPLE_TIME": {
+      "bit_size": 3,
+      "variants": [
+        {
+          "name": "Cycles1_5",
+          "value": 0,
+          "description": "1.5 ADC clock cycles"
+        },
+        {
+          "name": "Cycles7_5",
+          "value": 1,
+          "description": "7.5 ADC clock cycles"
+        },
+        {
+          "name": "Cycles13_5",
+          "value": 2,
+          "description": "13.5 ADC clock cycles"
+        },
+        {
+          "name": "Cycles28_5",
+          "value": 3,
+          "description": "28.5 ADC clock cycles"
+        },
+        {
+          "name": "Cycles41_5",
+          "value": 4,
+          "description": "41.5 ADC clock cycles"
+        },
+        {
+          "name": "Cycles55_5",
+          "value": 5,
+          "description": "55.5 ADC clock cycles"
+        },
+        {
+          "name": "Cycles71_5",
+          "value": 6,
+          "description": "71.5 ADC clock cycles"
+        },
+        {
+          "name": "Cycles239_5",
+          "value": 7,
+          "description": "239.5 ADC clock cycles"
+        }
+      ]
+    }
+  }
+}

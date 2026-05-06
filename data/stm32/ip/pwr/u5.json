@@ -1,0 +1,1325 @@
+{
+  "schema": 1,
+  "kind": "pwr",
+  "version": "u5",
+  "blocks": {
+    "PWR": {
+      "name": "PWR",
+      "description": "Power control",
+      "extends": null,
+      "registers": [
+        {
+          "name": "CR1",
+          "offset": 0,
+          "size": 32,
+          "description": "control register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "control register 1",
+          "fields": [
+            {
+              "name": "LPMS",
+              "bit_offset": 0,
+              "bit_width": 3,
+              "description": "Low-power mode selection\r These bits select the low-power mode entered when the CPU enters the Deepsleep mode.\r 10x: Standby mode (Standby mode also entered if LPMS=11X in CR1\r with BREN=1 in BDCR1)\r 11x: Shutdown mode if BREN = 0 in BDCR1",
+              "enum": "LPMS"
+            },
+            {
+              "name": "RRSB1",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "SRAM2 page 1 retention in Stop 3 and Standby modes\r This bit is used to keep the SRAM2 page 1 content in Stop 3 and Standby modes. The SRAM2 page 1 corresponds to the first 8 Kbytes of the SRAM2\r (from SRAM2 base address to SRAM2 base address + 0x1FFF).\r Note: This bit has no effect in Shutdown mode.",
+              "enum": null
+            },
+            {
+              "name": "RRSB2",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "SRAM2 page 2 retention in Stop 3 and Standby modes\r This bit is used to keep the SRAM2 page 2 content in Stop 3 and Standby modes. The SRAM2 page 2 corresponds to the last 56 Kbytes of the SRAM2\r (from SRAM2 base address + 0x2000 to SRAM2 base address + 0xFFFF).\r Note: This bit has no effect in Shutdown mode.",
+              "enum": null
+            },
+            {
+              "name": "ULPMEN",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "BOR ultra-low power mode\r This bit is used to reduce the consumption by configuring the BOR in discontinuous mode.\r This bit must be set to reach the lowest power consumption in the low-power modes.",
+              "enum": null
+            },
+            {
+              "name": "SRAM1PD",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "SRAM1 power down\r This bit is used to reduce the consumption by powering off the SRAM1.",
+              "enum": "SRAMPD"
+            },
+            {
+              "name": "SRAM2PD",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "SRAM2 power down\r This bit is used to reduce the consumption by powering off the SRAM2.",
+              "enum": "SRAMPD"
+            },
+            {
+              "name": "SRAM3PD",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "SRAM3 power down\r This bit is used to reduce the consumption by powering off the SRAM3.",
+              "enum": "SRAMPD"
+            },
+            {
+              "name": "SRAM4PD",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "SRAM4 power down\r This bit is used to reduce the consumption by powering off the SRAM4.",
+              "enum": "SRAMPD"
+            }
+          ]
+        },
+        {
+          "name": "CR2",
+          "offset": 4,
+          "size": 32,
+          "description": "control register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "control register 2",
+          "fields": [
+            {
+              "name": "SRAM1PDS1",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "SRAM1 page 1 (64 Kbytes) power-down in Stop modes (Stop 0, 1, 2, 3)",
+              "enum": "PDS"
+            },
+            {
+              "name": "SRAM1PDS2",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "SRAM1 page 2 (64 Kbytes) power-down in Stop modes (Stop 0, 1, 2, 3)",
+              "enum": "PDS"
+            },
+            {
+              "name": "SRAM1PDS3",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "SRAM1 page 3 (64 Kbytes) power-down in Stop modes (Stop 0, 1, 2, 3)",
+              "enum": "PDS"
+            },
+            {
+              "name": "SRAM2PDS1",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "SRAM2 page 1 (8 Kbytes) power-down in Stop modes (Stop 0, 1, 2)\r Note: The SRAM2 page 1 retention in Stop 3 is controlled by RRSB1 bit in CR1.",
+              "enum": "PDS"
+            },
+            {
+              "name": "SRAM2PDS2",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "SRAM2 page 2 (56 Kbytes) power-down in Stop modes (Stop 0, 1, 2)\r Note: The SRAM2 page 2 retention in Stop 3 is controlled by RRSB2 bit in CR1.",
+              "enum": "PDS"
+            },
+            {
+              "name": "SRAM4PDS",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "SRAM4 power-down in Stop modes (Stop 0, 1, 2, 3)",
+              "enum": "PDS"
+            },
+            {
+              "name": "ICRAMPDS",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "ICACHE SRAM power-down in Stop modes (Stop 0, 1, 2, 3)",
+              "enum": "PDS"
+            },
+            {
+              "name": "DC1RAMPDS",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "DCACHE1 SRAM power-down in Stop modes (Stop 0, 1, 2, 3)",
+              "enum": "PDS"
+            },
+            {
+              "name": "DMA2DRAMPDS",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "DMA2D SRAM power-down in Stop modes (Stop 0, 1, 2, 3)",
+              "enum": "PDS"
+            },
+            {
+              "name": "PRAMPDS",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "FMAC, FDCAN and USB peripherals SRAM power-down in Stop modes (Stop0,1,2,3)",
+              "enum": "PDS"
+            },
+            {
+              "name": "PKARAMPDS",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "PKA SRAM power-down",
+              "enum": "PDS"
+            },
+            {
+              "name": "SRAM4FWU",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "SRAM4 fast wakeup from Stop 0, Stop 1 and Stop 2 modes\r This bit is used to obtain the best trade-off between low-power consumption and wakeup time. SRAM4 wakeup time increases the wakeup time when exiting Stop 0, 1 and 2 modes, and also increases the LPDMA access time to SRAM4 during Stop modes.",
+              "enum": "SRAMFWU"
+            },
+            {
+              "name": "FLASHFWU",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "Flash memory fast wakeup from Stop 0 and Stop 1 modes\r This bit is used to obtain the best trade-off between low-power consumption and wakeup time when exiting the Stop 0 or Stop 1 modes.\r When this bit is set, the Flash memory remains in normal mode in Stop 0 and Stop 1 modes, which offers a faster startup time with higher consumption.",
+              "enum": "FLASHFWU"
+            },
+            {
+              "name": "SRAM3PDS1",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "SRAM3 page 1 (64 Kbytes) power-down in Stop modes (Stop 0, 1, 2, 3)",
+              "enum": "PDS"
+            },
+            {
+              "name": "SRAM3PDS2",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "SRAM3 page 2 (64 Kbytes) power-down in Stop modes (Stop 0, 1, 2, 3)",
+              "enum": "PDS"
+            },
+            {
+              "name": "SRAM3PDS3",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "SRAM3 page 3 (64 Kbytes) power-down in Stop modes (Stop 0, 1, 2, 3)",
+              "enum": "PDS"
+            },
+            {
+              "name": "SRAM3PDS4",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "SRAM3 page 4 (64 Kbytes) power-down in Stop modes (Stop 0, 1, 2, 3)",
+              "enum": "PDS"
+            },
+            {
+              "name": "SRAM3PDS5",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "SRAM3 page 5 (64 Kbytes) power-down in Stop modes (Stop 0, 1, 2, 3)",
+              "enum": "PDS"
+            },
+            {
+              "name": "SRAM3PDS6",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "SRAM3 page 6 (64 Kbytes) power-down in Stop modes (Stop 0, 1, 2, 3)",
+              "enum": "PDS"
+            },
+            {
+              "name": "SRAM3PDS7",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "SRAM3 page 7 (64 Kbytes) power-down in Stop modes (Stop 0, 1, 2, 3)",
+              "enum": "PDS"
+            },
+            {
+              "name": "SRAM3PDS8",
+              "bit_offset": 23,
+              "bit_width": 1,
+              "description": "SRAM3 page 8 (64 Kbytes) power-down in Stop modes (Stop 0, 1, 2, 3)",
+              "enum": "PDS"
+            },
+            {
+              "name": "SRDRUN",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "SmartRun domain in Run mode",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CR3",
+          "offset": 8,
+          "size": 32,
+          "description": "control register 3",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "control register 3",
+          "fields": [
+            {
+              "name": "REGSEL",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Regulator selection\r Note: REGSEL is reserved and must be kept at reset value in packages without SMPS.",
+              "enum": "REGSEL"
+            },
+            {
+              "name": "FSTEN",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Fast soft start",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "VOSR",
+          "offset": 12,
+          "size": 32,
+          "description": "voltage scaling register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "voltage scaling register",
+          "fields": [
+            {
+              "name": "USBBOOSTRDY",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "OTG_HS EPOD booster ready\r This bit is set to one by hardware when the power booster startup time is reached. The OTG_HS clock can be provided only after this bit is set.",
+              "enum": null
+            },
+            {
+              "name": "BOOSTRDY",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "EPOD booster ready\r This bit is set to 1 by hardware when the power booster startup time is reached. The system clock frequency can be switched higher than 50 MHz only after this bit is set.",
+              "enum": null
+            },
+            {
+              "name": "VOSRDY",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Ready bit for VCORE voltage scaling output selection",
+              "enum": null
+            },
+            {
+              "name": "VOS",
+              "bit_offset": 16,
+              "bit_width": 2,
+              "description": "Voltage scaling range selection\r This field is protected against non-secure access when SYSCLKSEC=1 in RCC_SECCFGR. It is protected against unprivileged access when SYSCLKSEC=1 in RCC_SECCFGR and SPRIV=1 in PRIVCFGR, or when SYSCLKSEC=0 and NSPRIV=1.",
+              "enum": "VOS"
+            },
+            {
+              "name": "BOOSTEN",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "EPOD booster enable",
+              "enum": null
+            },
+            {
+              "name": "USBPWREN",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "OTG_HS power enable",
+              "enum": null
+            },
+            {
+              "name": "USBBOOSTEN",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "OTG_HS EPOD booster enable",
+              "enum": null
+            },
+            {
+              "name": "VDD11USBDIS",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "OTG_HS VDD11USB disable",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SVMCR",
+          "offset": 16,
+          "size": 32,
+          "description": "supply voltage monitoring control register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "supply voltage monitoring control register",
+          "fields": [
+            {
+              "name": "PVDE",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Power voltage detector enable",
+              "enum": null
+            },
+            {
+              "name": "PVDLS",
+              "bit_offset": 5,
+              "bit_width": 3,
+              "description": "Power voltage detector level selection\r These bits select the voltage threshold detected by the power voltage detector:",
+              "enum": "PVDLS"
+            },
+            {
+              "name": "UVMEN",
+              "bit_offset": 24,
+              "bit_width": 1,
+              "description": "VDDUSB independent USB voltage monitor enable",
+              "enum": null
+            },
+            {
+              "name": "IO2VMEN",
+              "bit_offset": 25,
+              "bit_width": 1,
+              "description": "VDDIO2 independent I/Os voltage monitor enable",
+              "enum": null
+            },
+            {
+              "name": "AVM1EN",
+              "bit_offset": 26,
+              "bit_width": 1,
+              "description": "VDDA independent analog supply voltage monitor 1 enable (1.6V threshold)",
+              "enum": null
+            },
+            {
+              "name": "AVM2EN",
+              "bit_offset": 27,
+              "bit_width": 1,
+              "description": "VDDA independent analog supply voltage monitor 2 enable (1.8V threshold)",
+              "enum": null
+            },
+            {
+              "name": "USV",
+              "bit_offset": 28,
+              "bit_width": 1,
+              "description": "VDDUSB independent USB supply valid",
+              "enum": null
+            },
+            {
+              "name": "IO2SV",
+              "bit_offset": 29,
+              "bit_width": 1,
+              "description": "VDDIO2 independent I/Os supply valid\r This bit is used to validate the VDDIO2 supply for electrical and logical isolation purpose.\r Setting this bit is mandatory to use PG[15:2]. If VDDIO2 is not always present in the application, the VDDIO2 voltage monitor can be used to determine whether this supply is ready or not.",
+              "enum": null
+            },
+            {
+              "name": "ASV",
+              "bit_offset": 30,
+              "bit_width": 1,
+              "description": "VDDA independent analog supply valid",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "WUCR1",
+          "offset": 20,
+          "size": 32,
+          "description": "wakeup control register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "wakeup control register 1",
+          "fields": [
+            {
+              "name": "WUPEN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Wakeup pin WKUP1 enable",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "WUCR2",
+          "offset": 24,
+          "size": 32,
+          "description": "wakeup control register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "wakeup control register 2",
+          "fields": [
+            {
+              "name": "WUPP",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Wakeup pin WKUP1 polarity.\r This bit must be configured when WUPEN1 = 0.",
+              "enum": "WUPP"
+            }
+          ]
+        },
+        {
+          "name": "WUCR3",
+          "offset": 28,
+          "size": 32,
+          "description": "wakeup control register 3",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "wakeup control register 3",
+          "fields": [
+            {
+              "name": "WUSEL1",
+              "bit_offset": 0,
+              "bit_width": 2,
+              "description": "Wakeup pin WKUP1 selection\r This field must be configured when WUPEN1 = 0.",
+              "enum": "WUSEL"
+            },
+            {
+              "name": "WUSEL2",
+              "bit_offset": 2,
+              "bit_width": 2,
+              "description": "Wakeup pin WKUP2 selection\r This field must be configured when WUPEN2 = 0.",
+              "enum": "WUSEL"
+            },
+            {
+              "name": "WUSEL3",
+              "bit_offset": 4,
+              "bit_width": 2,
+              "description": "Wakeup pin WKUP3 selection\r This field must be configured when WUPEN3 = 0.",
+              "enum": "WUSEL"
+            },
+            {
+              "name": "WUSEL4",
+              "bit_offset": 6,
+              "bit_width": 2,
+              "description": "Wakeup pin WKUP4 selection\r This field must be configured when WUPEN4 = 0.",
+              "enum": "WUSEL"
+            },
+            {
+              "name": "WUSEL5",
+              "bit_offset": 8,
+              "bit_width": 2,
+              "description": "Wakeup pin WKUP5 selection\r This field must be configured when WUPEN5 = 0.",
+              "enum": "WUSEL"
+            },
+            {
+              "name": "WUSEL6",
+              "bit_offset": 10,
+              "bit_width": 2,
+              "description": "Wakeup pin WKUP6 selection\r This field must be configured when WUPEN6 = 0.",
+              "enum": "WUSEL"
+            },
+            {
+              "name": "WUSEL7",
+              "bit_offset": 12,
+              "bit_width": 2,
+              "description": "Wakeup pin WKUP7 selection\r This field must be configured when WUPEN7 = 0.",
+              "enum": "WUSEL"
+            },
+            {
+              "name": "WUSEL8",
+              "bit_offset": 14,
+              "bit_width": 2,
+              "description": "Wakeup pin WKUP8 selection\r This field must be configured when WUPEN8 = 0.",
+              "enum": "WUSEL"
+            }
+          ]
+        },
+        {
+          "name": "BDCR1",
+          "offset": 32,
+          "size": 32,
+          "description": "Backup domain control register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Backup domain control register 1",
+          "fields": [
+            {
+              "name": "BREN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Backup RAM retention in Standby and VBAT modes\r When this bit is set, the backup RAM content is kept in Standby and VBAT modes.\r If BREN is reset, the backup RAM can still be used in Run, Sleep and Stop modes. However, its content is lost in Standby, Shutdown and VBAT modes. This bit can be written only when the regulator is LDO, which must be configured before switching to SMPS.\r Note: Backup RAM cannot be preserved in Shutdown mode.",
+              "enum": null
+            },
+            {
+              "name": "MONEN",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Backup domain voltage and temperature monitoring enable",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "BDCR2",
+          "offset": 36,
+          "size": 32,
+          "description": "Backup domain control register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Backup domain control register 2",
+          "fields": [
+            {
+              "name": "VBE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "VBAT charging enable",
+              "enum": "VBE"
+            },
+            {
+              "name": "VBRS",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "VBAT charging resistor selection",
+              "enum": "VBRS"
+            }
+          ]
+        },
+        {
+          "name": "DBPCR",
+          "offset": 40,
+          "size": 32,
+          "description": "disable Backup domain register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "disable Backup domain register",
+          "fields": [
+            {
+              "name": "DBP",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Disable Backup domain write protection\r In reset state, all registers and SRAM in Backup domain are protected against parasitic write access. This bit must be set to enable the write access to these registers.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "UCPDR",
+          "offset": 44,
+          "size": 32,
+          "description": "USB Type-C™ and Power Delivery register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "USB Type-C™ and Power Delivery register",
+          "fields": [
+            {
+              "name": "UCPD_DBDIS",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "UCPD dead battery disable\r After exiting reset, the USB Type-C “dead battery” behavior is enabled, which may have a pull-down effect on CC1 and CC2 pins. It is recommended to disable it in all cases, either to stop this pull-down or to handover control to the UCPD (the UCPD must be initialized before doing the disable).",
+              "enum": null
+            },
+            {
+              "name": "UCPD_STBY",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "UCPD Standby mode\r When set, this bit is used to memorize the UCPD configuration in Standby mode.\r This bit must be written to 1 just before entering Standby mode when using UCPD.\r It must be written to 0 after exiting the Standby mode and before writing any UCPD registers.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SECCFGR",
+          "offset": 48,
+          "size": 32,
+          "description": "security configuration register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "security configuration register",
+          "fields": [
+            {
+              "name": "WUP1SEC",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "WUP1 secure protection",
+              "enum": null
+            },
+            {
+              "name": "LPMSEC",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "Low-power modes secure protection",
+              "enum": null
+            },
+            {
+              "name": "VDMSEC",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Voltage detection and monitoring secure protection",
+              "enum": null
+            },
+            {
+              "name": "VBSEC",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "Backup domain secure protection",
+              "enum": null
+            },
+            {
+              "name": "APCSEC",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Pull-up/pull-down secure protection",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "PRIVCFGR",
+          "offset": 52,
+          "size": 32,
+          "description": "privilege control register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "privilege control register",
+          "fields": [
+            {
+              "name": "SPRIV",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "secure functions privilege configuration\r This bit is set and reset by software. It can be written only by a secure privileged access.",
+              "enum": null
+            },
+            {
+              "name": "NSPRIV",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "non-secure functions privilege configuration\r This bit is set and reset by software. It can be written only by privileged access, secure or non-secure.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SR",
+          "offset": 56,
+          "size": 32,
+          "description": "status register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "status register",
+          "fields": [
+            {
+              "name": "CSSF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Clear Stop and Standby flags\r This bit is protected against non-secure access when LPMSEC=1 in SECCFGR.\r This bit is protected against unprivileged access when LPMSEC=1 and SPRIV=1 in PRIVCFGR, or when LPMSEC=0 and NSPRIV=1.\r Writing 1 to this bit clears the STOPF and SBF flags.",
+              "enum": null
+            },
+            {
+              "name": "STOPF",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Stop flag\r This bit is set by hardware when the device enters a Stop mode, and is cleared by software by writing 1 to the CSSF bit.",
+              "enum": null
+            },
+            {
+              "name": "SBF",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Standby flag\r This bit is set by hardware when the device enters the Standby mode, and is cleared by writing 1 to the CSSF bit, or by a power-on reset. It is not cleared by the system reset.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SVMSR",
+          "offset": 60,
+          "size": 32,
+          "description": null,
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": null,
+          "fields": [
+            {
+              "name": "REGS",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Regulator selection",
+              "enum": "REGSEL"
+            },
+            {
+              "name": "PVDO",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "VDD voltage detector output",
+              "enum": "PVDO"
+            },
+            {
+              "name": "ACTVOSRDY",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Voltage level ready for currently used VOS",
+              "enum": null
+            },
+            {
+              "name": "ACTVOS",
+              "bit_offset": 16,
+              "bit_width": 2,
+              "description": "VOS currently applied to VCORE\r This field provides the last VOS value.",
+              "enum": "ACTVOS"
+            },
+            {
+              "name": "VDDUSBRDY",
+              "bit_offset": 24,
+              "bit_width": 1,
+              "description": "VDDUSB ready",
+              "enum": null
+            },
+            {
+              "name": "VDDIO2RDY",
+              "bit_offset": 25,
+              "bit_width": 1,
+              "description": "VDDIO2 ready",
+              "enum": null
+            },
+            {
+              "name": "VDDA1RDY",
+              "bit_offset": 26,
+              "bit_width": 1,
+              "description": "VDDA ready versus 1.6V voltage monitor",
+              "enum": null
+            },
+            {
+              "name": "VDDA2RDY",
+              "bit_offset": 27,
+              "bit_width": 1,
+              "description": "VDDA ready versus 1.8V voltage monitor",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "BDSR",
+          "offset": 64,
+          "size": 32,
+          "description": "Backup domain status register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Backup domain status register",
+          "fields": [
+            {
+              "name": "VBATH",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Backup domain voltage level monitoring versus high threshold",
+              "enum": "VBATH"
+            },
+            {
+              "name": "TEMPL",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Temperature level monitoring versus low threshold",
+              "enum": "TEMPL"
+            },
+            {
+              "name": "TEMPH",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Temperature level monitoring versus high threshold",
+              "enum": "TEMPH"
+            }
+          ]
+        },
+        {
+          "name": "WUSR",
+          "offset": 68,
+          "size": 32,
+          "description": "wakeup status register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "wakeup status register",
+          "fields": [
+            {
+              "name": "WUF1",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Wakeup flag 1\r This bit is set when a wakeup event is detected on WKUP1 pin. This bit is cleared by writing 1 in the CWUF1 bit of WUSCR when WUSEL ≠ 11, or by hardware when WUPEN1=0.",
+              "enum": null
+            },
+            {
+              "name": "WUF2",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Wakeup flag 2\r This bit is set when a wakeup event is detected on WKUP2 pin. This bit is cleared by writing 1 in the CWUF2 bit of WUSCR when WUSEL ≠ 11, or by hardware when WUPEN2=0.",
+              "enum": null
+            },
+            {
+              "name": "WUF3",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Wakeup flag 3\r This bit is set when a wakeup event is detected on WKUP3 pin. This bit is cleared by writing 1 in the CWUF3 bit of WUSCR when WUSEL ≠ 11, or by hardware when WUPEN3=0.",
+              "enum": null
+            },
+            {
+              "name": "WUF4",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Wakeup flag 4\r This bit is set when a wakeup event is detected on WKUP4 pin. This bit is cleared by writing 1 in the CWUF4 bit of WUSCR when WUSEL ≠ 11, or by hardware when WUPEN4=0.",
+              "enum": null
+            },
+            {
+              "name": "WUF5",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Wakeup flag 5\r This bit is set when a wakeup event is detected on WKUP5 pin. This bit is cleared by writing 1 in the CWUF5 bit of WUSCR when WUSEL ≠ 11, or by hardware when WUPEN5=0.",
+              "enum": null
+            },
+            {
+              "name": "WUF6",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Wakeup flag 6\r This bit is set when a wakeup event is detected on WKUP6 pin. This bit is cleared by writing 1 in the CWUF6 bit of WUSCR when WUSEL ≠ 11, or by hardware when WUPEN6=0.\r If WUSEL=11, this bit is cleared by hardware when all internal wakeup source are cleared.",
+              "enum": null
+            },
+            {
+              "name": "WUF7",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Wakeup flag 7\r This bit is set when a wakeup event is detected on WKUP7 pin. This bit is cleared by writing 1 in the CWUF7 bit of WUSCR when WUSEL ≠ 11, or by hardware when WUPEN7=0.\r If WUSEL=11, this bit is cleared by hardware when all internal wakeup source are cleared.",
+              "enum": null
+            },
+            {
+              "name": "WUF8",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Wakeup flag 8\r This bit is set when a wakeup event is detected on WKUP8 pin. This bit is cleared by writing 1 in the CWUF8 bit of WUSCR when WUSEL ≠ 11, or by hardware when WUPEN8=0.\r If WUSEL=11, this bit is cleared by hardware when all internal wakeup source are cleared.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "WUSCR",
+          "offset": 72,
+          "size": 32,
+          "description": "wakeup status clear register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "wakeup status clear register",
+          "fields": [
+            {
+              "name": "CWUF1",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Wakeup flag 1\r Writing 1 to this bit clears the WUF1 flag in WUSR.",
+              "enum": null
+            },
+            {
+              "name": "CWUF2",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Wakeup flag 2\r Writing 1 to this bit clears the WUF2 flag in WUSR.",
+              "enum": null
+            },
+            {
+              "name": "CWUF3",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Wakeup flag 3\r Writing 1 to this bit clears the WUF3 flag in WUSR.",
+              "enum": null
+            },
+            {
+              "name": "CWUF4",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Wakeup flag 4\r Writing 1 to this bit clears the WUF4 flag in WUSR.",
+              "enum": null
+            },
+            {
+              "name": "CWUF5",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Wakeup flag 5\r Writing 1 to this bit clears the WUF5 flag in WUSR.",
+              "enum": null
+            },
+            {
+              "name": "CWUF6",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Wakeup flag 6\r Writing 1 to this bit clears the WUF6 flag in WUSR.",
+              "enum": null
+            },
+            {
+              "name": "CWUF7",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Wakeup flag 7\r Writing 1 to this bit clears the WUF7 flag in WUSR.",
+              "enum": null
+            },
+            {
+              "name": "CWUF8",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Wakeup flag 8\r Writing 1 to this bit clears the WUF8 flag in WUSR.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "APCR",
+          "offset": 76,
+          "size": 32,
+          "description": "apply pull configuration register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "apply pull configuration register",
+          "fields": [
+            {
+              "name": "APC",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Apply pull-up and pull-down configuration\r When this bit is set, the I/O pull-up and pull-down configurations defined in PUCRx and PDCRx are applied. When this bit is cleared, PUCRx and PDCRx are not applied to the I/Os.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "PUCR",
+          "offset": 80,
+          "size": 32,
+          "description": "Power Port pull-up control register",
+          "array_len": 9,
+          "array_stride": 8,
+          "fieldset_description": "Power Port pull control register",
+          "fields": [
+            {
+              "name": "P",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Port pull bit y (y=0..15)",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "PDCR",
+          "offset": 84,
+          "size": 32,
+          "description": "Power Port pull-down control register",
+          "array_len": 9,
+          "array_stride": 8,
+          "fieldset_description": "Power Port pull control register",
+          "fields": [
+            {
+              "name": "P",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Port pull bit y (y=0..15)",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "ACTVOS": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Range4",
+          "value": 0,
+          "description": "Range 4 (lowest power)"
+        },
+        {
+          "name": "Range3",
+          "value": 1,
+          "description": "Range 3"
+        },
+        {
+          "name": "Range2",
+          "value": 2,
+          "description": "Range 2"
+        },
+        {
+          "name": "Range1",
+          "value": 3,
+          "description": "Range 1 (highest frequency)"
+        }
+      ]
+    },
+    "FLASHFWU": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "LowPower",
+          "value": 0,
+          "description": "Flash memory enters low-power mode in Stop 0 and Stop 1 modes (lower-power consumption)."
+        },
+        {
+          "name": "Normal",
+          "value": 1,
+          "description": "Flash memory remains in normal mode in Stop 0 and Stop 1 modes (faster wakeup time)."
+        }
+      ]
+    },
+    "LPMS": {
+      "bit_size": 3,
+      "variants": [
+        {
+          "name": "Stop0",
+          "value": 0,
+          "description": "Stop 0 mode"
+        },
+        {
+          "name": "Stop1",
+          "value": 1,
+          "description": "Stop 1 mode"
+        },
+        {
+          "name": "Stop2",
+          "value": 2,
+          "description": "Stop 2 mode"
+        },
+        {
+          "name": "Stop3",
+          "value": 3,
+          "description": "Stop 3 mode"
+        }
+      ]
+    },
+    "PDS": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Retained",
+          "value": 0,
+          "description": "Content retained in Stop modes"
+        },
+        {
+          "name": "Lost",
+          "value": 1,
+          "description": "Content lost in Stop modes"
+        }
+      ]
+    },
+    "PVDLS": {
+      "bit_size": 3,
+      "variants": [
+        {
+          "name": "v20",
+          "value": 0,
+          "description": "VPVD0 around 2.0 V"
+        },
+        {
+          "name": "v22",
+          "value": 1,
+          "description": "VPVD1 around 2.2 V"
+        },
+        {
+          "name": "v24",
+          "value": 2,
+          "description": "VPVD2 around 2.4 V"
+        },
+        {
+          "name": "v25",
+          "value": 3,
+          "description": "VPVD3 around 2.5 V"
+        },
+        {
+          "name": "v26",
+          "value": 4,
+          "description": "VPVD4 around 2.6 V"
+        },
+        {
+          "name": "v28",
+          "value": 5,
+          "description": "VPVD5 around 2.8 V"
+        },
+        {
+          "name": "v29",
+          "value": 6,
+          "description": "VPVD6 around 2.9 V"
+        },
+        {
+          "name": "pvd_in",
+          "value": 7,
+          "description": "External input analog voltage PVD_IN (compared internally to VREFINT)"
+        }
+      ]
+    },
+    "PVDO": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "AboveOrEqual",
+          "value": 0,
+          "description": "VDD is equal or above the PVD threshold selected by PVDLS[2:0]."
+        },
+        {
+          "name": "Below",
+          "value": 1,
+          "description": "VDD is below the PVD threshold selected by PVDLS[2:0]."
+        }
+      ]
+    },
+    "REGSEL": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "LDO",
+          "value": 0,
+          "description": "LDO selected"
+        },
+        {
+          "name": "SMPS",
+          "value": 1,
+          "description": "SMPS selected"
+        }
+      ]
+    },
+    "SRAMFWU": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "SRAM4 enters low-power mode in Stop 0, 1 and 2 modes (source biasing for lower-power consumption)."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "SRAM4 remains in normal mode in Stop 0, 1 and 2 modes (higher consumption but no SRAM4 wakeup time)."
+        }
+      ]
+    },
+    "SRAMPD": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "PoweredOn",
+          "value": 0,
+          "description": "SRAM1 powered on"
+        },
+        {
+          "name": "PoweredOff",
+          "value": 1,
+          "description": "SRAM1 powered off"
+        }
+      ]
+    },
+    "TEMPH": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "Temperature < high threshold"
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "Temperature ≥ high threshold"
+        }
+      ]
+    },
+    "TEMPL": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "Temperature > low threshold"
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "Temperature ≤ low threshold"
+        }
+      ]
+    },
+    "VBATH": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "Backup domain voltage level < high threshold"
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "Backup domain voltage level ≥ high threshold"
+        }
+      ]
+    },
+    "VBE": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "VBAT battery charging disabled"
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "VBAT battery charging enabled"
+        }
+      ]
+    },
+    "VBRS": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "Charge VBAT through a 5 kΩ resistor"
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "Charge VBAT through a 1.5 kΩ resistor"
+        }
+      ]
+    },
+    "VOS": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Range4",
+          "value": 0,
+          "description": "Range 4 (lowest power)"
+        },
+        {
+          "name": "Range3",
+          "value": 1,
+          "description": "Range 3"
+        },
+        {
+          "name": "Range2",
+          "value": 2,
+          "description": "Range 2"
+        },
+        {
+          "name": "Range1",
+          "value": 3,
+          "description": "Range 1 (highest frequency). This value cannot be written when VCOREMEN = 1 in TAMP_OR register."
+        }
+      ]
+    },
+    "WUPP": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "High",
+          "value": 0,
+          "description": "Detection on high level (rising edge)"
+        },
+        {
+          "name": "Low",
+          "value": 1,
+          "description": "Detection on low level (falling edge)"
+        }
+      ]
+    },
+    "WUSEL": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "WKUP7_0"
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "WKUP7_1"
+        },
+        {
+          "name": "B_0x2",
+          "value": 2,
+          "description": "WKUP7_2"
+        },
+        {
+          "name": "B_0x3",
+          "value": 3,
+          "description": "WKUP7_3"
+        }
+      ]
+    }
+  }
+}

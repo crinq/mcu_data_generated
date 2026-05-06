@@ -1,0 +1,240 @@
+{
+  "schema": 1,
+  "kind": "dac",
+  "version": "v1",
+  "blocks": {
+    "DAC": {
+      "name": "DAC",
+      "description": "Digital-to-analog converter",
+      "extends": null,
+      "registers": [
+        {
+          "name": "CR",
+          "offset": 0,
+          "size": 32,
+          "description": "control register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "control register",
+          "fields": [
+            {
+              "name": "EN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "channel enable",
+              "enum": null
+            },
+            {
+              "name": "BOFF",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "channel output buffer disable",
+              "enum": null
+            },
+            {
+              "name": "TEN",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "channel trigger enable",
+              "enum": null
+            },
+            {
+              "name": "TSEL",
+              "bit_offset": 3,
+              "bit_width": 3,
+              "description": "channel trigger selection",
+              "enum": null
+            },
+            {
+              "name": "WAVE",
+              "bit_offset": 6,
+              "bit_width": 2,
+              "description": "channel noise/triangle wave generation enable",
+              "enum": "WAVE"
+            },
+            {
+              "name": "MAMP",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "channel mask/amplitude selector",
+              "enum": null
+            },
+            {
+              "name": "DMAEN",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "channel DMA enable",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SWTRIGR",
+          "offset": 4,
+          "size": 32,
+          "description": "software trigger register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "software trigger register",
+          "fields": [
+            {
+              "name": "SWTRIG",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "channel software trigger",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "DHR12R",
+          "offset": 8,
+          "size": 32,
+          "description": "channel 12-bit right-aligned data holding register",
+          "array_len": 2,
+          "array_stride": 12,
+          "fieldset_description": "channel 12-bit right-aligned data holding register",
+          "fields": [
+            {
+              "name": "DHR",
+              "bit_offset": 0,
+              "bit_width": 12,
+              "description": "channel 12-bit right-aligned data",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "DHR12L",
+          "offset": 12,
+          "size": 32,
+          "description": "channel 12-bit left-aligned data holding register",
+          "array_len": 2,
+          "array_stride": 12,
+          "fieldset_description": "channel 12-bit left-aligned data holding register",
+          "fields": [
+            {
+              "name": "DHR",
+              "bit_offset": 4,
+              "bit_width": 12,
+              "description": "channel 12-bit left-aligned data",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "DHR8R",
+          "offset": 16,
+          "size": 32,
+          "description": "channel 8-bit right-aligned data holding register",
+          "array_len": 2,
+          "array_stride": 12,
+          "fieldset_description": "channel 8-bit right-aligned data holding register",
+          "fields": [
+            {
+              "name": "DHR",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "channel 8-bit right-aligned data",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "DHR12RD",
+          "offset": 32,
+          "size": 32,
+          "description": "dual 12-bit right-aligned data holding register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "dual 12-bit right-aligned data holding register",
+          "fields": [
+            {
+              "name": "DHR",
+              "bit_offset": 0,
+              "bit_width": 12,
+              "description": "channel 12-bit right-aligned data",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "DHR12LD",
+          "offset": 36,
+          "size": 32,
+          "description": "dual 12-bit left aligned data holding register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "dual 12-bit left aligned data holding register",
+          "fields": [
+            {
+              "name": "DHR",
+              "bit_offset": 4,
+              "bit_width": 12,
+              "description": "channel 12-bit left-aligned data",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "DHR8RD",
+          "offset": 40,
+          "size": 32,
+          "description": "dual 8-bit right aligned data holding register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "dual 8-bit right aligned data holding register",
+          "fields": [
+            {
+              "name": "DHR",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "channel 8-bit right-aligned data",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "DOR",
+          "offset": 44,
+          "size": 32,
+          "description": "channel data output register",
+          "array_len": 2,
+          "array_stride": 4,
+          "fieldset_description": "channel data output register",
+          "fields": [
+            {
+              "name": "DOR",
+              "bit_offset": 0,
+              "bit_width": 12,
+              "description": "channel data output",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "WAVE": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Disabled",
+          "value": 0,
+          "description": "Wave generation disabled"
+        },
+        {
+          "name": "Noise",
+          "value": 1,
+          "description": "Noise wave generation enabled"
+        },
+        {
+          "name": "Triangle",
+          "value": 2,
+          "description": "Triangle wave generation enabled"
+        }
+      ]
+    }
+  }
+}

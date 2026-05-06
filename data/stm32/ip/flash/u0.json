@@ -1,0 +1,634 @@
+{
+  "schema": 1,
+  "kind": "flash",
+  "version": "u0",
+  "blocks": {
+    "FLASH": {
+      "name": "FLASH",
+      "description": "Mamba FLASH register block",
+      "extends": null,
+      "registers": [
+        {
+          "name": "ACR",
+          "offset": 0,
+          "size": 32,
+          "description": "FLASH access control register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "FLASH access control register",
+          "fields": [
+            {
+              "name": "LATENCY",
+              "bit_offset": 0,
+              "bit_width": 3,
+              "description": "Flash memory access latency The value in this bitfield represents the number of CPU wait states when accessing the flash memory. Other: Reserved A new write into the bitfield becomes effective when it returns the same value upon read.",
+              "enum": null
+            },
+            {
+              "name": "PRFTEN",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "CPU Prefetch enable",
+              "enum": null
+            },
+            {
+              "name": "ICEN",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "CPU Instruction cache enable",
+              "enum": null
+            },
+            {
+              "name": "ICRST",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "CPU Instruction cache reset This bit can be written only when the instruction cache is disabled.",
+              "enum": null
+            },
+            {
+              "name": "EMPTY",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Main flash memory area empty This bit indicates whether the first location of the main flash memory area is erased or has a programmed value. The bit can be set and reset by software.",
+              "enum": null
+            },
+            {
+              "name": "DBG_SWEN",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "Debug access software enable Software may use this bit to enable/disable the debugger read access.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "KEYR",
+          "offset": 8,
+          "size": 32,
+          "description": "FLASH key register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "FLASH key register",
+          "fields": [
+            {
+              "name": "KEY",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "FLASH key The following values must be written consecutively to unlock the FLASH control register (FLASH_CR), thus enabling programming/erasing operations: KEY1: 0x4567 0123 KEY2: 0xCDEF 89AB",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "OPTKEYR",
+          "offset": 12,
+          "size": 32,
+          "description": "FLASH option key register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "FLASH option key register",
+          "fields": [
+            {
+              "name": "OPTKEY",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Option byte key The following values must be written consecutively to unlock the flash memory option registers, enabling option byte programming/erasing operations: KEY1: 0x0819 2A3B KEY2: 0x4C5D 6E7F",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SR",
+          "offset": 16,
+          "size": 32,
+          "description": "FLASH status register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "FLASH status register",
+          "fields": [
+            {
+              "name": "EOP",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "End of operation Set by hardware when one or more flash memory operation (programming / erase) has been completed successfully. This bit is set only if the end of operation interrupts are enabled (EOPIE=1). Cleared by writing 1.",
+              "enum": null
+            },
+            {
+              "name": "OPERR",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Operation error Set by hardware when a flash memory operation (program / erase) completes unsuccessfully. This bit is set only if error interrupts are enabled (ERRIE=1). Cleared by writing 1.",
+              "enum": null
+            },
+            {
+              "name": "PROGERR",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Programming error Set by hardware when a double-word address to be programmed contains a value different from '0xFFFF FFFF' before programming, except if the data to write is '0x0000 0000'. Cleared by writing 1.",
+              "enum": null
+            },
+            {
+              "name": "WRPERR",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Write protection error Set by hardware when an address to be erased/programmed belongs to a write-protected part (by WRP, PCROP or RDP Level 1) of the flash memory. Cleared by writing 1.",
+              "enum": null
+            },
+            {
+              "name": "PGAERR",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Programming alignment error Set by hardware when the data to program cannot be contained in the same double word (64-bit) flash memory in case of standard programming, or if there is a change of page during fast programming. Cleared by writing 1.",
+              "enum": null
+            },
+            {
+              "name": "SIZERR",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Size error Set by hardware when the size of the access is a byte or half-word during a program or a fast program sequence. Only double word programming is allowed (consequently: word access). Cleared by writing 1.",
+              "enum": null
+            },
+            {
+              "name": "PGSERR",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Programming sequence error Set by hardware when a write access to the flash memory is performed by the code while PG or FSTPG have not been set previously. Set also by hardware when PROGERR, SIZERR, PGAERR, WRPERR, MISSERR or FASTERR is set due to a previous programming error. Cleared by writing 1.",
+              "enum": null
+            },
+            {
+              "name": "MISSERR",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Fast programming data miss error In Fast programming mode, 16 double words (128 bytes) must be sent to flash memory successively, and the new data must be sent to the logic control before the current data is fully programmed. MISSERR is set by hardware when the new data is not present in time. Cleared by writing 1.",
+              "enum": null
+            },
+            {
+              "name": "FASTERR",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Fast programming error Set by hardware when a fast programming sequence (activated by FSTPG) is interrupted due to an error (alignment, size, write protection or data miss). The corresponding status bit (PGAERR, SIZERR, WRPERR or MISSERR) is set at the same time. Cleared by writing 1.",
+              "enum": null
+            },
+            {
+              "name": "RDERR",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "PCROP read error Set by hardware when an address to be read belongs to a read protected area of the flash memory (PCROP protection). An interrupt is generated if RDERRIE is set in FLASH_CR. Cleared by writing 1.",
+              "enum": null
+            },
+            {
+              "name": "OPTVERR",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Option and Engineering bits loading validity error",
+              "enum": null
+            },
+            {
+              "name": "BSY1",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Busy This flag indicates that a flash memory operation requested by FLASH control register (FLASH_CR) is in progress. This bit is set at the beginning of the flash memory operation, and cleared when the operation finishes or when an error occurs.",
+              "enum": null
+            },
+            {
+              "name": "CFGBSY",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "Programming or erase configuration busy. This flag is set and cleared by hardware. It is set when the first word is sent for program or when setting the STRT bit of FLASH control register (FLASH_CR) for erase. It is cleared when the flash memory program or erase operation completes or ends with an error. When set, launching any other operation through the FLASH control register (FLASH_CR) is impossible, and must be postponed (a programming or erase operation is ongoing). When cleared, the program and erase settings in the FLASH control register (FLASH_CR) can be modified.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CR",
+          "offset": 20,
+          "size": 32,
+          "description": "FLASH control register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "FLASH control register",
+          "fields": [
+            {
+              "name": "PG",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Flash memory programming enable",
+              "enum": null
+            },
+            {
+              "name": "PER",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Page erase enable",
+              "enum": null
+            },
+            {
+              "name": "MER1",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Mass erase When set, this bit triggers the mass erase, that is, all user pages.",
+              "enum": null
+            },
+            {
+              "name": "PNB",
+              "bit_offset": 3,
+              "bit_width": 7,
+              "description": "Page number selection These bits select the page to erase: ... Note: Values corresponding to addresses outside the main memory are not allowed.",
+              "enum": null
+            },
+            {
+              "name": "STRT",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Start erase operation This bit triggers an erase operation when set. This bit is possible to set only by software and to clear only by hardware. The hardware clears it when one of BSY1 and BSY2 flags in the FLASH_SR register transits to zero.",
+              "enum": null
+            },
+            {
+              "name": "OPTSTRT",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "Start of modification of option bytes This bit triggers an options operation when set. This bit is set only by software, and is cleared when the BSY1 bit is cleared in FLASH_SR.",
+              "enum": null
+            },
+            {
+              "name": "FSTPG",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "Fast programming enable",
+              "enum": null
+            },
+            {
+              "name": "EOPIE",
+              "bit_offset": 24,
+              "bit_width": 1,
+              "description": "End-of-operation interrupt enable This bit enables the interrupt generation upon setting the EOP flag in the FLASH_SR register.",
+              "enum": null
+            },
+            {
+              "name": "ERRIE",
+              "bit_offset": 25,
+              "bit_width": 1,
+              "description": "Error interrupt enable This bit enables the interrupt generation upon setting the OPERR flag in the FLASH_SR register.",
+              "enum": null
+            },
+            {
+              "name": "RDERRIE",
+              "bit_offset": 26,
+              "bit_width": 1,
+              "description": "PCROP read error interrupt enable This bit enables the interrupt generation upon setting the RDERR flag in the FLASH_SR register.",
+              "enum": null
+            },
+            {
+              "name": "OBL_LAUNCH",
+              "bit_offset": 27,
+              "bit_width": 1,
+              "description": "Option byte load launch When set, this bit triggers the load of option bytes into option registers. It is automatically cleared upon the completion of the load. The high state of the bit indicates pending option byte load. The bit cannot be cleared by software. It cannot be written as long as OPTLOCK is set.",
+              "enum": null
+            },
+            {
+              "name": "SEC_PROT",
+              "bit_offset": 28,
+              "bit_width": 1,
+              "description": "Securable memory area protection enable This bit enables the protection on securable area, provided that a non-null securable memory area size (SEC_SIZE[4:0]) is defined in option bytes. This bit is possible to set only by software and to clear only through a system reset.",
+              "enum": null
+            },
+            {
+              "name": "OPTLOCK",
+              "bit_offset": 30,
+              "bit_width": 1,
+              "description": "Options Lock This bit is set only. When set, all bits concerning user option in FLASH_CR register and so option page are locked. This bit is cleared by hardware after detecting the unlock sequence. The LOCK bit must be cleared before doing the unlock sequence for OPTLOCK bit. In case of an unsuccessful unlock operation, this bit remains set until the next reset.",
+              "enum": null
+            },
+            {
+              "name": "LOCK",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "FLASH_CR Lock This bit is set only. When set, the FLASH_CR register is locked. It is cleared by hardware after detecting the unlock sequence. In case of an unsuccessful unlock operation, this bit remains set until the next system reset.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "ECCR",
+          "offset": 24,
+          "size": 32,
+          "description": "FLASH ECC register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "FLASH ECC register",
+          "fields": [
+            {
+              "name": "ADDR_ECC",
+              "bit_offset": 0,
+              "bit_width": 14,
+              "description": "ECC fail double-word address offset In case of ECC error or ECC correction detected, this bitfield contains double-word offset (multiple of 64 bits) to main Flash memory.",
+              "enum": null
+            },
+            {
+              "name": "SYSF_ECC",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "System Flash memory ECC fail This bit indicates that the ECC error correction or double ECC error detection is located in the system Flash memory.",
+              "enum": null
+            },
+            {
+              "name": "ECCCIE",
+              "bit_offset": 24,
+              "bit_width": 1,
+              "description": "ECC correction interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "ECCC",
+              "bit_offset": 30,
+              "bit_width": 1,
+              "description": "ECC correction Set by hardware when one ECC error has been detected and corrected. An interrupt is generated if ECCIE is set. Cleared by writing 1.",
+              "enum": null
+            },
+            {
+              "name": "ECCD",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "ECC detection Set by hardware when two ECC errors have been detected. When this bit is set, a NMI is generated. Cleared by writing 1.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "OPTR",
+          "offset": 32,
+          "size": 32,
+          "description": "FLASH option register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "FLASH option register",
+          "fields": [
+            {
+              "name": "RDP",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "Read protection level Other: Level 1, memories read protection active",
+              "enum": "RDP"
+            },
+            {
+              "name": "BORR_LEV",
+              "bit_offset": 8,
+              "bit_width": 3,
+              "description": "BOR reset level",
+              "enum": "BORR_LEV"
+            },
+            {
+              "name": "NRST_STOP",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Reset generated when entering Stop mode",
+              "enum": null
+            },
+            {
+              "name": "NRST_STDBY",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "Reset generated when entering Standby mode",
+              "enum": null
+            },
+            {
+              "name": "NRST_SHDW",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Reset generated when entering Shutdown mode",
+              "enum": null
+            },
+            {
+              "name": "IWDG_SW",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Independent watchdog selection",
+              "enum": null
+            },
+            {
+              "name": "IWDG_STOP",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "Independent watchdog counter freeze in Stop mode",
+              "enum": null
+            },
+            {
+              "name": "IWDG_STDBY",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "Independent watchdog counter freeze in Standby mode",
+              "enum": null
+            },
+            {
+              "name": "WWDG_SW",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "Window watchdog selection",
+              "enum": null
+            },
+            {
+              "name": "BDRST",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "Backup domain reset",
+              "enum": null
+            },
+            {
+              "name": "RAM_PARITY_CHECK",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "SRAM parity check control enable/disable",
+              "enum": null
+            },
+            {
+              "name": "BKPSRAM_HW_ERASE_DISABLE",
+              "bit_offset": 23,
+              "bit_width": 1,
+              "description": "Backup SRAM erase prevention",
+              "enum": null
+            },
+            {
+              "name": "NBOOT_SEL",
+              "bit_offset": 24,
+              "bit_width": 1,
+              "description": "BOOT0 signal source selection This option bit defines the source of the BOOT0 signal.",
+              "enum": null
+            },
+            {
+              "name": "NBOOT1",
+              "bit_offset": 25,
+              "bit_width": 1,
+              "description": "Boot configuration Together with the BOOT0 pin or option bit NBOOT0 (depending on NBOOT_SEL option bit configuration), this bit selects boot mode from the main flash memory, SRAM or the system memory. Refer to Section12.5: Boot configuration.",
+              "enum": null
+            },
+            {
+              "name": "NBOOT0",
+              "bit_offset": 26,
+              "bit_width": 1,
+              "description": "NBOOT0 option bit",
+              "enum": null
+            },
+            {
+              "name": "NRST_MODE",
+              "bit_offset": 27,
+              "bit_width": 2,
+              "description": "NRST pin configuration",
+              "enum": "NRST_MODE"
+            },
+            {
+              "name": "IRHEN",
+              "bit_offset": 29,
+              "bit_width": 1,
+              "description": "Internal reset holder enable bit",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "WRP1AR",
+          "offset": 44,
+          "size": 32,
+          "description": "FLASH WRP area A address register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "FLASH WRP area A address register",
+          "fields": [
+            {
+              "name": "WRP1A_STRT",
+              "bit_offset": 0,
+              "bit_width": 7,
+              "description": "WRP area A start offset This bitfield contains the offset of the first page of the WRP area A. Note: The number of effective bits depends on the size of the flash memory in the device.",
+              "enum": null
+            },
+            {
+              "name": "WRP1A_END",
+              "bit_offset": 16,
+              "bit_width": 7,
+              "description": "WRP area A end offset This bitfield contains the offset of the last page of the WRP area A. Note: The number of effective bits depends on the size of the flash memory in the device.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "WRP1BR",
+          "offset": 48,
+          "size": 32,
+          "description": "FLASH WRP area B address register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "FLASH WRP area B address register",
+          "fields": [
+            {
+              "name": "WRP1B_STRT",
+              "bit_offset": 0,
+              "bit_width": 7,
+              "description": "WRP area B start offset This bitfield contains the offset of the first page of the WRP area B. Note: The number of effective bits depends on the size of the flash memory in the device.",
+              "enum": null
+            },
+            {
+              "name": "WRP1B_END",
+              "bit_offset": 16,
+              "bit_width": 7,
+              "description": "WRP area B end offset This bitfield contains the offset of the last page of the WRP area B. Note: The number of effective bits depends on the size of the flash memory in the device.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SECR",
+          "offset": 128,
+          "size": 32,
+          "description": "FLASH security register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "FLASH security register",
+          "fields": [
+            {
+              "name": "HDP1_PEND",
+              "bit_offset": 0,
+              "bit_width": 7,
+              "description": "Last page of the first hide protection area",
+              "enum": null
+            },
+            {
+              "name": "BOOT_LOCK",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "used to force boot from user area If the bit is set in association with RDP level 1, the debug capabilities are disabled, except in the case of a bad OBL (mismatch).",
+              "enum": null
+            },
+            {
+              "name": "HDP1EN",
+              "bit_offset": 24,
+              "bit_width": 8,
+              "description": "Hide protection area enable",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "BORR_LEV": {
+      "bit_size": 3,
+      "variants": [
+        {
+          "name": "Level1",
+          "value": 0,
+          "description": "BOR rising level 1 with threshold around 2.1 V"
+        },
+        {
+          "name": "Level2",
+          "value": 1,
+          "description": "BOR rising level 2 with threshold around 2.3 V"
+        },
+        {
+          "name": "Level3",
+          "value": 2,
+          "description": "BOR rising level 3 with threshold around 2.6 V"
+        },
+        {
+          "name": "Level4",
+          "value": 3,
+          "description": "BOR rising level 4 with threshold around 2.9 V"
+        }
+      ]
+    },
+    "NRST_MODE": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "OnlyInput",
+          "value": 1,
+          "description": "Reset input only: a low level on the NRST pin generates system reset; internal RESET is not propagated to the NRST pin."
+        },
+        {
+          "name": "OnlyInternal",
+          "value": 2,
+          "description": "Standard GPIO: only internal RESET is possible"
+        },
+        {
+          "name": "Bidirectional",
+          "value": 3,
+          "description": "Bidirectional reset: the NRST pin is configured in reset input/output (legacy) mode"
+        }
+      ]
+    },
+    "RDP": {
+      "bit_size": 8,
+      "variants": [
+        {
+          "name": "Level0",
+          "value": 170,
+          "description": "Level 0, read protection not active"
+        },
+        {
+          "name": "Level2",
+          "value": 204,
+          "description": "Level 2, chip read protection active"
+        }
+      ]
+    }
+  }
+}

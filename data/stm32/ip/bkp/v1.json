@@ -1,0 +1,174 @@
+{
+  "schema": 1,
+  "kind": "bkp",
+  "version": "v1",
+  "blocks": {
+    "BKP": {
+      "name": "BKP",
+      "description": "Backup registers",
+      "extends": null,
+      "registers": [
+        {
+          "name": "DR",
+          "offset": 0,
+          "size": 32,
+          "description": "Data register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Data register",
+          "fields": [
+            {
+              "name": "D",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Backup data",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "RTCCR",
+          "offset": 44,
+          "size": 32,
+          "description": "RTC clock calibration register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "RTC clock calibration register",
+          "fields": [
+            {
+              "name": "CAL",
+              "bit_offset": 0,
+              "bit_width": 7,
+              "description": "Calibration value",
+              "enum": null
+            },
+            {
+              "name": "CCO",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Calibration Clock Output",
+              "enum": null
+            },
+            {
+              "name": "ASOE",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Alarm or second output enable",
+              "enum": null
+            },
+            {
+              "name": "ASOS",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Alarm or second output selection",
+              "enum": "ASOS"
+            }
+          ]
+        },
+        {
+          "name": "CR",
+          "offset": 48,
+          "size": 32,
+          "description": "Control register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Control register",
+          "fields": [
+            {
+              "name": "TPE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Tamper pin enable",
+              "enum": null
+            },
+            {
+              "name": "TPAL",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Tamper pin active level",
+              "enum": "TPAL"
+            }
+          ]
+        },
+        {
+          "name": "CSR",
+          "offset": 52,
+          "size": 32,
+          "description": "Control/status register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Control/status register",
+          "fields": [
+            {
+              "name": "CTE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Clear Tamper event",
+              "enum": null
+            },
+            {
+              "name": "CTI",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Clear Tamper Interrupt",
+              "enum": null
+            },
+            {
+              "name": "TPIE",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Tamper Pin interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "TEF",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Tamper Event Flag",
+              "enum": null
+            },
+            {
+              "name": "TIF",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Tamper Interrupt Flag",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "ASOS": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Alarm",
+          "value": 0,
+          "description": "RTC Alarm pulse output selected"
+        },
+        {
+          "name": "Second",
+          "value": 1,
+          "description": "RTC Second pulse output selected"
+        }
+      ]
+    },
+    "TPAL": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "High",
+          "value": 0,
+          "description": "A high level on the TAMPER pin resets all data backup registers (if TPE bit is set)"
+        },
+        {
+          "name": "Low",
+          "value": 1,
+          "description": "A low level on the TAMPER pin resets all data backup registers (if TPE bit is set)"
+        }
+      ]
+    }
+  }
+}

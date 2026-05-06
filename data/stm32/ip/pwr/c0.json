@@ -1,0 +1,229 @@
+{
+  "schema": 1,
+  "kind": "pwr",
+  "version": "c0",
+  "blocks": {
+    "PWR": {
+      "name": "PWR",
+      "description": "PWR address block description",
+      "extends": null,
+      "registers": [
+        {
+          "name": "CR1",
+          "offset": 0,
+          "size": 32,
+          "description": "PWR control register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "PWR control register 1",
+          "fields": [
+            {
+              "name": "LPMS",
+              "bit_offset": 0,
+              "bit_width": 3,
+              "description": "Low-power mode selection\r These bits select the low-power mode entered when CPU enters deepsleep mode.\r 1XX: Shutdown mode",
+              "enum": "LPMS"
+            },
+            {
+              "name": "FPD_STOP",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Flash memory powered down during Stop mode\r This bit determines whether the Flash memory is put in power-down mode or remains in idle mode when the device enters Stop mode.",
+              "enum": null
+            },
+            {
+              "name": "FPD_SLP",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Flash memory powered down during Sleep mode\r This bit determines whether the Flash memory is put in power-down mode or remains in idle mode when the device enters Sleep mode.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CR3",
+          "offset": 8,
+          "size": 32,
+          "description": "PWR control register 3",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "PWR control register 3",
+          "fields": [
+            {
+              "name": "EWUP",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Enable Wakeup pin",
+              "enum": null
+            },
+            {
+              "name": "APC",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Apply pull-up and pull-down configuration\r This bit determines whether the I/O pull-up and pull-down configurations defined in the PWR_PUCRx and PWR_PDCRx registers are applied.",
+              "enum": null
+            },
+            {
+              "name": "EIWUL",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Enable internal wakeup line\r When set, a rising edge on the internal wakeup line triggers a wakeup event.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CR4",
+          "offset": 12,
+          "size": 32,
+          "description": "PWR control register 4",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "PWR control register 4",
+          "fields": [
+            {
+              "name": "WP",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Wakeup pin WKUP1 polarity",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SR1",
+          "offset": 16,
+          "size": 32,
+          "description": "PWR status register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "PWR status register 1",
+          "fields": [
+            {
+              "name": "WUF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Wakeup flag",
+              "enum": null
+            },
+            {
+              "name": "SBF",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Standby/Shutdown flag\r This bit is set by hardware when the device enters Standby or Shutdown mode and is cleared by setting the CSBF bit in the PWR_SCR register, or by a power-on reset. It is not cleared by the system reset.",
+              "enum": null
+            },
+            {
+              "name": "WUFI",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Wakeup flag internal\r This bit is set when a wakeup condition is detected on the internal wakeup line. It is cleared when all internal wakeup sources are cleared.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SR2",
+          "offset": 20,
+          "size": 32,
+          "description": "PWR status register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "PWR status register 2",
+          "fields": [
+            {
+              "name": "FLASH_RDY",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Flash ready flag\r This bit is set by hardware to indicate when the Flash memory is ready to be accessed after wakeup from power-down. To place the Flash memory in power-down, set either FPD_SLP or FPD_STP bit.\r Note: If the system boots from SRAM, the user application must wait till FLASH_RDY bit is set, prior to jumping to Flash memory.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SCR",
+          "offset": 24,
+          "size": 32,
+          "description": "PWR status clear register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "PWR status clear register",
+          "fields": [
+            {
+              "name": "CWUF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Clear Wakeup flag",
+              "enum": null
+            },
+            {
+              "name": "CSBF",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Clear standby flag\r Setting this bit clears the SBF flag in the PWR_SR1 register.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "PUCR",
+          "offset": 32,
+          "size": 32,
+          "description": "PWR Port pull-up control register",
+          "array_len": 6,
+          "array_stride": 8,
+          "fieldset_description": "Power Port pull control register",
+          "fields": [
+            {
+              "name": "P",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Port pull bit y (y=0..15)",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "PDCR",
+          "offset": 36,
+          "size": 32,
+          "description": "PWR Port pull-down control register",
+          "array_len": 6,
+          "array_stride": 8,
+          "fieldset_description": "Power Port pull control register",
+          "fields": [
+            {
+              "name": "P",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Port pull bit y (y=0..15)",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "LPMS": {
+      "bit_size": 3,
+      "variants": [
+        {
+          "name": "Stop",
+          "value": 0,
+          "description": "Selects Stop mode when entering DeepSleep."
+        },
+        {
+          "name": "Standby",
+          "value": 3,
+          "description": "Selects Standby mode when entering DeepSleep."
+        },
+        {
+          "name": "Shutdown",
+          "value": 4,
+          "description": "Selects Shutdown mode when entering DeepSleep."
+        }
+      ]
+    }
+  }
+}

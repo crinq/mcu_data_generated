@@ -1,0 +1,845 @@
+{
+  "schema": 1,
+  "kind": "trng",
+  "version": "v1",
+  "blocks": {
+    "TRNG": {
+      "name": "TRNG",
+      "description": null,
+      "extends": null,
+      "registers": [
+        {
+          "name": "CR",
+          "offset": 0,
+          "size": 32,
+          "description": "CR register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "CR register.",
+          "fields": [
+            {
+              "name": "DISABLE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Disable Bit DISABLE can be used for reading or setting the state of the TRNG core. The value read is always the one available at the rng core clock domain. When changing the value, the change is effective when the value read is the same as the one written.",
+              "enum": null
+            },
+            {
+              "name": "CLR_REVCLK_FLAG",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Reset reveal clock error flags when writing a '1' without resetting the whole TRNG. When writing a 1, the value remains until it is seen by RNG core clock domain after resynchronization. Then it is automatically reset.",
+              "enum": "CLR_REVCLK_FLAG"
+            },
+            {
+              "name": "RST_HEALTH_FLAGS",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Reset Health error flags when writing a '1' without resetting the whole TRNG. When writing a 1, the value remains until it is seen by RNG core clock domain after resynchronization. Then it is automatically reset.",
+              "enum": "RST_HEALTH_FLAGS"
+            },
+            {
+              "name": "CLKDIV",
+              "bit_offset": 8,
+              "bit_width": 16,
+              "description": "Sampling Clock Enable Divider. CLKDIV[15:0] control the sampling clock enable divider, dividing by a factor equal to CLKDIV[15:0] + 1, values being in the range of 1 to 65536.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SR",
+          "offset": 4,
+          "size": 32,
+          "description": "SR register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SR register.",
+          "fields": [
+            {
+              "name": "DISABLED",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "TRNG is disabled.",
+              "enum": null
+            },
+            {
+              "name": "ALL_OSCS_DOWN",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "All oscillators of the random source noise have been powered down. This can cause the rising of OEC3 flag.",
+              "enum": "ALL_OSCS_DOWN"
+            },
+            {
+              "name": "REVEAL_CLK_ERR",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "The internal clock for the RNG core is not revealed.",
+              "enum": "REVEAL_CLK_ERR"
+            },
+            {
+              "name": "ENTROPY_ERR",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "The error refers to a fault in the bit sequence detected by the Entropy Monitor. Failed test is given by REPET_ERROR, and ADAPT_ERROR, OSCS_REPET_ERROR and OSCS_ADAPT_ERROR status flags.",
+              "enum": "ENTROPY_ERR"
+            },
+            {
+              "name": "VAL_READY",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "TRNG Value ready At least one 32-bit random value is available in the data FIFO. Note that application must ensure that a random is available in internal FIFO before starting a read otherwise a bus error will be generated.",
+              "enum": "VAL_READY"
+            },
+            {
+              "name": "FIFO_FULL",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Indicates whether random data FIFO is full.",
+              "enum": "FIFO_FULL"
+            },
+            {
+              "name": "SRC_HEALTH_DONE",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "First run of noise source health test is completed.",
+              "enum": null
+            },
+            {
+              "name": "REPET_ERROR",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "Noise source Repetition health test error.",
+              "enum": null
+            },
+            {
+              "name": "ADAPT_ERROR",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "Noise source Adaptive 1024 health test error.",
+              "enum": null
+            },
+            {
+              "name": "OSCS_HEALTH_DONE",
+              "bit_offset": 23,
+              "bit_width": 1,
+              "description": "First run of source health tests of individual oscillators composing the noise source are completed.Reserved.",
+              "enum": null
+            },
+            {
+              "name": "OSCS_REPET_ERROR",
+              "bit_offset": 24,
+              "bit_width": 1,
+              "description": "Logical OR of repetition health test errors of individual oscillators composing the noise source.",
+              "enum": null
+            },
+            {
+              "name": "OSCS_ADAPT_ERROR",
+              "bit_offset": 25,
+              "bit_width": 1,
+              "description": "Logical OR of adaptive health test errors of individual oscillators composing the noise source.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "VAL",
+          "offset": 8,
+          "size": 32,
+          "description": "VAL register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "VAL register.",
+          "fields": [
+            {
+              "name": "RND_VAL",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "RND_VAL is a 32-bit Random Value. This is the output of the internal four-word FIFO. Note that application must ensure that a random is available in FIFO by ready VAL_READY flag before starting a read otherwise a null value will be returned.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "OSCS_CR",
+          "offset": 48,
+          "size": 32,
+          "description": "OSCS_CR register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "OSCS_CR register.",
+          "fields": [
+            {
+              "name": "PWRD1",
+              "bit_offset": 1,
+              "bit_width": 3,
+              "description": "Power down of individual oscillators in triple-oscillator block number 1.",
+              "enum": null
+            },
+            {
+              "name": "PWRD2",
+              "bit_offset": 4,
+              "bit_width": 3,
+              "description": "Power down of individual oscillators in triple-oscillator block number 2.",
+              "enum": null
+            },
+            {
+              "name": "PWRD3",
+              "bit_offset": 7,
+              "bit_width": 3,
+              "description": "Power down of individual oscillators in triple-oscillator block number 3.",
+              "enum": null
+            },
+            {
+              "name": "SYNC_OSCS",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "When set, selection of resynchronized output of oscillators.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "POSTP_CR",
+          "offset": 52,
+          "size": 32,
+          "description": "POSTP_CR register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "POSTP_CR register.",
+          "fields": [
+            {
+              "name": "AES_RESET",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Reset AES post processing. When writing a 1, the AES post processing is reinitialized, resulting in a new key and new state generation before 128-bit random words generation. The '1' written is frozen until it is seen by RNG core clock domain after resynchronization. Then it is automatically reset. It also reruns analog source health tests.",
+              "enum": "AES_RESET"
+            },
+            {
+              "name": "NB_LOOP_AES",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "NB_LOOP_AES is the number of 128-bit words got from the noise source that have to be processed by AES for generating a single 128-bit random word. By default, this value is set to 2 (128 bits generated before an AES processing). 0 value means 16 loops. A new AES processing is started only when the previous one is completed.",
+              "enum": null
+            },
+            {
+              "name": "NB_RND_REINIT",
+              "bit_offset": 16,
+              "bit_width": 16,
+              "description": "Number of 128-bit random words generated before AES automatically resets. This number is in the range of 1 to 65535 words. Value 0x0000 means that AES is never reinitialized.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "POSTP_SR",
+          "offset": 56,
+          "size": 32,
+          "description": "POSTP_SR register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "POSTP_SR register.",
+          "fields": [
+            {
+              "name": "AES_INIT",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "AES Post processing has been fully initialized (key and state) and is ready for generating 128-bit random words.",
+              "enum": "AES_INIT"
+            },
+            {
+              "name": "AES_KEY_LD",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "AES random key has been generated and loaded in AES key register.",
+              "enum": "AES_KEY_LD"
+            },
+            {
+              "name": "AES_BUSY",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "AES core is busy, generating a random value.",
+              "enum": "AES_BUSY"
+            },
+            {
+              "name": "AES_HEALTH_DONE",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "AES-CMAC health test is completed.",
+              "enum": null
+            },
+            {
+              "name": "AES_K12_ERROR",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Health test error on AES-CMAC sub-keys generation.",
+              "enum": null
+            },
+            {
+              "name": "AES_DOUT_ERROR",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Health test error on AES-CMAC output generation.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "DEFKEY0",
+          "offset": 64,
+          "size": 32,
+          "description": "DEFKEY0 register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "DEFKEY0 register.",
+          "fields": [
+            {
+              "name": "DEFKEY0",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Bits 31 to 0 of AES 128-bit Default Key.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "DEFKEY1",
+          "offset": 68,
+          "size": 32,
+          "description": "DEFKEY1 register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "DEFKEY1 register.",
+          "fields": [
+            {
+              "name": "DEFKEY1",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Bits 63 to 31 of AES 128-bit Default Key.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "DEFKEY2",
+          "offset": 72,
+          "size": 32,
+          "description": "DEFKEY2 register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "DEFKEY2 register.",
+          "fields": [
+            {
+              "name": "DEFKEY2",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Bits 95 to 64 of AES 128-bit Default Key.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "DEFKEY3",
+          "offset": 76,
+          "size": 32,
+          "description": "DEFKEY3 register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "DEFKEY3 register.",
+          "fields": [
+            {
+              "name": "DEFKEY3",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Bits 127 to 96 of AES 128-bit Default Key.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "HEALTH_CR",
+          "offset": 96,
+          "size": 32,
+          "description": "HEALTH_CR register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "HEALTH_CR register.",
+          "fields": [
+            {
+              "name": "REPET_CUTOFF",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "Cutoff value of Repetition Test. The default value is set to 51. Caution: To be handled with care as any change can lead to misbehavior of TRNG.",
+              "enum": null
+            },
+            {
+              "name": "ADAP_CUTOFF",
+              "bit_offset": 16,
+              "bit_width": 10,
+              "description": "Cutoff value of Adaptive Test. The default value is set to 699. Caution: To be handled with care as any change can lead to misbehavior of TRNG.",
+              "enum": null
+            },
+            {
+              "name": "ITER_ADAP",
+              "bit_offset": 28,
+              "bit_width": 2,
+              "description": "Number of iterations minus 1 of Adaptive test during initialization phase. Default value is set to 0 i.e. 1 iteration.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "HEALTH_OSC1_CR",
+          "offset": 104,
+          "size": 32,
+          "description": "HEALTH_OSC1_CR register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "HEALTH_OSC1_CR register.",
+          "fields": [
+            {
+              "name": "REPET_CUTOFF_OSC1",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "Cutoff value of Repetition Test. The default value is set to 51. Caution: To be handled with care as any change can lead to misbehavior of TRNG.",
+              "enum": null
+            },
+            {
+              "name": "ADAP_CUTOFF_OSC1",
+              "bit_offset": 16,
+              "bit_width": 10,
+              "description": "Cutoff value of Adaptive Test. The default value is set to 699. Caution: To be handled with care as any change can lead to misbehavior of TRNG.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "HEALTH_OSC2_CR",
+          "offset": 108,
+          "size": 32,
+          "description": "HEALTH_OSC2_CR register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "HEALTH_OSC2_CR register.",
+          "fields": [
+            {
+              "name": "REPET_CUTOFF_OSC2",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "Cutoff value of Repetition Test. The default value is set to 51. Caution: To be handled with care as any change can lead to misbehavior of TRNG.",
+              "enum": null
+            },
+            {
+              "name": "ADAP_CUTOFF_OSC2",
+              "bit_offset": 16,
+              "bit_width": 10,
+              "description": "Cutoff value of Adaptive Test. The default value is set to 699. Caution: To be handled with care as any change can lead to misbehavior of TRNG.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "HEALTH_OSC3_CR",
+          "offset": 112,
+          "size": 32,
+          "description": "HEALTH_OSC3_CR register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "HEALTH_OSC3_CR register.",
+          "fields": [
+            {
+              "name": "REPET_CUTOFF_OSC3",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "Cutoff value of Repetition Test. The default value is set to 51. Caution: To be handled with care as any change can lead to misbehavior of TRNG.",
+              "enum": null
+            },
+            {
+              "name": "ADAP_CUTOFF_OSC3",
+              "bit_offset": 16,
+              "bit_width": 10,
+              "description": "Cutoff value of Adaptive Test. The default value is set to 699. Caution: To be handled with care as any change can lead to misbehavior of TRNG.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "HEALTH_OSC1_SR",
+          "offset": 116,
+          "size": 32,
+          "description": "HEALTH_OSC1_SR register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "HEALTH_OSC1_SR register.",
+          "fields": [
+            {
+              "name": "TO1_REPET_ERROR",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Repetition error flag of first oscillator of first triple-oscillator cell.",
+              "enum": null
+            },
+            {
+              "name": "TO1_ADAPT_ERROR",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Adaptive error flag of first oscillator of first triple-oscillator cell.",
+              "enum": null
+            },
+            {
+              "name": "TO2_REPET_ERROR",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Repetition error flag of first oscillator of second triple-oscillator cell.",
+              "enum": null
+            },
+            {
+              "name": "TO2_ADAPT_ERROR",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Adaptive error flag of first oscillator of second triple-oscillator cell.",
+              "enum": null
+            },
+            {
+              "name": "TO3_REPET_ERROR",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Repetition error flag of first oscillator of third triple-oscillator cell.",
+              "enum": null
+            },
+            {
+              "name": "TO3_ADAPT_ERROR",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Adaptive error flag of first oscillator of third triple-oscillator cell.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "HEALTH_OSC2_SR",
+          "offset": 120,
+          "size": 32,
+          "description": "HEALTH_OSC2_SR register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "HEALTH_OSC2_SR register.",
+          "fields": [
+            {
+              "name": "TO1_REPET_ERROR",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Repetition error flag of first oscillator of first triple-oscillator cell.",
+              "enum": null
+            },
+            {
+              "name": "TO1_ADAPT_ERROR",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Adaptive error flag of first oscillator of first triple-oscillator cell.",
+              "enum": null
+            },
+            {
+              "name": "TO2_REPET_ERROR",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Repetition error flag of first oscillator of second triple-oscillator cell.",
+              "enum": null
+            },
+            {
+              "name": "TO2_ADAPT_ERROR",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Adaptive error flag of first oscillator of second triple-oscillator cell.",
+              "enum": null
+            },
+            {
+              "name": "TO3_REPET_ERROR",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Repetition error flag of first oscillator of third triple-oscillator cell.",
+              "enum": null
+            },
+            {
+              "name": "TO3_ADAPT_ERROR",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Adaptive error flag of first oscillator of third triple-oscillator cell.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "HEALTH_OSC3_SR",
+          "offset": 124,
+          "size": 32,
+          "description": "HEALTH_OSC3_SR register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "HEALTH_OSC3_SR register.",
+          "fields": [
+            {
+              "name": "TO1_REPET_ERROR",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Repetition error flag of third oscillator of first triple-oscillator cell.",
+              "enum": null
+            },
+            {
+              "name": "TO1_ADAPT_ERROR",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Adaptive error flag of first oscillator of first triple-oscillator cell.",
+              "enum": null
+            },
+            {
+              "name": "TO2_REPET_ERROR",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Repetition error flag of first oscillator of second triple-oscillator cell.",
+              "enum": null
+            },
+            {
+              "name": "TO2_ADAPT_ERROR",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Adaptive error flag of first oscillator of second triple-oscillator cell.",
+              "enum": null
+            },
+            {
+              "name": "TO3_REPET_ERROR",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Repetition error flag of first oscillator of third triple-oscillator cell.",
+              "enum": null
+            },
+            {
+              "name": "TO3_ADAPT_ERROR",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Adaptive error flag of first oscillator of third triple-oscillator cell.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "IRQ_CR",
+          "offset": 128,
+          "size": 32,
+          "description": "IRQ_CR register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "IRQ_CR register.",
+          "fields": [
+            {
+              "name": "EN_FF_FULL_IRQ",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Enable the interrupt when the output fifo is full of new random.",
+              "enum": null
+            },
+            {
+              "name": "EN_ERROR_IRQ",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Enable the interrupt when an error is reported by the health tests.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "IRQ_SR",
+          "offset": 132,
+          "size": 32,
+          "description": "IRQ_SR register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "IRQ_SR register.",
+          "fields": [
+            {
+              "name": "FF_FULL_IRQ",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Set to 1 when the output fifo is full of new random. Flag is cleared by writing a 1.",
+              "enum": null
+            },
+            {
+              "name": "ERROR_IRQ",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Set to 1 when an error is reported by the health tests. Flag is cleared by writing a 1.",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "AES_BUSY": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "AES core is idle."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "AES core is busy."
+        }
+      ]
+    },
+    "AES_INIT": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "AES core is not initialized (no key or state set)."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "AES core is fully initialized."
+        }
+      ]
+    },
+    "AES_KEY_LD": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "AES core is waiting for 128 random bits from the entropy sources for generating its key."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "AES key register has been loaded with a random key."
+        }
+      ]
+    },
+    "AES_RESET": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "No effect."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "Reset AES core."
+        }
+      ]
+    },
+    "ALL_OSCS_DOWN": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "At least one oscillator is ON."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "All oscillators are down."
+        }
+      ]
+    },
+    "CLR_REVCLK_FLAG": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "no reset."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "reset revclk flag."
+        }
+      ]
+    },
+    "ENTROPY_ERR": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "No fault detected."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "Embedded heath monitor detects an error in bit stream quality."
+        }
+      ]
+    },
+    "FIFO_FULL": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "FIFO is not full."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "The internal data FIFO is full and four 32-bit random values can be read."
+        }
+      ]
+    },
+    "REVEAL_CLK_ERR": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "Internal clock for RNG clock is present."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "Internal RNG clock is not present."
+        }
+      ]
+    },
+    "RST_HEALTH_FLAGS": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "no reset."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "reset health flag."
+        }
+      ]
+    },
+    "VAL_READY": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "No value is ready in FIFO."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "A 32-bit value is available in the internal FIFO."
+        }
+      ]
+    }
+  }
+}

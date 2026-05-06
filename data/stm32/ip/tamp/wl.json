@@ -1,0 +1,408 @@
+{
+  "schema": 1,
+  "kind": "tamp",
+  "version": "wl",
+  "blocks": {
+    "TAMP": {
+      "name": "TAMP",
+      "description": "Tamper and backup registers",
+      "extends": null,
+      "registers": [
+        {
+          "name": "CR1",
+          "offset": 0,
+          "size": 32,
+          "description": "control register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "control register 1",
+          "fields": [
+            {
+              "name": "TAMPE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Tamper detection on IN X enable",
+              "enum": null
+            },
+            {
+              "name": "ITAMPE",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Internal tamper X enable",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CR2",
+          "offset": 4,
+          "size": 32,
+          "description": "control register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "control register 2",
+          "fields": [
+            {
+              "name": "TAMPNOER",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Tamper X no erase",
+              "enum": null
+            },
+            {
+              "name": "TAMPMSK",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Tamper X mask. The tamper X interrupt must not be enabled when TAMPMSK is set.",
+              "enum": "TAMPMSK"
+            },
+            {
+              "name": "BKERASE",
+              "bit_offset": 23,
+              "bit_width": 1,
+              "description": "Backup registers erase",
+              "enum": "BKERASE"
+            },
+            {
+              "name": "TAMPTRG",
+              "bit_offset": 24,
+              "bit_width": 1,
+              "description": "Active level for tamper X input",
+              "enum": "TAMPTRG"
+            }
+          ]
+        },
+        {
+          "name": "CR3",
+          "offset": 8,
+          "size": 32,
+          "description": "TAMP control register 3",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "TAMP control register 3",
+          "fields": [
+            {
+              "name": "ITAMPNOER",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Internal Tamper X no erase",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "FLTCR",
+          "offset": 12,
+          "size": 32,
+          "description": "TAMP filter control register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "TAMP filter control register",
+          "fields": [
+            {
+              "name": "TAMPFREQ",
+              "bit_offset": 0,
+              "bit_width": 3,
+              "description": "Tamper sampling frequency. Determines the frequency at which each of the INx inputs are sampled.",
+              "enum": "TAMPFREQ"
+            },
+            {
+              "name": "TAMPFLT",
+              "bit_offset": 3,
+              "bit_width": 2,
+              "description": "INx filter count. These bits determines the number of consecutive samples at the specified level (TAMP*TRG) needed to activate a tamper event. TAMPFLT is valid for each of the INx inputs.",
+              "enum": "TAMPFLT"
+            },
+            {
+              "name": "TAMPPRCH",
+              "bit_offset": 5,
+              "bit_width": 2,
+              "description": "INx precharge duration. These bit determines the duration of time during which the pull-up/is activated before each sample. TAMPPRCH is valid for each of the INx inputs.",
+              "enum": "TAMPPRCH"
+            },
+            {
+              "name": "TAMPPUDIS",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "INx pull-up disable. This bit determines if each of the TAMPx pins are precharged before each sample.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "IER",
+          "offset": 44,
+          "size": 32,
+          "description": "TAMP interrupt enable register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "TAMP interrupt enable register",
+          "fields": [
+            {
+              "name": "TAMPIE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Tamper X interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "ITAMPIE",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Internal tamper X interrupt enable",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SR",
+          "offset": 48,
+          "size": 32,
+          "description": "TAMP status register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "TAMP status register",
+          "fields": [
+            {
+              "name": "TAMPF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Tamper X detection flag",
+              "enum": null
+            },
+            {
+              "name": "ITAMPF",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Internal tamper X detection flag",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "MISR",
+          "offset": 52,
+          "size": 32,
+          "description": "TAMP masked interrupt status register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "TAMP masked interrupt status register",
+          "fields": [
+            {
+              "name": "TAMPMF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Tamper X interrupt masked flag",
+              "enum": null
+            },
+            {
+              "name": "ITAMPMF",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Internal tamper X interrupt masked flag",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SCR",
+          "offset": 60,
+          "size": 32,
+          "description": "TAMP status clear register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "TAMP status clear register",
+          "fields": [
+            {
+              "name": "CTAMPF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Clear tamper X detection flag",
+              "enum": null
+            },
+            {
+              "name": "CITAMPF",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Clear internal tamper X detection flag",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "COUNTR",
+          "offset": 64,
+          "size": 32,
+          "description": "monotonic counter register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "monotonic counter register",
+          "fields": [
+            {
+              "name": "COUNT",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "COUNT",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "BKPR",
+          "offset": 256,
+          "size": 32,
+          "description": "TAMP backup register",
+          "array_len": 20,
+          "array_stride": 4,
+          "fieldset_description": "TAMP backup register",
+          "fields": [
+            {
+              "name": "BKP",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "BKP",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "BKERASE": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Reset",
+          "value": 1,
+          "description": "Reset backup registers"
+        }
+      ]
+    },
+    "TAMPFLT": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "NoFilter",
+          "value": 0,
+          "description": "Tamper event is activated on edge of TAMP_INx input transitions to the active level (no internal pull-up on TAMP_INx input)\""
+        },
+        {
+          "name": "Filter2",
+          "value": 1,
+          "description": "Tamper event is activated after 2 consecutive samples at the active level\""
+        },
+        {
+          "name": "Filter4",
+          "value": 2,
+          "description": "Tamper event is activated after 4 consecutive samples at the active level\""
+        },
+        {
+          "name": "Filter8",
+          "value": 3,
+          "description": "Tamper event is activated after 8 consecutive samples at the active level\""
+        }
+      ]
+    },
+    "TAMPFREQ": {
+      "bit_size": 3,
+      "variants": [
+        {
+          "name": "Hz_1",
+          "value": 0,
+          "description": "RTCCLK / 32768 (1 Hz when RTCCLK = 32768 Hz)"
+        },
+        {
+          "name": "Hz_2",
+          "value": 1,
+          "description": "RTCCLK / 16384 (2 Hz when RTCCLK = 32768 Hz)"
+        },
+        {
+          "name": "Hz_4",
+          "value": 2,
+          "description": "RTCCLK / 8192 (4 Hz when RTCCLK = 32768 Hz)"
+        },
+        {
+          "name": "Hz_8",
+          "value": 3,
+          "description": "RTCCLK / 4096 (8 Hz when RTCCLK = 32768 Hz)"
+        },
+        {
+          "name": "Hz_16",
+          "value": 4,
+          "description": "RTCCLK / 2048 (16 Hz when RTCCLK = 32768 Hz)"
+        },
+        {
+          "name": "Hz_32",
+          "value": 5,
+          "description": "RTCCLK / 1024 (32 Hz when RTCCLK = 32768 Hz)"
+        },
+        {
+          "name": "Hz_64",
+          "value": 6,
+          "description": "RTCCLK / 512 (64 Hz when RTCCLK = 32768 Hz)"
+        },
+        {
+          "name": "Hz_128",
+          "value": 7,
+          "description": "RTCCLK / 256 (128 Hz when RTCCLK = 32768 Hz)"
+        }
+      ]
+    },
+    "TAMPMSK": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "ResetBySoftware",
+          "value": 0,
+          "description": "Tamper x event generates a trigger event and TAMPxF must be cleared by software to allow next tamper event detection"
+        },
+        {
+          "name": "ResetByHardware",
+          "value": 1,
+          "description": "Tamper x event generates a trigger event. TAMPxF is masked and internally cleared by hardware. The backup registers are not erased. The tamper x interrupt must not be enabled when TAMP3MSK is set"
+        }
+      ]
+    },
+    "TAMPPRCH": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Cycles1",
+          "value": 0,
+          "description": "1 RTCCLK cycle"
+        },
+        {
+          "name": "Cycles2",
+          "value": 1,
+          "description": "2 RTCCLK cycles"
+        },
+        {
+          "name": "Cycles4",
+          "value": 2,
+          "description": "4 RTCCLK cycles"
+        },
+        {
+          "name": "Cycles8",
+          "value": 3,
+          "description": "8 RTCCLK cycles"
+        }
+      ]
+    },
+    "TAMPTRG": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "FilteredLowOrUnfilteredHigh",
+          "value": 0,
+          "description": "If TAMPFLT != 00 Tamper x input staying low triggers a tamper detection event. If TAMPFLT = 00 Tamper x input rising edge and high level triggers a tamper detection event"
+        },
+        {
+          "name": "FilteredHighOrUnfilteredLow",
+          "value": 1,
+          "description": "If TAMPFLT != 00 Tamper x input staying high triggers a tamper detection event. If TAMPFLT = 00 Tamper x input falling edge and low level triggers a tamper detection event"
+        }
+      ]
+    }
+  }
+}

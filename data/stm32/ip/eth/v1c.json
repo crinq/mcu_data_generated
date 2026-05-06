@@ -1,0 +1,3181 @@
+{
+  "schema": 1,
+  "kind": "eth",
+  "version": "v1c",
+  "blocks": {
+    "ETH": {
+      "name": "ETH",
+      "description": "Ethernet Peripheral",
+      "extends": null,
+      "registers": [
+        {
+          "name": "ETHERNET_MAC",
+          "offset": 0,
+          "description": "Ethernet: media access control (MAC)",
+          "array_len": null,
+          "array_stride": null,
+          "fields": []
+        },
+        {
+          "name": "ETHERNET_PTP",
+          "offset": 1792,
+          "description": "Ethernet: Precision Time Protocol (PTP)",
+          "array_len": null,
+          "array_stride": null,
+          "fields": []
+        },
+        {
+          "name": "ETHERNET_DMA",
+          "offset": 4096,
+          "description": "Ethernet: DMA mode register (DMA)",
+          "array_len": null,
+          "array_stride": null,
+          "fields": []
+        }
+      ]
+    },
+    "ETHERNET_DMA": {
+      "name": "ETHERNET_DMA",
+      "description": "Ethernet: DMA controller operation",
+      "extends": null,
+      "registers": [
+        {
+          "name": "DMABMR",
+          "offset": 0,
+          "size": 32,
+          "description": "Ethernet DMA bus mode register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet DMA bus mode register",
+          "fields": [
+            {
+              "name": "SR",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Software reset",
+              "enum": null
+            },
+            {
+              "name": "DA",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "DMA arbitration",
+              "enum": "DA"
+            },
+            {
+              "name": "DSL",
+              "bit_offset": 2,
+              "bit_width": 5,
+              "description": "Descriptor skip length",
+              "enum": null
+            },
+            {
+              "name": "EDFE",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Enhanced descriptor format enable",
+              "enum": null
+            },
+            {
+              "name": "PBL",
+              "bit_offset": 8,
+              "bit_width": 6,
+              "description": "Programmable burst length",
+              "enum": "PBL"
+            },
+            {
+              "name": "PM",
+              "bit_offset": 14,
+              "bit_width": 2,
+              "description": "Rx-Tx priority ratio",
+              "enum": "PriorityRxOverTx"
+            },
+            {
+              "name": "FB",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Fixed burst",
+              "enum": "FB"
+            },
+            {
+              "name": "RDP",
+              "bit_offset": 17,
+              "bit_width": 6,
+              "description": "Rx DMA PBL",
+              "enum": "RDP"
+            },
+            {
+              "name": "USP",
+              "bit_offset": 23,
+              "bit_width": 1,
+              "description": "Use separate PBL",
+              "enum": "USP"
+            },
+            {
+              "name": "FPM",
+              "bit_offset": 24,
+              "bit_width": 1,
+              "description": "4xPBL mode",
+              "enum": "FPM"
+            },
+            {
+              "name": "AAB",
+              "bit_offset": 25,
+              "bit_width": 1,
+              "description": "Address-aligned beats",
+              "enum": null
+            },
+            {
+              "name": "MB",
+              "bit_offset": 26,
+              "bit_width": 1,
+              "description": "Mixed burst",
+              "enum": "MB"
+            }
+          ]
+        },
+        {
+          "name": "DMATPDR",
+          "offset": 4,
+          "size": 32,
+          "description": "Ethernet DMA transmit poll demand register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet DMA transmit poll demand register",
+          "fields": [
+            {
+              "name": "TPD",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Transmit poll demand",
+              "enum": "TPD"
+            }
+          ]
+        },
+        {
+          "name": "DMARPDR",
+          "offset": 8,
+          "size": 32,
+          "description": "EHERNET DMA receive poll demand register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "EHERNET DMA receive poll demand register",
+          "fields": [
+            {
+              "name": "RPD",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Receive poll demand",
+              "enum": "RPD"
+            }
+          ]
+        },
+        {
+          "name": "DMARDLAR",
+          "offset": 12,
+          "size": 32,
+          "description": "Ethernet DMA receive descriptor list address register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet DMA receive descriptor list address register",
+          "fields": [
+            {
+              "name": "SRL",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Start of receive list",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "DMATDLAR",
+          "offset": 16,
+          "size": 32,
+          "description": "Ethernet DMA transmit descriptor list address register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet DMA transmit descriptor list address register",
+          "fields": [
+            {
+              "name": "STL",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Start of transmit list",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "DMASR",
+          "offset": 20,
+          "size": 32,
+          "description": "Ethernet DMA status register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet DMA status register",
+          "fields": [
+            {
+              "name": "TS",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Transmit status",
+              "enum": null
+            },
+            {
+              "name": "TPSS",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Transmit process stopped status",
+              "enum": null
+            },
+            {
+              "name": "TBUS",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Transmit buffer unavailable status",
+              "enum": null
+            },
+            {
+              "name": "TJTS",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Transmit jabber timeout status",
+              "enum": null
+            },
+            {
+              "name": "ROS",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Receive overflow status",
+              "enum": null
+            },
+            {
+              "name": "TUS",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Transmit underflow status",
+              "enum": null
+            },
+            {
+              "name": "RS",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Receive status",
+              "enum": null
+            },
+            {
+              "name": "RBUS",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Receive buffer unavailable status",
+              "enum": null
+            },
+            {
+              "name": "RPSS",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Receive process stopped status",
+              "enum": null
+            },
+            {
+              "name": "PWTS",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "PWTS",
+              "enum": null
+            },
+            {
+              "name": "ETS",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Early transmit status",
+              "enum": null
+            },
+            {
+              "name": "FBES",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Fatal bus error status",
+              "enum": null
+            },
+            {
+              "name": "ERS",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "Early receive status",
+              "enum": null
+            },
+            {
+              "name": "AIS",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Abnormal interrupt summary",
+              "enum": null
+            },
+            {
+              "name": "NIS",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Normal interrupt summary",
+              "enum": null
+            },
+            {
+              "name": "RPS",
+              "bit_offset": 17,
+              "bit_width": 3,
+              "description": "Receive process state",
+              "enum": "RPS"
+            },
+            {
+              "name": "TPS",
+              "bit_offset": 20,
+              "bit_width": 3,
+              "description": "Transmit process state",
+              "enum": "TPS"
+            },
+            {
+              "name": "EBS",
+              "bit_offset": 23,
+              "bit_width": 3,
+              "description": "Error bits status",
+              "enum": null
+            },
+            {
+              "name": "MMCS",
+              "bit_offset": 27,
+              "bit_width": 1,
+              "description": "MMC status",
+              "enum": null
+            },
+            {
+              "name": "PMTS",
+              "bit_offset": 28,
+              "bit_width": 1,
+              "description": "PMT status",
+              "enum": null
+            },
+            {
+              "name": "TSTS",
+              "bit_offset": 29,
+              "bit_width": 1,
+              "description": "Time stamp trigger status",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "DMAOMR",
+          "offset": 24,
+          "size": 32,
+          "description": "Ethernet DMA operation mode register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet DMA operation mode register",
+          "fields": [
+            {
+              "name": "SR",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Start/stop receive",
+              "enum": "DMAOMR_SR"
+            },
+            {
+              "name": "OSF",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Operate on second frame",
+              "enum": null
+            },
+            {
+              "name": "RTC",
+              "bit_offset": 3,
+              "bit_width": 2,
+              "description": "Receive threshold control",
+              "enum": "RTC"
+            },
+            {
+              "name": "FUGF",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Forward undersized good frames",
+              "enum": "FUGF"
+            },
+            {
+              "name": "FEF",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Forward error frames",
+              "enum": "FEF"
+            },
+            {
+              "name": "ST",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Start/stop transmission",
+              "enum": "ST"
+            },
+            {
+              "name": "TTC",
+              "bit_offset": 14,
+              "bit_width": 3,
+              "description": "Transmit threshold control",
+              "enum": "TTC"
+            },
+            {
+              "name": "FTF",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "Flush transmit FIFO",
+              "enum": "FTF"
+            },
+            {
+              "name": "TSF",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "Transmit store and forward",
+              "enum": "TSF"
+            },
+            {
+              "name": "DFRF",
+              "bit_offset": 24,
+              "bit_width": 1,
+              "description": "Disable flushing of received frames",
+              "enum": null
+            },
+            {
+              "name": "RSF",
+              "bit_offset": 25,
+              "bit_width": 1,
+              "description": "Receive store and forward",
+              "enum": "RSF"
+            },
+            {
+              "name": "DTCEFD",
+              "bit_offset": 26,
+              "bit_width": 1,
+              "description": "Dropping of TCP/IP checksum error frames disable",
+              "enum": "DTCEFD"
+            }
+          ]
+        },
+        {
+          "name": "DMAIER",
+          "offset": 28,
+          "size": 32,
+          "description": "Ethernet DMA interrupt enable register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet DMA interrupt enable register",
+          "fields": [
+            {
+              "name": "TIE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Transmit interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "TPSIE",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Transmit process stopped interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "TBUIE",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Transmit buffer unavailable interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "TJTIE",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Transmit jabber timeout interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "ROIE",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Receive overflow interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "TUIE",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Transmit underflow interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "RIE",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Receive interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "RBUIE",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Receive buffer unavailable interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "RPSIE",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Receive process stopped interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "RWTIE",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Receive watchdog timeout interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "ETIE",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Early transmit interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "FBEIE",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Fatal bus error interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "ERIE",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "Early receive interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "AISE",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Abnormal interrupt summary enable",
+              "enum": null
+            },
+            {
+              "name": "NISE",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Normal interrupt summary enable",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "DMAMFBOCR",
+          "offset": 32,
+          "size": 32,
+          "description": "Ethernet DMA missed frame and buffer overflow counter register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet DMA missed frame and buffer overflow counter register",
+          "fields": [
+            {
+              "name": "MFC",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Missed frames by the controller",
+              "enum": null
+            },
+            {
+              "name": "OMFC",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Overflow bit for missed frame counter",
+              "enum": null
+            },
+            {
+              "name": "MFA",
+              "bit_offset": 17,
+              "bit_width": 11,
+              "description": "Missed frames by the application",
+              "enum": null
+            },
+            {
+              "name": "OFOC",
+              "bit_offset": 28,
+              "bit_width": 1,
+              "description": "Overflow bit for FIFO overflow counter",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "DMARSWTR",
+          "offset": 36,
+          "size": 32,
+          "description": "Ethernet DMA receive status watchdog timer register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet DMA receive status watchdog timer register",
+          "fields": [
+            {
+              "name": "RSWTC",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "Receive status watchdog timer count",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "DMACHTDR",
+          "offset": 72,
+          "size": 32,
+          "description": "Ethernet DMA current host transmit descriptor register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet DMA current host transmit descriptor register",
+          "fields": [
+            {
+              "name": "HTDAP",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Host transmit descriptor address pointer",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "DMACHRDR",
+          "offset": 76,
+          "size": 32,
+          "description": "Ethernet DMA current host receive descriptor register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet DMA current host receive descriptor register",
+          "fields": [
+            {
+              "name": "HRDAP",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Host receive descriptor address pointer",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "DMACHTBAR",
+          "offset": 80,
+          "size": 32,
+          "description": "Ethernet DMA current host transmit buffer address register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet DMA current host transmit buffer address register",
+          "fields": [
+            {
+              "name": "HTBAP",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Host transmit buffer address pointer",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "DMACHRBAR",
+          "offset": 84,
+          "size": 32,
+          "description": "Ethernet DMA current host receive buffer address register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet DMA current host receive buffer address register",
+          "fields": [
+            {
+              "name": "HRBAP",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Host receive buffer address pointer",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    },
+    "ETHERNET_MAC": {
+      "name": "ETHERNET_MAC",
+      "description": "Ethernet: media access control (MAC)",
+      "extends": null,
+      "registers": [
+        {
+          "name": "MACCR",
+          "offset": 0,
+          "size": 32,
+          "description": "Ethernet MAC configuration register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet MAC configuration register",
+          "fields": [
+            {
+              "name": "RE",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Receiver enable",
+              "enum": null
+            },
+            {
+              "name": "TE",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Transmitter enable",
+              "enum": null
+            },
+            {
+              "name": "DC",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Deferral check",
+              "enum": null
+            },
+            {
+              "name": "BL",
+              "bit_offset": 5,
+              "bit_width": 2,
+              "description": "Back-off limit",
+              "enum": "BL"
+            },
+            {
+              "name": "APCS",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Automatic pad/CRC stripping",
+              "enum": "APCS"
+            },
+            {
+              "name": "RD",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Retry disable",
+              "enum": "RD"
+            },
+            {
+              "name": "IPCO",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "IPv4 checksum offload",
+              "enum": "IPCO"
+            },
+            {
+              "name": "DM",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "Duplex mode",
+              "enum": "DM"
+            },
+            {
+              "name": "LM",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "Loopback mode",
+              "enum": "LM"
+            },
+            {
+              "name": "ROD",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Receive own disable",
+              "enum": "ROD"
+            },
+            {
+              "name": "FES",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "Fast Ethernet speed",
+              "enum": "FES"
+            },
+            {
+              "name": "CSD",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Carrier sense disable",
+              "enum": "CSD"
+            },
+            {
+              "name": "IFG",
+              "bit_offset": 17,
+              "bit_width": 3,
+              "description": "Interframe gap",
+              "enum": "IFG"
+            },
+            {
+              "name": "JD",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "Jabber disable",
+              "enum": "JD"
+            },
+            {
+              "name": "WD",
+              "bit_offset": 23,
+              "bit_width": 1,
+              "description": "Watchdog disable",
+              "enum": "WD"
+            },
+            {
+              "name": "CSTF",
+              "bit_offset": 25,
+              "bit_width": 1,
+              "description": "CRC stripping for type frames",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "MACFFR",
+          "offset": 4,
+          "size": 32,
+          "description": "Ethernet MAC frame filter register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet MAC frame filter register",
+          "fields": [
+            {
+              "name": "PM",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Promiscuous mode",
+              "enum": null
+            },
+            {
+              "name": "HU",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Hash unicast",
+              "enum": "HU"
+            },
+            {
+              "name": "HM",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Hash multicast",
+              "enum": "HM"
+            },
+            {
+              "name": "DAIF",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Destination address unique filtering",
+              "enum": "DAIF"
+            },
+            {
+              "name": "PAM",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Pass all multicast",
+              "enum": null
+            },
+            {
+              "name": "BFD",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Broadcast frames disable",
+              "enum": "BFD"
+            },
+            {
+              "name": "PCF",
+              "bit_offset": 6,
+              "bit_width": 2,
+              "description": "Pass control frames",
+              "enum": "PCF"
+            },
+            {
+              "name": "SAIF",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Source address inverse filtering",
+              "enum": "SAIF"
+            },
+            {
+              "name": "SAF",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Source address filter",
+              "enum": null
+            },
+            {
+              "name": "HPF",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Hash or perfect filter",
+              "enum": "HPF"
+            },
+            {
+              "name": "RA",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "Receive all",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "MACHTHR",
+          "offset": 8,
+          "size": 32,
+          "description": "Ethernet MAC hash table high register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet MAC hash table high register",
+          "fields": [
+            {
+              "name": "HTH",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Upper 32 bits of hash table",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "MACHTLR",
+          "offset": 12,
+          "size": 32,
+          "description": "Ethernet MAC hash table low register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet MAC hash table low register",
+          "fields": [
+            {
+              "name": "HTL",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Lower 32 bits of hash table",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "MACMIIAR",
+          "offset": 16,
+          "size": 32,
+          "description": "Ethernet MAC MII address register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet MAC MII address register",
+          "fields": [
+            {
+              "name": "MB",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "MII busy",
+              "enum": "MB_progress"
+            },
+            {
+              "name": "MW",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "MII write",
+              "enum": "MW"
+            },
+            {
+              "name": "CR",
+              "bit_offset": 2,
+              "bit_width": 3,
+              "description": "Clock range",
+              "enum": "CR"
+            },
+            {
+              "name": "MR",
+              "bit_offset": 6,
+              "bit_width": 5,
+              "description": "MII register - select the desired MII register in the PHY device",
+              "enum": null
+            },
+            {
+              "name": "PA",
+              "bit_offset": 11,
+              "bit_width": 5,
+              "description": "PHY address - select which of possible 32 PHYs is being accessed",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "MACMIIDR",
+          "offset": 20,
+          "size": 32,
+          "description": "Ethernet MAC MII data register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet MAC MII data register",
+          "fields": [
+            {
+              "name": "MD",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "MII data read from/written to the PHY",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "MACFCR",
+          "offset": 24,
+          "size": 32,
+          "description": "Ethernet MAC flow control register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet MAC flow control register",
+          "fields": [
+            {
+              "name": "FCB",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Flow control busy/back pressure activate",
+              "enum": "FCB"
+            },
+            {
+              "name": "TFCE",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Transmit flow control enable",
+              "enum": null
+            },
+            {
+              "name": "RFCE",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Receive flow control enable",
+              "enum": null
+            },
+            {
+              "name": "UPFD",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Unicast pause frame detect",
+              "enum": null
+            },
+            {
+              "name": "PLT",
+              "bit_offset": 4,
+              "bit_width": 2,
+              "description": "Pause low threshold",
+              "enum": "PLT"
+            },
+            {
+              "name": "ZQPD",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Zero-quanta pause disable",
+              "enum": "ZQPD"
+            },
+            {
+              "name": "PT",
+              "bit_offset": 16,
+              "bit_width": 16,
+              "description": "Pause time",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "MACVLANTR",
+          "offset": 28,
+          "size": 32,
+          "description": "Ethernet MAC VLAN tag register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet MAC VLAN tag register",
+          "fields": [
+            {
+              "name": "VLANTI",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "VLAN tag identifier (for receive frames)",
+              "enum": null
+            },
+            {
+              "name": "VLANTC",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "12-bit VLAN tag comparison",
+              "enum": "VLANTC"
+            }
+          ]
+        },
+        {
+          "name": "MACRWUFFR",
+          "offset": 40,
+          "description": "Ethernet MAC remote wakeup frame filter register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": []
+        },
+        {
+          "name": "MACPMTCSR",
+          "offset": 44,
+          "size": 32,
+          "description": "Ethernet MAC PMT control and status register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet MAC PMT control and status register",
+          "fields": [
+            {
+              "name": "PD",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Power down",
+              "enum": "PD"
+            },
+            {
+              "name": "MPE",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Magic packet enable",
+              "enum": null
+            },
+            {
+              "name": "WFE",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Wakeup frame enable",
+              "enum": null
+            },
+            {
+              "name": "MPR",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Magic packet received",
+              "enum": null
+            },
+            {
+              "name": "WFR",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Wakeup frame received",
+              "enum": null
+            },
+            {
+              "name": "GU",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Global unicast",
+              "enum": null
+            },
+            {
+              "name": "WFFRPR",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "Wakeup frame filter register pointer reset",
+              "enum": "WFFRPR"
+            }
+          ]
+        },
+        {
+          "name": "MACDBGR",
+          "offset": 52,
+          "size": 32,
+          "description": "Ethernet MAC debug register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet MAC debug register",
+          "fields": [
+            {
+              "name": "MMRPEA",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "MAC MII receive protocol engine active",
+              "enum": null
+            },
+            {
+              "name": "MSFRWCS",
+              "bit_offset": 1,
+              "bit_width": 2,
+              "description": "MAC small FIFO read/write controllers status",
+              "enum": null
+            },
+            {
+              "name": "RFWRA",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Rx FIFO write controller active",
+              "enum": null
+            },
+            {
+              "name": "RFRCS",
+              "bit_offset": 5,
+              "bit_width": 2,
+              "description": "Rx FIFO read controller status",
+              "enum": null
+            },
+            {
+              "name": "RFFL",
+              "bit_offset": 8,
+              "bit_width": 2,
+              "description": "Rx FIFO fill level",
+              "enum": null
+            },
+            {
+              "name": "MMTEA",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "MAC MII transmit engine active",
+              "enum": null
+            },
+            {
+              "name": "MTFCS",
+              "bit_offset": 17,
+              "bit_width": 2,
+              "description": "MAC transmit frame controller status",
+              "enum": null
+            },
+            {
+              "name": "MTP",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "MAC transmitter in pause",
+              "enum": null
+            },
+            {
+              "name": "TFRS",
+              "bit_offset": 20,
+              "bit_width": 2,
+              "description": "Tx FIFO read status",
+              "enum": null
+            },
+            {
+              "name": "TFWA",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "Tx FIFO write active",
+              "enum": null
+            },
+            {
+              "name": "TFNE",
+              "bit_offset": 24,
+              "bit_width": 1,
+              "description": "Tx FIFO not empty",
+              "enum": null
+            },
+            {
+              "name": "TFF",
+              "bit_offset": 25,
+              "bit_width": 1,
+              "description": "Tx FIFO full",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "MACSR",
+          "offset": 56,
+          "size": 32,
+          "description": "Ethernet MAC interrupt status register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet MAC interrupt status register",
+          "fields": [
+            {
+              "name": "PMTS",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "PMT status",
+              "enum": null
+            },
+            {
+              "name": "MMCS",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "MMC status",
+              "enum": null
+            },
+            {
+              "name": "MMCRS",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "MMC receive status",
+              "enum": null
+            },
+            {
+              "name": "MMCTS",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "MMC transmit status",
+              "enum": null
+            },
+            {
+              "name": "TSTS",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Time stamp trigger status",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "MACIMR",
+          "offset": 60,
+          "size": 32,
+          "description": "Ethernet MAC interrupt mask register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet MAC interrupt mask register",
+          "fields": [
+            {
+              "name": "PMTIM",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "PMT interrupt mask",
+              "enum": "PMTIM"
+            },
+            {
+              "name": "TSTIM",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Time stamp trigger interrupt mask",
+              "enum": "TSTIM"
+            }
+          ]
+        },
+        {
+          "name": "MACA0HR",
+          "offset": 64,
+          "size": 32,
+          "description": "Ethernet MAC address 0 high register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet MAC address 0 high register",
+          "fields": [
+            {
+              "name": "MACA0H",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Ethernet MAC address 0 high",
+              "enum": null
+            },
+            {
+              "name": "MO",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "Always 1",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "MACA0LR",
+          "offset": 68,
+          "size": 32,
+          "description": "Ethernet MAC address 0 low register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet MAC address 0 low register",
+          "fields": [
+            {
+              "name": "MACA0L",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Ethernet MAC address 0 low",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "MACAHR",
+          "offset": 72,
+          "size": 32,
+          "description": "Ethernet MAC address 1/2/3 high register",
+          "array_len": 3,
+          "array_stride": 8,
+          "fieldset_description": "Ethernet MAC address 1/2/3 high register",
+          "fields": [
+            {
+              "name": "MACAH",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Ethernet MAC address 1/2/3 high",
+              "enum": null
+            },
+            {
+              "name": "MBC",
+              "bit_offset": 24,
+              "bit_width": 6,
+              "description": "MBC",
+              "enum": null
+            },
+            {
+              "name": "SA",
+              "bit_offset": 30,
+              "bit_width": 1,
+              "description": "SA",
+              "enum": "MACAHR_SA"
+            },
+            {
+              "name": "AE",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "AE",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "MACALR",
+          "offset": 76,
+          "size": 32,
+          "description": "Ethernet MAC address 1/2/3 low register",
+          "array_len": 3,
+          "array_stride": 8,
+          "fieldset_description": "Ethernet MAC address 1/2/3 low register",
+          "fields": [
+            {
+              "name": "MACAL",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "thernet MAC address 1/2/3 low",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "MMCCR",
+          "offset": 256,
+          "size": 32,
+          "description": "Ethernet MMC control register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet MMC control register",
+          "fields": [
+            {
+              "name": "CR",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Counter reset",
+              "enum": "CounterReset"
+            },
+            {
+              "name": "CSR",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Counter stop rollover",
+              "enum": "CSR"
+            },
+            {
+              "name": "ROR",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Reset on read",
+              "enum": null
+            },
+            {
+              "name": "MCF",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "MMC counter freeze",
+              "enum": null
+            },
+            {
+              "name": "MCP",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "MMC counter preset",
+              "enum": "MCP"
+            },
+            {
+              "name": "MCFHP",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "MMC counter Full-Half preset",
+              "enum": "MCFHP"
+            }
+          ]
+        },
+        {
+          "name": "MMCRIR",
+          "offset": 260,
+          "size": 32,
+          "description": "Ethernet MMC receive interrupt register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet MMC receive interrupt register",
+          "fields": [
+            {
+              "name": "RFCES",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Received frames CRC error status",
+              "enum": null
+            },
+            {
+              "name": "RFAES",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Received frames alignment error status",
+              "enum": null
+            },
+            {
+              "name": "RGUFS",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "Received good Unicast frames status",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "MMCTIR",
+          "offset": 264,
+          "size": 32,
+          "description": "Ethernet MMC transmit interrupt register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet MMC transmit interrupt register",
+          "fields": [
+            {
+              "name": "TGFSCS",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "Transmitted good frames single collision status",
+              "enum": null
+            },
+            {
+              "name": "TGFMSCS",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Transmitted good frames more than single collision status",
+              "enum": null
+            },
+            {
+              "name": "TGFS",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "Transmitted good frames status",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "MMCRIMR",
+          "offset": 268,
+          "size": 32,
+          "description": "Ethernet MMC receive interrupt mask register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet MMC receive interrupt mask register",
+          "fields": [
+            {
+              "name": "RFCEM",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Received frame CRC error mask",
+              "enum": "RFCEM"
+            },
+            {
+              "name": "RFAEM",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Received frames alignment error mask",
+              "enum": "RFAEM"
+            },
+            {
+              "name": "RGUFM",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "Received good Unicast frames mask",
+              "enum": "RGUFM"
+            }
+          ]
+        },
+        {
+          "name": "MMCTIMR",
+          "offset": 272,
+          "size": 32,
+          "description": "Ethernet MMC transmit interrupt mask register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet MMC transmit interrupt mask register",
+          "fields": [
+            {
+              "name": "TGFSCM",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "Transmitted good frames single collision mask",
+              "enum": "TGFSCM"
+            },
+            {
+              "name": "TGFMSCM",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Transmitted good frames more than single collision mask",
+              "enum": "TGFMSCM"
+            },
+            {
+              "name": "TGFM",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Transmitted good frames mask",
+              "enum": "TGFM"
+            }
+          ]
+        },
+        {
+          "name": "MMCTGFSCCR",
+          "offset": 332,
+          "size": 32,
+          "description": "Ethernet MMC transmitted good frames after a single collision counter",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet MMC transmitted good frames after a single collision counter",
+          "fields": [
+            {
+              "name": "TGFSCC",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Transmitted good frames single collision counter",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "MMCTGFMSCCR",
+          "offset": 336,
+          "size": 32,
+          "description": "Ethernet MMC transmitted good frames after more than a single collision",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet MMC transmitted good frames after more than a single collision",
+          "fields": [
+            {
+              "name": "TGFMSCC",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "TGFMSCC",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "MMCTGFCR",
+          "offset": 360,
+          "size": 32,
+          "description": "Ethernet MMC transmitted good frames counter register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet MMC transmitted good frames counter register",
+          "fields": [
+            {
+              "name": "TGFC",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "HTL",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "MMCRFCECR",
+          "offset": 404,
+          "size": 32,
+          "description": "Ethernet MMC received frames with CRC error counter register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet MMC received frames with CRC error counter register",
+          "fields": [
+            {
+              "name": "RFCFC",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "RFCFC",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "MMCRFAECR",
+          "offset": 408,
+          "size": 32,
+          "description": "Ethernet MMC received frames with alignment error counter register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet MMC received frames with alignment error counter register",
+          "fields": [
+            {
+              "name": "RFAEC",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "RFAEC",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "MMCRGUFCR",
+          "offset": 452,
+          "size": 32,
+          "description": "MMC received good unicast frames counter register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "MMC received good unicast frames counter register",
+          "fields": [
+            {
+              "name": "RGUFC",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "RGUFC",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    },
+    "ETHERNET_PTP": {
+      "name": "ETHERNET_PTP",
+      "description": "Ethernet: Precision time protocol",
+      "extends": null,
+      "registers": [
+        {
+          "name": "PTPTSCR",
+          "offset": 0,
+          "size": 32,
+          "description": "Ethernet PTP time stamp control register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet PTP time stamp control register",
+          "fields": [
+            {
+              "name": "TSE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "TSE",
+              "enum": null
+            },
+            {
+              "name": "TSFCU",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "TSFCU",
+              "enum": null
+            },
+            {
+              "name": "TSSTI",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "TSSTI",
+              "enum": null
+            },
+            {
+              "name": "TSSTU",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "TSSTU",
+              "enum": null
+            },
+            {
+              "name": "TSITE",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "TSITE",
+              "enum": null
+            },
+            {
+              "name": "TTSARU",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "TTSARU",
+              "enum": null
+            },
+            {
+              "name": "TSSARFE",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "TSSARFE",
+              "enum": null
+            },
+            {
+              "name": "TSSSR",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "TSSSR",
+              "enum": null
+            },
+            {
+              "name": "TSPTPPSV2E",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "TSPTPPSV2E",
+              "enum": null
+            },
+            {
+              "name": "TSSPTPOEFE",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "TSSPTPOEFE",
+              "enum": null
+            },
+            {
+              "name": "TSSIPV6FE",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "TSSIPV6FE",
+              "enum": null
+            },
+            {
+              "name": "TSSIPV4FE",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "TSSIPV4FE",
+              "enum": null
+            },
+            {
+              "name": "TSSEME",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "TSSEME",
+              "enum": null
+            },
+            {
+              "name": "TSSMRME",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "TSSMRME",
+              "enum": null
+            },
+            {
+              "name": "TSCNT",
+              "bit_offset": 16,
+              "bit_width": 2,
+              "description": "TSCNT",
+              "enum": null
+            },
+            {
+              "name": "TSPFFMAE",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "TSPFFMAE",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "PTPSSIR",
+          "offset": 4,
+          "size": 32,
+          "description": "Ethernet PTP subsecond increment register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet PTP subsecond increment register",
+          "fields": [
+            {
+              "name": "STSSI",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "STSSI",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "PTPTSHR",
+          "offset": 8,
+          "size": 32,
+          "description": "Ethernet PTP time stamp high register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet PTP time stamp high register",
+          "fields": [
+            {
+              "name": "STS",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "STS",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "PTPTSLR",
+          "offset": 12,
+          "size": 32,
+          "description": "Ethernet PTP time stamp low register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet PTP time stamp low register",
+          "fields": [
+            {
+              "name": "STSS",
+              "bit_offset": 0,
+              "bit_width": 31,
+              "description": "STSS",
+              "enum": null
+            },
+            {
+              "name": "STPNS",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "STPNS",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "PTPTSHUR",
+          "offset": 16,
+          "size": 32,
+          "description": "Ethernet PTP time stamp high update register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet PTP time stamp high update register",
+          "fields": [
+            {
+              "name": "TSUS",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "TSUS",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "PTPTSLUR",
+          "offset": 20,
+          "size": 32,
+          "description": "Ethernet PTP time stamp low update register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet PTP time stamp low update register",
+          "fields": [
+            {
+              "name": "TSUSS",
+              "bit_offset": 0,
+              "bit_width": 31,
+              "description": "TSUSS",
+              "enum": null
+            },
+            {
+              "name": "TSUPNS",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "TSUPNS",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "PTPTSAR",
+          "offset": 24,
+          "size": 32,
+          "description": "Ethernet PTP time stamp addend register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet PTP time stamp addend register",
+          "fields": [
+            {
+              "name": "TSA",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "TSA",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "PTPTTHR",
+          "offset": 28,
+          "size": 32,
+          "description": "Ethernet PTP target time high register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet PTP target time high register",
+          "fields": [
+            {
+              "name": "TTSH",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "0",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "PTPTTLR",
+          "offset": 32,
+          "size": 32,
+          "description": "Ethernet PTP target time low register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet PTP target time low register",
+          "fields": [
+            {
+              "name": "TTSL",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "TTSL",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "PTPTSSR",
+          "offset": 40,
+          "size": 32,
+          "description": "Ethernet PTP time stamp status register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet PTP time stamp status register",
+          "fields": [
+            {
+              "name": "TSSO",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "TSSO",
+              "enum": null
+            },
+            {
+              "name": "TSTTR",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "TSSO",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "PTPPPSCR",
+          "offset": 44,
+          "size": 32,
+          "description": "Ethernet PTP PPS control register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Ethernet PTP PPS control register",
+          "fields": [
+            {
+              "name": "TSSO",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "TSSO",
+              "enum": null
+            },
+            {
+              "name": "TSTTR",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "TSTTR",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "APCS": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Disabled",
+          "value": 0,
+          "description": "MAC passes all incoming frames unmodified"
+        },
+        {
+          "name": "Strip",
+          "value": 1,
+          "description": "MAC strips the Pad/FCS field on incoming frames only for lengths less than or equal to 1500 bytes"
+        }
+      ]
+    },
+    "BFD": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Enabled",
+          "value": 0,
+          "description": "Address filters pass all received broadcast frames"
+        },
+        {
+          "name": "Disabled",
+          "value": 1,
+          "description": "Address filters filter all incoming broadcast frames"
+        }
+      ]
+    },
+    "BL": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "BL10",
+          "value": 0,
+          "description": "For retransmission n, wait up to 2^min(n, 10) time slots"
+        },
+        {
+          "name": "BL8",
+          "value": 1,
+          "description": "For retransmission n, wait up to 2^min(n, 8) time slots"
+        },
+        {
+          "name": "BL4",
+          "value": 2,
+          "description": "For retransmission n, wait up to 2^min(n, 4) time slots"
+        },
+        {
+          "name": "BL1",
+          "value": 3,
+          "description": "For retransmission n, wait up to 2^min(n, 1) time slots"
+        }
+      ]
+    },
+    "CR": {
+      "bit_size": 3,
+      "variants": [
+        {
+          "name": "CR_60_100",
+          "value": 0,
+          "description": "60-100MHz HCLK/42"
+        },
+        {
+          "name": "CR_100_150",
+          "value": 1,
+          "description": "100-150 MHz HCLK/62"
+        },
+        {
+          "name": "CR_20_35",
+          "value": 2,
+          "description": "20-35MHz HCLK/16"
+        },
+        {
+          "name": "CR_35_60",
+          "value": 3,
+          "description": "35-60MHz HCLK/16"
+        },
+        {
+          "name": "CR_150_168",
+          "value": 4,
+          "description": "150-168MHz HCLK/102"
+        }
+      ]
+    },
+    "CSD": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Enabled",
+          "value": 0,
+          "description": "Errors generated due to loss of carrier"
+        },
+        {
+          "name": "Disabled",
+          "value": 1,
+          "description": "No error generated due to loss of carrier"
+        }
+      ]
+    },
+    "CSR": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Rollover",
+          "value": 0,
+          "description": "Counters roll over to zero after reaching the maximum value"
+        },
+        {
+          "name": "NotRollover",
+          "value": 1,
+          "description": "Counters do not roll over to zero after reaching the maximum value"
+        }
+      ]
+    },
+    "CounterReset": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Reset",
+          "value": 1,
+          "description": "Reset all counters. Cleared automatically"
+        }
+      ]
+    },
+    "DA": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "RoundRobin",
+          "value": 0,
+          "description": "Round-robin with Rx:Tx priority given by PM"
+        },
+        {
+          "name": "RxPriority",
+          "value": 1,
+          "description": "Rx has priority over Tx"
+        }
+      ]
+    },
+    "DAIF": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Normal",
+          "value": 0,
+          "description": "Normal filtering of frames"
+        },
+        {
+          "name": "Invert",
+          "value": 1,
+          "description": "Address check block operates in inverse filtering mode for the DA address comparison"
+        }
+      ]
+    },
+    "DM": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "HalfDuplex",
+          "value": 0,
+          "description": "MAC operates in half-duplex mode"
+        },
+        {
+          "name": "FullDuplex",
+          "value": 1,
+          "description": "MAC operates in full-duplex mode"
+        }
+      ]
+    },
+    "DMAOMR_SR": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Stopped",
+          "value": 0,
+          "description": "Reception is stopped after transfer of the current frame"
+        },
+        {
+          "name": "Started",
+          "value": 1,
+          "description": "Reception is placed in the Running state"
+        }
+      ]
+    },
+    "DTCEFD": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Enabled",
+          "value": 0,
+          "description": "Drop frames with errors only in the receive checksum offload engine"
+        },
+        {
+          "name": "Disabled",
+          "value": 1,
+          "description": "Do not drop frames that only have errors in the receive checksum offload engine"
+        }
+      ]
+    },
+    "FB": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Variable",
+          "value": 0,
+          "description": "AHB uses SINGLE and INCR burst transfers"
+        },
+        {
+          "name": "Fixed",
+          "value": 1,
+          "description": "AHB uses only fixed burst transfers"
+        }
+      ]
+    },
+    "FCB": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "DisableBackPressure",
+          "value": 0,
+          "description": "In half duplex only, deasserts back pressure"
+        },
+        {
+          "name": "PauseOrBackPressure",
+          "value": 1,
+          "description": "In full duplex, initiate a Pause control frame. In half duplex, assert back pressure"
+        }
+      ]
+    },
+    "FEF": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Drop",
+          "value": 0,
+          "description": "Rx FIFO drops frames with error status"
+        },
+        {
+          "name": "Forward",
+          "value": 1,
+          "description": "All frames except runt error frames are forwarded to the DMA"
+        }
+      ]
+    },
+    "FES": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "FES10",
+          "value": 0,
+          "description": "10 Mbit/s"
+        },
+        {
+          "name": "FES100",
+          "value": 1,
+          "description": "100 Mbit/s"
+        }
+      ]
+    },
+    "FPM": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "x1",
+          "value": 0,
+          "description": "PBL values used as-is"
+        },
+        {
+          "name": "x4",
+          "value": 1,
+          "description": "PBL values multiplied by 4"
+        }
+      ]
+    },
+    "FTF": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Flush",
+          "value": 1,
+          "description": "Transmit FIFO controller logic is reset to its default values. Cleared automatically"
+        }
+      ]
+    },
+    "FUGF": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Drop",
+          "value": 0,
+          "description": "Rx FIFO drops all frames of less than 64 bytes"
+        },
+        {
+          "name": "Forward",
+          "value": 1,
+          "description": "Rx FIFO forwards undersized frames"
+        }
+      ]
+    },
+    "HM": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Perfect",
+          "value": 0,
+          "description": "MAC performs a perfect destination address filtering for multicast frames"
+        },
+        {
+          "name": "Hash",
+          "value": 1,
+          "description": "MAC performs destination address filtering of received multicast frames according to the hash table"
+        }
+      ]
+    },
+    "HPF": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "HashOnly",
+          "value": 0,
+          "description": "If HM or HU is set, only frames that match the Hash filter are passed"
+        },
+        {
+          "name": "HashOrPerfect",
+          "value": 1,
+          "description": "If HM or HU is set, frames that match either the perfect filter or the hash filter are passed"
+        }
+      ]
+    },
+    "HU": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Perfect",
+          "value": 0,
+          "description": "MAC performs a perfect destination address filtering for unicast frames"
+        },
+        {
+          "name": "Hash",
+          "value": 1,
+          "description": "MAC performs destination address filtering of received unicast frames according to the hash table"
+        }
+      ]
+    },
+    "IFG": {
+      "bit_size": 3,
+      "variants": [
+        {
+          "name": "IFG96",
+          "value": 0,
+          "description": "96 bit times"
+        },
+        {
+          "name": "IFG88",
+          "value": 1,
+          "description": "88 bit times"
+        },
+        {
+          "name": "IFG80",
+          "value": 2,
+          "description": "80 bit times"
+        },
+        {
+          "name": "IFG72",
+          "value": 3,
+          "description": "72 bit times"
+        },
+        {
+          "name": "IFG64",
+          "value": 4,
+          "description": "64 bit times"
+        },
+        {
+          "name": "IFG56",
+          "value": 5,
+          "description": "56 bit times"
+        },
+        {
+          "name": "IFG48",
+          "value": 6,
+          "description": "48 bit times"
+        },
+        {
+          "name": "IFG40",
+          "value": 7,
+          "description": "40 bit times"
+        }
+      ]
+    },
+    "IPCO": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Disabled",
+          "value": 0,
+          "description": "IPv4 checksum offload disabled"
+        },
+        {
+          "name": "Offload",
+          "value": 1,
+          "description": "IPv4 checksums are checked in received frames"
+        }
+      ]
+    },
+    "JD": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Enabled",
+          "value": 0,
+          "description": "Jabber enabled, transmit frames up to 2048 bytes"
+        },
+        {
+          "name": "Disabled",
+          "value": 1,
+          "description": "Jabber disabled, transmit frames up to 16384 bytes"
+        }
+      ]
+    },
+    "LM": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Normal",
+          "value": 0,
+          "description": "Normal mode"
+        },
+        {
+          "name": "Loopback",
+          "value": 1,
+          "description": "MAC operates in loopback mode at the MII"
+        }
+      ]
+    },
+    "MACAHR_SA": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Destination",
+          "value": 0,
+          "description": "This address is used for comparison with DA fields of the received frame"
+        },
+        {
+          "name": "Source",
+          "value": 1,
+          "description": "This address is used for comparison with SA fields of received frames"
+        }
+      ]
+    },
+    "MB": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Normal",
+          "value": 0,
+          "description": "Fixed burst transfers (INCRx and SINGLE) for burst lengths of 16 and below"
+        },
+        {
+          "name": "Mixed",
+          "value": 1,
+          "description": "If FB is low, start all bursts greater than 16 with INCR (undefined burst)"
+        }
+      ]
+    },
+    "MB_progress": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Busy",
+          "value": 1,
+          "description": "This bit is set to 1 by the application to indicate that a read or write access is in progress"
+        }
+      ]
+    },
+    "MCFHP": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "AlmostHalf",
+          "value": 0,
+          "description": "When MCP is set, MMC counters are preset to almost-half value 0x7FFF_FFF0"
+        },
+        {
+          "name": "AlmostFull",
+          "value": 1,
+          "description": "When MCP is set, MMC counters are preset to almost-full value 0xFFFF_FFF0"
+        }
+      ]
+    },
+    "MCP": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Preset",
+          "value": 1,
+          "description": "MMC counters will be preset to almost full or almost half. Cleared automatically"
+        }
+      ]
+    },
+    "MW": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Read",
+          "value": 0,
+          "description": "Read operation"
+        },
+        {
+          "name": "Write",
+          "value": 1,
+          "description": "Write operation"
+        }
+      ]
+    },
+    "PBL": {
+      "bit_size": 6,
+      "variants": [
+        {
+          "name": "PBL1",
+          "value": 1,
+          "description": "Maximum of 1 beat per DMA transaction"
+        },
+        {
+          "name": "PBL2",
+          "value": 2,
+          "description": "Maximum of 2 beats per DMA transaction"
+        },
+        {
+          "name": "PBL4",
+          "value": 4,
+          "description": "Maximum of 4 beats per DMA transaction"
+        },
+        {
+          "name": "PBL8",
+          "value": 8,
+          "description": "Maximum of 8 beats per DMA transaction"
+        },
+        {
+          "name": "PBL16",
+          "value": 16,
+          "description": "Maximum of 16 beats per DMA transaction"
+        },
+        {
+          "name": "PBL32",
+          "value": 32,
+          "description": "Maximum of 32 beats per DMA transaction"
+        }
+      ]
+    },
+    "PCF": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "PreventAll",
+          "value": 0,
+          "description": "MAC prevents all control frames from reaching the application"
+        },
+        {
+          "name": "ForwardAllExceptPause",
+          "value": 1,
+          "description": "MAC forwards all control frames to application except Pause"
+        },
+        {
+          "name": "ForwardAll",
+          "value": 2,
+          "description": "MAC forwards all control frames to application even if they fail the address filter"
+        },
+        {
+          "name": "ForwardAllFiltered",
+          "value": 3,
+          "description": "MAC forwards control frames that pass the address filter"
+        }
+      ]
+    },
+    "PD": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Enabled",
+          "value": 1,
+          "description": "All received frames will be dropped. Cleared automatically when a magic packet or wakeup frame is received"
+        }
+      ]
+    },
+    "PLT": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "PLT4",
+          "value": 0,
+          "description": "Pause time minus 4 slot times"
+        },
+        {
+          "name": "PLT28",
+          "value": 1,
+          "description": "Pause time minus 28 slot times"
+        },
+        {
+          "name": "PLT144",
+          "value": 2,
+          "description": "Pause time minus 144 slot times"
+        },
+        {
+          "name": "PLT256",
+          "value": 3,
+          "description": "Pause time minus 256 slot times"
+        }
+      ]
+    },
+    "PMTIM": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Unmasked",
+          "value": 0,
+          "description": "PMT Status interrupt generation enabled"
+        },
+        {
+          "name": "Masked",
+          "value": 1,
+          "description": "PMT Status interrupt generation disabled"
+        }
+      ]
+    },
+    "PriorityRxOverTx": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "OneToOne",
+          "value": 0,
+          "description": "RxDMA priority over TxDMA is 1:1"
+        },
+        {
+          "name": "TwoToOne",
+          "value": 1,
+          "description": "RxDMA priority over TxDMA is 2:1"
+        },
+        {
+          "name": "ThreeToOne",
+          "value": 2,
+          "description": "RxDMA priority over TxDMA is 3:1"
+        },
+        {
+          "name": "FourToOne",
+          "value": 3,
+          "description": "RxDMA priority over TxDMA is 4:1"
+        }
+      ]
+    },
+    "RD": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Enabled",
+          "value": 0,
+          "description": "MAC attempts retries based on the settings of BL"
+        },
+        {
+          "name": "Disabled",
+          "value": 1,
+          "description": "MAC attempts only 1 transmission"
+        }
+      ]
+    },
+    "RDP": {
+      "bit_size": 6,
+      "variants": [
+        {
+          "name": "RDP1",
+          "value": 1,
+          "description": "1 beat per RxDMA transaction"
+        },
+        {
+          "name": "RDP2",
+          "value": 2,
+          "description": "2 beats per RxDMA transaction"
+        },
+        {
+          "name": "RDP4",
+          "value": 4,
+          "description": "4 beats per RxDMA transaction"
+        },
+        {
+          "name": "RDP8",
+          "value": 8,
+          "description": "8 beats per RxDMA transaction"
+        },
+        {
+          "name": "RDP16",
+          "value": 16,
+          "description": "16 beats per RxDMA transaction"
+        },
+        {
+          "name": "RDP32",
+          "value": 32,
+          "description": "32 beats per RxDMA transaction"
+        }
+      ]
+    },
+    "RFAEM": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Unmasked",
+          "value": 0,
+          "description": "Received-alignment-error counter half-full interrupt enabled"
+        },
+        {
+          "name": "Masked",
+          "value": 1,
+          "description": "Received-alignment-error counter half-full interrupt disabled"
+        }
+      ]
+    },
+    "RFCEM": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Unmasked",
+          "value": 0,
+          "description": "Received-crc-error counter half-full interrupt enabled"
+        },
+        {
+          "name": "Masked",
+          "value": 1,
+          "description": "Received-crc-error counter half-full interrupt disabled"
+        }
+      ]
+    },
+    "RGUFM": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Unmasked",
+          "value": 0,
+          "description": "Received-good-unicast counter half-full interrupt enabled"
+        },
+        {
+          "name": "Masked",
+          "value": 1,
+          "description": "Received-good-unicast counter half-full interrupt disabled"
+        }
+      ]
+    },
+    "ROD": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Enabled",
+          "value": 0,
+          "description": "MAC receives all packets from PHY while transmitting"
+        },
+        {
+          "name": "Disabled",
+          "value": 1,
+          "description": "MAC disables reception of frames in half-duplex mode"
+        }
+      ]
+    },
+    "RPD": {
+      "bit_size": 32,
+      "variants": [
+        {
+          "name": "Poll",
+          "value": 0,
+          "description": "Poll the receive descriptor list"
+        }
+      ]
+    },
+    "RPS": {
+      "bit_size": 3,
+      "variants": [
+        {
+          "name": "Stopped",
+          "value": 0,
+          "description": "Stopped, reset or Stop Receive command issued"
+        },
+        {
+          "name": "RunningFetching",
+          "value": 1,
+          "description": "Running, fetching receive transfer descriptor"
+        },
+        {
+          "name": "RunningWaiting",
+          "value": 3,
+          "description": "Running, waiting for receive packet"
+        },
+        {
+          "name": "Suspended",
+          "value": 4,
+          "description": "Suspended, receive descriptor unavailable"
+        },
+        {
+          "name": "RunningWriting",
+          "value": 7,
+          "description": "Running, writing data to host memory buffer"
+        }
+      ]
+    },
+    "RSF": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "CutThrough",
+          "value": 0,
+          "description": "Rx FIFO operates in cut-through mode, subject to RTC bits"
+        },
+        {
+          "name": "StoreForward",
+          "value": 1,
+          "description": "Frames are read from Rx FIFO after complete frame has been written"
+        }
+      ]
+    },
+    "RTC": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "RTC64",
+          "value": 0,
+          "description": "64 bytes"
+        },
+        {
+          "name": "RTC32",
+          "value": 1,
+          "description": "32 bytes"
+        },
+        {
+          "name": "RTC96",
+          "value": 2,
+          "description": "96 bytes"
+        },
+        {
+          "name": "RTC128",
+          "value": 3,
+          "description": "128 bytes"
+        }
+      ]
+    },
+    "SAIF": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Normal",
+          "value": 0,
+          "description": "Source address filter operates normally"
+        },
+        {
+          "name": "Invert",
+          "value": 1,
+          "description": "Source address filter operation inverted"
+        }
+      ]
+    },
+    "ST": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Stopped",
+          "value": 0,
+          "description": "Transmission is placed in the Stopped state"
+        },
+        {
+          "name": "Started",
+          "value": 1,
+          "description": "Transmission is placed in Running state"
+        }
+      ]
+    },
+    "TGFM": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Unmasked",
+          "value": 0,
+          "description": "Transmitted-good counter half-full interrupt enabled"
+        },
+        {
+          "name": "Masked",
+          "value": 1,
+          "description": "Transmitted-good counter half-full interrupt disabled"
+        }
+      ]
+    },
+    "TGFMSCM": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Unmasked",
+          "value": 0,
+          "description": "Transmitted-good-multiple-collision half-full interrupt enabled"
+        },
+        {
+          "name": "Masked",
+          "value": 1,
+          "description": "Transmitted-good-multiple-collision half-full interrupt disabled"
+        }
+      ]
+    },
+    "TGFSCM": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Unmasked",
+          "value": 0,
+          "description": "Transmitted-good-single-collision half-full interrupt enabled"
+        },
+        {
+          "name": "Masked",
+          "value": 1,
+          "description": "Transmitted-good-single-collision half-full interrupt disabled"
+        }
+      ]
+    },
+    "TPD": {
+      "bit_size": 32,
+      "variants": [
+        {
+          "name": "Poll",
+          "value": 0,
+          "description": "Poll the transmit descriptor list"
+        }
+      ]
+    },
+    "TPS": {
+      "bit_size": 3,
+      "variants": [
+        {
+          "name": "Stopped",
+          "value": 0,
+          "description": "Stopped, Reset or Stop Transmit command issued"
+        },
+        {
+          "name": "RunningFetching",
+          "value": 1,
+          "description": "Running, fetching transmit transfer descriptor"
+        },
+        {
+          "name": "RunningWaiting",
+          "value": 2,
+          "description": "Running, waiting for status"
+        },
+        {
+          "name": "RunningReading",
+          "value": 3,
+          "description": "Running, reading data from host memory buffer"
+        },
+        {
+          "name": "Suspended",
+          "value": 6,
+          "description": "Suspended, transmit descriptor unavailable or transmit buffer underflow"
+        },
+        {
+          "name": "Running",
+          "value": 7,
+          "description": "Running, closing transmit descriptor"
+        }
+      ]
+    },
+    "TSF": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "CutThrough",
+          "value": 0,
+          "description": "Transmission starts when the frame size in the Tx FIFO exceeds TTC threshold"
+        },
+        {
+          "name": "StoreForward",
+          "value": 1,
+          "description": "Transmission starts when a full frame is in the Tx FIFO"
+        }
+      ]
+    },
+    "TSTIM": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Unmasked",
+          "value": 0,
+          "description": "Time stamp interrupt generation enabled"
+        },
+        {
+          "name": "Masked",
+          "value": 1,
+          "description": "Time stamp interrupt generation disabled"
+        }
+      ]
+    },
+    "TTC": {
+      "bit_size": 3,
+      "variants": [
+        {
+          "name": "TTC64",
+          "value": 0,
+          "description": "64 bytes"
+        },
+        {
+          "name": "TTC128",
+          "value": 1,
+          "description": "128 bytes"
+        },
+        {
+          "name": "TTC192",
+          "value": 2,
+          "description": "192 bytes"
+        },
+        {
+          "name": "TTC256",
+          "value": 3,
+          "description": "256 bytes"
+        },
+        {
+          "name": "TTC40",
+          "value": 4,
+          "description": "40 bytes"
+        },
+        {
+          "name": "TTC32",
+          "value": 5,
+          "description": "32 bytes"
+        },
+        {
+          "name": "TTC24",
+          "value": 6,
+          "description": "24 bytes"
+        },
+        {
+          "name": "TTC16",
+          "value": 7,
+          "description": "16 bytes"
+        }
+      ]
+    },
+    "USP": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Combined",
+          "value": 0,
+          "description": "PBL value used for both Rx and Tx DMA"
+        },
+        {
+          "name": "Separate",
+          "value": 1,
+          "description": "RxDMA uses RDP value, TxDMA uses PBL value"
+        }
+      ]
+    },
+    "VLANTC": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "VLANTC16",
+          "value": 0,
+          "description": "Full 16 bit VLAN identifiers are used for comparison and filtering"
+        },
+        {
+          "name": "VLANTC12",
+          "value": 1,
+          "description": "12 bit VLAN identifies are used for comparison and filtering"
+        }
+      ]
+    },
+    "WD": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Enabled",
+          "value": 0,
+          "description": "Watchdog enabled, receive frames limited to 2048 bytes"
+        },
+        {
+          "name": "Disabled",
+          "value": 1,
+          "description": "Watchdog disabled, receive frames may be up to to 16384 bytes"
+        }
+      ]
+    },
+    "WFFRPR": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Reset",
+          "value": 1,
+          "description": "Reset wakeup frame filter register point to 0b000. Automatically cleared"
+        }
+      ]
+    },
+    "ZQPD": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Enabled",
+          "value": 0,
+          "description": "Normal operation with automatic zero-quanta pause control frame generation"
+        },
+        {
+          "name": "Disabled",
+          "value": 1,
+          "description": "Automatic generation of zero-quanta pause control frames is disabled"
+        }
+      ]
+    }
+  }
+}

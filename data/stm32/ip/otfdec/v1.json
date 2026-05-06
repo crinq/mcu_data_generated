@@ -1,0 +1,278 @@
+{
+  "schema": 1,
+  "kind": "otfdec",
+  "version": "v1",
+  "blocks": {
+    "OTFDEC": {
+      "name": "OTFDEC",
+      "description": "On-The-Fly Decryption engine.",
+      "extends": null,
+      "registers": [
+        {
+          "name": "CR",
+          "offset": 0,
+          "size": 32,
+          "description": "OTFDEC control register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "OTFDEC control register.",
+          "fields": [
+            {
+              "name": "ENC",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Encryption mode bit When this bit is set, OTFDEC is used in encryption mode, during which application can write clear text data then read back encrypted data. When this bit is cleared (default), OTFDEC is used in decryption mode, during which application only read back decrypted data. For both modes, cryptographic context (keys, nonces, firmware versions) must be properly initialized. When this bit is set, only data accesses are allowed (zeros are returned otherwise, and XONEIF is set). When MODE = 11, enhanced encryption mode is automatically selected. Note: When ENC bit is set, no access to OCTOSPI must be done (registers and Memory‑mapped region).",
+              "enum": "ENC"
+            }
+          ]
+        },
+        {
+          "name": "PRIVCFGR",
+          "offset": 16,
+          "size": 32,
+          "description": "OTFDEC_PRIVCFGR.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "OTFDEC_PRIVCFGR.",
+          "fields": [
+            {
+              "name": "PRIV",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Privileged access protection. Unprivileged read accesses to registers return zeros Unprivileged write accesses to registers are ignored. Note: This bit can only be written in privileged mode. There is no limitations on reads.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "Region",
+          "offset": 32,
+          "description": null,
+          "array_len": 4,
+          "array_stride": 48,
+          "fields": []
+        },
+        {
+          "name": "ISR",
+          "offset": 768,
+          "size": 32,
+          "description": "OTFDEC interrupt status register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "OTFDEC interrupt status register.",
+          "fields": [
+            {
+              "name": "SEIF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Security error interrupt flag status This bit is set by hardware and read only by application. This bit is set when at least one security error has been detected. This bit is cleared when application sets in OTFDEC_ICR the corresponding bit to 1.",
+              "enum": null
+            },
+            {
+              "name": "XONEIF",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Execute-only execute-never error interrupt flag status This bit is set by hardware and read only by application. This bit is set when a read access and not an instruction fetch is detected on any encrypted region with MODE bits set to 11. Lastly, XONEIF is also set when an execute access is detected while encryption mode is enabled. This bit is cleared when application sets in OTFDEC_ICR the corresponding bit to 1.",
+              "enum": null
+            },
+            {
+              "name": "KEIF",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Key error interrupt flag status This bit is set by hardware and read only by application. The bit is set when a read access occurs on an encrypted region, while its key registers is null or not properly initialized (KEYCRC = 0x0). This bit is cleared when the application sets in OTFDEC_ICR the corresponding bit to 1. After KEIF is set any subsequent read to the region with bad key registers returns a zeroed value. This state remains until those key registers are properly initialized (KEYCRC not zero).",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "ICR",
+          "offset": 772,
+          "size": 32,
+          "description": "OTFDEC interrupt clear register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "OTFDEC interrupt clear register.",
+          "fields": [
+            {
+              "name": "SEIF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Security error interrupt flag clear This bit is written by application, and always read as 0.",
+              "enum": null
+            },
+            {
+              "name": "XONEIF",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Execute-only execute-never error interrupt flag clear This bit is written by application, and always read as 0.",
+              "enum": null
+            },
+            {
+              "name": "KEIF",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Key error interrupt flag clear This bit is written by application, and always read as 0. Note: Clearing KEIF does not solve the source of the problem (bad key registers). To be able to access again any encrypted region, OTFDEC key registers must be properly initialized again.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "IER",
+          "offset": 776,
+          "size": 32,
+          "description": "OTFDEC interrupt enable register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "OTFDEC interrupt enable register.",
+          "fields": [
+            {
+              "name": "SEIE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Security error interrupt enable This bit is read and written by application. It controls the OTFDEC interrupt generation when SEIF flag status is set.",
+              "enum": null
+            },
+            {
+              "name": "XONEIE",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Execute-only execute-never error interrupt enable This bit is read and written by application. It controls the OTFDEC interrupt generation when XONEIF flag status is set.",
+              "enum": null
+            },
+            {
+              "name": "KEIE",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Key error interrupt enable This bit is read and written by application. It controls the OTFDEC interrupt generation when KEIF flag status is set.",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    },
+    "Region": {
+      "name": "Region",
+      "description": null,
+      "extends": null,
+      "registers": [
+        {
+          "name": "CFGR",
+          "offset": 0,
+          "size": 32,
+          "description": "OTFDEC region 3 configuration register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "OTFDEC region 3 configuration register.",
+          "fields": [
+            {
+              "name": "REG_EN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "region on-the-fly decryption enable Note: Garbage is decrypted if region context (version, key, nonce) is not valid when this bit is set.",
+              "enum": null
+            },
+            {
+              "name": "CONFIGLOCK",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "region config lock Note: This bit is set once. If this bit is set, it can only be reset to 0 if OTFDEC is reset. Setting this bit forces KEYLOCK bit to 1.",
+              "enum": null
+            },
+            {
+              "name": "KEYLOCK",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "region key lock Note: This bit is set once: if this bit is set, it can only be reset to 0 if the OTFDEC is reset.",
+              "enum": null
+            },
+            {
+              "name": "MODE",
+              "bit_offset": 4,
+              "bit_width": 2,
+              "description": "operating mode This bitfield selects the OTFDEC operating mode for this region: Others: Reserved When MODE ≠ 11, the standard AES encryption mode is activated. When either of the MODE bits are changed, the region key and associated CRC are zeroed.",
+              "enum": "MODE"
+            },
+            {
+              "name": "KEYCRC",
+              "bit_offset": 8,
+              "bit_width": 8,
+              "description": "region key 8-bit CRC When KEYLOCK = 0, KEYCRC bitfield is automatically computed by hardware while loading the key of this region in this exact sequence: KEYR0 then KEYR1 then KEYR2 then finally KEYR3 (all written once). A new computation starts as soon as a new valid sequence is initiated, and KEYCRC is read as zero until a valid sequence is completed. When KEYLOCK = 1, KEYCRC remains unchanged until the next reset. CRC computation is an 8-bit checksum using the standard CRC-8-CCITT algorithm X8 + X2 + X + 1 (according the convention). Source code is available in . This field is read only. Note: CRC information is updated only after the last bit of the key has been written.",
+              "enum": null
+            },
+            {
+              "name": "REG_VERSION",
+              "bit_offset": 16,
+              "bit_width": 16,
+              "description": "region firmware version This 16-bit bitfield must be correctly initialized before the region corresponding REG_EN bit is set in OTFDEC_RxCFGR.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "STARTADDR",
+          "offset": 4,
+          "description": "OTFDEC region 3 start address register.",
+          "array_len": null,
+          "array_stride": null,
+          "fields": []
+        },
+        {
+          "name": "ENDADDR",
+          "offset": 8,
+          "description": "OTFDEC region 3 end address register.",
+          "array_len": null,
+          "array_stride": null,
+          "fields": []
+        },
+        {
+          "name": "NONCER",
+          "offset": 12,
+          "description": "OTFDEC region 3 nonce register 0.",
+          "array_len": 2,
+          "array_stride": 4,
+          "fields": []
+        },
+        {
+          "name": "KEYR",
+          "offset": 20,
+          "description": "OTFDEC region 3 key register 0.",
+          "array_len": 4,
+          "array_stride": 4,
+          "fields": []
+        }
+      ]
+    }
+  },
+  "enums": {
+    "ENC": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Decryption",
+          "value": 0,
+          "description": "OTFDEC working in decryption mode"
+        },
+        {
+          "name": "Encryption",
+          "value": 1,
+          "description": "OTFDEC working in encryption mode"
+        }
+      ]
+    },
+    "MODE": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Standard",
+          "value": 2,
+          "description": "All read accesses are decrypted (instruction or data)."
+        },
+        {
+          "name": "Enhanced",
+          "value": 3,
+          "description": "Enhanced encryption mode is activated, and only instruction accesses are decrypted"
+        }
+      ]
+    }
+  }
+}

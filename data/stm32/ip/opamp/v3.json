@@ -1,0 +1,269 @@
+{
+  "schema": 1,
+  "kind": "opamp",
+  "version": "v3",
+  "blocks": {
+    "OPAMP": {
+      "name": "OPAMP",
+      "description": "Operational amplifier",
+      "extends": null,
+      "registers": [
+        {
+          "name": "CSR",
+          "offset": 0,
+          "size": 32,
+          "description": "Control/status register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Control/status register",
+          "fields": [
+            {
+              "name": "OPAMPEN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Enable",
+              "enum": null
+            },
+            {
+              "name": "OPALPM",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Low-power mode enable. The operational amplifier must be disabled to change this configuration.",
+              "enum": null
+            },
+            {
+              "name": "OPAMODE",
+              "bit_offset": 2,
+              "bit_width": 2,
+              "description": "PGA mode",
+              "enum": "OPAMODE"
+            },
+            {
+              "name": "PGA_GAIN",
+              "bit_offset": 4,
+              "bit_width": 2,
+              "description": "Gain in PGA mode",
+              "enum": "PGA_GAIN"
+            },
+            {
+              "name": "VM_SEL",
+              "bit_offset": 8,
+              "bit_width": 2,
+              "description": "Inverting input selection",
+              "enum": "VM_SEL"
+            },
+            {
+              "name": "VP_SEL",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Non inverted input selection",
+              "enum": "VP_SEL"
+            },
+            {
+              "name": "CALON",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "Calibration mode enable",
+              "enum": null
+            },
+            {
+              "name": "CALSEL",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Calibration selection",
+              "enum": "CALSEL"
+            },
+            {
+              "name": "USERTRIM",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "User trimming enable",
+              "enum": null
+            },
+            {
+              "name": "CALOUT",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Calibration output",
+              "enum": null
+            },
+            {
+              "name": "OPA_RANGE",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "Power supply range for stability",
+              "enum": "OPA_RANGE"
+            }
+          ]
+        },
+        {
+          "name": "OTR",
+          "offset": 4,
+          "size": 32,
+          "description": "Offset trimming register in normal mode",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Offset trimming register in normal mode",
+          "fields": [
+            {
+              "name": "TRIMOFFSETN",
+              "bit_offset": 0,
+              "bit_width": 5,
+              "description": "Offset trimming value (NMOS)",
+              "enum": null
+            },
+            {
+              "name": "TRIMOFFSETP",
+              "bit_offset": 8,
+              "bit_width": 5,
+              "description": "Offset trimming value (PMOS)",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "LPOTR",
+          "offset": 8,
+          "size": 32,
+          "description": "Offset trimming register in low-power mode",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Offset trimming register in low-power mode",
+          "fields": [
+            {
+              "name": "TRIMLPOFFSETN",
+              "bit_offset": 0,
+              "bit_width": 5,
+              "description": "Offset trimming value (NMOS)",
+              "enum": null
+            },
+            {
+              "name": "TRIMLPOFFSETP",
+              "bit_offset": 8,
+              "bit_width": 5,
+              "description": "Offset trimming value (PMOS)",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "CALSEL": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "NMOS",
+          "value": 0,
+          "description": "NMOS calibration, 0.2 V applied to OPAMP inputs during calibration"
+        },
+        {
+          "name": "PMOS",
+          "value": 1,
+          "description": "PMOS calibration, VDDA - 0.2 V applied to OPAMP inputs during calibration"
+        }
+      ]
+    },
+    "OPAMODE": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Disable",
+          "value": 0,
+          "description": "Internal PGA disable"
+        },
+        {
+          "name": "Disable2",
+          "value": 1,
+          "description": "Internal PGA disable (duplicate)"
+        },
+        {
+          "name": "Enable",
+          "value": 2,
+          "description": "Internal PGA enable, gain programmed in PGA_GAIN"
+        },
+        {
+          "name": "Follower",
+          "value": 3,
+          "description": "Internal follower"
+        }
+      ]
+    },
+    "OPA_RANGE": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Low",
+          "value": 0,
+          "description": "Low range (VDDA < 2.4 V)"
+        },
+        {
+          "name": "High",
+          "value": 1,
+          "description": "High range (VDDA > 2.4 V)"
+        }
+      ]
+    },
+    "PGA_GAIN": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Gain2",
+          "value": 0,
+          "description": "Gain 2"
+        },
+        {
+          "name": "Gain4",
+          "value": 1,
+          "description": "Gain 4"
+        },
+        {
+          "name": "Gain8",
+          "value": 2,
+          "description": "Gain 8"
+        },
+        {
+          "name": "Gain16",
+          "value": 3,
+          "description": "Gain 16"
+        }
+      ]
+    },
+    "VM_SEL": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "GPIO",
+          "value": 0,
+          "description": "GPIO connected to VINM (valid also in PGA mode for filtering)"
+        },
+        {
+          "name": "LOW_LEAKAGE",
+          "value": 1,
+          "description": "Low leakage inputs connected (only available in certain packages)"
+        },
+        {
+          "name": "NOT_CONNECTED",
+          "value": 2,
+          "description": "VINM not externally connected, valid only in PGA mode"
+        }
+      ]
+    },
+    "VP_SEL": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "GPIO",
+          "value": 0,
+          "description": "GPIO connected to VINP"
+        },
+        {
+          "name": "DAC",
+          "value": 1,
+          "description": "DAC connected to VINP"
+        }
+      ]
+    }
+  }
+}

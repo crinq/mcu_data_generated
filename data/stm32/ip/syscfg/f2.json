@@ -1,0 +1,120 @@
+{
+  "schema": 1,
+  "kind": "syscfg",
+  "version": "f2",
+  "blocks": {
+    "SYSCFG": {
+      "name": "SYSCFG",
+      "description": "System configuration controller",
+      "extends": null,
+      "registers": [
+        {
+          "name": "MEMRMP",
+          "offset": 0,
+          "size": 32,
+          "description": "memory remap register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "memory remap register",
+          "fields": [
+            {
+              "name": "MEM_MODE",
+              "bit_offset": 0,
+              "bit_width": 2,
+              "description": "Memory mapping selection",
+              "enum": "MEM_MODE"
+            }
+          ]
+        },
+        {
+          "name": "PMC",
+          "offset": 4,
+          "size": 32,
+          "description": "peripheral mode configuration register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "peripheral mode configuration register",
+          "fields": [
+            {
+              "name": "MII_RMII_SEL",
+              "bit_offset": 23,
+              "bit_width": 1,
+              "description": "Ethernet PHY interface selection",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "EXTICR",
+          "offset": 8,
+          "size": 32,
+          "description": "external interrupt configuration register 1",
+          "array_len": 4,
+          "array_stride": 4,
+          "fieldset_description": "external interrupt configuration register 1",
+          "fields": [
+            {
+              "name": "EXTI",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 0 to 3)",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CMPCR",
+          "offset": 32,
+          "size": 32,
+          "description": "Compensation cell control register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "Compensation cell control register",
+          "fields": [
+            {
+              "name": "CMP_PD",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Compensation cell power-down",
+              "enum": null
+            },
+            {
+              "name": "READY",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Compensation cell ready flag",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "MEM_MODE": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "MainFlash",
+          "value": 0,
+          "description": "Main Flash memory mapped at 0x0000_0000"
+        },
+        {
+          "name": "SystemFlash",
+          "value": 1,
+          "description": "System Flash memory mapped at 0x0000_0000"
+        },
+        {
+          "name": "FSMC",
+          "value": 2,
+          "description": "FSMC Bank1 (NOR/PSRAM 1 and 2) mapped at 0x0000_0000"
+        },
+        {
+          "name": "SRAM",
+          "value": 3,
+          "description": "Embedded SRAM mapped at 0x0000_0000"
+        }
+      ]
+    }
+  }
+}

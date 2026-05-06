@@ -1,0 +1,247 @@
+{
+  "schema": 1,
+  "kind": "adccommon",
+  "version": "h50",
+  "blocks": {
+    "ADC_COMMON": {
+      "name": "ADC_COMMON",
+      "description": "ADC common registers",
+      "extends": null,
+      "registers": [
+        {
+          "name": "CCR",
+          "offset": 8,
+          "size": 32,
+          "description": "common control register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "common control register",
+          "fields": [
+            {
+              "name": "CKMODE",
+              "bit_offset": 16,
+              "bit_width": 2,
+              "description": "ADC clock mode These bits are set and cleared by software to define the ADC clock scheme (which is common to both master and slave ADCs): In all synchronous clock modes, there is no jitter in the delay from a timer trigger to the start of a conversion. Note: The software is allowed to write these bits only when the ADCs are disabled (ADCAL = 0, JADSTART = 0, ADSTART = 0, ADSTP = 0, ADDIS = 0 and ADEN = 0).",
+              "enum": "CKMODE"
+            },
+            {
+              "name": "PRESC",
+              "bit_offset": 18,
+              "bit_width": 4,
+              "description": "ADC prescaler These bits are set and cleared by software to select the frequency of the clock to the ADC. The clock is common for all the ADCs. other: reserved Note: The software is allowed to write these bits only when the ADC is disabled (ADCAL = 0, JADSTART = 0, ADSTART = 0, ADSTP = 0, ADDIS = 0 and ADEN = 0). The ADC prescaler value is applied only when CKMODE[1:0] = 0b00.",
+              "enum": "PRESC"
+            },
+            {
+              "name": "VREFEN",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "VREFINT enable This bit is set and cleared by software to enable/disable the VREFINT channel",
+              "enum": null
+            },
+            {
+              "name": "TSEN",
+              "bit_offset": 23,
+              "bit_width": 1,
+              "description": "VSENSE enable This bit is set and cleared by software to control VSENSE",
+              "enum": null
+            },
+            {
+              "name": "VBATEN",
+              "bit_offset": 24,
+              "bit_width": 1,
+              "description": "VBAT enable This bit is set and cleared by software to control",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "HWCFGR0",
+          "offset": 240,
+          "size": 32,
+          "description": "hardware configuration register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "hardware configuration register",
+          "fields": [
+            {
+              "name": "ADCNUM",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "Number of ADCs implemented",
+              "enum": null
+            },
+            {
+              "name": "MULPIPE",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "Number of pipeline stages",
+              "enum": null
+            },
+            {
+              "name": "OPBITS",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "Number of option bits 0002: 2 option bits implemented in the ADC option register (ADC_OR) at address offset 0xC8.",
+              "enum": null
+            },
+            {
+              "name": "IDLEVALUE",
+              "bit_offset": 12,
+              "bit_width": 4,
+              "description": "Idle value for non-selected channels",
+              "enum": "IDLEVALUE"
+            }
+          ]
+        },
+        {
+          "name": "VERR",
+          "offset": 244,
+          "size": 32,
+          "description": "version register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "version register",
+          "fields": [
+            {
+              "name": "MINREV",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "Minor revision These bits returns the ADC IP minor revision 0002: Major revision = X.2.",
+              "enum": null
+            },
+            {
+              "name": "MAJREV",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "Major revision These bits returns the ADC IP major revision",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "IPDR",
+          "offset": 248,
+          "description": "identification register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": []
+        },
+        {
+          "name": "SIDR",
+          "offset": 252,
+          "description": "size identification register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": []
+        }
+      ]
+    }
+  },
+  "enums": {
+    "CKMODE": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Asynchronous",
+          "value": 0,
+          "description": "Use Kernel Clock adc_ker_ck_input divided by PRESC. Asynchronous to AHB clock"
+        },
+        {
+          "name": "SyncDiv1",
+          "value": 1,
+          "description": "Use AHB clock rcc_hclk3. In this case rcc_hclk must equal sys_d1cpre_ck"
+        },
+        {
+          "name": "SyncDiv2",
+          "value": 2,
+          "description": "Use AHB clock rcc_hclk3 divided by 2"
+        },
+        {
+          "name": "SyncDiv4",
+          "value": 3,
+          "description": "Use AHB clock rcc_hclk3 divided by 4"
+        }
+      ]
+    },
+    "IDLEVALUE": {
+      "bit_size": 4,
+      "variants": [
+        {
+          "name": "H13",
+          "value": 0,
+          "description": "Dummy channel selection is 0x13"
+        },
+        {
+          "name": "H1F",
+          "value": 1,
+          "description": "Dummy channel selection is 0x1F"
+        }
+      ]
+    },
+    "PRESC": {
+      "bit_size": 4,
+      "variants": [
+        {
+          "name": "Div1",
+          "value": 0,
+          "description": "adc_ker_ck_input not divided"
+        },
+        {
+          "name": "Div2",
+          "value": 1,
+          "description": "adc_ker_ck_input divided by 2"
+        },
+        {
+          "name": "Div4",
+          "value": 2,
+          "description": "adc_ker_ck_input divided by 4"
+        },
+        {
+          "name": "Div6",
+          "value": 3,
+          "description": "adc_ker_ck_input divided by 6"
+        },
+        {
+          "name": "Div8",
+          "value": 4,
+          "description": "adc_ker_ck_input divided by 8"
+        },
+        {
+          "name": "Div10",
+          "value": 5,
+          "description": "adc_ker_ck_input divided by 10"
+        },
+        {
+          "name": "Div12",
+          "value": 6,
+          "description": "adc_ker_ck_input divided by 12"
+        },
+        {
+          "name": "Div16",
+          "value": 7,
+          "description": "adc_ker_ck_input divided by 16"
+        },
+        {
+          "name": "Div32",
+          "value": 8,
+          "description": "adc_ker_ck_input divided by 32"
+        },
+        {
+          "name": "Div64",
+          "value": 9,
+          "description": "adc_ker_ck_input divided by 64"
+        },
+        {
+          "name": "Div128",
+          "value": 10,
+          "description": "adc_ker_ck_input divided by 128"
+        },
+        {
+          "name": "Div256",
+          "value": 11,
+          "description": "adc_ker_ck_input divided by 256"
+        }
+      ]
+    }
+  }
+}

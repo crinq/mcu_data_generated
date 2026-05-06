@@ -1,0 +1,1656 @@
+{
+  "schema": 1,
+  "kind": "syscfg",
+  "version": "n6",
+  "blocks": {
+    "SYSCFG": {
+      "name": "SYSCFG",
+      "description": "System configuration controller.",
+      "extends": null,
+      "registers": [
+        {
+          "name": "BOOTCR",
+          "offset": 0,
+          "size": 32,
+          "description": "SYSCFG boot pin control register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SYSCFG boot pin control register.",
+          "fields": [
+            {
+              "name": "BOOT0_PD",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "BOOT0 pin pull-down disable.",
+              "enum": "BOOT0_PD"
+            },
+            {
+              "name": "BOOT1_PD",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "BOOT1 pin pull-down disable.",
+              "enum": "BOOT1_PD"
+            }
+          ]
+        },
+        {
+          "name": "CM55CR",
+          "offset": 4,
+          "size": 32,
+          "description": "SYSCFG Cortex-M55 control register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SYSCFG Cortex-M55 control register.",
+          "fields": [
+            {
+              "name": "FPU_IT_EN",
+              "bit_offset": 0,
+              "bit_width": 6,
+              "description": "Enable FPU exception.",
+              "enum": null
+            },
+            {
+              "name": "LOCKSVTAIRCR",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Prevent changes to:.",
+              "enum": null
+            },
+            {
+              "name": "LOCKNSVTOR",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "Prevent changes to the non-secure vector table base address.",
+              "enum": null
+            },
+            {
+              "name": "LOCKSMPU",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "Prevent changes to programmed secure MPU memory regions.",
+              "enum": null
+            },
+            {
+              "name": "LOCKNSMPU",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "Prevent changes to non-secure MPU memory regions already programmed.",
+              "enum": null
+            },
+            {
+              "name": "LOCKSAU",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "Prevent changes to secure SAU memory regions already programmed.",
+              "enum": null
+            },
+            {
+              "name": "LOCKDCAIC",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "Disable access to the instruction cache direct cache access registers DCAICLR and DCAICRR.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CM55TCMCR",
+          "offset": 8,
+          "size": 32,
+          "description": "SYSCFG Cortex-M55 TCM control register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SYSCFG Cortex-M55 TCM control register.",
+          "fields": [
+            {
+              "name": "CFGITCMSZ",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "Select ITCM memory size.",
+              "enum": "CFGITCMSZ"
+            },
+            {
+              "name": "CFGDTCMSZ",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "Select DTCM memory size.",
+              "enum": "CFGDTCMSZ"
+            },
+            {
+              "name": "LOCKTCM",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Disable writes to registers associated with the TCM region.",
+              "enum": null
+            },
+            {
+              "name": "LOCKITGU",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "Disable writes to registers associated with the ITCM interface security gating.",
+              "enum": null
+            },
+            {
+              "name": "LOCKDTGU",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "Disable writes to registers associated with the DTCM interface security gating.",
+              "enum": null
+            },
+            {
+              "name": "ITCMWSDISABLE",
+              "bit_offset": 23,
+              "bit_width": 1,
+              "description": "Disable wait-state applied by default on extended ITCM memory.",
+              "enum": null
+            },
+            {
+              "name": "DTCMWSDISABLE",
+              "bit_offset": 24,
+              "bit_width": 1,
+              "description": "Disable wait-state applied by default on extended DTCM memory.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CM55RWMCR",
+          "offset": 12,
+          "size": 32,
+          "description": "SYSCFG Cortex-CM55 memory RW margin register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SYSCFG Cortex-CM55 memory RW margin register.",
+          "fields": [
+            {
+              "name": "RME_TCM",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "RW margin enable input for TCM memories.",
+              "enum": "RME_TCM"
+            },
+            {
+              "name": "RM_TCM",
+              "bit_offset": 1,
+              "bit_width": 4,
+              "description": "External RW margin inputs for TCM memories.",
+              "enum": null
+            },
+            {
+              "name": "BC1_TCM",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Biasing level adjust input recommended for Vnom.",
+              "enum": null
+            },
+            {
+              "name": "BC2_TCM",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Biasing level adjust input recommended for Vnom + 10%.",
+              "enum": null
+            },
+            {
+              "name": "RME_CACHE",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "RW margin enable input for caches memories.",
+              "enum": "RME_CACHE"
+            },
+            {
+              "name": "RM_CACHE",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "External read/write (RW) margin inputs for caches memories.",
+              "enum": null
+            },
+            {
+              "name": "BC1_CACHE",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "Biasing level adjust input recommended for Vnom.",
+              "enum": null
+            },
+            {
+              "name": "BC2_CACHE",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Biasing level adjust input recommended for Vnom + 10%.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "INITSVTORCR",
+          "offset": 16,
+          "size": 32,
+          "description": "SYSCFG Cortex-M55 SVTOR control register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SYSCFG Cortex-M55 SVTOR control register.",
+          "fields": [
+            {
+              "name": "SVTOR_ADDR",
+              "bit_offset": 7,
+              "bit_width": 25,
+              "description": "Secure vector table base address.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "INITNSVTORCR",
+          "offset": 20,
+          "size": 32,
+          "description": "SYSCFG Cortex-M55 NSVTOR control register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SYSCFG Cortex-M55 NSVTOR control register.",
+          "fields": [
+            {
+              "name": "NSVTOR_ADDR",
+              "bit_offset": 7,
+              "bit_width": 25,
+              "description": "Non-secure vector table base address.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CM55RSTCR",
+          "offset": 24,
+          "size": 32,
+          "description": "SYSCFG Cortex-M55 reset type control register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SYSCFG Cortex-M55 reset type control register.",
+          "fields": [
+            {
+              "name": "CORE_RESET_TYPE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Select reset to apply on core upon SYSRESETREQ.",
+              "enum": "CORE_RESET_TYPE"
+            },
+            {
+              "name": "LOCKUP_RST_EN",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Select action to perform on a lockup state on the core.",
+              "enum": "LOCKUP_RST_EN"
+            },
+            {
+              "name": "LOCKUP_NMI_EN",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Select action to perform on a lockup state on the core.",
+              "enum": "LOCKUP_NMI_EN"
+            }
+          ]
+        },
+        {
+          "name": "CM55PAHBWPR",
+          "offset": 28,
+          "size": 32,
+          "description": "SYSCFG Cortex-M55 P-AHB write posting control register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SYSCFG Cortex-M55 P-AHB write posting control register.",
+          "fields": [
+            {
+              "name": "PAHB_ERROR_ACK",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Error capture in write posting buffer.",
+              "enum": "PAHB_ERROR_ACK"
+            }
+          ]
+        },
+        {
+          "name": "VENCRAMCR",
+          "offset": 32,
+          "size": 32,
+          "description": "SYSCFG VENCRAM control register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SYSCFG VENCRAM control register.",
+          "fields": [
+            {
+              "name": "VENCRAM_EN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "VENCRAM allocation VENC if active, or to system (if VENC inactive).",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "POTTAMPRSTCR",
+          "offset": 36,
+          "size": 32,
+          "description": "SYSCFG potential tamper reset register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SYSCFG potential tamper reset register.",
+          "fields": [
+            {
+              "name": "POTTAMPERSETMASK",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "This bit can be set by software to mask PKA, SAES, CRYP1/2, and HASH reset, in case of potential tamper.",
+              "enum": "POTTAMPERSETMASK"
+            }
+          ]
+        },
+        {
+          "name": "ICNEWRCR",
+          "offset": 52,
+          "size": 32,
+          "description": "SYSCFG AHB-AXI bridge early write response control register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SYSCFG AHB-AXI bridge early write response control register.",
+          "fields": [
+            {
+              "name": "SDMMC1_EARLY_WR_RSP_ENABLE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "None.",
+              "enum": "SDMMC1_EARLY_WR_RSP_ENABLE"
+            },
+            {
+              "name": "SDMMC2_EARLY_WR_RSP_ENABLE",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "None.",
+              "enum": "SDMMC2_EARLY_WR_RSP_ENABLE"
+            },
+            {
+              "name": "USB1_EARLY_WR_RSP_ENABLE",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "None.",
+              "enum": "USB1_EARLY_WR_RSP_ENABLE"
+            },
+            {
+              "name": "USB2_EARLY_WR_RSP_ENABLE",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "None.",
+              "enum": "USB2_EARLY_WR_RSP_ENABLE"
+            }
+          ]
+        },
+        {
+          "name": "ICNCGCR",
+          "offset": 56,
+          "size": 32,
+          "description": "SYSCFG ICN clock gating control register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SYSCFG ICN clock gating control register.",
+          "fields": [
+            {
+              "name": "ICNCGCR",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "When bit[i] is set to 1, ICN clock gating[i] is OFF.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "ICNBWRCR",
+          "offset": 60,
+          "size": 32,
+          "description": "SYSCFG ICN bandwidth regulator control register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SYSCFG ICN bandwidth regulator control register.",
+          "fields": [
+            {
+              "name": "ICNBWRCR",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Bandwidth regulator control bits.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "IOCR",
+          "offset": 64,
+          "size": 32,
+          "description": "SYSCFG /O control register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SYSCFG /O control register.",
+          "fields": [
+            {
+              "name": "IOCR",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Digital or analog pins.",
+              "enum": "IOCR"
+            }
+          ]
+        },
+        {
+          "name": "VDDIO1CCCR",
+          "offset": 68,
+          "size": 32,
+          "description": "SYSCFG VDDIO1 compensation cell control register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SYSCFG VDDIO1 compensation cell control register.",
+          "fields": [
+            {
+              "name": "RANSRC",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "These bits are written by software to define an I/O compensation code for NMOS transistors. This code is applied to the I/O compensation cell when the CS = 1.",
+              "enum": null
+            },
+            {
+              "name": "RAPSRC",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "These bits are written by software to define an I/O compensation code for PMOS transistors. This code is applied to the I/O compensation cell when CS = 1.",
+              "enum": null
+            },
+            {
+              "name": "EN",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Enables the compensation cell of I/Os supplied by VDDIOx.",
+              "enum": "VDDIO1CCCR_EN"
+            },
+            {
+              "name": "CS",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Selects the code to be applied for the compensation cell of I/Os supplied by VDDIOx.",
+              "enum": "VDDIO1CCCR_CS"
+            }
+          ]
+        },
+        {
+          "name": "VDDIO1CCSR",
+          "offset": 72,
+          "size": 32,
+          "description": "SYSCFG VDDIO1 compensation cell status register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SYSCFG VDDIO1 compensation cell status register.",
+          "fields": [
+            {
+              "name": "ANSRC",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "This value is provided by the cell, and can be used by the CPU to compute an I/O compensation cell code for NMOS transistors.",
+              "enum": null
+            },
+            {
+              "name": "APSRC",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "This value is provided by the cell, and can be used by the CPU to compute an I/O compensation cell code for PMOS transistors.",
+              "enum": null
+            },
+            {
+              "name": "READY",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Provides the compensation cell status of I/Os supplied by VDDIOx.",
+              "enum": "VDDIO1CCSR_READY"
+            }
+          ]
+        },
+        {
+          "name": "VDDIO2CCCR",
+          "offset": 76,
+          "size": 32,
+          "description": "SYSCFG VDDIO2 compensation cell control register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SYSCFG VDDIO2 compensation cell control register.",
+          "fields": [
+            {
+              "name": "RANSRC",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "These bits are written by software to define an I/O compensation code for NMOS transistors. This code is applied to the I/O compensation cell when the CS = 1.",
+              "enum": null
+            },
+            {
+              "name": "RAPSRC",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "These bits are written by software to define an I/O compensation code for PMOS transistors. This code is applied to the I/O compensation cell when CS = 1.",
+              "enum": null
+            },
+            {
+              "name": "EN",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Enables the compensation cell of I/Os supplied by VDDIOx.",
+              "enum": "VDDIO2CCCR_EN"
+            },
+            {
+              "name": "CS",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Selects the code to be applied for the compensation cell of I/Os supplied by VDDIOx.",
+              "enum": "VDDIO2CCCR_CS"
+            }
+          ]
+        },
+        {
+          "name": "VDDIO2CCSR",
+          "offset": 80,
+          "size": 32,
+          "description": "SYSCFG VDDIO2 compensation cell status register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SYSCFG VDDIO2 compensation cell status register.",
+          "fields": [
+            {
+              "name": "ANSRC",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "This value is provided by the cell, and can be used by the CPU to compute an I/O compensation cell code for NMOS transistors.",
+              "enum": null
+            },
+            {
+              "name": "APSRC",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "This value is provided by the cell, and can be used by the CPU to compute an I/O compensation cell code for PMOS transistors.",
+              "enum": null
+            },
+            {
+              "name": "READY",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Provides the compensation cell status of I/Os supplied by VDDIOx.",
+              "enum": "VDDIO2CCSR_READY"
+            }
+          ]
+        },
+        {
+          "name": "VDDIO3CCCR",
+          "offset": 84,
+          "size": 32,
+          "description": "SYSCFG VDDIO3 compensation cell control register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SYSCFG VDDIO3 compensation cell control register.",
+          "fields": [
+            {
+              "name": "RANSRC",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "These bits are written by software to define an I/O compensation code for NMOS transistors. This code is applied to the I/O compensation cell when the CS = 1.",
+              "enum": null
+            },
+            {
+              "name": "RAPSRC",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "These bits are written by software to define an I/O compensation code for PMOS transistors. This code is applied to the I/O compensation cell when CS = 1.",
+              "enum": null
+            },
+            {
+              "name": "EN",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Enables the compensation cell of I/Os supplied by VDDIOx.",
+              "enum": "VDDIO3CCCR_EN"
+            },
+            {
+              "name": "CS",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Selects the code to be applied for the compensation cell of I/Os supplied by VDDIOx.",
+              "enum": "VDDIO3CCCR_CS"
+            }
+          ]
+        },
+        {
+          "name": "VDDIO3CCSR",
+          "offset": 88,
+          "size": 32,
+          "description": "SYSCFG VDDIO3 compensation cell status register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SYSCFG VDDIO3 compensation cell status register.",
+          "fields": [
+            {
+              "name": "ANSRC",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "This value is provided by the cell, and can be used by the CPU to compute an I/O compensation cell code for NMOS transistors.",
+              "enum": null
+            },
+            {
+              "name": "APSRC",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "This value is provided by the cell, and can be used by the CPU to compute an I/O compensation cell code for PMOS transistors.",
+              "enum": null
+            },
+            {
+              "name": "READY",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Provides the compensation cell status of I/Os supplied by VDDIOx.",
+              "enum": "VDDIO3CCSR_READY"
+            }
+          ]
+        },
+        {
+          "name": "VDDIO4CCCR",
+          "offset": 92,
+          "size": 32,
+          "description": "SYSCFG VDDIO4 compensation cell control register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SYSCFG VDDIO4 compensation cell control register.",
+          "fields": [
+            {
+              "name": "RANSRC",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "These bits are written by software to define an I/O compensation code for NMOS transistors. This code is applied to the I/O compensation cell when the CS = 1.",
+              "enum": null
+            },
+            {
+              "name": "RAPSRC",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "These bits are written by software to define an I/O compensation code for PMOS transistors. This code is applied to the I/O compensation cell when CS = 1.",
+              "enum": null
+            },
+            {
+              "name": "EN",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Enables the compensation cell of I/Os supplied by VDDIOx.",
+              "enum": "VDDIO4CCCR_EN"
+            },
+            {
+              "name": "CS",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Selects the code to be applied for the compensation cell of I/Os supplied by VDDIOx.",
+              "enum": "VDDIO4CCCR_CS"
+            }
+          ]
+        },
+        {
+          "name": "VDDIO4CCSR",
+          "offset": 96,
+          "size": 32,
+          "description": "SYSCFG VDDIO4 compensation cell status register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SYSCFG VDDIO4 compensation cell status register.",
+          "fields": [
+            {
+              "name": "ANSRC",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "This value is provided by the cell, and can be used by the CPU to compute an I/O compensation cell code for NMOS transistors.",
+              "enum": null
+            },
+            {
+              "name": "APSRC",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "This value is provided by the cell, and can be used by the CPU to compute an I/O compensation cell code for PMOS transistors.",
+              "enum": null
+            },
+            {
+              "name": "READY",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Provides the compensation cell status of I/Os supplied by VDDIOx.",
+              "enum": "VDDIO4CCSR_READY"
+            }
+          ]
+        },
+        {
+          "name": "VDDIOCCCR",
+          "offset": 100,
+          "size": 32,
+          "description": "SYSCFG VDDIO compensation cell control register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SYSCFG VDDIO compensation cell control register.",
+          "fields": [
+            {
+              "name": "RANSRC",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "These bits are written by software to define an I/O compensation code for NMOS transistors. This code is applied to the I/O compensation cell when CS = 1.",
+              "enum": null
+            },
+            {
+              "name": "RAPSRC",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "These bits are written by software to define an I/O compensation code for PMOS transistors. This code is applied to the I/O compensation cell when CS = 1.",
+              "enum": null
+            },
+            {
+              "name": "EN",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Enables the compensation cell of I/Os supplied by VDDIO.",
+              "enum": "VDDIOCCCR_EN"
+            },
+            {
+              "name": "CS",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Selects the code to be applied for the compensation cell of I/Os supplied by VDDIO.",
+              "enum": "VDDIOCCCR_CS"
+            }
+          ]
+        },
+        {
+          "name": "VDDIOCCSR",
+          "offset": 104,
+          "size": 32,
+          "description": "SYSCFG VDDIO compensation cell status register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SYSCFG VDDIO compensation cell status register.",
+          "fields": [
+            {
+              "name": "ANSRC",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "This value is provided by the cell, and can be used by the CPU to compute an I/O compensation cell code for NMOS transistors.",
+              "enum": null
+            },
+            {
+              "name": "APSRC",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "This value is provided by the cell, and can be used by the CPU to compute an I/O compensation cell code for PMOS transistors.",
+              "enum": null
+            },
+            {
+              "name": "READY",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Provides the compensation cell status of I/Os supplied by VDDIO.",
+              "enum": "VDDIOCCSR_READY"
+            }
+          ]
+        },
+        {
+          "name": "CBR",
+          "offset": 108,
+          "size": 32,
+          "description": "SYSCFG control timer break register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SYSCFG control timer break register.",
+          "fields": [
+            {
+              "name": "CM55L",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "CM55 lockup lock enable.",
+              "enum": "CM55L"
+            },
+            {
+              "name": "PVDL_LOCK",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "PVD lock enable.",
+              "enum": "PVDL_LOCK"
+            },
+            {
+              "name": "BKPRAML",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Backup SRAM double ECC error lock.",
+              "enum": "BKPRAML"
+            },
+            {
+              "name": "CM55CACHEL",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "CM55 cache double ECC error lock.",
+              "enum": "CM55CACHEL"
+            },
+            {
+              "name": "CM55TCML",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "CM55 TCM double ECC error lock.",
+              "enum": "CM55TCML"
+            }
+          ]
+        },
+        {
+          "name": "SEC_AIDCR",
+          "offset": 112,
+          "size": 32,
+          "description": "SYSCFG DMA CID secure control register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SYSCFG DMA CID secure control register.",
+          "fields": [
+            {
+              "name": "DMACID_SEC",
+              "bit_offset": 0,
+              "bit_width": 3,
+              "description": "Secure OS allocates specific CID to DMA channel through these bits.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "FMC_RETIMECR",
+          "offset": 116,
+          "size": 32,
+          "description": "SYSCFG FMC retiming logic control register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SYSCFG FMC retiming logic control register.",
+          "fields": [
+            {
+              "name": "CFG_RETIME_RX",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Retiming on Rx path.",
+              "enum": "CFG_RETIME_RX"
+            },
+            {
+              "name": "CFG_RETIME_TX",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Retiming on Tx path.",
+              "enum": "CFG_RETIME_TX"
+            },
+            {
+              "name": "SDFBCLK_180",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Delay on feedback clock.",
+              "enum": "SDFBCLK_180"
+            }
+          ]
+        },
+        {
+          "name": "NPU_ICNCR",
+          "offset": 120,
+          "size": 32,
+          "description": "SYSCFG NPU RAM interleaving control register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SYSCFG NPU RAM interleaving control register.",
+          "fields": [
+            {
+              "name": "INTERLEAVING_ACTIVE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Control interleaving on NPU RAMs.",
+              "enum": "INTERLEAVING_ACTIVE"
+            }
+          ]
+        },
+        {
+          "name": "BOOTSR",
+          "offset": 256,
+          "size": 32,
+          "description": "SYSCFG boot pin status register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SYSCFG boot pin status register.",
+          "fields": [
+            {
+              "name": "BOOT0",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "BOOT0 pin value.",
+              "enum": "BOOT0"
+            },
+            {
+              "name": "BOOT1",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "BOOT1 pin value.",
+              "enum": "BOOT1"
+            }
+          ]
+        },
+        {
+          "name": "AHBWP_ERROR_SR",
+          "offset": 260,
+          "size": 32,
+          "description": "SYSCFG AHB write posting address error register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SYSCFG AHB write posting address error register.",
+          "fields": [
+            {
+              "name": "PAHB_ERROR_ADDR",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Reports address of the first error in P-AHB write-posting buffer.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SMPSHDPCR",
+          "offset": 1024,
+          "size": 32,
+          "description": "SYSCFG SMPS observable signals through HDP selection configuration register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SYSCFG SMPS observable signals through HDP selection configuration register.",
+          "fields": [
+            {
+              "name": "SMPSHDPSEL",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "Others: Reserved.",
+              "enum": "SMPSHDPSEL"
+            }
+          ]
+        },
+        {
+          "name": "NONSEC_AIDCR",
+          "offset": 2048,
+          "size": 32,
+          "description": "SYSCFG DMA CID non-secure control register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "SYSCFG DMA CID non-secure control register.",
+          "fields": [
+            {
+              "name": "DMACID_NONSEC",
+              "bit_offset": 0,
+              "bit_width": 3,
+              "description": "Non-secure OS allocates specific CID to DMA channel through these bits.",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "BKPRAML": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "Backup SRAM double ECC error signal disconnected from TIM1/8/15/16/17 break inputs."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "Backup SRAM double ECC error signal connected to TIM1/8/15/16/17 break inputs."
+        }
+      ]
+    },
+    "BOOT0": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "BOOT0 pin connected to VSS (or left open if BOOT0_PD = 0)."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "BOOT0 pin connected to VDD."
+        }
+      ]
+    },
+    "BOOT0_PD": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "Pull-down enabled. The BOOT0 pin can be left open and takes a value of 0 if open."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "Pull-down disabled. The BOOT0 pin must not be left open."
+        }
+      ]
+    },
+    "BOOT1": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "BOOT1 pin connected to VSS (or left open if BOOT1_PD = 0 in BOOTCR)."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "BOOT1 pin connected to VDD."
+        }
+      ]
+    },
+    "BOOT1_PD": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "Pull-down enabled. The BOOT1 pin can be left open and takes a value of 0 if open."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "Pull-down disabled. The BOOT1 pin must not be left open."
+        }
+      ]
+    },
+    "CFGDTCMSZ": {
+      "bit_size": 4,
+      "variants": [
+        {
+          "name": "B_0x8",
+          "value": 8,
+          "description": "128 Kbytes (default value)."
+        },
+        {
+          "name": "B_0x9",
+          "value": 9,
+          "description": "256 Kbytes."
+        }
+      ]
+    },
+    "CFGITCMSZ": {
+      "bit_size": 4,
+      "variants": [
+        {
+          "name": "B_0x7",
+          "value": 7,
+          "description": "64 KB (default value)."
+        },
+        {
+          "name": "B_0x8",
+          "value": 8,
+          "description": "128 Kbytes."
+        },
+        {
+          "name": "B_0x9",
+          "value": 9,
+          "description": "256 Kbytes."
+        }
+      ]
+    },
+    "CFG_RETIME_RX": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "No retiming on Rx path."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "Retiming on Rx path."
+        }
+      ]
+    },
+    "CFG_RETIME_TX": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "No retiming on Tx path."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "Retiming on Tx path."
+        }
+      ]
+    },
+    "CM55CACHEL": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "Cortex-M55 cache double ECC error signal disconnected from TIM1/8/15/16/17 break inputs."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "Cortex-M55 cache double ECC error signal connected to TIM1/8/15/16/17 break inputs."
+        }
+      ]
+    },
+    "CM55L": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "Cortex-M55 lockup output disconnected from TIM1/8/15/16/17 break inputs."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "Cortex-M55 lockup output disconnected from TIM1/8/15/16/17 break inputs."
+        }
+      ]
+    },
+    "CM55TCML": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "Cortex-M55 TCM double ECC error signal disconnected from TIM1/8/15/16/17 break inputs."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "Cortex-M55 TCM double ECC error signal connected to TIM1/8/15/16/17 break inputs."
+        }
+      ]
+    },
+    "CORE_RESET_TYPE": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "Warm reset (default value)."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "Power-on reset."
+        }
+      ]
+    },
+    "INTERLEAVING_ACTIVE": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "Interleaving disabled."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "Interleaving enabled."
+        }
+      ]
+    },
+    "IOCR": {
+      "bit_size": 32,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "High-speed mode disabled, or use ADC ANA pin."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "High-speed mode enabled, or connect internal ADC ANA signal to GPIO."
+        }
+      ]
+    },
+    "LOCKUP_NMI_EN": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "Lockup state must be recovered from NVIC interrupt (default value)."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "Lockup generates a NMI on the core."
+        }
+      ]
+    },
+    "LOCKUP_RST_EN": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "Lockup state shall be recovered from interrupt (default value)."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "Lockup requests a warm reset to the RCC."
+        }
+      ]
+    },
+    "PAHB_ERROR_ACK": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "Error capture."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "Clean error."
+        }
+      ]
+    },
+    "POTTAMPERSETMASK": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "PKA, SAES, CRYP1/2, and HASH reset in case of potential tamper."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "PKA, SAES, CRYP1/2, and HASH not reset in case of potential tamper."
+        }
+      ]
+    },
+    "PVDL_LOCK": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "PVD interrupt disconnected from TIM1/8/15/16/17 break input. PVDE bits can be programmed by the application."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "PVD interrupt connected to TIM1/8/15/16/17 break input. PVDE and bits are read only."
+        }
+      ]
+    },
+    "RME_CACHE": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "Default RW margin settings."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "Use external pin RW margin setting."
+        }
+      ]
+    },
+    "RME_TCM": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "Default RW margin settings."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "Use external pin RW margin setting."
+        }
+      ]
+    },
+    "SDFBCLK_180": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "No delay on the feedback clock."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "Half a cycle delay on the feedback clock."
+        }
+      ]
+    },
+    "SDMMC1_EARLY_WR_RSP_ENABLE": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "Early-write response disabled. The last AHB write data beat receives the AXI buffered response for the complete AHB transaction."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "Early-write response enabled. AHB-Lite write data beats receive an automatic OK response from the AHB-to-AXI bridge, whatever the B-channel AXI response."
+        }
+      ]
+    },
+    "SDMMC2_EARLY_WR_RSP_ENABLE": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "Early-write response disabled. The last AHB write data beat receives the AXI buffered response for the complete AHB transaction."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "Early-write response enabled. AHB-Lite write data beats receive an automatic OK response from the AHB-to-AXI bridge, whatever the B-channel AXI response."
+        }
+      ]
+    },
+    "SMPSHDPSEL": {
+      "bit_size": 4,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "Standard run mode (no HDP)."
+        },
+        {
+          "name": "B_0xC",
+          "value": 12,
+          "description": "Analyze fsm mode analysis."
+        },
+        {
+          "name": "B_0xD",
+          "value": 13,
+          "description": "Analyze fsm mos analysis."
+        },
+        {
+          "name": "B_0xE",
+          "value": 14,
+          "description": "Analyze fsm rampe analysis."
+        },
+        {
+          "name": "B_0xF",
+          "value": 15,
+          "description": "Analyze fsm mode analysis."
+        }
+      ]
+    },
+    "USB1_EARLY_WR_RSP_ENABLE": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "Early-write response disabled. The last AHB write data beat receives the AXI buffered response for the complete AHB transaction."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "Early-write response enabled. AHB-Lite write data beats receive an automatic OK response from the AHB-to-AXI bridge, whatever the B-channel AXI response."
+        }
+      ]
+    },
+    "USB2_EARLY_WR_RSP_ENABLE": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "Early-write response disabled. The last AHB write data beat receives the AXI buffered response for the complete AHB transaction."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "Early-write response enabled. AHB-Lite write data beats receive an automatic OK response from the AHB-to-AXI bridge, whatever the B-channel AXI response."
+        }
+      ]
+    },
+    "VDDIO1CCCR_CS": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "VDDIOx I/O code from the cell (available in the VDDIOxCCSR)."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "VDDIOx I/O code from RANSRC[3:0] and RAPSRC[3:0] in this register."
+        }
+      ]
+    },
+    "VDDIO1CCCR_EN": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "VDDIOx I/O compensation cell disabled."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "VDDIOx I/O compensation cell enabled."
+        }
+      ]
+    },
+    "VDDIO1CCSR_READY": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "VDDIOx I/O compensation cell not ready."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "VDDIOx I/O compensation cell ready."
+        }
+      ]
+    },
+    "VDDIO2CCCR_CS": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "VDDIOx I/O code from the cell (available in the VDDIOxCCSR)."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "VDDIOx I/O code from RANSRC[3:0] and RAPSRC[3:0] in this register."
+        }
+      ]
+    },
+    "VDDIO2CCCR_EN": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "VDDIOx I/O compensation cell disabled."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "VDDIOx I/O compensation cell enabled."
+        }
+      ]
+    },
+    "VDDIO2CCSR_READY": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "VDDIOx I/O compensation cell not ready."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "VDDIOx I/O compensation cell ready."
+        }
+      ]
+    },
+    "VDDIO3CCCR_CS": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "VDDIOx I/O code from the cell (available in the VDDIOxCCSR)."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "VDDIOx I/O code from RANSRC[3:0] and RAPSRC[3:0] in this register."
+        }
+      ]
+    },
+    "VDDIO3CCCR_EN": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "VDDIOx I/O compensation cell disabled."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "VDDIOx I/O compensation cell enabled."
+        }
+      ]
+    },
+    "VDDIO3CCSR_READY": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "VDDIOx I/O compensation cell not ready."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "VDDIOx I/O compensation cell ready."
+        }
+      ]
+    },
+    "VDDIO4CCCR_CS": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "VDDIOx I/O code from the cell (available in the VDDIOxCCSR)."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "VDDIOx I/O code from RANSRC[3:0] and RAPSRC[3:0] in this register."
+        }
+      ]
+    },
+    "VDDIO4CCCR_EN": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "VDDIOx I/O compensation cell disabled."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "VDDIOx I/O compensation cell enabled."
+        }
+      ]
+    },
+    "VDDIO4CCSR_READY": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "VDDIOx I/O compensation cell not ready."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "VDDIOx I/O compensation cell ready."
+        }
+      ]
+    },
+    "VDDIOCCCR_CS": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "VDDIO I/O code from the cell (available in the VDDIOCCSR)."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "VDDIO I/O code from RANSRC[3:0] and RAPSRC[3:0]."
+        }
+      ]
+    },
+    "VDDIOCCCR_EN": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "VDDIO I/O compensation cell disabled."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "VDDIO I/O compensation cell enabled."
+        }
+      ]
+    },
+    "VDDIOCCSR_READY": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "B_0x0",
+          "value": 0,
+          "description": "VDDIO I/O compensation cell not ready."
+        },
+        {
+          "name": "B_0x1",
+          "value": 1,
+          "description": "VDDIO I/O compensation cell ready."
+        }
+      ]
+    }
+  }
+}

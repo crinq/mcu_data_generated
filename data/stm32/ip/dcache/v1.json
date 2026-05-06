@@ -1,0 +1,315 @@
+{
+  "schema": 1,
+  "kind": "dcache",
+  "version": "v1",
+  "blocks": {
+    "DCACHE": {
+      "name": "DCACHE",
+      "description": "Data cache.",
+      "extends": null,
+      "registers": [
+        {
+          "name": "CR",
+          "offset": 0,
+          "size": 32,
+          "description": "DCACHE control register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "DCACHE control register.",
+          "fields": [
+            {
+              "name": "EN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "enable.",
+              "enum": null
+            },
+            {
+              "name": "CACHEINV",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "full cache invalidation Can be set by software, only when EN = 1. Cleared by hardware when the BUSYF flag is set (during full cache invalidation operation). Writing 0 has no effect.",
+              "enum": null
+            },
+            {
+              "name": "CACHECMD",
+              "bit_offset": 8,
+              "bit_width": 3,
+              "description": "cache command maintenance operation (cleans and/or invalidates an address range) Can be set and cleared by software, only when no maintenance command is ongoing (BUSYCMDF = 0). others: reserved.",
+              "enum": null
+            },
+            {
+              "name": "STARTCMD",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "starts maintenance command (maintenance operation defined in CACHECMD). Can be set by software, only when EN = 1, BUSYCMDF = 0, BUSYF = 0 and CACHECMD = 0b001, 0b010 or 0b011. Cleared by hardware when the BUSYCMDF flag is set (during cache maintenance operation). Writing 0 has no effect.",
+              "enum": null
+            },
+            {
+              "name": "RHITMEN",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "read-hit monitor enable.",
+              "enum": null
+            },
+            {
+              "name": "RMISSMEN",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "read-miss monitor enable.",
+              "enum": null
+            },
+            {
+              "name": "RHITMRST",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "read-hit monitor reset.",
+              "enum": null
+            },
+            {
+              "name": "RMISSMRST",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "read-miss monitor reset.",
+              "enum": null
+            },
+            {
+              "name": "WHITMEN",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "write-hit monitor enable.",
+              "enum": null
+            },
+            {
+              "name": "WMISSMEN",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "write-miss monitor enable.",
+              "enum": null
+            },
+            {
+              "name": "WHITMRST",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "write-hit monitor reset.",
+              "enum": null
+            },
+            {
+              "name": "WMISSMRST",
+              "bit_offset": 23,
+              "bit_width": 1,
+              "description": "write-miss monitor reset.",
+              "enum": null
+            },
+            {
+              "name": "HBURST",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "output burst type for cache master port read accesses Write access is always done in INCR burst type.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SR",
+          "offset": 4,
+          "size": 32,
+          "description": "DCACHE status register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "DCACHE status register.",
+          "fields": [
+            {
+              "name": "BUSYF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "full invalidate busy flag.",
+              "enum": null
+            },
+            {
+              "name": "BSYENDF",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "full invalidate busy end flag Cleared by writing DCACHE_FCR.CBSYENDF = 1.",
+              "enum": null
+            },
+            {
+              "name": "ERRF",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "cache error flag Cleared by writing DCACHE_FCR.CERRF = 1.",
+              "enum": null
+            },
+            {
+              "name": "BUSYCMDF",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "command busy flag.",
+              "enum": null
+            },
+            {
+              "name": "CMDENDF",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "command end flag Cleared by writing DCACHE_FCR.CCMDENDF = 1.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "IER",
+          "offset": 8,
+          "size": 32,
+          "description": "DCACHE interrupt enable register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "DCACHE interrupt enable register.",
+          "fields": [
+            {
+              "name": "BSYENDIE",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "interrupt enable on busy end Set by SW to enable an interrupt generation at the end of a cache full invalidate operation.",
+              "enum": null
+            },
+            {
+              "name": "ERRIE",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "interrupt enable on cache error Set by software to enable an interrupt generation in case of cache functional error (eviction or clean operation write-back error).",
+              "enum": null
+            },
+            {
+              "name": "CMDENDIE",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "interrupt enable on command end Set by software to enable an interrupt generation at the end of a cache command (clean and/or invalidate an address range).",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "FCR",
+          "offset": 12,
+          "size": 32,
+          "description": "DCACHE flag clear register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "DCACHE flag clear register.",
+          "fields": [
+            {
+              "name": "CBSYENDF",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "clear full invalidate busy end flag Set by software.",
+              "enum": null
+            },
+            {
+              "name": "CERRF",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "clear cache error flag Set by software.",
+              "enum": null
+            },
+            {
+              "name": "CCMDENDF",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "clear command end flag Set by software.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "RHMONR",
+          "offset": 16,
+          "description": "DCACHE read-hit monitor register.",
+          "array_len": null,
+          "array_stride": null,
+          "fields": []
+        },
+        {
+          "name": "RMMONR",
+          "offset": 20,
+          "size": 32,
+          "description": "DCACHE read-miss monitor register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "DCACHE read-miss monitor register.",
+          "fields": [
+            {
+              "name": "RMISSMON",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "cache read-miss monitor counter.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "WHMONR",
+          "offset": 32,
+          "description": "DCACHE write-hit monitor register.",
+          "array_len": null,
+          "array_stride": null,
+          "fields": []
+        },
+        {
+          "name": "WMMONR",
+          "offset": 36,
+          "size": 32,
+          "description": "DCACHE write-miss monitor register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "DCACHE write-miss monitor register.",
+          "fields": [
+            {
+              "name": "WMISSMON",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "cache write-miss monitor counter.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CMDRSADDRR",
+          "offset": 40,
+          "size": 32,
+          "description": "DCACHE command range start address register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "DCACHE command range start address register.",
+          "fields": [
+            {
+              "name": "CMDSTARTADDR",
+              "bit_offset": 4,
+              "bit_width": 28,
+              "description": "start address of range to which the cache maintenance command specified in DCACHE_CR.CACHECMD field applies This register must be set before DCACHE_CR.CACHECMD is written..",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CMDREADDRR",
+          "offset": 44,
+          "size": 32,
+          "description": "DCACHE command range end address register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "DCACHE command range end address register.",
+          "fields": [
+            {
+              "name": "CMDENDADDR",
+              "bit_offset": 4,
+              "bit_width": 28,
+              "description": "end address of range to which the cache maintenance command specified in DCACHE_CR.CACHECMD field applies This register must be set before DCACHE_CR.CACHECMD is written.",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {}
+}

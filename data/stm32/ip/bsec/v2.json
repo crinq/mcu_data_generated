@@ -1,0 +1,486 @@
+{
+  "schema": 1,
+  "kind": "bsec",
+  "version": "v2",
+  "blocks": {
+    "BSEC": {
+      "name": "BSEC",
+      "description": "Boot and security and OTP control.",
+      "extends": null,
+      "registers": [
+        {
+          "name": "FVR",
+          "offset": 0,
+          "size": 32,
+          "description": "BSEC fuse value register.",
+          "array_len": 376,
+          "array_stride": 4,
+          "fieldset_description": "BSEC fuse value register.",
+          "fields": [
+            {
+              "name": "FV",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Fuse value.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SPLOCK",
+          "offset": 2048,
+          "size": 32,
+          "description": "BSEC sticky program lock register.",
+          "array_len": 12,
+          "array_stride": 4,
+          "fieldset_description": "BSEC lock register.",
+          "fields": [
+            {
+              "name": "LOCK",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Lock bits for fuse words 0 to 31 of the corresponding group.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SWLOCK",
+          "offset": 2112,
+          "size": 32,
+          "description": "BSEC sticky write lock register.",
+          "array_len": 12,
+          "array_stride": 4,
+          "fieldset_description": "BSEC lock register.",
+          "fields": [
+            {
+              "name": "LOCK",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Lock bits for fuse words 0 to 31 of the corresponding group.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SRLOCK",
+          "offset": 2176,
+          "size": 32,
+          "description": "BSEC sticky read lock register.",
+          "array_len": 12,
+          "array_stride": 4,
+          "fieldset_description": "BSEC lock register.",
+          "fields": [
+            {
+              "name": "LOCK",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Lock bits for fuse words 0 to 31 of the corresponding group.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "OTPVLDR",
+          "offset": 2240,
+          "size": 32,
+          "description": "BSEC OTP valid status register.",
+          "array_len": 12,
+          "array_stride": 4,
+          "fieldset_description": "BSEC OTP valid status register.",
+          "fields": [
+            {
+              "name": "OTPVLD",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "OTP valid status bits.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SFSR",
+          "offset": 2368,
+          "size": 32,
+          "description": "BSEC shadow fuse status register.",
+          "array_len": 12,
+          "array_stride": 4,
+          "fieldset_description": "BSEC shadow fuse status register.",
+          "fields": [
+            {
+              "name": "SFSR",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Shadow fuse status bits.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "OTPCR",
+          "offset": 3076,
+          "size": 32,
+          "description": "BSEC OTP control register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "BSEC OTP control register.",
+          "fields": [
+            {
+              "name": "ADDR",
+              "bit_offset": 0,
+              "bit_width": 9,
+              "description": "Fuse word address.",
+              "enum": null
+            },
+            {
+              "name": "PROG",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Fuse word programming.",
+              "enum": null
+            },
+            {
+              "name": "PPLOCK",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "Permanent programming lock.",
+              "enum": null
+            },
+            {
+              "name": "BKPSEC",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Backup registers security.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "WDR",
+          "offset": 3080,
+          "size": 32,
+          "description": "BSEC OTP write data register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "BSEC write data register.",
+          "fields": [
+            {
+              "name": "WDATA",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Write data value to program in OTP.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SCRATCHR",
+          "offset": 3584,
+          "description": "BSEC scratch register.",
+          "array_len": 4,
+          "array_stride": 4,
+          "fields": []
+        },
+        {
+          "name": "LOCKR",
+          "offset": 3600,
+          "size": 32,
+          "description": "BSEC global lock register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "BSEC global lock register.",
+          "fields": [
+            {
+              "name": "GLOCK",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Global lock. When set, all writes to BSEC are ignored until next reset.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "JTAGINR",
+          "offset": 3604,
+          "description": "BSEC JTAG input register.",
+          "array_len": null,
+          "array_stride": null,
+          "fields": []
+        },
+        {
+          "name": "JTAGOUTR",
+          "offset": 3608,
+          "description": "BSEC JTAG output register.",
+          "array_len": null,
+          "array_stride": null,
+          "fields": []
+        },
+        {
+          "name": "UNMAPR",
+          "offset": 3620,
+          "size": 32,
+          "description": "BSEC unmap register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "BSEC unmap register.",
+          "fields": [
+            {
+              "name": "UNMAP",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Unmap OTP area.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "SR",
+          "offset": 3648,
+          "size": 32,
+          "description": "BSEC status register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "BSEC status register.",
+          "fields": [
+            {
+              "name": "HVALID",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Hardware key valid. When set, DHUK can be used in SAES.",
+              "enum": null
+            },
+            {
+              "name": "DBGREQ",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Debug request. Host debugger is requesting debug.",
+              "enum": null
+            },
+            {
+              "name": "NVSTATE",
+              "bit_offset": 26,
+              "bit_width": 6,
+              "description": "Non-volatile state.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "OTPSR",
+          "offset": 3652,
+          "size": 32,
+          "description": "BSEC OTP status register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "BSEC OTP status register.",
+          "fields": [
+            {
+              "name": "BUSY",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "OTP busy flag.",
+              "enum": null
+            },
+            {
+              "name": "HIDEUP",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Hide-up status.",
+              "enum": null
+            },
+            {
+              "name": "PPLOCK",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Programming permanent lock status.",
+              "enum": null
+            },
+            {
+              "name": "OTPERR",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "OTP error.",
+              "enum": null
+            },
+            {
+              "name": "OTPSEC",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "OTP security.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "EPOCHR",
+          "offset": 3712,
+          "description": "BSEC epoch register.",
+          "array_len": 2,
+          "array_stride": 4,
+          "fields": []
+        },
+        {
+          "name": "EPOCH_SELR",
+          "offset": 3720,
+          "size": 32,
+          "description": "BSEC epoch select register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "BSEC epoch select register.",
+          "fields": [
+            {
+              "name": "EPOCH_SEL",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Epoch select.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "DBGCR",
+          "offset": 3724,
+          "size": 32,
+          "description": "BSEC debug control register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "BSEC debug control register.",
+          "fields": [
+            {
+              "name": "DBGEN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Debug enable.",
+              "enum": null
+            },
+            {
+              "name": "NIDEN",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Non-invasive debug enable.",
+              "enum": null
+            },
+            {
+              "name": "SPIDEN",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Secure privileged invasive debug enable.",
+              "enum": null
+            },
+            {
+              "name": "SPNIDEN",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Secure privileged non-invasive debug enable.",
+              "enum": null
+            },
+            {
+              "name": "DBGSWEN",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Debug software enable.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "AP_UNLOCK",
+          "offset": 3728,
+          "size": 32,
+          "description": "BSEC AP unlock register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "BSEC AP unlock register.",
+          "fields": [
+            {
+              "name": "AP_UNLOCK",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Access port unlock key.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "HDPLSR",
+          "offset": 3732,
+          "size": 32,
+          "description": "BSEC HDPL status register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "BSEC HDPL status register.",
+          "fields": [
+            {
+              "name": "HDPL",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "Current hardware device protection level.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "HDPLCR",
+          "offset": 3736,
+          "size": 32,
+          "description": "BSEC HDPL control register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "BSEC HDPL control register.",
+          "fields": [
+            {
+              "name": "INCR_HDPL",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "Increment HDPL. Write HDPL_INCR_CODE to increment HDPL.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "NEXTLR",
+          "offset": 3740,
+          "size": 32,
+          "description": "BSEC next HDPL register.",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "BSEC next HDPL register.",
+          "fields": [
+            {
+              "name": "NEXTL",
+              "bit_offset": 0,
+              "bit_width": 2,
+              "description": "Next HDPL level.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "WOSCR",
+          "offset": 3904,
+          "description": "BSEC write-once scratch register.",
+          "array_len": 8,
+          "array_stride": 4,
+          "fields": []
+        },
+        {
+          "name": "HRCR",
+          "offset": 4072,
+          "description": "BSEC hot reset count register.",
+          "array_len": null,
+          "array_stride": null,
+          "fields": []
+        },
+        {
+          "name": "WRCR",
+          "offset": 4076,
+          "description": "BSEC warm reset count register.",
+          "array_len": null,
+          "array_stride": null,
+          "fields": []
+        }
+      ]
+    }
+  },
+  "enums": {}
+}

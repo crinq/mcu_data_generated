@@ -1,0 +1,806 @@
+{
+  "schema": 1,
+  "kind": "adc",
+  "version": "wb1",
+  "blocks": {
+    "ADC": {
+      "name": "ADC",
+      "description": "Analog-to-digital converter",
+      "extends": null,
+      "registers": [
+        {
+          "name": "ISR",
+          "offset": 0,
+          "size": 32,
+          "description": "interrupt and status register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "interrupt and status register",
+          "fields": [
+            {
+              "name": "ADRDY",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "ADC ready",
+              "enum": null
+            },
+            {
+              "name": "EOSMP",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "End of sampling flag",
+              "enum": null
+            },
+            {
+              "name": "EOC",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "End of conversion flag",
+              "enum": null
+            },
+            {
+              "name": "EOSEQ",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "End of sequence flag",
+              "enum": null
+            },
+            {
+              "name": "OVR",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "ADC overrun",
+              "enum": null
+            },
+            {
+              "name": "AWD",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Analog watchdog flag",
+              "enum": null
+            },
+            {
+              "name": "EOCAL",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "End of calibration flag",
+              "enum": null
+            },
+            {
+              "name": "CCRDY",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Channel configuration ready flag",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "IER",
+          "offset": 4,
+          "size": 32,
+          "description": "interrupt enable register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "interrupt enable register",
+          "fields": [
+            {
+              "name": "ADRDYIE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "ADC ready interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "EOSMPIE",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "End of sampling flag interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "EOCIE",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "End of conversion interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "EOSEQIE",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "End of conversion sequence interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "OVRIE",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Overrun interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "AWDIE",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Analog watchdog interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "EOCALIE",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "End of calibration interrupt enable",
+              "enum": null
+            },
+            {
+              "name": "CCRDYIE",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Channel configuration interrupt enable",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CR",
+          "offset": 8,
+          "size": 32,
+          "description": "control register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "control register",
+          "fields": [
+            {
+              "name": "ADEN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "ADC enable command",
+              "enum": null
+            },
+            {
+              "name": "ADDIS",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "ADC disable command",
+              "enum": null
+            },
+            {
+              "name": "ADSTART",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "ADC start conversion command",
+              "enum": null
+            },
+            {
+              "name": "ADSTP",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "ADC stop conversion command",
+              "enum": null
+            },
+            {
+              "name": "ADVREGEN",
+              "bit_offset": 28,
+              "bit_width": 1,
+              "description": "ADC voltage regulator enable command",
+              "enum": null
+            },
+            {
+              "name": "ADCAL",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "ADC calibration",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CFGR1",
+          "offset": 12,
+          "size": 32,
+          "description": "configuration register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "configuration register 1",
+          "fields": [
+            {
+              "name": "DMAEN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Direct memory access enable",
+              "enum": null
+            },
+            {
+              "name": "DMACFG",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Direct memory access configuration",
+              "enum": "DMACFG"
+            },
+            {
+              "name": "SCANDIR",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Scan sequence direction",
+              "enum": "SCANDIR"
+            },
+            {
+              "name": "RES",
+              "bit_offset": 3,
+              "bit_width": 2,
+              "description": "Data resolution",
+              "enum": "RES"
+            },
+            {
+              "name": "ALIGN",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Data alignment",
+              "enum": "ALIGN"
+            },
+            {
+              "name": "EXTSEL",
+              "bit_offset": 6,
+              "bit_width": 3,
+              "description": "External trigger selection",
+              "enum": "EXTSEL"
+            },
+            {
+              "name": "EXTEN",
+              "bit_offset": 10,
+              "bit_width": 2,
+              "description": "External trigger enable and polarity selection",
+              "enum": "EXTEN"
+            },
+            {
+              "name": "OVRMOD",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "Overrun management mode",
+              "enum": "OVRMOD"
+            },
+            {
+              "name": "CONT",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Continuous conversion",
+              "enum": null
+            },
+            {
+              "name": "WAIT",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "Wait conversion mode",
+              "enum": null
+            },
+            {
+              "name": "AUTOFF",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Auto-off mode",
+              "enum": null
+            },
+            {
+              "name": "DISCEN",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Discontinuous mode",
+              "enum": null
+            },
+            {
+              "name": "CHSELRMOD",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "Group regular sequencer mode",
+              "enum": null
+            },
+            {
+              "name": "AWDSGL",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "Enable the analog watchdog on a single channel or on all channels",
+              "enum": "AWDSGL"
+            },
+            {
+              "name": "AWDEN",
+              "bit_offset": 23,
+              "bit_width": 1,
+              "description": "Analog watchdog enable",
+              "enum": null
+            },
+            {
+              "name": "AWDCH",
+              "bit_offset": 26,
+              "bit_width": 5,
+              "description": "Analog watchdog channel selection",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CFGR2",
+          "offset": 16,
+          "size": 32,
+          "description": "configuration register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "configuration register 2",
+          "fields": [
+            {
+              "name": "LFTRIG",
+              "bit_offset": 29,
+              "bit_width": 1,
+              "description": "ADC low frequency trigger mode",
+              "enum": null
+            },
+            {
+              "name": "CKMODE",
+              "bit_offset": 30,
+              "bit_width": 2,
+              "description": "ADC clock mode",
+              "enum": "CKMODE"
+            }
+          ]
+        },
+        {
+          "name": "SMPR",
+          "offset": 20,
+          "size": 32,
+          "description": "sampling time register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "sampling time register",
+          "fields": [
+            {
+              "name": "SMP",
+              "bit_offset": 0,
+              "bit_width": 3,
+              "description": "Group sampling time selection",
+              "enum": "SAMPLE_TIME"
+            },
+            {
+              "name": "SMPSEL",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Channel sampling time group selection",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "TR",
+          "offset": 32,
+          "size": 32,
+          "description": "watchdog threshold register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "watchdog threshold register",
+          "fields": [
+            {
+              "name": "LT",
+              "bit_offset": 0,
+              "bit_width": 12,
+              "description": "Analog watchdog lower threshold",
+              "enum": null
+            },
+            {
+              "name": "HT",
+              "bit_offset": 16,
+              "bit_width": 12,
+              "description": "Analog watchdog higher threshold",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CHSELR",
+          "offset": 40,
+          "size": 32,
+          "description": "channel selection register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "channel selection register",
+          "fields": [
+            {
+              "name": "CHSEL x",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Channel-x selection (available when CFGR1_CHSELRMOD is cleared)",
+              "enum": null
+            },
+            {
+              "name": "SEQ x",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "Sequencer-x selection (available when CFGR1_CHSELRMOD is set)",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "DR",
+          "offset": 64,
+          "size": 32,
+          "description": "data register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "data register",
+          "fields": [
+            {
+              "name": "DATA",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Converted data",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CALFACT",
+          "offset": 180,
+          "size": 32,
+          "description": "calibration factor register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "calibration factor register",
+          "fields": [
+            {
+              "name": "CALFACT",
+              "bit_offset": 0,
+              "bit_width": 7,
+              "description": "Calibration factor in single-ended mode",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CCR",
+          "offset": 776,
+          "size": 32,
+          "description": "common configuration register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "common configuration register",
+          "fields": [
+            {
+              "name": "PRESC",
+              "bit_offset": 18,
+              "bit_width": 4,
+              "description": "Common clock prescalar for asynchronous clock source",
+              "enum": "PRESC"
+            },
+            {
+              "name": "VREFEN",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "Temperature sensor and VREFINT enable",
+              "enum": null
+            },
+            {
+              "name": "TSEN",
+              "bit_offset": 23,
+              "bit_width": 1,
+              "description": "Temperature sensor enable",
+              "enum": null
+            },
+            {
+              "name": "VBATEN",
+              "bit_offset": 24,
+              "bit_width": 1,
+              "description": "VBAT enable",
+              "enum": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "enums": {
+    "ALIGN": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Right",
+          "value": 0,
+          "description": "Right alignment"
+        },
+        {
+          "name": "Left",
+          "value": 1,
+          "description": "Left alignment"
+        }
+      ]
+    },
+    "AWDSGL": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "AllChannels",
+          "value": 0,
+          "description": "Analog watchdog enabled on all channels"
+        },
+        {
+          "name": "SingleChannel",
+          "value": 1,
+          "description": "Analog watchdog enabled on a single channel"
+        }
+      ]
+    },
+    "CKMODE": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "ADCCLK",
+          "value": 0,
+          "description": "Asynchronous clock mode"
+        },
+        {
+          "name": "PCLK_Div2",
+          "value": 1,
+          "description": "Synchronous clock mode (PCLK/2)"
+        },
+        {
+          "name": "PCLK_Div4",
+          "value": 2,
+          "description": "Sychronous clock mode (PCLK/4)"
+        },
+        {
+          "name": "PCLK",
+          "value": 3,
+          "description": "Synchronous clock mode (PCLK)"
+        }
+      ]
+    },
+    "DMACFG": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "OneShot",
+          "value": 0,
+          "description": "DMA One Shot mode selected"
+        },
+        {
+          "name": "Circular",
+          "value": 1,
+          "description": "DMA Circular mode selected"
+        }
+      ]
+    },
+    "EXTEN": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Disabled",
+          "value": 0,
+          "description": "Trigger detection disabled"
+        },
+        {
+          "name": "RisingEdge",
+          "value": 1,
+          "description": "Trigger detection on the rising edge"
+        },
+        {
+          "name": "FallingEdge",
+          "value": 2,
+          "description": "Trigger detection on the falling edge"
+        },
+        {
+          "name": "BothEdges",
+          "value": 3,
+          "description": "Trigger detection on both the rising and falling edges"
+        }
+      ]
+    },
+    "EXTSEL": {
+      "bit_size": 3,
+      "variants": [
+        {
+          "name": "Trg0",
+          "value": 0,
+          "description": "adc_trg0."
+        },
+        {
+          "name": "Trg1",
+          "value": 1,
+          "description": "adc_trg1."
+        },
+        {
+          "name": "Trg2",
+          "value": 2,
+          "description": "adc_trg2."
+        },
+        {
+          "name": "Trg3",
+          "value": 3,
+          "description": "adc_trg3."
+        },
+        {
+          "name": "Trg4",
+          "value": 4,
+          "description": "adc_trg4."
+        },
+        {
+          "name": "Trg5",
+          "value": 5,
+          "description": "adc_trg5."
+        },
+        {
+          "name": "Trg6",
+          "value": 6,
+          "description": "adc_trg6."
+        },
+        {
+          "name": "Trg7",
+          "value": 7,
+          "description": "adc_trg7."
+        }
+      ]
+    },
+    "OVRMOD": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Preserved",
+          "value": 0,
+          "description": "ADC_DR register is preserved with the old data when an overrun is detected"
+        },
+        {
+          "name": "Overwritten",
+          "value": 1,
+          "description": "ADC_DR register is overwritten with the last conversion result when an overrun is detected"
+        }
+      ]
+    },
+    "PRESC": {
+      "bit_size": 4,
+      "variants": [
+        {
+          "name": "Div1",
+          "value": 0,
+          "description": "input ADC clock not divided."
+        },
+        {
+          "name": "Div2",
+          "value": 1,
+          "description": "input ADC clock divided by 2."
+        },
+        {
+          "name": "Div4",
+          "value": 2,
+          "description": "input ADC clock divided by 4."
+        },
+        {
+          "name": "Div6",
+          "value": 3,
+          "description": "input ADC clock divided by 6."
+        },
+        {
+          "name": "Div8",
+          "value": 4,
+          "description": "input ADC clock divided by 8."
+        },
+        {
+          "name": "Div10",
+          "value": 5,
+          "description": "input ADC clock divided by 10."
+        },
+        {
+          "name": "Div12",
+          "value": 6,
+          "description": "input ADC clock divided by 12."
+        },
+        {
+          "name": "Div16",
+          "value": 7,
+          "description": "input ADC clock divided by 16."
+        },
+        {
+          "name": "Div32",
+          "value": 8,
+          "description": "input ADC clock divided by 32."
+        },
+        {
+          "name": "Div64",
+          "value": 9,
+          "description": "input ADC clock divided by 64."
+        },
+        {
+          "name": "Div128",
+          "value": 10,
+          "description": "input ADC clock divided by 128."
+        },
+        {
+          "name": "Div256",
+          "value": 11,
+          "description": "input ADC clock divided by 256."
+        }
+      ]
+    },
+    "RES": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Bits12",
+          "value": 0,
+          "description": "12-bit (14 ADCCLK cycles)"
+        },
+        {
+          "name": "Bits10",
+          "value": 1,
+          "description": "10-bit (13 ADCCLK cycles)"
+        },
+        {
+          "name": "Bits8",
+          "value": 2,
+          "description": "8-bit (11 ADCCLK cycles)"
+        },
+        {
+          "name": "Bits6",
+          "value": 3,
+          "description": "6-bit (9 ADCCLK cycles)"
+        }
+      ]
+    },
+    "SAMPLE_TIME": {
+      "bit_size": 3,
+      "variants": [
+        {
+          "name": "Cycles1_5",
+          "value": 0,
+          "description": "1.5 cycles"
+        },
+        {
+          "name": "Cycles3_5",
+          "value": 1,
+          "description": "3.5 cycles"
+        },
+        {
+          "name": "Cycles7_5",
+          "value": 2,
+          "description": "7.5 cycles"
+        },
+        {
+          "name": "Cycles12_5",
+          "value": 3,
+          "description": "12.5 cycles"
+        },
+        {
+          "name": "Cycles19_5",
+          "value": 4,
+          "description": "19.5 cycles"
+        },
+        {
+          "name": "Cycles39_5",
+          "value": 5,
+          "description": "39.5 cycles"
+        },
+        {
+          "name": "Cycles79_5",
+          "value": 6,
+          "description": "79.5 cycles"
+        },
+        {
+          "name": "Cycles160_5",
+          "value": 7,
+          "description": "160.5 cycles"
+        }
+      ]
+    },
+    "SCANDIR": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "Upward",
+          "value": 0,
+          "description": "Upward scan (from CHSEL0 to CHSEL18)"
+        },
+        {
+          "name": "Backward",
+          "value": 1,
+          "description": "Backward scan (from CHSEL18 to CHSEL0)"
+        }
+      ]
+    }
+  }
+}

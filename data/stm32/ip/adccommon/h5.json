@@ -1,0 +1,517 @@
+{
+  "schema": 1,
+  "kind": "adccommon",
+  "version": "h5",
+  "blocks": {
+    "ADC_COMMON": {
+      "name": "ADC_COMMON",
+      "description": "ADC common registers",
+      "extends": null,
+      "registers": [
+        {
+          "name": "CSR",
+          "offset": 0,
+          "size": 32,
+          "description": "common status register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "common status register",
+          "fields": [
+            {
+              "name": "ADRDY_MST",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Master ADC ready This bit is a copy of the ADRDY bit in the corresponding ADC_ISR register.",
+              "enum": null
+            },
+            {
+              "name": "EOSMP_MST",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "End of Sampling phase flag of the master ADC This bit is a copy of the EOSMP bit in the corresponding ADC_ISR register.",
+              "enum": null
+            },
+            {
+              "name": "EOC_MST",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "End of regular conversion of the master ADC This bit is a copy of the EOC bit in the corresponding ADC_ISR register.",
+              "enum": null
+            },
+            {
+              "name": "EOS_MST",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "End of regular sequence flag of the master ADC This bit is a copy of the EOS bit in the corresponding ADC_ISR register.",
+              "enum": null
+            },
+            {
+              "name": "OVR_MST",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Overrun flag of the master ADC This bit is a copy of the OVR bit in the corresponding ADC_ISR register.",
+              "enum": null
+            },
+            {
+              "name": "JEOC_MST",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "End of injected conversion flag of the master ADC This bit is a copy of the JEOC bit in the corresponding ADC_ISR register.",
+              "enum": null
+            },
+            {
+              "name": "JEOS_MST",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "End of injected sequence flag of the master ADC This bit is a copy of the JEOS bit in the corresponding ADC_ISR register.",
+              "enum": null
+            },
+            {
+              "name": "AWD_MST",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Analog watchdog 1 flag of the master ADC This bit is a copy of the AWD1 bit in the corresponding ADC_ISR register.",
+              "enum": null
+            },
+            {
+              "name": "JQOVF_MST",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Injected Context Queue Overflow flag of the master ADC This bit is a copy of the JQOVF bit in the corresponding ADC_ISR register.",
+              "enum": null
+            },
+            {
+              "name": "ADRDY_SLV",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Slave ADC ready This bit is a copy of the ADRDY bit in the corresponding ADC_ISR register.",
+              "enum": null
+            },
+            {
+              "name": "EOSMP_SLV",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "End of Sampling phase flag of the slave ADC This bit is a copy of the EOSMP2 bit in the corresponding ADC_ISR register.",
+              "enum": null
+            },
+            {
+              "name": "EOC_SLV",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "End of regular conversion of the slave ADC This bit is a copy of the EOC bit in the corresponding ADC_ISR register.",
+              "enum": null
+            },
+            {
+              "name": "EOS_SLV",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "End of regular sequence flag of the slave ADC. This bit is a copy of the EOS bit in the corresponding ADC_ISR register.",
+              "enum": null
+            },
+            {
+              "name": "OVR_SLV",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "Overrun flag of the slave ADC This bit is a copy of the OVR bit in the corresponding ADC_ISR register.",
+              "enum": null
+            },
+            {
+              "name": "JEOC_SLV",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "End of injected conversion flag of the slave ADC This bit is a copy of the JEOC bit in the corresponding ADC_ISR register.",
+              "enum": null
+            },
+            {
+              "name": "JEOS_SLV",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "End of injected sequence flag of the slave ADC This bit is a copy of the JEOS bit in the corresponding ADC_ISR register.",
+              "enum": null
+            },
+            {
+              "name": "AWD_SLV",
+              "bit_offset": 23,
+              "bit_width": 1,
+              "description": "Analog watchdog 1 flag of the slave ADC This bit is a copy of the AWD1 bit in the corresponding ADC_ISR register.",
+              "enum": null
+            },
+            {
+              "name": "JQOVF_SLV",
+              "bit_offset": 26,
+              "bit_width": 1,
+              "description": "Injected Context Queue Overflow flag of the slave ADC This bit is a copy of the JQOVF bit in the corresponding ADC_ISR register.",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CCR",
+          "offset": 8,
+          "size": 32,
+          "description": "common control register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "common control register",
+          "fields": [
+            {
+              "name": "DUAL",
+              "bit_offset": 0,
+              "bit_width": 5,
+              "description": "Dual ADC mode selection These bits are written by software to select the operating mode. 0 value means Independent Mode. Values 00001 to 01001 means Dual mode, master and slave ADCs are working together. All other combinations are reserved and must not be programmed Note: The software is allowed to write these bits only when the ADCs are disabled (ADCAL = 0, JADSTART = 0, ADSTART = 0, ADSTP = 0, ADDIS = 0 and ADEN = 0).",
+              "enum": "DUAL"
+            },
+            {
+              "name": "DELAY",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "Delay between 2 sampling phases These bits are set and cleared by software. These bits are used in dual interleaved modes. Refer to for the value of ADC resolution versus DELAY bits values. Note: The software is allowed to write these bits only when the ADCs are disabled (ADCAL = 0, JADSTART = 0, ADSTART = 0, ADSTP = 0, ADDIS = 0 and ADEN = 0).",
+              "enum": null
+            },
+            {
+              "name": "DMACFG",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "DMA configuration (for dual ADC mode) This bit is set and cleared by software to select between two DMA modes of operation and is effective only when DMAEN = 1. For more details, refer to Note: The software is allowed to write these bits only when ADSTART = 0 (which ensures that no regular conversion is ongoing).",
+              "enum": "DMACFG"
+            },
+            {
+              "name": "MDMA",
+              "bit_offset": 14,
+              "bit_width": 2,
+              "description": "Direct memory access mode for dual ADC mode This bitfield is set and cleared by software. Refer to the DMA controller section for more details. Note: The software is allowed to write these bits only when ADSTART = 0 (which ensures that no regular conversion is ongoing).",
+              "enum": "MDMA"
+            },
+            {
+              "name": "CKMODE",
+              "bit_offset": 16,
+              "bit_width": 2,
+              "description": "ADC clock mode These bits are set and cleared by software to define the ADC clock scheme (which is common to both master and slave ADCs): In all synchronous clock modes, there is no jitter in the delay from a timer trigger to the start of a conversion. Note: The software is allowed to write these bits only when the ADCs are disabled (ADCAL = 0, JADSTART = 0, ADSTART = 0, ADSTP = 0, ADDIS = 0 and ADEN = 0).",
+              "enum": "CKMODE"
+            },
+            {
+              "name": "PRESC",
+              "bit_offset": 18,
+              "bit_width": 4,
+              "description": "ADC prescaler These bits are set and cleared by software to select the frequency of the clock to the ADC. The clock is common for all the ADCs. other: reserved Note: The software is allowed to write these bits only when the ADC is disabled (ADCAL = 0, JADSTART = 0, ADSTART = 0, ADSTP = 0, ADDIS = 0 and ADEN = 0). The ADC prescaler value is applied only when CKMODE[1:0] = 0b00.",
+              "enum": "PRESC"
+            },
+            {
+              "name": "VREFEN",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "VREFINT enable This bit is set and cleared by software to enable/disable the VREFINT channel",
+              "enum": null
+            },
+            {
+              "name": "TSEN",
+              "bit_offset": 23,
+              "bit_width": 1,
+              "description": "VSENSE enable This bit is set and cleared by software to control VSENSE",
+              "enum": null
+            },
+            {
+              "name": "VBATEN",
+              "bit_offset": 24,
+              "bit_width": 1,
+              "description": "VBAT enable This bit is set and cleared by software to control",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "CDR",
+          "offset": 12,
+          "size": 32,
+          "description": "common regular data register for dual mode",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "common regular data register for dual mode",
+          "fields": [
+            {
+              "name": "RDATA_MST",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Regular data of the master ADC. In dual mode, these bits contain the regular data of the master ADC. Refer to . The data alignment is applied as described in offset (ADC_DR, OFFSET, OFFSET_CH, ALIGN)) In MDMA = 0b11 mode, bits 15:8 contains SLV_ADC_DR[7:0], bits 7:0 contains MST_ADC_DR[7:0].",
+              "enum": null
+            },
+            {
+              "name": "RDATA_SLV",
+              "bit_offset": 16,
+              "bit_width": 16,
+              "description": "Regular data of the slave ADC In dual mode, these bits contain the regular data of the slave ADC. Refer to Dual ADC modes. The data alignment is applied as described in offset (ADC_DR, OFFSET, OFFSET_CH, ALIGN)).",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "HWCFGR0",
+          "offset": 240,
+          "size": 32,
+          "description": "hardware configuration register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "hardware configuration register",
+          "fields": [
+            {
+              "name": "ADCNUM",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "Number of ADCs implemented",
+              "enum": null
+            },
+            {
+              "name": "MULPIPE",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "Number of pipeline stages",
+              "enum": null
+            },
+            {
+              "name": "OPBITS",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "Number of option bits 0002: 2 option bits implemented in the ADC option register (ADC_OR) at address offset 0xC8.",
+              "enum": null
+            },
+            {
+              "name": "IDLEVALUE",
+              "bit_offset": 12,
+              "bit_width": 4,
+              "description": "Idle value for non-selected channels",
+              "enum": "IDLEVALUE"
+            }
+          ]
+        },
+        {
+          "name": "VERR",
+          "offset": 244,
+          "size": 32,
+          "description": "version register",
+          "array_len": null,
+          "array_stride": null,
+          "fieldset_description": "version register",
+          "fields": [
+            {
+              "name": "MINREV",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "Minor revision These bits returns the ADC IP minor revision 0002: Major revision = X.2.",
+              "enum": null
+            },
+            {
+              "name": "MAJREV",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "Major revision These bits returns the ADC IP major revision",
+              "enum": null
+            }
+          ]
+        },
+        {
+          "name": "IPDR",
+          "offset": 248,
+          "description": "identification register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": []
+        },
+        {
+          "name": "SIDR",
+          "offset": 252,
+          "description": "size identification register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": []
+        }
+      ]
+    }
+  },
+  "enums": {
+    "CKMODE": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "Asynchronous",
+          "value": 0,
+          "description": "Use Kernel Clock adc_ker_ck_input divided by PRESC. Asynchronous to AHB clock"
+        },
+        {
+          "name": "SyncDiv1",
+          "value": 1,
+          "description": "Use AHB clock rcc_hclk3. In this case rcc_hclk must equal sys_d1cpre_ck"
+        },
+        {
+          "name": "SyncDiv2",
+          "value": 2,
+          "description": "Use AHB clock rcc_hclk3 divided by 2"
+        },
+        {
+          "name": "SyncDiv4",
+          "value": 3,
+          "description": "Use AHB clock rcc_hclk3 divided by 4"
+        }
+      ]
+    },
+    "DMACFG": {
+      "bit_size": 1,
+      "variants": [
+        {
+          "name": "OneShot",
+          "value": 0,
+          "description": "DMA One Shot mode selected"
+        },
+        {
+          "name": "Circular",
+          "value": 1,
+          "description": "DMA Circular mode selected"
+        }
+      ]
+    },
+    "DUAL": {
+      "bit_size": 5,
+      "variants": [
+        {
+          "name": "Independent",
+          "value": 0,
+          "description": "Independent mode"
+        },
+        {
+          "name": "DualRJ",
+          "value": 1,
+          "description": "Dual, combined regular simultaneous + injected simultaneous mode"
+        },
+        {
+          "name": "DualRA",
+          "value": 2,
+          "description": "Dual, combined regular simultaneous + alternate trigger mode"
+        },
+        {
+          "name": "DualIJ",
+          "value": 3,
+          "description": "Dual, combined interleaved mode + injected simultaneous mode"
+        },
+        {
+          "name": "DualJ",
+          "value": 5,
+          "description": "Dual, injected simultaneous mode only"
+        },
+        {
+          "name": "DualR",
+          "value": 6,
+          "description": "Dual, regular simultaneous mode only"
+        },
+        {
+          "name": "DualI",
+          "value": 7,
+          "description": "Dual, interleaved mode only"
+        },
+        {
+          "name": "DualA",
+          "value": 9,
+          "description": "Dual, alternate trigger mode only"
+        }
+      ]
+    },
+    "IDLEVALUE": {
+      "bit_size": 4,
+      "variants": [
+        {
+          "name": "H13",
+          "value": 0,
+          "description": "Dummy channel selection is 0x13"
+        },
+        {
+          "name": "H1F",
+          "value": 1,
+          "description": "Dummy channel selection is 0x1F"
+        }
+      ]
+    },
+    "MDMA": {
+      "bit_size": 2,
+      "variants": [
+        {
+          "name": "NoPack",
+          "value": 0,
+          "description": "Without data packing, CDR/CDR2 not used"
+        },
+        {
+          "name": "Format32to10",
+          "value": 2,
+          "description": "CDR formatted for 32-bit down to 10-bit resolution"
+        },
+        {
+          "name": "Format8",
+          "value": 3,
+          "description": "CDR formatted for 8-bit resolution"
+        }
+      ]
+    },
+    "PRESC": {
+      "bit_size": 4,
+      "variants": [
+        {
+          "name": "Div1",
+          "value": 0,
+          "description": "adc_ker_ck_input not divided"
+        },
+        {
+          "name": "Div2",
+          "value": 1,
+          "description": "adc_ker_ck_input divided by 2"
+        },
+        {
+          "name": "Div4",
+          "value": 2,
+          "description": "adc_ker_ck_input divided by 4"
+        },
+        {
+          "name": "Div6",
+          "value": 3,
+          "description": "adc_ker_ck_input divided by 6"
+        },
+        {
+          "name": "Div8",
+          "value": 4,
+          "description": "adc_ker_ck_input divided by 8"
+        },
+        {
+          "name": "Div10",
+          "value": 5,
+          "description": "adc_ker_ck_input divided by 10"
+        },
+        {
+          "name": "Div12",
+          "value": 6,
+          "description": "adc_ker_ck_input divided by 12"
+        },
+        {
+          "name": "Div16",
+          "value": 7,
+          "description": "adc_ker_ck_input divided by 16"
+        },
+        {
+          "name": "Div32",
+          "value": 8,
+          "description": "adc_ker_ck_input divided by 32"
+        },
+        {
+          "name": "Div64",
+          "value": 9,
+          "description": "adc_ker_ck_input divided by 64"
+        },
+        {
+          "name": "Div128",
+          "value": 10,
+          "description": "adc_ker_ck_input divided by 128"
+        },
+        {
+          "name": "Div256",
+          "value": 11,
+          "description": "adc_ker_ck_input divided by 256"
+        }
+      ]
+    }
+  }
+}
