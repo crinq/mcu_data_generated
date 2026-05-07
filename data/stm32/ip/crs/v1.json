@@ -2,6 +2,9 @@
   "schema": 1,
   "kind": "crs",
   "version": "v1",
+  "source": "stm32rs_svd",
+  "source_device": "stm32f042c4",
+  "source_file": "stm32f0x2.svd.patched",
   "blocks": {
     "CRS": {
       "name": "CRS",
@@ -12,66 +15,102 @@
           "name": "CR",
           "offset": 0,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 8192,
           "description": "control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "control register",
           "fields": [
             {
-              "name": "SYNCOKIE",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "SYNC event OK interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "SYNCWARNIE",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "SYNC warning interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "ERRIE",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Synchronization or trimming error interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "ESYNCIE",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Expected SYNC interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "CEN",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "Frequency error counter enable",
-              "enum": null
-            },
-            {
-              "name": "AUTOTRIMEN",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "Automatic trimming enable",
-              "enum": null
+              "name": "TRIM",
+              "bit_offset": 8,
+              "bit_width": 6,
+              "description": "HSI48 oscillator smooth trimming"
             },
             {
               "name": "SWSYNC",
               "bit_offset": 7,
               "bit_width": 1,
               "description": "Generate software SYNC event",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Sync",
+                  "value": 1,
+                  "description": "A software sync is generated"
+                }
+              ]
             },
             {
-              "name": "TRIM",
-              "bit_offset": 8,
-              "bit_width": 6,
-              "description": "HSI48 oscillator smooth trimming",
-              "enum": null
+              "name": "AUTOTRIMEN",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Automatic trimming enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Automatic trimming disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Automatic trimming enabled"
+                }
+              ]
+            },
+            {
+              "name": "CEN",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Frequency error counter enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Frequency error counter disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Frequency error counter enabled"
+                }
+              ]
+            },
+            {
+              "name": "SYNCOKIE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "SYNC event OK interrupt enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Interrupt enabled"
+                }
+              ]
+            },
+            {
+              "name": "ESYNCIE",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Expected SYNC interrupt enable"
+            },
+            {
+              "name": "ERRIE",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Synchronization or trimming error interrupt enable"
+            },
+            {
+              "name": "SYNCWARNIE",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "SYNC warning interrupt enable"
             }
           ]
         },
@@ -79,45 +118,112 @@
           "name": "CFGR",
           "offset": 4,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 539147135,
           "description": "configuration register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "configuration register",
           "fields": [
             {
-              "name": "RELOAD",
-              "bit_offset": 0,
-              "bit_width": 16,
-              "description": "Counter reload value",
-              "enum": null
-            },
-            {
-              "name": "FELIM",
-              "bit_offset": 16,
-              "bit_width": 8,
-              "description": "Frequency error limit",
-              "enum": null
-            },
-            {
-              "name": "SYNCDIV",
-              "bit_offset": 24,
-              "bit_width": 3,
-              "description": "SYNC divider",
-              "enum": null
+              "name": "SYNCPOL",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "SYNC polarity selection",
+              "enum_values": [
+                {
+                  "name": "RisingEdge",
+                  "value": 0,
+                  "description": "SYNC active on rising edge"
+                },
+                {
+                  "name": "FallingEdge",
+                  "value": 1,
+                  "description": "SYNC active on falling edge"
+                }
+              ]
             },
             {
               "name": "SYNCSRC",
               "bit_offset": 28,
               "bit_width": 2,
               "description": "SYNC signal source selection",
-              "enum": "SYNCSRC"
+              "enum_values": [
+                {
+                  "name": "GPIO_AF",
+                  "value": 0,
+                  "description": "GPIO AF (crs_sync_in_1) selected as SYNC signal source"
+                },
+                {
+                  "name": "LSE",
+                  "value": 1,
+                  "description": "LSE (crs_sync_in_2) selected as SYNC signal source"
+                },
+                {
+                  "name": "USB_SOF",
+                  "value": 2,
+                  "description": "USB SOF (crs_sync_in_3) selected as SYNC signal source"
+                }
+              ]
             },
             {
-              "name": "SYNCPOL",
-              "bit_offset": 31,
-              "bit_width": 1,
-              "description": "SYNC polarity selection",
-              "enum": null
+              "name": "SYNCDIV",
+              "bit_offset": 24,
+              "bit_width": 3,
+              "description": "SYNC divider",
+              "enum_values": [
+                {
+                  "name": "Div1",
+                  "value": 0,
+                  "description": "SYNC not divided"
+                },
+                {
+                  "name": "Div2",
+                  "value": 1,
+                  "description": "SYNC divided by 2"
+                },
+                {
+                  "name": "Div4",
+                  "value": 2,
+                  "description": "SYNC divided by 4"
+                },
+                {
+                  "name": "Div8",
+                  "value": 3,
+                  "description": "SYNC divided by 8"
+                },
+                {
+                  "name": "Div16",
+                  "value": 4,
+                  "description": "SYNC divided by 16"
+                },
+                {
+                  "name": "Div32",
+                  "value": 5,
+                  "description": "SYNC divided by 32"
+                },
+                {
+                  "name": "Div64",
+                  "value": 6,
+                  "description": "SYNC divided by 64"
+                },
+                {
+                  "name": "Div128",
+                  "value": 7,
+                  "description": "SYNC divided by 128"
+                }
+              ]
+            },
+            {
+              "name": "FELIM",
+              "bit_offset": 16,
+              "bit_width": 8,
+              "description": "Frequency error limit"
+            },
+            {
+              "name": "RELOAD",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Counter reload value"
             }
           ]
         },
@@ -125,73 +231,89 @@
           "name": "ISR",
           "offset": 8,
           "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
           "description": "interrupt and status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "interrupt and status register",
           "fields": [
             {
-              "name": "SYNCOKF",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "SYNC event OK flag",
-              "enum": null
-            },
-            {
-              "name": "SYNCWARNF",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "SYNC warning flag",
-              "enum": null
-            },
-            {
-              "name": "ERRF",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Error flag",
-              "enum": null
-            },
-            {
-              "name": "ESYNCF",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Expected SYNC flag",
-              "enum": null
-            },
-            {
-              "name": "SYNCERR",
-              "bit_offset": 8,
-              "bit_width": 1,
-              "description": "SYNC error",
-              "enum": null
-            },
-            {
-              "name": "SYNCMISS",
-              "bit_offset": 9,
-              "bit_width": 1,
-              "description": "SYNC missed",
-              "enum": null
-            },
-            {
-              "name": "TRIMOVF",
-              "bit_offset": 10,
-              "bit_width": 1,
-              "description": "Trimming overflow or underflow",
-              "enum": null
+              "name": "FECAP",
+              "bit_offset": 16,
+              "bit_width": 16,
+              "description": "Frequency error capture"
             },
             {
               "name": "FEDIR",
               "bit_offset": 15,
               "bit_width": 1,
               "description": "Frequency error direction",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "UpCounting",
+                  "value": 0,
+                  "description": "Error in up-counting direction"
+                },
+                {
+                  "name": "DownCounting",
+                  "value": 1,
+                  "description": "Error in down-counting direction"
+                }
+              ]
             },
             {
-              "name": "FECAP",
-              "bit_offset": 16,
-              "bit_width": 16,
-              "description": "Frequency error capture",
-              "enum": null
+              "name": "SYNCOKF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "SYNC event OK flag",
+              "enum_values": [
+                {
+                  "name": "NotSignaled",
+                  "value": 0,
+                  "description": "Signal not set"
+                },
+                {
+                  "name": "Signaled",
+                  "value": 1,
+                  "description": "Signal set"
+                }
+              ]
+            },
+            {
+              "name": "TRIMOVF",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Trimming overflow or underflow"
+            },
+            {
+              "name": "SYNCMISS",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "SYNC missed"
+            },
+            {
+              "name": "SYNCERR",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "SYNC error"
+            },
+            {
+              "name": "ESYNCF",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Expected SYNC flag"
+            },
+            {
+              "name": "ERRF",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Error flag"
+            },
+            {
+              "name": "SYNCWARNF",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "SYNC warning flag"
             }
           ]
         },
@@ -199,64 +321,47 @@
           "name": "ICR",
           "offset": 12,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "interrupt flag clear register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "interrupt flag clear register",
           "fields": [
             {
               "name": "SYNCOKC",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "SYNC event OK clear flag",
-              "enum": null
-            },
-            {
-              "name": "SYNCWARNC",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "SYNC warning clear flag",
-              "enum": null
-            },
-            {
-              "name": "ERRC",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Error clear flag",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clear flag"
+                }
+              ]
             },
             {
               "name": "ESYNCC",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "Expected SYNC clear flag",
-              "enum": null
+              "description": "Expected SYNC clear flag"
+            },
+            {
+              "name": "ERRC",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Error clear flag"
+            },
+            {
+              "name": "SYNCWARNC",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "SYNC warning clear flag"
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "SYNCSRC": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "GPIO",
-          "value": 0,
-          "description": "GPIO selected as SYNC signal source"
-        },
-        {
-          "name": "LSE",
-          "value": 1,
-          "description": "LSE selected as SYNC signal source"
-        },
-        {
-          "name": "USB",
-          "value": 2,
-          "description": "USB SOF selected as SYNC signal source"
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

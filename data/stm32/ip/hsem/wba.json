@@ -2,101 +2,106 @@
   "schema": 1,
   "kind": "hsem",
   "version": "wba",
+  "source": "stm32rs_svd",
+  "source_device": "stm32wba50ke",
+  "source_file": "stm32wba50.svd.patched",
   "blocks": {
     "HSEM": {
       "name": "HSEM",
-      "description": "Hardware semaphore (HSEM), STM32WBA.",
+      "description": "Hardware semaphore",
       "extends": null,
       "registers": [
         {
-          "name": "R",
+          "name": "R%s",
           "offset": 0,
           "size": 32,
-          "description": "HSEM 2-step write lock and read-back registers R0–R15.",
+          "access": null,
+          "reset_value": 0,
+          "description": "HSEM register HSEM_R%s",
           "array_len": 16,
           "array_stride": 4,
-          "fieldset_description": "HSEM semaphore register.",
           "fields": [
             {
               "name": "PROCID",
               "bit_offset": 0,
               "bit_width": 8,
-              "description": "Semaphore process ID.",
-              "enum": null
+              "description": "Semaphore PROCID Written by software -When the semaphore is free and the LOCK is written to 1, and the LOCKID matches the AHB bus master ID, SEC and PRIV matches the AHB bus master definition, PROCID is set to the written data. - When the semaphore is unlocked, LOCK written to 0 and AHB bus master ID matched LOCKID, SEC and PRIV matches the AHB bus master protection, the PROCID is cleared to 0. - When the semaphore is unlocked, LOCK bit written to 0 and AHB bus master ID does not match LOCKID and/or SEC or PRIV do not match the AHB bus master definition, the PROCID is not affected. - Write when LOCK bit is already 1 (semaphore locked), the PROCID is not affected. - An authorized read returns the stored PROCID value.",
+              "access": "read-write"
             },
             {
-              "name": "COREID",
+              "name": "LOCKID",
               "bit_offset": 8,
               "bit_width": 4,
-              "description": "Semaphore core ID.",
-              "enum": null
+              "description": "Semaphore LOCKID Written by software - When the semaphore is free and the LOCK bit is at the same time written to 1 and the LOCKID matches the AHB bus master ID, SEC and PRIV matches the AHB bus master protection. - When the semaphore is unlocked (LOCK written to 0 and AHB bus master ID matched LOCKID, SEC and PRIV matches the AHB bus master protection, the LOCKID is cleared to 0. - When the semaphore is unlocked (LOCK bit written to 0 or AHB bus master ID does not match LOCKID and/or SEC or PRIV do not match AHB bus master protection, the LOCKID is not affected. - Write when LOCK bit is already 1 (semaphore locked), the LOCKID is not affected. - An authorized read returns the stored LOCKID value.",
+              "access": "read-write"
             },
             {
               "name": "SEC",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "Semaphore secure bit.",
-              "enum": null
+              "description": "Semaphore secure Written by software - When the semaphore is free and the LOCK bit is at the same time written to 1, and the LOCKID matches the AHB bus master ID, SEC and PRIV matches the AHB bus master definition. - When the semaphore is unlocked (LOCK written to 0 and AHB bus master ID matched LOCKID, SEC and PRIV matches the AHB bus master definition, the SEC is cleared to 0. - When the semaphore is unlocked (LOCK bit written to 0 and AHB bus master ID does not match LOCKID and/or SEC or PRIV do not match AHB bus master definition, the SEC is not affected. - Write when LOCK bit is already 1 (semaphore locked), the SEC is not affected. - An authorized read returns the stored SEC value.",
+              "access": "read-write"
             },
             {
               "name": "PRIV",
               "bit_offset": 13,
               "bit_width": 1,
-              "description": "Semaphore privilege bit.",
-              "enum": null
+              "description": "Semaphore privilege Written by software - When the semaphore is free and the LOCK bit is at the same time written to 1, and the LOCKID matches the AHB bus master ID, SEC and PRIV matches the AHB bus master definition. - When the semaphore is unlocked (LOCK written to 0 and AHB bus master ID matched LOCKID, SEC and PRIV matches the AHB bus master definition, the PRIV is cleared to 0. - When the semaphore is unlocked (LOCK bit written to 0 and AHB bus master ID does not match LOCKID and/or SEC or PRIV do not match AHB bus master definition, the PRIV is not affected. - Write when LOCK bit is already 1 (semaphore locked), the PRIV is not affected. - An authorized read returns the stored PRIV value.",
+              "access": "read-write"
             },
             {
               "name": "LOCK",
               "bit_offset": 31,
               "bit_width": 1,
-              "description": "Lock indication.",
-              "enum": null
+              "description": "Lock indication This bit can be written and read by software.",
+              "access": "read-write"
             }
           ]
         },
         {
-          "name": "RLR",
+          "name": "RLR%s",
           "offset": 128,
           "size": 32,
-          "description": "HSEM 1-step read lock registers RLR0–RLR15.",
+          "access": null,
+          "reset_value": 0,
+          "description": "Semaphore %s read lock register",
           "array_len": 16,
           "array_stride": 4,
-          "fieldset_description": "HSEM read lock register.",
           "fields": [
             {
               "name": "PROCID",
               "bit_offset": 0,
               "bit_width": 8,
-              "description": "Semaphore process ID.",
-              "enum": null
+              "description": "Semaphore processor ID This field is read only by software at this address. - On a read when the semaphore is free: A read with a valid AHB bus master ID and SEC and PRIV locks the semaphore and hardware sets the PROCID to 0. - When the semaphore is locked: A read with a valid AHB bus master ID and SEC and PRIV returns the PROCID of the AHB bus master that has locked the semaphore.",
+              "access": "read-only"
             },
             {
-              "name": "COREID",
+              "name": "LOCKID",
               "bit_offset": 8,
               "bit_width": 4,
-              "description": "Semaphore core ID.",
-              "enum": null
+              "description": "Semaphore LOCKID This field is read only by software at this address. On a read, when the semaphore is free, the hardware sets the LOCKID to the AHB bus master ID reading the semaphore. The LOCKID of the AHB bus master locking the semaphore is read. On a read when the semaphore is locked, this field returns the LOCKID of the AHB bus master that has locked the semaphore.",
+              "access": "read-only"
             },
             {
               "name": "SEC",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "Semaphore secure bit.",
-              "enum": null
+              "description": "Semaphore secure. This field is read only by software at this address. - When the semaphore is free: A read with a valid AHB bus master ID and SEC and PRIV locks the semaphore and hardware sets the SEC to the valid AHB bus master security definition. - When the semaphore is locked: A read with a valid AHB bus master ID and SEC and PRIV returns the SEC of the AHB bus master that has locked the semaphore.",
+              "access": "read-only"
             },
             {
               "name": "PRIV",
               "bit_offset": 13,
               "bit_width": 1,
-              "description": "Semaphore privilege bit.",
-              "enum": null
+              "description": "Semaphore privilege This field is read only by software at this address. - When the semaphore is free: A read with a valid AHB bus master ID and SEC and PRIV locks the semaphore and hardware sets the PRIV to the valid AHB bus master privileged definition. - When the semaphore is locked: A read with a valid AHB bus master ID and SEC and PRIV returns the PRIV of the AHB bus master that has locked the semaphore.",
+              "access": "read-only"
             },
             {
               "name": "LOCK",
               "bit_offset": 31,
               "bit_width": 1,
-              "description": "Lock indication.",
-              "enum": null
+              "description": "Lock indication This bit is read only by software at this address. - When the semaphore is free: A read with a valid AHB bus master ID and SEC and PRIV locks the semaphore and returns 1. - When the semaphore is locked: A read with a valid AHB bus master ID and SEC and PRIV returns 1 (the LOCKID and SEC and PRIV and PROCID reflect the already locked semaphore information).",
+              "access": "read-only"
             }
           ]
         },
@@ -104,17 +109,17 @@
           "name": "IER",
           "offset": 256,
           "size": 32,
-          "description": "HSEM interrupt enable register.",
-          "array_len": 1,
-          "array_stride": 16,
-          "fieldset_description": "HSEM interrupt enable register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "HSEM non-secure interrupt enable register",
+          "array_len": null,
+          "array_stride": null,
           "fields": [
             {
-              "name": "ISE",
+              "name": "ISE%s",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Interrupt semaphore n enable bit.",
-              "enum": null
+              "description": "Interrupt semaphore %s enable bit"
             }
           ]
         },
@@ -122,17 +127,17 @@
           "name": "ICR",
           "offset": 260,
           "size": 32,
-          "description": "HSEM interrupt clear register.",
-          "array_len": 1,
-          "array_stride": 16,
-          "fieldset_description": "HSEM interrupt clear register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "HSEM non-secure interrupt clear register",
+          "array_len": null,
+          "array_stride": null,
           "fields": [
             {
-              "name": "ISC",
+              "name": "ISC%s",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Interrupt semaphore n clear bit.",
-              "enum": null
+              "description": "Interrupt semaphore %s clear bit"
             }
           ]
         },
@@ -140,17 +145,17 @@
           "name": "ISR",
           "offset": 264,
           "size": 32,
-          "description": "HSEM interrupt status register.",
-          "array_len": 1,
-          "array_stride": 16,
-          "fieldset_description": "HSEM interrupt status register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "HSEM non-secure interrupt status register",
+          "array_len": null,
+          "array_stride": null,
           "fields": [
             {
-              "name": "ISF",
+              "name": "ISF%s",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Interrupt semaphore n status bit before enable (mask).",
-              "enum": null
+              "description": "Interrupt semaphore %s status bit before enable (mask)"
             }
           ]
         },
@@ -158,17 +163,17 @@
           "name": "MISR",
           "offset": 268,
           "size": 32,
-          "description": "HSEM masked interrupt status register.",
-          "array_len": 1,
-          "array_stride": 16,
-          "fieldset_description": "HSEM masked interrupt status register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "HSEM non-secure interrupt status register",
+          "array_len": null,
+          "array_stride": null,
           "fields": [
             {
-              "name": "MISF",
+              "name": "MISF%s",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Masked interrupt semaphore n status bit after enable (mask).",
-              "enum": null
+              "description": "Masked interrupt semaphore %s status bit after enable (mask)"
             }
           ]
         },
@@ -176,17 +181,18 @@
           "name": "SIER",
           "offset": 384,
           "size": 32,
-          "description": "HSEM secure interrupt enable register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "HSEM secure interrupt enable register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "HSEM secure interrupt enable register.",
           "fields": [
             {
-              "name": "ISE",
+              "name": "SISE",
               "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Secure interrupt semaphore n enable bit.",
-              "enum": null
+              "bit_width": 16,
+              "description": "Secure interrupt semaphore x enable bit This bit is read and written by software. When semaphore x PRIVx is disabled, bit x can be accessed with secure privilege and secure unprivileged access. When semaphore x PRIVx is enabled, bit x can be accessed only with secure privilege access. secure unprivileged write to this bit is discarded, secure unprivileged read return 0 value.",
+              "access": "read-write"
             }
           ]
         },
@@ -194,17 +200,18 @@
           "name": "SICR",
           "offset": 388,
           "size": 32,
-          "description": "HSEM secure interrupt clear register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "HSEM secure interrupt clear register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "HSEM secure interrupt clear register.",
           "fields": [
             {
-              "name": "ISC",
+              "name": "SISC",
               "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Secure interrupt semaphore n clear bit.",
-              "enum": null
+              "bit_width": 16,
+              "description": "Secure interrupt semaphore x clear bit This bit is written by software, and is always read 0. When semaphore x PRIVx is disabled, bit x can be accessed with secure privilege and secure unprivileged access. When semaphore x PRIVx is enabled, bit x can be accessed only with secure privilege access. Secure unprivileged write to this bit is discarded.",
+              "access": "read-write"
             }
           ]
         },
@@ -212,35 +219,37 @@
           "name": "SISR",
           "offset": 392,
           "size": 32,
-          "description": "HSEM secure interrupt status register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "HSEM secure interrupt status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "HSEM secure interrupt status register.",
           "fields": [
             {
-              "name": "ISF",
+              "name": "SISF",
               "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Secure interrupt semaphore n status bit before enable (mask).",
-              "enum": null
+              "bit_width": 16,
+              "description": "Secure interrupt semaphore x status bit before enable (mask) This bit is set by hardware and read only by software. Bit is cleared by software writing the corresponding HSEM_SCnICR bit x. When semaphore x PRIVx is disabled, bit x can be accessed with secure privilege and secure unprivileged access. When semaphore x PRIVx is enabled, bit x can be accessed only with secure privilege access. Secure unprivileged read return 0 value.",
+              "access": "read-only"
             }
           ]
         },
         {
-          "name": "SMISR",
+          "name": "MSISR",
           "offset": 396,
           "size": 32,
-          "description": "HSEM secure masked interrupt status register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "HSEM secure masked interrupt status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "HSEM secure masked interrupt status register.",
           "fields": [
             {
-              "name": "MISF",
+              "name": "SMISF",
               "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Secure masked interrupt semaphore n status bit after enable (mask).",
-              "enum": null
+              "bit_width": 16,
+              "description": "Secure masked interrupt semaphore x status bit after enable (mask) This bit is set by hardware and read only by software. Bit is cleared by software writing the corresponding HSEM_SCnICR bit x. Bit is read as 0 when semaphore x status is masked in HSEM_SCnIER bit x. When semaphore x PRIVx is disabled, bit x can be accessed with secure privilege and secure unprivileged access. When semaphore x PRIVx is enabled, bit x can be accessed only with secure privilege access. Secure unprivileged read return 0 value.",
+              "access": "read-only"
             }
           ]
         },
@@ -248,17 +257,18 @@
           "name": "SECCFGR",
           "offset": 512,
           "size": 32,
-          "description": "HSEM security configuration register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "HSEM security configuration register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "HSEM security configuration register.",
           "fields": [
             {
               "name": "SEC",
               "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Semaphore n secure attribute status bit.",
-              "enum": null
+              "bit_width": 16,
+              "description": "Semaphore x security attribute This bit is set and cleared by software.",
+              "access": "read-write"
             }
           ]
         },
@@ -266,17 +276,18 @@
           "name": "PRIVCFGR",
           "offset": 528,
           "size": 32,
-          "description": "HSEM privilege configuration register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "HSEM privilege configuration register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "HSEM privilege configuration register.",
           "fields": [
             {
               "name": "PRIV",
               "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Semaphore n privilege attribute status bit.",
-              "enum": null
+              "bit_width": 16,
+              "description": "Semaphore x privilege attribute This bit is set and cleared by software. When semaphore x SECx is disabled, bit x can be write accessed with secure privileged and non-secure privileged access. When semaphore x SECx is enabled, bit x can only be write accessed with secure privilege access. Non-secure privileged write access is discarded. Both secure and non-secure read return the register bit x value",
+              "access": "read-write"
             }
           ]
         },
@@ -284,38 +295,39 @@
           "name": "CR",
           "offset": 560,
           "size": 32,
-          "description": "HSEM semaphore clear register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "HSEM clear register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "HSEM semaphore clear register.",
           "fields": [
             {
-              "name": "COREID",
+              "name": "LOCKID",
               "bit_offset": 8,
               "bit_width": 4,
-              "description": "COREID of semaphores to be cleared.",
-              "enum": null
+              "description": "LOCKID of semaphores to be cleared This field can be written by software and is always read 0. This field indicates the LOCKID for which the semaphores are cleared when writing the HSEM_CR.",
+              "access": "write-only"
             },
             {
               "name": "SEC",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "SEC value of semaphores to be cleared.",
-              "enum": null
+              "description": "SEC value of semaphores to be cleared. This field can be written by software, is always read 0. Indicates the SEC for which the CID semaphores are cleared when writing the HSEM_CR",
+              "access": "write-only"
             },
             {
               "name": "PRIV",
               "bit_offset": 13,
               "bit_width": 1,
-              "description": "PRIV value of semaphores to be cleared.",
-              "enum": null
+              "description": "PRIV value of semaphores to be cleared. This field can be written by software, is always read 0. Indicates the PRIV for which the CID semaphores are cleared when writing the HSEM_CR.",
+              "access": "write-only"
             },
             {
               "name": "KEY",
               "bit_offset": 16,
               "bit_width": 16,
-              "description": "Semaphore clear key.",
-              "enum": null
+              "description": "Semaphore clear key This field can be written by software and is always read 0. If this key value does not match HSEM_KEYR.KEY, semaphores are not affected. If this key value matches HSEM_KEYR.KEY, all semaphores matching the LOCKID are cleared to the free state.",
+              "access": "write-only"
             }
           ]
         },
@@ -323,17 +335,18 @@
           "name": "KEYR",
           "offset": 564,
           "size": 32,
-          "description": "HSEM semaphore clear key register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "HSEM interrupt clear register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "HSEM semaphore clear key register.",
           "fields": [
             {
               "name": "KEY",
               "bit_offset": 16,
               "bit_width": 16,
-              "description": "Semaphore clear key.",
-              "enum": null
+              "description": "Semaphore clear key This field can be written and read by software. Key value to match when clearing semaphores.",
+              "access": "read-write"
             }
           ]
         }

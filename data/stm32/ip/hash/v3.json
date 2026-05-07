@@ -2,149 +2,253 @@
   "schema": 1,
   "kind": "hash",
   "version": "v3",
+  "source": "stm32rs_svd",
+  "source_device": "stm32h562ag",
+  "source_file": "stm32h562.svd.patched",
   "blocks": {
     "HASH": {
       "name": "HASH",
-      "description": "Hash processor.",
+      "description": "HASH register bank",
       "extends": null,
       "registers": [
         {
           "name": "CR",
           "offset": 0,
           "size": 32,
-          "description": "control register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "HASH control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "control register.",
           "fields": [
             {
               "name": "INIT",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "Initialize message digest calculation.",
-              "enum": null
+              "description": "Initialize message digest calculation Writing this bit to 1 resets the hash processor core, so that the HASH is ready to compute the message digest of a new message. Writing this bit to 0 has no effect. Reading this bit always returns 0.",
+              "access": "read-write"
             },
             {
               "name": "DMAE",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "DMA enable.",
-              "enum": null
+              "description": "DMA enable After this bit is set, it is cleared by hardware while the last data of the message is written into the hash processor. Setting this bit to 0 while a DMA transfer is ongoing does not abort the current transfer. Instead, the DMA interface of the HASH remains internally enabled until the transfer is completed or INIT is written to 1. Setting INIT bit to 1 does not clear DMAE bit.",
+              "access": "read-write"
             },
             {
               "name": "DATATYPE",
               "bit_offset": 4,
               "bit_width": 2,
-              "description": "Data type selection.",
-              "enum": null
+              "description": "Data type selection This bitfield defines the format of the data entered into the HASH_DIN register:",
+              "access": "read-write"
             },
             {
               "name": "MODE",
               "bit_offset": 6,
               "bit_width": 1,
-              "description": "Mode selection.",
-              "enum": null
+              "description": "Mode selection This bit selects the normal or the keyed HMAC mode for the selected algorithm: This selection is only taken into account when the INIT bit is set. Changing this bit during a computation has no effect.",
+              "access": "read-write"
             },
             {
               "name": "NBW",
               "bit_offset": 8,
               "bit_width": 4,
-              "description": "Number of words already pushed.",
-              "enum": null
+              "description": "Number of words already pushed Refer to NBWP[3:0] bitfield of HASH_SR for a description of NBW[3:0] bitfield. This bit is read-only.",
+              "access": "read-only"
             },
             {
               "name": "DINNE",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "DIN not empty.",
-              "enum": null
+              "description": "DIN not empty Refer to DINNE bit of HASH_SR for a description of DINNE bit. This bit is read-only.",
+              "access": "read-only"
             },
             {
               "name": "MDMAT",
               "bit_offset": 13,
               "bit_width": 1,
-              "description": "Multiple DMA Transfers.",
-              "enum": null
+              "description": "Multiple DMA transfers This bit is set when hashing large files when multiple DMA transfers are needed.",
+              "access": "read-write"
             },
             {
               "name": "LKEY",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "Long key selection.",
-              "enum": null
+              "description": "Long key selection The application must set this bit if the HMAC key is greater than the block size corresponding to the hash algorithm (see algorithms for details). For example the block size is 64 bytes for SHA2-256. This selection is only taken into account when the INIT and MODE bits are set (HMAC mode selected). Changing this bit during a computation has no effect.",
+              "access": "read-write"
             },
             {
               "name": "ALGO",
               "bit_offset": 17,
               "bit_width": 4,
-              "description": "Algorithm selection.",
-              "enum": null
+              "description": "Algorithm selection These bits select the hash algorithm: This selection is only taken into account when the INIT bit is set. Changing this bitfield during a computation has no effect. When the ALGO bitfield is updated and INIT bit is set, NBWE in HASH_SR is automatically updated to 0x11.",
+              "access": "read-write"
             }
           ]
         },
         {
           "name": "DIN",
           "offset": 4,
-          "description": "data input register.",
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "HASH data input register",
           "array_len": null,
           "array_stride": null,
-          "fields": []
+          "fields": [
+            {
+              "name": "DATAIN",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Data input Writing this register pushes the current register content into the FIFO, and the register takes the new value presented on the AHB bus. Reading this register returns zeros.",
+              "access": "write-only"
+            }
+          ]
         },
         {
           "name": "STR",
           "offset": 8,
           "size": 32,
-          "description": "start register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "HASH start register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "start register.",
           "fields": [
             {
               "name": "NBLW",
               "bit_offset": 0,
               "bit_width": 5,
-              "description": "Number of valid bits in the last word of the message.",
-              "enum": null
+              "description": "Number of valid bits in the last word When the last word of the message bit string is written to HASH_DIN register, the hash processor takes only the valid bits, specified as below, after internal data swapping: ... The above mechanism is valid only if DCAL = 0. If NBLW bits are written while DCAL is set to 1, the NBLW bitfield remains unchanged. In other words it is not possible to configure NBLW and set DCAL at the same time. Reading NBLW bits returns the last value written to NBLW.",
+              "access": "read-write"
             },
             {
               "name": "DCAL",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "Digest calculation.",
-              "enum": null
+              "description": "Digest calculation Writing this bit to 1 starts the message padding using the previously written value of NBLW, and starts the calculation of the final message digest with all the data words written to the input FIFO since the INIT bit was last written to 1. Reading this bit returns 0.",
+              "access": "read-write"
             }
           ]
         },
         {
-          "name": "HRA",
+          "name": "HRA0",
           "offset": 12,
-          "description": "digest registers.",
-          "array_len": 5,
-          "array_stride": 4,
-          "fields": []
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "HASH aliased digest register 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "Hx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Hash data x Refer to introduction.",
+              "access": "read-only"
+            }
+          ]
+        },
+        {
+          "name": "HRA1",
+          "offset": 16,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "HASH aliased digest register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "Hx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Hash data x Refer to introduction.",
+              "access": "read-only"
+            }
+          ]
+        },
+        {
+          "name": "HRA2",
+          "offset": 20,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "HASH aliased digest register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "Hx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Hash data x Refer to introduction.",
+              "access": "read-only"
+            }
+          ]
+        },
+        {
+          "name": "HRA3",
+          "offset": 24,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "HASH aliased digest register 3",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "Hx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Hash data x Refer to introduction.",
+              "access": "read-only"
+            }
+          ]
+        },
+        {
+          "name": "HRA4",
+          "offset": 28,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "HASH aliased digest register 4",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "Hx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Hash data x Refer to introduction.",
+              "access": "read-only"
+            }
+          ]
         },
         {
           "name": "IMR",
           "offset": 32,
           "size": 32,
-          "description": "interrupt enable register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "HASH interrupt enable register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "interrupt enable register.",
           "fields": [
             {
               "name": "DINIE",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Data input interrupt enable.",
-              "enum": null
+              "description": "Data input interrupt enable",
+              "access": "read-write"
             },
             {
               "name": "DCIE",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Digest calculation completion interrupt enable.",
-              "enum": null
+              "description": "Digest calculation completion interrupt enable",
+              "access": "read-write"
             }
           ]
         },
@@ -152,77 +256,2323 @@
           "name": "SR",
           "offset": 36,
           "size": 32,
-          "description": "status register.",
+          "access": null,
+          "reset_value": 1114113,
+          "description": "HASH status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "status register.",
           "fields": [
             {
               "name": "DINIS",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Data input interrupt status.",
-              "enum": null
+              "description": "Data input interrupt status This bit is set by hardware when the FIFO is ready to get a new block (16 locations are free). It is cleared by writing it to 0 or by writing the HASH_DIN register. When DINIS = 0, HASH_CSRx registers reads as zero.",
+              "access": "read-write"
             },
             {
               "name": "DCIS",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Digest calculation completion interrupt status.",
-              "enum": null
+              "description": "Digest calculation completion interrupt status This bit is set by hardware when a digest becomes ready (the whole message has been processed). It is cleared by writing it to 0 or by writing the INIT bit to 1 in the HASH_CR register.",
+              "access": "read-write"
             },
             {
               "name": "DMAS",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "DMA Status.",
-              "enum": null
+              "description": "DMA Status This bit provides information on the DMA interface activity. It is set with DMAE and cleared when DMAE = 0 and no DMA transfer is ongoing. No interrupt is associated with this bit.",
+              "access": "read-only"
             },
             {
               "name": "BUSY",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "Busy bit.",
-              "enum": null
+              "description": "Busy bit",
+              "access": "read-only"
             },
             {
               "name": "NBWP",
               "bit_offset": 9,
               "bit_width": 5,
-              "description": "Number of words already pushed.",
-              "enum": null
+              "description": "Number of words already pushed This bitfield is the exact number of words in the message that have already been pushed into the FIFO. NBWP is incremented by 1 when a write access is performed to the HASH_DIN register. When a digest calculation starts, NBWP is updated to NBWP- block size (in words), and NBWP goes to zero when the INIT bit is written to 1.",
+              "access": "read-only"
             },
             {
               "name": "DINNE",
               "bit_offset": 15,
               "bit_width": 1,
-              "description": "DIN not empty.",
-              "enum": null
+              "description": "DIN not empty This bit is set when the HASH_DIN register holds valid data (that is after being written at least once). It is cleared when either the INIT bit (initialization) or the DCAL bit (completion of the previous message processing) is written to 1.",
+              "access": "read-only"
             },
             {
               "name": "NBWE",
               "bit_offset": 16,
               "bit_width": 5,
-              "description": "Number of words expected.",
-              "enum": null
+              "description": "Number of words expected This bitfield reflects the number of words in the message that must be pushed into the FIFO to trigger a partial computation. NBWE is decremented by 1 when a write access is performed to the HASH_DIN register. NBWE is set to the expected block size +1 in words (0x11) when INIT bit is set in HASH_CR. It is set to the expected block size (0x10) when the partial digest calculation ends.",
+              "access": "read-only"
             }
           ]
         },
         {
-          "name": "CSR",
+          "name": "CSR0",
           "offset": 248,
-          "description": "context swap registers.",
-          "array_len": 103,
-          "array_stride": 4,
-          "fields": []
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 0 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
         },
         {
-          "name": "HR",
+          "name": "CSR1",
+          "offset": 252,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 1 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR2",
+          "offset": 256,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 2 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR3",
+          "offset": 260,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 3",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 3 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR4",
+          "offset": 264,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 4",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 4 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR5",
+          "offset": 268,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 5",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 5 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR6",
+          "offset": 272,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 6",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 6 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR7",
+          "offset": 276,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 7",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 7 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR8",
+          "offset": 280,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 8",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 8 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR9",
+          "offset": 284,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 9",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 9 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR10",
+          "offset": 288,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 10",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 10 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR11",
+          "offset": 292,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 11",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 11 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR12",
+          "offset": 296,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 12",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 12 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR13",
+          "offset": 300,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 13",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 13 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR14",
+          "offset": 304,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 14",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 14 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR15",
+          "offset": 308,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 15",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 15 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR16",
+          "offset": 312,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 16",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 16 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR17",
+          "offset": 316,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 17",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 17 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR18",
+          "offset": 320,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 18",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 18 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR19",
+          "offset": 324,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 19",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 19 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR20",
+          "offset": 328,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 20",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 20 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR21",
+          "offset": 332,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 21",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 21 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR22",
+          "offset": 336,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 22",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 22 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR23",
+          "offset": 340,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 23",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 23 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR24",
+          "offset": 344,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 24",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 24 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR25",
+          "offset": 348,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 25",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 25 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR26",
+          "offset": 352,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 26",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 26 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR27",
+          "offset": 356,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 27",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 27 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR28",
+          "offset": 360,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 28",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 28 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR29",
+          "offset": 364,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 29",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 29 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR30",
+          "offset": 368,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 30",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 30 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR31",
+          "offset": 372,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 31",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 31 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR32",
+          "offset": 376,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 32",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 32 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR33",
+          "offset": 380,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 33",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 33 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR34",
+          "offset": 384,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 34",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 34 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR35",
+          "offset": 388,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 35",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 35 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR36",
+          "offset": 392,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 36",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 36 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR37",
+          "offset": 396,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 37",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 37 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR38",
+          "offset": 400,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 38",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 38 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR39",
+          "offset": 404,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 39",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 39 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR40",
+          "offset": 408,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 40",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 40 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR41",
+          "offset": 412,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 41",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 41 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR42",
+          "offset": 416,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 42",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 42 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR43",
+          "offset": 420,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 43",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 43 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR44",
+          "offset": 424,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 44",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 44 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR45",
+          "offset": 428,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 45",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 45 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR46",
+          "offset": 432,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 46",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 46 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR47",
+          "offset": 436,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 47",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 47 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR48",
+          "offset": 440,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 48",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 48 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR49",
+          "offset": 444,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 49",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 49 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR50",
+          "offset": 448,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 50",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 50 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR51",
+          "offset": 452,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 51",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 51 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR52",
+          "offset": 456,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 52",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 52 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR53",
+          "offset": 460,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 53",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 53 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR54",
+          "offset": 464,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 54",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 54 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR55",
+          "offset": 468,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 55",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 55 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR56",
+          "offset": 472,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 56",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 56 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR57",
+          "offset": 476,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 57",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 57 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR58",
+          "offset": 480,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 58",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 58 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR59",
+          "offset": 484,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 59",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 59 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR60",
+          "offset": 488,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 60",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 60 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR61",
+          "offset": 492,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 61",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 61 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR62",
+          "offset": 496,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 62",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 62 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR63",
+          "offset": 500,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 63",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 63 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR64",
+          "offset": 504,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 64",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 64 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR65",
+          "offset": 508,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 65",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 65 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR66",
+          "offset": 512,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 66",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 66 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR67",
+          "offset": 516,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 67",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 67 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR68",
+          "offset": 520,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 68",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 68 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR69",
+          "offset": 524,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 69",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 69 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR70",
+          "offset": 528,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 70",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 70 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR71",
+          "offset": 532,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 71",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 71 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR72",
+          "offset": 536,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 72",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 72 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR73",
+          "offset": 540,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 73",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 73 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR74",
+          "offset": 544,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 74",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 74 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR75",
+          "offset": 548,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 75",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 75 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR76",
+          "offset": 552,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 76",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 76 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR77",
+          "offset": 556,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 77",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 77 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR78",
+          "offset": 560,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 78",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 78 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR79",
+          "offset": 564,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 79",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 79 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR80",
+          "offset": 568,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 80",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 80 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR81",
+          "offset": 572,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 81",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 81 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR82",
+          "offset": 576,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 82",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 82 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR83",
+          "offset": 580,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 83",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 83 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR84",
+          "offset": 584,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 84",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 84 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR85",
+          "offset": 588,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 85",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 85 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR86",
+          "offset": 592,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 86",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 86 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR87",
+          "offset": 596,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 87",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 87 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR88",
+          "offset": 600,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 88",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 88 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR89",
+          "offset": 604,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 89",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 89 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR90",
+          "offset": 608,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 90",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 90 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR91",
+          "offset": 612,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 91",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 91 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR92",
+          "offset": 616,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 92",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 92 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR93",
+          "offset": 620,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 93",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 93 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR94",
+          "offset": 624,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 94",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 94 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR95",
+          "offset": 628,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 95",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 95 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR96",
+          "offset": 632,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 96",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 96 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR97",
+          "offset": 636,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 97",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 97 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR98",
+          "offset": 640,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 98",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 98 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR99",
+          "offset": 644,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 99",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 99 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR100",
+          "offset": 648,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 100",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 100 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR101",
+          "offset": 652,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 101",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 101 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "CSR102",
+          "offset": 656,
+          "size": 32,
+          "access": null,
+          "reset_value": 2228226,
+          "description": "HASH context swap register 102",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Context swap 102 Refer to introduction.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "HR0",
           "offset": 784,
-          "description": "HASH digest register.",
-          "array_len": 16,
-          "array_stride": 4,
-          "fields": []
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "HASH digest register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "Hx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Hash data x Refer to introduction.",
+              "access": "read-only"
+            }
+          ]
+        },
+        {
+          "name": "HR1",
+          "offset": 788,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "HASH digest register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "Hx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Hash data x Refer to introduction.",
+              "access": "read-only"
+            }
+          ]
+        },
+        {
+          "name": "HR2",
+          "offset": 792,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "HASH digest register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "Hx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Hash data x Refer to introduction.",
+              "access": "read-only"
+            }
+          ]
+        },
+        {
+          "name": "HR3",
+          "offset": 796,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "HASH digest register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "Hx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Hash data x Refer to introduction.",
+              "access": "read-only"
+            }
+          ]
+        },
+        {
+          "name": "HR4",
+          "offset": 800,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "HASH digest register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "Hx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Hash data x Refer to introduction.",
+              "access": "read-only"
+            }
+          ]
+        },
+        {
+          "name": "HR5",
+          "offset": 804,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "HASH digest register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "Hx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Hash data x Refer to introduction.",
+              "access": "read-only"
+            }
+          ]
+        },
+        {
+          "name": "HR6",
+          "offset": 808,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "HASH digest register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "Hx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Hash data x Refer to introduction.",
+              "access": "read-only"
+            }
+          ]
+        },
+        {
+          "name": "HR7",
+          "offset": 812,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "HASH digest register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "Hx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Hash data x Refer to introduction.",
+              "access": "read-only"
+            }
+          ]
+        },
+        {
+          "name": "HR8",
+          "offset": 816,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "HASH digest register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "Hx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Hash data x Refer to introduction.",
+              "access": "read-only"
+            }
+          ]
+        },
+        {
+          "name": "HR9",
+          "offset": 820,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "HASH digest register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "Hx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Hash data x Refer to introduction.",
+              "access": "read-only"
+            }
+          ]
+        },
+        {
+          "name": "HR10",
+          "offset": 824,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "HASH digest register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "Hx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Hash data x Refer to introduction.",
+              "access": "read-only"
+            }
+          ]
+        },
+        {
+          "name": "HR11",
+          "offset": 828,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "HASH digest register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "Hx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Hash data x Refer to introduction.",
+              "access": "read-only"
+            }
+          ]
+        },
+        {
+          "name": "HR12",
+          "offset": 832,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "HASH digest register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "Hx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Hash data x Refer to introduction.",
+              "access": "read-only"
+            }
+          ]
+        },
+        {
+          "name": "HR13",
+          "offset": 836,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "HASH digest register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "Hx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Hash data x Refer to introduction.",
+              "access": "read-only"
+            }
+          ]
+        },
+        {
+          "name": "HR14",
+          "offset": 840,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "HASH digest register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "Hx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Hash data x Refer to introduction.",
+              "access": "read-only"
+            }
+          ]
+        },
+        {
+          "name": "HR15",
+          "offset": 844,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "HASH digest register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "Hx",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Hash data x Refer to introduction.",
+              "access": "read-only"
+            }
+          ]
         }
       ]
     }

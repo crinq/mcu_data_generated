@@ -2,83 +2,80 @@
   "schema": 1,
   "kind": "cryp",
   "version": "v3",
+  "source": "stm32rs_svd",
+  "source_device": "stm32h7b3zi",
+  "source_file": "stm32h7b3.svd.patched",
   "blocks": {
     "CRYP": {
       "name": "CRYP",
-      "description": "Cryptographic processor.",
+      "description": "Cryptographic processor",
       "extends": null,
       "registers": [
         {
           "name": "CR",
           "offset": 0,
           "size": 32,
-          "description": "control register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "control register.",
           "fields": [
             {
               "name": "ALGODIR",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "Algorithm direction.",
-              "enum": null
+              "description": "Algorithm direction",
+              "access": "read-write"
             },
             {
               "name": "ALGOMODE0",
               "bit_offset": 3,
               "bit_width": 3,
-              "description": "Algorithm mode.",
-              "enum": null
+              "description": "Algorithm mode",
+              "access": "read-write"
             },
             {
               "name": "DATATYPE",
               "bit_offset": 6,
               "bit_width": 2,
-              "description": "Data type selection.",
-              "enum": null
+              "description": "Data type selection",
+              "access": "read-write"
             },
             {
               "name": "KEYSIZE",
               "bit_offset": 8,
               "bit_width": 2,
-              "description": "Key size selection (AES mode only).",
-              "enum": null
+              "description": "Key size selection (AES mode only)",
+              "access": "read-write"
             },
             {
               "name": "FFLUSH",
               "bit_offset": 14,
               "bit_width": 1,
-              "description": "FIFO flush.",
-              "enum": null
+              "description": "FIFO flush",
+              "access": "write-only"
             },
             {
               "name": "CRYPEN",
               "bit_offset": 15,
               "bit_width": 1,
-              "description": "Cryptographic processor enable.",
-              "enum": null
+              "description": "Cryptographic processor enable",
+              "access": "read-write"
             },
             {
               "name": "GCM_CCMPH",
               "bit_offset": 16,
               "bit_width": 2,
-              "description": "GCM_CCMPH.",
-              "enum": null
+              "description": "GCM_CCMPH",
+              "access": "read-write"
             },
             {
               "name": "ALGOMODE3",
               "bit_offset": 19,
               "bit_width": 1,
-              "description": "ALGOMODE.",
-              "enum": null
-            },
-            {
-              "name": "NPBLB",
-              "bit_offset": 20,
-              "bit_width": 4,
-              "description": "Number of Padding Bytes in Last Block of payload.",
-              "enum": null
+              "description": "ALGOMODE",
+              "access": "read-write"
             }
           ]
         },
@@ -86,86 +83,101 @@
           "name": "SR",
           "offset": 4,
           "size": 32,
-          "description": "status register.",
+          "access": "read-only",
+          "reset_value": 3,
+          "description": "status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "status register.",
           "fields": [
             {
-              "name": "IFEM",
-              "bit_offset": 0,
+              "name": "BUSY",
+              "bit_offset": 4,
               "bit_width": 1,
-              "description": "Input FIFO empty.",
-              "enum": null
-            },
-            {
-              "name": "IFNF",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Input FIFO not full.",
-              "enum": null
-            },
-            {
-              "name": "OFNE",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Output FIFO not empty.",
-              "enum": null
+              "description": "Busy bit"
             },
             {
               "name": "OFFU",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "Output FIFO full.",
-              "enum": null
+              "description": "Output FIFO full"
             },
             {
-              "name": "BUSY",
-              "bit_offset": 4,
+              "name": "OFNE",
+              "bit_offset": 2,
               "bit_width": 1,
-              "description": "Busy bit.",
-              "enum": null
+              "description": "Output FIFO not empty"
+            },
+            {
+              "name": "IFNF",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Input FIFO not full"
+            },
+            {
+              "name": "IFEM",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Input FIFO empty"
             }
           ]
         },
         {
           "name": "DIN",
           "offset": 8,
-          "description": "data input register.",
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "data input register",
           "array_len": null,
           "array_stride": null,
-          "fields": []
+          "fields": [
+            {
+              "name": "DATAIN",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Data input"
+            }
+          ]
         },
         {
           "name": "DOUT",
           "offset": 12,
-          "description": "data output register.",
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "data output register",
           "array_len": null,
           "array_stride": null,
-          "fields": []
+          "fields": [
+            {
+              "name": "DATAOUT",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Data output"
+            }
+          ]
         },
         {
           "name": "DMACR",
           "offset": 16,
           "size": 32,
-          "description": "DMA control register.",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "DMA control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "DMA control register.",
           "fields": [
-            {
-              "name": "DIEN",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "DMA input enable.",
-              "enum": null
-            },
             {
               "name": "DOEN",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "DMA output enable.",
-              "enum": null
+              "description": "DMA output enable"
+            },
+            {
+              "name": "DIEN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "DMA input enable"
             }
           ]
         },
@@ -173,24 +185,23 @@
           "name": "IMSCR",
           "offset": 20,
           "size": 32,
-          "description": "interrupt mask set/clear register.",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "interrupt mask set/clear register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "interrupt mask set/clear register.",
           "fields": [
-            {
-              "name": "INIM",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Input FIFO service interrupt mask.",
-              "enum": null
-            },
             {
               "name": "OUTIM",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Output FIFO service interrupt mask.",
-              "enum": null
+              "description": "Output FIFO service interrupt mask"
+            },
+            {
+              "name": "INIM",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Input FIFO service interrupt mask"
             }
           ]
         },
@@ -198,24 +209,23 @@
           "name": "RISR",
           "offset": 24,
           "size": 32,
-          "description": "raw interrupt status register.",
+          "access": "read-only",
+          "reset_value": 1,
+          "description": "raw interrupt status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "raw interrupt status register.",
           "fields": [
-            {
-              "name": "INRIS",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Input FIFO service raw interrupt status.",
-              "enum": null
-            },
             {
               "name": "OUTRIS",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Output FIFO service raw interrupt status.",
-              "enum": null
+              "description": "Output FIFO service raw interrupt status"
+            },
+            {
+              "name": "INRIS",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Input FIFO service raw interrupt status"
             }
           ]
         },
@@ -223,104 +233,529 @@
           "name": "MISR",
           "offset": 28,
           "size": 32,
-          "description": "masked interrupt status register.",
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "masked interrupt status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "masked interrupt status register.",
           "fields": [
-            {
-              "name": "INMIS",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Input FIFO service masked interrupt status.",
-              "enum": null
-            },
             {
               "name": "OUTMIS",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Output FIFO service masked interrupt status.",
-              "enum": null
+              "description": "Output FIFO service masked interrupt status"
+            },
+            {
+              "name": "INMIS",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Input FIFO service masked interrupt status"
             }
           ]
         },
         {
-          "name": "KEY",
+          "name": "K0LR",
           "offset": 32,
-          "description": "Cluster KEY%s, containing K?LR, K?RR.",
-          "array_len": 4,
-          "array_stride": 8,
-          "fields": []
+          "size": 32,
+          "access": "write-only",
+          "reset_value": 0,
+          "description": "key registers",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "b2",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "b224"
+            }
+          ]
         },
         {
-          "name": "INIT",
+          "name": "K0RR",
+          "offset": 36,
+          "size": 32,
+          "access": "write-only",
+          "reset_value": 0,
+          "description": "key registers",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "b",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "b192"
+            }
+          ]
+        },
+        {
+          "name": "K1LR",
+          "offset": 40,
+          "size": 32,
+          "access": "write-only",
+          "reset_value": 0,
+          "description": "key registers",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "b1",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "b160"
+            }
+          ]
+        },
+        {
+          "name": "K1RR",
+          "offset": 44,
+          "size": 32,
+          "access": "write-only",
+          "reset_value": 0,
+          "description": "key registers",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "b1",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "b128"
+            }
+          ]
+        },
+        {
+          "name": "K2LR",
+          "offset": 48,
+          "size": 32,
+          "access": "write-only",
+          "reset_value": 0,
+          "description": "key registers",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "b",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "b96"
+            }
+          ]
+        },
+        {
+          "name": "K2RR",
+          "offset": 52,
+          "size": 32,
+          "access": "write-only",
+          "reset_value": 0,
+          "description": "key registers",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "b",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "b64"
+            }
+          ]
+        },
+        {
+          "name": "K3LR",
+          "offset": 56,
+          "size": 32,
+          "access": "write-only",
+          "reset_value": 0,
+          "description": "key registers",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "b",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "b32"
+            }
+          ]
+        },
+        {
+          "name": "K3RR",
+          "offset": 60,
+          "size": 32,
+          "access": "write-only",
+          "reset_value": 0,
+          "description": "key registers",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "b",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "b0"
+            }
+          ]
+        },
+        {
+          "name": "IV0LR",
           "offset": 64,
-          "description": "Cluster INIT%s, containing IV?LR, IV?RR.",
-          "array_len": 2,
-          "array_stride": 8,
-          "fields": []
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "initialization vector registers",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "IV",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "IV31"
+            }
+          ]
         },
         {
-          "name": "CSGCMCCMR",
+          "name": "IV0RR",
+          "offset": 68,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "initialization vector registers",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "IV",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "IV63"
+            }
+          ]
+        },
+        {
+          "name": "IV1LR",
+          "offset": 72,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "initialization vector registers",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "IV",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "IV95"
+            }
+          ]
+        },
+        {
+          "name": "IV1RR",
+          "offset": 76,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "initialization vector registers",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "IV",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "IV127"
+            }
+          ]
+        },
+        {
+          "name": "CSGCMCCM0R",
           "offset": 80,
-          "description": "context swap register.",
-          "array_len": 8,
-          "array_stride": 4,
-          "fields": []
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "context swap register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSGCMCCM0R",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "CSGCMCCM0R"
+            }
+          ]
         },
         {
-          "name": "CSGCMR",
+          "name": "CSGCMCCM1R",
+          "offset": 84,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "context swap register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSGCMCCM1R",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "CSGCMCCM1R"
+            }
+          ]
+        },
+        {
+          "name": "CSGCMCCM2R",
+          "offset": 88,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "context swap register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSGCMCCM2R",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "CSGCMCCM2R"
+            }
+          ]
+        },
+        {
+          "name": "CSGCMCCM3R",
+          "offset": 92,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "context swap register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSGCMCCM3R",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "CSGCMCCM3R"
+            }
+          ]
+        },
+        {
+          "name": "CSGCMCCM4R",
+          "offset": 96,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "context swap register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSGCMCCM4R",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "CSGCMCCM4R"
+            }
+          ]
+        },
+        {
+          "name": "CSGCMCCM5R",
+          "offset": 100,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "context swap register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSGCMCCM5R",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "CSGCMCCM5R"
+            }
+          ]
+        },
+        {
+          "name": "CSGCMCCM6R",
+          "offset": 104,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "context swap register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSGCMCCM6R",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "CSGCMCCM6R"
+            }
+          ]
+        },
+        {
+          "name": "CSGCMCCM7R",
+          "offset": 108,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "context swap register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSGCMCCM7R",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "CSGCMCCM7R"
+            }
+          ]
+        },
+        {
+          "name": "CSGCM0R",
           "offset": 112,
-          "description": "context swap register.",
-          "array_len": 8,
-          "array_stride": 4,
-          "fields": []
-        }
-      ]
-    },
-    "INIT": {
-      "name": "INIT",
-      "description": "Cluster INIT%s, containing IV?LR, IV?RR.",
-      "extends": null,
-      "registers": [
-        {
-          "name": "IVLR",
-          "offset": 0,
-          "description": "initialization vector registers.",
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "context swap register",
           "array_len": null,
           "array_stride": null,
-          "fields": []
+          "fields": [
+            {
+              "name": "CSGCM0R",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "CSGCM0R"
+            }
+          ]
         },
         {
-          "name": "IVRR",
-          "offset": 4,
-          "description": "initialization vector registers.",
+          "name": "CSGCM1R",
+          "offset": 116,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "context swap register",
           "array_len": null,
           "array_stride": null,
-          "fields": []
-        }
-      ]
-    },
-    "KEY": {
-      "name": "KEY",
-      "description": "Cluster KEY%s, containing K?LR, K?RR.",
-      "extends": null,
-      "registers": [
-        {
-          "name": "KLR",
-          "offset": 0,
-          "description": "key registers.",
-          "array_len": null,
-          "array_stride": null,
-          "fields": []
+          "fields": [
+            {
+              "name": "CSGCM1R",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "CSGCM1R"
+            }
+          ]
         },
         {
-          "name": "KRR",
-          "offset": 4,
-          "description": "key registers.",
+          "name": "CSGCM2R",
+          "offset": 120,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "context swap register",
           "array_len": null,
           "array_stride": null,
-          "fields": []
+          "fields": [
+            {
+              "name": "CSGCM2R",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "CSGCM2R"
+            }
+          ]
+        },
+        {
+          "name": "CSGCM3R",
+          "offset": 124,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "context swap register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSGCM3R",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "CSGCM3R"
+            }
+          ]
+        },
+        {
+          "name": "CSGCM4R",
+          "offset": 128,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "context swap register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSGCM4R",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "CSGCM4R"
+            }
+          ]
+        },
+        {
+          "name": "CSGCM5R",
+          "offset": 132,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "context swap register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSGCM5R",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "CSGCM5R"
+            }
+          ]
+        },
+        {
+          "name": "CSGCM6R",
+          "offset": 136,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "context swap register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSGCM6R",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "CSGCM6R"
+            }
+          ]
+        },
+        {
+          "name": "CSGCM7R",
+          "offset": 140,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "context swap register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CSGCM7R",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "CSGCM7R"
+            }
+          ]
         }
       ]
     }

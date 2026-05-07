@@ -2,905 +2,951 @@
   "schema": 1,
   "kind": "usart",
   "version": "v1",
+  "source": "stm32rs_svd",
+  "source_device": "stm32f100v8",
+  "source_file": "stm32f100.svd.patched",
   "blocks": {
-    "UART": {
-      "name": "UART",
-      "description": "Universal asynchronous receiver transmitter",
+    "USART1": {
+      "name": "USART1",
+      "description": "Universal synchronous asynchronous receiver transmitter",
       "extends": null,
       "registers": [
         {
           "name": "SR",
           "offset": 0,
-          "size": 32,
+          "size": 16,
+          "access": null,
+          "reset_value": 192,
           "description": "Status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Status register",
           "fields": [
             {
-              "name": "PE",
-              "bit_offset": 0,
+              "name": "CTS",
+              "bit_offset": 9,
               "bit_width": 1,
-              "description": "Parity error",
-              "enum": null
-            },
-            {
-              "name": "FE",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Framing error",
-              "enum": null
-            },
-            {
-              "name": "NE",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Noise error flag",
-              "enum": null
-            },
-            {
-              "name": "ORE",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Overrun error",
-              "enum": null
-            },
-            {
-              "name": "IDLE",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "Idle line detected",
-              "enum": null
-            },
-            {
-              "name": "RXNE",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "Read data register not empty",
-              "enum": null
-            },
-            {
-              "name": "TC",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "Transmission complete",
-              "enum": null
-            },
-            {
-              "name": "TXE",
-              "bit_offset": 7,
-              "bit_width": 1,
-              "description": "Transmit data register empty",
-              "enum": null
+              "description": "CTS flag",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NotChanged",
+                  "value": 0,
+                  "description": "No change occurred on the CTS status line"
+                },
+                {
+                  "name": "Changed",
+                  "value": 1,
+                  "description": "A change occurred on the CTS status line"
+                },
+                {
+                  "name": "Clear",
+                  "value": 0,
+                  "description": "Clear CTS toggle detection flag"
+                }
+              ]
             },
             {
               "name": "LBD",
               "bit_offset": 8,
               "bit_width": 1,
               "description": "LIN break detection flag",
-              "enum": null
-            },
-            {
-              "name": "CTS",
-              "bit_offset": 9,
-              "bit_width": 1,
-              "description": "CTS flag",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "DR",
-          "offset": 4,
-          "size": 32,
-          "description": "Data register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "Data register",
-          "fields": [
-            {
-              "name": "DR",
-              "bit_offset": 0,
-              "bit_width": 9,
-              "description": "Data value",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "BRR",
-          "offset": 8,
-          "size": 32,
-          "description": "Baud rate register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "Baud rate register",
-          "fields": [
-            {
-              "name": "BRR",
-              "bit_offset": 0,
-              "bit_width": 16,
-              "description": "USARTDIV",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "CR1",
-          "offset": 12,
-          "size": 32,
-          "description": "Control register 1",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "Control register 1",
-          "fields": [
-            {
-              "name": "SBK",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Send break",
-              "enum": null
-            },
-            {
-              "name": "RWU",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Receiver wakeup",
-              "enum": "RWU"
-            },
-            {
-              "name": "RE",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Receiver enable",
-              "enum": null
-            },
-            {
-              "name": "TE",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Transmitter enable",
-              "enum": null
-            },
-            {
-              "name": "IDLEIE",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "IDLE interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "RXNEIE",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "RXNE interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "TCIE",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "Transmission complete interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "TXEIE",
-              "bit_offset": 7,
-              "bit_width": 1,
-              "description": "TXE interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "PEIE",
-              "bit_offset": 8,
-              "bit_width": 1,
-              "description": "PE interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "PS",
-              "bit_offset": 9,
-              "bit_width": 1,
-              "description": "Parity selection",
-              "enum": "PS"
-            },
-            {
-              "name": "PCE",
-              "bit_offset": 10,
-              "bit_width": 1,
-              "description": "Parity control enable",
-              "enum": null
-            },
-            {
-              "name": "WAKE",
-              "bit_offset": 11,
-              "bit_width": 1,
-              "description": "Receiver wakeup method",
-              "enum": "WAKE"
-            },
-            {
-              "name": "M0",
-              "bit_offset": 12,
-              "bit_width": 1,
-              "description": "Word length",
-              "enum": "M0"
-            },
-            {
-              "name": "UE",
-              "bit_offset": 13,
-              "bit_width": 1,
-              "description": "USART enable",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "CR2",
-          "offset": 16,
-          "size": 32,
-          "description": "Control register 2",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "Control register 2",
-          "fields": [
-            {
-              "name": "ADD",
-              "bit_offset": 0,
-              "bit_width": 4,
-              "description": "Address of the USART node",
-              "enum": null
-            },
-            {
-              "name": "LBDL",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "Line break detection length",
-              "enum": "LBDL"
-            },
-            {
-              "name": "LBDIE",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "LIN break detection interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "STOP",
-              "bit_offset": 12,
-              "bit_width": 2,
-              "description": "STOP bits",
-              "enum": "STOP"
-            },
-            {
-              "name": "LINEN",
-              "bit_offset": 14,
-              "bit_width": 1,
-              "description": "LIN mode enable",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "CR3",
-          "offset": 20,
-          "size": 32,
-          "description": "Control register 3",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "Control register 3",
-          "fields": [
-            {
-              "name": "EIE",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Error interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "IREN",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "IrDA mode enable",
-              "enum": null
-            },
-            {
-              "name": "IRLP",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "IrDA low-power",
-              "enum": "IRLP"
-            },
-            {
-              "name": "HDSEL",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Half-duplex selection",
-              "enum": null
-            },
-            {
-              "name": "DMAR",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "DMA enable receiver",
-              "enum": null
-            },
-            {
-              "name": "DMAT",
-              "bit_offset": 7,
-              "bit_width": 1,
-              "description": "DMA enable transmitter",
-              "enum": null
-            }
-          ]
-        }
-      ]
-    },
-    "USART": {
-      "name": "USART",
-      "description": "Universal synchronous asynchronous receiver transmitter",
-      "extends": "UART",
-      "registers": [
-        {
-          "name": "SR",
-          "offset": 0,
-          "size": 32,
-          "description": "Status register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "Status register",
-          "fields": [
-            {
-              "name": "PE",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Parity error",
-              "enum": null
-            },
-            {
-              "name": "FE",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Framing error",
-              "enum": null
-            },
-            {
-              "name": "NE",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Noise error flag",
-              "enum": null
-            },
-            {
-              "name": "ORE",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Overrun error",
-              "enum": null
-            },
-            {
-              "name": "IDLE",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "Idle line detected",
-              "enum": null
-            },
-            {
-              "name": "RXNE",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "Read data register not empty",
-              "enum": null
-            },
-            {
-              "name": "TC",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "Transmission complete",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NotDetected",
+                  "value": 0,
+                  "description": "LIN break not detected"
+                },
+                {
+                  "name": "Detected",
+                  "value": 1,
+                  "description": "LIN break detected"
+                },
+                {
+                  "name": "Clear",
+                  "value": 0,
+                  "description": "Clear LIN break detection flag"
+                }
+              ]
             },
             {
               "name": "TXE",
               "bit_offset": 7,
               "bit_width": 1,
               "description": "Transmit data register empty",
-              "enum": null
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "TxNotEmpty",
+                  "value": 0,
+                  "description": "Data is not transferred to the shift register"
+                },
+                {
+                  "name": "TxEmpty",
+                  "value": 1,
+                  "description": "Data is transferred to the shift register"
+                }
+              ]
             },
             {
-              "name": "LBD",
-              "bit_offset": 8,
+              "name": "TC",
+              "bit_offset": 6,
               "bit_width": 1,
-              "description": "LIN break detection flag",
-              "enum": null
+              "description": "Transmission complete",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "TxNotComplete",
+                  "value": 0,
+                  "description": "Transmission is not complete"
+                },
+                {
+                  "name": "TxComplete",
+                  "value": 1,
+                  "description": "Transmission is complete"
+                },
+                {
+                  "name": "Clear",
+                  "value": 0,
+                  "description": "Clear transmission complete flag"
+                }
+              ]
             },
             {
-              "name": "CTS",
-              "bit_offset": 9,
+              "name": "RXNE",
+              "bit_offset": 5,
               "bit_width": 1,
-              "description": "CTS flag",
-              "enum": null
+              "description": "Read data register not empty",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoData",
+                  "value": 0,
+                  "description": "Data is not received"
+                },
+                {
+                  "name": "DataReady",
+                  "value": 1,
+                  "description": "Received data is ready to be read"
+                },
+                {
+                  "name": "Clear",
+                  "value": 0,
+                  "description": "Clear received data ready flag"
+                }
+              ]
+            },
+            {
+              "name": "IDLE",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "IDLE line detected",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NoIdle",
+                  "value": 0,
+                  "description": "No Idle Line is detected"
+                },
+                {
+                  "name": "Idle",
+                  "value": 1,
+                  "description": "Idle Line is detected"
+                }
+              ]
+            },
+            {
+              "name": "ORE",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Overrun error",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NoOverrun",
+                  "value": 0,
+                  "description": "No Overrun error"
+                },
+                {
+                  "name": "Overrun",
+                  "value": 1,
+                  "description": "Overrun error is detected"
+                }
+              ]
+            },
+            {
+              "name": "NE",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Noise error flag",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NoNoise",
+                  "value": 0,
+                  "description": "No noise is detected"
+                },
+                {
+                  "name": "Noise",
+                  "value": 1,
+                  "description": "Noise is detected"
+                }
+              ]
+            },
+            {
+              "name": "FE",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Framing error",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NoError",
+                  "value": 0,
+                  "description": "No Framing error is detected"
+                },
+                {
+                  "name": "Error",
+                  "value": 1,
+                  "description": "Framing error or break character is detected"
+                }
+              ]
+            },
+            {
+              "name": "PE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Parity error",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NoError",
+                  "value": 0,
+                  "description": "No parity error"
+                },
+                {
+                  "name": "Error",
+                  "value": 1,
+                  "description": "Parity error"
+                }
+              ]
             }
           ]
         },
         {
           "name": "DR",
           "offset": 4,
-          "size": 32,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "Data register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Data register",
           "fields": [
             {
               "name": "DR",
               "bit_offset": 0,
               "bit_width": 9,
-              "description": "Data value",
-              "enum": null
+              "description": "Data value"
             }
           ]
         },
         {
           "name": "BRR",
           "offset": 8,
-          "size": 32,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "Baud rate register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Baud rate register",
           "fields": [
             {
-              "name": "BRR",
+              "name": "DIV_Mantissa",
+              "bit_offset": 4,
+              "bit_width": 12,
+              "description": "mantissa of USARTDIV"
+            },
+            {
+              "name": "DIV_Fraction",
               "bit_offset": 0,
-              "bit_width": 16,
-              "description": "USARTDIV",
-              "enum": null
+              "bit_width": 4,
+              "description": "fraction of USARTDIV"
             }
           ]
         },
         {
           "name": "CR1",
           "offset": 12,
-          "size": 32,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "Control register 1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Control register 1",
           "fields": [
             {
-              "name": "SBK",
-              "bit_offset": 0,
+              "name": "UE",
+              "bit_offset": 13,
               "bit_width": 1,
-              "description": "Send break",
-              "enum": null
+              "description": "USART enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "USART prescaler and outputs disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "USART enabled"
+                }
+              ]
             },
             {
-              "name": "RWU",
-              "bit_offset": 1,
+              "name": "M",
+              "bit_offset": 12,
               "bit_width": 1,
-              "description": "Receiver wakeup",
-              "enum": "RWU"
+              "description": "Word length",
+              "enum_values": [
+                {
+                  "name": "M8",
+                  "value": 0,
+                  "description": "8 data bits"
+                },
+                {
+                  "name": "M9",
+                  "value": 1,
+                  "description": "9 data bits"
+                }
+              ]
             },
             {
-              "name": "RE",
-              "bit_offset": 2,
+              "name": "WAKE",
+              "bit_offset": 11,
               "bit_width": 1,
-              "description": "Receiver enable",
-              "enum": null
-            },
-            {
-              "name": "TE",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Transmitter enable",
-              "enum": null
-            },
-            {
-              "name": "IDLEIE",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "IDLE interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "RXNEIE",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "RXNE interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "TCIE",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "Transmission complete interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "TXEIE",
-              "bit_offset": 7,
-              "bit_width": 1,
-              "description": "TXE interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "PEIE",
-              "bit_offset": 8,
-              "bit_width": 1,
-              "description": "PE interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "PS",
-              "bit_offset": 9,
-              "bit_width": 1,
-              "description": "Parity selection",
-              "enum": "PS"
+              "description": "Wakeup method",
+              "enum_values": [
+                {
+                  "name": "IdleLine",
+                  "value": 0,
+                  "description": "USART wakeup on idle line"
+                },
+                {
+                  "name": "AddressMark",
+                  "value": 1,
+                  "description": "USART wakeup on address mark"
+                }
+              ]
             },
             {
               "name": "PCE",
               "bit_offset": 10,
               "bit_width": 1,
               "description": "Parity control enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Parity control disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Parity control enabled"
+                }
+              ]
             },
             {
-              "name": "WAKE",
-              "bit_offset": 11,
+              "name": "PS",
+              "bit_offset": 9,
               "bit_width": 1,
-              "description": "Receiver wakeup method",
-              "enum": "WAKE"
+              "description": "Parity selection",
+              "enum_values": [
+                {
+                  "name": "Even",
+                  "value": 0,
+                  "description": "Even parity"
+                },
+                {
+                  "name": "Odd",
+                  "value": 1,
+                  "description": "Odd parity"
+                }
+              ]
             },
             {
-              "name": "M0",
-              "bit_offset": 12,
+              "name": "PEIE",
+              "bit_offset": 8,
               "bit_width": 1,
-              "description": "Word length",
-              "enum": "M0"
+              "description": "PE interrupt enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "PE interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "PE interrupt enabled"
+                }
+              ]
             },
             {
-              "name": "UE",
-              "bit_offset": 13,
+              "name": "TXEIE",
+              "bit_offset": 7,
               "bit_width": 1,
-              "description": "USART enable",
-              "enum": null
+              "description": "TXE interrupt enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "TXE interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "TXE interrupt enabled"
+                }
+              ]
+            },
+            {
+              "name": "TCIE",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Transmission complete interrupt enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "TC interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "TC interrupt enabled"
+                }
+              ]
+            },
+            {
+              "name": "RXNEIE",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "RXNE interrupt enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "RXNE interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "RXNE interrupt enabled"
+                }
+              ]
+            },
+            {
+              "name": "IDLEIE",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "IDLE interrupt enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "IDLE interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "IDLE interrupt enabled"
+                }
+              ]
+            },
+            {
+              "name": "TE",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Transmitter enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Transmitter disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Transmitter enabled"
+                }
+              ]
+            },
+            {
+              "name": "RE",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Receiver enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Receiver disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Receiver enabled"
+                }
+              ]
+            },
+            {
+              "name": "RWU",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Receiver wakeup",
+              "enum_values": [
+                {
+                  "name": "Active",
+                  "value": 0,
+                  "description": "Receiver in active mode"
+                },
+                {
+                  "name": "Mute",
+                  "value": 1,
+                  "description": "Receiver in mute mode"
+                }
+              ]
+            },
+            {
+              "name": "SBK",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Send break",
+              "enum_values": [
+                {
+                  "name": "NoBreak",
+                  "value": 0,
+                  "description": "No break character is transmitted"
+                },
+                {
+                  "name": "Break",
+                  "value": 1,
+                  "description": "Break character transmitted"
+                }
+              ]
             }
           ]
         },
         {
           "name": "CR2",
           "offset": 16,
-          "size": 32,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "Control register 2",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Control register 2",
           "fields": [
             {
-              "name": "ADD",
-              "bit_offset": 0,
-              "bit_width": 4,
-              "description": "Address of the USART node",
-              "enum": null
-            },
-            {
-              "name": "LBDL",
-              "bit_offset": 5,
+              "name": "LINEN",
+              "bit_offset": 14,
               "bit_width": 1,
-              "description": "Line break detection length",
-              "enum": "LBDL"
-            },
-            {
-              "name": "LBDIE",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "LIN break detection interrupt enable",
-              "enum": null
+              "description": "LIN mode enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "LIN mode disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "LIN mode enabled"
+                }
+              ]
             },
             {
               "name": "STOP",
               "bit_offset": 12,
               "bit_width": 2,
               "description": "STOP bits",
-              "enum": "STOP"
-            },
-            {
-              "name": "LINEN",
-              "bit_offset": 14,
-              "bit_width": 1,
-              "description": "LIN mode enable",
-              "enum": null
-            },
-            {
-              "name": "LBCL",
-              "bit_offset": 8,
-              "bit_width": 1,
-              "description": "Last bit clock pulse",
-              "enum": null
-            },
-            {
-              "name": "CPHA",
-              "bit_offset": 9,
-              "bit_width": 1,
-              "description": "Clock phase",
-              "enum": "CPHA"
-            },
-            {
-              "name": "CPOL",
-              "bit_offset": 10,
-              "bit_width": 1,
-              "description": "Clock polarity",
-              "enum": "CPOL"
+              "enum_values": [
+                {
+                  "name": "Stop1",
+                  "value": 0,
+                  "description": "1 stop bit"
+                },
+                {
+                  "name": "Stop0p5",
+                  "value": 1,
+                  "description": "0.5 stop bits"
+                },
+                {
+                  "name": "Stop2",
+                  "value": 2,
+                  "description": "2 stop bits"
+                },
+                {
+                  "name": "Stop1p5",
+                  "value": 3,
+                  "description": "1.5 stop bits"
+                }
+              ]
             },
             {
               "name": "CLKEN",
               "bit_offset": 11,
               "bit_width": 1,
               "description": "Clock enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "CK pin disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "CK pin enabled"
+                }
+              ]
+            },
+            {
+              "name": "CPOL",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Clock polarity",
+              "enum_values": [
+                {
+                  "name": "Low",
+                  "value": 0,
+                  "description": "Steady low value on CK pin outside transmission window"
+                },
+                {
+                  "name": "High",
+                  "value": 1,
+                  "description": "Steady high value on CK pin outside transmission window"
+                }
+              ]
+            },
+            {
+              "name": "CPHA",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Clock phase",
+              "enum_values": [
+                {
+                  "name": "First",
+                  "value": 0,
+                  "description": "The first clock transition is the first data capture edge"
+                },
+                {
+                  "name": "Second",
+                  "value": 1,
+                  "description": "The second clock transition is the first data capture edge"
+                }
+              ]
+            },
+            {
+              "name": "LBCL",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Last bit clock pulse",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "The clock pulse of the last data bit is not output to the CK pin"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "The clock pulse of the last data bit is output to the CK pin"
+                }
+              ]
+            },
+            {
+              "name": "LBDIE",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "LIN break detection interrupt enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "LIN break detection interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "LIN break detection interrupt enabled"
+                }
+              ]
+            },
+            {
+              "name": "LBDL",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "lin break detection length",
+              "enum_values": [
+                {
+                  "name": "LBDL10",
+                  "value": 0,
+                  "description": "10-bit break detection"
+                },
+                {
+                  "name": "LBDL11",
+                  "value": 1,
+                  "description": "11-bit break detection"
+                }
+              ]
+            },
+            {
+              "name": "ADD",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "Address of the USART node"
             }
           ]
         },
         {
           "name": "CR3",
           "offset": 20,
-          "size": 32,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "Control register 3",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Control register 3",
           "fields": [
             {
-              "name": "EIE",
-              "bit_offset": 0,
+              "name": "CTSIE",
+              "bit_offset": 10,
               "bit_width": 1,
-              "description": "Error interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "IREN",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "IrDA mode enable",
-              "enum": null
-            },
-            {
-              "name": "IRLP",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "IrDA low-power",
-              "enum": "IRLP"
-            },
-            {
-              "name": "HDSEL",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Half-duplex selection",
-              "enum": null
-            },
-            {
-              "name": "DMAR",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "DMA enable receiver",
-              "enum": null
-            },
-            {
-              "name": "DMAT",
-              "bit_offset": 7,
-              "bit_width": 1,
-              "description": "DMA enable transmitter",
-              "enum": null
-            },
-            {
-              "name": "NACK",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "Smartcard NACK enable",
-              "enum": null
-            },
-            {
-              "name": "SCEN",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "Smartcard mode enable",
-              "enum": null
-            },
-            {
-              "name": "RTSE",
-              "bit_offset": 8,
-              "bit_width": 1,
-              "description": "RTS enable",
-              "enum": null
+              "description": "CTS interrupt enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "CTS interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "CTS interrupt enabled"
+                }
+              ]
             },
             {
               "name": "CTSE",
               "bit_offset": 9,
               "bit_width": 1,
               "description": "CTS enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "CTS hardware flow control disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "CTS hardware flow control enabled"
+                }
+              ]
             },
             {
-              "name": "CTSIE",
-              "bit_offset": 10,
+              "name": "RTSE",
+              "bit_offset": 8,
               "bit_width": 1,
-              "description": "CTS interrupt enable",
-              "enum": null
+              "description": "RTS enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "RTS hardware flow control disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "RTS hardware flow control enabled"
+                }
+              ]
+            },
+            {
+              "name": "DMAT",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "DMA enable transmitter",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "DMA mode is disabled for transmission"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "DMA mode is enabled for transmission"
+                }
+              ]
+            },
+            {
+              "name": "DMAR",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "DMA enable receiver",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "DMA mode is disabled for reception"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "DMA mode is enabled for reception"
+                }
+              ]
+            },
+            {
+              "name": "SCEN",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Smartcard mode enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Smartcard mode disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Smartcard mode enabled"
+                }
+              ]
+            },
+            {
+              "name": "NACK",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Smartcard NACK enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "NACK transmission in case of parity error is disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "NACK transmission during parity error is enabled"
+                }
+              ]
+            },
+            {
+              "name": "HDSEL",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Half-duplex selection",
+              "enum_values": [
+                {
+                  "name": "FullDuplex",
+                  "value": 0,
+                  "description": "Half duplex mode is not selected"
+                },
+                {
+                  "name": "HalfDuplex",
+                  "value": 1,
+                  "description": "Half duplex mode is selected"
+                }
+              ]
+            },
+            {
+              "name": "IRLP",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "IrDA low-power",
+              "enum_values": [
+                {
+                  "name": "Normal",
+                  "value": 0,
+                  "description": "Normal mode"
+                },
+                {
+                  "name": "LowPower",
+                  "value": 1,
+                  "description": "Low-power mode"
+                }
+              ]
+            },
+            {
+              "name": "IREN",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "IrDA mode enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "IrDA disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "IrDA enabled"
+                }
+              ]
+            },
+            {
+              "name": "EIE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Error interrupt enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Error interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Error interrupt enabled"
+                }
+              ]
             }
           ]
         },
         {
           "name": "GTPR",
           "offset": 24,
-          "size": 32,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "Guard time and prescaler register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Guard time and prescaler register",
           "fields": [
-            {
-              "name": "PSC",
-              "bit_offset": 0,
-              "bit_width": 8,
-              "description": "Prescaler value",
-              "enum": null
-            },
             {
               "name": "GT",
               "bit_offset": 8,
               "bit_width": 8,
-              "description": "Guard time value",
-              "enum": null
+              "description": "Guard time value"
+            },
+            {
+              "name": "PSC",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "Prescaler value"
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "CPHA": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "First",
-          "value": 0,
-          "description": "The first clock transition is the first data capture edge"
-        },
-        {
-          "name": "Second",
-          "value": 1,
-          "description": "The second clock transition is the first data capture edge"
-        }
-      ]
-    },
-    "CPOL": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Low",
-          "value": 0,
-          "description": "Steady low value on CK pin outside transmission window"
-        },
-        {
-          "name": "High",
-          "value": 1,
-          "description": "Steady high value on CK pin outside transmission window"
-        }
-      ]
-    },
-    "IRLP": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Normal",
-          "value": 0,
-          "description": "Normal mode"
-        },
-        {
-          "name": "LowPower",
-          "value": 1,
-          "description": "Low-power mode"
-        }
-      ]
-    },
-    "LBDL": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Bit10",
-          "value": 0,
-          "description": "10-bit break detection"
-        },
-        {
-          "name": "Bit11",
-          "value": 1,
-          "description": "11-bit break detection"
-        }
-      ]
-    },
-    "M0": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Bit8",
-          "value": 0,
-          "description": "1 start bit, 8 data bits, n stop bits"
-        },
-        {
-          "name": "Bit9",
-          "value": 1,
-          "description": "1 start bit, 9 data bits, n stop bits"
-        }
-      ]
-    },
-    "PS": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Even",
-          "value": 0,
-          "description": "Even parity"
-        },
-        {
-          "name": "Odd",
-          "value": 1,
-          "description": "Odd parity"
-        }
-      ]
-    },
-    "RWU": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Active",
-          "value": 0,
-          "description": "Receiver in active mode"
-        },
-        {
-          "name": "Mute",
-          "value": 1,
-          "description": "Receiver in mute mode"
-        }
-      ]
-    },
-    "STOP": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Stop1",
-          "value": 0,
-          "description": "1 stop bit"
-        },
-        {
-          "name": "Stop0p5",
-          "value": 1,
-          "description": "0.5 stop bits"
-        },
-        {
-          "name": "Stop2",
-          "value": 2,
-          "description": "2 stop bits"
-        },
-        {
-          "name": "Stop1p5",
-          "value": 3,
-          "description": "1.5 stop bits"
-        }
-      ]
-    },
-    "WAKE": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "IdleLine",
-          "value": 0,
-          "description": "USART wakeup on idle line"
-        },
-        {
-          "name": "AddressMark",
-          "value": 1,
-          "description": "USART wakeup on address mark"
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

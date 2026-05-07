@@ -2,41 +2,45 @@
   "schema": 1,
   "kind": "fmac",
   "version": "v1",
+  "source": "stm32rs_svd",
+  "source_device": "stm32h562ag",
+  "source_file": "stm32h562.svd.patched",
   "blocks": {
     "FMAC": {
       "name": "FMAC",
-      "description": "Filter math accelerator",
+      "description": "Filter Math Accelerator",
       "extends": null,
       "registers": [
         {
           "name": "X1BUFCFG",
           "offset": 0,
           "size": 32,
-          "description": "X1 buffer configuration register",
+          "access": null,
+          "reset_value": 0,
+          "description": "FMAC X1 buffer configuration register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "X1 buffer configuration register",
           "fields": [
             {
               "name": "X1_BASE",
               "bit_offset": 0,
               "bit_width": 8,
               "description": "Base address of X1 buffer",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "X1_BUF_SIZE",
               "bit_offset": 8,
               "bit_width": 8,
-              "description": "Allocated size of X1 buffer in 16-bit words",
-              "enum": null
+              "description": "Allocated size of X1 buffer in 16-bit words The minimum buffer size is the number of feed-forward taps in the filter (+ the watermark threshold 1).",
+              "access": "read-write"
             },
             {
               "name": "FULL_WM",
               "bit_offset": 24,
               "bit_width": 2,
-              "description": "Watermark for buffer full flag",
-              "enum": null
+              "description": "Watermark for buffer full flag Defines the threshold for setting the X1 buffer full flag when operating in circular mode. The flag is set if the number of free spaces in the buffer is less than 2FULL_WM. 2: Threshold = 4 3: Threshold = 8 Setting a threshold greater than 1 allows several data to be transferred into the buffer under one interrupt. Threshold should be set to 1 if DMA write requests are enabled (DMAWEN = 1 in FMAC_CR register).",
+              "access": "read-write"
             }
           ]
         },
@@ -44,24 +48,25 @@
           "name": "X2BUFCFG",
           "offset": 4,
           "size": 32,
-          "description": "X2 buffer configuration register",
+          "access": null,
+          "reset_value": 0,
+          "description": "FMAC X2 buffer configuration register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "X2 buffer configuration register",
           "fields": [
             {
               "name": "X2_BASE",
               "bit_offset": 0,
               "bit_width": 8,
-              "description": "Base address of X2 buffer",
-              "enum": null
+              "description": "Base address of X2 buffer The X2 buffer base address can be modified while START=1, for example to change coefficient values. The filter should be stalled when doing this, since changing the coefficients while a calculation is ongoing affects the result.",
+              "access": "read-write"
             },
             {
               "name": "X2_BUF_SIZE",
               "bit_offset": 8,
               "bit_width": 8,
-              "description": "Size of X2 buffer in 16-bit words",
-              "enum": null
+              "description": "Size of X2 buffer in 16-bit words This bitfield can not be modified when a function is ongoing (START = 1).",
+              "access": "read-write"
             }
           ]
         },
@@ -69,31 +74,32 @@
           "name": "YBUFCFG",
           "offset": 8,
           "size": 32,
-          "description": "Y buffer configuration register",
+          "access": null,
+          "reset_value": 0,
+          "description": "FMAC Y buffer configuration register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Y buffer configuration register",
           "fields": [
             {
               "name": "Y_BASE",
               "bit_offset": 0,
               "bit_width": 8,
               "description": "Base address of Y buffer",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "Y_BUF_SIZE",
               "bit_offset": 8,
               "bit_width": 8,
-              "description": "Size of Y buffer in 16-bit words",
-              "enum": null
+              "description": "Size of Y buffer in 16-bit words For FIR filters, the minimum buffer size is 1 (+ the watermark threshold). For IIR filters the minimum buffer size is the number of feedback taps (+ the watermark threshold).",
+              "access": "read-write"
             },
             {
               "name": "EMPTY_WM",
               "bit_offset": 24,
               "bit_width": 2,
-              "description": "Watermark for buffer empty flag",
-              "enum": null
+              "description": "Watermark for buffer empty flag Defines the threshold for setting the Y buffer empty flag when operating in circular mode. The flag is set if the number of unread values in the buffer is less than 2EMPTY_WM. 2: Threshold = 4 3: Threshold = 8 Setting a threshold greater than 1 allows several data to be transferred from the buffer under one interrupt. Threshold should be set to 1 if DMA read requests are enabled (DMAREN = 1 in FMAC_CR register).",
+              "access": "read-write"
             }
           ]
         },
@@ -101,45 +107,46 @@
           "name": "PARAM",
           "offset": 12,
           "size": 32,
-          "description": "Parameter register",
+          "access": null,
+          "reset_value": 0,
+          "description": "FMAC parameter register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Parameter register",
           "fields": [
             {
               "name": "P",
               "bit_offset": 0,
               "bit_width": 8,
-              "description": "Input parameter P",
-              "enum": null
+              "description": "Input parameter P. The value of this parameter is dependent on the function This bitfield can not be modified when a function is ongoing (START = 1)",
+              "access": "read-write"
             },
             {
               "name": "Q",
               "bit_offset": 8,
               "bit_width": 8,
-              "description": "Input parameter Q",
-              "enum": null
+              "description": "Input parameter Q. The value of this parameter is dependent on the function. This bitfield can not be modified when a function is ongoing (START = 1)",
+              "access": "read-write"
             },
             {
               "name": "R",
               "bit_offset": 16,
               "bit_width": 8,
-              "description": "Input parameter R",
-              "enum": null
+              "description": "Input parameter R. The value of this parameter is dependent on the function. This bitfield can not be modified when a function is ongoing (START = 1)",
+              "access": "read-write"
             },
             {
               "name": "FUNC",
               "bit_offset": 24,
               "bit_width": 7,
-              "description": "Function",
-              "enum": null
+              "description": "Function 2: Load X2 buffer 3: Load Y buffer 4 to 7: Reserved 8: Convolution (FIR filter) 9: IIR filter (direct form 1) This bitfield can not be modified when a function is ongoing (START = 1)",
+              "access": "read-write"
             },
             {
               "name": "START",
               "bit_offset": 31,
               "bit_width": 1,
-              "description": "Enable execution",
-              "enum": null
+              "description": "Enable execution Setting this bit triggers the execution of the function selected in the FUNC bitfield. Resetting it by software stops any ongoing function. For initialization functions, this bit is reset by hardware.",
+              "access": "read-write"
             }
           ]
         },
@@ -147,73 +154,74 @@
           "name": "CR",
           "offset": 16,
           "size": 32,
-          "description": "Control register",
+          "access": null,
+          "reset_value": 0,
+          "description": "FMAC control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Control register",
           "fields": [
             {
               "name": "RIEN",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Enable read interrupt",
-              "enum": null
+              "description": "Enable read interrupt This bit is set and cleared by software. A read returns the current state of the bit.",
+              "access": "read-write"
             },
             {
               "name": "WIEN",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Enable write interrupt",
-              "enum": null
+              "description": "Enable write interrupt This bit is set and cleared by software. A read returns the current state of the bit.",
+              "access": "read-write"
             },
             {
               "name": "OVFLIEN",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "Enable overflow error interrupts",
-              "enum": null
+              "description": "Enable overflow error interrupts This bit is set and cleared by software. A read returns the current state of the bit.",
+              "access": "read-write"
             },
             {
               "name": "UNFLIEN",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "Enable underflow error interrupts",
-              "enum": null
+              "description": "Enable underflow error interrupts This bit is set and cleared by software. A read returns the current state of the bit.",
+              "access": "read-write"
             },
             {
               "name": "SATIEN",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "Enable saturation error interrupts",
-              "enum": null
+              "description": "Enable saturation error interrupts This bit is set and cleared by software. A read returns the current state of the bit.",
+              "access": "read-write"
             },
             {
               "name": "DMAREN",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "Enable DMA read channel requests",
-              "enum": null
+              "description": "Enable DMA read channel requests This bit can only be modified when START= 0 in the FMAC_PARAM register. A read returns the current state of the bit.",
+              "access": "read-write"
             },
             {
               "name": "DMAWEN",
               "bit_offset": 9,
               "bit_width": 1,
-              "description": "Enable DMA write channel requests",
-              "enum": null
+              "description": "Enable DMA write channel requests This bit can only be modified when START= 0 in the FMAC_PARAM register. A read returns the current state of the bit.",
+              "access": "read-write"
             },
             {
               "name": "CLIPEN",
               "bit_offset": 15,
               "bit_width": 1,
               "description": "Enable clipping",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "RESET",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "Reset FMAC unit",
-              "enum": null
+              "description": "Reset FMAC unit This resets the write and read pointers, the internal control logic, the FMAC_SR register and the FMAC_PARAM register, including the START bit if active. Other register settings are not affected. This bit is reset by hardware.",
+              "access": "read-write"
             }
           ]
         },
@@ -221,45 +229,46 @@
           "name": "SR",
           "offset": 20,
           "size": 32,
-          "description": "Status register",
+          "access": null,
+          "reset_value": 1,
+          "description": "FMAC status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Status register",
           "fields": [
             {
               "name": "YEMPTY",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Y buffer empty flag",
-              "enum": null
+              "description": "Y buffer empty flag The buffer is flagged as empty if the number of unread data is less than the EMPTY_WM threshold. The number of unread data is the difference between the read pointer and the current output destination address. This flag is set and cleared by hardware, or by a reset. Note: after the last sample is read from the Y buffer there is a delay of 3 clock cycles before the YEMPTY flag goes high. To avoid any risk of underflow it is recommended to insert a software delay after reading from the Y buffer before reading the FMAC_SR. Alternatively, an EMPTY_WM threshold of 2 can be used.",
+              "access": "read-only"
             },
             {
               "name": "X1FULL",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "X1 buffer full flag",
-              "enum": null
+              "description": "X1 buffer full flag The buffer is flagged as full if the number of available spaces is less than the FULL_WM threshold. The number of available spaces is the difference between the write pointer and the least recent sample currently in use. This flag is set and cleared by hardware, or by a reset. Note: after the last available space in the X1 buffer is filled there is a delay of 3 clock cycles before the X1FULL flag goes high. To avoid any risk of overflow it is recommended to insert a software delay after writing to the X1 buffer before reading the FMAC_SR. Alternatively, a FULL_WM threshold of 2 can be used.",
+              "access": "read-only"
             },
             {
               "name": "OVFL",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "Overflow error flag",
-              "enum": null
+              "description": "Overflow error flag An overflow occurs when a write is made to FMAC_WDATA when no free space is available in the X1 buffer. This flag is cleared by a reset of the unit.",
+              "access": "read-only"
             },
             {
               "name": "UNFL",
               "bit_offset": 9,
               "bit_width": 1,
-              "description": "Underflow error flag",
-              "enum": null
+              "description": "Underflow error flag An underflow occurs when a read is made from FMAC_RDATA when no valid data is available in the Y buffer. This flag is cleared by a reset of the unit.",
+              "access": "read-only"
             },
             {
               "name": "SAT",
               "bit_offset": 10,
               "bit_width": 1,
-              "description": "Saturation error flag",
-              "enum": null
+              "description": "Saturation error flag Saturation occurs when the result of an accumulation exceeds the numeric range of the accumulator. This flag is cleared by a reset of the unit.",
+              "access": "read-only"
             }
           ]
         },
@@ -267,17 +276,18 @@
           "name": "WDATA",
           "offset": 24,
           "size": 32,
-          "description": "Write data register",
+          "access": null,
+          "reset_value": 0,
+          "description": "FMAC write data register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Write data register",
           "fields": [
             {
               "name": "WDATA",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "Write data (write data are transferred to the address indicated by the write pointer)",
-              "enum": null
+              "description": "Write data When a write access to this register occurs, the write data are transferred to the address offset indicated by the write pointer. The pointer address is automatically incremented after each write access.",
+              "access": "write-only"
             }
           ]
         },
@@ -285,17 +295,18 @@
           "name": "RDATA",
           "offset": 28,
           "size": 32,
-          "description": "Read data register",
+          "access": null,
+          "reset_value": 0,
+          "description": "FMAC read data register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Read data register",
           "fields": [
             {
-              "name": "RES",
+              "name": "RDATA",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "Read data (contents of the Y output buffer at the address indicated by the READ pointer)",
-              "enum": null
+              "description": "Read data When a read access to this register occurs, the read data are the contents of the Y output buffer at the address offset indicated by the READ pointer. The pointer address is automatically incremented after each read access.",
+              "access": "read-only"
             }
           ]
         }

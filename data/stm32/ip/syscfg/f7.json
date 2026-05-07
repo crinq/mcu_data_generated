@@ -2,6 +2,9 @@
   "schema": 1,
   "kind": "syscfg",
   "version": "f7",
+  "source": "stm32rs_svd",
+  "source_device": "stm32f730i8",
+  "source_file": "stm32f730.svd.patched",
   "blocks": {
     "SYSCFG": {
       "name": "SYSCFG",
@@ -12,31 +15,23 @@
           "name": "MEMRMP",
           "offset": 0,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "memory remap register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "memory remap register",
           "fields": [
             {
               "name": "MEM_BOOT",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Memory boot mapping",
-              "enum": null
-            },
-            {
-              "name": "FB_MODE",
-              "bit_offset": 8,
-              "bit_width": 1,
-              "description": "Flash bank mode selection",
-              "enum": null
+              "description": "Memory boot mapping"
             },
             {
               "name": "SWP_FMC",
               "bit_offset": 10,
               "bit_width": 2,
-              "description": "FMC memory mapping swap",
-              "enum": null
+              "description": "FMC memory mapping swap"
             }
           ]
         },
@@ -44,112 +39,215 @@
           "name": "PMC",
           "offset": 4,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "peripheral mode configuration register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "peripheral mode configuration register",
           "fields": [
-            {
-              "name": "I2C1_FMP",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "I2C1_FMP I2C1 Fast Mode + Enable",
-              "enum": null
-            },
-            {
-              "name": "I2C2_FMP",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "I2C2_FMP I2C2 Fast Mode + Enable",
-              "enum": null
-            },
-            {
-              "name": "I2C3_FMP",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "I2C3_FMP I2C3 Fast Mode + Enable",
-              "enum": null
-            },
-            {
-              "name": "I2C4_FMP",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "I2C4 Fast Mode + Enable",
-              "enum": null
-            },
-            {
-              "name": "PB6_FMP",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "PB6_FMP Fast Mode",
-              "enum": null
-            },
             {
               "name": "PB7_FMP",
               "bit_offset": 5,
               "bit_width": 1,
-              "description": "PB7_FMP Fast Mode + Enable",
-              "enum": null
+              "description": "PB7_FMP Fast Mode + Enable"
             },
             {
               "name": "PB8_FMP",
               "bit_offset": 6,
               "bit_width": 1,
-              "description": "PB8_FMP Fast Mode + Enable",
-              "enum": null
+              "description": "PB8_FMP Fast Mode + Enable"
             },
             {
               "name": "PB9_FMP",
               "bit_offset": 7,
               "bit_width": 1,
-              "description": "Fast Mode + Enable",
-              "enum": null
+              "description": "Fast Mode + Enable"
             },
             {
               "name": "ADC1DC2",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "ADC3DC2",
-              "enum": null
+              "description": "ADC3DC2"
             },
             {
-              "name": "ADC2DC2",
-              "bit_offset": 17,
+              "name": "PB6_FMP",
+              "bit_offset": 4,
               "bit_width": 1,
-              "description": "ADC2DC2",
-              "enum": null
+              "description": "PB6_FMP Fast Mode"
+            },
+            {
+              "name": "I2C3_FMP",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "I2C3_FMP I2C3 Fast Mode + Enable"
+            },
+            {
+              "name": "I2C2_FMP",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "I2C2_FMP I2C2 Fast Mode + Enable"
+            },
+            {
+              "name": "I2C1_FMP",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "I2C1_FMP I2C1 Fast Mode + Enable"
             },
             {
               "name": "ADC3DC2",
               "bit_offset": 18,
               "bit_width": 1,
-              "description": "ADC3DC2",
-              "enum": null
+              "description": "ADC3DC2"
             },
             {
-              "name": "MII_RMII_SEL",
-              "bit_offset": 23,
+              "name": "ADC2DC2",
+              "bit_offset": 17,
               "bit_width": 1,
-              "description": "Ethernet PHY interface selection",
-              "enum": null
+              "description": "ADC2DC2"
             }
           ]
         },
         {
-          "name": "EXTICR",
+          "name": "EXTICR1",
           "offset": 8,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "external interrupt configuration register 1",
-          "array_len": 4,
-          "array_stride": 4,
-          "fieldset_description": "external interrupt configuration register 1",
+          "array_len": null,
+          "array_stride": null,
           "fields": [
             {
-              "name": "EXTI",
+              "name": "EXTI3",
+              "bit_offset": 12,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 0 to 3)"
+            },
+            {
+              "name": "EXTI2",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 0 to 3)"
+            },
+            {
+              "name": "EXTI1",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 0 to 3)"
+            },
+            {
+              "name": "EXTI0",
               "bit_offset": 0,
               "bit_width": 4,
-              "description": "EXTI x configuration (x = 0 to 3)",
-              "enum": null
+              "description": "EXTI x configuration (x = 0 to 3)"
+            }
+          ]
+        },
+        {
+          "name": "EXTICR2",
+          "offset": 12,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "external interrupt configuration register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "EXTI7",
+              "bit_offset": 12,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 4 to 7)"
+            },
+            {
+              "name": "EXTI6",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 4 to 7)"
+            },
+            {
+              "name": "EXTI5",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 4 to 7)"
+            },
+            {
+              "name": "EXTI4",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 4 to 7)"
+            }
+          ]
+        },
+        {
+          "name": "EXTICR3",
+          "offset": 16,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "external interrupt configuration register 3",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "EXTI11",
+              "bit_offset": 12,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 8 to 11)"
+            },
+            {
+              "name": "EXTI10",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "EXTI10"
+            },
+            {
+              "name": "EXTI9",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 8 to 11)"
+            },
+            {
+              "name": "EXTI8",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 8 to 11)"
+            }
+          ]
+        },
+        {
+          "name": "EXTICR4",
+          "offset": 20,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "external interrupt configuration register 4",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "EXTI15",
+              "bit_offset": 12,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 12 to 15)"
+            },
+            {
+              "name": "EXTI14",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 12 to 15)"
+            },
+            {
+              "name": "EXTI13",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 12 to 15)"
+            },
+            {
+              "name": "EXTI12",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 12 to 15)"
             }
           ]
         },
@@ -157,24 +255,23 @@
           "name": "CMPCR",
           "offset": 32,
           "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
           "description": "Compensation cell control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Compensation cell control register",
           "fields": [
-            {
-              "name": "CMP_PD",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Compensation cell power-down",
-              "enum": null
-            },
             {
               "name": "READY",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "READY",
-              "enum": null
+              "description": "READY"
+            },
+            {
+              "name": "CMP_PD",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Compensation cell power-down"
             }
           ]
         }

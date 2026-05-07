@@ -2,69 +2,73 @@
   "schema": 1,
   "kind": "icache",
   "version": "v1_0crr",
+  "source": "stm32rs_svd",
+  "source_device": "stm32h503cb",
+  "source_file": "stm32h503.svd.patched",
   "blocks": {
     "ICACHE": {
       "name": "ICACHE",
-      "description": "Instruction Cache Control Registers.",
+      "description": "Instruction cache",
       "extends": null,
       "registers": [
         {
           "name": "CR",
           "offset": 0,
           "size": 32,
-          "description": "ICACHE control register.",
+          "access": null,
+          "reset_value": 4,
+          "description": "ICACHE control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "ICACHE control register.",
           "fields": [
             {
               "name": "EN",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "EN.",
-              "enum": null
+              "description": "enable",
+              "access": "read-write"
             },
             {
               "name": "CACHEINV",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Set by software and cleared by hardware when the BUSYF flag is set (during cache maintenance operation). Writing 0 has no effect.",
-              "enum": null
+              "description": "cache invalidation Set by software and cleared by hardware when the BUSYF flag is set (during cache maintenance operation). Writing 0 has no effect.",
+              "access": "write-only"
             },
             {
               "name": "WAYSEL",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "This bit allows user to choose ICACHE set-associativity. It can be written by software only when cache is disabled (EN = 0).",
-              "enum": "WAYSEL"
+              "description": "cache associativity mode selection This bit allows user to choose ICACHE set-associativity. It can be written by software only when cache is disabled (EN = 0).",
+              "access": "read-write"
             },
             {
               "name": "HITMEN",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "Hit monitor enable.",
-              "enum": null
+              "description": "hit monitor enable",
+              "access": "read-write"
             },
             {
               "name": "MISSMEN",
               "bit_offset": 17,
               "bit_width": 1,
-              "description": "Miss monitor enable.",
-              "enum": null
+              "description": "miss monitor enable",
+              "access": "read-write"
             },
             {
               "name": "HITMRST",
               "bit_offset": 18,
               "bit_width": 1,
-              "description": "Hit monitor reset.",
-              "enum": null
+              "description": "hit monitor reset",
+              "access": "read-write"
             },
             {
               "name": "MISSMRST",
               "bit_offset": 19,
               "bit_width": 1,
-              "description": "Miss monitor reset.",
-              "enum": null
+              "description": "miss monitor reset",
+              "access": "read-write"
             }
           ]
         },
@@ -72,31 +76,32 @@
           "name": "SR",
           "offset": 4,
           "size": 32,
-          "description": "ICACHE status register.",
+          "access": null,
+          "reset_value": 1,
+          "description": "ICACHE status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "ICACHE status register.",
           "fields": [
             {
               "name": "BUSYF",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "cache busy executing a full invalidate CACHEINV operation.",
-              "enum": null
+              "description": "busy flag",
+              "access": "read-only"
             },
             {
               "name": "BSYENDF",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "full invalidate CACHEINV operation finished.",
-              "enum": null
+              "description": "busy end flag",
+              "access": "read-only"
             },
             {
               "name": "ERRF",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "an error occurred during the operation.",
-              "enum": null
+              "description": "cache error flag",
+              "access": "read-only"
             }
           ]
         },
@@ -104,24 +109,25 @@
           "name": "IER",
           "offset": 8,
           "size": 32,
-          "description": "ICACHE interrupt enable register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "ICACHE interrupt enable register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "ICACHE interrupt enable register.",
           "fields": [
             {
               "name": "BSYENDIE",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Interrupt enable on busy end.",
-              "enum": null
+              "description": "interrupt enable on busy end Set by software to enable an interrupt generation at the end of a cache invalidate operation.",
+              "access": "read-write"
             },
             {
               "name": "ERRIE",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "Error interrupt on cache error.",
-              "enum": null
+              "description": "interrupt enable on cache error Set by software to enable an interrupt generation in case of cache functional error (cacheable write access)",
+              "access": "read-write"
             }
           ]
         },
@@ -129,71 +135,68 @@
           "name": "FCR",
           "offset": 12,
           "size": 32,
-          "description": "ICACHE flag clear register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "ICACHE flag clear register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "ICACHE flag clear register.",
           "fields": [
             {
               "name": "CBSYENDF",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Clear busy end flag.",
-              "enum": null
+              "description": "clear busy end flag Set by software.",
+              "access": "write-only"
             },
             {
               "name": "CERRF",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "Clear ERRF flag in SR.",
-              "enum": null
+              "description": "clear cache error flag Set by software.",
+              "access": "write-only"
             }
           ]
         },
         {
           "name": "HMONR",
           "offset": 16,
-          "description": "ICACHE hit monitor register.",
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "ICACHE hit monitor register",
           "array_len": null,
           "array_stride": null,
-          "fields": []
+          "fields": [
+            {
+              "name": "HITMON",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "cache hit monitor counter",
+              "access": "read-only"
+            }
+          ]
         },
         {
           "name": "MMONR",
           "offset": 20,
           "size": 32,
-          "description": "ICACHE miss monitor register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "ICACHE miss monitor register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "ICACHE miss monitor register.",
           "fields": [
             {
               "name": "MISSMON",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "Miss monitor register.",
-              "enum": null
+              "description": "cache miss monitor counter",
+              "access": "read-only"
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "WAYSEL": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "DirectMapped",
-          "value": 0,
-          "description": "direct mapped cache (1-way cache)"
-        },
-        {
-          "name": "NWaySetAssociative",
-          "value": 1,
-          "description": "n-way set associative cache (reset value)"
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

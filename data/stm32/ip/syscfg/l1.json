@@ -2,6 +2,9 @@
   "schema": 1,
   "kind": "syscfg",
   "version": "l1",
+  "source": "stm32rs_svd",
+  "source_device": "stm32l151r6",
+  "source_file": "stm32l151.svd.patched",
   "blocks": {
     "SYSCFG": {
       "name": "SYSCFG",
@@ -12,24 +15,25 @@
           "name": "MEMRMP",
           "offset": 0,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "memory remap register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "memory remap register",
           "fields": [
             {
               "name": "MEM_MODE",
               "bit_offset": 0,
               "bit_width": 2,
               "description": "MEM_MODE",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "BOOT_MODE",
               "bit_offset": 8,
               "bit_width": 2,
               "description": "BOOT_MODE",
-              "enum": null
+              "access": "read-only"
             }
           ]
         },
@@ -37,42 +41,167 @@
           "name": "PMC",
           "offset": 4,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "peripheral mode configuration register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "peripheral mode configuration register",
           "fields": [
             {
               "name": "USB_PU",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "USB pull-up",
-              "enum": null
+              "description": "USB pull-up"
             },
             {
               "name": "LCD_CAPA",
               "bit_offset": 1,
               "bit_width": 5,
-              "description": "USB pull-up enable on DP line",
-              "enum": null
+              "description": "USB pull-up enable on DP line"
             }
           ]
         },
         {
-          "name": "EXTICR",
+          "name": "EXTICR1",
           "offset": 8,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "external interrupt configuration register 1",
-          "array_len": 4,
-          "array_stride": 4,
-          "fieldset_description": "external interrupt configuration register 3",
+          "array_len": null,
+          "array_stride": null,
           "fields": [
             {
-              "name": "EXTI",
+              "name": "EXTI3",
+              "bit_offset": 12,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 0 to 3)"
+            },
+            {
+              "name": "EXTI2",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 0 to 3)"
+            },
+            {
+              "name": "EXTI1",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 0 to 3)"
+            },
+            {
+              "name": "EXTI0",
               "bit_offset": 0,
               "bit_width": 4,
-              "description": "EXTI x configuration (x = 8 to 11)",
-              "enum": null
+              "description": "EXTI x configuration (x = 0 to 3)"
+            }
+          ]
+        },
+        {
+          "name": "EXTICR2",
+          "offset": 12,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "external interrupt configuration register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "EXTI7",
+              "bit_offset": 12,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 4 to 7)"
+            },
+            {
+              "name": "EXTI6",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 4 to 7)"
+            },
+            {
+              "name": "EXTI5",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 4 to 7)"
+            },
+            {
+              "name": "EXTI4",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 4 to 7)"
+            }
+          ]
+        },
+        {
+          "name": "EXTICR3",
+          "offset": 16,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "external interrupt configuration register 3",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "EXTI11",
+              "bit_offset": 12,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 8 to 11)"
+            },
+            {
+              "name": "EXTI10",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "EXTI10"
+            },
+            {
+              "name": "EXTI9",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 8 to 11)"
+            },
+            {
+              "name": "EXTI8",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 8 to 11)"
+            }
+          ]
+        },
+        {
+          "name": "EXTICR4",
+          "offset": 20,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "external interrupt configuration register 4",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "EXTI15",
+              "bit_offset": 12,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 12 to 15)"
+            },
+            {
+              "name": "EXTI14",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "EXTI14"
+            },
+            {
+              "name": "EXTI13",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "EXTI13"
+            },
+            {
+              "name": "EXTI12",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "EXTI12"
             }
           ]
         }

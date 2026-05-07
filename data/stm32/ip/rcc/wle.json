@@ -2,6 +2,9 @@
   "schema": 1,
   "kind": "rcc",
   "version": "wle",
+  "source": "stm32rs_svd",
+  "source_device": "stm32wle5c8",
+  "source_file": "stm32wle5.svd.patched",
   "blocks": {
     "RCC": {
       "name": "RCC",
@@ -12,129 +15,384 @@
           "name": "CR",
           "offset": 0,
           "size": 32,
+          "access": null,
+          "reset_value": 97,
           "description": "Clock control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Clock control register",
           "fields": [
             {
-              "name": "MSION",
-              "bit_offset": 0,
+              "name": "PLLRDY",
+              "bit_offset": 25,
               "bit_width": 1,
-              "description": "MSI clock enable",
-              "enum": null
-            },
-            {
-              "name": "MSIRDY",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "MSI clock ready flag (After reset this bit will be read 1 once the MSI is ready)",
-              "enum": null
-            },
-            {
-              "name": "MSIPLLEN",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "MSI clock PLL enable",
-              "enum": null
-            },
-            {
-              "name": "MSIRGSEL",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "MSI range control selection",
-              "enum": "MSIRGSEL"
-            },
-            {
-              "name": "MSIRANGE",
-              "bit_offset": 4,
-              "bit_width": 4,
-              "description": "MSI clock ranges",
-              "enum": "MSIRANGE"
-            },
-            {
-              "name": "HSION",
-              "bit_offset": 8,
-              "bit_width": 1,
-              "description": "HSI clock enable",
-              "enum": null
-            },
-            {
-              "name": "HSIKERON",
-              "bit_offset": 9,
-              "bit_width": 1,
-              "description": "HSI always enable for peripheral kernel clocks.",
-              "enum": null
-            },
-            {
-              "name": "HSIRDY",
-              "bit_offset": 10,
-              "bit_width": 1,
-              "description": "HSI clock ready flag. (After wakeup from Stop this bit will be read 1 once the HSI is ready)",
-              "enum": null
-            },
-            {
-              "name": "HSIASFS",
-              "bit_offset": 11,
-              "bit_width": 1,
-              "description": "HSI automatic start from Stop",
-              "enum": null
-            },
-            {
-              "name": "HSIKERDY",
-              "bit_offset": 12,
-              "bit_width": 1,
-              "description": "HSI kernel clock ready flag for peripherals requests.",
-              "enum": null
-            },
-            {
-              "name": "HSEON",
-              "bit_offset": 16,
-              "bit_width": 1,
-              "description": "HSE clock enable",
-              "enum": null
-            },
-            {
-              "name": "HSERDY",
-              "bit_offset": 17,
-              "bit_width": 1,
-              "description": "HSE clock ready flag",
-              "enum": null
-            },
-            {
-              "name": "CSSON",
-              "bit_offset": 19,
-              "bit_width": 1,
-              "description": "HSE Clock security system enable",
-              "enum": null
-            },
-            {
-              "name": "HSEPRE",
-              "bit_offset": 20,
-              "bit_width": 1,
-              "description": "HSE sysclk prescaler",
-              "enum": "HSEPRE"
-            },
-            {
-              "name": "HSEBYPPWR",
-              "bit_offset": 21,
-              "bit_width": 1,
-              "description": "Enable HSE VDDTCXO output on package pin PB0-VDDTCXO.",
-              "enum": null
+              "description": "Main PLL clock ready flag",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "Unlocked",
+                  "value": 0,
+                  "description": "PLL unlocked"
+                },
+                {
+                  "name": "Locked",
+                  "value": 1,
+                  "description": "PLL Locked"
+                }
+              ]
             },
             {
               "name": "PLLON",
               "bit_offset": 24,
               "bit_width": 1,
               "description": "Main PLL enable",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Off",
+                  "value": 0,
+                  "description": "Main PLL Off"
+                },
+                {
+                  "name": "On",
+                  "value": 1,
+                  "description": "Main PLL On"
+                }
+              ]
             },
             {
-              "name": "PLLRDY",
-              "bit_offset": 25,
+              "name": "HSEBYPPWR",
+              "bit_offset": 21,
               "bit_width": 1,
-              "description": "Main PLL clock ready flag",
-              "enum": null
+              "description": "Enable HSE32 VDDTCXO output on package pin PB0-VDDTCXO.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "PB0",
+                  "value": 0,
+                  "description": "PB0 selected"
+                },
+                {
+                  "name": "VDDTCXO",
+                  "value": 1,
+                  "description": "VDDTCXO selected"
+                }
+              ]
+            },
+            {
+              "name": "HSEPRE",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "HSE32 sysclk prescaler",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Div1",
+                  "value": 0,
+                  "description": "SYSCLK not divided (HSE32)"
+                },
+                {
+                  "name": "Div2",
+                  "value": 1,
+                  "description": "SYSCLK divided by two (HSE32/2)"
+                }
+              ]
+            },
+            {
+              "name": "CSSON",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "HSE32 Clock security system enable",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "HSE32 CSS off"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "HSE32 CSS on if the HSE32 oscillator is stable and off if not"
+                }
+              ]
+            },
+            {
+              "name": "HSERDY",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "HSE32 clock ready flag",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotReady",
+                  "value": 0,
+                  "description": "HSE32 oscillator not ready"
+                },
+                {
+                  "name": "Ready",
+                  "value": 1,
+                  "description": "HSE32 oscillator ready"
+                }
+              ]
+            },
+            {
+              "name": "HSEON",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "HSE32 clock enable",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "HSE32 oscillator for CPU disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "HSE32 oscillator for CPU enabled"
+                }
+              ]
+            },
+            {
+              "name": "HSIKERDY",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "HSI16 kernel clock ready flag for peripherals requests.",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotReady",
+                  "value": 0,
+                  "description": "HSI16 oscillator not ready"
+                },
+                {
+                  "name": "Ready",
+                  "value": 1,
+                  "description": "HSI16 oscillator ready"
+                }
+              ]
+            },
+            {
+              "name": "HSIASFS",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "HSI16 automatic start from Stop",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "HSI16 not enabled by hardware when exiting Stop modes with MSI as wakeup clock"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "HSI16 enabled by hardware when exiting Stop mode with MSI as wakeup clock"
+                }
+              ]
+            },
+            {
+              "name": "HSIRDY",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "HSI16 clock ready flag. (After wakeup from Stop this bit will be read 1 once the HSI16 is ready)",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotReady",
+                  "value": 0,
+                  "description": "HSI16 oscillator not ready"
+                },
+                {
+                  "name": "Ready",
+                  "value": 1,
+                  "description": "HSI16 oscillator ready"
+                }
+              ]
+            },
+            {
+              "name": "HSIKERON",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "HSI16 always enable for peripheral kernel clocks.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NotForced",
+                  "value": 0,
+                  "description": "No effect on HSI16 oscillator"
+                },
+                {
+                  "name": "Forced",
+                  "value": 1,
+                  "description": "HSI16 oscillator forced on even in Stop modes"
+                }
+              ]
+            },
+            {
+              "name": "HSION",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "HSI16 clock enable",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "HSI16 oscillator off"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "HSI16 oscillator on"
+                }
+              ]
+            },
+            {
+              "name": "MSIRANGE",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "MSI clock ranges",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Range100K",
+                  "value": 0,
+                  "description": "range 0 around 100 kHz"
+                },
+                {
+                  "name": "Range200K",
+                  "value": 1,
+                  "description": "range 1 around 200 kHz"
+                },
+                {
+                  "name": "Range400K",
+                  "value": 2,
+                  "description": "range 2 around 400 kHz"
+                },
+                {
+                  "name": "Range800K",
+                  "value": 3,
+                  "description": "range 3 around 800 kHz"
+                },
+                {
+                  "name": "Range1M",
+                  "value": 4,
+                  "description": "range 4 around 1 MHz"
+                },
+                {
+                  "name": "Range2M",
+                  "value": 5,
+                  "description": "range 5 around 2 MHz"
+                },
+                {
+                  "name": "Range4M",
+                  "value": 6,
+                  "description": "range 6 around 4 MHz (reset value)"
+                },
+                {
+                  "name": "Range8M",
+                  "value": 7,
+                  "description": "range 7 around 8 MHz"
+                },
+                {
+                  "name": "Range16M",
+                  "value": 8,
+                  "description": "range 8 around 16 MHz"
+                },
+                {
+                  "name": "Range24M",
+                  "value": 9,
+                  "description": "range 9 around 24 MHz"
+                },
+                {
+                  "name": "Range32M",
+                  "value": 10,
+                  "description": "range 10 around 32 MHz"
+                },
+                {
+                  "name": "Range48M",
+                  "value": 11,
+                  "description": "range 11 around 48 MHz"
+                }
+              ]
+            },
+            {
+              "name": "MSIRGSEL",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "MSI range control selection",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "CSR",
+                  "value": 0,
+                  "description": "MSI frequency range defined by MSISRANGE[3:0] in the RCC_CSR register"
+                },
+                {
+                  "name": "CR",
+                  "value": 1,
+                  "description": "MSI frequency range defined by MSIRANGE[3:0] in the RCC_CR register"
+                }
+              ]
+            },
+            {
+              "name": "MSIPLLEN",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "MSI clock PLL enable",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Off",
+                  "value": 0,
+                  "description": "MSI PLL Off"
+                },
+                {
+                  "name": "On",
+                  "value": 1,
+                  "description": "MSI PLL On"
+                }
+              ]
+            },
+            {
+              "name": "MSIRDY",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "MSI clock ready flag (After reset this bit will be read 1 once the MSI is ready)",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotReady",
+                  "value": 0,
+                  "description": "MSI oscillator not ready"
+                },
+                {
+                  "name": "Ready",
+                  "value": 1,
+                  "description": "MSI oscillator ready"
+                }
+              ]
+            },
+            {
+              "name": "MSION",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "MSI clock enable",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "MSI oscillator off"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "MSI oscillator on"
+                }
+              ]
             }
           ]
         },
@@ -142,38 +400,39 @@
           "name": "ICSCR",
           "offset": 4,
           "size": 32,
+          "access": null,
+          "reset_value": 1073741824,
           "description": "Internal clock sources calibration register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Internal clock sources calibration register",
           "fields": [
             {
-              "name": "MSICAL",
-              "bit_offset": 0,
+              "name": "HSITRIM",
+              "bit_offset": 24,
+              "bit_width": 7,
+              "description": "HSI16 clock trimming",
+              "access": "read-write"
+            },
+            {
+              "name": "HSICAL",
+              "bit_offset": 16,
               "bit_width": 8,
-              "description": "MSI clock calibration",
-              "enum": null
+              "description": "HSI16 clock calibration",
+              "access": "read-only"
             },
             {
               "name": "MSITRIM",
               "bit_offset": 8,
               "bit_width": 8,
               "description": "MSI clock trimming",
-              "enum": null
+              "access": "read-write"
             },
             {
-              "name": "HSICAL",
-              "bit_offset": 16,
+              "name": "MSICAL",
+              "bit_offset": 0,
               "bit_width": 8,
-              "description": "HSI clock calibration",
-              "enum": null
-            },
-            {
-              "name": "HSITRIM",
-              "bit_offset": 24,
-              "bit_width": 7,
-              "description": "HSI clock trimming",
-              "enum": null
+              "description": "MSI clock calibration",
+              "access": "read-only"
             }
           ]
         },
@@ -181,87 +440,348 @@
           "name": "CFGR",
           "offset": 8,
           "size": 32,
+          "access": null,
+          "reset_value": 458752,
           "description": "Clock configuration register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Clock configuration register",
           "fields": [
             {
-              "name": "SW",
-              "bit_offset": 0,
-              "bit_width": 2,
-              "description": "System clock switch",
-              "enum": "SW"
-            },
-            {
-              "name": "SWS",
-              "bit_offset": 2,
-              "bit_width": 2,
-              "description": "System clock switch status",
-              "enum": "SW"
-            },
-            {
-              "name": "HPRE",
-              "bit_offset": 4,
-              "bit_width": 4,
-              "description": "HCLK1 prescaler (CPU1, AHB1, AHB2, and SRAM1.)",
-              "enum": "HPRE"
-            },
-            {
-              "name": "PPRE1",
-              "bit_offset": 8,
+              "name": "MCOPRE",
+              "bit_offset": 28,
               "bit_width": 3,
-              "description": "PCLK1 low-speed prescaler (APB1)",
-              "enum": "PPRE"
-            },
-            {
-              "name": "PPRE2",
-              "bit_offset": 11,
-              "bit_width": 3,
-              "description": "PCLK2 high-speed prescaler (APB2)",
-              "enum": "PPRE"
-            },
-            {
-              "name": "STOPWUCK",
-              "bit_offset": 15,
-              "bit_width": 1,
-              "description": "Wakeup from Stop and CSS backup clock selection",
-              "enum": null
-            },
-            {
-              "name": "HPREF",
-              "bit_offset": 16,
-              "bit_width": 1,
-              "description": "HCLK1 prescaler flag (CPU1, AHB1, AHB2, and SRAM1)",
-              "enum": null
-            },
-            {
-              "name": "PPRE1F",
-              "bit_offset": 17,
-              "bit_width": 1,
-              "description": "PCLK1 prescaler flag (APB1)",
-              "enum": null
-            },
-            {
-              "name": "PPRE2F",
-              "bit_offset": 18,
-              "bit_width": 1,
-              "description": "PCLK2 prescaler flag (APB2)",
-              "enum": null
+              "description": "Microcontroller clock output prescaler",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Div1",
+                  "value": 0,
+                  "description": "No division"
+                },
+                {
+                  "name": "Div2",
+                  "value": 1,
+                  "description": "Division by 2"
+                },
+                {
+                  "name": "Div4",
+                  "value": 2,
+                  "description": "Division by 4"
+                },
+                {
+                  "name": "Div8",
+                  "value": 3,
+                  "description": "Division by 8"
+                },
+                {
+                  "name": "Div16",
+                  "value": 4,
+                  "description": "Division by 16"
+                }
+              ]
             },
             {
               "name": "MCOSEL",
               "bit_offset": 24,
               "bit_width": 4,
               "description": "Microcontroller clock output",
-              "enum": "MCOSEL"
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoClock",
+                  "value": 0,
+                  "description": "No clock"
+                },
+                {
+                  "name": "SYSCLK",
+                  "value": 1,
+                  "description": "SYSCLK clock selected"
+                },
+                {
+                  "name": "MSI",
+                  "value": 2,
+                  "description": "MSI oscillator clock selected"
+                },
+                {
+                  "name": "HSI16",
+                  "value": 3,
+                  "description": "HSI16 oscillator clock selected"
+                },
+                {
+                  "name": "HSE32",
+                  "value": 4,
+                  "description": "HSE32 oscillator clock selected"
+                },
+                {
+                  "name": "PLLR",
+                  "value": 5,
+                  "description": "Main PLLRCLK clock selected"
+                },
+                {
+                  "name": "LSI",
+                  "value": 6,
+                  "description": "LSI oscillator clock selected"
+                },
+                {
+                  "name": "LSE",
+                  "value": 8,
+                  "description": "LSE oscillator clock selected"
+                },
+                {
+                  "name": "PLLP",
+                  "value": 13,
+                  "description": "Main PLLPCLK clock selected"
+                },
+                {
+                  "name": "PLLQ",
+                  "value": 14,
+                  "description": "Main PLLQCLK clock selected"
+                }
+              ]
             },
             {
-              "name": "MCOPRE",
-              "bit_offset": 28,
+              "name": "PPRE2F",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "PCLK2 prescaler flag (APB2)",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotApplied",
+                  "value": 0,
+                  "description": "PCLK2 prescaler value not yet applied"
+                },
+                {
+                  "name": "Applied",
+                  "value": 1,
+                  "description": "PCLK2 prescaler value applied"
+                }
+              ]
+            },
+            {
+              "name": "PPRE1F",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "PCLK1 prescaler flag (APB1)",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotApplied",
+                  "value": 0,
+                  "description": "PCLK1 prescaler value not yet applied"
+                },
+                {
+                  "name": "Applied",
+                  "value": 1,
+                  "description": "PCLK1 prescaler value applied"
+                }
+              ]
+            },
+            {
+              "name": "HPREF",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "HCLK1 prescaler flag (CPU1, AHB1, AHB2, and SRAM1)",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotApplied",
+                  "value": 0,
+                  "description": "HCLK1 prescaler value not yet applied"
+                },
+                {
+                  "name": "Applied",
+                  "value": 1,
+                  "description": "HCLK1 prescaler value applied"
+                }
+              ]
+            },
+            {
+              "name": "STOPWUCK",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Wakeup from Stop and CSS backup clock selection",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "MSI",
+                  "value": 0,
+                  "description": "MSI oscillator selected as wakeup from stop clock and CSS backup clock"
+                },
+                {
+                  "name": "HSI16",
+                  "value": 1,
+                  "description": "HSI16 oscillator selected as wakeup from stop clock and CSS backup clock"
+                }
+              ]
+            },
+            {
+              "name": "PPRE1",
+              "bit_offset": 8,
               "bit_width": 3,
-              "description": "Microcontroller clock output prescaler",
-              "enum": "MCOPRE"
+              "description": "PCLK1 low-speed prescaler (APB1)",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Div2",
+                  "value": 4,
+                  "description": "HCLK divided by 2"
+                },
+                {
+                  "name": "Div4",
+                  "value": 5,
+                  "description": "HCLK divided by 4"
+                },
+                {
+                  "name": "Div8",
+                  "value": 6,
+                  "description": "HCLK divided by 8"
+                },
+                {
+                  "name": "Div16",
+                  "value": 7,
+                  "description": "HCLK divided by 16"
+                }
+              ]
+            },
+            {
+              "name": "PPRE2",
+              "bit_offset": 11,
+              "bit_width": 3,
+              "description": "PCLK2 high-speed prescaler (APB2)",
+              "access": "read-write"
+            },
+            {
+              "name": "HPRE",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "HCLK1 prescaler (CPU1, AHB1, AHB2, and SRAM1.)",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Div3",
+                  "value": 1,
+                  "description": "SYSCLK divided by 3"
+                },
+                {
+                  "name": "Div5",
+                  "value": 2,
+                  "description": "SYSCLK divided by 5"
+                },
+                {
+                  "name": "Div6",
+                  "value": 5,
+                  "description": "SYSCLK divided by 6"
+                },
+                {
+                  "name": "Div10",
+                  "value": 6,
+                  "description": "SYSCLK divided by 10"
+                },
+                {
+                  "name": "Div32",
+                  "value": 7,
+                  "description": "SYSCLK divided by 32"
+                },
+                {
+                  "name": "Div2",
+                  "value": 8,
+                  "description": "SYSCLK divided by 2"
+                },
+                {
+                  "name": "Div4",
+                  "value": 9,
+                  "description": "SYSCLK divided by 4"
+                },
+                {
+                  "name": "Div8",
+                  "value": 10,
+                  "description": "SYSCLK divided by 8"
+                },
+                {
+                  "name": "Div16",
+                  "value": 11,
+                  "description": "SYSCLK divided by 16"
+                },
+                {
+                  "name": "Div64",
+                  "value": 12,
+                  "description": "SYSCLK divided by 64"
+                },
+                {
+                  "name": "Div128",
+                  "value": 13,
+                  "description": "SYSCLK divided by 128"
+                },
+                {
+                  "name": "Div256",
+                  "value": 14,
+                  "description": "SYSCLK divided by 256"
+                },
+                {
+                  "name": "Div512",
+                  "value": 15,
+                  "description": "SYSCLK divided by 512"
+                }
+              ]
+            },
+            {
+              "name": "SWS",
+              "bit_offset": 2,
+              "bit_width": 2,
+              "description": "System clock switch status",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "MSI",
+                  "value": 0,
+                  "description": "MSI oscillator used as system clock"
+                },
+                {
+                  "name": "HSI16",
+                  "value": 1,
+                  "description": "HSI16 oscillator used as system clock"
+                },
+                {
+                  "name": "HSE32",
+                  "value": 2,
+                  "description": "HSE32 oscillator used as system clock"
+                },
+                {
+                  "name": "PLLR",
+                  "value": 3,
+                  "description": "PLLRCLK used as system clock"
+                }
+              ]
+            },
+            {
+              "name": "SW",
+              "bit_offset": 0,
+              "bit_width": 2,
+              "description": "System clock switch",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "MSI",
+                  "value": 0,
+                  "description": "MSI oscillator used as system clock"
+                },
+                {
+                  "name": "HSI16",
+                  "value": 1,
+                  "description": "HSI16 oscillator used as system clock"
+                },
+                {
+                  "name": "HSE32",
+                  "value": 2,
+                  "description": "HSE32 oscillator used as system clock"
+                },
+                {
+                  "name": "PLLR",
+                  "value": 3,
+                  "description": "PLLRCLK used as system clock"
+                }
+              ]
             }
           ]
         },
@@ -269,73 +789,335 @@
           "name": "PLLCFGR",
           "offset": 12,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 570687744,
           "description": "PLL configuration register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "PLL configuration register",
           "fields": [
             {
-              "name": "PLLSRC",
-              "bit_offset": 0,
-              "bit_width": 2,
-              "description": "Main PLL entry clock source",
-              "enum": "PLLSRC"
-            },
-            {
-              "name": "PLLM",
-              "bit_offset": 4,
+              "name": "PLLQ",
+              "bit_offset": 25,
               "bit_width": 3,
-              "description": "Division factor for the main PLL input clock",
-              "enum": "PLLM"
+              "description": "Main PLL division factor for PLLQCLK",
+              "enum_values": [
+                {
+                  "name": "Div2",
+                  "value": 1,
+                  "description": "PLL = VCO/(N+1)"
+                },
+                {
+                  "name": "Div3",
+                  "value": 2,
+                  "description": "PLL = VCO/(N+1)"
+                },
+                {
+                  "name": "Div4",
+                  "value": 3,
+                  "description": "PLL = VCO/(N+1)"
+                },
+                {
+                  "name": "Div5",
+                  "value": 4,
+                  "description": "PLL = VCO/(N+1)"
+                },
+                {
+                  "name": "Div6",
+                  "value": 5,
+                  "description": "PLL = VCO/(N+1)"
+                },
+                {
+                  "name": "Div7",
+                  "value": 6,
+                  "description": "PLL = VCO/(N+1)"
+                },
+                {
+                  "name": "Div8",
+                  "value": 7,
+                  "description": "PLL = VCO/(N+1)"
+                }
+              ]
             },
             {
-              "name": "PLLN",
-              "bit_offset": 8,
-              "bit_width": 7,
-              "description": "Main PLL multiplication factor for VCO",
-              "enum": "PLLN"
+              "name": "PLLR",
+              "bit_offset": 29,
+              "bit_width": 3,
+              "description": "Main PLL division factor for PLLRCLK"
             },
             {
               "name": "PLLPEN",
               "bit_offset": 16,
               "bit_width": 1,
               "description": "Main PLL PLLPCLK output enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "PLLCLK output disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "PLLCLK output enabled"
+                }
+              ]
+            },
+            {
+              "name": "PLLREN",
+              "bit_offset": 28,
+              "bit_width": 1,
+              "description": "Main PLL PLLRCLK output enable"
+            },
+            {
+              "name": "PLLQEN",
+              "bit_offset": 24,
+              "bit_width": 1,
+              "description": "Main PLL PLLQCLK output enable"
             },
             {
               "name": "PLLP",
               "bit_offset": 17,
               "bit_width": 5,
               "description": "Main PLL division factor for PLLPCLK.",
-              "enum": "PLLP"
+              "enum_values": [
+                {
+                  "name": "Div2",
+                  "value": 1,
+                  "description": "PLL = VCO/(N+1)"
+                },
+                {
+                  "name": "Div3",
+                  "value": 2,
+                  "description": "PLL = VCO/(N+1)"
+                },
+                {
+                  "name": "Div4",
+                  "value": 3,
+                  "description": "PLL = VCO/(N+1)"
+                },
+                {
+                  "name": "Div5",
+                  "value": 4,
+                  "description": "PLL = VCO/(N+1)"
+                },
+                {
+                  "name": "Div6",
+                  "value": 5,
+                  "description": "PLL = VCO/(N+1)"
+                },
+                {
+                  "name": "Div7",
+                  "value": 6,
+                  "description": "PLL = VCO/(N+1)"
+                },
+                {
+                  "name": "Div8",
+                  "value": 7,
+                  "description": "PLL = VCO/(N+1)"
+                },
+                {
+                  "name": "Div9",
+                  "value": 8,
+                  "description": "PLL = VCO/(N+1)"
+                },
+                {
+                  "name": "Div10",
+                  "value": 9,
+                  "description": "PLL = VCO/(N+1)"
+                },
+                {
+                  "name": "Div11",
+                  "value": 10,
+                  "description": "PLL = VCO/(N+1)"
+                },
+                {
+                  "name": "Div12",
+                  "value": 11,
+                  "description": "PLL = VCO/(N+1)"
+                },
+                {
+                  "name": "Div13",
+                  "value": 12,
+                  "description": "PLL = VCO/(N+1)"
+                },
+                {
+                  "name": "Div14",
+                  "value": 13,
+                  "description": "PLL = VCO/(N+1)"
+                },
+                {
+                  "name": "Div15",
+                  "value": 14,
+                  "description": "PLL = VCO/(N+1)"
+                },
+                {
+                  "name": "Div16",
+                  "value": 15,
+                  "description": "PLL = VCO/(N+1)"
+                },
+                {
+                  "name": "Div17",
+                  "value": 16,
+                  "description": "PLL = VCO/(N+1)"
+                },
+                {
+                  "name": "Div18",
+                  "value": 17,
+                  "description": "PLL = VCO/(N+1)"
+                },
+                {
+                  "name": "Div19",
+                  "value": 18,
+                  "description": "PLL = VCO/(N+1)"
+                },
+                {
+                  "name": "Div20",
+                  "value": 19,
+                  "description": "PLL = VCO/(N+1)"
+                },
+                {
+                  "name": "Div21",
+                  "value": 20,
+                  "description": "PLL = VCO/(N+1)"
+                },
+                {
+                  "name": "Div22",
+                  "value": 21,
+                  "description": "PLL = VCO/(N+1)"
+                },
+                {
+                  "name": "Div23",
+                  "value": 22,
+                  "description": "PLL = VCO/(N+1)"
+                },
+                {
+                  "name": "Div24",
+                  "value": 23,
+                  "description": "PLL = VCO/(N+1)"
+                },
+                {
+                  "name": "Div25",
+                  "value": 24,
+                  "description": "PLL = VCO/(N+1)"
+                },
+                {
+                  "name": "Div26",
+                  "value": 25,
+                  "description": "PLL = VCO/(N+1)"
+                },
+                {
+                  "name": "Div27",
+                  "value": 26,
+                  "description": "PLL = VCO/(N+1)"
+                },
+                {
+                  "name": "Div28",
+                  "value": 27,
+                  "description": "PLL = VCO/(N+1)"
+                },
+                {
+                  "name": "Div29",
+                  "value": 28,
+                  "description": "PLL = VCO/(N+1)"
+                },
+                {
+                  "name": "Div30",
+                  "value": 29,
+                  "description": "PLL = VCO/(N+1)"
+                },
+                {
+                  "name": "Div31",
+                  "value": 30,
+                  "description": "PLL = VCO/(N+1)"
+                },
+                {
+                  "name": "Div32",
+                  "value": 31,
+                  "description": "PLL = VCO/(N+1)"
+                }
+              ]
             },
             {
-              "name": "PLLQEN",
-              "bit_offset": 24,
-              "bit_width": 1,
-              "description": "Main PLL PLLQCLK output enable",
-              "enum": null
+              "name": "PLLN",
+              "bit_offset": 8,
+              "bit_width": 7,
+              "description": "Main PLL multiplication factor for VCO"
             },
             {
-              "name": "PLLQ",
-              "bit_offset": 25,
+              "name": "PLLM",
+              "bit_offset": 4,
               "bit_width": 3,
-              "description": "Main PLL division factor for PLLQCLK",
-              "enum": "PLLQ"
+              "description": "Division factor for the main PLL input clock",
+              "enum_values": [
+                {
+                  "name": "Div1",
+                  "value": 0,
+                  "description": "VCO input = PLL input / PLLM"
+                },
+                {
+                  "name": "Div2",
+                  "value": 1,
+                  "description": "VCO input = PLL input / PLLM"
+                },
+                {
+                  "name": "Div3",
+                  "value": 2,
+                  "description": "VCO input = PLL input / PLLM"
+                },
+                {
+                  "name": "Div4",
+                  "value": 3,
+                  "description": "VCO input = PLL input / PLLM"
+                },
+                {
+                  "name": "Div5",
+                  "value": 4,
+                  "description": "VCO input = PLL input / PLLM"
+                },
+                {
+                  "name": "Div6",
+                  "value": 5,
+                  "description": "VCO input = PLL input / PLLM"
+                },
+                {
+                  "name": "Div7",
+                  "value": 6,
+                  "description": "VCO input = PLL input / PLLM"
+                },
+                {
+                  "name": "Div8",
+                  "value": 7,
+                  "description": "VCO input = PLL input / PLLM"
+                }
+              ]
             },
             {
-              "name": "PLLREN",
-              "bit_offset": 28,
-              "bit_width": 1,
-              "description": "Main PLL PLLRCLK output enable",
-              "enum": null
-            },
-            {
-              "name": "PLLR",
-              "bit_offset": 29,
-              "bit_width": 3,
-              "description": "Main PLL division factor for PLLRCLK",
-              "enum": "PLLR"
+              "name": "PLLSRC",
+              "bit_offset": 0,
+              "bit_width": 2,
+              "description": "Main PLL entry clock source",
+              "enum_values": [
+                {
+                  "name": "NoClock",
+                  "value": 0,
+                  "description": "No clock sent to PLL"
+                },
+                {
+                  "name": "MSI",
+                  "value": 1,
+                  "description": "MSI clock selected as PLL clock entry"
+                },
+                {
+                  "name": "HSI16",
+                  "value": 2,
+                  "description": "HSI16 clock selected as PLL clock entry"
+                },
+                {
+                  "name": "HSE32",
+                  "value": 3,
+                  "description": "HSE32 clock selected as PLL clock entry"
+                }
+              ]
             }
           ]
         },
@@ -343,59 +1125,65 @@
           "name": "CIER",
           "offset": 24,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "Clock interrupt enable register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Clock interrupt enable register",
           "fields": [
             {
               "name": "LSIRDYIE",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "LSI ready interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "LSERDYIE",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "LSE ready interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "MSIRDYIE",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "MSI ready interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "HSIRDYIE",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "HSI ready interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "HSERDYIE",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "HSE ready interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "PLLRDYIE",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "PLL ready interrupt enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Interrupt enabled"
+                }
+              ]
             },
             {
               "name": "LSECSSIE",
               "bit_offset": 9,
               "bit_width": 1,
-              "description": "LSE clock security system interrupt enable",
-              "enum": null
+              "description": "LSE clock security system interrupt enable"
+            },
+            {
+              "name": "PLLRDYIE",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "PLL ready interrupt enable"
+            },
+            {
+              "name": "HSERDYIE",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "HSE32 ready interrupt enable"
+            },
+            {
+              "name": "HSIRDYIE",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "HSI16 ready interrupt enable"
+            },
+            {
+              "name": "MSIRDYIE",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "MSI ready interrupt enable"
+            },
+            {
+              "name": "LSERDYIE",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "LSE ready interrupt enable"
             }
           ]
         },
@@ -403,66 +1191,71 @@
           "name": "CIFR",
           "offset": 28,
           "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
           "description": "Clock interrupt flag register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Clock interrupt flag register",
           "fields": [
             {
               "name": "LSIRDYF",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "LSI ready interrupt flag",
-              "enum": null
-            },
-            {
-              "name": "LSERDYF",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "LSE ready interrupt flag",
-              "enum": null
-            },
-            {
-              "name": "MSIRDYF",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "MSI ready interrupt flag",
-              "enum": null
-            },
-            {
-              "name": "HSIRDYF",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "HSI ready interrupt flag",
-              "enum": null
-            },
-            {
-              "name": "HSERDYF",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "HSE ready interrupt flag",
-              "enum": null
-            },
-            {
-              "name": "PLLRDYF",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "PLL ready interrupt flag",
-              "enum": null
-            },
-            {
-              "name": "CSSF",
-              "bit_offset": 8,
-              "bit_width": 1,
-              "description": "HSE Clock security system interrupt flag",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "NotInterrupted",
+                  "value": 0,
+                  "description": "Not interrupted"
+                },
+                {
+                  "name": "Interrupted",
+                  "value": 1,
+                  "description": "Interrupted"
+                }
+              ]
             },
             {
               "name": "LSECSSF",
               "bit_offset": 9,
               "bit_width": 1,
-              "description": "LSE Clock security system interrupt flag",
-              "enum": null
+              "description": "LSE Clock security system interrupt flag"
+            },
+            {
+              "name": "CSSF",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "HSE32 Clock security system interrupt flag"
+            },
+            {
+              "name": "PLLRDYF",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "PLL ready interrupt flag"
+            },
+            {
+              "name": "HSERDYF",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "HSE32 ready interrupt flag"
+            },
+            {
+              "name": "HSIRDYF",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "HSI16 ready interrupt flag"
+            },
+            {
+              "name": "MSIRDYF",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "MSI ready interrupt flag"
+            },
+            {
+              "name": "LSERDYF",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "LSE ready interrupt flag"
             }
           ]
         },
@@ -470,66 +1263,66 @@
           "name": "CICR",
           "offset": 32,
           "size": 32,
+          "access": "write-only",
+          "reset_value": 0,
           "description": "Clock interrupt clear register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Clock interrupt clear register",
           "fields": [
             {
               "name": "LSIRDYC",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "LSI ready interrupt clear",
-              "enum": null
-            },
-            {
-              "name": "LSERDYC",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "LSE ready interrupt clear",
-              "enum": null
-            },
-            {
-              "name": "MSIRDYC",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "MSI ready interrupt clear",
-              "enum": null
-            },
-            {
-              "name": "HSIRDYC",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "HSI ready interrupt clear",
-              "enum": null
-            },
-            {
-              "name": "HSERDYC",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "HSE ready interrupt clear",
-              "enum": null
-            },
-            {
-              "name": "PLLRDYC",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "PLL ready interrupt clear",
-              "enum": null
-            },
-            {
-              "name": "CSSC",
-              "bit_offset": 8,
-              "bit_width": 1,
-              "description": "HSE Clock security system interrupt clear",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clear interrupt flag"
+                }
+              ]
             },
             {
               "name": "LSECSSC",
               "bit_offset": 9,
               "bit_width": 1,
-              "description": "LSE Clock security system interrupt clear",
-              "enum": null
+              "description": "LSE Clock security system interrupt clear"
+            },
+            {
+              "name": "CSSC",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "HSE32 Clock security system interrupt clear"
+            },
+            {
+              "name": "PLLRDYC",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "PLL ready interrupt clear"
+            },
+            {
+              "name": "HSERDYC",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "HSE32 ready interrupt clear"
+            },
+            {
+              "name": "HSIRDYC",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "HSI16 ready interrupt clear"
+            },
+            {
+              "name": "MSIRDYC",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "MSI ready interrupt clear"
+            },
+            {
+              "name": "LSERDYC",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "LSE ready interrupt clear"
             }
           ]
         },
@@ -537,38 +1330,47 @@
           "name": "AHB1RSTR",
           "offset": 40,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "AHB1 peripheral reset register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "AHB1 peripheral reset register",
           "fields": [
             {
               "name": "DMA1RST",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "DMA1 reset",
-              "enum": null
-            },
-            {
-              "name": "DMA2RST",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "DMA2 reset",
-              "enum": null
-            },
-            {
-              "name": "DMAMUX1RST",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "DMAMUX1 reset",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "NoReset",
+                  "value": 0,
+                  "description": "No effect"
+                },
+                {
+                  "name": "Reset",
+                  "value": 1,
+                  "description": "Reset peripheral"
+                }
+              ]
             },
             {
               "name": "CRCRST",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "CRC reset",
-              "enum": null
+              "description": "CRC reset"
+            },
+            {
+              "name": "DMAMUX1RST",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "DMAMUX1 reset"
+            },
+            {
+              "name": "DMA2RST",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "DMA2 reset"
             }
           ]
         },
@@ -576,38 +1378,47 @@
           "name": "AHB2RSTR",
           "offset": 44,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "AHB2 peripheral reset register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "AHB2 peripheral reset register",
           "fields": [
             {
               "name": "GPIOARST",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "IO port A reset",
-              "enum": null
-            },
-            {
-              "name": "GPIOBRST",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "IO port B reset",
-              "enum": null
-            },
-            {
-              "name": "GPIOCRST",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "IO port C reset",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "NoReset",
+                  "value": 0,
+                  "description": "No effect"
+                },
+                {
+                  "name": "Reset",
+                  "value": 1,
+                  "description": "Reset peripheral"
+                }
+              ]
             },
             {
               "name": "GPIOHRST",
               "bit_offset": 7,
               "bit_width": 1,
-              "description": "IO port H reset",
-              "enum": null
+              "description": "IO port H reset"
+            },
+            {
+              "name": "GPIOCRST",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "IO port C reset"
+            },
+            {
+              "name": "GPIOBRST",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "IO port B reset"
             }
           ]
         },
@@ -615,45 +1426,53 @@
           "name": "AHB3RSTR",
           "offset": 48,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "AHB3 peripheral reset register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "AHB3 peripheral reset register",
           "fields": [
             {
               "name": "PKARST",
               "bit_offset": 16,
               "bit_width": 1,
               "description": "PKARST",
-              "enum": null
-            },
-            {
-              "name": "AESRST",
-              "bit_offset": 17,
-              "bit_width": 1,
-              "description": "AESRST",
-              "enum": null
-            },
-            {
-              "name": "RNGRST",
-              "bit_offset": 18,
-              "bit_width": 1,
-              "description": "RNGRST",
-              "enum": null
-            },
-            {
-              "name": "HSEMRST",
-              "bit_offset": 19,
-              "bit_width": 1,
-              "description": "HSEMRST",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "NoReset",
+                  "value": 0,
+                  "description": "No effect"
+                },
+                {
+                  "name": "Reset",
+                  "value": 1,
+                  "description": "Reset peripheral"
+                }
+              ]
             },
             {
               "name": "FLASHRST",
               "bit_offset": 25,
               "bit_width": 1,
-              "description": "Flash interface reset",
-              "enum": null
+              "description": "Flash interface reset"
+            },
+            {
+              "name": "HSEMRST",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "HSEMRST"
+            },
+            {
+              "name": "RNGRST",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "RNGRST"
+            },
+            {
+              "name": "AESRST",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "AESRST"
             }
           ]
         },
@@ -661,66 +1480,71 @@
           "name": "APB1RSTR1",
           "offset": 56,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "APB1 peripheral reset register 1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "APB1 peripheral reset register 1",
           "fields": [
             {
               "name": "TIM2RST",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "TIM2 timer reset",
-              "enum": null
-            },
-            {
-              "name": "SPI2RST",
-              "bit_offset": 14,
-              "bit_width": 1,
-              "description": "SPI2 reset",
-              "enum": null
-            },
-            {
-              "name": "USART2RST",
-              "bit_offset": 17,
-              "bit_width": 1,
-              "description": "USART2 reset",
-              "enum": null
-            },
-            {
-              "name": "I2C1RST",
-              "bit_offset": 21,
-              "bit_width": 1,
-              "description": "I2C1 reset",
-              "enum": null
-            },
-            {
-              "name": "I2C2RST",
-              "bit_offset": 22,
-              "bit_width": 1,
-              "description": "I2C2 reset",
-              "enum": null
-            },
-            {
-              "name": "I2C3RST",
-              "bit_offset": 23,
-              "bit_width": 1,
-              "description": "I2C3 reset",
-              "enum": null
-            },
-            {
-              "name": "DACRST",
-              "bit_offset": 29,
-              "bit_width": 1,
-              "description": "DAC reset",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "NoReset",
+                  "value": 0,
+                  "description": "No effect"
+                },
+                {
+                  "name": "Reset",
+                  "value": 1,
+                  "description": "Reset peripheral"
+                }
+              ]
             },
             {
               "name": "LPTIM1RST",
               "bit_offset": 31,
               "bit_width": 1,
-              "description": "Low Power Timer 1 reset",
-              "enum": null
+              "description": "Low Power Timer 1 reset"
+            },
+            {
+              "name": "DACRST",
+              "bit_offset": 29,
+              "bit_width": 1,
+              "description": "DAC reset"
+            },
+            {
+              "name": "I2C3RST",
+              "bit_offset": 23,
+              "bit_width": 1,
+              "description": "I2C3 reset"
+            },
+            {
+              "name": "I2C2RST",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "I2C2 reset"
+            },
+            {
+              "name": "I2C1RST",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "I2C1 reset"
+            },
+            {
+              "name": "USART2RST",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "USART2 reset"
+            },
+            {
+              "name": "SPI2S2RST",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "SPI2S2 reset"
             }
           ]
         },
@@ -728,31 +1552,41 @@
           "name": "APB1RSTR2",
           "offset": 60,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "APB1 peripheral reset register 2",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "APB1 peripheral reset register 2",
           "fields": [
             {
               "name": "LPUART1RST",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "Low-power UART 1 reset",
-              "enum": null
-            },
-            {
-              "name": "LPTIM2RST",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "Low-power timer 2 reset",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "NoReset",
+                  "value": 0,
+                  "description": "No effect"
+                },
+                {
+                  "name": "Reset",
+                  "value": 1,
+                  "description": "Reset peripheral"
+                }
+              ]
             },
             {
               "name": "LPTIM3RST",
               "bit_offset": 6,
               "bit_width": 1,
-              "description": "Low-power timer 3 reset",
-              "enum": null
+              "description": "Low-power timer 3 reset"
+            },
+            {
+              "name": "LPTIM2RST",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Low-power timer 2 reset"
             }
           ]
         },
@@ -760,52 +1594,47 @@
           "name": "APB2RSTR",
           "offset": 64,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "APB2 peripheral reset register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "APB2 peripheral reset register",
           "fields": [
             {
-              "name": "ADCRST",
-              "bit_offset": 9,
+              "name": "TIM17RST",
+              "bit_offset": 18,
               "bit_width": 1,
-              "description": "ADC reset",
-              "enum": null
-            },
-            {
-              "name": "TIM1RST",
-              "bit_offset": 11,
-              "bit_width": 1,
-              "description": "TIM1 timer reset",
-              "enum": null
-            },
-            {
-              "name": "SPI1RST",
-              "bit_offset": 12,
-              "bit_width": 1,
-              "description": "SPI1 reset",
-              "enum": null
-            },
-            {
-              "name": "USART1RST",
-              "bit_offset": 14,
-              "bit_width": 1,
-              "description": "USART1 reset",
-              "enum": null
+              "description": "TIM17 timer reset"
             },
             {
               "name": "TIM16RST",
               "bit_offset": 17,
               "bit_width": 1,
-              "description": "TIM16 timer reset",
-              "enum": null
+              "description": "TIM16 timer reset"
             },
             {
-              "name": "TIM17RST",
-              "bit_offset": 18,
+              "name": "USART1RST",
+              "bit_offset": 14,
               "bit_width": 1,
-              "description": "TIM17 timer reset",
-              "enum": null
+              "description": "USART1 reset"
+            },
+            {
+              "name": "SPI1RST",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "SPI1 reset"
+            },
+            {
+              "name": "TIM1RST",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "TIM1 timer reset"
+            },
+            {
+              "name": "ADCRST",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "ADC reset"
             }
           ]
         },
@@ -813,17 +1642,17 @@
           "name": "APB3RSTR",
           "offset": 68,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "APB3 peripheral reset register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "APB3 peripheral reset register",
           "fields": [
             {
               "name": "SUBGHZSPIRST",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Sub-GHz radio SPI reset",
-              "enum": null
+              "description": "Sub-GHz radio SPI reset"
             }
           ]
         },
@@ -831,38 +1660,47 @@
           "name": "AHB1ENR",
           "offset": 72,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "AHB1 peripheral clock enable register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "AHB1 peripheral clock enable register",
           "fields": [
             {
               "name": "DMA1EN",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "CPU1 DMA1 clock enable",
-              "enum": null
-            },
-            {
-              "name": "DMA2EN",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "CPU1 DMA2 clock enable",
-              "enum": null
-            },
-            {
-              "name": "DMAMUX1EN",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "CPU1 DMAMUX1 clock enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Clock disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Clock enabled"
+                }
+              ]
             },
             {
               "name": "CRCEN",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "CPU1 CRC clock enable",
-              "enum": null
+              "description": "CPU1 CRC clock enable"
+            },
+            {
+              "name": "DMAMUX1EN",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "CPU1 DMAMUX1 clock enable"
+            },
+            {
+              "name": "DMA2EN",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "CPU1 DMA2 clock enable"
             }
           ]
         },
@@ -870,38 +1708,47 @@
           "name": "AHB2ENR",
           "offset": 76,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "AHB2 peripheral clock enable register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "AHB2 peripheral clock enable register",
           "fields": [
             {
               "name": "GPIOAEN",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "CPU1 IO port A clock enable",
-              "enum": null
-            },
-            {
-              "name": "GPIOBEN",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "CPU1 IO port B clock enable",
-              "enum": null
-            },
-            {
-              "name": "GPIOCEN",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "CPU1 IO port C clock enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Clock disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Clock enabled"
+                }
+              ]
             },
             {
               "name": "GPIOHEN",
               "bit_offset": 7,
               "bit_width": 1,
-              "description": "CPU1 IO port H clock enable",
-              "enum": null
+              "description": "CPU1 IO port H clock enable"
+            },
+            {
+              "name": "GPIOCEN",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "CPU1 IO port C clock enable"
+            },
+            {
+              "name": "GPIOBEN",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "CPU1 IO port B clock enable"
             }
           ]
         },
@@ -909,45 +1756,53 @@
           "name": "AHB3ENR",
           "offset": 80,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 34078720,
           "description": "AHB3 peripheral clock enable register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "AHB3 peripheral clock enable register",
           "fields": [
             {
               "name": "PKAEN",
               "bit_offset": 16,
               "bit_width": 1,
               "description": "PKAEN",
-              "enum": null
-            },
-            {
-              "name": "AESEN",
-              "bit_offset": 17,
-              "bit_width": 1,
-              "description": "AESEN",
-              "enum": null
-            },
-            {
-              "name": "RNGEN",
-              "bit_offset": 18,
-              "bit_width": 1,
-              "description": "RNGEN",
-              "enum": null
-            },
-            {
-              "name": "HSEMEN",
-              "bit_offset": 19,
-              "bit_width": 1,
-              "description": "HSEMEN",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Clock disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Clock enabled"
+                }
+              ]
             },
             {
               "name": "FLASHEN",
               "bit_offset": 25,
               "bit_width": 1,
-              "description": "CPU1 Flash interface clock enable",
-              "enum": null
+              "description": "CPU1 Flash interface clock enable"
+            },
+            {
+              "name": "HSEMEN",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "HSEMEN"
+            },
+            {
+              "name": "RNGEN",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "RNGEN"
+            },
+            {
+              "name": "AESEN",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "AESEN"
             }
           ]
         },
@@ -955,80 +1810,93 @@
           "name": "APB1ENR1",
           "offset": 88,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "APB1 peripheral clock enable register 1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "APB1 peripheral clock enable register 1",
           "fields": [
             {
               "name": "TIM2EN",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "CPU1 TIM2 timer clock enable",
-              "enum": null
-            },
-            {
-              "name": "RTCAPBEN",
-              "bit_offset": 10,
-              "bit_width": 1,
-              "description": "CPU1 RTC APB clock enable",
-              "enum": null
-            },
-            {
-              "name": "WWDGEN",
-              "bit_offset": 11,
-              "bit_width": 1,
-              "description": "CPU1 Window watchdog clock enable",
-              "enum": null
-            },
-            {
-              "name": "SPI2EN",
-              "bit_offset": 14,
-              "bit_width": 1,
-              "description": "CPU1 SPI2 clock enable",
-              "enum": null
-            },
-            {
-              "name": "USART2EN",
-              "bit_offset": 17,
-              "bit_width": 1,
-              "description": "CPU1 USART2 clock enable",
-              "enum": null
-            },
-            {
-              "name": "I2C1EN",
-              "bit_offset": 21,
-              "bit_width": 1,
-              "description": "CPU1 I2C1 clocks enable",
-              "enum": null
-            },
-            {
-              "name": "I2C2EN",
-              "bit_offset": 22,
-              "bit_width": 1,
-              "description": "CPU1 I2C2 clocks enable",
-              "enum": null
-            },
-            {
-              "name": "I2C3EN",
-              "bit_offset": 23,
-              "bit_width": 1,
-              "description": "CPU1 I2C3 clocks enable",
-              "enum": null
-            },
-            {
-              "name": "DACEN",
-              "bit_offset": 29,
-              "bit_width": 1,
-              "description": "CPU1 DAC clock enable",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Clock disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Clock enabled"
+                }
+              ]
             },
             {
               "name": "LPTIM1EN",
               "bit_offset": 31,
               "bit_width": 1,
               "description": "CPU1 Low power timer 1 clocks enable",
-              "enum": null
+              "access": "read-write"
+            },
+            {
+              "name": "DAC1EN",
+              "bit_offset": 29,
+              "bit_width": 1,
+              "description": "CPU1 DAC1 clock enable",
+              "access": "read-write"
+            },
+            {
+              "name": "I2C3EN",
+              "bit_offset": 23,
+              "bit_width": 1,
+              "description": "CPU1 I2C3 clocks enable",
+              "access": "read-write"
+            },
+            {
+              "name": "I2C2EN",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "CPU1 I2C2 clocks enable",
+              "access": "read-write"
+            },
+            {
+              "name": "I2C1EN",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "CPU1 I2C1 clocks enable",
+              "access": "read-write"
+            },
+            {
+              "name": "USART2EN",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "CPU1 USART2 clock enable",
+              "access": "read-write"
+            },
+            {
+              "name": "SPI2S2EN",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "CPU1 SPI2S2 clock enable",
+              "access": "read-write"
+            },
+            {
+              "name": "WWDGEN",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "CPU1 Window watchdog clock enable",
+              "access": "read-write"
+            },
+            {
+              "name": "RTCAPBEN",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "CPU1 RTC APB clock enable",
+              "access": "read-write"
             }
           ]
         },
@@ -1036,31 +1904,41 @@
           "name": "APB1ENR2",
           "offset": 92,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "APB1 peripheral clock enable register 2",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "APB1 peripheral clock enable register 2",
           "fields": [
             {
               "name": "LPUART1EN",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "CPU1 Low power UART 1 clocks enable",
-              "enum": null
-            },
-            {
-              "name": "LPTIM2EN",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "CPU1 Low power timer 2 clocks enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Clock disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Clock enabled"
+                }
+              ]
             },
             {
               "name": "LPTIM3EN",
               "bit_offset": 6,
               "bit_width": 1,
-              "description": "CPU1 Low power timer 3 clocks enable",
-              "enum": null
+              "description": "CPU1 Low power timer 3 clocks enable"
+            },
+            {
+              "name": "LPTIM2EN",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "CPU1 Low power timer 2 clocks enable"
             }
           ]
         },
@@ -1068,52 +1946,59 @@
           "name": "APB2ENR",
           "offset": 96,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "APB2 peripheral clock enable register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "APB2 peripheral clock enable register",
           "fields": [
             {
               "name": "ADCEN",
               "bit_offset": 9,
               "bit_width": 1,
               "description": "CPU1 ADC clocks enable",
-              "enum": null
-            },
-            {
-              "name": "TIM1EN",
-              "bit_offset": 11,
-              "bit_width": 1,
-              "description": "CPU1 TIM1 timer clock enable",
-              "enum": null
-            },
-            {
-              "name": "SPI1EN",
-              "bit_offset": 12,
-              "bit_width": 1,
-              "description": "CPU1 SPI1 clock enable",
-              "enum": null
-            },
-            {
-              "name": "USART1EN",
-              "bit_offset": 14,
-              "bit_width": 1,
-              "description": "CPU1 USART1clocks enable",
-              "enum": null
-            },
-            {
-              "name": "TIM16EN",
-              "bit_offset": 17,
-              "bit_width": 1,
-              "description": "CPU1 TIM16 timer clock enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Clock disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Clock enabled"
+                }
+              ]
             },
             {
               "name": "TIM17EN",
               "bit_offset": 18,
               "bit_width": 1,
-              "description": "CPU1 TIM17 timer clock enable",
-              "enum": null
+              "description": "CPU1 TIM17 timer clock enable"
+            },
+            {
+              "name": "TIM16EN",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "CPU1 TIM16 timer clock enable"
+            },
+            {
+              "name": "USART1EN",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "CPU1 USART1clocks enable"
+            },
+            {
+              "name": "SPI1EN",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "CPU1 SPI1 clock enable"
+            },
+            {
+              "name": "TIM1EN",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "CPU1 TIM1 timer clock enable"
             }
           ]
         },
@@ -1121,17 +2006,29 @@
           "name": "APB3ENR",
           "offset": 100,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "APB3 peripheral clock enable register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "APB3 peripheral clock enable register",
           "fields": [
             {
               "name": "SUBGHZSPIEN",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "sub-GHz radio SPI clock enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Clock disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Clock enabled"
+                }
+              ]
             }
           ]
         },
@@ -1139,38 +2036,35 @@
           "name": "AHB1SMENR",
           "offset": 104,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 4103,
           "description": "AHB1 peripheral clocks enable in Sleep modes register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "AHB1 peripheral clocks enable in Sleep modes register",
           "fields": [
             {
-              "name": "DMA1SMEN",
-              "bit_offset": 0,
+              "name": "CRCSMEN",
+              "bit_offset": 12,
               "bit_width": 1,
-              "description": "DMA1 clock enable during CPU1 CSleep mode.",
-              "enum": null
-            },
-            {
-              "name": "DMA2SMEN",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "DMA2 clock enable during CPU1 CSleep mode",
-              "enum": null
+              "description": "CRC clock enable during CPU1 CSleep mode."
             },
             {
               "name": "DMAMUX1SMEN",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "DMAMUX1 clock enable during CPU1 CSleep mode.",
-              "enum": null
+              "description": "DMAMUX1 clock enable during CPU1 CSleep mode."
             },
             {
-              "name": "CRCSMEN",
-              "bit_offset": 12,
+              "name": "DMA2SMEN",
+              "bit_offset": 1,
               "bit_width": 1,
-              "description": "CRC clock enable during CPU1 CSleep mode.",
-              "enum": null
+              "description": "DMA2 clock enable during CPU1 CSleep mode"
+            },
+            {
+              "name": "DMA1SMEN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "DMA1 clock enable during CPU1 CSleep mode."
             }
           ]
         },
@@ -1178,38 +2072,35 @@
           "name": "AHB2SMENR",
           "offset": 108,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 135,
           "description": "AHB2 peripheral clocks enable in Sleep modes register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "AHB2 peripheral clocks enable in Sleep modes register",
           "fields": [
             {
-              "name": "GPIOASMEN",
-              "bit_offset": 0,
+              "name": "GPIOHSMEN",
+              "bit_offset": 7,
               "bit_width": 1,
-              "description": "IO port A clock enable during CPU1 CSleep mode.",
-              "enum": null
-            },
-            {
-              "name": "GPIOBSMEN",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "IO port B clock enable during CPU1 CSleep mode.",
-              "enum": null
+              "description": "IO port H clock enable during CPU1 CSleep mode."
             },
             {
               "name": "GPIOCSMEN",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "IO port C clock enable during CPU1 CSleep mode.",
-              "enum": null
+              "description": "IO port C clock enable during CPU1 CSleep mode."
             },
             {
-              "name": "GPIOHSMEN",
-              "bit_offset": 7,
+              "name": "GPIOBSMEN",
+              "bit_offset": 1,
               "bit_width": 1,
-              "description": "IO port H clock enable during CPU1 CSleep mode.",
-              "enum": null
+              "description": "IO port B clock enable during CPU1 CSleep mode."
+            },
+            {
+              "name": "GPIOASMEN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "IO port A clock enable during CPU1 CSleep mode."
             }
           ]
         },
@@ -1217,52 +2108,47 @@
           "name": "AHB3SMENR",
           "offset": 112,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 59179008,
           "description": "AHB3 peripheral clocks enable in Sleep and Stop modes register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "AHB3 peripheral clocks enable in Sleep and Stop modes register",
           "fields": [
             {
-              "name": "PKASMEN",
-              "bit_offset": 16,
+              "name": "FLASHSMEN",
+              "bit_offset": 25,
               "bit_width": 1,
-              "description": "PKA accelerator clock enable during CPU1 CSleep mode.",
-              "enum": null
-            },
-            {
-              "name": "AESSMEN",
-              "bit_offset": 17,
-              "bit_width": 1,
-              "description": "AES accelerator clock enable during CPU1 CSleep mode.",
-              "enum": null
-            },
-            {
-              "name": "RNGSMEN",
-              "bit_offset": 18,
-              "bit_width": 1,
-              "description": "True RNG clocks enable during CPU1 Csleep and CStop modes",
-              "enum": null
-            },
-            {
-              "name": "SRAM1SMEN",
-              "bit_offset": 23,
-              "bit_width": 1,
-              "description": "SRAM1 interface clock enable during CPU1 CSleep mode.",
-              "enum": null
+              "description": "Flash interface clock enable during CPU1 CSleep mode."
             },
             {
               "name": "SRAM2SMEN",
               "bit_offset": 24,
               "bit_width": 1,
-              "description": "SRAM2 memory interface clock enable during CPU1 CSleep mode",
-              "enum": null
+              "description": "SRAM2 memory interface clock enable during CPU1 CSleep mode"
             },
             {
-              "name": "FLASHSMEN",
-              "bit_offset": 25,
+              "name": "SRAM1SMEN",
+              "bit_offset": 23,
               "bit_width": 1,
-              "description": "Flash interface clock enable during CPU1 CSleep mode.",
-              "enum": null
+              "description": "SRAM1 interface clock enable during CPU1 CSleep mode."
+            },
+            {
+              "name": "RNGSMEN",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "True RNG clocks enable during CPU1 Csleep and CStop modes"
+            },
+            {
+              "name": "AESSMEN",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "AES accelerator clock enable during CPU1 CSleep mode."
+            },
+            {
+              "name": "PKASMEN",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "PKA accelerator clock enable during CPU1 CSleep mode."
             }
           ]
         },
@@ -1270,80 +2156,83 @@
           "name": "APB1SMENR1",
           "offset": 120,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 2699185153,
           "description": "APB1 peripheral clocks enable in Sleep mode register 1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "APB1 peripheral clocks enable in Sleep mode register 1",
           "fields": [
             {
               "name": "TIM2SMEN",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "TIM2 timer clock enable during CPU1 CSleep mode.",
-              "enum": null
-            },
-            {
-              "name": "RTCAPBSMEN",
-              "bit_offset": 10,
-              "bit_width": 1,
-              "description": "RTC bus clock enable during CPU1 CSleep mode.",
-              "enum": null
-            },
-            {
-              "name": "WWDGSMEN",
-              "bit_offset": 11,
-              "bit_width": 1,
-              "description": "Window watchdog clocks enable during CPU1 CSleep mode.",
-              "enum": null
-            },
-            {
-              "name": "SPI2SMEN",
-              "bit_offset": 14,
-              "bit_width": 1,
-              "description": "SPI2 clock enable during CPU1 CSleep mode.",
-              "enum": null
-            },
-            {
-              "name": "USART2SMEN",
-              "bit_offset": 17,
-              "bit_width": 1,
-              "description": "USART2 clock enable during CPU1 CSleep mode.",
-              "enum": null
-            },
-            {
-              "name": "I2C1SMEN",
-              "bit_offset": 21,
-              "bit_width": 1,
-              "description": "I2C1 clock enable during CPU1 Csleep and CStop modes",
-              "enum": null
-            },
-            {
-              "name": "I2C2SMEN",
-              "bit_offset": 22,
-              "bit_width": 1,
-              "description": "I2C2 clock enable during CPU1 Csleep and CStop modes",
-              "enum": null
-            },
-            {
-              "name": "I2C3SMEN",
-              "bit_offset": 23,
-              "bit_width": 1,
-              "description": "I2C3 clock enable during CPU1 Csleep and CStop modes",
-              "enum": null
-            },
-            {
-              "name": "DACSMEN",
-              "bit_offset": 29,
-              "bit_width": 1,
-              "description": "DAC clock enable during CPU1 CSleep mode.",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Clock disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Clock enabled"
+                }
+              ]
             },
             {
               "name": "LPTIM1SMEN",
               "bit_offset": 31,
               "bit_width": 1,
-              "description": "Low power timer 1 clock enable during CPU1 Csleep and CStop mode",
-              "enum": null
+              "description": "Low power timer 1 clock enable during CPU1 Csleep and CStop mode"
+            },
+            {
+              "name": "DACSMEN",
+              "bit_offset": 29,
+              "bit_width": 1,
+              "description": "DAC clock enable during CPU1 CSleep mode."
+            },
+            {
+              "name": "I2C3SMEN",
+              "bit_offset": 23,
+              "bit_width": 1,
+              "description": "I2C3 clock enable during CPU1 Csleep and CStop modes"
+            },
+            {
+              "name": "I2C2SMEN",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "I2C2 clock enable during CPU1 Csleep and CStop modes"
+            },
+            {
+              "name": "I2C1SMEN",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "I2C1 clock enable during CPU1 Csleep and CStop modes"
+            },
+            {
+              "name": "USART2SMEN",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "USART2 clock enable during CPU1 CSleep mode."
+            },
+            {
+              "name": "SPI2S2SMEN",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "SPI2S2 clock enable during CPU1 CSleep mode."
+            },
+            {
+              "name": "WWDGSMEN",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "Window watchdog clocks enable during CPU1 CSleep mode."
+            },
+            {
+              "name": "RTCAPBSMEN",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "RTC bus clock enable during CPU1 CSleep mode."
             }
           ]
         },
@@ -1351,31 +2240,41 @@
           "name": "APB1SMENR2",
           "offset": 124,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 97,
           "description": "APB1 peripheral clocks enable in Sleep mode register 2",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "APB1 peripheral clocks enable in Sleep mode register 2",
           "fields": [
             {
               "name": "LPUART1SMEN",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "Low power UART 1 clock enable during CPU1 Csleep and CStop modes.",
-              "enum": null
-            },
-            {
-              "name": "LPTIM2SMEN",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "Low power timer 2 clock enable during CPU1 Csleep and CStop modes",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Clock disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Clock enabled"
+                }
+              ]
             },
             {
               "name": "LPTIM3SMEN",
               "bit_offset": 6,
               "bit_width": 1,
-              "description": "Low power timer 3 clock enable during CPU1 Csleep and CStop modes",
-              "enum": null
+              "description": "Low power timer 3 clock enable during CPU1 Csleep and CStop modes"
+            },
+            {
+              "name": "LPTIM2SMEN",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Low power timer 2 clock enable during CPU1 Csleep and CStop modes"
             }
           ]
         },
@@ -1383,52 +2282,47 @@
           "name": "APB2SMENR",
           "offset": 128,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 416256,
           "description": "APB2 peripheral clocks enable in Sleep mode register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "APB2 peripheral clocks enable in Sleep mode register",
           "fields": [
             {
-              "name": "ADCSMEN",
-              "bit_offset": 9,
+              "name": "TIM17SMEN",
+              "bit_offset": 18,
               "bit_width": 1,
-              "description": "ADC clocks enable during CPU1 Csleep and CStop modes",
-              "enum": null
-            },
-            {
-              "name": "TIM1SMEN",
-              "bit_offset": 11,
-              "bit_width": 1,
-              "description": "TIM1 timer clock enable during CPU1 CSleep mode.",
-              "enum": null
-            },
-            {
-              "name": "SPI1SMEN",
-              "bit_offset": 12,
-              "bit_width": 1,
-              "description": "SPI1 clock enable during CPU1 CSleep mode.",
-              "enum": null
-            },
-            {
-              "name": "USART1SMEN",
-              "bit_offset": 14,
-              "bit_width": 1,
-              "description": "USART1 clock enable during CPU1 Csleep and CStop modes.",
-              "enum": null
+              "description": "TIM17 timer clock enable during CPU1 CSleep mode."
             },
             {
               "name": "TIM16SMEN",
               "bit_offset": 17,
               "bit_width": 1,
-              "description": "TIM16 timer clock enable during CPU1 CSleep mode.",
-              "enum": null
+              "description": "TIM16 timer clock enable during CPU1 CSleep mode."
             },
             {
-              "name": "TIM17SMEN",
-              "bit_offset": 18,
+              "name": "USART1SMEN",
+              "bit_offset": 14,
               "bit_width": 1,
-              "description": "TIM17 timer clock enable during CPU1 CSleep mode.",
-              "enum": null
+              "description": "USART1 clock enable during CPU1 Csleep and CStop modes."
+            },
+            {
+              "name": "SPI1SMEN",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "SPI1 clock enable during CPU1 CSleep mode."
+            },
+            {
+              "name": "TIM1SMEN",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "TIM1 timer clock enable during CPU1 CSleep mode."
+            },
+            {
+              "name": "ADCSMEN",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "ADC clocks enable during CPU1 Csleep and CStop modes"
             }
           ]
         },
@@ -1436,17 +2330,17 @@
           "name": "APB3SMENR",
           "offset": 132,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 1,
           "description": "APB3 peripheral clock enable in Sleep mode register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "APB3 peripheral clock enable in Sleep mode register",
           "fields": [
             {
               "name": "SUBGHZSPISMEN",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Sub-GHz radio SPI clock enable during Sleep and Stop modes",
-              "enum": null
+              "description": "Sub-GHz radio SPI clock enable during Sleep and Stop modes"
             }
           ]
         },
@@ -1454,94 +2348,227 @@
           "name": "CCIPR",
           "offset": 136,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "Peripherals independent clock configuration register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Peripherals independent clock configuration register",
           "fields": [
             {
-              "name": "USART1SEL",
-              "bit_offset": 0,
+              "name": "RNGSEL",
+              "bit_offset": 30,
               "bit_width": 2,
-              "description": "USART1 clock source selection",
-              "enum": "USART1SEL"
-            },
-            {
-              "name": "USART2SEL",
-              "bit_offset": 2,
-              "bit_width": 2,
-              "description": "USART2 clock source selection",
-              "enum": "USART2SEL"
-            },
-            {
-              "name": "SPI2S2SEL",
-              "bit_offset": 8,
-              "bit_width": 2,
-              "description": "SPI2 I2S clock source selection",
-              "enum": "SPI2S2SEL"
-            },
-            {
-              "name": "LPUART1SEL",
-              "bit_offset": 10,
-              "bit_width": 2,
-              "description": "LPUART1 clock source selection",
-              "enum": "LPUART1SEL"
-            },
-            {
-              "name": "I2C1SEL",
-              "bit_offset": 12,
-              "bit_width": 2,
-              "description": "I2C1 clock source selection",
-              "enum": "I2C1SEL"
-            },
-            {
-              "name": "I2C2SEL",
-              "bit_offset": 14,
-              "bit_width": 2,
-              "description": "I2C2 clock source selection",
-              "enum": "I2C2SEL"
-            },
-            {
-              "name": "I2C3SEL",
-              "bit_offset": 16,
-              "bit_width": 2,
-              "description": "I2C3 clock source selection",
-              "enum": "I2C3SEL"
-            },
-            {
-              "name": "LPTIM1SEL",
-              "bit_offset": 18,
-              "bit_width": 2,
-              "description": "Low power timer 1 clock source selection",
-              "enum": "LPTIMSEL"
-            },
-            {
-              "name": "LPTIM2SEL",
-              "bit_offset": 20,
-              "bit_width": 2,
-              "description": "Low power timer 2 clock source selection",
-              "enum": "LPTIMSEL"
-            },
-            {
-              "name": "LPTIM3SEL",
-              "bit_offset": 22,
-              "bit_width": 2,
-              "description": "Low power timer 3 clock source selection",
-              "enum": "LPTIMSEL"
+              "description": "RNG clock source selection",
+              "enum_values": [
+                {
+                  "name": "PLLQ",
+                  "value": 0,
+                  "description": "PLLQ clock selected"
+                },
+                {
+                  "name": "LSI",
+                  "value": 1,
+                  "description": "LSI clock selected"
+                },
+                {
+                  "name": "LSE",
+                  "value": 2,
+                  "description": "LSE clock selected"
+                },
+                {
+                  "name": "MSI",
+                  "value": 3,
+                  "description": "MSI clock selected"
+                }
+              ]
             },
             {
               "name": "ADCSEL",
               "bit_offset": 28,
               "bit_width": 2,
               "description": "ADC clock source selection",
-              "enum": "ADCSEL"
+              "enum_values": [
+                {
+                  "name": "NoClock",
+                  "value": 0,
+                  "description": "No clock selected"
+                },
+                {
+                  "name": "HSI16",
+                  "value": 1,
+                  "description": "HSI16 clock selected"
+                },
+                {
+                  "name": "PLLP",
+                  "value": 2,
+                  "description": "PLLP clock selected"
+                },
+                {
+                  "name": "SYSCLK",
+                  "value": 3,
+                  "description": "SYSCLK clock selected"
+                }
+              ]
             },
             {
-              "name": "RNGSEL",
-              "bit_offset": 30,
+              "name": "LPTIM1SEL",
+              "bit_offset": 18,
               "bit_width": 2,
-              "description": "RNG clock source selection",
-              "enum": "RNGSEL"
+              "description": "Low power timer 1 clock source selection",
+              "enum_values": [
+                {
+                  "name": "PCLK",
+                  "value": 0,
+                  "description": "PCLK clock selected"
+                },
+                {
+                  "name": "LSI",
+                  "value": 1,
+                  "description": "LSI clock selected"
+                },
+                {
+                  "name": "HSI16",
+                  "value": 2,
+                  "description": "HSI16 clock selected"
+                },
+                {
+                  "name": "LSE",
+                  "value": 3,
+                  "description": "LSE clock selected"
+                }
+              ]
+            },
+            {
+              "name": "LPTIM3SEL",
+              "bit_offset": 22,
+              "bit_width": 2,
+              "description": "Low power timer 3 clock source selection"
+            },
+            {
+              "name": "LPTIM2SEL",
+              "bit_offset": 20,
+              "bit_width": 2,
+              "description": "Low power timer 2 clock source selection"
+            },
+            {
+              "name": "I2C1SEL",
+              "bit_offset": 12,
+              "bit_width": 2,
+              "description": "I2C1 clock source selection",
+              "enum_values": [
+                {
+                  "name": "PCLK",
+                  "value": 0,
+                  "description": "PCLK clock selected"
+                },
+                {
+                  "name": "SYSCLK",
+                  "value": 1,
+                  "description": "SYSCLK clock selected"
+                },
+                {
+                  "name": "HSI16",
+                  "value": 2,
+                  "description": "HSI16 clock selected"
+                }
+              ]
+            },
+            {
+              "name": "I2C3SEL",
+              "bit_offset": 16,
+              "bit_width": 2,
+              "description": "I2C3 clock source selection"
+            },
+            {
+              "name": "I2C2SEL",
+              "bit_offset": 14,
+              "bit_width": 2,
+              "description": "I2C2 clock source selection"
+            },
+            {
+              "name": "LPUART1SEL",
+              "bit_offset": 10,
+              "bit_width": 2,
+              "description": "LPUART1 clock source selection",
+              "enum_values": [
+                {
+                  "name": "PCLK",
+                  "value": 0,
+                  "description": "PCLK clock selected"
+                },
+                {
+                  "name": "SYSCLK",
+                  "value": 1,
+                  "description": "SYSCLK clock selected"
+                },
+                {
+                  "name": "HSI16",
+                  "value": 2,
+                  "description": "HSI16 clock selected"
+                },
+                {
+                  "name": "LSE",
+                  "value": 3,
+                  "description": "LSE clock selected"
+                }
+              ]
+            },
+            {
+              "name": "SPI2S2SEL",
+              "bit_offset": 8,
+              "bit_width": 2,
+              "description": "SPI2S2 I2S clock source selection",
+              "enum_values": [
+                {
+                  "name": "PLLQ",
+                  "value": 1,
+                  "description": "PLLQ clock selected"
+                },
+                {
+                  "name": "HSI16",
+                  "value": 2,
+                  "description": "HSI16 clock selected"
+                },
+                {
+                  "name": "I2S",
+                  "value": 3,
+                  "description": "External input I2S_CKIN selected"
+                }
+              ]
+            },
+            {
+              "name": "USART1SEL",
+              "bit_offset": 0,
+              "bit_width": 2,
+              "description": "USART1 clock source selection",
+              "enum_values": [
+                {
+                  "name": "PCLK",
+                  "value": 0,
+                  "description": "PCLK clock selected"
+                },
+                {
+                  "name": "SYSCLK",
+                  "value": 1,
+                  "description": "SYSCLK clock selected"
+                },
+                {
+                  "name": "HSI16",
+                  "value": 2,
+                  "description": "HSI16 clock selected"
+                },
+                {
+                  "name": "LSE",
+                  "value": 3,
+                  "description": "LSE clock selected"
+                }
+              ]
+            },
+            {
+              "name": "USART2SEL",
+              "bit_offset": 2,
+              "bit_width": 2,
+              "description": "USART2 clock source selection"
             }
           ]
         },
@@ -1549,101 +2576,278 @@
           "name": "BDCR",
           "offset": 144,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "Backup domain control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Backup domain control register",
           "fields": [
             {
-              "name": "LSEON",
-              "bit_offset": 0,
+              "name": "LSCOSEL",
+              "bit_offset": 25,
               "bit_width": 1,
-              "description": "LSE oscillator enable",
-              "enum": null
-            },
-            {
-              "name": "LSERDY",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "LSE oscillator ready",
-              "enum": null
-            },
-            {
-              "name": "LSEBYP",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "LSE oscillator bypass",
-              "enum": null
-            },
-            {
-              "name": "LSEDRV",
-              "bit_offset": 3,
-              "bit_width": 2,
-              "description": "LSE oscillator drive capability",
-              "enum": "LSEDRV"
-            },
-            {
-              "name": "LSECSSON",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "CSS on LSE enable",
-              "enum": null
-            },
-            {
-              "name": "LSECSSD",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "CSS on LSE failure Detection",
-              "enum": null
-            },
-            {
-              "name": "LSESYSEN",
-              "bit_offset": 7,
-              "bit_width": 1,
-              "description": "LSE system clock enable",
-              "enum": null
-            },
-            {
-              "name": "RTCSEL",
-              "bit_offset": 8,
-              "bit_width": 2,
-              "description": "RTC clock source selection",
-              "enum": "RTCSEL"
-            },
-            {
-              "name": "LSESYSRDY",
-              "bit_offset": 11,
-              "bit_width": 1,
-              "description": "LSE system clock ready",
-              "enum": null
-            },
-            {
-              "name": "RTCEN",
-              "bit_offset": 15,
-              "bit_width": 1,
-              "description": "RTC clock enable",
-              "enum": null
-            },
-            {
-              "name": "BDRST",
-              "bit_offset": 16,
-              "bit_width": 1,
-              "description": "Backup domain software reset",
-              "enum": null
+              "description": "Low speed clock output selection",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "LSI",
+                  "value": 0,
+                  "description": "LSI clock selected"
+                },
+                {
+                  "name": "LSE",
+                  "value": 1,
+                  "description": "LSE clock selected"
+                }
+              ]
             },
             {
               "name": "LSCOEN",
               "bit_offset": 24,
               "bit_width": 1,
               "description": "Low speed clock output enable",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "LSCO disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "LSCO enabled"
+                }
+              ]
             },
             {
-              "name": "LSCOSEL",
-              "bit_offset": 25,
+              "name": "BDRST",
+              "bit_offset": 16,
               "bit_width": 1,
-              "description": "Low speed clock output selection",
-              "enum": null
+              "description": "Backup domain software reset",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NotActive",
+                  "value": 0,
+                  "description": "Reset not activated"
+                },
+                {
+                  "name": "Reset",
+                  "value": 1,
+                  "description": "Entire Backup domain reset"
+                }
+              ]
+            },
+            {
+              "name": "RTCEN",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "RTC clock enable",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "RTC kernel clock disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "RTC kernel clock enabled"
+                }
+              ]
+            },
+            {
+              "name": "LSESYSRDY",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "LSE system clock ready",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotReady",
+                  "value": 0,
+                  "description": "LSE system clock not ready"
+                },
+                {
+                  "name": "Ready",
+                  "value": 1,
+                  "description": "LSE system clock ready"
+                }
+              ]
+            },
+            {
+              "name": "RTCSEL",
+              "bit_offset": 8,
+              "bit_width": 2,
+              "description": "RTC clock source selection",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoClock",
+                  "value": 0,
+                  "description": "No clock"
+                },
+                {
+                  "name": "LSE",
+                  "value": 1,
+                  "description": "LSE oscillator clock selected"
+                },
+                {
+                  "name": "LSI",
+                  "value": 2,
+                  "description": "LSI oscillator clock selected"
+                },
+                {
+                  "name": "HSE32",
+                  "value": 3,
+                  "description": "HSE32 oscillator clock divided by 32 selected"
+                }
+              ]
+            },
+            {
+              "name": "LSESYSEN",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "LSE system clock enable",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "LSE system clock disabled to USARTx, LPUARTx, LPTIMx, TIMx, RNG, system LSCO, MCO, MSI PLL mode"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "LSE system clock enabled to USARTx, LPUARTx, LPTIMx, TIMx, RNG, system LSCO, MCO, MSI PLL mode"
+                }
+              ]
+            },
+            {
+              "name": "LSECSSD",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "CSS on LSE failure Detection",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NoFailure",
+                  "value": 0,
+                  "description": "No failure detected on LSE"
+                },
+                {
+                  "name": "Failure",
+                  "value": 1,
+                  "description": "Failure detected on LSE"
+                }
+              ]
+            },
+            {
+              "name": "LSECSSON",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "CSS on LSE enable",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "CSS on LSE disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "CSS on LSE enabled"
+                }
+              ]
+            },
+            {
+              "name": "LSEDRV",
+              "bit_offset": 3,
+              "bit_width": 2,
+              "description": "LSE oscillator drive capability",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Low",
+                  "value": 0,
+                  "description": "Xtal mode lower driving capability"
+                },
+                {
+                  "name": "MedLow",
+                  "value": 1,
+                  "description": "Xtal mode medium-low driving capability"
+                },
+                {
+                  "name": "MedHigh",
+                  "value": 2,
+                  "description": "Xtal mode medium-high driving capability"
+                },
+                {
+                  "name": "High",
+                  "value": 3,
+                  "description": "Xtal mode higher driving capability"
+                }
+              ]
+            },
+            {
+              "name": "LSEBYP",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "LSE oscillator bypass",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "LSE oscillator not bypassed"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "LSE oscillator bypassed"
+                }
+              ]
+            },
+            {
+              "name": "LSERDY",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "LSE oscillator ready",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotReady",
+                  "value": 0,
+                  "description": "LSE oscillator not ready"
+                },
+                {
+                  "name": "Ready",
+                  "value": 1,
+                  "description": "LSE oscillator ready"
+                }
+              ]
+            },
+            {
+              "name": "LSEON",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "LSE oscillator enable",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Off",
+                  "value": 0,
+                  "description": "LSE oscillator off"
+                },
+                {
+                  "name": "On",
+                  "value": 1,
+                  "description": "LSE oscillator on"
+                }
+              ]
             }
           ]
         },
@@ -1651,115 +2855,234 @@
           "name": "CSR",
           "offset": 148,
           "size": 32,
+          "access": null,
+          "reset_value": 201442816,
           "description": "Control/status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Control/status register",
           "fields": [
-            {
-              "name": "LSION",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "LSI oscillator enable",
-              "enum": null
-            },
-            {
-              "name": "LSIRDY",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "LSI oscillator ready",
-              "enum": null
-            },
-            {
-              "name": "LSIPRE",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "LSI frequency prescaler",
-              "enum": null
-            },
-            {
-              "name": "MSISRANGE",
-              "bit_offset": 8,
-              "bit_width": 4,
-              "description": "MSI clock ranges",
-              "enum": null
-            },
-            {
-              "name": "RFRSTF",
-              "bit_offset": 14,
-              "bit_width": 1,
-              "description": "Radio in reset status flag",
-              "enum": null
-            },
-            {
-              "name": "RFRST",
-              "bit_offset": 15,
-              "bit_width": 1,
-              "description": "Radio reset",
-              "enum": null
-            },
-            {
-              "name": "RMVF",
-              "bit_offset": 23,
-              "bit_width": 1,
-              "description": "Remove reset flag",
-              "enum": null
-            },
-            {
-              "name": "RFILARSTF",
-              "bit_offset": 24,
-              "bit_width": 1,
-              "description": "Radio illegal access flag",
-              "enum": null
-            },
             {
               "name": "OBLRSTF",
               "bit_offset": 25,
               "bit_width": 1,
               "description": "Option byte loader reset flag",
-              "enum": null
-            },
-            {
-              "name": "PINRSTF",
-              "bit_offset": 26,
-              "bit_width": 1,
-              "description": "Pin reset flag",
-              "enum": null
-            },
-            {
-              "name": "BORRSTF",
-              "bit_offset": 27,
-              "bit_width": 1,
-              "description": "BOR flag",
-              "enum": null
-            },
-            {
-              "name": "SFTRSTF",
-              "bit_offset": 28,
-              "bit_width": 1,
-              "description": "Software reset flag",
-              "enum": null
-            },
-            {
-              "name": "IWDGRSTF",
-              "bit_offset": 29,
-              "bit_width": 1,
-              "description": "Independent window watchdog reset flag",
-              "enum": null
-            },
-            {
-              "name": "WWDGRSTF",
-              "bit_offset": 30,
-              "bit_width": 1,
-              "description": "Window watchdog reset flag",
-              "enum": null
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NoReset",
+                  "value": 0,
+                  "description": "No reset occurred"
+                },
+                {
+                  "name": "Reset",
+                  "value": 1,
+                  "description": "Reset occurred"
+                }
+              ]
             },
             {
               "name": "LPWRRSTF",
               "bit_offset": 31,
               "bit_width": 1,
               "description": "Low-power reset flag",
-              "enum": null
+              "access": "read-only"
+            },
+            {
+              "name": "WWDGRSTF",
+              "bit_offset": 30,
+              "bit_width": 1,
+              "description": "Window watchdog reset flag",
+              "access": "read-only"
+            },
+            {
+              "name": "IWDGRSTF",
+              "bit_offset": 29,
+              "bit_width": 1,
+              "description": "Independent window watchdog reset flag",
+              "access": "read-only"
+            },
+            {
+              "name": "SFTRSTF",
+              "bit_offset": 28,
+              "bit_width": 1,
+              "description": "Software reset flag",
+              "access": "read-only"
+            },
+            {
+              "name": "BORRSTF",
+              "bit_offset": 27,
+              "bit_width": 1,
+              "description": "BOR flag",
+              "access": "read-only"
+            },
+            {
+              "name": "PINRSTF",
+              "bit_offset": 26,
+              "bit_width": 1,
+              "description": "Pin reset flag",
+              "access": "read-only"
+            },
+            {
+              "name": "RFILARSTF",
+              "bit_offset": 24,
+              "bit_width": 1,
+              "description": "Radio illegal access flag",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NoIllegalCommand",
+                  "value": 0,
+                  "description": "No SUBGHZ radio illegal command occurred"
+                },
+                {
+                  "name": "IllegalCommand",
+                  "value": 1,
+                  "description": "SUBGHZ radio illegal command occurred"
+                }
+              ]
+            },
+            {
+              "name": "RMVF",
+              "bit_offset": 23,
+              "bit_width": 1,
+              "description": "Remove reset flag",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoEffect",
+                  "value": 0,
+                  "description": "No effect"
+                },
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Reset flags reset"
+                }
+              ]
+            },
+            {
+              "name": "RFRST",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Radio reset",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Removed",
+                  "value": 0,
+                  "description": "Sub-GHz radio software reset removed"
+                },
+                {
+                  "name": "Reset",
+                  "value": 1,
+                  "description": "Sub-GHz radio software reset active"
+                }
+              ]
+            },
+            {
+              "name": "RFRSTF",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "Radio in reset status flag",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NoReset",
+                  "value": 0,
+                  "description": "Sub-GHz radio out of reset"
+                },
+                {
+                  "name": "Reset",
+                  "value": 1,
+                  "description": "Sub-GHz radio in reset"
+                }
+              ]
+            },
+            {
+              "name": "MSISRANGE",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "MSI clock ranges",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "f_1MHz",
+                  "value": 4,
+                  "description": "Range 4 around 1 MHz"
+                },
+                {
+                  "name": "f_2MHz",
+                  "value": 5,
+                  "description": "Range 5 around 2 MHz"
+                },
+                {
+                  "name": "f_4MHz",
+                  "value": 6,
+                  "description": "Range 6 around 4 MHz (reset value)"
+                },
+                {
+                  "name": "f_8MHz",
+                  "value": 7,
+                  "description": "Range 7 around 8 MHz"
+                }
+              ]
+            },
+            {
+              "name": "LSIPRE",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "LSI frequency prescaler",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Div1",
+                  "value": 0,
+                  "description": "LSI clock not divided"
+                },
+                {
+                  "name": "Div128",
+                  "value": 1,
+                  "description": "LSI clock divided by 128"
+                }
+              ]
+            },
+            {
+              "name": "LSIRDY",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "LSI oscillator ready",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotReady",
+                  "value": 0,
+                  "description": "LSI oscillator not ready"
+                },
+                {
+                  "name": "Ready",
+                  "value": 1,
+                  "description": "LSI oscillator ready"
+                }
+              ]
+            },
+            {
+              "name": "LSION",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "LSI oscillator enable",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Off",
+                  "value": 0,
+                  "description": "LSI oscillator off"
+                },
+                {
+                  "name": "On",
+                  "value": 1,
+                  "description": "LSI oscillator on"
+                }
+              ]
             }
           ]
         },
@@ -1767,1530 +3090,109 @@
           "name": "EXTCFGR",
           "offset": 264,
           "size": 32,
+          "access": null,
+          "reset_value": 196608,
           "description": "Extended clock recovery register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Extended clock recovery register",
           "fields": [
-            {
-              "name": "SHDHPRE",
-              "bit_offset": 0,
-              "bit_width": 4,
-              "description": "HCLK3 shared prescaler (AHB3, Flash, and SRAM2)",
-              "enum": "HPRE"
-            },
             {
               "name": "SHDHPREF",
               "bit_offset": 16,
               "bit_width": 1,
               "description": "HCLK3 shared prescaler flag (AHB3, Flash, and SRAM2)",
-              "enum": null
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotApplied",
+                  "value": 0,
+                  "description": "HCLK3 prescaler value not yet applied"
+                },
+                {
+                  "name": "Applied",
+                  "value": 1,
+                  "description": "HCLK3 prescaler value applied"
+                }
+              ]
+            },
+            {
+              "name": "SHDHPRE",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "HCLK3 shared prescaler (AHB3, Flash, and SRAM2)",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Div3",
+                  "value": 1,
+                  "description": "SYSCLK divided by 3"
+                },
+                {
+                  "name": "Div5",
+                  "value": 2,
+                  "description": "SYSCLK divided by 5"
+                },
+                {
+                  "name": "Div6",
+                  "value": 5,
+                  "description": "SYSCLK divided by 6"
+                },
+                {
+                  "name": "Div10",
+                  "value": 6,
+                  "description": "SYSCLK divided by 10"
+                },
+                {
+                  "name": "Div32",
+                  "value": 7,
+                  "description": "SYSCLK divided by 32"
+                },
+                {
+                  "name": "Div2",
+                  "value": 8,
+                  "description": "SYSCLK divided by 2"
+                },
+                {
+                  "name": "Div4",
+                  "value": 9,
+                  "description": "SYSCLK divided by 4"
+                },
+                {
+                  "name": "Div8",
+                  "value": 10,
+                  "description": "SYSCLK divided by 8"
+                },
+                {
+                  "name": "Div16",
+                  "value": 11,
+                  "description": "SYSCLK divided by 16"
+                },
+                {
+                  "name": "Div64",
+                  "value": 12,
+                  "description": "SYSCLK divided by 64"
+                },
+                {
+                  "name": "Div128",
+                  "value": 13,
+                  "description": "SYSCLK divided by 128"
+                },
+                {
+                  "name": "Div256",
+                  "value": 14,
+                  "description": "SYSCLK divided by 256"
+                },
+                {
+                  "name": "Div512",
+                  "value": 15,
+                  "description": "SYSCLK divided by 512"
+                }
+              ]
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "ADCSEL": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "DISABLE",
-          "value": 0,
-          "description": "No clock selected"
-        },
-        {
-          "name": "HSI",
-          "value": 1,
-          "description": "HSI used as ADC clock source"
-        },
-        {
-          "name": "PLL1_P",
-          "value": 2,
-          "description": "PLLPCLK used as ADC clock source"
-        },
-        {
-          "name": "SYS",
-          "value": 3,
-          "description": "SYSCLK used as ADC clock source"
-        }
-      ]
-    },
-    "HPRE": {
-      "bit_size": 4,
-      "variants": [
-        {
-          "name": "Div1",
-          "value": 0,
-          "description": "DCLK not divided"
-        },
-        {
-          "name": "Div3",
-          "value": 1,
-          "description": "hclk = SYSCLK divided by 3"
-        },
-        {
-          "name": "Div5",
-          "value": 2,
-          "description": "hclk = SYSCLK divided by 5"
-        },
-        {
-          "name": "Div6",
-          "value": 5,
-          "description": "hclk = SYSCLK divided by 6"
-        },
-        {
-          "name": "Div10",
-          "value": 6,
-          "description": "hclk = SYSCLK divided by 8"
-        },
-        {
-          "name": "Div32",
-          "value": 7,
-          "description": "hclk = SYSCLK divided by 32"
-        },
-        {
-          "name": "Div2",
-          "value": 8,
-          "description": "hclk = SYSCLK divided by 2"
-        },
-        {
-          "name": "Div4",
-          "value": 9,
-          "description": "hclk = SYSCLK divided by 4"
-        },
-        {
-          "name": "Div8",
-          "value": 10,
-          "description": "hclk = SYSCLK divided by 8"
-        },
-        {
-          "name": "Div16",
-          "value": 11,
-          "description": "hclk = SYSCLK divided by 16"
-        },
-        {
-          "name": "Div64",
-          "value": 12,
-          "description": "hclk = SYSCLK divided by 64"
-        },
-        {
-          "name": "Div128",
-          "value": 13,
-          "description": "hclk = SYSCLK divided by 128"
-        },
-        {
-          "name": "Div256",
-          "value": 14,
-          "description": "hclk = SYSCLK divided by 256"
-        },
-        {
-          "name": "Div512",
-          "value": 15,
-          "description": "hclk = SYSCLK divided by 256"
-        }
-      ]
-    },
-    "HSEPRE": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Div1",
-          "value": 0,
-          "description": null
-        },
-        {
-          "name": "Div2",
-          "value": 1,
-          "description": null
-        }
-      ]
-    },
-    "I2C1SEL": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "PCLK1",
-          "value": 0,
-          "description": "APB clock selected"
-        },
-        {
-          "name": "SYS",
-          "value": 1,
-          "description": "System clock selected"
-        },
-        {
-          "name": "HSI",
-          "value": 2,
-          "description": "HSI16 clock selected"
-        }
-      ]
-    },
-    "I2C2SEL": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "PCLK1",
-          "value": 0,
-          "description": "APB clock selected"
-        },
-        {
-          "name": "SYS",
-          "value": 1,
-          "description": "System clock selected"
-        },
-        {
-          "name": "HSI",
-          "value": 2,
-          "description": "HSI16 clock selected"
-        }
-      ]
-    },
-    "I2C3SEL": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "PCLK1",
-          "value": 0,
-          "description": "APB clock selected"
-        },
-        {
-          "name": "SYS",
-          "value": 1,
-          "description": "System clock selected"
-        },
-        {
-          "name": "HSI",
-          "value": 2,
-          "description": "HSI16 clock selected"
-        }
-      ]
-    },
-    "LPTIMSEL": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "PCLK1",
-          "value": 0,
-          "description": "APB clock selected"
-        },
-        {
-          "name": "LSI",
-          "value": 1,
-          "description": "LSI clock selected"
-        },
-        {
-          "name": "HSI",
-          "value": 2,
-          "description": "HSI16 clock selected"
-        },
-        {
-          "name": "LSE",
-          "value": 3,
-          "description": "LSE clock selected"
-        }
-      ]
-    },
-    "LPUART1SEL": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "PCLK1",
-          "value": 0,
-          "description": "APB clock selected"
-        },
-        {
-          "name": "SYS",
-          "value": 1,
-          "description": "System clock selected"
-        },
-        {
-          "name": "HSI",
-          "value": 2,
-          "description": "HSI16 clock selected"
-        },
-        {
-          "name": "LSE",
-          "value": 3,
-          "description": "LSE clock selected"
-        }
-      ]
-    },
-    "LSEDRV": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Low",
-          "value": 0,
-          "description": "Low driving capability"
-        },
-        {
-          "name": "MediumLow",
-          "value": 1,
-          "description": "Medium low driving capability"
-        },
-        {
-          "name": "MediumHigh",
-          "value": 2,
-          "description": "Medium high driving capability"
-        },
-        {
-          "name": "High",
-          "value": 3,
-          "description": "High driving capability"
-        }
-      ]
-    },
-    "MCOPRE": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "Div1",
-          "value": 0,
-          "description": "No division"
-        },
-        {
-          "name": "Div2",
-          "value": 1,
-          "description": "Division by 2"
-        },
-        {
-          "name": "Div4",
-          "value": 2,
-          "description": "Division by 4"
-        },
-        {
-          "name": "Div8",
-          "value": 3,
-          "description": "Division by 8"
-        },
-        {
-          "name": "Div16",
-          "value": 4,
-          "description": "Division by 16"
-        }
-      ]
-    },
-    "MCOSEL": {
-      "bit_size": 4,
-      "variants": [
-        {
-          "name": "DISABLE",
-          "value": 0,
-          "description": "No clock"
-        },
-        {
-          "name": "SYS",
-          "value": 1,
-          "description": "SYSCLK clock selected"
-        },
-        {
-          "name": "MSI",
-          "value": 2,
-          "description": "MSI oscillator clock selected"
-        },
-        {
-          "name": "HSI",
-          "value": 3,
-          "description": "HSI oscillator clock selected"
-        },
-        {
-          "name": "HSE",
-          "value": 4,
-          "description": "HSE oscillator clock selected"
-        },
-        {
-          "name": "PLL1_R",
-          "value": 5,
-          "description": "Main PLLRCLK clock selected"
-        },
-        {
-          "name": "LSI",
-          "value": 6,
-          "description": "LSI oscillator clock selected"
-        },
-        {
-          "name": "LSE",
-          "value": 8,
-          "description": "LSE oscillator clock selected"
-        },
-        {
-          "name": "PLL1_P",
-          "value": 13,
-          "description": "Main PLLCLK oscillator clock selected"
-        },
-        {
-          "name": "PLL1_Q",
-          "value": 14,
-          "description": "Main PLLQCLK oscillator clock selected"
-        }
-      ]
-    },
-    "MSIRANGE": {
-      "bit_size": 4,
-      "variants": [
-        {
-          "name": "Range100K",
-          "value": 0,
-          "description": "range 0 around 100 kHz"
-        },
-        {
-          "name": "Range200K",
-          "value": 1,
-          "description": "range 1 around 200 kHz"
-        },
-        {
-          "name": "Range400K",
-          "value": 2,
-          "description": "range 2 around 400 kHz"
-        },
-        {
-          "name": "Range800K",
-          "value": 3,
-          "description": "range 3 around 800 kHz"
-        },
-        {
-          "name": "Range1M",
-          "value": 4,
-          "description": "range 4 around 1 MHz"
-        },
-        {
-          "name": "Range2M",
-          "value": 5,
-          "description": "range 5 around 2 MHz"
-        },
-        {
-          "name": "Range4M",
-          "value": 6,
-          "description": "range 6 around 4 MHz"
-        },
-        {
-          "name": "Range8M",
-          "value": 7,
-          "description": "range 7 around 8 MHz"
-        },
-        {
-          "name": "Range16M",
-          "value": 8,
-          "description": "range 8 around 16 MHz"
-        },
-        {
-          "name": "Range24M",
-          "value": 9,
-          "description": "range 9 around 24 MHz"
-        },
-        {
-          "name": "Range32M",
-          "value": 10,
-          "description": "range 10 around 32 MHz"
-        },
-        {
-          "name": "Range48M",
-          "value": 11,
-          "description": "range 11 around 48 MHz"
-        }
-      ]
-    },
-    "MSIRGSEL": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "CSR",
-          "value": 0,
-          "description": "MSI Range is provided by MSISRANGE[3:0] in RCC_CSR register"
-        },
-        {
-          "name": "CR",
-          "value": 1,
-          "description": "MSI Range is provided by MSIRANGE[3:0] in the RCC_CR register"
-        }
-      ]
-    },
-    "PLLM": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "Div1",
-          "value": 0,
-          "description": null
-        },
-        {
-          "name": "Div2",
-          "value": 1,
-          "description": null
-        },
-        {
-          "name": "Div3",
-          "value": 2,
-          "description": null
-        },
-        {
-          "name": "Div4",
-          "value": 3,
-          "description": null
-        },
-        {
-          "name": "Div5",
-          "value": 4,
-          "description": null
-        },
-        {
-          "name": "Div6",
-          "value": 5,
-          "description": null
-        },
-        {
-          "name": "Div7",
-          "value": 6,
-          "description": null
-        },
-        {
-          "name": "Div8",
-          "value": 7,
-          "description": null
-        }
-      ]
-    },
-    "PLLN": {
-      "bit_size": 7,
-      "variants": [
-        {
-          "name": "Mul6",
-          "value": 6,
-          "description": null
-        },
-        {
-          "name": "Mul7",
-          "value": 7,
-          "description": null
-        },
-        {
-          "name": "Mul8",
-          "value": 8,
-          "description": null
-        },
-        {
-          "name": "Mul9",
-          "value": 9,
-          "description": null
-        },
-        {
-          "name": "Mul10",
-          "value": 10,
-          "description": null
-        },
-        {
-          "name": "Mul11",
-          "value": 11,
-          "description": null
-        },
-        {
-          "name": "Mul12",
-          "value": 12,
-          "description": null
-        },
-        {
-          "name": "Mul13",
-          "value": 13,
-          "description": null
-        },
-        {
-          "name": "Mul14",
-          "value": 14,
-          "description": null
-        },
-        {
-          "name": "Mul15",
-          "value": 15,
-          "description": null
-        },
-        {
-          "name": "Mul16",
-          "value": 16,
-          "description": null
-        },
-        {
-          "name": "Mul17",
-          "value": 17,
-          "description": null
-        },
-        {
-          "name": "Mul18",
-          "value": 18,
-          "description": null
-        },
-        {
-          "name": "Mul19",
-          "value": 19,
-          "description": null
-        },
-        {
-          "name": "Mul20",
-          "value": 20,
-          "description": null
-        },
-        {
-          "name": "Mul21",
-          "value": 21,
-          "description": null
-        },
-        {
-          "name": "Mul22",
-          "value": 22,
-          "description": null
-        },
-        {
-          "name": "Mul23",
-          "value": 23,
-          "description": null
-        },
-        {
-          "name": "Mul24",
-          "value": 24,
-          "description": null
-        },
-        {
-          "name": "Mul25",
-          "value": 25,
-          "description": null
-        },
-        {
-          "name": "Mul26",
-          "value": 26,
-          "description": null
-        },
-        {
-          "name": "Mul27",
-          "value": 27,
-          "description": null
-        },
-        {
-          "name": "Mul28",
-          "value": 28,
-          "description": null
-        },
-        {
-          "name": "Mul29",
-          "value": 29,
-          "description": null
-        },
-        {
-          "name": "Mul30",
-          "value": 30,
-          "description": null
-        },
-        {
-          "name": "Mul31",
-          "value": 31,
-          "description": null
-        },
-        {
-          "name": "Mul32",
-          "value": 32,
-          "description": null
-        },
-        {
-          "name": "Mul33",
-          "value": 33,
-          "description": null
-        },
-        {
-          "name": "Mul34",
-          "value": 34,
-          "description": null
-        },
-        {
-          "name": "Mul35",
-          "value": 35,
-          "description": null
-        },
-        {
-          "name": "Mul36",
-          "value": 36,
-          "description": null
-        },
-        {
-          "name": "Mul37",
-          "value": 37,
-          "description": null
-        },
-        {
-          "name": "Mul38",
-          "value": 38,
-          "description": null
-        },
-        {
-          "name": "Mul39",
-          "value": 39,
-          "description": null
-        },
-        {
-          "name": "Mul40",
-          "value": 40,
-          "description": null
-        },
-        {
-          "name": "Mul41",
-          "value": 41,
-          "description": null
-        },
-        {
-          "name": "Mul42",
-          "value": 42,
-          "description": null
-        },
-        {
-          "name": "Mul43",
-          "value": 43,
-          "description": null
-        },
-        {
-          "name": "Mul44",
-          "value": 44,
-          "description": null
-        },
-        {
-          "name": "Mul45",
-          "value": 45,
-          "description": null
-        },
-        {
-          "name": "Mul46",
-          "value": 46,
-          "description": null
-        },
-        {
-          "name": "Mul47",
-          "value": 47,
-          "description": null
-        },
-        {
-          "name": "Mul48",
-          "value": 48,
-          "description": null
-        },
-        {
-          "name": "Mul49",
-          "value": 49,
-          "description": null
-        },
-        {
-          "name": "Mul50",
-          "value": 50,
-          "description": null
-        },
-        {
-          "name": "Mul51",
-          "value": 51,
-          "description": null
-        },
-        {
-          "name": "Mul52",
-          "value": 52,
-          "description": null
-        },
-        {
-          "name": "Mul53",
-          "value": 53,
-          "description": null
-        },
-        {
-          "name": "Mul54",
-          "value": 54,
-          "description": null
-        },
-        {
-          "name": "Mul55",
-          "value": 55,
-          "description": null
-        },
-        {
-          "name": "Mul56",
-          "value": 56,
-          "description": null
-        },
-        {
-          "name": "Mul57",
-          "value": 57,
-          "description": null
-        },
-        {
-          "name": "Mul58",
-          "value": 58,
-          "description": null
-        },
-        {
-          "name": "Mul59",
-          "value": 59,
-          "description": null
-        },
-        {
-          "name": "Mul60",
-          "value": 60,
-          "description": null
-        },
-        {
-          "name": "Mul61",
-          "value": 61,
-          "description": null
-        },
-        {
-          "name": "Mul62",
-          "value": 62,
-          "description": null
-        },
-        {
-          "name": "Mul63",
-          "value": 63,
-          "description": null
-        },
-        {
-          "name": "Mul64",
-          "value": 64,
-          "description": null
-        },
-        {
-          "name": "Mul65",
-          "value": 65,
-          "description": null
-        },
-        {
-          "name": "Mul66",
-          "value": 66,
-          "description": null
-        },
-        {
-          "name": "Mul67",
-          "value": 67,
-          "description": null
-        },
-        {
-          "name": "Mul68",
-          "value": 68,
-          "description": null
-        },
-        {
-          "name": "Mul69",
-          "value": 69,
-          "description": null
-        },
-        {
-          "name": "Mul70",
-          "value": 70,
-          "description": null
-        },
-        {
-          "name": "Mul71",
-          "value": 71,
-          "description": null
-        },
-        {
-          "name": "Mul72",
-          "value": 72,
-          "description": null
-        },
-        {
-          "name": "Mul73",
-          "value": 73,
-          "description": null
-        },
-        {
-          "name": "Mul74",
-          "value": 74,
-          "description": null
-        },
-        {
-          "name": "Mul75",
-          "value": 75,
-          "description": null
-        },
-        {
-          "name": "Mul76",
-          "value": 76,
-          "description": null
-        },
-        {
-          "name": "Mul77",
-          "value": 77,
-          "description": null
-        },
-        {
-          "name": "Mul78",
-          "value": 78,
-          "description": null
-        },
-        {
-          "name": "Mul79",
-          "value": 79,
-          "description": null
-        },
-        {
-          "name": "Mul80",
-          "value": 80,
-          "description": null
-        },
-        {
-          "name": "Mul81",
-          "value": 81,
-          "description": null
-        },
-        {
-          "name": "Mul82",
-          "value": 82,
-          "description": null
-        },
-        {
-          "name": "Mul83",
-          "value": 83,
-          "description": null
-        },
-        {
-          "name": "Mul84",
-          "value": 84,
-          "description": null
-        },
-        {
-          "name": "Mul85",
-          "value": 85,
-          "description": null
-        },
-        {
-          "name": "Mul86",
-          "value": 86,
-          "description": null
-        },
-        {
-          "name": "Mul87",
-          "value": 87,
-          "description": null
-        },
-        {
-          "name": "Mul88",
-          "value": 88,
-          "description": null
-        },
-        {
-          "name": "Mul89",
-          "value": 89,
-          "description": null
-        },
-        {
-          "name": "Mul90",
-          "value": 90,
-          "description": null
-        },
-        {
-          "name": "Mul91",
-          "value": 91,
-          "description": null
-        },
-        {
-          "name": "Mul92",
-          "value": 92,
-          "description": null
-        },
-        {
-          "name": "Mul93",
-          "value": 93,
-          "description": null
-        },
-        {
-          "name": "Mul94",
-          "value": 94,
-          "description": null
-        },
-        {
-          "name": "Mul95",
-          "value": 95,
-          "description": null
-        },
-        {
-          "name": "Mul96",
-          "value": 96,
-          "description": null
-        },
-        {
-          "name": "Mul97",
-          "value": 97,
-          "description": null
-        },
-        {
-          "name": "Mul98",
-          "value": 98,
-          "description": null
-        },
-        {
-          "name": "Mul99",
-          "value": 99,
-          "description": null
-        },
-        {
-          "name": "Mul100",
-          "value": 100,
-          "description": null
-        },
-        {
-          "name": "Mul101",
-          "value": 101,
-          "description": null
-        },
-        {
-          "name": "Mul102",
-          "value": 102,
-          "description": null
-        },
-        {
-          "name": "Mul103",
-          "value": 103,
-          "description": null
-        },
-        {
-          "name": "Mul104",
-          "value": 104,
-          "description": null
-        },
-        {
-          "name": "Mul105",
-          "value": 105,
-          "description": null
-        },
-        {
-          "name": "Mul106",
-          "value": 106,
-          "description": null
-        },
-        {
-          "name": "Mul107",
-          "value": 107,
-          "description": null
-        },
-        {
-          "name": "Mul108",
-          "value": 108,
-          "description": null
-        },
-        {
-          "name": "Mul109",
-          "value": 109,
-          "description": null
-        },
-        {
-          "name": "Mul110",
-          "value": 110,
-          "description": null
-        },
-        {
-          "name": "Mul111",
-          "value": 111,
-          "description": null
-        },
-        {
-          "name": "Mul112",
-          "value": 112,
-          "description": null
-        },
-        {
-          "name": "Mul113",
-          "value": 113,
-          "description": null
-        },
-        {
-          "name": "Mul114",
-          "value": 114,
-          "description": null
-        },
-        {
-          "name": "Mul115",
-          "value": 115,
-          "description": null
-        },
-        {
-          "name": "Mul116",
-          "value": 116,
-          "description": null
-        },
-        {
-          "name": "Mul117",
-          "value": 117,
-          "description": null
-        },
-        {
-          "name": "Mul118",
-          "value": 118,
-          "description": null
-        },
-        {
-          "name": "Mul119",
-          "value": 119,
-          "description": null
-        },
-        {
-          "name": "Mul120",
-          "value": 120,
-          "description": null
-        },
-        {
-          "name": "Mul121",
-          "value": 121,
-          "description": null
-        },
-        {
-          "name": "Mul122",
-          "value": 122,
-          "description": null
-        },
-        {
-          "name": "Mul123",
-          "value": 123,
-          "description": null
-        },
-        {
-          "name": "Mul124",
-          "value": 124,
-          "description": null
-        },
-        {
-          "name": "Mul125",
-          "value": 125,
-          "description": null
-        },
-        {
-          "name": "Mul126",
-          "value": 126,
-          "description": null
-        },
-        {
-          "name": "Mul127",
-          "value": 127,
-          "description": null
-        }
-      ]
-    },
-    "PLLP": {
-      "bit_size": 5,
-      "variants": [
-        {
-          "name": "Div2",
-          "value": 1,
-          "description": null
-        },
-        {
-          "name": "Div3",
-          "value": 2,
-          "description": null
-        },
-        {
-          "name": "Div4",
-          "value": 3,
-          "description": null
-        },
-        {
-          "name": "Div5",
-          "value": 4,
-          "description": null
-        },
-        {
-          "name": "Div6",
-          "value": 5,
-          "description": null
-        },
-        {
-          "name": "Div7",
-          "value": 6,
-          "description": null
-        },
-        {
-          "name": "Div8",
-          "value": 7,
-          "description": null
-        },
-        {
-          "name": "Div9",
-          "value": 8,
-          "description": null
-        },
-        {
-          "name": "Div10",
-          "value": 9,
-          "description": null
-        },
-        {
-          "name": "Div11",
-          "value": 10,
-          "description": null
-        },
-        {
-          "name": "Div12",
-          "value": 11,
-          "description": null
-        },
-        {
-          "name": "Div13",
-          "value": 12,
-          "description": null
-        },
-        {
-          "name": "Div14",
-          "value": 13,
-          "description": null
-        },
-        {
-          "name": "Div15",
-          "value": 14,
-          "description": null
-        },
-        {
-          "name": "Div16",
-          "value": 15,
-          "description": null
-        },
-        {
-          "name": "Div17",
-          "value": 16,
-          "description": null
-        },
-        {
-          "name": "Div18",
-          "value": 17,
-          "description": null
-        },
-        {
-          "name": "Div19",
-          "value": 18,
-          "description": null
-        },
-        {
-          "name": "Div20",
-          "value": 19,
-          "description": null
-        },
-        {
-          "name": "Div21",
-          "value": 20,
-          "description": null
-        },
-        {
-          "name": "Div22",
-          "value": 21,
-          "description": null
-        },
-        {
-          "name": "Div23",
-          "value": 22,
-          "description": null
-        },
-        {
-          "name": "Div24",
-          "value": 23,
-          "description": null
-        },
-        {
-          "name": "Div25",
-          "value": 24,
-          "description": null
-        },
-        {
-          "name": "Div26",
-          "value": 25,
-          "description": null
-        },
-        {
-          "name": "Div27",
-          "value": 26,
-          "description": null
-        },
-        {
-          "name": "Div28",
-          "value": 27,
-          "description": null
-        },
-        {
-          "name": "Div29",
-          "value": 28,
-          "description": null
-        },
-        {
-          "name": "Div30",
-          "value": 29,
-          "description": null
-        },
-        {
-          "name": "Div31",
-          "value": 30,
-          "description": null
-        }
-      ]
-    },
-    "PLLQ": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "Div2",
-          "value": 1,
-          "description": null
-        },
-        {
-          "name": "Div3",
-          "value": 2,
-          "description": null
-        },
-        {
-          "name": "Div4",
-          "value": 3,
-          "description": null
-        },
-        {
-          "name": "Div5",
-          "value": 4,
-          "description": null
-        },
-        {
-          "name": "Div6",
-          "value": 5,
-          "description": null
-        },
-        {
-          "name": "Div7",
-          "value": 6,
-          "description": null
-        }
-      ]
-    },
-    "PLLR": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "Div2",
-          "value": 1,
-          "description": null
-        },
-        {
-          "name": "Div3",
-          "value": 2,
-          "description": null
-        },
-        {
-          "name": "Div4",
-          "value": 3,
-          "description": null
-        },
-        {
-          "name": "Div5",
-          "value": 4,
-          "description": null
-        },
-        {
-          "name": "Div6",
-          "value": 5,
-          "description": null
-        },
-        {
-          "name": "Div7",
-          "value": 6,
-          "description": null
-        }
-      ]
-    },
-    "PLLSRC": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "DISABLE",
-          "value": 0,
-          "description": "No clock selected as PLL entry clock source"
-        },
-        {
-          "name": "MSI",
-          "value": 1,
-          "description": "MSI selected as PLL entry clock source"
-        },
-        {
-          "name": "HSI",
-          "value": 2,
-          "description": "HSI selected as PLL entry clock source"
-        },
-        {
-          "name": "HSE",
-          "value": 3,
-          "description": "HSE selected as PLL entry clock source"
-        }
-      ]
-    },
-    "PPRE": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "Div1",
-          "value": 0,
-          "description": "HCLK not divided"
-        },
-        {
-          "name": "Div2",
-          "value": 4,
-          "description": "HCLK divided by 2"
-        },
-        {
-          "name": "Div4",
-          "value": 5,
-          "description": "HCLK divided by 4"
-        },
-        {
-          "name": "Div8",
-          "value": 6,
-          "description": "HCLK divided by 8"
-        },
-        {
-          "name": "Div16",
-          "value": 7,
-          "description": "HCLK divided by 16"
-        }
-      ]
-    },
-    "RNGSEL": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "PLL1_Q",
-          "value": 0,
-          "description": "PLL \"Q\" clock selected"
-        },
-        {
-          "name": "LSI",
-          "value": 1,
-          "description": "LSI clock selected"
-        },
-        {
-          "name": "LSE",
-          "value": 2,
-          "description": "LSE clock selected"
-        },
-        {
-          "name": "MSI",
-          "value": 3,
-          "description": "MSI clock selected"
-        }
-      ]
-    },
-    "RTCSEL": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "DISABLE",
-          "value": 0,
-          "description": "No clock selected"
-        },
-        {
-          "name": "LSE",
-          "value": 1,
-          "description": "LSE oscillator clock selected"
-        },
-        {
-          "name": "LSI",
-          "value": 2,
-          "description": "LSI oscillator clock selected"
-        },
-        {
-          "name": "HSE",
-          "value": 3,
-          "description": "HSE oscillator clock divided by 32 selected"
-        }
-      ]
-    },
-    "SPI2S2SEL": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "PLL1_Q",
-          "value": 1,
-          "description": "PLL \"Q\" clock selected"
-        },
-        {
-          "name": "HSI",
-          "value": 2,
-          "description": "HSI16 clock selected"
-        },
-        {
-          "name": "I2S_CKIN",
-          "value": 3,
-          "description": "External input I2S_CKIN selected"
-        }
-      ]
-    },
-    "SW": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "MSI",
-          "value": 0,
-          "description": null
-        },
-        {
-          "name": "HSI",
-          "value": 1,
-          "description": null
-        },
-        {
-          "name": "HSE",
-          "value": 2,
-          "description": null
-        },
-        {
-          "name": "PLL1_R",
-          "value": 3,
-          "description": null
-        }
-      ]
-    },
-    "USART1SEL": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "PCLK2",
-          "value": 0,
-          "description": "APB clock selected"
-        },
-        {
-          "name": "SYS",
-          "value": 1,
-          "description": "System clock selected"
-        },
-        {
-          "name": "HSI",
-          "value": 2,
-          "description": "HSI16 clock selected"
-        },
-        {
-          "name": "LSE",
-          "value": 3,
-          "description": "LSE clock selected"
-        }
-      ]
-    },
-    "USART2SEL": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "PCLK1",
-          "value": 0,
-          "description": "APB clock selected"
-        },
-        {
-          "name": "SYS",
-          "value": 1,
-          "description": "System clock selected"
-        },
-        {
-          "name": "HSI",
-          "value": 2,
-          "description": "HSI16 clock selected"
-        },
-        {
-          "name": "LSE",
-          "value": 3,
-          "description": "LSE clock selected"
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

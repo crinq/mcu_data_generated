@@ -2,601 +2,586 @@
   "schema": 1,
   "kind": "fmc",
   "version": "v4",
+  "source": "stm32rs_svd",
+  "source_device": "stm32h562ag",
+  "source_file": "stm32h562.svd.patched",
   "blocks": {
     "FMC": {
       "name": "FMC",
-      "description": "Flexible memory controller.",
-      "extends": null,
-      "registers": [
-        {
-          "name": "NOR_PSRAM",
-          "offset": 0,
-          "description": null,
-          "array_len": null,
-          "array_stride": null,
-          "fields": []
-        },
-        {
-          "name": "NAND",
-          "offset": 128,
-          "description": null,
-          "array_len": null,
-          "array_stride": null,
-          "fields": []
-        },
-        {
-          "name": "SDRAM",
-          "offset": 320,
-          "description": null,
-          "array_len": null,
-          "array_stride": null,
-          "fields": []
-        }
-      ]
-    },
-    "NAND": {
-      "name": "NAND",
-      "description": null,
-      "extends": null,
-      "registers": [
-        {
-          "name": "PCR",
-          "offset": 0,
-          "size": 32,
-          "description": "NAND Flash control registers.",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "NAND Flash control registers.",
-          "fields": [
-            {
-              "name": "PWAITEN",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Wait feature enable bit Enables the Wait feature for the NAND Flash memory bank:.",
-              "enum": null
-            },
-            {
-              "name": "PBKEN",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "NAND Flash memory bank enable bit Enables the memory bank. Accessing a disabled memory bank causes an ERROR on AHB bus.",
-              "enum": null
-            },
-            {
-              "name": "PTYP",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Memory type Defines the type of device attached to the corresponding memory bank:.",
-              "enum": "PTYP"
-            },
-            {
-              "name": "PWID",
-              "bit_offset": 4,
-              "bit_width": 2,
-              "description": "Data bus width Defines the external memory device width.",
-              "enum": "PWID"
-            },
-            {
-              "name": "ECCEN",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "ECC computation logic enable bit.",
-              "enum": null
-            },
-            {
-              "name": "TCLR",
-              "bit_offset": 9,
-              "bit_width": 4,
-              "description": "CLE to RE delay Sets time from CLE low to RE low in number of AHB clock cycles (HCLK). Time is t_clr = (TCLR + SET + 2) � THCLK where THCLK is the HCLK clock period Note: SET is MEMSET or ATTSET according to the addressed space.",
-              "enum": null
-            },
-            {
-              "name": "TAR",
-              "bit_offset": 13,
-              "bit_width": 4,
-              "description": "ALE to RE delay Sets time from ALE low to RE low in number of AHB clock cycles (HCLK). Time is: t_ar = (TAR + SET + 2) � THCLK where THCLK is the HCLK clock period Note: SET is MEMSET or ATTSET according to the addressed space.",
-              "enum": null
-            },
-            {
-              "name": "ECCPS",
-              "bit_offset": 17,
-              "bit_width": 3,
-              "description": "ECC page size Defines the page size for the extended ECC:.",
-              "enum": "ECCPS"
-            }
-          ]
-        },
-        {
-          "name": "SR",
-          "offset": 4,
-          "size": 32,
-          "description": "FIFO status and interrupt register.",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "FIFO status and interrupt register.",
-          "fields": [
-            {
-              "name": "IRS",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Interrupt rising edge status The flag is set by hardware and reset by software. Note: If this bit is written by software to 1 it is set.",
-              "enum": null
-            },
-            {
-              "name": "ILS",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Interrupt high-level status The flag is set by hardware and reset by software.",
-              "enum": null
-            },
-            {
-              "name": "IFS",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Interrupt falling edge status The flag is set by hardware and reset by software. Note: If this bit is written by software to 1 it is set.",
-              "enum": null
-            },
-            {
-              "name": "IREN",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Interrupt rising edge detection enable bit.",
-              "enum": null
-            },
-            {
-              "name": "ILEN",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "Interrupt high-level detection enable bit.",
-              "enum": null
-            },
-            {
-              "name": "IFEN",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "Interrupt falling edge detection enable bit.",
-              "enum": null
-            },
-            {
-              "name": "FEMPT",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "FIFO empty Read-only bit that provides the status of the FIFO.",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "PMEM",
-          "offset": 8,
-          "size": 32,
-          "description": "Common memory space timing register.",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "Common memory space timing register.",
-          "fields": [
-            {
-              "name": "MEMSET",
-              "bit_offset": 0,
-              "bit_width": 8,
-              "description": "Common memory x setup time Defines the number of HCLK (+1) clock cycles to set up the address before the command assertion (NWE, NOE), for NAND Flash read or write access to common memory space on socket x:.",
-              "enum": null
-            },
-            {
-              "name": "MEMWAIT",
-              "bit_offset": 8,
-              "bit_width": 8,
-              "description": "Common memory wait time Defines the minimum number of HCLK (+1) clock cycles to assert the command (NWE, NOE), for NAND Flash read or write access to common memory space on socket. The duration of command assertion is extended if the wait signal (NWAIT) is active (low) at the end of the programmed value of HCLK:.",
-              "enum": null
-            },
-            {
-              "name": "MEMHOLD",
-              "bit_offset": 16,
-              "bit_width": 8,
-              "description": "Common memory hold time Defines the number of HCLK clock cycles for write access and HCLK (+2) clock cycles for read access during which the address is held (and data for write accesses) after the command is deasserted (NWE, NOE), for NAND Flash read or write access to common memory space on socket x:.",
-              "enum": null
-            },
-            {
-              "name": "MEMHIZ",
-              "bit_offset": 24,
-              "bit_width": 8,
-              "description": "Common memory x data bus Hi-Z time Defines the number of HCLK clock cycles during which the data bus is kept Hi-Z after the start of a NAND Flash write access to common memory space on socket. This is only valid for write transactions:.",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "PATT",
-          "offset": 12,
-          "size": 32,
-          "description": "Attribute memory space timing register.",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "Attribute memory space timing register.",
-          "fields": [
-            {
-              "name": "ATTSET",
-              "bit_offset": 0,
-              "bit_width": 8,
-              "description": "Attribute memory setup time Defines the number of HCLK (+1) clock cycles to set up address before the command assertion (NWE, NOE), for NAND Flash read or write access to attribute memory space on socket:.",
-              "enum": null
-            },
-            {
-              "name": "ATTWAIT",
-              "bit_offset": 8,
-              "bit_width": 8,
-              "description": "Attribute memory wait time Defines the minimum number of HCLK (+1) clock cycles to assert the command (NWE, NOE), for NAND Flash read or write access to attribute memory space on socket x. The duration for command assertion is extended if the wait signal (NWAIT) is active (low) at the end of the programmed value of HCLK:.",
-              "enum": null
-            },
-            {
-              "name": "ATTHOLD",
-              "bit_offset": 16,
-              "bit_width": 8,
-              "description": "Attribute memory hold time Defines the number of HCLK clock cycles for write access and HCLK (+2) clock cycles for read access during which the address is held (and data for write access) after the command deassertion (NWE, NOE), for NAND Flash read or write access to attribute memory space on socket:.",
-              "enum": null
-            },
-            {
-              "name": "ATTHIZ",
-              "bit_offset": 24,
-              "bit_width": 8,
-              "description": "Attribute memory data bus Hi-Z time Defines the number of HCLK clock cycles during which the data bus is kept in Hi-Z after the start of a NAND Flash write access to attribute memory space on socket. Only valid for writ transaction:.",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "ECCR",
-          "offset": 20,
-          "description": "ECC result registers.",
-          "array_len": null,
-          "array_stride": null,
-          "fields": []
-        }
-      ]
-    },
-    "NOR_PSRAM": {
-      "name": "NOR_PSRAM",
-      "description": null,
+      "description": "Flexible memory controller",
       "extends": null,
       "registers": [
         {
           "name": "BCR1",
           "offset": 0,
           "size": 32,
-          "description": "SRAM/NOR-Flash chip-select control register for bank 1.",
+          "access": null,
+          "reset_value": 12507,
+          "description": "SRAM/NOR-Flash chip-select control register for bank 1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "SRAM/NOR-Flash chip-select control register for bank 1.",
           "fields": [
             {
               "name": "MBKEN",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "Memory bank enable bit Enables the memory bank. After reset Bank1 is enabled, all others are disabled. Accessing a disabled bank causes an ERROR on AHB bus.",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Corresponding memory bank is disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Corresponding memory bank is enabled"
+                }
+              ]
             },
             {
               "name": "MUXEN",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Address/data multiplexing enable bit When this bit is set, the address and data values are multiplexed on the data bus, valid only with NOR and PSRAM memories:.",
-              "enum": null
+              "description": "Address/data multiplexing enable bit When this bit is set, the address and data values are multiplexed on the data bus, valid only with NOR and PSRAM memories:",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Address/Data non-multiplexed"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Address/Data multiplexed on databus"
+                }
+              ]
             },
             {
               "name": "MTYP",
               "bit_offset": 2,
               "bit_width": 2,
               "description": "Memory type Defines the type of external memory attached to the corresponding memory bank.",
-              "enum": "MTYP"
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "SRAM",
+                  "value": 0,
+                  "description": "SRAM memory type"
+                },
+                {
+                  "name": "PSRAM",
+                  "value": 1,
+                  "description": "PSRAM (CRAM) memory type"
+                },
+                {
+                  "name": "Flash",
+                  "value": 2,
+                  "description": "NOR Flash/OneNAND Flash"
+                }
+              ]
             },
             {
               "name": "MWID",
               "bit_offset": 4,
               "bit_width": 2,
               "description": "Memory data bus width Defines the external memory device width, valid for all type of memories.",
-              "enum": "MWID"
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Bits8",
+                  "value": 0,
+                  "description": "Memory data bus width 8 bits"
+                },
+                {
+                  "name": "Bits16",
+                  "value": 1,
+                  "description": "Memory data bus width 16 bits"
+                },
+                {
+                  "name": "Bits32",
+                  "value": 2,
+                  "description": "Memory data bus width 32 bits"
+                }
+              ]
             },
             {
               "name": "FACCEN",
               "bit_offset": 6,
               "bit_width": 1,
               "description": "Flash access enable Enables NOR Flash memory access operations.",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Corresponding NOR Flash memory access is disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Corresponding NOR Flash memory access is enabled"
+                }
+              ]
             },
             {
               "name": "BURSTEN",
               "bit_offset": 8,
               "bit_width": 1,
               "description": "Burst enable bit This bit enables/disables synchronous accesses during read operations. It is valid only for synchronous memories operating in Burst mode.",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Burst mode disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Burst mode enabled"
+                }
+              ]
             },
             {
               "name": "WAITPOL",
               "bit_offset": 9,
               "bit_width": 1,
               "description": "Wait signal polarity bit Defines the polarity of the wait signal from memory used for either in Synchronous or Asynchronous mode.",
-              "enum": "WAITPOL"
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "ActiveLow",
+                  "value": 0,
+                  "description": "NWAIT active low"
+                },
+                {
+                  "name": "ActiveHigh",
+                  "value": 1,
+                  "description": "NWAIT active high"
+                }
+              ]
             },
             {
               "name": "WAITCFG",
               "bit_offset": 11,
               "bit_width": 1,
-              "description": "Wait timing configuration The NWAIT signal indicates whether the data from the memory are valid or if a wait state must be inserted when accessing the memory in Synchronous mode. This configuration bit determines if NWAIT is asserted by the memory one clock cycle before the wait state or during the wait state:.",
-              "enum": "WAITCFG"
+              "description": "Wait timing configuration The NWAIT signal indicates whether the data from the memory are valid or if a wait state must be inserted when accessing the memory in Synchronous mode. This configuration bit determines if NWAIT is asserted by the memory one clock cycle before the wait state or during the wait state:",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "BeforeWaitState",
+                  "value": 0,
+                  "description": "NWAIT signal is active one data cycle before wait state"
+                },
+                {
+                  "name": "DuringWaitState",
+                  "value": 1,
+                  "description": "NWAIT signal is active during wait state"
+                }
+              ]
             },
             {
               "name": "WREN",
               "bit_offset": 12,
               "bit_width": 1,
               "description": "Write enable bit This bit indicates whether write operations are enabled/disabled in the bank by the FMC.",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Write operations disabled for the bank by the FMC"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Write operations enabled for the bank by the FMC"
+                }
+              ]
             },
             {
               "name": "WAITEN",
               "bit_offset": 13,
               "bit_width": 1,
               "description": "Wait enable bit This bit enables/disables wait-state insertion via the NWAIT signal when accessing the memory in Synchronous mode.",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Values inside the FMC_BWTR are taken into account"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "NWAIT signal enabled"
+                }
+              ]
             },
             {
               "name": "EXTMOD",
               "bit_offset": 14,
               "bit_width": 1,
               "description": "Extended mode enable This bit enables the FMC to program the write timings for non multiplexed asynchronous accesses inside the FMC_BWTR register, thus resulting in different timings for read and write operations. Note: When the Extended mode is disabled, the FMC can operate in mode 1 or mode 2 as follows: Mode 1 is the default mode when the SRAM/PSRAM memory type is selected (MTYP = 0x0 or 0x01) Mode 2 is the default mode when the NOR memory type is selected (MTYP = 0x10).",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Values inside the FMC_BWTR are not taken into account"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Values inside the FMC_BWTR are taken into account"
+                }
+              ]
             },
             {
               "name": "ASYNCWAIT",
               "bit_offset": 15,
               "bit_width": 1,
               "description": "Wait signal during asynchronous transfers This bit enables/disables the FMC to use the wait signal even during an asynchronous protocol.",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Wait signal not used in asynchronous mode"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Wait signal used even in asynchronous mode"
+                }
+              ]
             },
             {
               "name": "CPSIZE",
               "bit_offset": 16,
               "bit_width": 3,
-              "description": "CRAM page size These are used for CellularRAM™ 1.5 which does not allow burst access to cross the address boundaries between pages. When these bits are configured, the FMC controller splits automatically the burst access when the memory page size is reached (refer to memory datasheet for page size). Others: reserved.",
-              "enum": "CPSIZE"
+              "description": "CRAM page size These are used for CellularRAM 1.5 which does not allow burst access to cross the address boundaries between pages. When these bits are configured, the FMC controller splits automatically the burst access when the memory page size is reached (refer to memory datasheet for page size). Others: reserved",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoBurstSplit",
+                  "value": 0,
+                  "description": "No burst split when crossing page boundary"
+                },
+                {
+                  "name": "Bytes128",
+                  "value": 1,
+                  "description": "128 bytes CRAM page size"
+                },
+                {
+                  "name": "Bytes256",
+                  "value": 2,
+                  "description": "256 bytes CRAM page size"
+                },
+                {
+                  "name": "Bytes512",
+                  "value": 3,
+                  "description": "512 bytes CRAM page size"
+                },
+                {
+                  "name": "Bytes1024",
+                  "value": 4,
+                  "description": "1024 bytes CRAM page size"
+                }
+              ]
             },
             {
               "name": "CBURSTRW",
               "bit_offset": 19,
               "bit_width": 1,
               "description": "Write burst enable For PSRAM (CRAM) operating in Burst mode, the bit enables synchronous accesses during write operations. The enable bit for synchronous read accesses is the BURSTEN bit in the FMC_BCRx register.",
-              "enum": "CBURSTRW"
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Write operations are always performed in asynchronous mode"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Write operations are performed in synchronous mode"
+                }
+              ]
             },
             {
               "name": "CCLKEN",
               "bit_offset": 20,
               "bit_width": 1,
-              "description": "Continuous clock enable This bit enables the FMC_CLK clock output to external memory devices. Note: The CCLKEN bit of the FMC_BCR2..4 registers is don’t care. It is only enabled through the FMC_BCR1 register. Bank 1 must be configured in Synchronous mode to generate the FMC_CLK continuous clock. Note: If CCLKEN bit is set, the FMC_CLK clock ratio is specified by CLKDIV value in the FMC_BTR1 register. CLKDIV in FMC_BWTR1 is don’t care. Note: If the Synchronous mode is used and CCLKEN bit is set, the synchronous memories connected to other banks than Bank 1 are clocked by the same clock (the CLKDIV value in the FMC_BTR2..4 and FMC_BWTR2..4 registers for other banks has no effect.).",
-              "enum": null
+              "description": "Continuous clock enable This bit enables the FMC_CLK clock output to external memory devices. Note: The CCLKEN bit of the FMC_BCR2..4 registers is don't care. It is only enabled through the FMC_BCR1 register. Bank 1 must be configured in Synchronous mode to generate the FMC_CLK continuous clock. Note: If CCLKEN bit is set, the FMC_CLK clock ratio is specified by CLKDIV value in the FMC_BTR1 register. CLKDIV in FMC_BWTR1 is don't care. Note: If the Synchronous mode is used and CCLKEN bit is set, the synchronous memories connected to other banks than Bank 1 are clocked by the same clock (the CLKDIV value in the FMC_BTR2..4 and FMC_BWTR2..4 registers for other banks has no effect.)",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "The FMC_CLK is generated continuously during asynchronous and synchronous access. The FMC_CLK clock is activated when the CCLKEN is set"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "The FMC_CLK is only generated during the synchronous memory access (read/write transaction)"
+                }
+              ]
             },
             {
               "name": "WFDIS",
               "bit_offset": 21,
               "bit_width": 1,
-              "description": "Write FIFO disable This bit disables the Write FIFO used by the FMC controller. Note: The WFDIS bit of the FMC_BCR2..4 registers is don’t care. It is only enabled through the FMC_BCR1 register.",
-              "enum": null
+              "description": "Write FIFO disable This bit disables the Write FIFO used by the FMC controller. Note: The WFDIS bit of the FMC_BCR2..4 registers is don't care. It is only enabled through the FMC_BCR1 register.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Enabled",
+                  "value": 0,
+                  "description": "Write FIFO enabled"
+                },
+                {
+                  "name": "Disabled",
+                  "value": 1,
+                  "description": "Write FIFO disabled"
+                }
+              ]
             },
             {
               "name": "NBLSET",
               "bit_offset": 22,
               "bit_width": 2,
               "description": "Byte lane (NBL) setup These bits configure the NBL setup timing from NBLx low to chip select NEx low.",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "FMCEN",
               "bit_offset": 31,
               "bit_width": 1,
-              "description": "FMC controller enable This bit enables or disables the FMC controller. Note: The FMCEN bit of the FMC_BCR2..4 registers is don’t care. It is only enabled through the FMC_BCR1 register.",
-              "enum": null
+              "description": "FMC controller enable This bit enables or disables the FMC controller. Note: The FMCEN bit of the FMC_BCR2..4 registers is don't care. It is only enabled through the FMC_BCR1 register.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Disable the FMC controller"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Enable the FMC controller"
+                }
+              ]
             }
           ]
         },
         {
-          "name": "BTR",
+          "name": "BTR%s",
           "offset": 4,
           "size": 32,
-          "description": "SRAM/NOR-Flash chip-select timing register for bank 1.",
+          "access": null,
+          "reset_value": 268435455,
+          "description": "SRAM/NOR-Flash chip-select timing register for bank %s",
           "array_len": 4,
           "array_stride": 8,
-          "fieldset_description": "SRAM/NOR-Flash chip-select timing register for bank 1.",
           "fields": [
             {
               "name": "ADDSET",
               "bit_offset": 0,
               "bit_width": 4,
-              "description": "Address setup phase duration. These bits are written by software to define the duration of the address setup phase in HCLK cycles (refer to Figure 21 to Figure 33), used in asynchronous accesses: ... Note: In synchronous accesses, this value is not used, the address setup phase is always 1 Flash clock period duration. In muxed mode, the minimum ADDSET value is 1.",
-              "enum": null
+              "description": "Address setup phase duration These bits are written by software to define the duration of the address setup phase (refer to Figure 21 to Figure 33), used in SRAMs, ROMs, asynchronous NOR Flash and PSRAM: ... For each access mode address setup phase duration, refer to the respective figure (Figure 21 to Figure 33). Note: In synchronous accesses, this value is don't care. Note: In Muxed mode or mode D, the minimum value for ADDSET is 1. Note: In mode 1 and PSRAM memory, the minimum value for ADDSET is 1.",
+              "access": "read-write"
             },
             {
               "name": "ADDHLD",
               "bit_offset": 4,
               "bit_width": 4,
-              "description": "Address-hold phase duration. These bits are written by software to define the duration of the address hold phase (refer to Figure 30 to Figure 33), used in asynchronous multiplexed accesses: ... Note: In synchronous NOR Flash accesses, this value is not used, the address hold phase is always 1 Flash clock period duration.",
-              "enum": null
+              "description": "Address-hold phase duration These bits are written by software to define the duration of the address hold phase (refer to Figure 21 to Figure 33), used in mode D or multiplexed accesses: ... For each access mode address-hold phase duration, refer to the respective figure (Figure 21 to Figure 33). Note: In synchronous accesses, this value is not used, the address hold phase is always 1 memory clock period duration.",
+              "access": "read-write"
             },
             {
               "name": "DATAST",
               "bit_offset": 8,
               "bit_width": 8,
-              "description": "Data-phase duration. These bits are written by software to define the duration of the data phase (refer to Figure 21 to Figure 33), used in asynchronous SRAM, PSRAM and NOR Flash memory accesses: ...",
-              "enum": null
+              "description": "Data-phase duration These bits are written by software to define the duration of the data phase (refer to Figure 21 to Figure 33), used in asynchronous accesses: ... For each memory type and access mode data-phase duration, refer to the respective figure (Figure 21 to Figure 33). Example: Mode 1, write access, DATAST=1: Data-phase duration= DATAST+1 = 2 HCLK clock cycles. Note: In synchronous accesses, this value is don't care.",
+              "access": "read-write"
             },
             {
               "name": "BUSTURN",
               "bit_offset": 16,
               "bit_width": 4,
-              "description": "Bus turnaround phase duration These bits are written by software to add a delay at the end of current write transaction to next transaction on the same bank. For FRAM memories, the bus turnaround delay should be configured to match the minimum t<sub>PC</sub> (precharge time) timings. The bus turnaround delay is inserted between any consecutive transactions on the same bank (read/read, write/write, read/write and write/read). The chip select is toggling between any consecutive accesses. (BUSTURN + 1)HCLK period ≥ tPC min ...",
-              "enum": null
-            },
-            {
-              "name": "ACCMOD",
-              "bit_offset": 28,
-              "bit_width": 2,
-              "description": "Access mode. Specifies the asynchronous access modes as shown in the next timing diagrams.These bits are taken into account only when the EXTMOD bit in the FMC_BCRx register is 1.",
-              "enum": "ACCMOD"
-            },
-            {
-              "name": "DATAHLD",
-              "bit_offset": 30,
-              "bit_width": 2,
-              "description": "Data hold phase duration These bits are written by software to define the duration of the data hold phase in HCLK cycles (refer to Figure 21 to Figure 33), used in asynchronous write accesses:.",
-              "enum": null
+              "description": "Bus turnaround phase duration These bits are written by software to add a delay at the end of current read or write transaction to next transaction on the same bank. This delay allows to match the minimum time between consecutive transactions (t EHEL from NEx high to NEx low) and the maximum time needed by the memory to free the data bus after a read access (t EHQZ , chip enable high to output Hi-Z). This delay is recommended for mode D and muxed mode. For non-muxed memory, the bus turnaround delay can be set to minimum value. (BUSTURN + 1)HCLK period greater than or equal max(t EHEL min, t EHQZ max) For FRAM memories, the bus turnaround delay should be configured to match the minimum tPC (precharge time) timings. The bus turnaround delay is inserted between any consecutive transactions on the same bank (read/read, write/write, read/write and write/read) to match the tPC memory timing. The chip select is toggling between any consecutive accesses. (BUSTURN + 1)HCLK period greater than or equal t PC min ...",
+              "access": "read-write"
             },
             {
               "name": "CLKDIV",
               "bit_offset": 20,
               "bit_width": 4,
-              "description": "Clock divide ratio (for FMC_CLK signal) Defines the period of FMC_CLK clock output signal, expressed in number of HCLK cycles: In asynchronous NOR Flash, SRAM or PSRAM accesses, this value is don’t care. Note: Refer to Section 5.6.5: Synchronous transactions for FMC_CLK divider ratio formula).",
-              "enum": null
+              "description": "Clock divide ratio (for FMC_CLK signal) Defines the period of FMC_CLK clock output signal, expressed in number of HCLK cycles: In asynchronous NOR Flash, SRAM or PSRAM accesses, this value is don't care. Note: Refer to Section 5.6.5: Synchronous transactions for FMC_CLK divider ratio formula)",
+              "access": "read-write"
             },
             {
               "name": "DATLAT",
               "bit_offset": 24,
               "bit_width": 4,
               "description": "(see note below bit descriptions): Data latency for synchronous memory For synchronous access with read/write Burst mode enabled (BURSTEN / CBURSTRW bits set), defines the number of memory clock cycles (+2) to issue to the memory before reading/writing the first data: This timing parameter is not expressed in HCLK periods, but in FMC_CLK periods. For asynchronous access, this value is don't care.",
-              "enum": null
+              "access": "read-write"
+            },
+            {
+              "name": "ACCMOD",
+              "bit_offset": 28,
+              "bit_width": 2,
+              "description": "Access mode Specifies the asynchronous access modes as shown in the timing diagrams. These bits are taken into account only when the EXTMOD bit in the FMC_BCRx register is 1.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "A",
+                  "value": 0,
+                  "description": "Access mode A"
+                },
+                {
+                  "name": "B",
+                  "value": 1,
+                  "description": "Access mode B"
+                },
+                {
+                  "name": "C",
+                  "value": 2,
+                  "description": "Access mode C"
+                },
+                {
+                  "name": "D",
+                  "value": 3,
+                  "description": "Access mode D"
+                }
+              ]
+            },
+            {
+              "name": "DATAHLD",
+              "bit_offset": 30,
+              "bit_width": 2,
+              "description": "Data hold phase duration These bits are written by software to define the duration of the data hold phase in HCLK cycles (refer to Figure 21 to Figure 33), used in asynchronous accesses: For read accesses For write accesses",
+              "access": "read-write"
             }
           ]
         },
         {
-          "name": "BCR",
+          "name": "BCR%s",
           "offset": 8,
           "size": 32,
-          "description": "SRAM/NOR-Flash chip-select control register for bank 2.",
+          "access": null,
+          "reset_value": 12498,
+          "description": "SRAM/NOR-Flash chip-select control register for bank %s",
           "array_len": 3,
           "array_stride": 8,
-          "fieldset_description": "SRAM/NOR-Flash chip-select control register for bank 4.",
           "fields": [
             {
               "name": "MBKEN",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "Memory bank enable bit Enables the memory bank. After reset Bank1 is enabled, all others are disabled. Accessing a disabled bank causes an ERROR on AHB bus.",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "MUXEN",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Address/data multiplexing enable bit When this bit is set, the address and data values are multiplexed on the data bus, valid only with NOR and PSRAM memories:.",
-              "enum": null
+              "description": "Address/data multiplexing enable bit When this bit is set, the address and data values are multiplexed on the data bus, valid only with NOR and PSRAM memories:",
+              "access": "read-write"
             },
             {
               "name": "MTYP",
               "bit_offset": 2,
               "bit_width": 2,
               "description": "Memory type Defines the type of external memory attached to the corresponding memory bank.",
-              "enum": "MTYP"
+              "access": "read-write"
             },
             {
               "name": "MWID",
               "bit_offset": 4,
               "bit_width": 2,
               "description": "Memory data bus width Defines the external memory device width, valid for all type of memories.",
-              "enum": "MWID"
+              "access": "read-write"
             },
             {
               "name": "FACCEN",
               "bit_offset": 6,
               "bit_width": 1,
               "description": "Flash access enable Enables NOR Flash memory access operations.",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "BURSTEN",
               "bit_offset": 8,
               "bit_width": 1,
               "description": "Burst enable bit This bit enables/disables synchronous accesses during read operations. It is valid only for synchronous memories operating in Burst mode.",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "WAITPOL",
               "bit_offset": 9,
               "bit_width": 1,
               "description": "Wait signal polarity bit Defines the polarity of the wait signal from memory used for either in Synchronous or Asynchronous mode.",
-              "enum": "WAITPOL"
+              "access": "read-write"
             },
             {
               "name": "WAITCFG",
               "bit_offset": 11,
               "bit_width": 1,
-              "description": "Wait timing configuration The NWAIT signal indicates whether the data from the memory are valid or if a wait state must be inserted when accessing the memory in Synchronous mode. This configuration bit determines if NWAIT is asserted by the memory one clock cycle before the wait state or during the wait state:.",
-              "enum": "WAITCFG"
+              "description": "Wait timing configuration The NWAIT signal indicates whether the data from the memory are valid or if a wait state must be inserted when accessing the memory in Synchronous mode. This configuration bit determines if NWAIT is asserted by the memory one clock cycle before the wait state or during the wait state:",
+              "access": "read-write"
             },
             {
               "name": "WREN",
               "bit_offset": 12,
               "bit_width": 1,
               "description": "Write enable bit This bit indicates whether write operations are enabled/disabled in the bank by the FMC.",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "WAITEN",
               "bit_offset": 13,
               "bit_width": 1,
               "description": "Wait enable bit This bit enables/disables wait-state insertion via the NWAIT signal when accessing the memory in Synchronous mode.",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "EXTMOD",
               "bit_offset": 14,
               "bit_width": 1,
               "description": "Extended mode enable This bit enables the FMC to program the write timings for non multiplexed asynchronous accesses inside the FMC_BWTR register, thus resulting in different timings for read and write operations. Note: When the Extended mode is disabled, the FMC can operate in mode 1 or mode 2 as follows: Mode 1 is the default mode when the SRAM/PSRAM memory type is selected (MTYP = 0x0 or 0x01) Mode 2 is the default mode when the NOR memory type is selected (MTYP = 0x10).",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "ASYNCWAIT",
               "bit_offset": 15,
               "bit_width": 1,
               "description": "Wait signal during asynchronous transfers This bit enables/disables the FMC to use the wait signal even during an asynchronous protocol.",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "CPSIZE",
               "bit_offset": 16,
               "bit_width": 3,
-              "description": "CRAM page size These are used for CellularRAM™ 1.5 which does not allow burst access to cross the address boundaries between pages. When these bits are configured, the FMC controller splits automatically the burst access when the memory page size is reached (refer to memory datasheet for page size). Others: reserved.",
-              "enum": "CPSIZE"
+              "description": "CRAM page size These are used for CellularRAM 1.5 which does not allow burst access to cross the address boundaries between pages. When these bits are configured, the FMC controller splits automatically the burst access when the memory page size is reached (refer to memory datasheet for page size). Others: reserved",
+              "access": "read-write"
             },
             {
               "name": "CBURSTRW",
               "bit_offset": 19,
               "bit_width": 1,
               "description": "Write burst enable For PSRAM (CRAM) operating in Burst mode, the bit enables synchronous accesses during write operations. The enable bit for synchronous read accesses is the BURSTEN bit in the FMC_BCRx register.",
-              "enum": "CBURSTRW"
-            },
-            {
-              "name": "CCLKEN",
-              "bit_offset": 20,
-              "bit_width": 1,
-              "description": "Continuous clock enable This bit enables the FMC_CLK clock output to external memory devices. Note: The CCLKEN bit of the FMC_BCR2..4 registers is don’t care. It is only enabled through the FMC_BCR1 register. Bank 1 must be configured in Synchronous mode to generate the FMC_CLK continuous clock. Note: If CCLKEN bit is set, the FMC_CLK clock ratio is specified by CLKDIV value in the FMC_BTR1 register. CLKDIV in FMC_BWTR1 is don’t care. Note: If the Synchronous mode is used and CCLKEN bit is set, the synchronous memories connected to other banks than Bank 1 are clocked by the same clock (the CLKDIV value in the FMC_BTR2..4 and FMC_BWTR2..4 registers for other banks has no effect.).",
-              "enum": null
-            },
-            {
-              "name": "WFDIS",
-              "bit_offset": 21,
-              "bit_width": 1,
-              "description": "Write FIFO disable This bit disables the Write FIFO used by the FMC controller. Note: The WFDIS bit of the FMC_BCR2..4 registers is don’t care. It is only enabled through the FMC_BCR1 register.",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "NBLSET",
               "bit_offset": 22,
               "bit_width": 2,
               "description": "Byte lane (NBL) setup These bits configure the NBL setup timing from NBLx low to chip select NEx low.",
-              "enum": null
-            },
-            {
-              "name": "FMCEN",
-              "bit_offset": 31,
-              "bit_width": 1,
-              "description": "FMC controller enable This bit enables or disables the FMC controller. Note: The FMCEN bit of the FMC_BCR2..4 registers is don’t care. It is only enabled through the FMC_BCR1 register.",
-              "enum": null
+              "access": "read-write"
             }
           ]
         },
@@ -604,707 +589,1116 @@
           "name": "PCSCNTR",
           "offset": 32,
           "size": 32,
-          "description": "PSRAM chip select counter register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "PSRAM chip select counter register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "PSRAM chip select counter register.",
           "fields": [
             {
               "name": "CSCOUNT",
               "bit_offset": 0,
               "bit_width": 16,
               "description": "Chip select counter. These bits are written by software to define the maximum chip select low pulse duration. It is expressed in FMC_CLK cycles for synchronous accesses and in HCLK cycles for asynchronous accesses. The counter is disabled if the programmed value is 0.",
-              "enum": null
+              "access": "read-write"
             },
             {
-              "name": "CNTBEN",
+              "name": "CNTB%sEN",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "Counter Bank 1 enable This bit enables the chip select counter for PSRAM/NOR Bank 1.",
-              "enum": null
+              "description": "Counter Bank %s enable",
+              "access": "read-write"
             }
           ]
         },
         {
-          "name": "BWTR",
+          "name": "PCR",
+          "offset": 128,
+          "size": 32,
+          "access": null,
+          "reset_value": 24,
+          "description": "NAND Flash control registers",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "PWAITEN",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Wait feature enable bit Enables the Wait feature for the NAND Flash memory bank:",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Wait feature disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Wait feature enabled"
+                }
+              ]
+            },
+            {
+              "name": "PBKEN",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "NAND Flash memory bank enable bit Enables the memory bank. Accessing a disabled memory bank causes an ERROR on AHB bus",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Corresponding memory bank is disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Corresponding memory bank is enabled"
+                }
+              ]
+            },
+            {
+              "name": "PTYP",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Memory type Defines the type of device attached to the corresponding memory bank:",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NANDFlash",
+                  "value": 1,
+                  "description": "NAND Flash"
+                }
+              ]
+            },
+            {
+              "name": "PWID",
+              "bit_offset": 4,
+              "bit_width": 2,
+              "description": "Data bus width Defines the external memory device width.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Bits8",
+                  "value": 0,
+                  "description": "External memory device width 8 bits"
+                },
+                {
+                  "name": "Bits16",
+                  "value": 1,
+                  "description": "External memory device width 16 bits"
+                }
+              ]
+            },
+            {
+              "name": "ECCEN",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "ECC computation logic enable bit",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "ECC logic is disabled and reset"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "ECC logic is enabled"
+                }
+              ]
+            },
+            {
+              "name": "TCLR",
+              "bit_offset": 9,
+              "bit_width": 4,
+              "description": "CLE to RE delay Sets time from CLE low to RE low in number of AHB clock cycles (HCLK). Time is t_clr = (TCLR + SET + 2) THCLK where THCLK is the HCLK clock period Note: SET is MEMSET or ATTSET according to the addressed space.",
+              "access": "read-write"
+            },
+            {
+              "name": "TAR",
+              "bit_offset": 13,
+              "bit_width": 4,
+              "description": "ALE to RE delay Sets time from ALE low to RE low in number of AHB clock cycles (HCLK). Time is: t_ar = (TAR + SET + 2) THCLK where THCLK is the HCLK clock period Note: SET is MEMSET or ATTSET according to the addressed space."
+            },
+            {
+              "name": "ECCPS",
+              "bit_offset": 17,
+              "bit_width": 3,
+              "description": "ECC page size Defines the page size for the extended ECC:",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Bytes256",
+                  "value": 0,
+                  "description": "ECC page size 256 bytes"
+                },
+                {
+                  "name": "Bytes512",
+                  "value": 1,
+                  "description": "ECC page size 512 bytes"
+                },
+                {
+                  "name": "Bytes1024",
+                  "value": 2,
+                  "description": "ECC page size 1024 bytes"
+                },
+                {
+                  "name": "Bytes2048",
+                  "value": 3,
+                  "description": "ECC page size 2048 bytes"
+                },
+                {
+                  "name": "Bytes4096",
+                  "value": 4,
+                  "description": "ECC page size 4096 bytes"
+                },
+                {
+                  "name": "Bytes8192",
+                  "value": 5,
+                  "description": "ECC page size 8192 bytes"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "SR",
+          "offset": 132,
+          "size": 32,
+          "access": null,
+          "reset_value": 64,
+          "description": "FIFO status and interrupt register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "IRS",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Interrupt rising edge status The flag is set by hardware and reset by software. Note: If this bit is written by software to 1 it is set.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "DidNotOccur",
+                  "value": 0,
+                  "description": "Interrupt rising edge did not occur"
+                },
+                {
+                  "name": "Occurred",
+                  "value": 1,
+                  "description": "Interrupt rising edge occurred"
+                }
+              ]
+            },
+            {
+              "name": "ILS",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Interrupt high-level status The flag is set by hardware and reset by software.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "DidNotOccur",
+                  "value": 0,
+                  "description": "Interrupt high-level did not occur"
+                },
+                {
+                  "name": "Occurred",
+                  "value": 1,
+                  "description": "Interrupt high-level occurred"
+                }
+              ]
+            },
+            {
+              "name": "IFS",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Interrupt falling edge status The flag is set by hardware and reset by software. Note: If this bit is written by software to 1 it is set.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "DidNotOccur",
+                  "value": 0,
+                  "description": "Interrupt falling edge did not occur"
+                },
+                {
+                  "name": "Occurred",
+                  "value": 1,
+                  "description": "Interrupt falling edge occurred"
+                }
+              ]
+            },
+            {
+              "name": "IREN",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Interrupt rising edge detection enable bit",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Interrupt rising edge detection request disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Interrupt rising edge detection request enabled"
+                }
+              ]
+            },
+            {
+              "name": "ILEN",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Interrupt high-level detection enable bit",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Interrupt high-level detection request disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Interrupt high-level detection request enabled"
+                }
+              ]
+            },
+            {
+              "name": "IFEN",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Interrupt falling edge detection enable bit",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Interrupt falling edge detection request disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Interrupt falling edge detection request enabled"
+                }
+              ]
+            },
+            {
+              "name": "FEMPT",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "FIFO empty Read-only bit that provides the status of the FIFO",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotEmpty",
+                  "value": 0,
+                  "description": "FIFO not empty"
+                },
+                {
+                  "name": "Empty",
+                  "value": 1,
+                  "description": "FIFO empty"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "PMEM",
+          "offset": 136,
+          "size": 32,
+          "access": null,
+          "reset_value": 4244438268,
+          "description": "Common memory space timing register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "MEMSET",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "Common memory x setup time Defines the number of HCLK (+1) clock cycles to set up the address before the command assertion (NWE, NOE), for NAND Flash read or write access to common memory space on socket x:",
+              "access": "read-write"
+            },
+            {
+              "name": "MEMWAIT",
+              "bit_offset": 8,
+              "bit_width": 8,
+              "description": "Common memory wait time Defines the minimum number of HCLK (+1) clock cycles to assert the command (NWE, NOE), for NAND Flash read or write access to common memory space on socket. The duration of command assertion is extended if the wait signal (NWAIT) is active (low) at the end of the programmed value of HCLK:",
+              "access": "read-write"
+            },
+            {
+              "name": "MEMHOLD",
+              "bit_offset": 16,
+              "bit_width": 8,
+              "description": "Common memory hold time Defines the number of HCLK clock cycles for write access and HCLK (+2) clock cycles for read access during which the address is held (and data for write accesses) after the command is deasserted (NWE, NOE), for NAND Flash read or write access to common memory space on socket x:",
+              "access": "read-write"
+            },
+            {
+              "name": "MEMHIZ",
+              "bit_offset": 24,
+              "bit_width": 8,
+              "description": "Common memory x data bus Hi-Z time Defines the number of HCLK clock cycles during which the data bus is kept Hi-Z after the start of a NAND Flash write access to common memory space on socket. This is only valid for write transactions:",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "PATT",
+          "offset": 140,
+          "size": 32,
+          "access": null,
+          "reset_value": 4244438268,
+          "description": "Attribute memory space timing register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "ATTSET",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "Attribute memory setup time Defines the number of HCLK (+1) clock cycles to set up address before the command assertion (NWE, NOE), for NAND Flash read or write access to attribute memory space on socket:",
+              "access": "read-write"
+            },
+            {
+              "name": "ATTWAIT",
+              "bit_offset": 8,
+              "bit_width": 8,
+              "description": "Attribute memory wait time Defines the minimum number of HCLK (+1) clock cycles to assert the command (NWE, NOE), for NAND Flash read or write access to attribute memory space on socket x. The duration for command assertion is extended if the wait signal (NWAIT) is active (low) at the end of the programmed value of HCLK:",
+              "access": "read-write"
+            },
+            {
+              "name": "ATTHOLD",
+              "bit_offset": 16,
+              "bit_width": 8,
+              "description": "Attribute memory hold time Defines the number of HCLK clock cycles for write access and HCLK (+2) clock cycles for read access during which the address is held (and data for write access) after the command deassertion (NWE, NOE), for NAND Flash read or write access to attribute memory space on socket:",
+              "access": "read-write"
+            },
+            {
+              "name": "ATTHIZ",
+              "bit_offset": 24,
+              "bit_width": 8,
+              "description": "Attribute memory data bus Hi-Z time Defines the number of HCLK clock cycles during which the data bus is kept in Hi-Z after the start of a NAND Flash write access to attribute memory space on socket. Only valid for writ transaction:",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "ECCR",
+          "offset": 148,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "ECC result registers",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "ECC",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "ECC result This field contains the value computed by the ECC computation logic. Table 99 describes the contents of these bitfields.",
+              "access": "read-only"
+            }
+          ]
+        },
+        {
+          "name": "BWTR%s",
           "offset": 260,
           "size": 32,
-          "description": "SRAM/NOR-Flash write timing registers 1.",
+          "access": null,
+          "reset_value": 268435455,
+          "description": "SRAM/NOR-Flash write timing registers %s",
           "array_len": 4,
           "array_stride": 8,
-          "fieldset_description": "SRAM/NOR-Flash write timing registers 1.",
           "fields": [
             {
               "name": "ADDSET",
               "bit_offset": 0,
               "bit_width": 4,
               "description": "Address setup phase duration. These bits are written by software to define the duration of the address setup phase in HCLK cycles (refer to Figure 21 to Figure 33), used in asynchronous accesses: ... Note: In synchronous accesses, this value is not used, the address setup phase is always 1 Flash clock period duration. In muxed mode, the minimum ADDSET value is 1.",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "ADDHLD",
               "bit_offset": 4,
               "bit_width": 4,
               "description": "Address-hold phase duration. These bits are written by software to define the duration of the address hold phase (refer to Figure 30 to Figure 33), used in asynchronous multiplexed accesses: ... Note: In synchronous NOR Flash accesses, this value is not used, the address hold phase is always 1 Flash clock period duration.",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "DATAST",
               "bit_offset": 8,
               "bit_width": 8,
               "description": "Data-phase duration. These bits are written by software to define the duration of the data phase (refer to Figure 21 to Figure 33), used in asynchronous SRAM, PSRAM and NOR Flash memory accesses: ...",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "BUSTURN",
               "bit_offset": 16,
               "bit_width": 4,
-              "description": "Bus turnaround phase duration These bits are written by software to add a delay at the end of current write transaction to next transaction on the same bank. For FRAM memories, the bus turnaround delay should be configured to match the minimum t<sub>PC</sub> (precharge time) timings. The bus turnaround delay is inserted between any consecutive transactions on the same bank (read/read, write/write, read/write and write/read). The chip select is toggling between any consecutive accesses. (BUSTURN + 1)HCLK period ≥ tPC min ...",
-              "enum": null
+              "description": "Bus turnaround phase duration These bits are written by software to add a delay at the end of current write transaction to next transaction on the same bank. For FRAM memories, the bus turnaround delay should be configured to match the minimum t PC (precharge time) timings. The bus turnaround delay is inserted between any consecutive transactions on the same bank (read/read, write/write, read/write and write/read). The chip select is toggling between any consecutive accesses. (BUSTURN + 1)HCLK period greater than or equal tPC min ...",
+              "access": "read-write"
             },
             {
               "name": "ACCMOD",
               "bit_offset": 28,
               "bit_width": 2,
               "description": "Access mode. Specifies the asynchronous access modes as shown in the next timing diagrams.These bits are taken into account only when the EXTMOD bit in the FMC_BCRx register is 1.",
-              "enum": "ACCMOD"
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "A",
+                  "value": 0,
+                  "description": "Access mode A"
+                },
+                {
+                  "name": "B",
+                  "value": 1,
+                  "description": "Access mode B"
+                },
+                {
+                  "name": "C",
+                  "value": 2,
+                  "description": "Access mode C"
+                },
+                {
+                  "name": "D",
+                  "value": 3,
+                  "description": "Access mode D"
+                }
+              ]
             },
             {
               "name": "DATAHLD",
               "bit_offset": 30,
               "bit_width": 2,
-              "description": "Data hold phase duration These bits are written by software to define the duration of the data hold phase in HCLK cycles (refer to Figure 21 to Figure 33), used in asynchronous write accesses:.",
-              "enum": null
+              "description": "Data hold phase duration These bits are written by software to define the duration of the data hold phase in HCLK cycles (refer to Figure 21 to Figure 33), used in asynchronous write accesses:",
+              "access": "read-write"
             }
           ]
-        }
-      ]
-    },
-    "SDRAM": {
-      "name": "SDRAM",
-      "description": null,
-      "extends": null,
-      "registers": [
+        },
         {
-          "name": "SDCR",
-          "offset": 0,
+          "name": "SDCR1",
+          "offset": 320,
           "size": 32,
-          "description": "SDRAM control registers 1.",
-          "array_len": 2,
-          "array_stride": 4,
-          "fieldset_description": "SDRAM control registers 1.",
+          "access": null,
+          "reset_value": 720,
+          "description": "SDRAM control registers 1",
+          "array_len": null,
+          "array_stride": null,
           "fields": [
             {
               "name": "NC",
               "bit_offset": 0,
               "bit_width": 2,
               "description": "Number of column address bits These bits define the number of bits of a column address.",
-              "enum": "NC"
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Bits8",
+                  "value": 0,
+                  "description": "8 bits"
+                },
+                {
+                  "name": "Bits9",
+                  "value": 1,
+                  "description": "9 bits"
+                },
+                {
+                  "name": "Bits10",
+                  "value": 2,
+                  "description": "10 bits"
+                },
+                {
+                  "name": "Bits11",
+                  "value": 3,
+                  "description": "11 bits"
+                }
+              ]
             },
             {
               "name": "NR",
               "bit_offset": 2,
               "bit_width": 2,
               "description": "Number of row address bits These bits define the number of bits of a row address.",
-              "enum": "NR"
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Bits11",
+                  "value": 0,
+                  "description": "11 bits"
+                },
+                {
+                  "name": "Bits12",
+                  "value": 1,
+                  "description": "12 bits"
+                },
+                {
+                  "name": "Bits13",
+                  "value": 2,
+                  "description": "13 bits"
+                }
+              ]
             },
             {
               "name": "MWID",
               "bit_offset": 4,
               "bit_width": 2,
               "description": "Memory data bus width. These bits define the memory device width.",
-              "enum": "MWID"
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Bits8",
+                  "value": 0,
+                  "description": "Memory data bus width 8 bits"
+                },
+                {
+                  "name": "Bits16",
+                  "value": 1,
+                  "description": "Memory data bus width 16 bits"
+                },
+                {
+                  "name": "Bits32",
+                  "value": 2,
+                  "description": "Memory data bus width 32 bits"
+                }
+              ]
             },
             {
               "name": "NB",
               "bit_offset": 6,
               "bit_width": 1,
               "description": "Number of internal banks This bit sets the number of internal banks.",
-              "enum": "NB"
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NB2",
+                  "value": 0,
+                  "description": "Two internal Banks"
+                },
+                {
+                  "name": "NB4",
+                  "value": 1,
+                  "description": "Four internal Banks"
+                }
+              ]
             },
             {
               "name": "CAS",
               "bit_offset": 7,
               "bit_width": 2,
-              "description": "CAS Latency This bits sets the SDRAM CAS latency in number of memory clock cycles.",
-              "enum": "CAS"
+              "description": "CAS Latency This bits sets the SDRAM CAS latency in number of memory clock cycles",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Clocks1",
+                  "value": 1,
+                  "description": "1 cycle"
+                },
+                {
+                  "name": "Clocks2",
+                  "value": 2,
+                  "description": "2 cycles"
+                },
+                {
+                  "name": "Clocks3",
+                  "value": 3,
+                  "description": "3 cycles"
+                }
+              ]
             },
             {
               "name": "WP",
               "bit_offset": 9,
               "bit_width": 1,
               "description": "Write protection This bit enables write mode access to the SDRAM bank.",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Write accesses allowed"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Write accesses ignored"
+                }
+              ]
             },
             {
               "name": "SDCLK",
               "bit_offset": 10,
               "bit_width": 2,
-              "description": "SDRAM clock configuration These bits define the SDRAM clock period for both SDRAM banks and allow disabling the clock before changing the frequency. In this case the SDRAM must be re-initialized. Note: The corresponding bits in the FMC_SDCR2 register are don’t care.",
-              "enum": "SDCLK"
+              "description": "SDRAM clock configuration These bits define the SDRAM clock period for both SDRAM banks and allow disabling the clock before changing the frequency. In this case the SDRAM must be re-initialized. Note: The corresponding bits in the FMC_SDCR2 register are don't care.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "SDCLK clock disabled"
+                },
+                {
+                  "name": "Div2",
+                  "value": 2,
+                  "description": "SDCLK period = 2 x HCLK period"
+                },
+                {
+                  "name": "Div3",
+                  "value": 3,
+                  "description": "SDCLK period = 3 x HCLK period"
+                }
+              ]
             },
             {
               "name": "RBURST",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "Burst read This bit enables Burst read mode. The SDRAM controller anticipates the next read commands during the CAS latency and stores data in the Read FIFO. Note: The corresponding bit in the FMC_SDCR2 register is don’t care.",
-              "enum": null
+              "description": "Burst read This bit enables Burst read mode. The SDRAM controller anticipates the next read commands during the CAS latency and stores data in the Read FIFO. Note: The corresponding bit in the FMC_SDCR2 register is don't care.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Single read requests are not managed as bursts"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Single read requests are always managed as bursts"
+                }
+              ]
             },
             {
               "name": "RPIPE",
               "bit_offset": 13,
               "bit_width": 2,
               "description": "Read pipe These bits define the delay, in clock cycles, for reading data after CAS latency. Note: The corresponding bits in the FMC_SDCR2 register is read only.",
-              "enum": "RPIPE"
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoDelay",
+                  "value": 0,
+                  "description": "No clock cycle delay"
+                },
+                {
+                  "name": "Clocks1",
+                  "value": 1,
+                  "description": "One clock cycle delay"
+                },
+                {
+                  "name": "Clocks2",
+                  "value": 2,
+                  "description": "Two clock cycles delay"
+                }
+              ]
             }
           ]
         },
         {
-          "name": "SDTR",
-          "offset": 8,
+          "name": "SDCR2",
+          "offset": 324,
           "size": 32,
-          "description": "SDRAM timing registers 1.",
+          "access": null,
+          "reset_value": 720,
+          "description": "SDRAM control registers 2",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "NC",
+              "bit_offset": 0,
+              "bit_width": 2,
+              "description": "Number of column address bits These bits define the number of bits of a column address.",
+              "access": "read-write"
+            },
+            {
+              "name": "NR",
+              "bit_offset": 2,
+              "bit_width": 2,
+              "description": "Number of row address bits These bits define the number of bits of a row address.",
+              "access": "read-write"
+            },
+            {
+              "name": "MWID",
+              "bit_offset": 4,
+              "bit_width": 2,
+              "description": "Memory data bus width. These bits define the memory device width.",
+              "access": "read-write"
+            },
+            {
+              "name": "NB",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Number of internal banks This bit sets the number of internal banks.",
+              "access": "read-write"
+            },
+            {
+              "name": "CAS",
+              "bit_offset": 7,
+              "bit_width": 2,
+              "description": "CAS Latency This bits sets the SDRAM CAS latency in number of memory clock cycles",
+              "access": "read-write"
+            },
+            {
+              "name": "WP",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Write protection This bit enables write mode access to the SDRAM bank.",
+              "access": "read-write"
+            },
+            {
+              "name": "SDCLK",
+              "bit_offset": 10,
+              "bit_width": 2,
+              "description": "SDRAM clock configuration These bits define the SDRAM clock period for both SDRAM banks and allow disabling the clock before changing the frequency. In this case the SDRAM must be re-initialized. Note: The corresponding bits in the FMC_SDCR2 register are don't care.",
+              "access": "read-write"
+            },
+            {
+              "name": "RBURST",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "Burst read This bit enables Burst read mode. The SDRAM controller anticipates the next read commands during the CAS latency and stores data in the Read FIFO. Note: The corresponding bit in the FMC_SDCR2 register is don't care.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Single read requests are not managed as bursts"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Single read requests are always managed as bursts"
+                }
+              ]
+            },
+            {
+              "name": "RPIPE",
+              "bit_offset": 13,
+              "bit_width": 2,
+              "description": "Read pipe These bits define the delay, in clock cycles, for reading data after CAS latency. Note: The corresponding bits in the FMC_SDCR2 register is read only.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoDelay",
+                  "value": 0,
+                  "description": "No clock cycle delay"
+                },
+                {
+                  "name": "Clocks1",
+                  "value": 1,
+                  "description": "One clock cycle delay"
+                },
+                {
+                  "name": "Clocks2",
+                  "value": 2,
+                  "description": "Two clock cycles delay"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "SDTR%s",
+          "offset": 328,
+          "size": 32,
+          "access": null,
+          "reset_value": 268435455,
+          "description": "SDRAM timing registers %s",
           "array_len": 2,
           "array_stride": 4,
-          "fieldset_description": "SDRAM timing registers 1.",
           "fields": [
             {
               "name": "TMRD",
               "bit_offset": 0,
               "bit_width": 4,
               "description": "Load Mode Register to Active These bits define the delay between a Load Mode Register command and an Active or Refresh command in number of memory clock cycles. ....",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "TXSR",
               "bit_offset": 4,
               "bit_width": 4,
               "description": "Exit Self-refresh delay These bits define the delay from releasing the Self-refresh command to issuing the Activate command in number of memory clock cycles. .... Note: If two SDRAM devices are used, the FMC_SDTR1 and FMC_SDTR2 must be programmed with the same TXSR timing corresponding to the slowest SDRAM device.",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "TRAS",
               "bit_offset": 8,
               "bit_width": 4,
               "description": "Self refresh time These bits define the minimum Self-refresh period in number of memory clock cycles. ....",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "TRC",
               "bit_offset": 12,
               "bit_width": 4,
-              "description": "Row cycle delay These bits define the delay between the Refresh command and the Activate command, as well as the delay between two consecutive Refresh commands. It is expressed in number of memory clock cycles. The TRC timing is only configured in the FMC_SDTR1 register. If two SDRAM devices are used, the TRC must be programmed with the timings of the slowest device. .... Note: TRC must match the TRC and TRFC (Auto Refresh period) timings defined in the SDRAM device datasheet. Note: The corresponding bits in the FMC_SDTR2 register are don’t care.",
-              "enum": null
+              "description": "Row cycle delay These bits define the delay between the Refresh command and the Activate command, as well as the delay between two consecutive Refresh commands. It is expressed in number of memory clock cycles. The TRC timing is only configured in the FMC_SDTR1 register. If two SDRAM devices are used, the TRC must be programmed with the timings of the slowest device. .... Note: TRC must match the TRC and TRFC (Auto Refresh period) timings defined in the SDRAM device datasheet. Note: The corresponding bits in the FMC_SDTR2 register are don't care.",
+              "access": "read-write"
             },
             {
               "name": "TWR",
               "bit_offset": 16,
               "bit_width": 4,
-              "description": "Recovery delay These bits define the delay between a Write and a Precharge command in number of memory clock cycles. .... Note: TWR must be programmed to match the write recovery time (t<sub>WR</sub>) defined in the SDRAM datasheet, and to guarantee that: Note: TWR ≥ TRAS - TRCD and TWR ≥TRC - TRCD - TRP Note: Example: TRAS= 4 cycles, TRCD= 2 cycles. So, TWR >= 2 cycles. TWR must be programmed to 0x1. Note: If two SDRAM devices are used, the FMC_SDTR1 and FMC_SDTR2 must be programmed with the same TWR timing corresponding to the slowest SDRAM device. Note: If only one SDRAM device is used, the TWR timing must be kept at reset value (0xF) for the not used bank.",
-              "enum": null
+              "description": "Recovery delay These bits define the delay between a Write and a Precharge command in number of memory clock cycles. .... Note: TWR must be programmed to match the write recovery time (t WR ) defined in the SDRAM datasheet, and to guarantee that: Note: TWR greater than or equal TRAS TRCD and TWR greater than or equalTRC TRCD TRP Note: Example: TRAS= 4 cycles, TRCD= 2 cycles. So, TWR = 2 cycles. TWR must be programmed to 0x1. Note: If two SDRAM devices are used, the FMC_SDTR1 and FMC_SDTR2 must be programmed with the same TWR timing corresponding to the slowest SDRAM device. Note: If only one SDRAM device is used, the TWR timing must be kept at reset value (0xF) for the not used bank.",
+              "access": "read-write"
             },
             {
               "name": "TRP",
               "bit_offset": 20,
               "bit_width": 4,
-              "description": "Row precharge delay These bits define the delay between a Precharge command and another command in number of memory clock cycles. The TRP timing is only configured in the FMC_SDTR1 register. If two SDRAM devices are used, the TRP must be programmed with the timing of the slowest device. .... Note: The corresponding bits in the FMC_SDTR2 register are don’t care.",
-              "enum": null
+              "description": "Row precharge delay These bits define the delay between a Precharge command and another command in number of memory clock cycles. The TRP timing is only configured in the FMC_SDTR1 register. If two SDRAM devices are used, the TRP must be programmed with the timing of the slowest device. .... Note: The corresponding bits in the FMC_SDTR2 register are don't care.",
+              "access": "read-write"
             },
             {
               "name": "TRCD",
               "bit_offset": 24,
               "bit_width": 4,
               "description": "Row to column delay These bits define the delay between the Activate command and a Read/Write command in number of memory clock cycles. ....",
-              "enum": null
+              "access": "read-write"
             }
           ]
         },
         {
           "name": "SDCMR",
-          "offset": 16,
+          "offset": 336,
           "size": 32,
-          "description": "SDRAM Command Mode register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "SDRAM Command Mode register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "SDRAM Command Mode register.",
           "fields": [
             {
               "name": "MODE",
               "bit_offset": 0,
               "bit_width": 3,
-              "description": "Command mode These bits define the command issued to the SDRAM device. Note: When a command is issued, at least one Command Target Bank bit ( CTB1 or CTB2) must be set otherwise the command will be ignored. Note: If two SDRAM banks are used, the Auto-refresh and PALL command must be issued simultaneously to the two devices with CTB1 and CTB2 bits set otherwise the command will be ignored. Note: If only one SDRAM bank is used and a command is issued with it’s associated CTB bit set, the other CTB bit of the the unused bank must be kept to 0.",
-              "enum": "MODE"
+              "description": "Command mode These bits define the command issued to the SDRAM device. Note: When a command is issued, at least one Command Target Bank bit ( CTB1 or CTB2) must be set otherwise the command will be ignored. Note: If two SDRAM banks are used, the Auto-refresh and PALL command must be issued simultaneously to the two devices with CTB1 and CTB2 bits set otherwise the command will be ignored. Note: If only one SDRAM bank is used and a command is issued with it's associated CTB bit set, the other CTB bit of the the unused bank must be kept to 0.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Normal",
+                  "value": 0,
+                  "description": "Normal Mode"
+                },
+                {
+                  "name": "ClockConfigurationEnable",
+                  "value": 1,
+                  "description": "Clock Configuration Enable"
+                },
+                {
+                  "name": "PALL",
+                  "value": 2,
+                  "description": "PALL (All Bank Precharge) command"
+                },
+                {
+                  "name": "AutoRefreshCommand",
+                  "value": 3,
+                  "description": "Auto-refresh command"
+                },
+                {
+                  "name": "LoadModeRegister",
+                  "value": 4,
+                  "description": "Load Mode Resgier"
+                },
+                {
+                  "name": "SelfRefreshCommand",
+                  "value": 5,
+                  "description": "Self-refresh command"
+                },
+                {
+                  "name": "PowerDownCommand",
+                  "value": 6,
+                  "description": "Power-down command"
+                }
+              ]
             },
             {
-              "name": "CTB",
+              "name": "CTB2",
               "bit_offset": 3,
               "bit_width": 1,
               "description": "Command Target Bank 2 This bit indicates whether the command will be issued to SDRAM Bank 2 or not.",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NotIssued",
+                  "value": 0,
+                  "description": "Command not issued to SDRAM Bank 1"
+                },
+                {
+                  "name": "Issued",
+                  "value": 1,
+                  "description": "Command issued to SDRAM Bank 1"
+                }
+              ]
+            },
+            {
+              "name": "CTB1",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Command Target Bank 1 This bit indicates whether the command will be issued to SDRAM Bank 1 or not.",
+              "access": "read-write"
             },
             {
               "name": "NRFS",
               "bit_offset": 5,
               "bit_width": 4,
-              "description": "Number of Auto-refresh These bits define the number of consecutive Auto-refresh commands issued when MODE = ‘011’. ....",
-              "enum": null
+              "description": "Number of Auto-refresh These bits define the number of consecutive Auto-refresh commands issued when MODE = '011'. ....",
+              "access": "read-write"
             },
             {
               "name": "MRD",
               "bit_offset": 9,
               "bit_width": 13,
               "description": "Mode Register definition This 13-bit field defines the SDRAM Mode Register content. The Mode Register is programmed using the Load Mode Register command.",
-              "enum": null
+              "access": "read-write"
             }
           ]
         },
         {
           "name": "SDRTR",
-          "offset": 20,
+          "offset": 340,
           "size": 32,
-          "description": "SDRAM refresh timer register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "SDRAM refresh timer register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "SDRAM refresh timer register.",
           "fields": [
             {
               "name": "CRE",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "Clear Refresh error flag This bit is used to clear the Refresh Error Flag (RE) in the Status Register.",
-              "enum": null
+              "access": "write-only",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Refresh Error Flag is cleared"
+                }
+              ]
             },
             {
               "name": "COUNT",
               "bit_offset": 1,
               "bit_width": 13,
-              "description": "Refresh Timer Count This 13-bit field defines the refresh rate of the SDRAM device. It is expressed in number of memory clock cycles. It must be set at least to 41 SDRAM clock cycles (0x29). Refresh rate = (COUNT + 1) x SDRAM frequency clock COUNT = (SDRAM refresh period / Number of rows) - 20.",
-              "enum": null
+              "description": "Refresh Timer Count This 13-bit field defines the refresh rate of the SDRAM device. It is expressed in number of memory clock cycles. It must be set at least to 41 SDRAM clock cycles (0x29). Refresh rate = (COUNT + 1) x SDRAM frequency clock COUNT = (SDRAM refresh period / Number of rows) 20",
+              "access": "read-write"
             },
             {
               "name": "REIE",
               "bit_offset": 14,
               "bit_width": 1,
-              "description": "RES Interrupt Enable.",
-              "enum": null
+              "description": "RES Interrupt Enable",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Interrupt is disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Interrupt is generated if RE = 1"
+                }
+              ]
             }
           ]
         },
         {
           "name": "SDSR",
-          "offset": 24,
+          "offset": 344,
           "size": 32,
-          "description": "SDRAM status register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "SDRAM status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "SDRAM status register.",
           "fields": [
             {
               "name": "RE",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Refresh error flag An interrupt is generated if REIE = 1 and RE = 1.",
-              "enum": null
+              "description": "Refresh error flag An interrupt is generated if REIE = 1 and RE = 1",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NoError",
+                  "value": 0,
+                  "description": "No refresh error has been detected"
+                },
+                {
+                  "name": "Error",
+                  "value": 1,
+                  "description": "A refresh error has been detected"
+                }
+              ]
             },
             {
-              "name": "MODES",
+              "name": "MODES1",
               "bit_offset": 1,
               "bit_width": 2,
               "description": "Status Mode for Bank 1 This bit defines the Status Mode of SDRAM Bank 1.",
-              "enum": "MODES"
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "Normal",
+                  "value": 0,
+                  "description": "Normal Mode"
+                },
+                {
+                  "name": "SelfRefresh",
+                  "value": 1,
+                  "description": "Self-refresh mode"
+                },
+                {
+                  "name": "PowerDown",
+                  "value": 2,
+                  "description": "Power-down mode"
+                }
+              ]
+            },
+            {
+              "name": "MODES2",
+              "bit_offset": 3,
+              "bit_width": 2,
+              "description": "Status Mode for Bank 2 This bit defines the Status Mode of SDRAM Bank 2.",
+              "access": "read-only"
             },
             {
               "name": "BUSY",
               "bit_offset": 5,
               "bit_width": 1,
-              "description": "Busy status This bit defines the status of the SDRAM controller after a Command Mode request 1; SDRAM Controller is not ready to accept a new request.",
-              "enum": null
+              "description": "Busy status This bit defines the status of the SDRAM controller after a Command Mode request 1; SDRAM Controller is not ready to accept a new request",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotBusy",
+                  "value": 0,
+                  "description": "SDRAM Controller is ready to accept a new request"
+                },
+                {
+                  "name": "Busy",
+                  "value": 1,
+                  "description": "SDRAM Controller is not ready to accept a new request"
+                }
+              ]
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "ACCMOD": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "A",
-          "value": 0,
-          "description": "Access mode A"
-        },
-        {
-          "name": "B",
-          "value": 1,
-          "description": "Access mode B"
-        },
-        {
-          "name": "C",
-          "value": 2,
-          "description": "Access mode C"
-        },
-        {
-          "name": "D",
-          "value": 3,
-          "description": "Access mode D"
-        }
-      ]
-    },
-    "CAS": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Clocks1",
-          "value": 1,
-          "description": "1 cycle"
-        },
-        {
-          "name": "Clocks2",
-          "value": 2,
-          "description": "2 cycles"
-        },
-        {
-          "name": "Clocks3",
-          "value": 3,
-          "description": "3 cycles"
-        }
-      ]
-    },
-    "CBURSTRW": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Asynchronous",
-          "value": 0,
-          "description": "Write operations are always performed in Asynchronous mode."
-        },
-        {
-          "name": "Synchronous",
-          "value": 1,
-          "description": "Write operations are performed in Synchronous mode."
-        }
-      ]
-    },
-    "CPSIZE": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "NoBurstSplit",
-          "value": 0,
-          "description": "No burst split when crossing page boundary"
-        },
-        {
-          "name": "Bytes128",
-          "value": 1,
-          "description": "128 bytes CRAM page size"
-        },
-        {
-          "name": "Bytes256",
-          "value": 2,
-          "description": "256 bytes CRAM page size"
-        },
-        {
-          "name": "Bytes512",
-          "value": 3,
-          "description": "512 bytes CRAM page size"
-        },
-        {
-          "name": "Bytes1024",
-          "value": 4,
-          "description": "1024 bytes CRAM page size"
-        }
-      ]
-    },
-    "ECCPS": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "Bytes256",
-          "value": 0,
-          "description": "ECC page size 256 bytes"
-        },
-        {
-          "name": "Bytes512",
-          "value": 1,
-          "description": "ECC page size 512 bytes"
-        },
-        {
-          "name": "Bytes1024",
-          "value": 2,
-          "description": "ECC page size 1024 bytes"
-        },
-        {
-          "name": "Bytes2048",
-          "value": 3,
-          "description": "ECC page size 2048 bytes"
-        },
-        {
-          "name": "Bytes4096",
-          "value": 4,
-          "description": "ECC page size 4096 bytes"
-        },
-        {
-          "name": "Bytes8192",
-          "value": 5,
-          "description": "ECC page size 8192 bytes"
-        }
-      ]
-    },
-    "MODE": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "Normal",
-          "value": 0,
-          "description": "Normal Mode"
-        },
-        {
-          "name": "ClockConfigurationEnable",
-          "value": 1,
-          "description": "Clock Configuration Enable"
-        },
-        {
-          "name": "PALL",
-          "value": 2,
-          "description": "PALL (All Bank Precharge) command"
-        },
-        {
-          "name": "AutoRefreshCommand",
-          "value": 3,
-          "description": "Auto-refresh command"
-        },
-        {
-          "name": "LoadModeRegister",
-          "value": 4,
-          "description": "Load Mode Resgier"
-        },
-        {
-          "name": "SelfRefreshCommand",
-          "value": 5,
-          "description": "Self-refresh command"
-        },
-        {
-          "name": "PowerDownCommand",
-          "value": 6,
-          "description": "Power-down command"
-        }
-      ]
-    },
-    "MODES": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Normal",
-          "value": 0,
-          "description": "Normal Mode"
-        },
-        {
-          "name": "SelfRefresh",
-          "value": 1,
-          "description": "Self-refresh mode"
-        },
-        {
-          "name": "PowerDown",
-          "value": 2,
-          "description": "Power-down mode"
-        }
-      ]
-    },
-    "MTYP": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "SRAM",
-          "value": 0,
-          "description": "SRAM memory type"
-        },
-        {
-          "name": "PSRAM",
-          "value": 1,
-          "description": "PSRAM (CRAM) memory type"
-        },
-        {
-          "name": "Flash",
-          "value": 2,
-          "description": "NOR Flash/OneNAND Flash"
-        }
-      ]
-    },
-    "MWID": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Bits8",
-          "value": 0,
-          "description": "Memory data bus width 8 bits"
-        },
-        {
-          "name": "Bits16",
-          "value": 1,
-          "description": "Memory data bus width 16 bits"
-        },
-        {
-          "name": "Bits32",
-          "value": 2,
-          "description": "Memory data bus width 32 bits"
-        }
-      ]
-    },
-    "NB": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "NB2",
-          "value": 0,
-          "description": "Two internal Banks"
-        },
-        {
-          "name": "NB4",
-          "value": 1,
-          "description": "Four internal Banks"
-        }
-      ]
-    },
-    "NC": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Bits8",
-          "value": 0,
-          "description": "8 bits"
-        },
-        {
-          "name": "Bits9",
-          "value": 1,
-          "description": "9 bits"
-        },
-        {
-          "name": "Bits10",
-          "value": 2,
-          "description": "10 bits"
-        },
-        {
-          "name": "Bits11",
-          "value": 3,
-          "description": "11 bits"
-        }
-      ]
-    },
-    "NR": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Bits11",
-          "value": 0,
-          "description": "11 bits"
-        },
-        {
-          "name": "Bits12",
-          "value": 1,
-          "description": "12 bits"
-        },
-        {
-          "name": "Bits13",
-          "value": 2,
-          "description": "13 bits"
-        }
-      ]
-    },
-    "PTYP": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "NAND",
-          "value": 1,
-          "description": "NAND flash"
-        }
-      ]
-    },
-    "PWID": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Bits8",
-          "value": 0,
-          "description": "External memory device width 8 bits"
-        },
-        {
-          "name": "Bits16",
-          "value": 1,
-          "description": "External memory device width 16 bits"
-        }
-      ]
-    },
-    "RPIPE": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "NoDelay",
-          "value": 0,
-          "description": "No clock cycle delay"
-        },
-        {
-          "name": "Clocks1",
-          "value": 1,
-          "description": "One clock cycle delay"
-        },
-        {
-          "name": "Clocks2",
-          "value": 2,
-          "description": "Two clock cycles delay"
-        }
-      ]
-    },
-    "SDCLK": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Disabled",
-          "value": 0,
-          "description": "SDCLK clock disabled"
-        },
-        {
-          "name": "Div2",
-          "value": 2,
-          "description": "SDCLK period = 2 x HCLK period"
-        },
-        {
-          "name": "Div3",
-          "value": 3,
-          "description": "SDCLK period = 3 x HCLK period"
-        }
-      ]
-    },
-    "WAITCFG": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "BeforeWaitState",
-          "value": 0,
-          "description": "NWAIT signal is active one data cycle before wait state"
-        },
-        {
-          "name": "DuringWaitState",
-          "value": 1,
-          "description": "NWAIT signal is active during wait state"
-        }
-      ]
-    },
-    "WAITPOL": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "ActiveLow",
-          "value": 0,
-          "description": "NWAIT active low"
-        },
-        {
-          "name": "ActiveHigh",
-          "value": 1,
-          "description": "NWAIT active high"
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

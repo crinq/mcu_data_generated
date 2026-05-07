@@ -2,6 +2,9 @@
   "schema": 1,
   "kind": "flash",
   "version": "l5",
+  "source": "stm32rs_svd",
+  "source_device": "stm32l552cc",
+  "source_file": "stm32l552.svd.patched",
   "blocks": {
     "FLASH": {
       "name": "FLASH",
@@ -12,159 +15,207 @@
           "name": "ACR",
           "offset": 0,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "Access control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Access control register",
           "fields": [
             {
               "name": "LATENCY",
               "bit_offset": 0,
               "bit_width": 4,
-              "description": "Latency",
-              "enum": null
+              "description": "Latency"
             },
             {
               "name": "RUN_PD",
               "bit_offset": 13,
               "bit_width": 1,
-              "description": "Flash Power-down mode during Low-power run mode",
-              "enum": null
+              "description": "Flash Power-down mode during Low-power run mode"
             },
             {
               "name": "SLEEP_PD",
               "bit_offset": 14,
               "bit_width": 1,
-              "description": "Flash Power-down mode during Low-power sleep mode",
-              "enum": null
+              "description": "Flash Power-down mode during Low-power sleep mode"
             },
             {
               "name": "LVEN",
               "bit_offset": 15,
               "bit_width": 1,
-              "description": "LVEN",
-              "enum": null
+              "description": "LVEN"
             }
           ]
         },
         {
           "name": "PDKEYR",
           "offset": 4,
+          "size": 32,
+          "access": "write-only",
+          "reset_value": 0,
           "description": "Power down key register",
           "array_len": null,
           "array_stride": null,
-          "fields": []
+          "fields": [
+            {
+              "name": "PDKEYR",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "RUN_PD in FLASH_ACR key"
+            }
+          ]
         },
         {
           "name": "NSKEYR",
           "offset": 8,
+          "size": 32,
+          "access": "write-only",
+          "reset_value": 0,
           "description": "Flash non-secure key register",
           "array_len": null,
           "array_stride": null,
-          "fields": []
+          "fields": [
+            {
+              "name": "NSKEYR",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "NSKEYR"
+            }
+          ]
         },
         {
           "name": "SECKEYR",
           "offset": 12,
+          "size": 32,
+          "access": "write-only",
+          "reset_value": 0,
           "description": "Flash secure key register",
           "array_len": null,
           "array_stride": null,
-          "fields": []
+          "fields": [
+            {
+              "name": "SECKEYR",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "SECKEYR"
+            }
+          ]
         },
         {
           "name": "OPTKEYR",
           "offset": 16,
+          "size": 32,
+          "access": "write-only",
+          "reset_value": 0,
           "description": "Flash option key register",
           "array_len": null,
           "array_stride": null,
-          "fields": []
+          "fields": [
+            {
+              "name": "OPTKEYR",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "OPTKEYR"
+            }
+          ]
         },
         {
           "name": "LVEKEYR",
           "offset": 20,
+          "size": 32,
+          "access": "write-only",
+          "reset_value": 0,
           "description": "Flash low voltage key register",
           "array_len": null,
           "array_stride": null,
-          "fields": []
+          "fields": [
+            {
+              "name": "LVEKEYR",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "LVEKEYR"
+            }
+          ]
         },
         {
           "name": "NSSR",
           "offset": 32,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "Flash status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Flash status register",
           "fields": [
             {
               "name": "NSEOP",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "NSEOP",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "NSOPERR",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "NSOPERR",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "NSPROGERR",
               "bit_offset": 3,
               "bit_width": 1,
               "description": "NSPROGERR",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "NSWRPERR",
               "bit_offset": 4,
               "bit_width": 1,
               "description": "NSWRPERR",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "NSPGAERR",
               "bit_offset": 5,
               "bit_width": 1,
               "description": "NSPGAERR",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "NSSIZERR",
               "bit_offset": 6,
               "bit_width": 1,
               "description": "NSSIZERR",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "NSPGSERR",
               "bit_offset": 7,
               "bit_width": 1,
               "description": "NSPGSERR",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "OPTWERR",
               "bit_offset": 13,
               "bit_width": 1,
               "description": "OPTWERR",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "OPTVERR",
               "bit_offset": 15,
               "bit_width": 1,
               "description": "OPTVERR",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "NSBSY",
               "bit_offset": 16,
               "bit_width": 1,
               "description": "NSBusy",
-              "enum": null
+              "access": "read-only"
             }
           ]
         },
@@ -172,73 +223,74 @@
           "name": "SECSR",
           "offset": 36,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "Flash status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Flash status register",
           "fields": [
             {
               "name": "SECEOP",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "SECEOP",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "SECOPERR",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "SECOPERR",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "SECPROGERR",
               "bit_offset": 3,
               "bit_width": 1,
               "description": "SECPROGERR",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "SECWRPERR",
               "bit_offset": 4,
               "bit_width": 1,
               "description": "SECWRPERR",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "SECPGAERR",
               "bit_offset": 5,
               "bit_width": 1,
               "description": "SECPGAERR",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "SECSIZERR",
               "bit_offset": 6,
               "bit_width": 1,
               "description": "SECSIZERR",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "SECPGSERR",
               "bit_offset": 7,
               "bit_width": 1,
               "description": "SECPGSERR",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "SECRDERR",
               "bit_offset": 14,
               "bit_width": 1,
               "description": "Secure read protection error",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "SECBSY",
               "bit_offset": 16,
               "bit_width": 1,
               "description": "SECBusy",
-              "enum": null
+              "access": "read-only"
             }
           ]
         },
@@ -246,101 +298,89 @@
           "name": "NSCR",
           "offset": 40,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 3221225472,
           "description": "Flash non-secure control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Flash non-secure control register",
           "fields": [
             {
               "name": "NSPG",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "NSPG",
-              "enum": null
+              "description": "NSPG"
             },
             {
               "name": "NSPER",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "NSPER",
-              "enum": null
+              "description": "NSPER"
             },
             {
               "name": "NSMER1",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "NSMER1",
-              "enum": null
+              "description": "NSMER1"
             },
             {
               "name": "NSPNB",
               "bit_offset": 3,
               "bit_width": 7,
-              "description": "NSPNB",
-              "enum": null
+              "description": "NSPNB"
             },
             {
               "name": "NSBKER",
               "bit_offset": 11,
               "bit_width": 1,
-              "description": "NSBKER",
-              "enum": null
+              "description": "NSBKER"
             },
             {
               "name": "NSMER2",
               "bit_offset": 15,
               "bit_width": 1,
-              "description": "NSMER2",
-              "enum": null
+              "description": "NSMER2"
             },
             {
               "name": "NSSTRT",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "Options modification start",
-              "enum": null
+              "description": "Options modification start"
             },
             {
               "name": "OPTSTRT",
               "bit_offset": 17,
               "bit_width": 1,
-              "description": "Options modification start",
-              "enum": null
+              "description": "Options modification start"
             },
             {
               "name": "NSEOPIE",
               "bit_offset": 24,
               "bit_width": 1,
-              "description": "NSEOPIE",
-              "enum": null
+              "description": "NSEOPIE"
             },
             {
               "name": "NSERRIE",
               "bit_offset": 25,
               "bit_width": 1,
-              "description": "NSERRIE",
-              "enum": null
+              "description": "NSERRIE"
             },
             {
               "name": "OBL_LAUNCH",
               "bit_offset": 27,
               "bit_width": 1,
-              "description": "Force the option byte loading",
-              "enum": null
+              "description": "Force the option byte loading"
             },
             {
               "name": "OPTLOCK",
               "bit_offset": 30,
               "bit_width": 1,
-              "description": "Options Lock",
-              "enum": null
+              "description": "Options Lock"
             },
             {
               "name": "NSLOCK",
               "bit_offset": 31,
               "bit_width": 1,
-              "description": "NSLOCK",
-              "enum": null
+              "description": "NSLOCK"
             }
           ]
         },
@@ -348,94 +388,83 @@
           "name": "SECCR",
           "offset": 44,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 2147483648,
           "description": "Flash secure control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Flash secure control register",
           "fields": [
             {
               "name": "SECPG",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "SECPG",
-              "enum": null
+              "description": "SECPG"
             },
             {
               "name": "SECPER",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "SECPER",
-              "enum": null
+              "description": "SECPER"
             },
             {
               "name": "SECMER1",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "SECMER1",
-              "enum": null
+              "description": "SECMER1"
             },
             {
               "name": "SECPNB",
               "bit_offset": 3,
               "bit_width": 7,
-              "description": "SECPNB",
-              "enum": null
+              "description": "SECPNB"
             },
             {
               "name": "SECBKER",
               "bit_offset": 11,
               "bit_width": 1,
-              "description": "SECBKER",
-              "enum": null
+              "description": "SECBKER"
             },
             {
               "name": "SECMER2",
               "bit_offset": 15,
               "bit_width": 1,
-              "description": "SECMER2",
-              "enum": null
+              "description": "SECMER2"
             },
             {
               "name": "SECSTRT",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "SECSTRT",
-              "enum": null
+              "description": "SECSTRT"
             },
             {
               "name": "SECEOPIE",
               "bit_offset": 24,
               "bit_width": 1,
-              "description": "SECEOPIE",
-              "enum": null
+              "description": "SECEOPIE"
             },
             {
               "name": "SECERRIE",
               "bit_offset": 25,
               "bit_width": 1,
-              "description": "SECERRIE",
-              "enum": null
+              "description": "SECERRIE"
             },
             {
               "name": "SECRDERRIE",
               "bit_offset": 26,
               "bit_width": 1,
-              "description": "SECRDERRIE",
-              "enum": null
+              "description": "SECRDERRIE"
             },
             {
               "name": "SECINV",
               "bit_offset": 29,
               "bit_width": 1,
-              "description": "SECINV",
-              "enum": null
+              "description": "SECINV"
             },
             {
               "name": "SECLOCK",
               "bit_offset": 31,
               "bit_width": 1,
-              "description": "SECLOCK",
-              "enum": null
+              "description": "SECLOCK"
             }
           ]
         },
@@ -443,66 +472,67 @@
           "name": "ECCR",
           "offset": 48,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "Flash ECC register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Flash ECC register",
           "fields": [
             {
               "name": "ADDR_ECC",
               "bit_offset": 0,
               "bit_width": 19,
               "description": "ECC fail address",
-              "enum": null
+              "access": "read-only"
             },
             {
               "name": "BK_ECC",
               "bit_offset": 21,
               "bit_width": 1,
               "description": "BK_ECC",
-              "enum": null
+              "access": "read-only"
             },
             {
               "name": "SYSF_ECC",
               "bit_offset": 22,
               "bit_width": 1,
               "description": "SYSF_ECC",
-              "enum": null
+              "access": "read-only"
             },
             {
               "name": "ECCIE",
               "bit_offset": 24,
               "bit_width": 1,
               "description": "ECC correction interrupt enable",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "ECCC2",
               "bit_offset": 28,
               "bit_width": 1,
               "description": "ECCC2",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "ECCD2",
               "bit_offset": 29,
               "bit_width": 1,
               "description": "ECCD2",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "ECCC",
               "bit_offset": 30,
               "bit_width": 1,
               "description": "ECC correction",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "ECCD",
               "bit_offset": 31,
               "bit_width": 1,
               "description": "ECC detection",
-              "enum": null
+              "access": "read-write"
             }
           ]
         },
@@ -510,136 +540,119 @@
           "name": "OPTR",
           "offset": 64,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "Flash option register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Flash option register",
           "fields": [
             {
               "name": "RDP",
               "bit_offset": 0,
               "bit_width": 8,
-              "description": "Read protection level",
-              "enum": null
+              "description": "Read protection level"
             },
             {
               "name": "BOR_LEV",
               "bit_offset": 8,
               "bit_width": 3,
-              "description": "BOR reset Level",
-              "enum": null
+              "description": "BOR reset Level"
             },
             {
               "name": "nRST_STOP",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "nRST_STOP",
-              "enum": null
+              "description": "nRST_STOP"
             },
             {
               "name": "nRST_STDBY",
               "bit_offset": 13,
               "bit_width": 1,
-              "description": "nRST_STDBY",
-              "enum": null
+              "description": "nRST_STDBY"
             },
             {
               "name": "nRST_SHDW",
               "bit_offset": 14,
               "bit_width": 1,
-              "description": "nRST_SHDW",
-              "enum": null
+              "description": "nRST_SHDW"
             },
             {
               "name": "IWDG_SW",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "Independent watchdog selection",
-              "enum": null
+              "description": "Independent watchdog selection"
             },
             {
               "name": "IWDG_STOP",
               "bit_offset": 17,
               "bit_width": 1,
-              "description": "Independent watchdog counter freeze in Stop mode",
-              "enum": null
+              "description": "Independent watchdog counter freeze in Stop mode"
             },
             {
               "name": "IWDG_STDBY",
               "bit_offset": 18,
               "bit_width": 1,
-              "description": "Independent watchdog counter freeze in Standby mode",
-              "enum": null
+              "description": "Independent watchdog counter freeze in Standby mode"
             },
             {
               "name": "WWDG_SW",
               "bit_offset": 19,
               "bit_width": 1,
-              "description": "Window watchdog selection",
-              "enum": null
+              "description": "Window watchdog selection"
             },
             {
               "name": "SWAP_BANK",
               "bit_offset": 20,
               "bit_width": 1,
-              "description": "SWAP_BANK",
-              "enum": null
+              "description": "SWAP_BANK"
             },
             {
               "name": "DB256K",
               "bit_offset": 21,
               "bit_width": 1,
-              "description": "DB256K",
-              "enum": null
+              "description": "DB256K"
             },
             {
               "name": "DBANK",
               "bit_offset": 22,
               "bit_width": 1,
-              "description": "DBANK",
-              "enum": null
+              "description": "DBANK"
             },
             {
               "name": "SRAM2_PE",
               "bit_offset": 24,
               "bit_width": 1,
-              "description": "SRAM2 parity check enable",
-              "enum": null
+              "description": "SRAM2 parity check enable"
             },
             {
               "name": "SRAM2_RST",
               "bit_offset": 25,
               "bit_width": 1,
-              "description": "SRAM2 Erase when system reset",
-              "enum": null
+              "description": "SRAM2 Erase when system reset"
             },
             {
               "name": "nSWBOOT0",
               "bit_offset": 26,
               "bit_width": 1,
-              "description": "nSWBOOT0",
-              "enum": null
+              "description": "nSWBOOT0"
             },
             {
               "name": "nBOOT0",
               "bit_offset": 27,
               "bit_width": 1,
-              "description": "nBOOT0",
-              "enum": null
+              "description": "nBOOT0"
             },
             {
               "name": "PA15_PUPEN",
               "bit_offset": 28,
               "bit_width": 1,
-              "description": "PA15_PUPEN",
-              "enum": null
+              "description": "PA15_PUPEN"
             },
             {
               "name": "TZEN",
               "bit_offset": 31,
               "bit_width": 1,
-              "description": "TZEN",
-              "enum": null
+              "description": "TZEN"
             }
           ]
         },
@@ -647,17 +660,17 @@
           "name": "NSBOOTADD0R",
           "offset": 68,
           "size": 32,
+          "access": "write-only",
+          "reset_value": 15,
           "description": "Flash non-secure boot address 0 register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Flash non-secure boot address 0 register",
           "fields": [
             {
               "name": "NSBOOTADD0",
               "bit_offset": 7,
               "bit_width": 25,
-              "description": "NSBOOTADD0",
-              "enum": null
+              "description": "NSBOOTADD0"
             }
           ]
         },
@@ -665,17 +678,17 @@
           "name": "NSBOOTADD1R",
           "offset": 72,
           "size": 32,
+          "access": "write-only",
+          "reset_value": 15,
           "description": "Flash non-secure boot address 1 register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Flash non-secure boot address 1 register",
           "fields": [
             {
               "name": "NSBOOTADD1",
               "bit_offset": 7,
               "bit_width": 25,
-              "description": "NSBOOTADD1",
-              "enum": null
+              "description": "NSBOOTADD1"
             }
           ]
         },
@@ -683,24 +696,25 @@
           "name": "SECBOOTADD0R",
           "offset": 76,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "FFlash secure boot address 0 register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "FFlash secure boot address 0 register",
           "fields": [
             {
               "name": "BOOT_LOCK",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "BOOT_LOCK",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "SECBOOTADD0",
               "bit_offset": 7,
               "bit_width": 25,
               "description": "SECBOOTADD0",
-              "enum": null
+              "access": "write-only"
             }
           ]
         },
@@ -708,24 +722,23 @@
           "name": "SECWM1R1",
           "offset": 80,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 4278255360,
           "description": "Flash bank 1 secure watermak1 register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Flash bank 1 secure watermak1 register",
           "fields": [
             {
               "name": "SECWM1_PSTRT",
               "bit_offset": 0,
               "bit_width": 7,
-              "description": "SECWM1_PSTRT",
-              "enum": null
+              "description": "SECWM1_PSTRT"
             },
             {
               "name": "SECWM1_PEND",
               "bit_offset": 16,
               "bit_width": 7,
-              "description": "SECWM1_PEND",
-              "enum": null
+              "description": "SECWM1_PEND"
             }
           ]
         },
@@ -733,38 +746,35 @@
           "name": "SECWM1R2",
           "offset": 84,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 251662080,
           "description": "Flash secure watermak1 register 2",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Flash secure watermak1 register 2",
           "fields": [
             {
               "name": "PCROP1_PSTRT",
               "bit_offset": 0,
               "bit_width": 7,
-              "description": "PCROP1_PSTRT",
-              "enum": null
+              "description": "PCROP1_PSTRT"
             },
             {
               "name": "PCROP1EN",
               "bit_offset": 15,
               "bit_width": 1,
-              "description": "PCROP1EN",
-              "enum": null
+              "description": "PCROP1EN"
             },
             {
               "name": "HDP1_PEND",
               "bit_offset": 16,
               "bit_width": 7,
-              "description": "HDP1_PEND",
-              "enum": null
+              "description": "HDP1_PEND"
             },
             {
               "name": "HDP1EN",
               "bit_offset": 31,
               "bit_width": 1,
-              "description": "HDP1EN",
-              "enum": null
+              "description": "HDP1EN"
             }
           ]
         },
@@ -772,24 +782,23 @@
           "name": "WRP1AR",
           "offset": 88,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 4278255360,
           "description": "Flash Bank 1 WRP area A address register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Flash Bank 1 WRP area A address register",
           "fields": [
             {
               "name": "WRP1A_PSTRT",
               "bit_offset": 0,
               "bit_width": 7,
-              "description": "WRP1A_PSTRT",
-              "enum": null
+              "description": "WRP1A_PSTRT"
             },
             {
               "name": "WRP1A_PEND",
               "bit_offset": 16,
               "bit_width": 7,
-              "description": "WRP1A_PEND",
-              "enum": null
+              "description": "WRP1A_PEND"
             }
           ]
         },
@@ -797,24 +806,23 @@
           "name": "WRP1BR",
           "offset": 92,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 4278255360,
           "description": "Flash Bank 1 WRP area B address register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Flash Bank 1 WRP area B address register",
           "fields": [
             {
               "name": "WRP1B_PSTRT",
               "bit_offset": 0,
               "bit_width": 7,
-              "description": "WRP1B_PSTRT",
-              "enum": null
+              "description": "WRP1B_PSTRT"
             },
             {
               "name": "WRP1B_PEND",
               "bit_offset": 16,
               "bit_width": 7,
-              "description": "WRP1B_PEND",
-              "enum": null
+              "description": "WRP1B_PEND"
             }
           ]
         },
@@ -822,24 +830,23 @@
           "name": "SECWM2R1",
           "offset": 96,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 4278255360,
           "description": "Flash secure watermak2 register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Flash secure watermak2 register",
           "fields": [
             {
               "name": "SECWM2_PSTRT",
               "bit_offset": 0,
               "bit_width": 7,
-              "description": "SECWM2_PSTRT",
-              "enum": null
+              "description": "SECWM2_PSTRT"
             },
             {
               "name": "SECWM2_PEND",
               "bit_offset": 16,
               "bit_width": 7,
-              "description": "SECWM2_PEND",
-              "enum": null
+              "description": "SECWM2_PEND"
             }
           ]
         },
@@ -847,38 +854,35 @@
           "name": "SECWM2R2",
           "offset": 100,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 251662080,
           "description": "Flash secure watermak2 register2",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Flash secure watermak2 register2",
           "fields": [
             {
               "name": "PCROP2_PSTRT",
               "bit_offset": 0,
               "bit_width": 7,
-              "description": "PCROP2_PSTRT",
-              "enum": null
+              "description": "PCROP2_PSTRT"
             },
             {
               "name": "PCROP2EN",
               "bit_offset": 15,
               "bit_width": 1,
-              "description": "PCROP2EN",
-              "enum": null
+              "description": "PCROP2EN"
             },
             {
               "name": "HDP2_PEND",
               "bit_offset": 16,
               "bit_width": 7,
-              "description": "HDP2_PEND",
-              "enum": null
+              "description": "HDP2_PEND"
             },
             {
               "name": "HDP2EN",
               "bit_offset": 31,
               "bit_width": 1,
-              "description": "HDP2EN",
-              "enum": null
+              "description": "HDP2EN"
             }
           ]
         },
@@ -886,24 +890,23 @@
           "name": "WRP2AR",
           "offset": 104,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 4278255360,
           "description": "Flash WPR2 area A address register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Flash WPR2 area A address register",
           "fields": [
             {
               "name": "WRP2A_PSTRT",
               "bit_offset": 0,
               "bit_width": 7,
-              "description": "WRP2A_PSTRT",
-              "enum": null
+              "description": "WRP2A_PSTRT"
             },
             {
               "name": "WRP2A_PEND",
               "bit_offset": 16,
               "bit_width": 7,
-              "description": "WRP2A_PEND",
-              "enum": null
+              "description": "WRP2A_PEND"
             }
           ]
         },
@@ -911,168 +914,59 @@
           "name": "WRP2BR",
           "offset": 108,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 4278255360,
           "description": "Flash WPR2 area B address register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Flash WPR2 area B address register",
           "fields": [
             {
               "name": "WRP2B_PSTRT",
               "bit_offset": 0,
               "bit_width": 7,
-              "description": "WRP2B_PSTRT",
-              "enum": null
+              "description": "WRP2B_PSTRT"
             },
             {
               "name": "WRP2B_PEND",
               "bit_offset": 16,
               "bit_width": 7,
-              "description": "WRP2B_PEND",
-              "enum": null
+              "description": "WRP2B_PEND"
             }
           ]
         },
         {
-          "name": "SECBB1R1",
+          "name": "SECBB1R%s",
           "offset": 128,
           "size": 32,
-          "description": "FLASH secure block based bank 1 register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "FLASH secure block based bank 1 register",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "FLASH secure block based bank 1",
+          "array_len": 4,
+          "array_stride": 4,
           "fields": [
             {
               "name": "SECBB1",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "SECBB1",
-              "enum": null
+              "description": "SECBB1"
             }
           ]
         },
         {
-          "name": "SECBB1R2",
-          "offset": 132,
-          "size": 32,
-          "description": "FLASH secure block based bank 1 register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "FLASH secure block based bank 1 register",
-          "fields": [
-            {
-              "name": "SECBB1",
-              "bit_offset": 0,
-              "bit_width": 32,
-              "description": "SECBB1",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "SECBB1R3",
-          "offset": 136,
-          "size": 32,
-          "description": "FLASH secure block based bank 1 register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "FLASH secure block based bank 1 register",
-          "fields": [
-            {
-              "name": "SECBB1",
-              "bit_offset": 0,
-              "bit_width": 32,
-              "description": "SECBB1",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "SECBB1R4",
-          "offset": 140,
-          "size": 32,
-          "description": "FLASH secure block based bank 1 register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "FLASH secure block based bank 1 register",
-          "fields": [
-            {
-              "name": "SECBB1",
-              "bit_offset": 0,
-              "bit_width": 32,
-              "description": "SECBB1",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "SECBB2R1",
+          "name": "SECBB2R%s",
           "offset": 160,
           "size": 32,
-          "description": "FLASH secure block based bank 2 register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "FLASH secure block based bank 2 register",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "FLASH secure block based bank 2",
+          "array_len": 4,
+          "array_stride": 4,
           "fields": [
             {
               "name": "SECBB2",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "SECBB2",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "SECBB2R2",
-          "offset": 164,
-          "size": 32,
-          "description": "FLASH secure block based bank 2 register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "FLASH secure block based bank 2 register",
-          "fields": [
-            {
-              "name": "SECBB2",
-              "bit_offset": 0,
-              "bit_width": 32,
-              "description": "SECBB2",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "SECBB2R3",
-          "offset": 168,
-          "size": 32,
-          "description": "FLASH secure block based bank 2 register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "FLASH secure block based bank 2 register",
-          "fields": [
-            {
-              "name": "SECBB2",
-              "bit_offset": 0,
-              "bit_width": 32,
-              "description": "SECBB2",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "SECBB2R4",
-          "offset": 172,
-          "size": 32,
-          "description": "FLASH secure block based bank 2 register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "FLASH secure block based bank 2 register",
-          "fields": [
-            {
-              "name": "SECBB2",
-              "bit_offset": 0,
-              "bit_width": 32,
-              "description": "SECBB2",
-              "enum": null
+              "description": "SECBB2"
             }
           ]
         },
@@ -1080,24 +974,23 @@
           "name": "SECHDPCR",
           "offset": 192,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "FLASH secure HDP control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "FLASH secure HDP control register",
           "fields": [
             {
               "name": "HDP1_ACCDIS",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "HDP1_ACCDIS",
-              "enum": null
+              "description": "HDP1_ACCDIS"
             },
             {
               "name": "HDP2_ACCDIS",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "HDP2_ACCDIS",
-              "enum": null
+              "description": "HDP2_ACCDIS"
             }
           ]
         },
@@ -1105,17 +998,17 @@
           "name": "PRIVCFGR",
           "offset": 196,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "Power privilege configuration register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Power privilege configuration register",
           "fields": [
             {
               "name": "PRIV",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "PRIV",
-              "enum": null
+              "description": "PRIV"
             }
           ]
         }

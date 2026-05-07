@@ -2,6 +2,9 @@
   "schema": 1,
   "kind": "usb",
   "version": "v3",
+  "source": "stm32rs_svd",
+  "source_device": "stm32l412c8",
+  "source_file": "stm32l412.svd.patched",
   "blocks": {
     "USB": {
       "name": "USB",
@@ -9,590 +12,1687 @@
       "extends": null,
       "registers": [
         {
-          "name": "EPR",
+          "name": "EP%sR",
           "offset": 0,
-          "size": 32,
-          "description": "endpoint register",
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "endpoint %s register",
           "array_len": 8,
           "array_stride": 4,
-          "fieldset_description": "endpoint register",
           "fields": [
             {
               "name": "EA",
               "bit_offset": 0,
               "bit_width": 4,
-              "description": "EA",
-              "enum": null
+              "description": "Endpoint address"
             },
             {
               "name": "STAT_TX",
               "bit_offset": 4,
               "bit_width": 2,
-              "description": "STAT_TX",
-              "enum": "STAT"
+              "description": "Status bits, for transmission transfers",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "all transmission requests addressed to this endpoint are ignored"
+                },
+                {
+                  "name": "Stall",
+                  "value": 1,
+                  "description": "the endpoint is stalled and all transmission requests result in a STALL handshake"
+                },
+                {
+                  "name": "Nak",
+                  "value": 2,
+                  "description": "the endpoint is naked and all transmission requests result in a NAK handshake"
+                },
+                {
+                  "name": "Valid",
+                  "value": 3,
+                  "description": "this endpoint is enabled for transmission"
+                }
+              ]
             },
             {
               "name": "DTOG_TX",
               "bit_offset": 6,
               "bit_width": 1,
-              "description": "DTOG_TX",
-              "enum": null
+              "description": "Data Toggle, for transmission transfers"
             },
             {
               "name": "CTR_TX",
               "bit_offset": 7,
               "bit_width": 1,
-              "description": "CTR_TX",
-              "enum": null
+              "description": "Correct Transfer for transmission"
             },
             {
               "name": "EP_KIND",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "EP_KIND",
-              "enum": null
+              "description": "Endpoint kind"
             },
             {
               "name": "EP_TYPE",
               "bit_offset": 9,
               "bit_width": 2,
-              "description": "EPTYPE",
-              "enum": "EP_TYPE"
+              "description": "Endpoint type",
+              "enum_values": [
+                {
+                  "name": "Bulk",
+                  "value": 0,
+                  "description": "Bulk endpoint"
+                },
+                {
+                  "name": "Control",
+                  "value": 1,
+                  "description": "Control endpoint"
+                },
+                {
+                  "name": "Iso",
+                  "value": 2,
+                  "description": "Iso endpoint"
+                },
+                {
+                  "name": "Interrupt",
+                  "value": 3,
+                  "description": "Interrupt endpoint"
+                }
+              ]
             },
             {
               "name": "SETUP",
               "bit_offset": 11,
               "bit_width": 1,
-              "description": "SETUP",
-              "enum": null
+              "description": "Setup transaction completed"
             },
             {
               "name": "STAT_RX",
               "bit_offset": 12,
               "bit_width": 2,
-              "description": "STAT_RX",
-              "enum": "STAT"
+              "description": "Status bits, for reception transfers",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "all reception requests addressed to this endpoint are ignored"
+                },
+                {
+                  "name": "Stall",
+                  "value": 1,
+                  "description": "the endpoint is stalled and all reception requests result in a STALL handshake"
+                },
+                {
+                  "name": "Nak",
+                  "value": 2,
+                  "description": "the endpoint is naked and all reception requests result in a NAK handshake"
+                },
+                {
+                  "name": "Valid",
+                  "value": 3,
+                  "description": "this endpoint is enabled for reception"
+                }
+              ]
             },
             {
               "name": "DTOG_RX",
               "bit_offset": 14,
               "bit_width": 1,
-              "description": "DTOG_RX",
-              "enum": null
+              "description": "Data Toggle, for reception transfers"
             },
             {
               "name": "CTR_RX",
               "bit_offset": 15,
               "bit_width": 1,
-              "description": "CTR_RX",
-              "enum": null
+              "description": "Correct transfer for reception"
             }
           ]
         },
         {
           "name": "CNTR",
           "offset": 64,
-          "size": 32,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 3,
           "description": "control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "control register",
           "fields": [
             {
               "name": "FRES",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Force a reset of the USB peripheral, exactly like a RESET signaling on the USB",
-              "enum": null
+              "description": "Force USB Reset",
+              "enum_values": [
+                {
+                  "name": "NoReset",
+                  "value": 0,
+                  "description": "Clear USB reset"
+                },
+                {
+                  "name": "Reset",
+                  "value": 1,
+                  "description": "Force a reset of the USB peripheral, exactly like a RESET signaling on the USB"
+                }
+              ]
             },
             {
               "name": "PDWN",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Enter power down mode",
-              "enum": null
+              "description": "Power down",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "No power down"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Enter power down mode"
+                }
+              ]
             },
             {
               "name": "LPMODE",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "Enter low-power mode",
-              "enum": null
+              "description": "Low-power mode",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "No low-power mode"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Enter low-power mode"
+                }
+              ]
             },
             {
               "name": "FSUSP",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "Enter suspend mode. Clocks and static power dissipation in the analog transceiver are left unaffected",
-              "enum": null
+              "description": "Force suspend",
+              "enum_values": [
+                {
+                  "name": "NoEffect",
+                  "value": 0,
+                  "description": "No effect"
+                },
+                {
+                  "name": "Suspend",
+                  "value": 1,
+                  "description": "Enter suspend mode. Clocks and static power dissipation in the analog transceiver are left unaffected"
+                }
+              ]
             },
             {
               "name": "RESUME",
               "bit_offset": 4,
               "bit_width": 1,
               "description": "Resume request",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Requested",
+                  "value": 1,
+                  "description": "Resume requested"
+                }
+              ]
             },
             {
               "name": "L1RESUME",
               "bit_offset": 5,
               "bit_width": 1,
-              "description": "LPM L1 request request",
-              "enum": null
+              "description": "LPM L1 Resume request",
+              "enum_values": [
+                {
+                  "name": "Requested",
+                  "value": 1,
+                  "description": "LPM L1 request requested"
+                }
+              ]
             },
             {
               "name": "L1REQM",
               "bit_offset": 7,
               "bit_width": 1,
-              "description": "L1REQ Interrupt enabled, an interrupt request is generated when the corresponding bit in the USB_ISTR register is set",
-              "enum": null
+              "description": "LPM L1 state request interrupt mask",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "L1REQ Interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "L1REQ Interrupt enabled, an interrupt request is generated when the corresponding bit in the USB_ISTR register is set"
+                }
+              ]
             },
             {
               "name": "ESOFM",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "ESOF Interrupt enabled, an interrupt request is generated when the corresponding bit in the USB_ISTR register is set",
-              "enum": null
+              "description": "Expected start of frame interrupt mask",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "ESOF Interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "ESOF Interrupt enabled, an interrupt request is generated when the corresponding bit in the USB_ISTR register is set"
+                }
+              ]
             },
             {
               "name": "SOFM",
               "bit_offset": 9,
               "bit_width": 1,
-              "description": "SOF Interrupt enabled, an interrupt request is generated when the corresponding bit in the USB_ISTR register is set",
-              "enum": null
+              "description": "Start of frame interrupt mask",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "SOF Interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "SOF Interrupt enabled, an interrupt request is generated when the corresponding bit in the USB_ISTR register is set"
+                }
+              ]
             },
             {
               "name": "RESETM",
               "bit_offset": 10,
               "bit_width": 1,
-              "description": "RESET Interrupt enabled, an interrupt request is generated when the corresponding bit in the USB_ISTR register is set",
-              "enum": null
+              "description": "USB reset interrupt mask",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "RESET Interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "RESET Interrupt enabled, an interrupt request is generated when the corresponding bit in the USB_ISTR register is set"
+                }
+              ]
             },
             {
               "name": "SUSPM",
               "bit_offset": 11,
               "bit_width": 1,
-              "description": "SUSP Interrupt enabled, an interrupt request is generated when the corresponding bit in the USB_ISTR register is set",
-              "enum": null
+              "description": "Suspend mode interrupt mask",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Suspend Mode Request SUSP Interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "SUSP Interrupt enabled, an interrupt request is generated when the corresponding bit in the USB_ISTR register is set"
+                }
+              ]
             },
             {
               "name": "WKUPM",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "WKUP Interrupt enabled, an interrupt request is generated when the corresponding bit in the USB_ISTR register is set",
-              "enum": null
+              "description": "Wakeup interrupt mask",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "WKUP Interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "WKUP Interrupt enabled, an interrupt request is generated when the corresponding bit in the USB_ISTR register is set"
+                }
+              ]
             },
             {
               "name": "ERRM",
               "bit_offset": 13,
               "bit_width": 1,
-              "description": "ERR Interrupt enabled, an interrupt request is generated when the corresponding bit in the USB_ISTR register is set",
-              "enum": null
+              "description": "Error interrupt mask",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "ERR Interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "ERR Interrupt enabled, an interrupt request is generated when the corresponding bit in the USB_ISTR register is set"
+                }
+              ]
             },
             {
               "name": "PMAOVRM",
               "bit_offset": 14,
               "bit_width": 1,
-              "description": "PMAOVR Interrupt enabled, an interrupt request is generated when the corresponding bit in the USB_ISTR register is set",
-              "enum": null
+              "description": "Packet memory area over / underrun interrupt mask",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "PMAOVR Interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "PMAOVR Interrupt enabled, an interrupt request is generated when the corresponding bit in the USB_ISTR register is set"
+                }
+              ]
             },
             {
               "name": "CTRM",
               "bit_offset": 15,
               "bit_width": 1,
-              "description": "CTR Interrupt enabled, an interrupt request is generated when the corresponding bit in the USB_ISTR register is set",
-              "enum": null
+              "description": "Correct transfer interrupt mask",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Correct Transfer (CTR) Interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "CTR Interrupt enabled, an interrupt request is generated when the corresponding bit in the USB_ISTR register is set"
+                }
+              ]
             }
           ]
         },
         {
           "name": "ISTR",
           "offset": 68,
-          "size": 32,
+          "size": 16,
+          "access": null,
+          "reset_value": 0,
           "description": "interrupt status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "interrupt status register",
           "fields": [
             {
               "name": "EP_ID",
               "bit_offset": 0,
               "bit_width": 4,
-              "description": "EP_ID",
-              "enum": null
+              "description": "Endpoint Identifier",
+              "access": "read-only"
             },
             {
               "name": "DIR",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "DIR",
-              "enum": "DIR"
+              "description": "Direction of transaction",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "To",
+                  "value": 0,
+                  "description": "Data transmitted by the USB peripheral to the host PC"
+                },
+                {
+                  "name": "From",
+                  "value": 1,
+                  "description": "Data received by the USB peripheral from the host PC"
+                }
+              ]
             },
             {
               "name": "L1REQ",
               "bit_offset": 7,
               "bit_width": 1,
-              "description": "LPM command to enter the L1 state is successfully received and acknowledged",
-              "enum": null
+              "description": "LPM L1 state request",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NotReceived",
+                  "value": 0,
+                  "description": "LPM command to enter the L1 state is not received"
+                },
+                {
+                  "name": "Received",
+                  "value": 1,
+                  "description": "LPM command to enter the L1 state is successfully received and acknowledged"
+                },
+                {
+                  "name": "Clear",
+                  "value": 0,
+                  "description": "Clear flag"
+                }
+              ]
             },
             {
               "name": "ESOF",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "an SOF packet is expected but not received",
-              "enum": null
+              "description": "Expected start frame",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NotExpectedStartOfFrame",
+                  "value": 0,
+                  "description": "NotExpectedStartOfFrame"
+                },
+                {
+                  "name": "ExpectedStartOfFrame",
+                  "value": 1,
+                  "description": "An SOF packet is expected but not received"
+                },
+                {
+                  "name": "Clear",
+                  "value": 0,
+                  "description": "Clear flag"
+                }
+              ]
             },
             {
               "name": "SOF",
               "bit_offset": 9,
               "bit_width": 1,
-              "description": "beginning of a new USB frame and it is set when a SOF packet arrives through the USB bus",
-              "enum": null
+              "description": "start of frame",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NotStartOfFrame",
+                  "value": 0,
+                  "description": "NotStartOfFrame"
+                },
+                {
+                  "name": "StartOfFrame",
+                  "value": 1,
+                  "description": "Beginning of a new USB frame and it is set when a SOF packet arrives through the USB bus"
+                },
+                {
+                  "name": "Clear",
+                  "value": 0,
+                  "description": "Clear flag"
+                }
+              ]
             },
             {
               "name": "RESET",
               "bit_offset": 10,
               "bit_width": 1,
-              "description": "peripheral detects an active USB RESET signal at its inputs",
-              "enum": null
+              "description": "reset request",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NotReset",
+                  "value": 0,
+                  "description": "NotReset"
+                },
+                {
+                  "name": "Reset",
+                  "value": 1,
+                  "description": "Peripheral detects an active USB RESET signal at its inputs"
+                },
+                {
+                  "name": "Clear",
+                  "value": 0,
+                  "description": "Clear flag"
+                }
+              ]
             },
             {
               "name": "SUSP",
               "bit_offset": 11,
               "bit_width": 1,
-              "description": "no traffic has been received for 3 ms, indicating a suspend mode request from the USB bus",
-              "enum": null
+              "description": "Suspend mode request",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NotSuspend",
+                  "value": 0,
+                  "description": "NotSuspend"
+                },
+                {
+                  "name": "Suspend",
+                  "value": 1,
+                  "description": "No traffic has been received for 3 ms, indicating a suspend mode request from the USB bus"
+                },
+                {
+                  "name": "Clear",
+                  "value": 0,
+                  "description": "Clear flag"
+                }
+              ]
             },
             {
               "name": "WKUP",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "activity is detected that wakes up the USB peripheral",
-              "enum": null
+              "description": "Wakeup",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NotWakeup",
+                  "value": 0,
+                  "description": "NotWakeup"
+                },
+                {
+                  "name": "Wakeup",
+                  "value": 1,
+                  "description": "Activity is detected that wakes up the USB peripheral"
+                },
+                {
+                  "name": "Clear",
+                  "value": 0,
+                  "description": "Clear flag"
+                }
+              ]
             },
             {
               "name": "ERR",
               "bit_offset": 13,
               "bit_width": 1,
-              "description": "One of No ANSwer, Cyclic Redundancy Check, Bit Stuffing or Framing format Violation error occurred",
-              "enum": null
+              "description": "Error",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NotOverrun",
+                  "value": 0,
+                  "description": "Errors are not occurred"
+                },
+                {
+                  "name": "Error",
+                  "value": 1,
+                  "description": "One of No ANSwer, Cyclic Redundancy Check, Bit Stuffing or Framing format Violation error occurred"
+                },
+                {
+                  "name": "Clear",
+                  "value": 0,
+                  "description": "Clear flag"
+                }
+              ]
             },
             {
               "name": "PMAOVR",
               "bit_offset": 14,
               "bit_width": 1,
-              "description": "microcontroller has not been able to respond in time to an USB memory request",
-              "enum": null
+              "description": "Packet memory area over / underrun",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NotOverrun",
+                  "value": 0,
+                  "description": "Overrun is not occurred"
+                },
+                {
+                  "name": "Overrun",
+                  "value": 1,
+                  "description": "Microcontroller has not been able to respond in time to an USB memory request"
+                },
+                {
+                  "name": "Clear",
+                  "value": 0,
+                  "description": "Clear flag"
+                }
+              ]
             },
             {
               "name": "CTR",
               "bit_offset": 15,
               "bit_width": 1,
-              "description": "endpoint has successfully completed a transaction",
-              "enum": null
+              "description": "Correct transfer",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "Completed",
+                  "value": 1,
+                  "description": "Endpoint has successfully completed a transaction"
+                }
+              ]
             }
           ]
         },
         {
           "name": "FNR",
           "offset": 72,
-          "size": 32,
+          "size": 16,
+          "access": "read-only",
+          "reset_value": 0,
           "description": "frame number register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "frame number register",
           "fields": [
             {
               "name": "FN",
               "bit_offset": 0,
               "bit_width": 11,
-              "description": "FN",
-              "enum": null
+              "description": "Frame number"
             },
             {
               "name": "LSOF",
               "bit_offset": 11,
               "bit_width": 2,
-              "description": "LSOF",
-              "enum": null
+              "description": "Lost SOF"
             },
             {
               "name": "LCK",
               "bit_offset": 13,
               "bit_width": 1,
-              "description": "the frame timer remains in this state until an USB reset or USB suspend event occurs",
-              "enum": null
+              "description": "Locked",
+              "enum_values": [
+                {
+                  "name": "Locked",
+                  "value": 1,
+                  "description": "the frame timer remains in this state until an USB reset or USB suspend event occurs"
+                }
+              ]
             },
             {
               "name": "RXDM",
               "bit_offset": 14,
               "bit_width": 1,
-              "description": "received data minus upstream port data line",
-              "enum": null
+              "description": "Receive data - line status",
+              "enum_values": [
+                {
+                  "name": "Received",
+                  "value": 1,
+                  "description": "received data minus upstream port data line"
+                }
+              ]
             },
             {
               "name": "RXDP",
               "bit_offset": 15,
               "bit_width": 1,
-              "description": "received data plus upstream port data line",
-              "enum": null
+              "description": "Receive data + line status",
+              "enum_values": [
+                {
+                  "name": "Received",
+                  "value": 1,
+                  "description": "received data plus upstream port data line"
+                }
+              ]
             }
           ]
         },
         {
           "name": "DADDR",
           "offset": 76,
-          "size": 32,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "device address",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "device address",
           "fields": [
             {
               "name": "ADD",
               "bit_offset": 0,
               "bit_width": 7,
-              "description": "device address",
-              "enum": null
+              "description": "Device address"
             },
             {
               "name": "EF",
               "bit_offset": 7,
               "bit_width": 1,
-              "description": "USB device enabled",
-              "enum": null
+              "description": "Enable function",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "USB device disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "USB device enabled"
+                }
+              ]
             }
           ]
         },
         {
           "name": "BTABLE",
           "offset": 80,
-          "size": 32,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "Buffer table address",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Buffer table address",
           "fields": [
             {
               "name": "BTABLE",
               "bit_offset": 3,
               "bit_width": 13,
-              "description": "BTABLE",
-              "enum": null
+              "description": "Buffer table"
             }
           ]
         },
         {
           "name": "LPMCSR",
           "offset": 84,
-          "size": 32,
+          "size": 16,
+          "access": null,
+          "reset_value": 0,
           "description": "LPM control and status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "LPM control and status register",
           "fields": [
             {
-              "name": "LPMEN",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "enable the LPM support within the USB device",
-              "enum": null
-            },
-            {
-              "name": "LPMACK",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "LPMACK",
-              "enum": "LPMACK"
+              "name": "BESL",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "BESL value",
+              "access": "read-only"
             },
             {
               "name": "REMWAKE",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "REMWAKE",
-              "enum": null
+              "description": "RemoteWake value",
+              "access": "read-only"
             },
             {
-              "name": "BESL",
-              "bit_offset": 4,
-              "bit_width": 4,
-              "description": "BESL",
-              "enum": null
+              "name": "LPMACK",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "LPM Token acknowledge enable",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Nyet",
+                  "value": 0,
+                  "description": "The valid LPM Token will be NYET"
+                },
+                {
+                  "name": "Ack",
+                  "value": 1,
+                  "description": "The valid LPM Token will be ACK"
+                }
+              ]
+            },
+            {
+              "name": "LPMEN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "LPM support enable",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "No LPM transactions are handled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Enable the LPM support within the USB device"
+                }
+              ]
             }
           ]
         },
         {
           "name": "BCDR",
           "offset": 88,
-          "size": 32,
-          "description": "Battery Charging Detector",
+          "size": 16,
+          "access": null,
+          "reset_value": 0,
+          "description": "Battery charging detector",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Battery Charging Detector",
           "fields": [
             {
-              "name": "BCDEN",
-              "bit_offset": 0,
+              "name": "DPPU",
+              "bit_offset": 15,
               "bit_width": 1,
-              "description": "Battery charging detector mode enable",
-              "enum": null
-            },
-            {
-              "name": "DCDEN",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Data contact detection mode enable",
-              "enum": null
-            },
-            {
-              "name": "PDEN",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Primary detection mode enable",
-              "enum": null
-            },
-            {
-              "name": "SDEN",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Secondary detection mode enable",
-              "enum": null
-            },
-            {
-              "name": "DCDET",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "Data contact detection status",
-              "enum": null
-            },
-            {
-              "name": "PDET",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "Primary detection status",
-              "enum": null
-            },
-            {
-              "name": "SDET",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "Secondary detection status",
-              "enum": "SDET"
+              "description": "DP pull-up control",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "signalize disconnect to the host when needed by the user software"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "enable the embedded pull-up on the DP line"
+                }
+              ]
             },
             {
               "name": "PS2DET",
               "bit_offset": 7,
               "bit_width": 1,
               "description": "DM pull-up detection status",
-              "enum": null
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "Normal",
+                  "value": 0,
+                  "description": "Normal port detected"
+                },
+                {
+                  "name": "PS2",
+                  "value": 1,
+                  "description": "PS2 port or proprietary charger detected"
+                }
+              ]
             },
             {
-              "name": "DPPU",
+              "name": "SDET",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Secondary detection (SD) status",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "CDP",
+                  "value": 0,
+                  "description": "CDP detected"
+                },
+                {
+                  "name": "DCP",
+                  "value": 1,
+                  "description": "DCP detected"
+                }
+              ]
+            },
+            {
+              "name": "PDET",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Primary detection (PD) status",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NoBCD",
+                  "value": 0,
+                  "description": "no BCD support detected"
+                },
+                {
+                  "name": "BCD",
+                  "value": 1,
+                  "description": "BCD support detected"
+                }
+              ]
+            },
+            {
+              "name": "DCDET",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Data contact detection (DCD) status",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotDetected",
+                  "value": 0,
+                  "description": "data lines contact not detected"
+                },
+                {
+                  "name": "Detected",
+                  "value": 1,
+                  "description": "data lines contact detected"
+                }
+              ]
+            },
+            {
+              "name": "SDEN",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Secondary detection (SD) mode enable",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Secondary detection (SD) mode disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Secondary detection (SD) mode enabled"
+                }
+              ]
+            },
+            {
+              "name": "PDEN",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Primary detection (PD) mode enable",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Primary detection (PD) mode disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Primary detection (PD) mode enabled"
+                }
+              ]
+            },
+            {
+              "name": "DCDEN",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Data contact detection (DCD) mode enable",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Data contact detection (DCD) mode disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Data contact detection (DCD) mode enabled"
+                }
+              ]
+            },
+            {
+              "name": "BCDEN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Battery charging detector (BCD) enable",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "disable the BCD support"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "enable the BCD support within the USB device"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "COUNT0_TX",
+          "offset": 82,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Transmission byte count 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "COUNT0_TX",
+              "bit_offset": 0,
+              "bit_width": 10,
+              "description": "Transmission byte count"
+            }
+          ]
+        },
+        {
+          "name": "COUNT1_TX",
+          "offset": 90,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Transmission byte count 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "COUNT1_TX",
+              "bit_offset": 0,
+              "bit_width": 10,
+              "description": "Transmission byte count"
+            }
+          ]
+        },
+        {
+          "name": "COUNT2_TX",
+          "offset": 98,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Transmission byte count 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "COUNT2_TX",
+              "bit_offset": 0,
+              "bit_width": 10,
+              "description": "Transmission byte count"
+            }
+          ]
+        },
+        {
+          "name": "COUNT3_TX",
+          "offset": 106,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Transmission byte count 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "COUNT3_TX",
+              "bit_offset": 0,
+              "bit_width": 10,
+              "description": "Transmission byte count"
+            }
+          ]
+        },
+        {
+          "name": "COUNT4_TX",
+          "offset": 114,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Transmission byte count 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "COUNT4_TX",
+              "bit_offset": 0,
+              "bit_width": 10,
+              "description": "Transmission byte count"
+            }
+          ]
+        },
+        {
+          "name": "COUNT5_TX",
+          "offset": 122,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Transmission byte count 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "COUNT5_TX",
+              "bit_offset": 0,
+              "bit_width": 10,
+              "description": "Transmission byte count"
+            }
+          ]
+        },
+        {
+          "name": "COUNT6_TX",
+          "offset": 130,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Transmission byte count 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "COUNT6_TX",
+              "bit_offset": 0,
+              "bit_width": 10,
+              "description": "Transmission byte count"
+            }
+          ]
+        },
+        {
+          "name": "COUNT7_TX",
+          "offset": 138,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Transmission byte count 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "COUNT7_TX",
+              "bit_offset": 0,
+              "bit_width": 10,
+              "description": "Transmission byte count"
+            }
+          ]
+        },
+        {
+          "name": "ADDR2_TX",
+          "offset": 96,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Transmission buffer address 2",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "ADDR2_TX",
+              "bit_offset": 1,
+              "bit_width": 15,
+              "description": "Transmission buffer address"
+            }
+          ]
+        },
+        {
+          "name": "ADDR3_TX",
+          "offset": 104,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Transmission buffer address 3",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "ADDR3_TX",
+              "bit_offset": 1,
+              "bit_width": 15,
+              "description": "Transmission buffer address"
+            }
+          ]
+        },
+        {
+          "name": "ADDR4_TX",
+          "offset": 112,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Transmission buffer address 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "ADDR4_RX",
+              "bit_offset": 1,
+              "bit_width": 15,
+              "description": "Transmission buffer address"
+            }
+          ]
+        },
+        {
+          "name": "ADDR5_TX",
+          "offset": 120,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Transmission buffer address 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "ADDR5_TX",
+              "bit_offset": 1,
+              "bit_width": 15,
+              "description": "Transmission buffer address"
+            }
+          ]
+        },
+        {
+          "name": "ADDR6_TX",
+          "offset": 128,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Transmission buffer address 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "ADDR6_TX",
+              "bit_offset": 1,
+              "bit_width": 15,
+              "description": "Transmission buffer address"
+            }
+          ]
+        },
+        {
+          "name": "ADDR7_TX",
+          "offset": 136,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Transmission buffer address 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "ADDR7_TX",
+              "bit_offset": 1,
+              "bit_width": 15,
+              "description": "Transmission buffer address"
+            }
+          ]
+        },
+        {
+          "name": "ADDR0_RX",
+          "offset": 84,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Reception buffer address 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "ADDR0_RX",
+              "bit_offset": 1,
+              "bit_width": 15,
+              "description": "Reception buffer address"
+            }
+          ]
+        },
+        {
+          "name": "ADDR1_RX",
+          "offset": 92,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Reception buffer address 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "ADDR1_RX",
+              "bit_offset": 1,
+              "bit_width": 15,
+              "description": "Reception buffer address"
+            }
+          ]
+        },
+        {
+          "name": "ADDR2_RX",
+          "offset": 100,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Reception buffer address 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "ADDR2_RX",
+              "bit_offset": 1,
+              "bit_width": 15,
+              "description": "Reception buffer address"
+            }
+          ]
+        },
+        {
+          "name": "ADDR3_RX",
+          "offset": 108,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Reception buffer address 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "ADDR3_RX",
+              "bit_offset": 1,
+              "bit_width": 15,
+              "description": "Reception buffer address"
+            }
+          ]
+        },
+        {
+          "name": "ADDR4_RX",
+          "offset": 116,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Reception buffer address 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "ADDR4_RX",
+              "bit_offset": 1,
+              "bit_width": 15,
+              "description": "Reception buffer address"
+            }
+          ]
+        },
+        {
+          "name": "ADDR5_RX",
+          "offset": 124,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Reception buffer address 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "ADDR5_RX",
+              "bit_offset": 1,
+              "bit_width": 15,
+              "description": "Reception buffer address"
+            }
+          ]
+        },
+        {
+          "name": "ADDR6_RX",
+          "offset": 132,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Reception buffer address 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "ADDR6_RX",
+              "bit_offset": 1,
+              "bit_width": 15,
+              "description": "Reception buffer address"
+            }
+          ]
+        },
+        {
+          "name": "ADDR7_RX",
+          "offset": 140,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Reception buffer address 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "ADDR7_RX",
+              "bit_offset": 1,
+              "bit_width": 15,
+              "description": "Reception buffer address"
+            }
+          ]
+        },
+        {
+          "name": "COUNT0_RX",
+          "offset": 86,
+          "size": 16,
+          "access": null,
+          "reset_value": 0,
+          "description": "Reception byte count 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "COUNT0_RX",
+              "bit_offset": 0,
+              "bit_width": 10,
+              "description": "Reception byte count",
+              "access": "read-only"
+            },
+            {
+              "name": "NUM_BLOCK",
+              "bit_offset": 10,
+              "bit_width": 5,
+              "description": "Number of blocks",
+              "access": "read-write"
+            },
+            {
+              "name": "BL_SIZE",
               "bit_offset": 15,
               "bit_width": 1,
-              "description": "DP pull-up control",
-              "enum": null
+              "description": "Block size",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "COUNT1_RX",
+          "offset": 94,
+          "size": 16,
+          "access": null,
+          "reset_value": 0,
+          "description": "Reception byte count 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "COUNT1_RX",
+              "bit_offset": 0,
+              "bit_width": 10,
+              "description": "Reception byte count",
+              "access": "read-only"
+            },
+            {
+              "name": "NUM_BLOCK",
+              "bit_offset": 10,
+              "bit_width": 5,
+              "description": "Number of blocks",
+              "access": "read-write"
+            },
+            {
+              "name": "BL_SIZE",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Block size",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "COUNT2_RX",
+          "offset": 102,
+          "size": 16,
+          "access": null,
+          "reset_value": 0,
+          "description": "Reception byte count 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "COUNT2_RX",
+              "bit_offset": 0,
+              "bit_width": 10,
+              "description": "Reception byte count",
+              "access": "read-only"
+            },
+            {
+              "name": "NUM_BLOCK",
+              "bit_offset": 10,
+              "bit_width": 5,
+              "description": "Number of blocks",
+              "access": "read-write"
+            },
+            {
+              "name": "BL_SIZE",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Block size",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "COUNT3_RX",
+          "offset": 110,
+          "size": 16,
+          "access": null,
+          "reset_value": 0,
+          "description": "Reception byte count 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "COUNT3_RX",
+              "bit_offset": 0,
+              "bit_width": 10,
+              "description": "Reception byte count",
+              "access": "read-only"
+            },
+            {
+              "name": "NUM_BLOCK",
+              "bit_offset": 10,
+              "bit_width": 5,
+              "description": "Number of blocks",
+              "access": "read-write"
+            },
+            {
+              "name": "BL_SIZE",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Block size",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "COUNT4_RX",
+          "offset": 118,
+          "size": 16,
+          "access": null,
+          "reset_value": 0,
+          "description": "Reception byte count 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "COUNT4_RX",
+              "bit_offset": 0,
+              "bit_width": 10,
+              "description": "Reception byte count",
+              "access": "read-only"
+            },
+            {
+              "name": "NUM_BLOCK",
+              "bit_offset": 10,
+              "bit_width": 5,
+              "description": "Number of blocks",
+              "access": "read-write"
+            },
+            {
+              "name": "BL_SIZE",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Block size",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "COUNT5_RX",
+          "offset": 126,
+          "size": 16,
+          "access": null,
+          "reset_value": 0,
+          "description": "Reception byte count 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "COUNT5_RX",
+              "bit_offset": 0,
+              "bit_width": 10,
+              "description": "Reception byte count",
+              "access": "read-only"
+            },
+            {
+              "name": "NUM_BLOCK",
+              "bit_offset": 10,
+              "bit_width": 5,
+              "description": "Number of blocks",
+              "access": "read-write"
+            },
+            {
+              "name": "BL_SIZE",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Block size",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "COUNT6_RX",
+          "offset": 134,
+          "size": 16,
+          "access": null,
+          "reset_value": 0,
+          "description": "Reception byte count 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "COUNT6_RX",
+              "bit_offset": 0,
+              "bit_width": 10,
+              "description": "Reception byte count",
+              "access": "read-only"
+            },
+            {
+              "name": "NUM_BLOCK",
+              "bit_offset": 10,
+              "bit_width": 5,
+              "description": "Number of blocks",
+              "access": "read-write"
+            },
+            {
+              "name": "BL_SIZE",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Block size",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "COUNT7_RX",
+          "offset": 142,
+          "size": 16,
+          "access": null,
+          "reset_value": 0,
+          "description": "Reception byte count 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "COUNT7_RX",
+              "bit_offset": 0,
+              "bit_width": 10,
+              "description": "Reception byte count",
+              "access": "read-only"
+            },
+            {
+              "name": "NUM_BLOCK",
+              "bit_offset": 10,
+              "bit_width": 5,
+              "description": "Number of blocks",
+              "access": "read-write"
+            },
+            {
+              "name": "BL_SIZE",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Block size",
+              "access": "read-write"
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "DIR": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "To",
-          "value": 0,
-          "description": "data transmitted by the USB peripheral to the host PC"
-        },
-        {
-          "name": "From",
-          "value": 1,
-          "description": "data received by the USB peripheral from the host PC"
-        }
-      ]
-    },
-    "EP_TYPE": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Bulk",
-          "value": 0,
-          "description": "Bulk endpoint"
-        },
-        {
-          "name": "Control",
-          "value": 1,
-          "description": "Control endpoint"
-        },
-        {
-          "name": "Iso",
-          "value": 2,
-          "description": "Iso endpoint"
-        },
-        {
-          "name": "Interrupt",
-          "value": 3,
-          "description": "Interrupt endpoint"
-        }
-      ]
-    },
-    "LPMACK": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Nyet",
-          "value": 0,
-          "description": "the valid LPM Token will be NYET"
-        },
-        {
-          "name": "Ack",
-          "value": 1,
-          "description": "the valid LPM Token will be ACK"
-        }
-      ]
-    },
-    "SDET": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "CDP",
-          "value": 0,
-          "description": "CDP detected"
-        },
-        {
-          "name": "DCP",
-          "value": 1,
-          "description": "DCP detected"
-        }
-      ]
-    },
-    "STAT": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Disabled",
-          "value": 0,
-          "description": "all requests addressed to this endpoint are ignored"
-        },
-        {
-          "name": "Stall",
-          "value": 1,
-          "description": "the endpoint is stalled and all requests result in a STALL handshake"
-        },
-        {
-          "name": "Nak",
-          "value": 2,
-          "description": "the endpoint is naked and all requests result in a NAK handshake"
-        },
-        {
-          "name": "Valid",
-          "value": 3,
-          "description": "this endpoint is enabled, requests are ACKed"
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

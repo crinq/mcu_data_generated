@@ -2,6 +2,9 @@
   "schema": 1,
   "kind": "pwr",
   "version": "f3",
+  "source": "stm32rs_svd",
+  "source_device": "stm32f373v8",
+  "source_file": "stm32f373.svd.patched",
   "blocks": {
     "PWR": {
       "name": "PWR",
@@ -12,66 +15,71 @@
           "name": "CR",
           "offset": 0,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "power control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "power control register",
           "fields": [
             {
               "name": "LPDS",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Low-power deep sleep",
-              "enum": null
+              "description": "Low-power deep sleep"
             },
             {
               "name": "PDDS",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Power down deepsleep",
-              "enum": "PDDS"
+              "description": "Power down deepsleep"
             },
             {
               "name": "CWUF",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "Clear wakeup flag",
-              "enum": null
+              "description": "Clear wakeup flag"
             },
             {
               "name": "CSBF",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "Clear standby flag",
-              "enum": null
+              "description": "Clear standby flag"
             },
             {
               "name": "PVDE",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "Power voltage detector enable",
-              "enum": null
+              "description": "Power voltage detector enable"
             },
             {
               "name": "PLS",
               "bit_offset": 5,
               "bit_width": 3,
-              "description": "PVD level selection",
-              "enum": null
+              "description": "PVD level selection"
             },
             {
               "name": "DBP",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "Disable backup domain write protection",
-              "enum": null
+              "description": "Disable backup domain write protection"
             },
             {
-              "name": "ENSD",
+              "name": "ENSD1",
               "bit_offset": 9,
               "bit_width": 1,
-              "description": "ENable SD1 ADC",
-              "enum": null
+              "description": "ENable SD1 ADC"
+            },
+            {
+              "name": "ENSD2",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "ENable SD2 ADC"
+            },
+            {
+              "name": "ENSD3",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "ENable SD3 ADC"
             }
           ]
         },
@@ -79,66 +87,58 @@
           "name": "CSR",
           "offset": 4,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "power control/status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "power control/status register",
           "fields": [
             {
               "name": "WUF",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "Wakeup flag",
-              "enum": null
+              "access": "read-only"
             },
             {
               "name": "SBF",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "Standby flag",
-              "enum": null
+              "access": "read-only"
             },
             {
               "name": "PVDO",
               "bit_offset": 2,
               "bit_width": 1,
               "description": "PVD output",
-              "enum": null
+              "access": "read-only"
             },
             {
-              "name": "VREFINTRDYF",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Internal voltage reference ready flag",
-              "enum": null
-            },
-            {
-              "name": "EWUP",
+              "name": "EWUP1",
               "bit_offset": 8,
               "bit_width": 1,
               "description": "Enable WKUP1 pin",
-              "enum": null
+              "access": "read-write"
+            },
+            {
+              "name": "EWUP2",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Enable WKUP2 pin",
+              "access": "read-write"
+            },
+            {
+              "name": "EWUP3",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Enable WKUP3 pin",
+              "access": "read-write"
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "PDDS": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "STOP_MODE",
-          "value": 0,
-          "description": "Enter Stop mode when the CPU enters deepsleep"
-        },
-        {
-          "name": "STANDBY_MODE",
-          "value": 1,
-          "description": "Enter Standby mode when the CPU enters deepsleep"
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

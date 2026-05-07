@@ -2,6 +2,9 @@
   "schema": 1,
   "kind": "ipcc",
   "version": "v1",
+  "source": "stm32rs_svd",
+  "source_device": "stm32wb55cc",
+  "source_file": "stm32wb55.svd.patched",
   "blocks": {
     "IPCC": {
       "name": "IPCC",
@@ -9,110 +12,560 @@
       "extends": null,
       "registers": [
         {
-          "name": "CPU",
-          "offset": 0,
-          "description": "CPU specific registers",
-          "array_len": 2,
-          "array_stride": 16,
-          "fields": []
-        }
-      ]
-    },
-    "IPCC_CPU": {
-      "name": "IPCC_CPU",
-      "description": "IPCC",
-      "extends": null,
-      "registers": [
-        {
-          "name": "CR",
+          "name": "C1CR",
           "offset": 0,
           "size": 32,
-          "description": "Control register CPUx",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Control register CPU1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Control register CPUx",
           "fields": [
-            {
-              "name": "RXOIE",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "processor x Receive channel occupied interrupt enable",
-              "enum": null
-            },
             {
               "name": "TXFIE",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "processor x Transmit channel free interrupt enable",
-              "enum": null
+              "description": "processor 1 Transmit channel free interrupt enable"
+            },
+            {
+              "name": "RXOIE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "processor 1 Receive channel occupied interrupt enable"
             }
           ]
         },
         {
-          "name": "MR",
+          "name": "C1MR",
           "offset": 4,
           "size": 32,
-          "description": "Mask register CPUx",
+          "access": "read-write",
+          "reset_value": 4294967295,
+          "description": "Mask register CPU1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Mask register CPUx",
           "fields": [
             {
-              "name": "CHOM",
-              "bit_offset": 0,
+              "name": "CH6FM",
+              "bit_offset": 21,
               "bit_width": 1,
-              "description": "processor x Receive channel y occupied interrupt enable",
-              "enum": null
+              "description": "processor 1 Transmit channel 6 free interrupt mask"
             },
             {
-              "name": "CHFM",
+              "name": "CH5FM",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "processor 1 Transmit channel 5 free interrupt mask"
+            },
+            {
+              "name": "CH4FM",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "processor 1 Transmit channel 4 free interrupt mask"
+            },
+            {
+              "name": "CH3FM",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "processor 1 Transmit channel 3 free interrupt mask"
+            },
+            {
+              "name": "CH2FM",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "processor 1 Transmit channel 2 free interrupt mask"
+            },
+            {
+              "name": "CH1FM",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "processor x Transmit channel y free interrupt mask",
-              "enum": null
+              "description": "processor 1 Transmit channel 1 free interrupt mask"
+            },
+            {
+              "name": "CH6OM",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "processor 1 Receive channel 6 occupied interrupt enable"
+            },
+            {
+              "name": "CH5OM",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "processor 1 Receive channel 5 occupied interrupt enable"
+            },
+            {
+              "name": "CH4OM",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "processor 1 Receive channel 4 occupied interrupt enable"
+            },
+            {
+              "name": "CH3OM",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "processor 1 Receive channel 3 occupied interrupt enable"
+            },
+            {
+              "name": "CH2OM",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "processor 1 Receive channel 2 occupied interrupt enable"
+            },
+            {
+              "name": "CH1OM",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "processor 1 Receive channel 1 occupied interrupt enable"
             }
           ]
         },
         {
-          "name": "SCR",
+          "name": "C1SCR",
           "offset": 8,
           "size": 32,
-          "description": "Status Set or Clear register CPUx",
+          "access": "write-only",
+          "reset_value": 0,
+          "description": "Status Set or Clear register CPU1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Status Set or Clear register CPUx",
           "fields": [
             {
-              "name": "CHC",
-              "bit_offset": 0,
+              "name": "CH6S",
+              "bit_offset": 21,
               "bit_width": 1,
-              "description": "processor x Receive channel y status clear",
-              "enum": null
+              "description": "processor 1 Transmit channel 6 status set"
             },
             {
-              "name": "CHS",
+              "name": "CH5S",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "processor 1 Transmit channel 5 status set"
+            },
+            {
+              "name": "CH4S",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "processor 1 Transmit channel 4 status set"
+            },
+            {
+              "name": "CH3S",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "processor 1 Transmit channel 3 status set"
+            },
+            {
+              "name": "CH2S",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "processor 1 Transmit channel 2 status set"
+            },
+            {
+              "name": "CH1S",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "processor x Transmit channel y status set",
-              "enum": null
+              "description": "processor 1 Transmit channel 1 status set"
+            },
+            {
+              "name": "CH6C",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "processor 1 Receive channel 6 status clear"
+            },
+            {
+              "name": "CH5C",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "processor 1 Receive channel 5 status clear"
+            },
+            {
+              "name": "CH4C",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "processor 1 Receive channel 4 status clear"
+            },
+            {
+              "name": "CH3C",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "processor 1 Receive channel 3 status clear"
+            },
+            {
+              "name": "CH2C",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "processor 1 Receive channel 2 status clear"
+            },
+            {
+              "name": "CH1C",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "processor 1 Receive channel 1 status clear"
             }
           ]
         },
         {
-          "name": "SR",
+          "name": "C1TOC2SR",
           "offset": 12,
           "size": 32,
-          "description": "CPUx to CPUy status register",
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "CPU1 to CPU2 status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "CPUx to CPUy status register",
           "fields": [
             {
-              "name": "CHF",
+              "name": "CH6F",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "processor 1 transmit to process 2 Receive channel 6 status flag"
+            },
+            {
+              "name": "CH5F",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "processor 1 transmit to process 2 Receive channel 5 status flag"
+            },
+            {
+              "name": "CH4F",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "processor 1 transmit to process 2 Receive channel 4 status flag"
+            },
+            {
+              "name": "CH3F",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "processor 1 transmit to process 2 Receive channel 3 status flag"
+            },
+            {
+              "name": "CH2F",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "processor 1 transmit to process 2 Receive channel 2 status flag"
+            },
+            {
+              "name": "CH1F",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "processor x transmit to process y Receive channel z status flag",
-              "enum": null
+              "description": "processor 1 transmit to process 2 Receive channel 1 status flag"
+            }
+          ]
+        },
+        {
+          "name": "C2CR",
+          "offset": 16,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Control register CPU2",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "TXFIE",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "processor 2 Transmit channel free interrupt enable"
+            },
+            {
+              "name": "RXOIE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "processor 2 Receive channel occupied interrupt enable"
+            }
+          ]
+        },
+        {
+          "name": "C2MR",
+          "offset": 20,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 4294967295,
+          "description": "Mask register CPU2",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CH6FM",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "processor 2 Transmit channel 6 free interrupt mask"
+            },
+            {
+              "name": "CH5FM",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "processor 2 Transmit channel 5 free interrupt mask"
+            },
+            {
+              "name": "CH4FM",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "processor 2 Transmit channel 4 free interrupt mask"
+            },
+            {
+              "name": "CH3FM",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "processor 2 Transmit channel 3 free interrupt mask"
+            },
+            {
+              "name": "CH2FM",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "processor 2 Transmit channel 2 free interrupt mask"
+            },
+            {
+              "name": "CH1FM",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "processor 2 Transmit channel 1 free interrupt mask"
+            },
+            {
+              "name": "CH6OM",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "processor 2 Receive channel 6 occupied interrupt enable"
+            },
+            {
+              "name": "CH5OM",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "processor 2 Receive channel 5 occupied interrupt enable"
+            },
+            {
+              "name": "CH4OM",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "processor 2 Receive channel 4 occupied interrupt enable"
+            },
+            {
+              "name": "CH3OM",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "processor 2 Receive channel 3 occupied interrupt enable"
+            },
+            {
+              "name": "CH2OM",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "processor 2 Receive channel 2 occupied interrupt enable"
+            },
+            {
+              "name": "CH1OM",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "processor 2 Receive channel 1 occupied interrupt enable"
+            }
+          ]
+        },
+        {
+          "name": "C2SCR",
+          "offset": 24,
+          "size": 32,
+          "access": "write-only",
+          "reset_value": 0,
+          "description": "Status Set or Clear register CPU2",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CH6S",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "processor 2 Transmit channel 6 status set"
+            },
+            {
+              "name": "CH5S",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "processor 2 Transmit channel 5 status set"
+            },
+            {
+              "name": "CH4S",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "processor 2 Transmit channel 4 status set"
+            },
+            {
+              "name": "CH3S",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "processor 2 Transmit channel 3 status set"
+            },
+            {
+              "name": "CH2S",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "processor 2 Transmit channel 2 status set"
+            },
+            {
+              "name": "CH1S",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "processor 2 Transmit channel 1 status set"
+            },
+            {
+              "name": "CH6C",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "processor 2 Receive channel 6 status clear"
+            },
+            {
+              "name": "CH5C",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "processor 2 Receive channel 5 status clear"
+            },
+            {
+              "name": "CH4C",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "processor 2 Receive channel 4 status clear"
+            },
+            {
+              "name": "CH3C",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "processor 2 Receive channel 3 status clear"
+            },
+            {
+              "name": "CH2C",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "processor 2 Receive channel 2 status clear"
+            },
+            {
+              "name": "CH1C",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "processor 2 Receive channel 1 status clear"
+            }
+          ]
+        },
+        {
+          "name": "C2TOC1SR",
+          "offset": 28,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "CPU2 to CPU1 status register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CH6F",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "processor 2 transmit to process 1 Receive channel 6 status flag"
+            },
+            {
+              "name": "CH5F",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "processor 2 transmit to process 1 Receive channel 5 status flag"
+            },
+            {
+              "name": "CH4F",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "processor 2 transmit to process 1 Receive channel 4 status flag"
+            },
+            {
+              "name": "CH3F",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "processor 2 transmit to process 1 Receive channel 3 status flag"
+            },
+            {
+              "name": "CH2F",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "processor 2 transmit to process 1 Receive channel 2 status flag"
+            },
+            {
+              "name": "CH1F",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "processor 2 transmit to process 1 Receive channel 1 status flag"
+            }
+          ]
+        },
+        {
+          "name": "HWCFGR",
+          "offset": 1008,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 6,
+          "description": "IPCC Hardware configuration register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CHANNELS",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "Number of channels per CPU supported by the IP, range 1 to 16"
+            }
+          ]
+        },
+        {
+          "name": "VERR",
+          "offset": 1012,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 16,
+          "description": "IPCC version register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "MAJREV",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "Major Revision"
+            },
+            {
+              "name": "MINREV",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "Minor Revision"
+            }
+          ]
+        },
+        {
+          "name": "IPIDR",
+          "offset": 1016,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 1048689,
+          "description": "IPCC indentification register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "IPID",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Identification Code"
+            }
+          ]
+        },
+        {
+          "name": "SIDR",
+          "offset": 1020,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 2747653377,
+          "description": "IPCC size indentification register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "SID",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Size Identification Code"
             }
           ]
         }

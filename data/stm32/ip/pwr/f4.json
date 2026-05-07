@@ -2,6 +2,9 @@
   "schema": 1,
   "kind": "pwr",
   "version": "f4",
+  "source": "stm32rs_svd",
+  "source_device": "stm32f401cb",
+  "source_file": "stm32f401.svd.patched",
   "blocks": {
     "PWR": {
       "name": "PWR",
@@ -9,261 +12,356 @@
       "extends": null,
       "registers": [
         {
-          "name": "CR1",
+          "name": "CR",
           "offset": 0,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "power control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "power control register",
           "fields": [
             {
-              "name": "LPDS",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Low-power deep sleep",
-              "enum": null
+              "name": "VOS",
+              "bit_offset": 14,
+              "bit_width": 2,
+              "description": "Regulator voltage scaling output selection",
+              "enum_values": [
+                {
+                  "name": "Scale3",
+                  "value": 1,
+                  "description": "Scale 3 mode"
+                },
+                {
+                  "name": "Scale2",
+                  "value": 2,
+                  "description": "Scale 2 mode"
+                }
+              ]
             },
             {
-              "name": "PDDS",
-              "bit_offset": 1,
+              "name": "ADCDC1",
+              "bit_offset": 13,
               "bit_width": 1,
-              "description": "Power down deepsleep",
-              "enum": "PDDS"
-            },
-            {
-              "name": "CWUF",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Clear wakeup flag",
-              "enum": null
-            },
-            {
-              "name": "CSBF",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Clear standby flag",
-              "enum": null
-            },
-            {
-              "name": "PVDE",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "Power voltage detector enable",
-              "enum": null
-            },
-            {
-              "name": "PLS",
-              "bit_offset": 5,
-              "bit_width": 3,
-              "description": "PVD level selection",
-              "enum": null
-            },
-            {
-              "name": "DBP",
-              "bit_offset": 8,
-              "bit_width": 1,
-              "description": "Disable backup domain write protection",
-              "enum": null
+              "description": "ADCDC1"
             },
             {
               "name": "FPDS",
               "bit_offset": 9,
               "bit_width": 1,
               "description": "Flash power down in Stop mode",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Idle",
+                  "value": 0,
+                  "description": "Flash memory not in power-down when the device is in Stop mode"
+                },
+                {
+                  "name": "PowerDown",
+                  "value": 1,
+                  "description": "Flash memory in power-down when the device is in Stop mode"
+                }
+              ]
             },
             {
-              "name": "LPLVDS",
-              "bit_offset": 10,
+              "name": "DBP",
+              "bit_offset": 8,
               "bit_width": 1,
-              "description": "Low-Power Regulator Low Voltage in deepsleep",
-              "enum": null
+              "description": "Disable backup domain write protection",
+              "enum_values": [
+                {
+                  "name": "Protected",
+                  "value": 0,
+                  "description": "Access to RTC and RTC Backup registers and backup SRAM disabled"
+                },
+                {
+                  "name": "Writable",
+                  "value": 1,
+                  "description": "Access to RTC and RTC Backup registers and backup SRAM enabled"
+                }
+              ]
+            },
+            {
+              "name": "PLS",
+              "bit_offset": 5,
+              "bit_width": 3,
+              "description": "PVD level selection"
+            },
+            {
+              "name": "PVDE",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Power voltage detector enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "PVD disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "PVD enabled"
+                }
+              ]
+            },
+            {
+              "name": "CSBF",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Clear standby flag",
+              "enum_values": [
+                {
+                  "name": "Zero",
+                  "value": 0,
+                  "description": "This bit is always read as 0"
+                },
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clear the SBF Standby Flag"
+                }
+              ]
+            },
+            {
+              "name": "CWUF",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Clear wakeup flag",
+              "enum_values": [
+                {
+                  "name": "Zero",
+                  "value": 0,
+                  "description": "This bit is always read as 0"
+                },
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clear the WUPF Wakeup Flag **after 2 System clock cycles**"
+                }
+              ]
+            },
+            {
+              "name": "PDDS",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Power down deepsleep",
+              "enum_values": [
+                {
+                  "name": "EnterStop",
+                  "value": 0,
+                  "description": "Enter Stop mode when the CPU enters deepsleep. The regulator status depends on the LPDS bit"
+                },
+                {
+                  "name": "EnterStandby",
+                  "value": 1,
+                  "description": "Enter Standby mode when the CPU enters deepsleep"
+                }
+              ]
+            },
+            {
+              "name": "LPDS",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Low-power deep sleep",
+              "enum_values": [
+                {
+                  "name": "Main",
+                  "value": 0,
+                  "description": "Main voltage regulator ON during Stop mode"
+                },
+                {
+                  "name": "LowPower",
+                  "value": 1,
+                  "description": "Low-power voltage regulator ON during Stop mode"
+                }
+              ]
             },
             {
               "name": "MRLVDS",
               "bit_offset": 11,
               "bit_width": 1,
-              "description": "Main regulator low voltage in deepsleep mode",
-              "enum": null
+              "description": "Main regulator Low Voltage in Deep Sleep",
+              "enum_values": [
+                {
+                  "name": "On",
+                  "value": 0,
+                  "description": "Main regulator ON when the device is in Stop mode"
+                },
+                {
+                  "name": "UnderDrive",
+                  "value": 1,
+                  "description": "Main Regulator in under-drive mode and Flash memory in power-down when the device is in Stop under-drive mode"
+                }
+              ]
             },
             {
-              "name": "ADCDC1",
-              "bit_offset": 13,
+              "name": "LPLVDS",
+              "bit_offset": 10,
               "bit_width": 1,
-              "description": "ADCDC1",
-              "enum": null
-            },
-            {
-              "name": "VOS",
-              "bit_offset": 14,
-              "bit_width": 2,
-              "description": "Regulator voltage scaling output selection",
-              "enum": "VOS"
-            },
-            {
-              "name": "ODEN",
-              "bit_offset": 16,
-              "bit_width": 1,
-              "description": "Over-drive enable (STM32F4[23] ONLY)",
-              "enum": null
-            },
-            {
-              "name": "ODSWEN",
-              "bit_offset": 17,
-              "bit_width": 1,
-              "description": "Over-drive switching enabled (STM32F4[23] ONLY)",
-              "enum": null
-            },
-            {
-              "name": "UDEN",
-              "bit_offset": 18,
-              "bit_width": 2,
-              "description": "Under-drive enable in stop mode (STM32F4[23] ONLY)",
-              "enum": null
-            },
-            {
-              "name": "FMSSR",
-              "bit_offset": 20,
-              "bit_width": 1,
-              "description": "Flash Memory Stop while System Run",
-              "enum": null
-            },
-            {
-              "name": "FISSR",
-              "bit_offset": 21,
-              "bit_width": 1,
-              "description": "Flash Interface Stop while System Run",
-              "enum": null
+              "description": "Low-power regulator Low Voltage in Deep Sleep",
+              "enum_values": [
+                {
+                  "name": "On",
+                  "value": 0,
+                  "description": "Low-power regulator ON if LPDS bit is set when the device is in Stop mode"
+                },
+                {
+                  "name": "UnderDrive",
+                  "value": 1,
+                  "description": "Low-power regulator in under-drive mode if LPDS bit is set and Flash memory in power-down when the device is in Stop under-drive mode"
+                }
+              ]
             }
           ]
         },
         {
-          "name": "CSR1",
+          "name": "CSR",
           "offset": 4,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "power control/status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "power control/status register",
           "fields": [
             {
               "name": "WUF",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "Wakeup flag",
-              "enum": null
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotOccurred",
+                  "value": 0,
+                  "description": "No wakeup event occurred"
+                },
+                {
+                  "name": "Occurred",
+                  "value": 1,
+                  "description": "A wakeup event was received from the WKUP pin or from the RTC alarm (Alarm A or Alarm B), RTC Tamper event, RTC TimeStamp event or RTC Wakeup)"
+                }
+              ]
             },
             {
               "name": "SBF",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "Standby flag",
-              "enum": null
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "InStandby",
+                  "value": 0,
+                  "description": "Device has not been in Standby mode"
+                },
+                {
+                  "name": "NotInStandby",
+                  "value": 1,
+                  "description": "Device has been in Standby mode"
+                }
+              ]
             },
             {
               "name": "PVDO",
               "bit_offset": 2,
               "bit_width": 1,
               "description": "PVD output",
-              "enum": null
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "Higher",
+                  "value": 0,
+                  "description": "Vdd is higher than the PVD threshold selected with the PLS[2:0] bits"
+                },
+                {
+                  "name": "Lower",
+                  "value": 1,
+                  "description": "Vdd is lower than the PVD threshold selected with the PLS[2:0] bits"
+                }
+              ]
             },
             {
               "name": "BRR",
               "bit_offset": 3,
               "bit_width": 1,
               "description": "Backup regulator ready",
-              "enum": null
-            },
-            {
-              "name": "EWUP2",
-              "bit_offset": 7,
-              "bit_width": 1,
-              "description": "Enable WKUP2 pin",
-              "enum": null
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotReady",
+                  "value": 0,
+                  "description": "Backup Regulator not ready"
+                },
+                {
+                  "name": "Ready",
+                  "value": 1,
+                  "description": "Backup Regulator ready"
+                }
+              ]
             },
             {
               "name": "EWUP",
               "bit_offset": 8,
               "bit_width": 1,
               "description": "Enable WKUP pin",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "GPIO",
+                  "value": 0,
+                  "description": "WKUP1 pin is used for general purpose I/O. An event on the WKUP1 pin does not wakeup the device from Standby mode"
+                },
+                {
+                  "name": "WakeUp",
+                  "value": 1,
+                  "description": "WKUP1 pin is used for wakeup from Standby mode and forced in input pull down configuration (rising edge or falling on WKUP pin wakes-up the system from Standby mode)"
+                }
+              ]
             },
             {
               "name": "BRE",
               "bit_offset": 9,
               "bit_width": 1,
               "description": "Backup regulator enable",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Backup regulator disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Backup regulator enabled"
+                }
+              ]
             },
             {
               "name": "VOSRDY",
               "bit_offset": 14,
               "bit_width": 1,
-              "description": "Regulator voltage scaling output selection ready bit (STM32F4[23] ONLY)",
-              "enum": null
-            },
-            {
-              "name": "ODRDY",
-              "bit_offset": 16,
-              "bit_width": 1,
-              "description": "Over-drive mode ready (STM32F4[23] ONLY)",
-              "enum": null
-            },
-            {
-              "name": "ODSWRDY",
-              "bit_offset": 17,
-              "bit_width": 1,
-              "description": "Over-drive mode switching ready (STM32F4[23] ONLY)",
-              "enum": null
-            },
-            {
-              "name": "UDRDY",
-              "bit_offset": 18,
-              "bit_width": 2,
-              "description": "Under-drive ready flag",
-              "enum": null
+              "description": "Regulator voltage scaling output selection ready bit",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotReady",
+                  "value": 0,
+                  "description": "Not ready"
+                },
+                {
+                  "name": "Ready",
+                  "value": 1,
+                  "description": "Ready"
+                }
+              ]
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "PDDS": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "STOP_MODE",
-          "value": 0,
-          "description": "Enter Stop mode when the CPU enters deepsleep"
-        },
-        {
-          "name": "STANDBY_MODE",
-          "value": 1,
-          "description": "Enter Standby mode when the CPU enters deepsleep"
-        }
-      ]
-    },
-    "VOS": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "SCALE3",
-          "value": 1,
-          "description": "Scale 3 mode (STM32F4[23] ONLY)"
-        },
-        {
-          "name": "SCALE2",
-          "value": 2,
-          "description": "Scale 2 mode"
-        },
-        {
-          "name": "SCALE1",
-          "value": 3,
-          "description": "Scale 1 mode (reset value)"
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

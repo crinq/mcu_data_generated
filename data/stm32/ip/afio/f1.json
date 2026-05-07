@@ -2,6 +2,9 @@
   "schema": 1,
   "kind": "afio",
   "version": "f1",
+  "source": "stm32rs_svd",
+  "source_device": "stm32f100v8",
+  "source_file": "stm32f100.svd.patched",
   "blocks": {
     "AFIO": {
       "name": "AFIO",
@@ -12,31 +15,29 @@
           "name": "EVCR",
           "offset": 0,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "Event Control Register (AFIO_EVCR)",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Event Control Register (AFIO_EVCR)",
           "fields": [
             {
               "name": "PIN",
               "bit_offset": 0,
               "bit_width": 4,
-              "description": "Pin selection",
-              "enum": null
+              "description": "Pin selection"
             },
             {
               "name": "PORT",
               "bit_offset": 4,
               "bit_width": 3,
-              "description": "Port selection",
-              "enum": null
+              "description": "Port selection"
             },
             {
               "name": "EVOE",
               "bit_offset": 7,
               "bit_width": 1,
-              "description": "Event Output Enable",
-              "enum": null
+              "description": "Event Output Enable"
             }
           ]
         },
@@ -44,189 +45,276 @@
           "name": "MAPR",
           "offset": 4,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "AF remap and debug I/O configuration register (AFIO_MAPR)",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "AF remap and debug I/O configuration register (AFIO_MAPR)",
           "fields": [
             {
               "name": "SPI1_REMAP",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "SPI1 remapping",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "I2C1_REMAP",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "I2C1 remapping",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "USART1_REMAP",
               "bit_offset": 2,
               "bit_width": 1,
               "description": "USART1 remapping",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "USART2_REMAP",
               "bit_offset": 3,
               "bit_width": 1,
               "description": "USART2 remapping",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "USART3_REMAP",
               "bit_offset": 4,
               "bit_width": 2,
               "description": "USART3 remapping",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "TIM1_REMAP",
               "bit_offset": 6,
               "bit_width": 2,
               "description": "TIM1 remapping",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "TIM2_REMAP",
               "bit_offset": 8,
               "bit_width": 2,
               "description": "TIM2 remapping",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "TIM3_REMAP",
               "bit_offset": 10,
               "bit_width": 2,
               "description": "TIM3 remapping",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "TIM4_REMAP",
               "bit_offset": 12,
               "bit_width": 1,
               "description": "TIM4 remapping",
-              "enum": null
-            },
-            {
-              "name": "CAN1_REMAP",
-              "bit_offset": 13,
-              "bit_width": 2,
-              "description": "CAN1 remapping",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "PD01_REMAP",
               "bit_offset": 15,
               "bit_width": 1,
               "description": "Port D0/Port D1 mapping on OSCIN/OSCOUT",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "TIM5CH4_IREMAP",
               "bit_offset": 16,
               "bit_width": 1,
               "description": "Set and cleared by software",
-              "enum": null
-            },
-            {
-              "name": "ADC1_ETRGINJ_REMAP",
-              "bit_offset": 17,
-              "bit_width": 1,
-              "description": "ADC 1 External trigger injected conversion remapping",
-              "enum": null
-            },
-            {
-              "name": "ADC1_ETRGREG_REMAP",
-              "bit_offset": 18,
-              "bit_width": 1,
-              "description": "ADC 1 external trigger regular conversion remapping",
-              "enum": null
-            },
-            {
-              "name": "ADC2_ETRGINJ_REMAP",
-              "bit_offset": 19,
-              "bit_width": 1,
-              "description": "ADC 2 external trigger injected conversion remapping",
-              "enum": null
-            },
-            {
-              "name": "ADC2_ETRGREG_REMAP",
-              "bit_offset": 20,
-              "bit_width": 1,
-              "description": "ADC 2 external trigger regular conversion remapping",
-              "enum": null
-            },
-            {
-              "name": "ETH_REMAP",
-              "bit_offset": 21,
-              "bit_width": 1,
-              "description": "Ethernet MAC I/O remapping",
-              "enum": null
-            },
-            {
-              "name": "CAN2_REMAP",
-              "bit_offset": 22,
-              "bit_width": 1,
-              "description": "CAN2 I/O remapping",
-              "enum": null
-            },
-            {
-              "name": "MII_RMII_SEL",
-              "bit_offset": 23,
-              "bit_width": 1,
-              "description": "MII or RMII selection",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "SWJ_CFG",
               "bit_offset": 24,
               "bit_width": 3,
-              "description": "Serial wire JTAG configuration (must be set to NoOp to leave it unchanged!)",
-              "enum": "SWJ_CFG"
-            },
-            {
-              "name": "SPI3_REMAP",
-              "bit_offset": 28,
-              "bit_width": 1,
-              "description": "SPI3/I2S3 remapping",
-              "enum": null
-            },
-            {
-              "name": "TIM2ITR1_IREMAP",
-              "bit_offset": 29,
-              "bit_width": 1,
-              "description": "TIM2 internal trigger 1 remapping",
-              "enum": null
-            },
-            {
-              "name": "PTP_PPS_REMAP",
-              "bit_offset": 30,
-              "bit_width": 1,
-              "description": "Ethernet PTP PPS remapping",
-              "enum": null
+              "description": "Serial wire JTAG configuration",
+              "access": "write-only"
             }
           ]
         },
         {
-          "name": "EXTICR",
+          "name": "EXTICR1",
           "offset": 8,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "External interrupt configuration register 1 (AFIO_EXTICR1)",
-          "array_len": 4,
-          "array_stride": 4,
-          "fieldset_description": "External interrupt configuration register 3 (AFIO_EXTICR3)",
+          "array_len": null,
+          "array_stride": null,
           "fields": [
             {
-              "name": "EXTI",
+              "name": "EXTI0",
               "bit_offset": 0,
               "bit_width": 4,
-              "description": "EXTI12 configuration",
-              "enum": null
+              "description": "EXTI0 configuration",
+              "enum_values": [
+                {
+                  "name": "PA",
+                  "value": 0,
+                  "description": "Select PAx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PB",
+                  "value": 1,
+                  "description": "Select PBx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PC",
+                  "value": 2,
+                  "description": "Select PCx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PD",
+                  "value": 3,
+                  "description": "Select PDx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PE",
+                  "value": 4,
+                  "description": "Select PEx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PF",
+                  "value": 5,
+                  "description": "Select PFx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PG",
+                  "value": 6,
+                  "description": "Select PGx as the source input for the EXTIx external interrupt"
+                }
+              ]
+            },
+            {
+              "name": "EXTI1",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "EXTI1 configuration"
+            },
+            {
+              "name": "EXTI2",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "EXTI2 configuration"
+            },
+            {
+              "name": "EXTI3",
+              "bit_offset": 12,
+              "bit_width": 4,
+              "description": "EXTI3 configuration"
+            }
+          ]
+        },
+        {
+          "name": "EXTICR2",
+          "offset": 12,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "External interrupt configuration register 2 (AFIO_EXTICR2)",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "EXTI4",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "EXTI4 configuration"
+            },
+            {
+              "name": "EXTI5",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "EXTI5 configuration"
+            },
+            {
+              "name": "EXTI6",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "EXTI6 configuration"
+            },
+            {
+              "name": "EXTI7",
+              "bit_offset": 12,
+              "bit_width": 4,
+              "description": "EXTI7 configuration"
+            }
+          ]
+        },
+        {
+          "name": "EXTICR3",
+          "offset": 16,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "External interrupt configuration register 3 (AFIO_EXTICR3)",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "EXTI8",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "EXTI8 configuration"
+            },
+            {
+              "name": "EXTI9",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "EXTI9 configuration"
+            },
+            {
+              "name": "EXTI10",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "EXTI10 configuration"
+            },
+            {
+              "name": "EXTI11",
+              "bit_offset": 12,
+              "bit_width": 4,
+              "description": "EXTI11 configuration"
+            }
+          ]
+        },
+        {
+          "name": "EXTICR4",
+          "offset": 20,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "External interrupt configuration register 4 (AFIO_EXTICR4)",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "EXTI12",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "EXTI12 configuration"
+            },
+            {
+              "name": "EXTI13",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "EXTI13 configuration"
+            },
+            {
+              "name": "EXTI14",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "EXTI14 configuration"
+            },
+            {
+              "name": "EXTI15",
+              "bit_offset": 12,
+              "bit_width": 4,
+              "description": "EXTI15 configuration"
             }
           ]
         },
@@ -234,144 +322,82 @@
           "name": "MAPR2",
           "offset": 28,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "AF remap and debug I/O configuration register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "AF remap and debug I/O configuration register",
           "fields": [
             {
               "name": "TIM15_REMAP",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "TIM15 remapping",
-              "enum": null
+              "description": "TIM15 remapping"
             },
             {
               "name": "TIM16_REMAP",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "TIM16 remapping",
-              "enum": null
+              "description": "TIM16 remapping"
             },
             {
               "name": "TIM17_REMAP",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "TIM17 remapping",
-              "enum": null
-            },
-            {
-              "name": "CEC_REMAP",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "CEC remapping",
-              "enum": null
-            },
-            {
-              "name": "TIM1_DMA_REMAP",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "TIM1 DMA remapping",
-              "enum": null
-            },
-            {
-              "name": "TIM9_REMAP",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "TIM9 remapping",
-              "enum": null
-            },
-            {
-              "name": "TIM10_REMAP",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "TIM10 remapping",
-              "enum": null
-            },
-            {
-              "name": "TIM11_REMAP",
-              "bit_offset": 7,
-              "bit_width": 1,
-              "description": "TIM11 remapping",
-              "enum": null
+              "description": "TIM17 remapping"
             },
             {
               "name": "TIM13_REMAP",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "TIM13 remapping",
-              "enum": null
+              "description": "TIM13 remapping"
             },
             {
               "name": "TIM14_REMAP",
               "bit_offset": 9,
               "bit_width": 1,
-              "description": "TIM14 remapping",
-              "enum": null
+              "description": "TIM14 remapping"
             },
             {
               "name": "FSMC_NADV",
               "bit_offset": 10,
               "bit_width": 1,
-              "description": "NADV connect/disconnect",
-              "enum": null
+              "description": "NADV connect/disconnect"
+            },
+            {
+              "name": "CEC_REMAP",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "CEC remapping"
+            },
+            {
+              "name": "TIM1_DMA_REMAP",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "TIM1 DMA remapping"
             },
             {
               "name": "TIM67_DAC_DMA_REMAP",
               "bit_offset": 11,
               "bit_width": 1,
-              "description": "TIM67_DAC DMA remapping",
-              "enum": null
+              "description": "TIM67_DAC DMA remapping"
             },
             {
               "name": "TIM12_REMAP",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "TIM12 remapping",
-              "enum": null
+              "description": "TIM12 remapping"
             },
             {
               "name": "MISC_REMAP",
               "bit_offset": 13,
               "bit_width": 1,
-              "description": "Miscellaneous features remapping",
-              "enum": null
+              "description": "Miscellaneous features remapping"
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "SWJ_CFG": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "Reset",
-          "value": 0,
-          "description": "Full SWJ (JTAG-DP + SW-DP) (Reset state)"
-        },
-        {
-          "name": "NoJntRst",
-          "value": 1,
-          "description": "Full SWJ (JTAG-DP + SW-DP) but without NJTRST"
-        },
-        {
-          "name": "JtagDisable",
-          "value": 2,
-          "description": "JTAG-DP Disabled and SW-DP Enabled"
-        },
-        {
-          "name": "Disable",
-          "value": 4,
-          "description": "JTAG-DP Disabled and SW-DP Disabled"
-        },
-        {
-          "name": "NoOp",
-          "value": 7,
-          "description": "Sets all bits to 1, indicating that the configuration should remain unchanged"
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

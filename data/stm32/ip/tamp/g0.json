@@ -2,6 +2,9 @@
   "schema": 1,
   "kind": "tamp",
   "version": "g0",
+  "source": "stm32rs_svd",
+  "source_device": "stm32g071c6",
+  "source_file": "stm32g071.svd.patched",
   "blocks": {
     "TAMP": {
       "name": "TAMP",
@@ -12,24 +15,53 @@
           "name": "CR1",
           "offset": 0,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 4294901760,
           "description": "control register 1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "control register 1",
           "fields": [
             {
-              "name": "TAMPE",
+              "name": "TAMP1E",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Tamper detection on IN X enable",
-              "enum": null
+              "description": "TAMP1E"
             },
             {
-              "name": "ITAMPE",
+              "name": "TAMP2E",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "TAMP2E"
+            },
+            {
+              "name": "ITAMP1E",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "Internal tamper X enable",
-              "enum": null
+              "description": "ITAMP1E"
+            },
+            {
+              "name": "ITAMP3E",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "ITAMP3E"
+            },
+            {
+              "name": "ITAMP4E",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "ITAMP4E"
+            },
+            {
+              "name": "ITAMP5E",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "ITAMP5E"
+            },
+            {
+              "name": "ITAMP6E",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "ITAMP6E"
             }
           ]
         },
@@ -37,31 +69,47 @@
           "name": "CR2",
           "offset": 4,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "control register 2",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "control register 2",
           "fields": [
             {
-              "name": "TAMPNOER",
+              "name": "TAMP1NOER",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Tamper X no erase",
-              "enum": null
+              "description": "TAMP1NOER"
             },
             {
-              "name": "TAMPMSK",
+              "name": "TAMP2NOER",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "TAMP2NOER"
+            },
+            {
+              "name": "TAMP1MSK",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "Tamper X mask",
-              "enum": null
+              "description": "TAMP1MSK"
             },
             {
-              "name": "TAMPTRG",
+              "name": "TAMP2MSK",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "TAMP2MSK"
+            },
+            {
+              "name": "TAMP1TRG",
               "bit_offset": 24,
               "bit_width": 1,
-              "description": "Active level for tamper X input",
-              "enum": null
+              "description": "TAMP1TRG"
+            },
+            {
+              "name": "TAMP2TRG",
+              "bit_offset": 25,
+              "bit_width": 1,
+              "description": "TAMP2TRG"
             }
           ]
         },
@@ -69,38 +117,35 @@
           "name": "FLTCR",
           "offset": 12,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "TAMP filter control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "TAMP filter control register",
           "fields": [
             {
               "name": "TAMPFREQ",
               "bit_offset": 0,
               "bit_width": 3,
-              "description": "Tamper sampling frequency. Determines the frequency at which each of the INx inputs are sampled.",
-              "enum": null
+              "description": "TAMPFREQ"
             },
             {
               "name": "TAMPFLT",
               "bit_offset": 3,
               "bit_width": 2,
-              "description": "INx filter count. These bits determines the number of consecutive samples at the specified level (TAMP*TRG) needed to activate a tamper event. TAMPFLT is valid for each of the INx inputs.",
-              "enum": null
+              "description": "TAMPFLT"
             },
             {
               "name": "TAMPPRCH",
               "bit_offset": 5,
               "bit_width": 2,
-              "description": "INx precharge duration. These bit determines the duration of time during which the pull-up/is activated before each sample. TAMPPRCH is valid for each of the INx inputs.",
-              "enum": null
+              "description": "TAMPPRCH"
             },
             {
               "name": "TAMPPUDIS",
               "bit_offset": 7,
               "bit_width": 1,
-              "description": "INx pull-up disable. This bit determines if each of the TAMPx pins are precharged before each sample.",
-              "enum": null
+              "description": "TAMPPUDIS"
             }
           ]
         },
@@ -108,24 +153,53 @@
           "name": "IER",
           "offset": 44,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "TAMP interrupt enable register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "TAMP interrupt enable register",
           "fields": [
             {
-              "name": "TAMPIE",
+              "name": "TAMP1IE",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Tamper X interrupt enable",
-              "enum": null
+              "description": "TAMP1IE"
             },
             {
-              "name": "ITAMPIE",
+              "name": "TAMP2IE",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "TAMP2IE"
+            },
+            {
+              "name": "ITAMP1IE",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "Internal tamper X interrupt enable",
-              "enum": null
+              "description": "ITAMP1IE"
+            },
+            {
+              "name": "ITAMP3IE",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "ITAMP3IE"
+            },
+            {
+              "name": "ITAMP4IE",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "ITAMP4IE"
+            },
+            {
+              "name": "ITAMP5IE",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "ITAMP5IE"
+            },
+            {
+              "name": "ITAMP6IE",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "ITAMP6IE"
             }
           ]
         },
@@ -133,24 +207,59 @@
           "name": "SR",
           "offset": 48,
           "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
           "description": "TAMP status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "TAMP status register",
           "fields": [
             {
-              "name": "TAMPF",
+              "name": "TAMP1F",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Tamper X detection flag",
-              "enum": null
+              "description": "TAMP1F"
             },
             {
-              "name": "ITAMPF",
+              "name": "TAMP2F",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "TAMP2F"
+            },
+            {
+              "name": "ITAMP1F",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "Internal tamper X detection flag",
-              "enum": null
+              "description": "ITAMP1F"
+            },
+            {
+              "name": "ITAMP3F",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "ITAMP3F"
+            },
+            {
+              "name": "ITAMP4F",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "ITAMP4F"
+            },
+            {
+              "name": "ITAMP5F",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "ITAMP5F"
+            },
+            {
+              "name": "ITAMP6F",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "ITAMP6F"
+            },
+            {
+              "name": "ITAMP7F",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "ITAMP7F"
             }
           ]
         },
@@ -158,24 +267,53 @@
           "name": "MISR",
           "offset": 52,
           "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
           "description": "TAMP masked interrupt status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "TAMP masked interrupt status register",
           "fields": [
             {
-              "name": "TAMPMF",
+              "name": "TAMP1MF",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Tamper X interrupt masked flag",
-              "enum": null
+              "description": "TAMP1MF:"
             },
             {
-              "name": "ITAMPMF",
+              "name": "TAMP2MF",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "TAMP2MF"
+            },
+            {
+              "name": "ITAMP1MF",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "Internal tamper X interrupt masked flag",
-              "enum": null
+              "description": "ITAMP1MF"
+            },
+            {
+              "name": "ITAMP3MF",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "ITAMP3MF"
+            },
+            {
+              "name": "ITAMP4MF",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "ITAMP4MF"
+            },
+            {
+              "name": "ITAMP5MF",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "ITAMP5MF"
+            },
+            {
+              "name": "ITAMP6MF",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "ITAMP6MF"
             }
           ]
         },
@@ -183,42 +321,77 @@
           "name": "SCR",
           "offset": 60,
           "size": 32,
+          "access": "write-only",
+          "reset_value": 0,
           "description": "TAMP status clear register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "TAMP status clear register",
           "fields": [
             {
-              "name": "CTAMPF",
+              "name": "CTAMP1F",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Clear tamper X detection flag",
-              "enum": null
+              "description": "CTAMP1F"
             },
             {
-              "name": "CITAMPF",
+              "name": "CTAMP2F",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "CTAMP2F"
+            },
+            {
+              "name": "CITAMP1F",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "Clear internal tamper X detection flag",
-              "enum": null
+              "description": "CITAMP1F"
+            },
+            {
+              "name": "CITAMP3F",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "CITAMP3F"
+            },
+            {
+              "name": "CITAMP4F",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "CITAMP4F"
+            },
+            {
+              "name": "CITAMP5F",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "CITAMP5F"
+            },
+            {
+              "name": "CITAMP6F",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "CITAMP6F"
+            },
+            {
+              "name": "CITAMP7F",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "CITAMP7F"
             }
           ]
         },
         {
-          "name": "BKPR",
+          "name": "BKP%sR",
           "offset": 256,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "TAMP backup register",
           "array_len": 5,
           "array_stride": 4,
-          "fieldset_description": "TAMP backup register",
           "fields": [
             {
               "name": "BKP",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "BKP",
-              "enum": null
+              "description": "BKP"
             }
           ]
         },
@@ -226,24 +399,23 @@
           "name": "HWCFGR2",
           "offset": 1004,
           "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
           "description": "TAMP hardware configuration register 2",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "TAMP hardware configuration register 2",
           "fields": [
             {
               "name": "PTIONREG_OUT",
               "bit_offset": 0,
               "bit_width": 8,
-              "description": "PTIONREG_OUT",
-              "enum": null
+              "description": "PTIONREG_OUT"
             },
             {
               "name": "TRUST_ZONE",
               "bit_offset": 8,
               "bit_width": 4,
-              "description": "TRUST_ZONE",
-              "enum": null
+              "description": "TRUST_ZONE"
             }
           ]
         },
@@ -251,38 +423,35 @@
           "name": "HWCFGR1",
           "offset": 1008,
           "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
           "description": "TAMP hardware configuration register 1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "TAMP hardware configuration register 1",
           "fields": [
             {
               "name": "BACKUP_REGS",
               "bit_offset": 0,
               "bit_width": 8,
-              "description": "BACKUP_REGS",
-              "enum": null
+              "description": "BACKUP_REGS"
             },
             {
               "name": "TAMPER",
               "bit_offset": 8,
               "bit_width": 4,
-              "description": "TAMPER",
-              "enum": null
+              "description": "TAMPER"
             },
             {
               "name": "ACTIVE_TAMPER",
               "bit_offset": 12,
               "bit_width": 4,
-              "description": "ACTIVE_TAMPER",
-              "enum": null
+              "description": "ACTIVE_TAMPER"
             },
             {
               "name": "INT_TAMPER",
               "bit_offset": 16,
               "bit_width": 16,
-              "description": "INT_TAMPER",
-              "enum": null
+              "description": "INT_TAMPER"
             }
           ]
         },
@@ -290,24 +459,23 @@
           "name": "VERR",
           "offset": 1012,
           "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
           "description": "EXTI IP Version register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "EXTI IP Version register",
           "fields": [
             {
               "name": "MINREV",
               "bit_offset": 0,
               "bit_width": 4,
-              "description": "Minor Revision number",
-              "enum": null
+              "description": "Minor Revision number"
             },
             {
               "name": "MAJREV",
               "bit_offset": 4,
               "bit_width": 4,
-              "description": "Major Revision number",
-              "enum": null
+              "description": "Major Revision number"
             }
           ]
         },
@@ -315,17 +483,17 @@
           "name": "IPIDR",
           "offset": 1016,
           "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
           "description": "EXTI Identification register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "EXTI Identification register",
           "fields": [
             {
               "name": "IPID",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "IP Identification",
-              "enum": null
+              "description": "IP Identification"
             }
           ]
         },
@@ -333,17 +501,17 @@
           "name": "SIDR",
           "offset": 1020,
           "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
           "description": "EXTI Size ID register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "EXTI Size ID register",
           "fields": [
             {
               "name": "SID",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Size Identification",
-              "enum": null
+              "description": "Size Identification"
             }
           ]
         }

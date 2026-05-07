@@ -2,6 +2,9 @@
   "schema": 1,
   "kind": "dma2d",
   "version": "v1",
+  "source": "stm32rs_svd",
+  "source_device": "stm32f429ag",
+  "source_file": "stm32f429.svd.patched",
   "blocks": {
     "DMA2D": {
       "name": "DMA2D",
@@ -12,80 +15,71 @@
           "name": "CR",
           "offset": 0,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "control register",
           "fields": [
             {
-              "name": "START",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Start",
-              "enum": "CR_START"
-            },
-            {
-              "name": "SUSP",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Suspend",
-              "enum": null
-            },
-            {
-              "name": "ABORT",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Abort",
-              "enum": "ABORT"
-            },
-            {
-              "name": "TEIE",
-              "bit_offset": 8,
-              "bit_width": 1,
-              "description": "Transfer error interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "TCIE",
-              "bit_offset": 9,
-              "bit_width": 1,
-              "description": "Transfer complete interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "TWIE",
-              "bit_offset": 10,
-              "bit_width": 1,
-              "description": "Transfer watermark interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "CAEIE",
-              "bit_offset": 11,
-              "bit_width": 1,
-              "description": "CLUT access error interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "CTCIE",
-              "bit_offset": 12,
-              "bit_width": 1,
-              "description": "CLUT transfer complete interrupt enable",
-              "enum": null
+              "name": "MODE",
+              "bit_offset": 16,
+              "bit_width": 2,
+              "description": "DMA2D mode"
             },
             {
               "name": "CEIE",
               "bit_offset": 13,
               "bit_width": 1,
-              "description": "Configuration Error Interrupt Enable",
-              "enum": null
+              "description": "Configuration Error Interrupt Enable"
             },
             {
-              "name": "MODE",
-              "bit_offset": 16,
-              "bit_width": 2,
-              "description": "DMA2D mode",
-              "enum": "MODE"
+              "name": "CTCIE",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "CLUT transfer complete interrupt enable"
+            },
+            {
+              "name": "CAEIE",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "CLUT access error interrupt enable"
+            },
+            {
+              "name": "TWIE",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Transfer watermark interrupt enable"
+            },
+            {
+              "name": "TCIE",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Transfer complete interrupt enable"
+            },
+            {
+              "name": "TEIE",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Transfer error interrupt enable"
+            },
+            {
+              "name": "ABORT",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Abort"
+            },
+            {
+              "name": "SUSP",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Suspend"
+            },
+            {
+              "name": "START",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Start"
             }
           ]
         },
@@ -93,52 +87,47 @@
           "name": "ISR",
           "offset": 4,
           "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
           "description": "Interrupt Status Register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Interrupt Status Register",
           "fields": [
             {
-              "name": "TEIF",
-              "bit_offset": 0,
+              "name": "CEIF",
+              "bit_offset": 5,
               "bit_width": 1,
-              "description": "Transfer error interrupt flag",
-              "enum": null
-            },
-            {
-              "name": "TCIF",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Transfer complete interrupt flag",
-              "enum": null
-            },
-            {
-              "name": "TWIF",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Transfer watermark interrupt flag",
-              "enum": null
-            },
-            {
-              "name": "CAEIF",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "CLUT access error interrupt flag",
-              "enum": null
+              "description": "Configuration error interrupt flag"
             },
             {
               "name": "CTCIF",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "CLUT transfer complete interrupt flag",
-              "enum": null
+              "description": "CLUT transfer complete interrupt flag"
             },
             {
-              "name": "CEIF",
-              "bit_offset": 5,
+              "name": "CAEIF",
+              "bit_offset": 3,
               "bit_width": 1,
-              "description": "Configuration error interrupt flag",
-              "enum": null
+              "description": "CLUT access error interrupt flag"
+            },
+            {
+              "name": "TWIF",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Transfer watermark interrupt flag"
+            },
+            {
+              "name": "TCIF",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Transfer complete interrupt flag"
+            },
+            {
+              "name": "TEIF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Transfer error interrupt flag"
             }
           ]
         },
@@ -146,52 +135,47 @@
           "name": "IFCR",
           "offset": 8,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "interrupt flag clear register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "interrupt flag clear register",
           "fields": [
             {
-              "name": "CTEIF",
-              "bit_offset": 0,
+              "name": "CCEIF",
+              "bit_offset": 5,
               "bit_width": 1,
-              "description": "Clear Transfer error interrupt flag",
-              "enum": "CTEIF"
-            },
-            {
-              "name": "CTCIF",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Clear transfer complete interrupt flag",
-              "enum": "CTCIF"
-            },
-            {
-              "name": "CTWIF",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Clear transfer watermark interrupt flag",
-              "enum": "CTWIF"
-            },
-            {
-              "name": "CAECIF",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Clear CLUT access error interrupt flag",
-              "enum": "CAECIF"
+              "description": "Clear configuration error interrupt flag"
             },
             {
               "name": "CCTCIF",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "Clear CLUT transfer complete interrupt flag",
-              "enum": "CCTCIF"
+              "description": "Clear CLUT transfer complete interrupt flag"
             },
             {
-              "name": "CCEIF",
-              "bit_offset": 5,
+              "name": "CAECIF",
+              "bit_offset": 3,
               "bit_width": 1,
-              "description": "Clear configuration error interrupt flag",
-              "enum": "CCEIF"
+              "description": "Clear CLUT access error interrupt flag"
+            },
+            {
+              "name": "CTWIF",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Clear transfer watermark interrupt flag"
+            },
+            {
+              "name": "CTCIF",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Clear transfer complete interrupt flag"
+            },
+            {
+              "name": "CTEIF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Clear Transfer error interrupt flag"
             }
           ]
         },
@@ -199,17 +183,17 @@
           "name": "FGMAR",
           "offset": 12,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "foreground memory address register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "foreground memory address register",
           "fields": [
             {
               "name": "MA",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Memory address",
-              "enum": null
+              "description": "Memory address"
             }
           ]
         },
@@ -217,17 +201,17 @@
           "name": "FGOR",
           "offset": 16,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "foreground offset register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "foreground offset register",
           "fields": [
             {
               "name": "LO",
               "bit_offset": 0,
               "bit_width": 14,
-              "description": "Line offset",
-              "enum": null
+              "description": "Line offset"
             }
           ]
         },
@@ -235,17 +219,17 @@
           "name": "BGMAR",
           "offset": 20,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "background memory address register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "background memory address register",
           "fields": [
             {
               "name": "MA",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Memory address",
-              "enum": null
+              "description": "Memory address"
             }
           ]
         },
@@ -253,17 +237,17 @@
           "name": "BGOR",
           "offset": 24,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "background offset register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "background offset register",
           "fields": [
             {
               "name": "LO",
               "bit_offset": 0,
               "bit_width": 14,
-              "description": "Line offset",
-              "enum": null
+              "description": "Line offset"
             }
           ]
         },
@@ -271,52 +255,47 @@
           "name": "FGPFCCR",
           "offset": 28,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "foreground PFC control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "foreground PFC control register",
           "fields": [
             {
-              "name": "CM",
-              "bit_offset": 0,
-              "bit_width": 4,
-              "description": "Color mode",
-              "enum": "FGPFCCR_CM"
-            },
-            {
-              "name": "CCM",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "CLUT color mode",
-              "enum": "FGPFCCR_CCM"
-            },
-            {
-              "name": "START",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "Start",
-              "enum": "FGPFCCR_START"
-            },
-            {
-              "name": "CS",
-              "bit_offset": 8,
+              "name": "ALPHA",
+              "bit_offset": 24,
               "bit_width": 8,
-              "description": "CLUT size",
-              "enum": null
+              "description": "Alpha value"
             },
             {
               "name": "AM",
               "bit_offset": 16,
               "bit_width": 2,
-              "description": "Alpha mode",
-              "enum": "FGPFCCR_AM"
+              "description": "Alpha mode"
             },
             {
-              "name": "ALPHA",
-              "bit_offset": 24,
+              "name": "CS",
+              "bit_offset": 8,
               "bit_width": 8,
-              "description": "Alpha value",
-              "enum": null
+              "description": "CLUT size"
+            },
+            {
+              "name": "START",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Start"
+            },
+            {
+              "name": "CCM",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "CLUT color mode"
+            },
+            {
+              "name": "CM",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "Color mode"
             }
           ]
         },
@@ -324,31 +303,29 @@
           "name": "FGCOLR",
           "offset": 32,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "foreground color register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "foreground color register",
           "fields": [
             {
-              "name": "BLUE",
-              "bit_offset": 0,
+              "name": "RED",
+              "bit_offset": 16,
               "bit_width": 8,
-              "description": "Blue Value",
-              "enum": null
+              "description": "Red Value"
             },
             {
               "name": "GREEN",
               "bit_offset": 8,
               "bit_width": 8,
-              "description": "Green Value",
-              "enum": null
+              "description": "Green Value"
             },
             {
-              "name": "RED",
-              "bit_offset": 16,
+              "name": "BLUE",
+              "bit_offset": 0,
               "bit_width": 8,
-              "description": "Red Value",
-              "enum": null
+              "description": "Blue Value"
             }
           ]
         },
@@ -356,52 +333,47 @@
           "name": "BGPFCCR",
           "offset": 36,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "background PFC control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "background PFC control register",
           "fields": [
             {
-              "name": "CM",
-              "bit_offset": 0,
-              "bit_width": 4,
-              "description": "Color mode",
-              "enum": "BGPFCCR_CM"
-            },
-            {
-              "name": "CCM",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "CLUT Color mode",
-              "enum": "BGPFCCR_CCM"
-            },
-            {
-              "name": "START",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "Start",
-              "enum": "BGPFCCR_START"
-            },
-            {
-              "name": "CS",
-              "bit_offset": 8,
+              "name": "ALPHA",
+              "bit_offset": 24,
               "bit_width": 8,
-              "description": "CLUT size",
-              "enum": null
+              "description": "Alpha value"
             },
             {
               "name": "AM",
               "bit_offset": 16,
               "bit_width": 2,
-              "description": "Alpha mode",
-              "enum": "BGPFCCR_AM"
+              "description": "Alpha mode"
             },
             {
-              "name": "ALPHA",
-              "bit_offset": 24,
+              "name": "CS",
+              "bit_offset": 8,
               "bit_width": 8,
-              "description": "Alpha value",
-              "enum": null
+              "description": "CLUT size"
+            },
+            {
+              "name": "START",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Start"
+            },
+            {
+              "name": "CCM",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "CLUT Color mode"
+            },
+            {
+              "name": "CM",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "Color mode"
             }
           ]
         },
@@ -409,31 +381,29 @@
           "name": "BGCOLR",
           "offset": 40,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "background color register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "background color register",
           "fields": [
             {
-              "name": "BLUE",
-              "bit_offset": 0,
+              "name": "RED",
+              "bit_offset": 16,
               "bit_width": 8,
-              "description": "Blue Value",
-              "enum": null
+              "description": "Red Value"
             },
             {
               "name": "GREEN",
               "bit_offset": 8,
               "bit_width": 8,
-              "description": "Green Value",
-              "enum": null
+              "description": "Green Value"
             },
             {
-              "name": "RED",
-              "bit_offset": 16,
+              "name": "BLUE",
+              "bit_offset": 0,
               "bit_width": 8,
-              "description": "Red Value",
-              "enum": null
+              "description": "Blue Value"
             }
           ]
         },
@@ -441,17 +411,17 @@
           "name": "FGCMAR",
           "offset": 44,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "foreground CLUT memory address register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "foreground CLUT memory address register",
           "fields": [
             {
               "name": "MA",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Memory Address",
-              "enum": null
+              "description": "Memory Address"
             }
           ]
         },
@@ -459,17 +429,17 @@
           "name": "BGCMAR",
           "offset": 48,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "background CLUT memory address register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "background CLUT memory address register",
           "fields": [
             {
               "name": "MA",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Memory address",
-              "enum": null
+              "description": "Memory address"
             }
           ]
         },
@@ -477,17 +447,17 @@
           "name": "OPFCCR",
           "offset": 52,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "output PFC control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "output PFC control register",
           "fields": [
             {
               "name": "CM",
               "bit_offset": 0,
               "bit_width": 3,
-              "description": "Color mode",
-              "enum": "OPFCCR_CM"
+              "description": "Color mode"
             }
           ]
         },
@@ -495,38 +465,35 @@
           "name": "OCOLR",
           "offset": 56,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "output color register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "output color register",
           "fields": [
             {
-              "name": "BLUE",
-              "bit_offset": 0,
+              "name": "APLHA",
+              "bit_offset": 24,
               "bit_width": 8,
-              "description": "Blue Value",
-              "enum": null
-            },
-            {
-              "name": "GREEN",
-              "bit_offset": 8,
-              "bit_width": 8,
-              "description": "Green Value",
-              "enum": null
+              "description": "Alpha Channel Value"
             },
             {
               "name": "RED",
               "bit_offset": 16,
               "bit_width": 8,
-              "description": "Red Value",
-              "enum": null
+              "description": "Red Value"
             },
             {
-              "name": "APLHA",
-              "bit_offset": 24,
+              "name": "GREEN",
+              "bit_offset": 8,
               "bit_width": 8,
-              "description": "Alpha Channel Value",
-              "enum": null
+              "description": "Green Value"
+            },
+            {
+              "name": "BLUE",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "Blue Value"
             }
           ]
         },
@@ -534,17 +501,17 @@
           "name": "OMAR",
           "offset": 60,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "output memory address register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "output memory address register",
           "fields": [
             {
               "name": "MA",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Memory Address",
-              "enum": null
+              "description": "Memory Address"
             }
           ]
         },
@@ -552,17 +519,17 @@
           "name": "OOR",
           "offset": 64,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "output offset register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "output offset register",
           "fields": [
             {
               "name": "LO",
               "bit_offset": 0,
               "bit_width": 14,
-              "description": "Line Offset",
-              "enum": null
+              "description": "Line Offset"
             }
           ]
         },
@@ -570,24 +537,23 @@
           "name": "NLR",
           "offset": 68,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "number of line register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "number of line register",
           "fields": [
-            {
-              "name": "NL",
-              "bit_offset": 0,
-              "bit_width": 16,
-              "description": "Number of lines",
-              "enum": null
-            },
             {
               "name": "PL",
               "bit_offset": 16,
               "bit_width": 14,
-              "description": "Pixel per lines",
-              "enum": null
+              "description": "Pixel per lines"
+            },
+            {
+              "name": "NL",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Number of lines"
             }
           ]
         },
@@ -595,17 +561,17 @@
           "name": "LWR",
           "offset": 72,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "line watermark register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "line watermark register",
           "fields": [
             {
               "name": "LW",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "Line watermark",
-              "enum": null
+              "description": "Line watermark"
             }
           ]
         },
@@ -613,24 +579,23 @@
           "name": "AMTCR",
           "offset": 76,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "AHB master timer configuration register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "AHB master timer configuration register",
           "fields": [
-            {
-              "name": "EN",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Enable",
-              "enum": null
-            },
             {
               "name": "DT",
               "bit_offset": 8,
               "bit_width": 8,
-              "description": "Dead Time",
-              "enum": null
+              "description": "Dead Time"
+            },
+            {
+              "name": "EN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Enable"
             }
           ]
         },
@@ -638,38 +603,35 @@
           "name": "FGCLUT",
           "offset": 1024,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "FGCLUT",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "FGCLUT",
           "fields": [
             {
-              "name": "BLUE",
-              "bit_offset": 0,
+              "name": "APLHA",
+              "bit_offset": 24,
               "bit_width": 8,
-              "description": "BLUE",
-              "enum": null
-            },
-            {
-              "name": "GREEN",
-              "bit_offset": 8,
-              "bit_width": 8,
-              "description": "GREEN",
-              "enum": null
+              "description": "APLHA"
             },
             {
               "name": "RED",
               "bit_offset": 16,
               "bit_width": 8,
-              "description": "RED",
-              "enum": null
+              "description": "RED"
             },
             {
-              "name": "APLHA",
-              "bit_offset": 24,
+              "name": "GREEN",
+              "bit_offset": 8,
               "bit_width": 8,
-              "description": "APLHA",
-              "enum": null
+              "description": "GREEN"
+            },
+            {
+              "name": "BLUE",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "BLUE"
             }
           ]
         },
@@ -677,389 +639,40 @@
           "name": "BGCLUT",
           "offset": 2048,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "BGCLUT",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "BGCLUT",
           "fields": [
             {
-              "name": "BLUE",
-              "bit_offset": 0,
+              "name": "APLHA",
+              "bit_offset": 24,
               "bit_width": 8,
-              "description": "BLUE",
-              "enum": null
-            },
-            {
-              "name": "GREEN",
-              "bit_offset": 8,
-              "bit_width": 8,
-              "description": "GREEN",
-              "enum": null
+              "description": "APLHA"
             },
             {
               "name": "RED",
               "bit_offset": 16,
               "bit_width": 8,
-              "description": "RED",
-              "enum": null
+              "description": "RED"
             },
             {
-              "name": "APLHA",
-              "bit_offset": 24,
+              "name": "GREEN",
+              "bit_offset": 8,
               "bit_width": 8,
-              "description": "APLHA",
-              "enum": null
+              "description": "GREEN"
+            },
+            {
+              "name": "BLUE",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "BLUE"
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "ABORT": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "AbortRequest",
-          "value": 1,
-          "description": "Transfer abort requested"
-        }
-      ]
-    },
-    "BGPFCCR_AM": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "NoModify",
-          "value": 0,
-          "description": "No modification of alpha channel"
-        },
-        {
-          "name": "Replace",
-          "value": 1,
-          "description": "Replace with value in ALPHA[7:0]"
-        },
-        {
-          "name": "Multiply",
-          "value": 2,
-          "description": "Multiply with value in ALPHA[7:0]"
-        }
-      ]
-    },
-    "BGPFCCR_CCM": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "ARGB8888",
-          "value": 0,
-          "description": "CLUT color format ARGB8888"
-        },
-        {
-          "name": "RGB888",
-          "value": 1,
-          "description": "CLUT color format RGB888"
-        }
-      ]
-    },
-    "BGPFCCR_CM": {
-      "bit_size": 4,
-      "variants": [
-        {
-          "name": "ARGB8888",
-          "value": 0,
-          "description": "Color mode ARGB8888"
-        },
-        {
-          "name": "RGB888",
-          "value": 1,
-          "description": "Color mode RGB888"
-        },
-        {
-          "name": "RGB565",
-          "value": 2,
-          "description": "Color mode RGB565"
-        },
-        {
-          "name": "ARGB1555",
-          "value": 3,
-          "description": "Color mode ARGB1555"
-        },
-        {
-          "name": "ARGB4444",
-          "value": 4,
-          "description": "Color mode ARGB4444"
-        },
-        {
-          "name": "L8",
-          "value": 5,
-          "description": "Color mode L8"
-        },
-        {
-          "name": "AL44",
-          "value": 6,
-          "description": "Color mode AL44"
-        },
-        {
-          "name": "AL88",
-          "value": 7,
-          "description": "Color mode AL88"
-        },
-        {
-          "name": "L4",
-          "value": 8,
-          "description": "Color mode L4"
-        },
-        {
-          "name": "A8",
-          "value": 9,
-          "description": "Color mode A8"
-        },
-        {
-          "name": "A4",
-          "value": 10,
-          "description": "Color mode A4"
-        }
-      ]
-    },
-    "BGPFCCR_START": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Start",
-          "value": 1,
-          "description": "Start the automatic loading of the CLUT"
-        }
-      ]
-    },
-    "CAECIF": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Clear",
-          "value": 1,
-          "description": "Clear the CAEIF flag in the ISR register"
-        }
-      ]
-    },
-    "CCEIF": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Clear",
-          "value": 1,
-          "description": "Clear the CEIF flag in the ISR register"
-        }
-      ]
-    },
-    "CCTCIF": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Clear",
-          "value": 1,
-          "description": "Clear the CTCIF flag in the ISR register"
-        }
-      ]
-    },
-    "CR_START": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Start",
-          "value": 1,
-          "description": "Launch the DMA2D"
-        }
-      ]
-    },
-    "CTCIF": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Clear",
-          "value": 1,
-          "description": "Clear the TCIF flag in the ISR register"
-        }
-      ]
-    },
-    "CTEIF": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Clear",
-          "value": 1,
-          "description": "Clear the TEIF flag in the ISR register"
-        }
-      ]
-    },
-    "CTWIF": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Clear",
-          "value": 1,
-          "description": "Clear the TWIF flag in the ISR register"
-        }
-      ]
-    },
-    "FGPFCCR_AM": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "NoModify",
-          "value": 0,
-          "description": "No modification of alpha channel"
-        },
-        {
-          "name": "Replace",
-          "value": 1,
-          "description": "Replace with value in ALPHA[7:0]"
-        },
-        {
-          "name": "Multiply",
-          "value": 2,
-          "description": "Multiply with value in ALPHA[7:0]"
-        }
-      ]
-    },
-    "FGPFCCR_CCM": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "ARGB8888",
-          "value": 0,
-          "description": "CLUT color format ARGB8888"
-        },
-        {
-          "name": "RGB888",
-          "value": 1,
-          "description": "CLUT color format RGB888"
-        }
-      ]
-    },
-    "FGPFCCR_CM": {
-      "bit_size": 4,
-      "variants": [
-        {
-          "name": "ARGB8888",
-          "value": 0,
-          "description": "Color mode ARGB8888"
-        },
-        {
-          "name": "RGB888",
-          "value": 1,
-          "description": "Color mode RGB888"
-        },
-        {
-          "name": "RGB565",
-          "value": 2,
-          "description": "Color mode RGB565"
-        },
-        {
-          "name": "ARGB1555",
-          "value": 3,
-          "description": "Color mode ARGB1555"
-        },
-        {
-          "name": "ARGB4444",
-          "value": 4,
-          "description": "Color mode ARGB4444"
-        },
-        {
-          "name": "L8",
-          "value": 5,
-          "description": "Color mode L8"
-        },
-        {
-          "name": "AL44",
-          "value": 6,
-          "description": "Color mode AL44"
-        },
-        {
-          "name": "AL88",
-          "value": 7,
-          "description": "Color mode AL88"
-        },
-        {
-          "name": "L4",
-          "value": 8,
-          "description": "Color mode L4"
-        },
-        {
-          "name": "A8",
-          "value": 9,
-          "description": "Color mode A8"
-        },
-        {
-          "name": "A4",
-          "value": 10,
-          "description": "Color mode A4"
-        }
-      ]
-    },
-    "FGPFCCR_START": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Start",
-          "value": 1,
-          "description": "Start the automatic loading of the CLUT"
-        }
-      ]
-    },
-    "MODE": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "MemoryToMemory",
-          "value": 0,
-          "description": "Memory-to-memory (FG fetch only)"
-        },
-        {
-          "name": "MemoryToMemoryPFC",
-          "value": 1,
-          "description": "Memory-to-memory with PFC (FG fetch only with FG PFC active)"
-        },
-        {
-          "name": "MemoryToMemoryPFCBlending",
-          "value": 2,
-          "description": "Memory-to-memory with blending (FG and BG fetch with PFC and blending)"
-        },
-        {
-          "name": "RegisterToMemory",
-          "value": 3,
-          "description": "Register-to-memory"
-        }
-      ]
-    },
-    "OPFCCR_CM": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "ARGB8888",
-          "value": 0,
-          "description": "ARGB8888"
-        },
-        {
-          "name": "RGB888",
-          "value": 1,
-          "description": "RGB888"
-        },
-        {
-          "name": "RGB565",
-          "value": 2,
-          "description": "RGB565"
-        },
-        {
-          "name": "ARGB1555",
-          "value": 3,
-          "description": "ARGB1555"
-        },
-        {
-          "name": "ARGB4444",
-          "value": 4,
-          "description": "ARGB4444"
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

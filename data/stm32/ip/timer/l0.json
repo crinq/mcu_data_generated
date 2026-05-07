@@ -2,2281 +2,1483 @@
   "schema": 1,
   "kind": "timer",
   "version": "l0",
+  "source": "stm32rs_svd",
+  "source_device": "stm32l010c6",
+  "source_file": "stm32l0x0.svd.patched",
   "blocks": {
-    "TIM_1CH": {
-      "name": "TIM_1CH",
-      "description": "Virtual 1-channel timers",
-      "extends": "TIM_CORE",
-      "registers": [
-        {
-          "name": "CR1",
-          "offset": 0,
-          "size": 32,
-          "description": "control register 1",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "control register 1",
-          "fields": [
-            {
-              "name": "CEN",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Counter enable",
-              "enum": null
-            },
-            {
-              "name": "UDIS",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Update disable",
-              "enum": null
-            },
-            {
-              "name": "URS",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Update request source",
-              "enum": "URS"
-            },
-            {
-              "name": "OPM",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "One-pulse mode enbaled",
-              "enum": null
-            },
-            {
-              "name": "ARPE",
-              "bit_offset": 7,
-              "bit_width": 1,
-              "description": "Auto-reload preload enable",
-              "enum": null
-            },
-            {
-              "name": "UIFREMAP",
-              "bit_offset": 11,
-              "bit_width": 1,
-              "description": "UIF status bit remapping enable",
-              "enum": null
-            },
-            {
-              "name": "CKD",
-              "bit_offset": 8,
-              "bit_width": 2,
-              "description": "Clock division",
-              "enum": "CKD"
-            }
-          ]
-        },
-        {
-          "name": "DIER",
-          "offset": 12,
-          "size": 32,
-          "description": "DMA/Interrupt enable register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "DMA/Interrupt enable register",
-          "fields": [
-            {
-              "name": "UIE",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Update interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "CCIE",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Capture/Compare x (x=1) interrupt enable",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "SR",
-          "offset": 16,
-          "size": 32,
-          "description": "status register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "status register",
-          "fields": [
-            {
-              "name": "UIF",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Update interrupt flag",
-              "enum": null
-            },
-            {
-              "name": "CCIF",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Capture/compare x (x=1) interrupt flag",
-              "enum": null
-            },
-            {
-              "name": "CCOF",
-              "bit_offset": 9,
-              "bit_width": 1,
-              "description": "Capture/Compare x (x=1) overcapture flag",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "EGR",
-          "offset": 20,
-          "size": 32,
-          "description": "event generation register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "event generation register",
-          "fields": [
-            {
-              "name": "UG",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Update generation",
-              "enum": null
-            },
-            {
-              "name": "CCG",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Capture/compare x (x=1) generation",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "CNT",
-          "offset": 36,
-          "size": 32,
-          "description": "counter",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "counter",
-          "fields": [
-            {
-              "name": "CNT",
-              "bit_offset": 0,
-              "bit_width": 16,
-              "description": "counter value",
-              "enum": null
-            },
-            {
-              "name": "UIFCPY",
-              "bit_offset": 31,
-              "bit_width": 1,
-              "description": "UIF copy",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "PSC",
-          "offset": 40,
-          "description": "prescaler",
-          "array_len": null,
-          "array_stride": null,
-          "fields": []
-        },
-        {
-          "name": "ARR",
-          "offset": 44,
-          "size": 32,
-          "description": "auto-reload register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "auto-reload register",
-          "fields": [
-            {
-              "name": "ARR",
-              "bit_offset": 0,
-              "bit_width": 16,
-              "description": "Auto-reload value",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "CCMR_Input",
-          "offset": 24,
-          "size": 32,
-          "description": "capture/compare mode register 1 (input mode)",
-          "array_len": 1,
-          "array_stride": 4,
-          "fieldset_description": "capture/compare mode register x (x=1) (input mode)",
-          "fields": [
-            {
-              "name": "CCS",
-              "bit_offset": 0,
-              "bit_width": 2,
-              "description": "Capture/Compare y selection",
-              "enum": "CCMR_Input_CCS"
-            },
-            {
-              "name": "ICPSC",
-              "bit_offset": 2,
-              "bit_width": 2,
-              "description": "Input capture y prescaler",
-              "enum": null
-            },
-            {
-              "name": "ICF",
-              "bit_offset": 4,
-              "bit_width": 4,
-              "description": "Input capture y filter",
-              "enum": "FilterValue"
-            }
-          ]
-        },
-        {
-          "name": "CCMR_Output",
-          "offset": 24,
-          "size": 32,
-          "description": "capture/compare mode register 1 (output mode)",
-          "array_len": 1,
-          "array_stride": 4,
-          "fieldset_description": "capture/compare mode register x (x=1) (output mode)",
-          "fields": [
-            {
-              "name": "CCS",
-              "bit_offset": 0,
-              "bit_width": 2,
-              "description": "Capture/Compare y selection",
-              "enum": "CCMR_Output_CCS"
-            },
-            {
-              "name": "OCFE",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Output compare y fast enable",
-              "enum": null
-            },
-            {
-              "name": "OCPE",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Output compare y preload enable",
-              "enum": null
-            },
-            {
-              "name": "OCM",
-              "bit_offset": 4,
-              "bit_width": 3,
-              "description": "Output compare y mode",
-              "enum": "OCM"
-            }
-          ]
-        },
-        {
-          "name": "CCER",
-          "offset": 32,
-          "size": 32,
-          "description": "capture/compare enable register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "capture/compare enable register",
-          "fields": [
-            {
-              "name": "CCE",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Capture/Compare x (x=1) output enable",
-              "enum": null
-            },
-            {
-              "name": "CCP",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Capture/Compare x (x=1) output Polarity",
-              "enum": null
-            },
-            {
-              "name": "CCNP",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Capture/Compare x (x=1) output Polarity",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "CCR",
-          "offset": 52,
-          "size": 32,
-          "description": "capture/compare register x (x=1)",
-          "array_len": 1,
-          "array_stride": 4,
-          "fieldset_description": "capture/compare register x (x=1-4,6)",
-          "fields": [
-            {
-              "name": "CCR",
-              "bit_offset": 0,
-              "bit_width": 16,
-              "description": "capture/compare x (x=1-4,6) value",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "OR",
-          "offset": 80,
-          "description": "Option register 1\nNote: Check Reference Manual to parse this register content",
-          "array_len": null,
-          "array_stride": null,
-          "fields": []
-        }
-      ]
-    },
-    "TIM_2CH": {
-      "name": "TIM_2CH",
-      "description": "2-channel timers",
-      "extends": "TIM_1CH",
-      "registers": [
-        {
-          "name": "CR1",
-          "offset": 0,
-          "size": 32,
-          "description": "control register 1",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "control register 1",
-          "fields": [
-            {
-              "name": "CEN",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Counter enable",
-              "enum": null
-            },
-            {
-              "name": "UDIS",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Update disable",
-              "enum": null
-            },
-            {
-              "name": "URS",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Update request source",
-              "enum": "URS"
-            },
-            {
-              "name": "OPM",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "One-pulse mode enbaled",
-              "enum": null
-            },
-            {
-              "name": "ARPE",
-              "bit_offset": 7,
-              "bit_width": 1,
-              "description": "Auto-reload preload enable",
-              "enum": null
-            },
-            {
-              "name": "UIFREMAP",
-              "bit_offset": 11,
-              "bit_width": 1,
-              "description": "UIF status bit remapping enable",
-              "enum": null
-            },
-            {
-              "name": "CKD",
-              "bit_offset": 8,
-              "bit_width": 2,
-              "description": "Clock division",
-              "enum": "CKD"
-            }
-          ]
-        },
-        {
-          "name": "DIER",
-          "offset": 12,
-          "size": 32,
-          "description": "DMA/Interrupt enable register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "DMA/Interrupt enable register",
-          "fields": [
-            {
-              "name": "UIE",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Update interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "CCIE",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Capture/Compare x (x=1-2) interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "TIE",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "Trigger interrupt enable",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "SR",
-          "offset": 16,
-          "size": 32,
-          "description": "status register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "status register",
-          "fields": [
-            {
-              "name": "UIF",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Update interrupt flag",
-              "enum": null
-            },
-            {
-              "name": "CCIF",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Capture/compare x (x=1-2) interrupt flag",
-              "enum": null
-            },
-            {
-              "name": "CCOF",
-              "bit_offset": 9,
-              "bit_width": 1,
-              "description": "Capture/Compare x (x=1-2) overcapture flag",
-              "enum": null
-            },
-            {
-              "name": "TIF",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "Trigger interrupt flag",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "EGR",
-          "offset": 20,
-          "size": 32,
-          "description": "event generation register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "event generation register",
-          "fields": [
-            {
-              "name": "UG",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Update generation",
-              "enum": null
-            },
-            {
-              "name": "CCG",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Capture/compare x (x=1-2) generation",
-              "enum": null
-            },
-            {
-              "name": "TG",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "Trigger generation",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "CNT",
-          "offset": 36,
-          "size": 32,
-          "description": "counter",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "counter",
-          "fields": [
-            {
-              "name": "CNT",
-              "bit_offset": 0,
-              "bit_width": 16,
-              "description": "counter value",
-              "enum": null
-            },
-            {
-              "name": "UIFCPY",
-              "bit_offset": 31,
-              "bit_width": 1,
-              "description": "UIF copy",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "PSC",
-          "offset": 40,
-          "description": "prescaler",
-          "array_len": null,
-          "array_stride": null,
-          "fields": []
-        },
-        {
-          "name": "ARR",
-          "offset": 44,
-          "size": 32,
-          "description": "auto-reload register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "auto-reload register",
-          "fields": [
-            {
-              "name": "ARR",
-              "bit_offset": 0,
-              "bit_width": 16,
-              "description": "Auto-reload value",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "CCMR_Input",
-          "offset": 24,
-          "size": 32,
-          "description": "capture/compare mode register 1 (input mode)",
-          "array_len": 1,
-          "array_stride": 4,
-          "fieldset_description": "capture/compare mode register x (x=1) (input mode)",
-          "fields": [
-            {
-              "name": "CCS",
-              "bit_offset": 0,
-              "bit_width": 2,
-              "description": "Capture/Compare y selection",
-              "enum": "CCMR_Input_CCS"
-            },
-            {
-              "name": "ICPSC",
-              "bit_offset": 2,
-              "bit_width": 2,
-              "description": "Input capture y prescaler",
-              "enum": null
-            },
-            {
-              "name": "ICF",
-              "bit_offset": 4,
-              "bit_width": 4,
-              "description": "Input capture y filter",
-              "enum": "FilterValue"
-            }
-          ]
-        },
-        {
-          "name": "CCMR_Output",
-          "offset": 24,
-          "size": 32,
-          "description": "capture/compare mode register 1 (output mode)",
-          "array_len": 1,
-          "array_stride": 4,
-          "fieldset_description": "capture/compare mode register x (x=1) (output mode)",
-          "fields": [
-            {
-              "name": "CCS",
-              "bit_offset": 0,
-              "bit_width": 2,
-              "description": "Capture/Compare y selection",
-              "enum": "CCMR_Output_CCS"
-            },
-            {
-              "name": "OCFE",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Output compare y fast enable",
-              "enum": null
-            },
-            {
-              "name": "OCPE",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Output compare y preload enable",
-              "enum": null
-            },
-            {
-              "name": "OCM",
-              "bit_offset": 4,
-              "bit_width": 3,
-              "description": "Output compare y mode",
-              "enum": "OCM"
-            }
-          ]
-        },
-        {
-          "name": "CCER",
-          "offset": 32,
-          "size": 32,
-          "description": "capture/compare enable register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "capture/compare enable register",
-          "fields": [
-            {
-              "name": "CCE",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Capture/Compare x (x=1-2) output enable",
-              "enum": null
-            },
-            {
-              "name": "CCP",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Capture/Compare x (x=1-2) output Polarity",
-              "enum": null
-            },
-            {
-              "name": "CCNP",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Capture/Compare x (x=1-2) output Polarity",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "CCR",
-          "offset": 52,
-          "size": 32,
-          "description": "capture/compare register x (x=1-2)",
-          "array_len": 2,
-          "array_stride": 4,
-          "fieldset_description": "capture/compare register x (x=1-4,6)",
-          "fields": [
-            {
-              "name": "CCR",
-              "bit_offset": 0,
-              "bit_width": 16,
-              "description": "capture/compare x (x=1-4,6) value",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "OR",
-          "offset": 80,
-          "description": "Option register 1\nNote: Check Reference Manual to parse this register content",
-          "array_len": null,
-          "array_stride": null,
-          "fields": []
-        },
-        {
-          "name": "CR2",
-          "offset": 4,
-          "size": 32,
-          "description": "control register 2",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "control register 2",
-          "fields": [
-            {
-              "name": "MMS",
-              "bit_offset": 4,
-              "bit_width": 3,
-              "description": "Master mode selection",
-              "enum": "MMS"
-            },
-            {
-              "name": "TI1S",
-              "bit_offset": 7,
-              "bit_width": 1,
-              "description": "TI1 selection",
-              "enum": "TI1S"
-            }
-          ]
-        },
-        {
-          "name": "SMCR",
-          "offset": 8,
-          "size": 32,
-          "description": "slave mode control register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "slave mode control register",
-          "fields": [
-            {
-              "name": "SMS",
-              "bit_offset": 0,
-              "bit_width": 3,
-              "description": "Slave mode selection",
-              "enum": "SMS"
-            },
-            {
-              "name": "TS",
-              "bit_offset": 4,
-              "bit_width": 3,
-              "description": "Trigger selection",
-              "enum": "TS"
-            },
-            {
-              "name": "MSM",
-              "bit_offset": 7,
-              "bit_width": 1,
-              "description": "Master/Slave mode",
-              "enum": "MSM"
-            },
-            {
-              "name": "ETF",
-              "bit_offset": 8,
-              "bit_width": 4,
-              "description": "External trigger filter",
-              "enum": "FilterValue"
-            },
-            {
-              "name": "ETPS",
-              "bit_offset": 12,
-              "bit_width": 2,
-              "description": "External trigger prescaler",
-              "enum": "ETPS"
-            },
-            {
-              "name": "ECE",
-              "bit_offset": 14,
-              "bit_width": 1,
-              "description": "External clock mode 2 enable",
-              "enum": null
-            },
-            {
-              "name": "ETP",
-              "bit_offset": 15,
-              "bit_width": 1,
-              "description": "External trigger polarity",
-              "enum": "ETP"
-            }
-          ]
-        }
-      ]
-    },
-    "TIM_BASIC": {
-      "name": "TIM_BASIC",
-      "description": "Basic timers",
-      "extends": "TIM_BASIC_NO_CR2",
-      "registers": [
-        {
-          "name": "CR1",
-          "offset": 0,
-          "size": 32,
-          "description": "control register 1",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "control register 1",
-          "fields": [
-            {
-              "name": "CEN",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Counter enable",
-              "enum": null
-            },
-            {
-              "name": "UDIS",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Update disable",
-              "enum": null
-            },
-            {
-              "name": "URS",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Update request source",
-              "enum": "URS"
-            },
-            {
-              "name": "OPM",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "One-pulse mode enbaled",
-              "enum": null
-            },
-            {
-              "name": "ARPE",
-              "bit_offset": 7,
-              "bit_width": 1,
-              "description": "Auto-reload preload enable",
-              "enum": null
-            },
-            {
-              "name": "UIFREMAP",
-              "bit_offset": 11,
-              "bit_width": 1,
-              "description": "UIF status bit remapping enable",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "DIER",
-          "offset": 12,
-          "size": 32,
-          "description": "DMA/Interrupt enable register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "DMA/Interrupt enable register",
-          "fields": [
-            {
-              "name": "UIE",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Update interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "UDE",
-              "bit_offset": 8,
-              "bit_width": 1,
-              "description": "Update DMA request enable",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "SR",
-          "offset": 16,
-          "size": 32,
-          "description": "status register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "status register",
-          "fields": [
-            {
-              "name": "UIF",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Update interrupt flag",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "EGR",
-          "offset": 20,
-          "size": 32,
-          "description": "event generation register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "event generation register",
-          "fields": [
-            {
-              "name": "UG",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Update generation",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "CNT",
-          "offset": 36,
-          "size": 32,
-          "description": "counter",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "counter",
-          "fields": [
-            {
-              "name": "CNT",
-              "bit_offset": 0,
-              "bit_width": 16,
-              "description": "counter value",
-              "enum": null
-            },
-            {
-              "name": "UIFCPY",
-              "bit_offset": 31,
-              "bit_width": 1,
-              "description": "UIF copy",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "PSC",
-          "offset": 40,
-          "description": "prescaler",
-          "array_len": null,
-          "array_stride": null,
-          "fields": []
-        },
-        {
-          "name": "ARR",
-          "offset": 44,
-          "size": 32,
-          "description": "auto-reload register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "auto-reload register",
-          "fields": [
-            {
-              "name": "ARR",
-              "bit_offset": 0,
-              "bit_width": 16,
-              "description": "Auto-reload value",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "CR2",
-          "offset": 4,
-          "size": 32,
-          "description": "control register 2",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "control register 2",
-          "fields": [
-            {
-              "name": "MMS",
-              "bit_offset": 4,
-              "bit_width": 3,
-              "description": "Master mode selection",
-              "enum": "MMS"
-            }
-          ]
-        }
-      ]
-    },
-    "TIM_BASIC_NO_CR2": {
-      "name": "TIM_BASIC_NO_CR2",
-      "description": "Virtual Basic timers without CR2 register for common part of TIM_BASIC and TIM_1CH_CMP",
-      "extends": "TIM_CORE",
-      "registers": [
-        {
-          "name": "CR1",
-          "offset": 0,
-          "size": 32,
-          "description": "control register 1",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "control register 1",
-          "fields": [
-            {
-              "name": "CEN",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Counter enable",
-              "enum": null
-            },
-            {
-              "name": "UDIS",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Update disable",
-              "enum": null
-            },
-            {
-              "name": "URS",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Update request source",
-              "enum": "URS"
-            },
-            {
-              "name": "OPM",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "One-pulse mode enbaled",
-              "enum": null
-            },
-            {
-              "name": "ARPE",
-              "bit_offset": 7,
-              "bit_width": 1,
-              "description": "Auto-reload preload enable",
-              "enum": null
-            },
-            {
-              "name": "UIFREMAP",
-              "bit_offset": 11,
-              "bit_width": 1,
-              "description": "UIF status bit remapping enable",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "DIER",
-          "offset": 12,
-          "size": 32,
-          "description": "DMA/Interrupt enable register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "DMA/Interrupt enable register",
-          "fields": [
-            {
-              "name": "UIE",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Update interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "UDE",
-              "bit_offset": 8,
-              "bit_width": 1,
-              "description": "Update DMA request enable",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "SR",
-          "offset": 16,
-          "size": 32,
-          "description": "status register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "status register",
-          "fields": [
-            {
-              "name": "UIF",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Update interrupt flag",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "EGR",
-          "offset": 20,
-          "size": 32,
-          "description": "event generation register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "event generation register",
-          "fields": [
-            {
-              "name": "UG",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Update generation",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "CNT",
-          "offset": 36,
-          "size": 32,
-          "description": "counter",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "counter",
-          "fields": [
-            {
-              "name": "CNT",
-              "bit_offset": 0,
-              "bit_width": 16,
-              "description": "counter value",
-              "enum": null
-            },
-            {
-              "name": "UIFCPY",
-              "bit_offset": 31,
-              "bit_width": 1,
-              "description": "UIF copy",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "PSC",
-          "offset": 40,
-          "description": "prescaler",
-          "array_len": null,
-          "array_stride": null,
-          "fields": []
-        },
-        {
-          "name": "ARR",
-          "offset": 44,
-          "size": 32,
-          "description": "auto-reload register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "auto-reload register",
-          "fields": [
-            {
-              "name": "ARR",
-              "bit_offset": 0,
-              "bit_width": 16,
-              "description": "Auto-reload value",
-              "enum": null
-            }
-          ]
-        }
-      ]
-    },
-    "TIM_CORE": {
-      "name": "TIM_CORE",
-      "description": "Virtual timer for common part of TIM_BASIC and TIM_1CH",
+    "TIM2": {
+      "name": "TIM2",
+      "description": "General-purpose-timers",
       "extends": null,
       "registers": [
         {
           "name": "CR1",
           "offset": 0,
-          "size": 32,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "control register 1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "control register 1",
           "fields": [
             {
-              "name": "CEN",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Counter enable",
-              "enum": null
-            },
-            {
-              "name": "UDIS",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Update disable",
-              "enum": null
-            },
-            {
-              "name": "URS",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Update request source",
-              "enum": "URS"
-            },
-            {
-              "name": "OPM",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "One-pulse mode enbaled",
-              "enum": null
+              "name": "CKD",
+              "bit_offset": 8,
+              "bit_width": 2,
+              "description": "Clock division",
+              "enum_values": [
+                {
+                  "name": "Div1",
+                  "value": 0,
+                  "description": "t_DTS = t_CK_INT"
+                },
+                {
+                  "name": "Div2",
+                  "value": 1,
+                  "description": "t_DTS = 2 × t_CK_INT"
+                },
+                {
+                  "name": "Div4",
+                  "value": 2,
+                  "description": "t_DTS = 4 × t_CK_INT"
+                }
+              ]
             },
             {
               "name": "ARPE",
               "bit_offset": 7,
               "bit_width": 1,
               "description": "Auto-reload preload enable",
-              "enum": null
-            },
-            {
-              "name": "UIFREMAP",
-              "bit_offset": 11,
-              "bit_width": 1,
-              "description": "UIF status bit remapping enable",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "DIER",
-          "offset": 12,
-          "size": 32,
-          "description": "DMA/Interrupt enable register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "DMA/Interrupt enable register",
-          "fields": [
-            {
-              "name": "UIE",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Update interrupt enable",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "SR",
-          "offset": 16,
-          "size": 32,
-          "description": "status register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "status register",
-          "fields": [
-            {
-              "name": "UIF",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Update interrupt flag",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "EGR",
-          "offset": 20,
-          "size": 32,
-          "description": "event generation register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "event generation register",
-          "fields": [
-            {
-              "name": "UG",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Update generation",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "CNT",
-          "offset": 36,
-          "size": 32,
-          "description": "counter",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "counter",
-          "fields": [
-            {
-              "name": "CNT",
-              "bit_offset": 0,
-              "bit_width": 16,
-              "description": "counter value",
-              "enum": null
-            },
-            {
-              "name": "UIFCPY",
-              "bit_offset": 31,
-              "bit_width": 1,
-              "description": "UIF copy",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "PSC",
-          "offset": 40,
-          "description": "prescaler",
-          "array_len": null,
-          "array_stride": null,
-          "fields": []
-        },
-        {
-          "name": "ARR",
-          "offset": 44,
-          "size": 32,
-          "description": "auto-reload register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "auto-reload register",
-          "fields": [
-            {
-              "name": "ARR",
-              "bit_offset": 0,
-              "bit_width": 16,
-              "description": "Auto-reload value",
-              "enum": null
-            }
-          ]
-        }
-      ]
-    },
-    "TIM_GP16": {
-      "name": "TIM_GP16",
-      "description": "General purpose 16-bit timers",
-      "extends": "TIM_2CH",
-      "registers": [
-        {
-          "name": "CR1",
-          "offset": 0,
-          "size": 32,
-          "description": "control register 1",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "control register 1",
-          "fields": [
-            {
-              "name": "CEN",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Counter enable",
-              "enum": null
-            },
-            {
-              "name": "UDIS",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Update disable",
-              "enum": null
-            },
-            {
-              "name": "URS",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Update request source",
-              "enum": "URS"
-            },
-            {
-              "name": "OPM",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "One-pulse mode enbaled",
-              "enum": null
-            },
-            {
-              "name": "ARPE",
-              "bit_offset": 7,
-              "bit_width": 1,
-              "description": "Auto-reload preload enable",
-              "enum": null
-            },
-            {
-              "name": "UIFREMAP",
-              "bit_offset": 11,
-              "bit_width": 1,
-              "description": "UIF status bit remapping enable",
-              "enum": null
-            },
-            {
-              "name": "DIR",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "Direction",
-              "enum": "DIR"
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "TIMx_APRR register is not buffered"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "TIMx_APRR register is buffered"
+                }
+              ]
             },
             {
               "name": "CMS",
               "bit_offset": 5,
               "bit_width": 2,
               "description": "Center-aligned mode selection",
-              "enum": "CMS"
+              "enum_values": [
+                {
+                  "name": "EdgeAligned",
+                  "value": 0,
+                  "description": "The counter counts up or down depending on the direction bit"
+                },
+                {
+                  "name": "CenterAligned1",
+                  "value": 1,
+                  "description": "The counter counts up and down alternatively. Output compare interrupt flags are set only when the counter is counting down."
+                },
+                {
+                  "name": "CenterAligned2",
+                  "value": 2,
+                  "description": "The counter counts up and down alternatively. Output compare interrupt flags are set only when the counter is counting up."
+                },
+                {
+                  "name": "CenterAligned3",
+                  "value": 3,
+                  "description": "The counter counts up and down alternatively. Output compare interrupt flags are set both when the counter is counting up or down."
+                }
+              ]
             },
             {
-              "name": "CKD",
-              "bit_offset": 8,
-              "bit_width": 2,
-              "description": "Clock division",
-              "enum": "CKD"
-            }
-          ]
-        },
-        {
-          "name": "DIER",
-          "offset": 12,
-          "size": 32,
-          "description": "DMA/Interrupt enable register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "DMA/Interrupt enable register",
-          "fields": [
-            {
-              "name": "UIE",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Update interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "UDE",
-              "bit_offset": 8,
-              "bit_width": 1,
-              "description": "Update DMA request enable",
-              "enum": null
-            },
-            {
-              "name": "CCIE",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Capture/Compare x (x=1-4) interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "TIE",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "Trigger interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "CCDE",
-              "bit_offset": 9,
-              "bit_width": 1,
-              "description": "Capture/Compare x (x=1-4) DMA request enable",
-              "enum": null
-            },
-            {
-              "name": "TDE",
-              "bit_offset": 14,
-              "bit_width": 1,
-              "description": "Trigger DMA request enable",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "SR",
-          "offset": 16,
-          "size": 32,
-          "description": "status register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "status register",
-          "fields": [
-            {
-              "name": "UIF",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Update interrupt flag",
-              "enum": null
-            },
-            {
-              "name": "CCIF",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Capture/compare x (x=1-4) interrupt flag",
-              "enum": null
-            },
-            {
-              "name": "TIF",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "Trigger interrupt flag",
-              "enum": null
-            },
-            {
-              "name": "CCOF",
-              "bit_offset": 9,
-              "bit_width": 1,
-              "description": "Capture/Compare x (x=1-4) overcapture flag",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "EGR",
-          "offset": 20,
-          "size": 32,
-          "description": "event generation register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "event generation register",
-          "fields": [
-            {
-              "name": "UG",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Update generation",
-              "enum": null
-            },
-            {
-              "name": "CCG",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Capture/compare x (x=1-4) generation",
-              "enum": null
-            },
-            {
-              "name": "TG",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "Trigger generation",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "CNT",
-          "offset": 36,
-          "size": 32,
-          "description": "counter",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "counter",
-          "fields": [
-            {
-              "name": "CNT",
-              "bit_offset": 0,
-              "bit_width": 16,
-              "description": "counter value",
-              "enum": null
-            },
-            {
-              "name": "UIFCPY",
-              "bit_offset": 31,
-              "bit_width": 1,
-              "description": "UIF copy",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "PSC",
-          "offset": 40,
-          "description": "prescaler",
-          "array_len": null,
-          "array_stride": null,
-          "fields": []
-        },
-        {
-          "name": "ARR",
-          "offset": 44,
-          "size": 32,
-          "description": "auto-reload register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "auto-reload register",
-          "fields": [
-            {
-              "name": "ARR",
-              "bit_offset": 0,
-              "bit_width": 16,
-              "description": "Auto-reload value",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "CCMR_Input",
-          "offset": 24,
-          "size": 32,
-          "description": "capture/compare mode register 1-2 (input mode)",
-          "array_len": 2,
-          "array_stride": 4,
-          "fieldset_description": "capture/compare mode register x (x=1) (input mode)",
-          "fields": [
-            {
-              "name": "CCS",
-              "bit_offset": 0,
-              "bit_width": 2,
-              "description": "Capture/Compare y selection",
-              "enum": "CCMR_Input_CCS"
-            },
-            {
-              "name": "ICPSC",
-              "bit_offset": 2,
-              "bit_width": 2,
-              "description": "Input capture y prescaler",
-              "enum": null
-            },
-            {
-              "name": "ICF",
+              "name": "DIR",
               "bit_offset": 4,
-              "bit_width": 4,
-              "description": "Input capture y filter",
-              "enum": "FilterValue"
-            }
-          ]
-        },
-        {
-          "name": "CCMR_Output",
-          "offset": 24,
-          "size": 32,
-          "description": "capture/compare mode register 1-2 (output mode)",
-          "array_len": 2,
-          "array_stride": 4,
-          "fieldset_description": "capture/compare mode register x (x=1-2) (output mode)",
-          "fields": [
-            {
-              "name": "CCS",
-              "bit_offset": 0,
-              "bit_width": 2,
-              "description": "Capture/Compare y selection",
-              "enum": "CCMR_Output_CCS"
-            },
-            {
-              "name": "OCFE",
-              "bit_offset": 2,
               "bit_width": 1,
-              "description": "Output compare y fast enable",
-              "enum": null
+              "description": "Direction",
+              "enum_values": [
+                {
+                  "name": "Up",
+                  "value": 0,
+                  "description": "Counter used as upcounter"
+                },
+                {
+                  "name": "Down",
+                  "value": 1,
+                  "description": "Counter used as downcounter"
+                }
+              ]
             },
             {
-              "name": "OCPE",
+              "name": "OPM",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "Output compare y preload enable",
-              "enum": null
+              "description": "One-pulse mode",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Counter is not stopped at update event"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Counter stops counting at the next update event (clearing the CEN bit)"
+                }
+              ]
             },
             {
-              "name": "OCM",
-              "bit_offset": 4,
-              "bit_width": 3,
-              "description": "Output compare y mode",
-              "enum": "OCM"
-            },
-            {
-              "name": "OCCE",
-              "bit_offset": 7,
+              "name": "URS",
+              "bit_offset": 2,
               "bit_width": 1,
-              "description": "Output compare y clear enable",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "CCER",
-          "offset": 32,
-          "size": 32,
-          "description": "capture/compare enable register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "capture/compare enable register",
-          "fields": [
-            {
-              "name": "CCE",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Capture/Compare x (x=1-4) output enable",
-              "enum": null
+              "description": "Update request source",
+              "enum_values": [
+                {
+                  "name": "AnyEvent",
+                  "value": 0,
+                  "description": "Any of counter overflow/underflow, setting UG, or update through slave mode, generates an update interrupt or DMA request"
+                },
+                {
+                  "name": "CounterOnly",
+                  "value": 1,
+                  "description": "Only counter overflow/underflow generates an update interrupt or DMA request"
+                }
+              ]
             },
             {
-              "name": "CCP",
+              "name": "UDIS",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Capture/Compare x (x=1-4) output Polarity",
-              "enum": null
+              "description": "Update disable",
+              "enum_values": [
+                {
+                  "name": "Enabled",
+                  "value": 0,
+                  "description": "Update event enabled"
+                },
+                {
+                  "name": "Disabled",
+                  "value": 1,
+                  "description": "Update event disabled"
+                }
+              ]
             },
             {
-              "name": "CCNP",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Capture/Compare x (x=1-4) output Polarity",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "CCR",
-          "offset": 52,
-          "size": 32,
-          "description": "capture/compare register x (x=1-4)",
-          "array_len": 4,
-          "array_stride": 4,
-          "fieldset_description": "capture/compare register x (x=1-4,6)",
-          "fields": [
-            {
-              "name": "CCR",
+              "name": "CEN",
               "bit_offset": 0,
-              "bit_width": 16,
-              "description": "capture/compare x (x=1-4,6) value",
-              "enum": null
+              "bit_width": 1,
+              "description": "Counter enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Counter disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Counter enabled"
+                }
+              ]
             }
           ]
-        },
-        {
-          "name": "OR",
-          "offset": 80,
-          "description": "Option register 1\nNote: Check Reference Manual to parse this register content",
-          "array_len": null,
-          "array_stride": null,
-          "fields": []
         },
         {
           "name": "CR2",
           "offset": 4,
-          "size": 32,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "control register 2",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "control register 2",
           "fields": [
+            {
+              "name": "TI1S",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "TI1 selection",
+              "enum_values": [
+                {
+                  "name": "Normal",
+                  "value": 0,
+                  "description": "The TIMx_CH1 pin is connected to TI1 input"
+                },
+                {
+                  "name": "XOR",
+                  "value": 1,
+                  "description": "The TIMx_CH1, CH2, CH3 pins are connected to TI1 input"
+                }
+              ]
+            },
             {
               "name": "MMS",
               "bit_offset": 4,
               "bit_width": 3,
               "description": "Master mode selection",
-              "enum": "MMS"
+              "enum_values": [
+                {
+                  "name": "Reset",
+                  "value": 0,
+                  "description": "The UG bit from the TIMx_EGR register is used as trigger output"
+                },
+                {
+                  "name": "Enable",
+                  "value": 1,
+                  "description": "The counter enable signal, CNT_EN, is used as trigger output"
+                },
+                {
+                  "name": "Update",
+                  "value": 2,
+                  "description": "The update event is selected as trigger output"
+                },
+                {
+                  "name": "ComparePulse",
+                  "value": 3,
+                  "description": "The trigger output send a positive pulse when the CC1IF flag it to be set, as soon as a capture or a compare match occurred"
+                },
+                {
+                  "name": "CompareOC1",
+                  "value": 4,
+                  "description": "OC1REF signal is used as trigger output"
+                },
+                {
+                  "name": "CompareOC2",
+                  "value": 5,
+                  "description": "OC2REF signal is used as trigger output"
+                },
+                {
+                  "name": "CompareOC3",
+                  "value": 6,
+                  "description": "OC3REF signal is used as trigger output"
+                },
+                {
+                  "name": "CompareOC4",
+                  "value": 7,
+                  "description": "OC4REF signal is used as trigger output"
+                }
+              ]
             },
             {
               "name": "CCDS",
               "bit_offset": 3,
               "bit_width": 1,
               "description": "Capture/compare DMA selection",
-              "enum": "CCDS"
-            },
-            {
-              "name": "TI1S",
-              "bit_offset": 7,
-              "bit_width": 1,
-              "description": "TI1 selection",
-              "enum": "TI1S"
+              "enum_values": [
+                {
+                  "name": "OnCompare",
+                  "value": 0,
+                  "description": "CCx DMA request sent when CCx event occurs"
+                },
+                {
+                  "name": "OnUpdate",
+                  "value": 1,
+                  "description": "CCx DMA request sent when update event occurs"
+                }
+              ]
             }
           ]
         },
         {
           "name": "SMCR",
           "offset": 8,
-          "size": 32,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "slave mode control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "slave mode control register",
           "fields": [
             {
-              "name": "SMS",
-              "bit_offset": 0,
-              "bit_width": 3,
-              "description": "Slave mode selection",
-              "enum": "SMS"
-            },
-            {
-              "name": "TS",
-              "bit_offset": 4,
-              "bit_width": 3,
-              "description": "Trigger selection",
-              "enum": "TS"
-            },
-            {
-              "name": "MSM",
-              "bit_offset": 7,
+              "name": "ETP",
+              "bit_offset": 15,
               "bit_width": 1,
-              "description": "Master/Slave mode",
-              "enum": "MSM"
+              "description": "External trigger polarity",
+              "enum_values": [
+                {
+                  "name": "NotInverted",
+                  "value": 0,
+                  "description": "ETR is noninverted, active at high level or rising edge"
+                },
+                {
+                  "name": "Inverted",
+                  "value": 1,
+                  "description": "ETR is inverted, active at low level or falling edge"
+                }
+              ]
             },
             {
-              "name": "ETF",
-              "bit_offset": 8,
-              "bit_width": 4,
-              "description": "External trigger filter",
-              "enum": "FilterValue"
+              "name": "ECE",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "External clock enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "External clock mode 2 disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "External clock mode 2 enabled. The counter is clocked by any active edge on the ETRF signal."
+                }
+              ]
             },
             {
               "name": "ETPS",
               "bit_offset": 12,
               "bit_width": 2,
               "description": "External trigger prescaler",
-              "enum": "ETPS"
+              "enum_values": [
+                {
+                  "name": "Div1",
+                  "value": 0,
+                  "description": "Prescaler OFF"
+                },
+                {
+                  "name": "Div2",
+                  "value": 1,
+                  "description": "ETRP frequency divided by 2"
+                },
+                {
+                  "name": "Div4",
+                  "value": 2,
+                  "description": "ETRP frequency divided by 4"
+                },
+                {
+                  "name": "Div8",
+                  "value": 3,
+                  "description": "ETRP frequency divided by 8"
+                }
+              ]
             },
             {
-              "name": "ECE",
+              "name": "ETF",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "External trigger filter",
+              "enum_values": [
+                {
+                  "name": "NoFilter",
+                  "value": 0,
+                  "description": "No filter, sampling is done at fDTS"
+                },
+                {
+                  "name": "FCK_INT_N2",
+                  "value": 1,
+                  "description": "fSAMPLING=fCK_INT, N=2"
+                },
+                {
+                  "name": "FCK_INT_N4",
+                  "value": 2,
+                  "description": "fSAMPLING=fCK_INT, N=4"
+                },
+                {
+                  "name": "FCK_INT_N8",
+                  "value": 3,
+                  "description": "fSAMPLING=fCK_INT, N=8"
+                },
+                {
+                  "name": "FDTS_Div2_N6",
+                  "value": 4,
+                  "description": "fSAMPLING=fDTS/2, N=6"
+                },
+                {
+                  "name": "FDTS_Div2_N8",
+                  "value": 5,
+                  "description": "fSAMPLING=fDTS/2, N=8"
+                },
+                {
+                  "name": "FDTS_Div4_N6",
+                  "value": 6,
+                  "description": "fSAMPLING=fDTS/4, N=6"
+                },
+                {
+                  "name": "FDTS_Div4_N8",
+                  "value": 7,
+                  "description": "fSAMPLING=fDTS/4, N=8"
+                },
+                {
+                  "name": "FDTS_Div8_N6",
+                  "value": 8,
+                  "description": "fSAMPLING=fDTS/8, N=6"
+                },
+                {
+                  "name": "FDTS_Div8_N8",
+                  "value": 9,
+                  "description": "fSAMPLING=fDTS/8, N=8"
+                },
+                {
+                  "name": "FDTS_Div16_N5",
+                  "value": 10,
+                  "description": "fSAMPLING=fDTS/16, N=5"
+                },
+                {
+                  "name": "FDTS_Div16_N6",
+                  "value": 11,
+                  "description": "fSAMPLING=fDTS/16, N=6"
+                },
+                {
+                  "name": "FDTS_Div16_N8",
+                  "value": 12,
+                  "description": "fSAMPLING=fDTS/16, N=8"
+                },
+                {
+                  "name": "FDTS_Div32_N5",
+                  "value": 13,
+                  "description": "fSAMPLING=fDTS/32, N=5"
+                },
+                {
+                  "name": "FDTS_Div32_N6",
+                  "value": 14,
+                  "description": "fSAMPLING=fDTS/32, N=6"
+                },
+                {
+                  "name": "FDTS_Div32_N8",
+                  "value": 15,
+                  "description": "fSAMPLING=fDTS/32, N=8"
+                }
+              ]
+            },
+            {
+              "name": "MSM",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Master/Slave mode",
+              "enum_values": [
+                {
+                  "name": "NoSync",
+                  "value": 0,
+                  "description": "No action"
+                },
+                {
+                  "name": "Sync",
+                  "value": 1,
+                  "description": "The effect of an event on the trigger input (TRGI) is delayed to allow a perfect synchronization between the current timer and its slaves (through TRGO). It is useful if we want to synchronize several timers on a single external event."
+                }
+              ]
+            },
+            {
+              "name": "TS",
+              "bit_offset": 4,
+              "bit_width": 3,
+              "description": "Trigger selection",
+              "enum_values": [
+                {
+                  "name": "ITR0",
+                  "value": 0,
+                  "description": "Internal Trigger 0 (ITR0)"
+                },
+                {
+                  "name": "ITR1",
+                  "value": 1,
+                  "description": "Internal Trigger 1 (ITR1)"
+                },
+                {
+                  "name": "ITR2",
+                  "value": 2,
+                  "description": "Internal Trigger 2 (ITR2)"
+                },
+                {
+                  "name": "TI1F_ED",
+                  "value": 4,
+                  "description": "TI1 Edge Detector (TI1F_ED)"
+                },
+                {
+                  "name": "TI1FP1",
+                  "value": 5,
+                  "description": "Filtered Timer Input 1 (TI1FP1)"
+                },
+                {
+                  "name": "TI2FP2",
+                  "value": 6,
+                  "description": "Filtered Timer Input 2 (TI2FP2)"
+                },
+                {
+                  "name": "ETRF",
+                  "value": 7,
+                  "description": "External Trigger input (ETRF)"
+                }
+              ]
+            },
+            {
+              "name": "SMS",
+              "bit_offset": 0,
+              "bit_width": 3,
+              "description": "Slave mode selection",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Slave mode disabled - if CEN = ‘1 then the prescaler is clocked directly by the internal clock."
+                },
+                {
+                  "name": "Encoder_Mode_1",
+                  "value": 1,
+                  "description": "Encoder mode 1 - Counter counts up/down on TI2FP1 edge depending on TI1FP2 level."
+                },
+                {
+                  "name": "Encoder_Mode_2",
+                  "value": 2,
+                  "description": "Encoder mode 2 - Counter counts up/down on TI1FP2 edge depending on TI2FP1 level."
+                },
+                {
+                  "name": "Encoder_Mode_3",
+                  "value": 3,
+                  "description": "Encoder mode 3 - Counter counts up/down on both TI1FP1 and TI2FP2 edges depending on the level of the other input."
+                },
+                {
+                  "name": "Reset_Mode",
+                  "value": 4,
+                  "description": "Reset Mode - Rising edge of the selected trigger input (TRGI) reinitializes the counter and generates an update of the registers."
+                },
+                {
+                  "name": "Gated_Mode",
+                  "value": 5,
+                  "description": "Gated Mode - The counter clock is enabled when the trigger input (TRGI) is high. The counter stops (but is not reset) as soon as the trigger becomes low. Both start and stop of the counter are controlled."
+                },
+                {
+                  "name": "Trigger_Mode",
+                  "value": 6,
+                  "description": "Trigger Mode - The counter starts at a rising edge of the trigger TRGI (but it is not reset). Only the start of the counter is controlled."
+                },
+                {
+                  "name": "Ext_Clock_Mode",
+                  "value": 7,
+                  "description": "External Clock Mode 1 - Rising edges of the selected trigger (TRGI) clock the counter."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "DIER",
+          "offset": 12,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "DMA/Interrupt enable register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "TDE",
               "bit_offset": 14,
               "bit_width": 1,
-              "description": "External clock mode 2 enable",
-              "enum": null
+              "description": "Trigger DMA request enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Trigger DMA request disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Trigger DMA request enabled"
+                }
+              ]
             },
             {
-              "name": "ETP",
-              "bit_offset": 15,
+              "name": "CC%sDE",
+              "bit_offset": 9,
               "bit_width": 1,
-              "description": "External trigger polarity",
-              "enum": "ETP"
+              "description": "Capture/Compare %s DMA request enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "CCx DMA request disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "CCx DMA request enabled"
+                }
+              ]
+            },
+            {
+              "name": "UDE",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Update DMA request enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Update DMA request disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Update DMA request enabled"
+                }
+              ]
+            },
+            {
+              "name": "TIE",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Trigger interrupt enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Trigger interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Trigger interrupt enabled"
+                }
+              ]
+            },
+            {
+              "name": "CC%sIE",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Capture/Compare %s interrupt enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "CCx interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "CCx interrupt enabled"
+                }
+              ]
+            },
+            {
+              "name": "UIE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Update interrupt enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Update interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Update interrupt enabled"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "SR",
+          "offset": 16,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "status register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CC%sOF",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Capture/Compare %s overcapture flag",
+              "enum_values": [
+                {
+                  "name": "NoOvercapture",
+                  "value": 0,
+                  "description": "No overcapture has been detected"
+                },
+                {
+                  "name": "Overcapture",
+                  "value": 1,
+                  "description": "The counter value has been captured in TIMx_CCRx register while CCxIF flag was already set"
+                },
+                {
+                  "name": "Clear",
+                  "value": 0,
+                  "description": "Clear flag"
+                }
+              ]
+            },
+            {
+              "name": "TIF",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Trigger interrupt flag",
+              "enum_values": [
+                {
+                  "name": "NoTrigger",
+                  "value": 0,
+                  "description": "No trigger event occurred"
+                },
+                {
+                  "name": "Trigger",
+                  "value": 1,
+                  "description": "Trigger interrupt pending"
+                },
+                {
+                  "name": "Clear",
+                  "value": 0,
+                  "description": "Clear flag"
+                }
+              ]
+            },
+            {
+              "name": "CC%sIF",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Capture/compare %s interrupt flag",
+              "enum_values": [
+                {
+                  "name": "NoMatch",
+                  "value": 0,
+                  "description": "No campture/compare has been detected"
+                },
+                {
+                  "name": "Match",
+                  "value": 1,
+                  "description": "If CC1 is an output: The content of the counter TIMx_CNT matches the content of the TIMx_CCR1 register. If CC1 is an input: The counter value has been captured in TIMx_CCR1 register."
+                },
+                {
+                  "name": "Clear",
+                  "value": 0,
+                  "description": "Clear flag"
+                }
+              ]
+            },
+            {
+              "name": "UIF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Update interrupt flag",
+              "enum_values": [
+                {
+                  "name": "NoUpdateOccurred",
+                  "value": 0,
+                  "description": "No update occurred"
+                },
+                {
+                  "name": "UpdatePending",
+                  "value": 1,
+                  "description": "Update interrupt pending"
+                },
+                {
+                  "name": "Clear",
+                  "value": 0,
+                  "description": "Clear flag"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "EGR",
+          "offset": 20,
+          "size": 16,
+          "access": "write-only",
+          "reset_value": 0,
+          "description": "event generation register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "TG",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Trigger generation",
+              "enum_values": [
+                {
+                  "name": "Trigger",
+                  "value": 1,
+                  "description": "The TIF flag is set in TIMx_SR register. Related interrupt or DMA transfer can occur if enabled."
+                }
+              ]
+            },
+            {
+              "name": "CC%sG",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Capture/compare %s generation",
+              "enum_values": [
+                {
+                  "name": "Trigger",
+                  "value": 1,
+                  "description": "If CC1 is an output: CC1IF flag is set, Corresponding interrupt or DMA request is sent if enabled. If CC1 is an input: The current value of the counter is captured in TIMx_CCR1 register."
+                }
+              ]
+            },
+            {
+              "name": "UG",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Update generation",
+              "enum_values": [
+                {
+                  "name": "Update",
+                  "value": 1,
+                  "description": "Re-initializes the timer counter and generates an update of the registers."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "CCMR1_Output",
+          "offset": 24,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "capture/compare mode register 1 (output mode)",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "OC%sCE",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Output compare %s clear enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "OCxRef is not affected by the ETRF signal"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "OCxRef is cleared as soon as a High level is detected on ETRF signal"
+                }
+              ]
+            },
+            {
+              "name": "OC%sM",
+              "bit_offset": 4,
+              "bit_width": 3,
+              "description": "Output compare %s mode",
+              "enum_values": [
+                {
+                  "name": "Frozen",
+                  "value": 0,
+                  "description": "The comparison between the output compare register TIMx_CCRy and the counter TIMx_CNT has no effect on the outputs"
+                },
+                {
+                  "name": "ActiveOnMatch",
+                  "value": 1,
+                  "description": "Set channel to active level on match. OCyREF signal is forced high when the counter matches the capture/compare register"
+                },
+                {
+                  "name": "InactiveOnMatch",
+                  "value": 2,
+                  "description": "Set channel to inactive level on match. OCyREF signal is forced low when the counter matches the capture/compare register"
+                },
+                {
+                  "name": "Toggle",
+                  "value": 3,
+                  "description": "OCyREF toggles when TIMx_CNT=TIMx_CCRy"
+                },
+                {
+                  "name": "ForceInactive",
+                  "value": 4,
+                  "description": "OCyREF is forced low"
+                },
+                {
+                  "name": "ForceActive",
+                  "value": 5,
+                  "description": "OCyREF is forced high"
+                },
+                {
+                  "name": "PwmMode1",
+                  "value": 6,
+                  "description": "In upcounting, channel is active as long as TIMx_CNT<TIMx_CCRy else inactive. In downcounting, channel is inactive as long as TIMx_CNT>TIMx_CCRy else active"
+                },
+                {
+                  "name": "PwmMode2",
+                  "value": 7,
+                  "description": "Inversely to PwmMode1"
+                }
+              ]
+            },
+            {
+              "name": "OC%sPE",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Output compare %s preload enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Preload register on CCRx disabled. New values written to CCRx are taken into account immediately"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Preload register on CCRx enabled. Preload value is loaded into active register on each update event"
+                }
+              ]
+            },
+            {
+              "name": "OC%sFE",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Output compare %s fast enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Fast output disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Fast output enabled"
+                }
+              ]
+            },
+            {
+              "name": "CC%sS",
+              "bit_offset": 0,
+              "bit_width": 2,
+              "description": "Capture/Compare %s selection",
+              "enum_values": [
+                {
+                  "name": "Output",
+                  "value": 0,
+                  "description": "CCx channel is configured as output"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "CCMR1_Input",
+          "offset": 24,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "capture/compare mode register 1 (input mode)",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "IC%sF",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "Input capture %s filter",
+              "enum_values": [
+                {
+                  "name": "NoFilter",
+                  "value": 0,
+                  "description": "No filter, sampling is done at fDTS"
+                },
+                {
+                  "name": "FCK_INT_N2",
+                  "value": 1,
+                  "description": "fSAMPLING=fCK_INT, N=2"
+                },
+                {
+                  "name": "FCK_INT_N4",
+                  "value": 2,
+                  "description": "fSAMPLING=fCK_INT, N=4"
+                },
+                {
+                  "name": "FCK_INT_N8",
+                  "value": 3,
+                  "description": "fSAMPLING=fCK_INT, N=8"
+                },
+                {
+                  "name": "FDTS_Div2_N6",
+                  "value": 4,
+                  "description": "fSAMPLING=fDTS/2, N=6"
+                },
+                {
+                  "name": "FDTS_Div2_N8",
+                  "value": 5,
+                  "description": "fSAMPLING=fDTS/2, N=8"
+                },
+                {
+                  "name": "FDTS_Div4_N6",
+                  "value": 6,
+                  "description": "fSAMPLING=fDTS/4, N=6"
+                },
+                {
+                  "name": "FDTS_Div4_N8",
+                  "value": 7,
+                  "description": "fSAMPLING=fDTS/4, N=8"
+                },
+                {
+                  "name": "FDTS_Div8_N6",
+                  "value": 8,
+                  "description": "fSAMPLING=fDTS/8, N=6"
+                },
+                {
+                  "name": "FDTS_Div8_N8",
+                  "value": 9,
+                  "description": "fSAMPLING=fDTS/8, N=8"
+                },
+                {
+                  "name": "FDTS_Div16_N5",
+                  "value": 10,
+                  "description": "fSAMPLING=fDTS/16, N=5"
+                },
+                {
+                  "name": "FDTS_Div16_N6",
+                  "value": 11,
+                  "description": "fSAMPLING=fDTS/16, N=6"
+                },
+                {
+                  "name": "FDTS_Div16_N8",
+                  "value": 12,
+                  "description": "fSAMPLING=fDTS/16, N=8"
+                },
+                {
+                  "name": "FDTS_Div32_N5",
+                  "value": 13,
+                  "description": "fSAMPLING=fDTS/32, N=5"
+                },
+                {
+                  "name": "FDTS_Div32_N6",
+                  "value": 14,
+                  "description": "fSAMPLING=fDTS/32, N=6"
+                },
+                {
+                  "name": "FDTS_Div32_N8",
+                  "value": 15,
+                  "description": "fSAMPLING=fDTS/32, N=8"
+                }
+              ]
+            },
+            {
+              "name": "IC%sPSC",
+              "bit_offset": 2,
+              "bit_width": 2,
+              "description": "Input capture %s prescaler",
+              "enum_values": [
+                {
+                  "name": "NoPrescaler",
+                  "value": 0,
+                  "description": "No prescaler, capture is done each time an edge is detected on the capture input"
+                },
+                {
+                  "name": "TwoEvents",
+                  "value": 1,
+                  "description": "Capture is done once every 2 events"
+                },
+                {
+                  "name": "FourEvents",
+                  "value": 2,
+                  "description": "Capture is done once every 4 events"
+                },
+                {
+                  "name": "EightEvents",
+                  "value": 3,
+                  "description": "Capture is done once every 8 events"
+                }
+              ]
+            },
+            {
+              "name": "CC2S",
+              "bit_offset": 8,
+              "bit_width": 2,
+              "description": "Capture/compare 2 selection",
+              "enum_values": [
+                {
+                  "name": "TI2",
+                  "value": 1,
+                  "description": "CC2 channel is configured as input, IC2 is mapped on TI2"
+                },
+                {
+                  "name": "TI1",
+                  "value": 2,
+                  "description": "CC2 channel is configured as input, IC2 is mapped on TI1"
+                },
+                {
+                  "name": "TRC",
+                  "value": 3,
+                  "description": "CC2 channel is configured as input, IC2 is mapped on TRC"
+                }
+              ]
+            },
+            {
+              "name": "CC1S",
+              "bit_offset": 0,
+              "bit_width": 2,
+              "description": "Capture/Compare 1 selection",
+              "enum_values": [
+                {
+                  "name": "TI1",
+                  "value": 1,
+                  "description": "CC1 channel is configured as input, IC1 is mapped on TI1"
+                },
+                {
+                  "name": "TI2",
+                  "value": 2,
+                  "description": "CC1 channel is configured as input, IC1 is mapped on TI2"
+                },
+                {
+                  "name": "TRC",
+                  "value": 3,
+                  "description": "CC1 channel is configured as input, IC1 is mapped on TRC"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "CCMR2_Output",
+          "offset": 28,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "capture/compare mode register 2 (output mode)",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "OC%sCE",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Output compare %s clear enable"
+            },
+            {
+              "name": "OC%sM",
+              "bit_offset": 4,
+              "bit_width": 3,
+              "description": "Output compare %s mode"
+            },
+            {
+              "name": "OC%sPE",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Output compare %s preload enable"
+            },
+            {
+              "name": "OC%sFE",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Output compare %s fast enable"
+            },
+            {
+              "name": "CC%sS",
+              "bit_offset": 0,
+              "bit_width": 2,
+              "description": "Capture/Compare %s selection"
+            }
+          ]
+        },
+        {
+          "name": "CCMR2_Input",
+          "offset": 28,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "capture/compare mode register 2 (input mode)",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "IC%sF",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "Input capture %s filter"
+            },
+            {
+              "name": "IC%sPSC",
+              "bit_offset": 2,
+              "bit_width": 2,
+              "description": "Input capture %s prescaler"
+            },
+            {
+              "name": "CC4S",
+              "bit_offset": 8,
+              "bit_width": 2,
+              "description": "Capture/Compare 4 selection",
+              "enum_values": [
+                {
+                  "name": "TI4",
+                  "value": 1,
+                  "description": "CC4 channel is configured as input, IC4 is mapped on TI4"
+                },
+                {
+                  "name": "TI3",
+                  "value": 2,
+                  "description": "CC4 channel is configured as input, IC4 is mapped on TI3"
+                },
+                {
+                  "name": "TRC",
+                  "value": 3,
+                  "description": "CC4 channel is configured as input, IC4 is mapped on TRC"
+                }
+              ]
+            },
+            {
+              "name": "CC3S",
+              "bit_offset": 0,
+              "bit_width": 2,
+              "description": "Capture/Compare 3 selection",
+              "enum_values": [
+                {
+                  "name": "TI3",
+                  "value": 1,
+                  "description": "CC3 channel is configured as input, IC3 is mapped on TI3"
+                },
+                {
+                  "name": "TI4",
+                  "value": 2,
+                  "description": "CC3 channel is configured as input, IC3 is mapped on TI4"
+                },
+                {
+                  "name": "TRC",
+                  "value": 3,
+                  "description": "CC3 channel is configured as input, IC3 is mapped on TRC"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "CCER",
+          "offset": 32,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "capture/compare enable register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CC%sNP",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Capture/Compare %s output Polarity",
+              "enum_values": [
+                {
+                  "name": "Negative",
+                  "value": 0,
+                  "description": "Negative polarity"
+                },
+                {
+                  "name": "Positive",
+                  "value": 1,
+                  "description": "Positive polarity"
+                }
+              ]
+            },
+            {
+              "name": "CC%sP",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Capture/Compare %s output Polarity",
+              "enum_values": [
+                {
+                  "name": "RisingEdge",
+                  "value": 0,
+                  "description": "Noninverted/rising edge"
+                },
+                {
+                  "name": "FallingEdge",
+                  "value": 1,
+                  "description": "Inverted/falling edge"
+                }
+              ]
+            },
+            {
+              "name": "CC%sE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Capture/Compare %s output enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Capture disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Capture enabled"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "CNT",
+          "offset": 36,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "counter",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CNT",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Counter value"
+            }
+          ]
+        },
+        {
+          "name": "PSC",
+          "offset": 40,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "prescaler",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "PSC",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Prescaler value"
+            }
+          ]
+        },
+        {
+          "name": "ARR",
+          "offset": 44,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 65535,
+          "description": "auto-reload register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "ARR",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Auto-reload value"
+            }
+          ]
+        },
+        {
+          "name": "CCR%s",
+          "offset": 52,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "capture/compare register",
+          "array_len": 4,
+          "array_stride": 4,
+          "fields": [
+            {
+              "name": "CCR",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Capture/Compare value"
             }
           ]
         },
         {
           "name": "DCR",
           "offset": 72,
-          "size": 32,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "DMA control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "DMA control register",
           "fields": [
-            {
-              "name": "DBA",
-              "bit_offset": 0,
-              "bit_width": 5,
-              "description": "DMA base address",
-              "enum": null
-            },
             {
               "name": "DBL",
               "bit_offset": 8,
               "bit_width": 5,
-              "description": "DMA burst length",
-              "enum": null
+              "description": "DMA burst length"
+            },
+            {
+              "name": "DBA",
+              "bit_offset": 0,
+              "bit_width": 5,
+              "description": "DMA base address"
             }
           ]
         },
         {
           "name": "DMAR",
           "offset": 76,
-          "size": 32,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "DMA address for full transfer",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "DMA address for full transfer",
           "fields": [
             {
               "name": "DMAB",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "DMA register for burst accesses",
-              "enum": null
+              "description": "DMA register for burst accesses"
+            }
+          ]
+        },
+        {
+          "name": "OR",
+          "offset": 80,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "TIM2 option register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "ETR_RMP",
+              "bit_offset": 0,
+              "bit_width": 3,
+              "description": "Timer2 ETR remap",
+              "enum_values": [
+                {
+                  "name": "HSI",
+                  "value": 3,
+                  "description": "TIM2 ETR input is connected to HSI16 when HSI16OUTEN bit is set"
+                },
+                {
+                  "name": "LSE",
+                  "value": 5,
+                  "description": "TIM2 ETR input is connected to LSE"
+                },
+                {
+                  "name": "COMP2_OUT",
+                  "value": 6,
+                  "description": "TIM2 ETR input is connected to COMP2_OUT"
+                },
+                {
+                  "name": "COMP1_OUT",
+                  "value": 7,
+                  "description": "TIM2 ETR input is connected to COMP1_OUT"
+                }
+              ]
+            },
+            {
+              "name": "TI4_RMP",
+              "bit_offset": 3,
+              "bit_width": 2,
+              "description": "Internal trigger",
+              "enum_values": [
+                {
+                  "name": "COMP2_OUT",
+                  "value": 1,
+                  "description": "TIM2 TI4 input connected to COMP2_OUT"
+                },
+                {
+                  "name": "COMP1_OUT",
+                  "value": 2,
+                  "description": "TIM2 TI4 input connected to COMP1_OUT"
+                }
+              ]
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "CCDS": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "OnCompare",
-          "value": 0,
-          "description": "CCx DMA request sent when CCx event occurs"
-        },
-        {
-          "name": "OnUpdate",
-          "value": 1,
-          "description": "CCx DMA request sent when update event occurs"
-        }
-      ]
-    },
-    "CCMR_Input_CCS": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "TI4",
-          "value": 1,
-          "description": "CCx channel is configured as input, normal mapping: ICx mapped to TIx"
-        },
-        {
-          "name": "TI3",
-          "value": 2,
-          "description": "CCx channel is configured as input, alternate mapping (switches 1 with 2, 3 with 4)"
-        },
-        {
-          "name": "TRC",
-          "value": 3,
-          "description": "CCx channel is configured as input, ICx is mapped on TRC"
-        }
-      ]
-    },
-    "CCMR_Output_CCS": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Output",
-          "value": 0,
-          "description": "CCx channel is configured as output"
-        }
-      ]
-    },
-    "CKD": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Div1",
-          "value": 0,
-          "description": "t_DTS = t_CK_INT"
-        },
-        {
-          "name": "Div2",
-          "value": 1,
-          "description": "t_DTS = 2 × t_CK_INT"
-        },
-        {
-          "name": "Div4",
-          "value": 2,
-          "description": "t_DTS = 4 × t_CK_INT"
-        }
-      ]
-    },
-    "CMS": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "EdgeAligned",
-          "value": 0,
-          "description": "The counter counts up or down depending on the direction bit"
-        },
-        {
-          "name": "CenterAligned1",
-          "value": 1,
-          "description": "The counter counts up and down alternatively. Output compare interrupt flags are set only when the counter is counting down."
-        },
-        {
-          "name": "CenterAligned2",
-          "value": 2,
-          "description": "The counter counts up and down alternatively. Output compare interrupt flags are set only when the counter is counting up."
-        },
-        {
-          "name": "CenterAligned3",
-          "value": 3,
-          "description": "The counter counts up and down alternatively. Output compare interrupt flags are set both when the counter is counting up or down."
-        }
-      ]
-    },
-    "DIR": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Up",
-          "value": 0,
-          "description": "Counter used as upcounter"
-        },
-        {
-          "name": "Down",
-          "value": 1,
-          "description": "Counter used as downcounter"
-        }
-      ]
-    },
-    "ETP": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "NotInverted",
-          "value": 0,
-          "description": "ETR is noninverted, active at high level or rising edge"
-        },
-        {
-          "name": "Inverted",
-          "value": 1,
-          "description": "ETR is inverted, active at low level or falling edge"
-        }
-      ]
-    },
-    "ETPS": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Div1",
-          "value": 0,
-          "description": "Prescaler OFF"
-        },
-        {
-          "name": "Div2",
-          "value": 1,
-          "description": "ETRP frequency divided by 2"
-        },
-        {
-          "name": "Div4",
-          "value": 2,
-          "description": "ETRP frequency divided by 4"
-        },
-        {
-          "name": "Div8",
-          "value": 3,
-          "description": "ETRP frequency divided by 8"
-        }
-      ]
-    },
-    "FilterValue": {
-      "bit_size": 4,
-      "variants": [
-        {
-          "name": "NoFilter",
-          "value": 0,
-          "description": "No filter, sampling is done at fDTS"
-        },
-        {
-          "name": "FCK_INT_N2",
-          "value": 1,
-          "description": "fSAMPLING=fCK_INT, N=2"
-        },
-        {
-          "name": "FCK_INT_N4",
-          "value": 2,
-          "description": "fSAMPLING=fCK_INT, N=4"
-        },
-        {
-          "name": "FCK_INT_N8",
-          "value": 3,
-          "description": "fSAMPLING=fCK_INT, N=8"
-        },
-        {
-          "name": "FDTS_Div2_N6",
-          "value": 4,
-          "description": "fSAMPLING=fDTS/2, N=6"
-        },
-        {
-          "name": "FDTS_Div2_N8",
-          "value": 5,
-          "description": "fSAMPLING=fDTS/2, N=8"
-        },
-        {
-          "name": "FDTS_Div4_N6",
-          "value": 6,
-          "description": "fSAMPLING=fDTS/4, N=6"
-        },
-        {
-          "name": "FDTS_Div4_N8",
-          "value": 7,
-          "description": "fSAMPLING=fDTS/4, N=8"
-        },
-        {
-          "name": "FDTS_Div8_N6",
-          "value": 8,
-          "description": "fSAMPLING=fDTS/8, N=6"
-        },
-        {
-          "name": "FDTS_Div8_N8",
-          "value": 9,
-          "description": "fSAMPLING=fDTS/8, N=8"
-        },
-        {
-          "name": "FDTS_Div16_N5",
-          "value": 10,
-          "description": "fSAMPLING=fDTS/16, N=5"
-        },
-        {
-          "name": "FDTS_Div16_N6",
-          "value": 11,
-          "description": "fSAMPLING=fDTS/16, N=6"
-        },
-        {
-          "name": "FDTS_Div16_N8",
-          "value": 12,
-          "description": "fSAMPLING=fDTS/16, N=8"
-        },
-        {
-          "name": "FDTS_Div32_N5",
-          "value": 13,
-          "description": "fSAMPLING=fDTS/32, N=5"
-        },
-        {
-          "name": "FDTS_Div32_N6",
-          "value": 14,
-          "description": "fSAMPLING=fDTS/32, N=6"
-        },
-        {
-          "name": "FDTS_Div32_N8",
-          "value": 15,
-          "description": "fSAMPLING=fDTS/32, N=8"
-        }
-      ]
-    },
-    "MMS": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "Reset",
-          "value": 0,
-          "description": "The UG bit from the TIMx_EGR register is used as trigger output"
-        },
-        {
-          "name": "Enable",
-          "value": 1,
-          "description": "The counter enable signal, CNT_EN, is used as trigger output"
-        },
-        {
-          "name": "Update",
-          "value": 2,
-          "description": "The update event is selected as trigger output"
-        },
-        {
-          "name": "ComparePulse",
-          "value": 3,
-          "description": "The trigger output send a positive pulse when the CC1IF flag it to be set, as soon as a capture or a compare match occurred"
-        },
-        {
-          "name": "CompareOC1",
-          "value": 4,
-          "description": "OC1REF signal is used as trigger output"
-        },
-        {
-          "name": "CompareOC2",
-          "value": 5,
-          "description": "OC2REF signal is used as trigger output"
-        },
-        {
-          "name": "CompareOC3",
-          "value": 6,
-          "description": "OC3REF signal is used as trigger output"
-        },
-        {
-          "name": "CompareOC4",
-          "value": 7,
-          "description": "OC4REF signal is used as trigger output"
-        }
-      ]
-    },
-    "MSM": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "NoSync",
-          "value": 0,
-          "description": "No action"
-        },
-        {
-          "name": "Sync",
-          "value": 1,
-          "description": "The effect of an event on the trigger input (TRGI) is delayed to allow a perfect synchronization between the current timer and its slaves (through TRGO). It is useful if we want to synchronize several timers on a single external event."
-        }
-      ]
-    },
-    "OCM": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "Frozen",
-          "value": 0,
-          "description": "The comparison between the output compare register TIMx_CCRy and the counter TIMx_CNT has no effect on the outputs"
-        },
-        {
-          "name": "ActiveOnMatch",
-          "value": 1,
-          "description": "Set channel to active level on match. OCyREF signal is forced high when the counter matches the capture/compare register"
-        },
-        {
-          "name": "InactiveOnMatch",
-          "value": 2,
-          "description": "Set channel to inactive level on match. OCyREF signal is forced low when the counter matches the capture/compare register"
-        },
-        {
-          "name": "Toggle",
-          "value": 3,
-          "description": "OCyREF toggles when TIMx_CNT=TIMx_CCRy"
-        },
-        {
-          "name": "ForceInactive",
-          "value": 4,
-          "description": "OCyREF is forced low"
-        },
-        {
-          "name": "ForceActive",
-          "value": 5,
-          "description": "OCyREF is forced high"
-        },
-        {
-          "name": "PwmMode1",
-          "value": 6,
-          "description": "In upcounting, channel is active as long as TIMx_CNT<TIMx_CCRy else inactive. In downcounting, channel is inactive as long as TIMx_CNT>TIMx_CCRy else active"
-        },
-        {
-          "name": "PwmMode2",
-          "value": 7,
-          "description": "Inversely to PwmMode1"
-        }
-      ]
-    },
-    "SMS": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "Disabled",
-          "value": 0,
-          "description": "Slave mode disabled - if CEN = '1' then the prescaler is clocked directly by the internal clock."
-        },
-        {
-          "name": "Encoder_Mode_1",
-          "value": 1,
-          "description": "Encoder mode 1 - Counter counts up/down on TI2FP1 edge depending on TI1FP2 level."
-        },
-        {
-          "name": "Encoder_Mode_2",
-          "value": 2,
-          "description": "Encoder mode 2 - Counter counts up/down on TI1FP2 edge depending on TI2FP1 level."
-        },
-        {
-          "name": "Encoder_Mode_3",
-          "value": 3,
-          "description": "Encoder mode 3 - Counter counts up/down on both TI1FP1 and TI2FP2 edges depending on the level of the other input."
-        },
-        {
-          "name": "Reset_Mode",
-          "value": 4,
-          "description": "Reset Mode - Rising edge of the selected trigger input (TRGI) reinitializes the counter and generates an update of the registers."
-        },
-        {
-          "name": "Gated_Mode",
-          "value": 5,
-          "description": "Gated Mode - The counter clock is enabled when the trigger input (TRGI) is high. The counter stops (but is not reset) as soon as the trigger becomes low. Both start and stop of the counter are controlled."
-        },
-        {
-          "name": "Trigger_Mode",
-          "value": 6,
-          "description": "Trigger Mode - The counter starts at a rising edge of the trigger TRGI (but it is not reset). Only the start of the counter is controlled."
-        },
-        {
-          "name": "Ext_Clock_Mode",
-          "value": 7,
-          "description": "External Clock Mode 1 - Rising edges of the selected trigger (TRGI) clock the counter."
-        }
-      ]
-    },
-    "TI1S": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Normal",
-          "value": 0,
-          "description": "The TIMx_CH1 pin is connected to TI1 input"
-        },
-        {
-          "name": "XOR",
-          "value": 1,
-          "description": "The TIMx_CH1, CH2, CH3 pins are connected to TI1 input"
-        }
-      ]
-    },
-    "TS": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "ITR0",
-          "value": 0,
-          "description": "Internal Trigger 0 (ITR0)"
-        },
-        {
-          "name": "ITR1",
-          "value": 1,
-          "description": "Internal Trigger 1 (ITR1)"
-        },
-        {
-          "name": "ITR2",
-          "value": 2,
-          "description": "Internal Trigger 2 (ITR2)"
-        },
-        {
-          "name": "ITR3",
-          "value": 3,
-          "description": "Internal Trigger 3 (ITR3)"
-        },
-        {
-          "name": "TI1F_ED",
-          "value": 4,
-          "description": "TI1 Edge Detector (TI1F_ED)"
-        },
-        {
-          "name": "TI1FP1",
-          "value": 5,
-          "description": "Filtered Timer Input 1 (TI1FP1)"
-        },
-        {
-          "name": "TI2FP2",
-          "value": 6,
-          "description": "Filtered Timer Input 2 (TI2FP2)"
-        },
-        {
-          "name": "ETRF",
-          "value": 7,
-          "description": "External Trigger input (ETRF)"
-        }
-      ]
-    },
-    "URS": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "AnyEvent",
-          "value": 0,
-          "description": "Any of counter overflow/underflow, setting UG, or update through slave mode, generates an update interrupt or DMA request"
-        },
-        {
-          "name": "CounterOnly",
-          "value": 1,
-          "description": "Only counter overflow/underflow generates an update interrupt or DMA request"
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

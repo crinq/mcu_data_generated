@@ -2,9 +2,12 @@
   "schema": 1,
   "kind": "dac",
   "version": "v4",
+  "source": "stm32rs_svd",
+  "source_device": "stm32h7b3zi",
+  "source_file": "stm32h7b3.svd.patched",
   "blocks": {
-    "DAC": {
-      "name": "DAC",
+    "DAC1": {
+      "name": "DAC1",
       "description": "Digital-to-analog converter",
       "extends": null,
       "registers": [
@@ -12,138 +15,345 @@
           "name": "CR",
           "offset": 0,
           "size": 32,
-          "description": "control register",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "DAC control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "control register",
           "fields": [
             {
-              "name": "EN",
+              "name": "EN%s",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "channel enable",
-              "enum": null
+              "description": "DAC channel%s enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "DAC Channel X disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "DAC Channel X enabled"
+                }
+              ]
             },
             {
-              "name": "TEN",
+              "name": "TEN%s",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "channel trigger enable",
-              "enum": null
+              "description": "DAC channel%s trigger enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "DAC Channel X trigger disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "DAC Channel X trigger enabled"
+                }
+              ]
             },
             {
-              "name": "TSEL",
+              "name": "TSEL1",
               "bit_offset": 2,
               "bit_width": 4,
-              "description": "channel trigger selection",
-              "enum": null
+              "description": "DAC channel1 trigger selection These bits select the external event used to trigger DAC channel1. Note: Only used if bit TEN1 = 1 (DAC channel1 trigger enabled).",
+              "enum_values": [
+                {
+                  "name": "Swtrig",
+                  "value": 0,
+                  "description": "Software trigger"
+                },
+                {
+                  "name": "Tim1Trgo",
+                  "value": 1,
+                  "description": "Timer 1 TRGO event"
+                },
+                {
+                  "name": "Tim2Trgo",
+                  "value": 2,
+                  "description": "Timer 2 TRGO event"
+                },
+                {
+                  "name": "Tim4Trgo",
+                  "value": 3,
+                  "description": "Timer 4 TRGO event"
+                },
+                {
+                  "name": "Tim5Trgo",
+                  "value": 4,
+                  "description": "Timer 5 TRGO event"
+                },
+                {
+                  "name": "Tim6Trgo",
+                  "value": 5,
+                  "description": "Timer 6 TRGO event"
+                },
+                {
+                  "name": "Tim7Trgo",
+                  "value": 6,
+                  "description": "Timer 7 TRGO event"
+                },
+                {
+                  "name": "Tim8Trgo",
+                  "value": 7,
+                  "description": "Timer 8 TRGO event"
+                },
+                {
+                  "name": "Tim15Trgo",
+                  "value": 8,
+                  "description": "Timer 15 TRGO event"
+                },
+                {
+                  "name": "Lptim1Out",
+                  "value": 11,
+                  "description": "LPTIM1 OUT event"
+                },
+                {
+                  "name": "Lptim2Out",
+                  "value": 12,
+                  "description": "LPTIM2 OUT event"
+                },
+                {
+                  "name": "Exti9",
+                  "value": 13,
+                  "description": "EXTI line 9"
+                },
+                {
+                  "name": "Lptim2or3Out",
+                  "value": 14,
+                  "description": "LPTIM2 (DAC1)/ LPTIM3 (DAC2) OUT event"
+                }
+              ]
             },
             {
-              "name": "WAVE",
+              "name": "WAVE%s",
               "bit_offset": 6,
               "bit_width": 2,
-              "description": "channel noise/triangle wave generation enable",
-              "enum": "WAVE"
+              "description": "DAC channel%s noise/triangle wave generation enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Wave generation disabled"
+                },
+                {
+                  "name": "Noise",
+                  "value": 1,
+                  "description": "Noise wave generation enabled"
+                }
+              ]
             },
             {
-              "name": "MAMP",
+              "name": "MAMP%s",
               "bit_offset": 8,
               "bit_width": 4,
-              "description": "channel mask/amplitude selector",
-              "enum": null
+              "description": "DAC channel%s mask/amplitude selector",
+              "enum_values": [
+                {
+                  "name": "Amp1",
+                  "value": 0,
+                  "description": "Unmask bit0 of LFSR/ triangle amplitude equal to 1"
+                },
+                {
+                  "name": "Amp3",
+                  "value": 1,
+                  "description": "Unmask bits[1:0] of LFSR/ triangle amplitude equal to 3"
+                },
+                {
+                  "name": "Amp7",
+                  "value": 2,
+                  "description": "Unmask bits[2:0] of LFSR/ triangle amplitude equal to 7"
+                },
+                {
+                  "name": "Amp15",
+                  "value": 3,
+                  "description": "Unmask bits[3:0] of LFSR/ triangle amplitude equal to 15"
+                },
+                {
+                  "name": "Amp31",
+                  "value": 4,
+                  "description": "Unmask bits[4:0] of LFSR/ triangle amplitude equal to 31"
+                },
+                {
+                  "name": "Amp63",
+                  "value": 5,
+                  "description": "Unmask bits[5:0] of LFSR/ triangle amplitude equal 63"
+                },
+                {
+                  "name": "Amp127",
+                  "value": 6,
+                  "description": "Unmask bits[6:0] of LFSR/ triangle amplitude equal to 127"
+                },
+                {
+                  "name": "Amp255",
+                  "value": 7,
+                  "description": "Unmask bits[7:0] of LFSR/ triangle amplitude equal to 255"
+                },
+                {
+                  "name": "Amp511",
+                  "value": 8,
+                  "description": "Unmask bits[8:0] of LFSR/ triangle amplitude equal to 511"
+                },
+                {
+                  "name": "Amp1023",
+                  "value": 9,
+                  "description": "Unmask bits[9:0] of LFSR/ triangle amplitude equal to 1023"
+                },
+                {
+                  "name": "Amp2047",
+                  "value": 10,
+                  "description": "Unmask bits[10:0] of LFSR/ triangle amplitude equal to 2047"
+                }
+              ]
             },
             {
-              "name": "DMAEN",
+              "name": "DMAEN%s",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "channel DMA enable",
-              "enum": null
+              "description": "DAC channel%s DMA enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "DAC Channel X DMA mode disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "DAC Channel X DMA mode enabled"
+                }
+              ]
             },
             {
-              "name": "DMAUDRIE",
+              "name": "DMAUDRIE%s",
               "bit_offset": 13,
               "bit_width": 1,
-              "description": "channel DMA Underrun Interrupt enable",
-              "enum": null
+              "description": "DAC channel%s DMA Underrun Interrupt enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "DAC channel X DMA Underrun Interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "DAC channel X DMA Underrun Interrupt enabled"
+                }
+              ]
             },
             {
-              "name": "CEN",
+              "name": "CEN%s",
               "bit_offset": 14,
               "bit_width": 1,
-              "description": "DAC channel calibration enable",
-              "enum": null
+              "description": "DAC channel%s calibration enable",
+              "enum_values": [
+                {
+                  "name": "Normal",
+                  "value": 0,
+                  "description": "DAC Channel X Normal operating mode"
+                },
+                {
+                  "name": "Calibration",
+                  "value": 1,
+                  "description": "DAC Channel X calibration mode"
+                }
+              ]
+            },
+            {
+              "name": "TSEL2",
+              "bit_offset": 18,
+              "bit_width": 4,
+              "description": "DAC channel2 trigger selection These bits select the external event used to trigger DAC channel2 Note: Only used if bit TEN2 = 1 (DAC channel2 trigger enabled)."
             }
           ]
         },
         {
-          "name": "SWTRIGR",
+          "name": "SWTRGR",
           "offset": 4,
           "size": 32,
-          "description": "software trigger register",
+          "access": "write-only",
+          "reset_value": 0,
+          "description": "DAC software trigger register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "software trigger register",
           "fields": [
             {
-              "name": "SWTRIG",
+              "name": "SWTRIG%s",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "channel software trigger",
-              "enum": null
+              "description": "DAC channel%s software trigger",
+              "enum_values": [
+                {
+                  "name": "NoTrigger",
+                  "value": 0,
+                  "description": "No trigger"
+                },
+                {
+                  "name": "Trigger",
+                  "value": 1,
+                  "description": "Trigger"
+                }
+              ]
             }
           ]
         },
         {
-          "name": "DHR12R",
+          "name": "DHR12R%s",
           "offset": 8,
           "size": 32,
-          "description": "channel 12-bit right-aligned data holding register",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "channel%s 12-bit right-aligned data holding register",
           "array_len": 2,
           "array_stride": 12,
-          "fieldset_description": "channel 12-bit right-aligned data holding register",
           "fields": [
             {
-              "name": "DHR",
+              "name": "DACCDHR",
               "bit_offset": 0,
               "bit_width": 12,
-              "description": "channel 12-bit right-aligned data",
-              "enum": null
+              "description": "DAC channel1 12-bit right-aligned data These bits are written by software which specifies 12-bit data for DAC channel1."
             }
           ]
         },
         {
-          "name": "DHR12L",
+          "name": "DHR12L%s",
           "offset": 12,
           "size": 32,
-          "description": "channel 12-bit left-aligned data holding register",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "channel%s 12-bit left aligned data holding register",
           "array_len": 2,
           "array_stride": 12,
-          "fieldset_description": "channel 12-bit left-aligned data holding register",
           "fields": [
             {
-              "name": "DHR",
+              "name": "DACCDHR",
               "bit_offset": 4,
               "bit_width": 12,
-              "description": "channel 12-bit left-aligned data",
-              "enum": null
+              "description": "DAC channel1 12-bit left-aligned data These bits are written by software which specifies 12-bit data for DAC channel1."
             }
           ]
         },
         {
-          "name": "DHR8R",
+          "name": "DHR8R%s",
           "offset": 16,
           "size": 32,
-          "description": "channel 8-bit right-aligned data holding register",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "channel%s 8-bit right aligned data holding register",
           "array_len": 2,
           "array_stride": 12,
-          "fieldset_description": "channel 8-bit right-aligned data holding register",
           "fields": [
             {
-              "name": "DHR",
+              "name": "DACCDHR",
               "bit_offset": 0,
               "bit_width": 8,
-              "description": "channel 8-bit right-aligned data",
-              "enum": null
+              "description": "DAC channel1 8-bit right-aligned data These bits are written by software which specifies 8-bit data for DAC channel1."
             }
           ]
         },
@@ -151,17 +361,17 @@
           "name": "DHR12RD",
           "offset": 32,
           "size": 32,
-          "description": "dual 12-bit right-aligned data holding register",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Dual DAC 12-bit right-aligned data holding register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "dual 12-bit right-aligned data holding register",
           "fields": [
             {
-              "name": "DHR",
+              "name": "DACC%sDHR",
               "bit_offset": 0,
               "bit_width": 12,
-              "description": "channel 12-bit right-aligned data",
-              "enum": null
+              "description": "DAC channel%s 12-bit right-aligned data"
             }
           ]
         },
@@ -169,17 +379,17 @@
           "name": "DHR12LD",
           "offset": 36,
           "size": 32,
-          "description": "dual 12-bit left aligned data holding register",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "DUAL DAC 12-bit left aligned data holding register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "dual 12-bit left aligned data holding register",
           "fields": [
             {
-              "name": "DHR",
+              "name": "DACC%sDHR",
               "bit_offset": 4,
               "bit_width": 12,
-              "description": "channel 12-bit left-aligned data",
-              "enum": null
+              "description": "DAC channel%s 12-bit left-aligned data"
             }
           ]
         },
@@ -187,35 +397,35 @@
           "name": "DHR8RD",
           "offset": 40,
           "size": 32,
-          "description": "dual 8-bit right aligned data holding register",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "DUAL DAC 8-bit right aligned data holding register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "dual 8-bit right aligned data holding register",
           "fields": [
             {
-              "name": "DHR",
+              "name": "DACC%sDHR",
               "bit_offset": 0,
               "bit_width": 8,
-              "description": "channel 8-bit right-aligned data",
-              "enum": null
+              "description": "DAC channel%s 8-bit right-aligned data"
             }
           ]
         },
         {
-          "name": "DOR",
+          "name": "DOR%s",
           "offset": 44,
           "size": 32,
-          "description": "channel data output register",
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "channel%s data output register",
           "array_len": 2,
           "array_stride": 4,
-          "fieldset_description": "channel data output register",
           "fields": [
             {
-              "name": "DOR",
+              "name": "DACCDOR",
               "bit_offset": 0,
               "bit_width": 12,
-              "description": "channel data output",
-              "enum": null
+              "description": "DAC channel1 data output These bits are read-only, they contain data output for DAC channel1."
             }
           ]
         },
@@ -223,31 +433,68 @@
           "name": "SR",
           "offset": 52,
           "size": 32,
-          "description": "status register",
+          "access": null,
+          "reset_value": 0,
+          "description": "DAC status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "status register",
           "fields": [
             {
-              "name": "DMAUDR",
+              "name": "DMAUDR%s",
               "bit_offset": 13,
               "bit_width": 1,
-              "description": "channel DMA underrun flag",
-              "enum": null
+              "description": "DAC channel%s DMA underrun flag",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoUnderrun",
+                  "value": 0,
+                  "description": "No DMA underrun error condition occurred for DAC channel x"
+                },
+                {
+                  "name": "Underrun",
+                  "value": 1,
+                  "description": "DMA underrun error condition occurred for DAC channel x (the currently selected trigger is driving DAC channel1 conversion at a frequency higher than the DMA service capability rate)"
+                }
+              ]
             },
             {
-              "name": "CAL_FLAG",
+              "name": "CAL_FLAG%s",
               "bit_offset": 14,
               "bit_width": 1,
-              "description": "channel calibration offset status",
-              "enum": null
+              "description": "DAC channel%s calibration offset status",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "Lower",
+                  "value": 0,
+                  "description": "Calibration trimming value is lower than the offset correction value"
+                },
+                {
+                  "name": "Equal_Higher",
+                  "value": 1,
+                  "description": "Calibration trimming value is equal or greater than the offset correction value"
+                }
+              ]
             },
             {
-              "name": "BWST",
+              "name": "BWST%s",
               "bit_offset": 15,
               "bit_width": 1,
-              "description": "channel busy writing sample time flag",
-              "enum": null
+              "description": "DAC channel%s busy writing sample time flag",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "Idle",
+                  "value": 0,
+                  "description": "There is no write operation of DAC_SHSR1 ongoing: DAC_SHSR1 can be written"
+                },
+                {
+                  "name": "Busy",
+                  "value": 1,
+                  "description": "There is a write operation of DAC_SHSR1 ongoing: DAC_SHSR1 cannot be written"
+                }
+              ]
             }
           ]
         },
@@ -255,17 +502,17 @@
           "name": "CCR",
           "offset": 56,
           "size": 32,
-          "description": "calibration control register",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "DAC calibration control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "calibration control register",
           "fields": [
             {
-              "name": "OTRIM",
+              "name": "OTRIM%s",
               "bit_offset": 0,
               "bit_width": 5,
-              "description": "channel offset trimming value",
-              "enum": null
+              "description": "DAC channel%s offset trimming value"
             }
           ]
         },
@@ -273,35 +520,77 @@
           "name": "MCR",
           "offset": 60,
           "size": 32,
-          "description": "mode control register",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "DAC mode control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "mode control register",
           "fields": [
             {
-              "name": "MODE",
+              "name": "MODE%s",
               "bit_offset": 0,
               "bit_width": 3,
-              "description": "DAC channel mode",
-              "enum": "MODE"
+              "description": "DAC channel%s mode",
+              "enum_values": [
+                {
+                  "name": "NormalPinBuffer",
+                  "value": 0,
+                  "description": "Normal mode - DAC channelx is connected to external pin with Buffer enabled"
+                },
+                {
+                  "name": "NormalPinChipBuffer",
+                  "value": 1,
+                  "description": "Normal mode - DAC channelx is connected to external pin and to on chip peripherals with Buffer enabled"
+                },
+                {
+                  "name": "NormalPinNoBuffer",
+                  "value": 2,
+                  "description": "Normal mode - DAC channelx is connected to external pin with Buffer disabled"
+                },
+                {
+                  "name": "NormalChipNoBuffer",
+                  "value": 3,
+                  "description": "Normal mode - DAC channelx is connected to on chip peripherals with Buffer disabled"
+                },
+                {
+                  "name": "SHPinBuffer",
+                  "value": 4,
+                  "description": "S&H mode - DAC channelx is connected to external pin with Buffer enabled"
+                },
+                {
+                  "name": "SHPinChipBuffer",
+                  "value": 5,
+                  "description": "S&H mode - DAC channelx is connected to external pin and to on chip peripherals with Buffer enabled"
+                },
+                {
+                  "name": "SHPinNoBuffer",
+                  "value": 6,
+                  "description": "S&H mode - DAC channelx is connected to external pin and to on chip peripherals with Buffer disabled"
+                },
+                {
+                  "name": "SHChipNoBuffer",
+                  "value": 7,
+                  "description": "S&H mode - DAC channelx is connected to on chip peripherals with Buffer disabled"
+                }
+              ]
             }
           ]
         },
         {
-          "name": "SHSR",
+          "name": "SHSR%s",
           "offset": 64,
           "size": 32,
-          "description": "sample and hold sample time register",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "DAC channel%s sample and hold sample time register",
           "array_len": 2,
           "array_stride": 4,
-          "fieldset_description": "sample and hold sample time register",
           "fields": [
             {
               "name": "TSAMPLE",
               "bit_offset": 0,
               "bit_width": 10,
-              "description": "channel sample time",
-              "enum": null
+              "description": "DAC Channel 1 sample Time (only valid in sample &amp; hold mode) These bits can be written when the DAC channel1 is disabled or also during normal operation. in the latter case, the write can be done only when BWSTx of DAC_SR register is low, If BWSTx=1, the write operation is ignored."
             }
           ]
         },
@@ -309,17 +598,17 @@
           "name": "SHHR",
           "offset": 72,
           "size": 32,
-          "description": "sample and hold hold time register",
+          "access": "read-write",
+          "reset_value": 65537,
+          "description": "DAC Sample and Hold hold time register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "sample and hold hold time register",
           "fields": [
             {
-              "name": "THOLD",
+              "name": "THOLD%s",
               "bit_offset": 0,
               "bit_width": 10,
-              "description": "channel hold time",
-              "enum": null
+              "description": "DAC channel%s hold time (only valid in Sample and hold mode)"
             }
           ]
         },
@@ -327,88 +616,22 @@
           "name": "SHRR",
           "offset": 76,
           "size": 32,
-          "description": "sample and hold refresh time register",
+          "access": "read-write",
+          "reset_value": 65537,
+          "description": "DAC Sample and Hold refresh time register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "sample and hold refresh time register",
           "fields": [
             {
-              "name": "TREFRESH",
+              "name": "TREFRESH%s",
               "bit_offset": 0,
               "bit_width": 8,
-              "description": "channel refresh time",
-              "enum": null
+              "description": "DAC channel%s refresh time (only valid in Sample and hold mode)"
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "MODE": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "NORMAL_EXT_BUFEN",
-          "value": 0,
-          "description": "Normal mode, external pin only, buffer enabled"
-        },
-        {
-          "name": "NORMAL_EXT_INT_BUFEN",
-          "value": 1,
-          "description": "Normal mode, external pin and internal peripherals, buffer enabled"
-        },
-        {
-          "name": "NORMAL_EXT_BUFDIS",
-          "value": 2,
-          "description": "Normal mode, external pin only, buffer disabled"
-        },
-        {
-          "name": "NORMAL_INT_BUFDIS",
-          "value": 3,
-          "description": "Normal mode, internal peripherals only, buffer disabled"
-        },
-        {
-          "name": "SAMPHOLD_EXT_BUFEN",
-          "value": 4,
-          "description": "Sample and hold mode, external pin only, buffer enabled"
-        },
-        {
-          "name": "SAMPHOLD_EXT_INT_BUFEN",
-          "value": 5,
-          "description": "Sample and hold mode, external pin and internal peripherals, buffer enabled"
-        },
-        {
-          "name": "SAMPHOLD_EXT_INT_BUFDIS",
-          "value": 6,
-          "description": "Sample and hold mode, external pin and internal peripherals, buffer disabled"
-        },
-        {
-          "name": "SAMPHOLD_INT_BUFDIS",
-          "value": 7,
-          "description": "Sample and hold mode, internal peripherals only, buffer disabled"
-        }
-      ]
-    },
-    "WAVE": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Disabled",
-          "value": 0,
-          "description": "Wave generation disabled"
-        },
-        {
-          "name": "Noise",
-          "value": 1,
-          "description": "Noise wave generation enabled"
-        },
-        {
-          "name": "Triangle",
-          "value": 2,
-          "description": "Triangle wave generation enabled"
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

@@ -2,6 +2,9 @@
   "schema": 1,
   "kind": "mdios",
   "version": "v1",
+  "source": "stm32rs_svd",
+  "source_device": "stm32h7b3zi",
+  "source_file": "stm32h7b3.svd.patched",
   "blocks": {
     "MDIOS": {
       "name": "MDIOS",
@@ -12,52 +15,47 @@
           "name": "CR",
           "offset": 0,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "MDIOS configuration register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "MDIOS configuration register",
           "fields": [
             {
               "name": "EN",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Peripheral enable",
-              "enum": null
+              "description": "Peripheral enable"
             },
             {
               "name": "WRIE",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Register write interrupt enable",
-              "enum": null
+              "description": "Register write interrupt enable"
             },
             {
               "name": "RDIE",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "Register Read Interrupt Enable",
-              "enum": null
+              "description": "Register Read Interrupt Enable"
             },
             {
               "name": "EIE",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "Error interrupt enable",
-              "enum": null
+              "description": "Error interrupt enable"
             },
             {
               "name": "DPC",
               "bit_offset": 7,
               "bit_width": 1,
-              "description": "Disable Preamble Check",
-              "enum": null
+              "description": "Disable Preamble Check"
             },
             {
               "name": "PORT_ADDRESS",
               "bit_offset": 8,
               "bit_width": 5,
-              "description": "Slaves's address",
-              "enum": null
+              "description": "Slaves's address"
             }
           ]
         },
@@ -65,17 +63,17 @@
           "name": "WRFR",
           "offset": 4,
           "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
           "description": "MDIOS write flag register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "MDIOS write flag register",
           "fields": [
             {
               "name": "WRF",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Write flags for MDIO registers 0 to 31",
-              "enum": null
+              "description": "Write flags for MDIO registers 0 to 31"
             }
           ]
         },
@@ -83,17 +81,17 @@
           "name": "CWRFR",
           "offset": 8,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "MDIOS clear write flag register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "MDIOS clear write flag register",
           "fields": [
             {
               "name": "CWRF",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Clear the write flag",
-              "enum": null
+              "description": "Clear the write flag"
             }
           ]
         },
@@ -101,17 +99,17 @@
           "name": "RDFR",
           "offset": 12,
           "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
           "description": "MDIOS read flag register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "MDIOS read flag register",
           "fields": [
             {
               "name": "RDF",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Read flags for MDIO registers 0 to 31",
-              "enum": null
+              "description": "Read flags for MDIO registers 0 to 31"
             }
           ]
         },
@@ -119,17 +117,17 @@
           "name": "CRDFR",
           "offset": 16,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "MDIOS clear read flag register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "MDIOS clear read flag register",
           "fields": [
             {
               "name": "CRDF",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Clear the read flag",
-              "enum": null
+              "description": "Clear the read flag"
             }
           ]
         },
@@ -137,31 +135,29 @@
           "name": "SR",
           "offset": 20,
           "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
           "description": "MDIOS status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "MDIOS status register",
           "fields": [
             {
               "name": "PERF",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Preamble error flag",
-              "enum": null
+              "description": "Preamble error flag"
             },
             {
               "name": "SERF",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Start error flag",
-              "enum": null
+              "description": "Start error flag"
             },
             {
               "name": "TERF",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "Turnaround error flag",
-              "enum": null
+              "description": "Turnaround error flag"
             }
           ]
         },
@@ -169,67 +165,1181 @@
           "name": "CLRFR",
           "offset": 24,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "MDIOS clear flag register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "MDIOS clear flag register",
           "fields": [
             {
               "name": "CPERF",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Clear the preamble error flag",
-              "enum": null
+              "description": "Clear the preamble error flag"
             },
             {
               "name": "CSERF",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Clear the start error flag",
-              "enum": null
+              "description": "Clear the start error flag"
             },
             {
               "name": "CTERF",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "Clear the turnaround error flag",
-              "enum": null
+              "description": "Clear the turnaround error flag"
             }
           ]
         },
         {
-          "name": "DINR",
+          "name": "DINR0",
+          "offset": 28,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "MDIOS input data register 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DIN0",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Input data received from MDIO Master during write frames"
+            }
+          ]
+        },
+        {
+          "name": "DINR1",
+          "offset": 32,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "MDIOS input data register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DIN1",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Input data received from MDIO Master during write frames"
+            }
+          ]
+        },
+        {
+          "name": "DINR2",
+          "offset": 36,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "MDIOS input data register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DIN2",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Input data received from MDIO Master during write frames"
+            }
+          ]
+        },
+        {
+          "name": "DINR3",
+          "offset": 40,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "MDIOS input data register 3",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DIN3",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Input data received from MDIO Master during write frames"
+            }
+          ]
+        },
+        {
+          "name": "DINR4",
+          "offset": 44,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "MDIOS input data register 4",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DIN4",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Input data received from MDIO Master during write frames"
+            }
+          ]
+        },
+        {
+          "name": "DINR5",
+          "offset": 48,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "MDIOS input data register 5",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DIN5",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Input data received from MDIO Master during write frames"
+            }
+          ]
+        },
+        {
+          "name": "DINR6",
+          "offset": 52,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "MDIOS input data register 6",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DIN6",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Input data received from MDIO Master during write frames"
+            }
+          ]
+        },
+        {
+          "name": "DINR7",
+          "offset": 56,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "MDIOS input data register 7",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DIN7",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Input data received from MDIO Master during write frames"
+            }
+          ]
+        },
+        {
+          "name": "DINR8",
+          "offset": 60,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "MDIOS input data register 8",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DIN8",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Input data received from MDIO Master during write frames"
+            }
+          ]
+        },
+        {
+          "name": "DINR9",
+          "offset": 64,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "MDIOS input data register 9",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DIN9",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Input data received from MDIO Master during write frames"
+            }
+          ]
+        },
+        {
+          "name": "DINR10",
+          "offset": 68,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "MDIOS input data register 10",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DIN10",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Input data received from MDIO Master during write frames"
+            }
+          ]
+        },
+        {
+          "name": "DINR11",
+          "offset": 72,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "MDIOS input data register 11",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DIN11",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Input data received from MDIO Master during write frames"
+            }
+          ]
+        },
+        {
+          "name": "DINR12",
+          "offset": 76,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "MDIOS input data register 12",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DIN12",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Input data received from MDIO Master during write frames"
+            }
+          ]
+        },
+        {
+          "name": "DINR13",
+          "offset": 80,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "MDIOS input data register 13",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DIN13",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Input data received from MDIO Master during write frames"
+            }
+          ]
+        },
+        {
+          "name": "DINR14",
+          "offset": 84,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "MDIOS input data register 14",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DIN14",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Input data received from MDIO Master during write frames"
+            }
+          ]
+        },
+        {
+          "name": "DINR15",
+          "offset": 88,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "MDIOS input data register 15",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DIN15",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Input data received from MDIO Master during write frames"
+            }
+          ]
+        },
+        {
+          "name": "DINR16",
+          "offset": 92,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "MDIOS input data register 16",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DIN16",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Input data received from MDIO Master during write frames"
+            }
+          ]
+        },
+        {
+          "name": "DINR17",
+          "offset": 96,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "MDIOS input data register 17",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DIN17",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Input data received from MDIO Master during write frames"
+            }
+          ]
+        },
+        {
+          "name": "DINR18",
+          "offset": 100,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "MDIOS input data register 18",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DIN18",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Input data received from MDIO Master during write frames"
+            }
+          ]
+        },
+        {
+          "name": "DINR19",
+          "offset": 104,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "MDIOS input data register 19",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DIN19",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Input data received from MDIO Master during write frames"
+            }
+          ]
+        },
+        {
+          "name": "DINR20",
+          "offset": 108,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "MDIOS input data register 20",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DIN20",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Input data received from MDIO Master during write frames"
+            }
+          ]
+        },
+        {
+          "name": "DINR21",
+          "offset": 112,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "MDIOS input data register 21",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DIN21",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Input data received from MDIO Master during write frames"
+            }
+          ]
+        },
+        {
+          "name": "DINR22",
+          "offset": 116,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "MDIOS input data register 22",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DIN22",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Input data received from MDIO Master during write frames"
+            }
+          ]
+        },
+        {
+          "name": "DINR23",
+          "offset": 120,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "MDIOS input data register 23",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DIN23",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Input data received from MDIO Master during write frames"
+            }
+          ]
+        },
+        {
+          "name": "DINR24",
+          "offset": 124,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "MDIOS input data register 24",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DIN24",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Input data received from MDIO Master during write frames"
+            }
+          ]
+        },
+        {
+          "name": "DINR25",
+          "offset": 128,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "MDIOS input data register 25",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DIN25",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Input data received from MDIO Master during write frames"
+            }
+          ]
+        },
+        {
+          "name": "DINR26",
+          "offset": 132,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "MDIOS input data register 26",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DIN26",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Input data received from MDIO Master during write frames"
+            }
+          ]
+        },
+        {
+          "name": "DINR27",
+          "offset": 136,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "MDIOS input data register 27",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DIN27",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Input data received from MDIO Master during write frames"
+            }
+          ]
+        },
+        {
+          "name": "DINR28",
+          "offset": 140,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "MDIOS input data register 28",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DIN28",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Input data received from MDIO Master during write frames"
+            }
+          ]
+        },
+        {
+          "name": "DINR29",
+          "offset": 144,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "MDIOS input data register 29",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DIN29",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Input data received from MDIO Master during write frames"
+            }
+          ]
+        },
+        {
+          "name": "DINR30",
+          "offset": 148,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "MDIOS input data register 30",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DIN30",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Input data received from MDIO Master during write frames"
+            }
+          ]
+        },
+        {
+          "name": "DINR31",
+          "offset": 152,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "MDIOS input data register 31",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DIN31",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Input data received from MDIO Master during write frames"
+            }
+          ]
+        },
+        {
+          "name": "DOUTR0",
+          "offset": 156,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "MDIOS output data register 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DOUT0",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Output data sent to MDIO Master during read frames"
+            }
+          ]
+        },
+        {
+          "name": "DOUTR1",
+          "offset": 160,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "MDIOS output data register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DOUT1",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Output data sent to MDIO Master during read frames"
+            }
+          ]
+        },
+        {
+          "name": "DOUTR2",
+          "offset": 164,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "MDIOS output data register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DOUT2",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Output data sent to MDIO Master during read frames"
+            }
+          ]
+        },
+        {
+          "name": "DOUTR3",
+          "offset": 168,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "MDIOS output data register 3",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DOUT3",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Output data sent to MDIO Master during read frames"
+            }
+          ]
+        },
+        {
+          "name": "DOUTR4",
+          "offset": 172,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "MDIOS output data register 4",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DOUT4",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Output data sent to MDIO Master during read frames"
+            }
+          ]
+        },
+        {
+          "name": "DOUTR5",
+          "offset": 176,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "MDIOS output data register 5",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DOUT5",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Output data sent to MDIO Master during read frames"
+            }
+          ]
+        },
+        {
+          "name": "DOUTR6",
+          "offset": 180,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "MDIOS output data register 6",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DOUT6",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Output data sent to MDIO Master during read frames"
+            }
+          ]
+        },
+        {
+          "name": "DOUTR7",
+          "offset": 184,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "MDIOS output data register 7",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DOUT7",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Output data sent to MDIO Master during read frames"
+            }
+          ]
+        },
+        {
+          "name": "DOUTR8",
+          "offset": 188,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "MDIOS output data register 8",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DOUT8",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Output data sent to MDIO Master during read frames"
+            }
+          ]
+        },
+        {
+          "name": "DOUTR9",
+          "offset": 192,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "MDIOS output data register 9",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DOUT9",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Output data sent to MDIO Master during read frames"
+            }
+          ]
+        },
+        {
+          "name": "DOUTR10",
+          "offset": 196,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "MDIOS output data register 10",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DOUT10",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Output data sent to MDIO Master during read frames"
+            }
+          ]
+        },
+        {
+          "name": "DOUTR11",
+          "offset": 200,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "MDIOS output data register 11",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DOUT11",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Output data sent to MDIO Master during read frames"
+            }
+          ]
+        },
+        {
+          "name": "DOUTR12",
+          "offset": 204,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "MDIOS output data register 12",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DOUT12",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Output data sent to MDIO Master during read frames"
+            }
+          ]
+        },
+        {
+          "name": "DOUTR13",
+          "offset": 208,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "MDIOS output data register 13",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DOUT13",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Output data sent to MDIO Master during read frames"
+            }
+          ]
+        },
+        {
+          "name": "DOUTR14",
+          "offset": 212,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "MDIOS output data register 14",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DOUT14",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Output data sent to MDIO Master during read frames"
+            }
+          ]
+        },
+        {
+          "name": "DOUTR15",
+          "offset": 216,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "MDIOS output data register 15",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DOUT15",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Output data sent to MDIO Master during read frames"
+            }
+          ]
+        },
+        {
+          "name": "DOUTR16",
+          "offset": 220,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "MDIOS output data register 16",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DOUT16",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Output data sent to MDIO Master during read frames"
+            }
+          ]
+        },
+        {
+          "name": "DOUTR17",
+          "offset": 224,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "MDIOS output data register 17",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DOUT17",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Output data sent to MDIO Master during read frames"
+            }
+          ]
+        },
+        {
+          "name": "DOUTR18",
+          "offset": 228,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "MDIOS output data register 18",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DOUT18",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Output data sent to MDIO Master during read frames"
+            }
+          ]
+        },
+        {
+          "name": "DOUTR19",
+          "offset": 232,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "MDIOS output data register 19",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DOUT19",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Output data sent to MDIO Master during read frames"
+            }
+          ]
+        },
+        {
+          "name": "DOUTR20",
+          "offset": 236,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "MDIOS output data register 20",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DOUT20",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Output data sent to MDIO Master during read frames"
+            }
+          ]
+        },
+        {
+          "name": "DOUTR21",
+          "offset": 240,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "MDIOS output data register 21",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DOUT21",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Output data sent to MDIO Master during read frames"
+            }
+          ]
+        },
+        {
+          "name": "DOUTR22",
+          "offset": 244,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "MDIOS output data register 22",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DOUT22",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Output data sent to MDIO Master during read frames"
+            }
+          ]
+        },
+        {
+          "name": "DOUTR23",
+          "offset": 248,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "MDIOS output data register 23",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DOUT23",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Output data sent to MDIO Master during read frames"
+            }
+          ]
+        },
+        {
+          "name": "DOUTR24",
+          "offset": 252,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "MDIOS output data register 24",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DOUT24",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Output data sent to MDIO Master during read frames"
+            }
+          ]
+        },
+        {
+          "name": "DOUTR25",
           "offset": 256,
           "size": 32,
-          "description": "MDIOS input data register %s",
-          "array_len": 32,
-          "array_stride": 4,
-          "fieldset_description": "MDIOS input data register %s",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "MDIOS output data register 25",
+          "array_len": null,
+          "array_stride": null,
           "fields": [
             {
-              "name": "DIN",
+              "name": "DOUT25",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "Input data received from MDIO Master during write frames",
-              "enum": null
+              "description": "Output data sent to MDIO Master during read frames"
             }
           ]
         },
         {
-          "name": "DOUTR",
-          "offset": 384,
+          "name": "DOUTR26",
+          "offset": 260,
           "size": 32,
-          "description": "MDIOS output data register %s",
-          "array_len": 32,
-          "array_stride": 4,
-          "fieldset_description": "MDIOS output data register %s",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "MDIOS output data register 26",
+          "array_len": null,
+          "array_stride": null,
           "fields": [
             {
-              "name": "DOUT",
+              "name": "DOUT26",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "Output data sent to MDIO Master during read frames",
-              "enum": null
+              "description": "Output data sent to MDIO Master during read frames"
+            }
+          ]
+        },
+        {
+          "name": "DOUTR27",
+          "offset": 264,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "MDIOS output data register 27",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DOUT27",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Output data sent to MDIO Master during read frames"
+            }
+          ]
+        },
+        {
+          "name": "DOUTR28",
+          "offset": 268,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "MDIOS output data register 28",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DOUT28",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Output data sent to MDIO Master during read frames"
+            }
+          ]
+        },
+        {
+          "name": "DOUTR29",
+          "offset": 272,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "MDIOS output data register 29",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DOUT29",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Output data sent to MDIO Master during read frames"
+            }
+          ]
+        },
+        {
+          "name": "DOUTR30",
+          "offset": 276,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "MDIOS output data register 30",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DOUT30",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Output data sent to MDIO Master during read frames"
+            }
+          ]
+        },
+        {
+          "name": "DOUTR31",
+          "offset": 280,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "MDIOS output data register 31",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DOUT31",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Output data sent to MDIO Master during read frames"
             }
           ]
         }

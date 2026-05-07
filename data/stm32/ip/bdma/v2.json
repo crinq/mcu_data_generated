@@ -2,184 +2,96 @@
   "schema": 1,
   "kind": "bdma",
   "version": "v2",
+  "source": "stm32rs_svd",
+  "source_device": "stm32l010c6",
+  "source_file": "stm32l0x0.svd.patched",
   "blocks": {
-    "CH": {
-      "name": "CH",
-      "description": "Channel cluster: CCR?, CNDTR?, CPAR?, and CMAR? registers",
-      "extends": null,
-      "registers": [
-        {
-          "name": "CR",
-          "offset": 0,
-          "size": 32,
-          "description": "DMA channel configuration register (DMA_CCR)",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "DMA channel configuration register (DMA_CCR)",
-          "fields": [
-            {
-              "name": "EN",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Channel enable",
-              "enum": null
-            },
-            {
-              "name": "TCIE",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Transfer complete interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "HTIE",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Half Transfer interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "TEIE",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Transfer error interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "DIR",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "Data transfer direction",
-              "enum": "DIR"
-            },
-            {
-              "name": "CIRC",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "Circular mode enabled",
-              "enum": null
-            },
-            {
-              "name": "PINC",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "Peripheral increment mode enabled",
-              "enum": null
-            },
-            {
-              "name": "MINC",
-              "bit_offset": 7,
-              "bit_width": 1,
-              "description": "Memory increment mode enabled",
-              "enum": null
-            },
-            {
-              "name": "PSIZE",
-              "bit_offset": 8,
-              "bit_width": 2,
-              "description": "Peripheral size",
-              "enum": "SIZE"
-            },
-            {
-              "name": "MSIZE",
-              "bit_offset": 10,
-              "bit_width": 2,
-              "description": "Memory size",
-              "enum": "SIZE"
-            },
-            {
-              "name": "PL",
-              "bit_offset": 12,
-              "bit_width": 2,
-              "description": "Channel Priority level",
-              "enum": "PL"
-            },
-            {
-              "name": "MEM2MEM",
-              "bit_offset": 14,
-              "bit_width": 1,
-              "description": "Memory to memory mode enabled",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "NDTR",
-          "offset": 4,
-          "size": 32,
-          "description": "DMA channel 1 number of data register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "DMA channel 1 number of data register",
-          "fields": [
-            {
-              "name": "NDT",
-              "bit_offset": 0,
-              "bit_width": 16,
-              "description": "Number of data to transfer",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "PAR",
-          "offset": 8,
-          "description": "DMA channel 1 peripheral address register",
-          "array_len": null,
-          "array_stride": null,
-          "fields": []
-        },
-        {
-          "name": "MAR",
-          "offset": 12,
-          "description": "DMA channel 1 memory address register",
-          "array_len": null,
-          "array_stride": null,
-          "fields": []
-        }
-      ]
-    },
-    "DMA": {
-      "name": "DMA",
-      "description": "DMA controller",
+    "DMA1": {
+      "name": "DMA1",
+      "description": "Direct memory access controller",
       "extends": null,
       "registers": [
         {
           "name": "ISR",
           "offset": 0,
           "size": 32,
-          "description": "DMA interrupt status register (DMA_ISR)",
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "interrupt status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "DMA interrupt status register (DMA_ISR)",
           "fields": [
             {
-              "name": "GIF",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Channel 1 Global interrupt flag",
-              "enum": null
-            },
-            {
-              "name": "TCIF",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Channel 1 Transfer Complete flag",
-              "enum": null
-            },
-            {
-              "name": "HTIF",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Channel 1 Half Transfer Complete flag",
-              "enum": null
-            },
-            {
-              "name": "TEIF",
+              "name": "TEIF%s",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "Channel 1 Transfer Error flag",
-              "enum": null
+              "description": "Channel %s Transfer Error flag",
+              "enum_values": [
+                {
+                  "name": "NoError",
+                  "value": 0,
+                  "description": "No transfer error"
+                },
+                {
+                  "name": "Error",
+                  "value": 1,
+                  "description": "A transfer error has occured"
+                }
+              ]
+            },
+            {
+              "name": "HTIF%s",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Channel %s Half Transfer Complete flag",
+              "enum_values": [
+                {
+                  "name": "NotHalf",
+                  "value": 0,
+                  "description": "No half transfer event"
+                },
+                {
+                  "name": "Half",
+                  "value": 1,
+                  "description": "A half transfer event has occured"
+                }
+              ]
+            },
+            {
+              "name": "TCIF%s",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Channel %s Transfer Complete flag",
+              "enum_values": [
+                {
+                  "name": "NotComplete",
+                  "value": 0,
+                  "description": "No transfer complete event"
+                },
+                {
+                  "name": "Complete",
+                  "value": 1,
+                  "description": "A transfer complete event has occured"
+                }
+              ]
+            },
+            {
+              "name": "GIF%s",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Channel %s Global interrupt flag",
+              "enum_values": [
+                {
+                  "name": "NoEvent",
+                  "value": 0,
+                  "description": "No transfer error, half event, complete event"
+                },
+                {
+                  "name": "Event",
+                  "value": 1,
+                  "description": "A transfer error, half event or complete event has occured"
+                }
+              ]
             }
           ]
         },
@@ -187,130 +99,204 @@
           "name": "IFCR",
           "offset": 4,
           "size": 32,
-          "description": "DMA interrupt flag clear register (DMA_IFCR)",
+          "access": "write-only",
+          "reset_value": 0,
+          "description": "interrupt flag clear register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "DMA interrupt status register (DMA_ISR)",
           "fields": [
             {
-              "name": "GIF",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Channel 1 Global interrupt flag",
-              "enum": null
-            },
-            {
-              "name": "TCIF",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Channel 1 Transfer Complete flag",
-              "enum": null
-            },
-            {
-              "name": "HTIF",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Channel 1 Half Transfer Complete flag",
-              "enum": null
-            },
-            {
-              "name": "TEIF",
+              "name": "CTEIF%s",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "Channel 1 Transfer Error flag",
-              "enum": null
+              "description": "Channel %s Transfer Error clear",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clears the TEIF flag in the ISR register"
+                }
+              ]
+            },
+            {
+              "name": "CHTIF%s",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Channel %s Half Transfer clear",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clears the HTIF flag in the ISR register"
+                }
+              ]
+            },
+            {
+              "name": "CTCIF%s",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Channel %s Transfer Complete clear",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clears the TCIF flag in the ISR register"
+                }
+              ]
+            },
+            {
+              "name": "CGIF%s",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Channel %s Global interrupt clear",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clears the GIF, TEIF, HTIF, TCIF flags in the ISR register"
+                }
+              ]
             }
           ]
-        },
-        {
-          "name": "CH",
-          "offset": 8,
-          "description": "Channel cluster: CCR?, CNDTR?, CPAR?, and CMAR? registers",
-          "array_len": 8,
-          "array_stride": 20,
-          "fields": []
         },
         {
           "name": "CSELR",
           "offset": 168,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "channel selection register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "channel selection register",
           "fields": [
             {
-              "name": "CS",
+              "name": "C1S",
               "bit_offset": 0,
               "bit_width": 4,
-              "description": "DMA channel selection",
-              "enum": null
+              "description": "DMA channel 1 selection",
+              "enum_values": [
+                {
+                  "name": "NoMapping",
+                  "value": 0,
+                  "description": "Default mapping"
+                },
+                {
+                  "name": "Map1",
+                  "value": 1,
+                  "description": "Mapping 1"
+                },
+                {
+                  "name": "Map2",
+                  "value": 2,
+                  "description": "Mapping 2"
+                },
+                {
+                  "name": "Map3",
+                  "value": 3,
+                  "description": "Mapping 3"
+                },
+                {
+                  "name": "Map4",
+                  "value": 4,
+                  "description": "Mapping 4"
+                },
+                {
+                  "name": "Map5",
+                  "value": 5,
+                  "description": "Mapping 5"
+                },
+                {
+                  "name": "Map6",
+                  "value": 6,
+                  "description": "Mapping 6"
+                },
+                {
+                  "name": "Map7",
+                  "value": 7,
+                  "description": "Mapping 7"
+                },
+                {
+                  "name": "Map8",
+                  "value": 8,
+                  "description": "Mapping 8"
+                },
+                {
+                  "name": "Map9",
+                  "value": 9,
+                  "description": "Mapping 9"
+                },
+                {
+                  "name": "Map10",
+                  "value": 10,
+                  "description": "Mapping 10"
+                },
+                {
+                  "name": "Map11",
+                  "value": 11,
+                  "description": "Mapping 11"
+                },
+                {
+                  "name": "Map12",
+                  "value": 12,
+                  "description": "Mapping 12"
+                },
+                {
+                  "name": "Map13",
+                  "value": 13,
+                  "description": "Mapping 13"
+                },
+                {
+                  "name": "Map14",
+                  "value": 14,
+                  "description": "Mapping 14"
+                },
+                {
+                  "name": "Map15",
+                  "value": 15,
+                  "description": "Mapping 15"
+                }
+              ]
+            },
+            {
+              "name": "C7S",
+              "bit_offset": 24,
+              "bit_width": 4,
+              "description": "DMA channel 7 selection"
+            },
+            {
+              "name": "C6S",
+              "bit_offset": 20,
+              "bit_width": 4,
+              "description": "DMA channel 6 selection"
+            },
+            {
+              "name": "C5S",
+              "bit_offset": 16,
+              "bit_width": 4,
+              "description": "DMA channel 5 selection"
+            },
+            {
+              "name": "C4S",
+              "bit_offset": 12,
+              "bit_width": 4,
+              "description": "DMA channel 4 selection"
+            },
+            {
+              "name": "C3S",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "DMA channel 3 selection"
+            },
+            {
+              "name": "C2S",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "DMA channel 2 selection"
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "DIR": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "FromPeripheral",
-          "value": 0,
-          "description": "Read from peripheral"
-        },
-        {
-          "name": "FromMemory",
-          "value": 1,
-          "description": "Read from memory"
-        }
-      ]
-    },
-    "PL": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Low",
-          "value": 0,
-          "description": "Low priority"
-        },
-        {
-          "name": "Medium",
-          "value": 1,
-          "description": "Medium priority"
-        },
-        {
-          "name": "High",
-          "value": 2,
-          "description": "High priority"
-        },
-        {
-          "name": "VeryHigh",
-          "value": 3,
-          "description": "Very high priority"
-        }
-      ]
-    },
-    "SIZE": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Bits8",
-          "value": 0,
-          "description": "8-bit size"
-        },
-        {
-          "name": "Bits16",
-          "value": 1,
-          "description": "16-bit size"
-        },
-        {
-          "name": "Bits32",
-          "value": 2,
-          "description": "32-bit size"
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

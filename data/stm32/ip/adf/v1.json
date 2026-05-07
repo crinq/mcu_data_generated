@@ -2,27 +2,30 @@
   "schema": 1,
   "kind": "adf",
   "version": "v1",
+  "source": "stm32rs_svd",
+  "source_device": "stm32u535cb",
+  "source_file": "stm32u535.svd.patched",
   "blocks": {
-    "ADF": {
-      "name": "ADF",
-      "description": "ADF.",
+    "ADF1": {
+      "name": "ADF1",
+      "description": "ADF1",
       "extends": null,
       "registers": [
         {
           "name": "GCR",
           "offset": 0,
           "size": 32,
-          "description": "ADF Global Control Register.",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "ADF Global Control Register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "ADF Global Control Register.",
           "fields": [
             {
               "name": "TRGO",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Trigger output control Set by software and reset by.",
-              "enum": null
+              "description": "Trigger output control Set by software and reset by"
             }
           ]
         },
@@ -30,455 +33,421 @@
           "name": "CKGCR",
           "offset": 4,
           "size": 32,
-          "description": "ADF clock generator control register.",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "ADF clock generator control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "ADF clock generator control register.",
           "fields": [
             {
-              "name": "CKGDEN",
-              "bit_offset": 0,
+              "name": "CKGACTIVE",
+              "bit_offset": 31,
               "bit_width": 1,
-              "description": "Clock generator dividers enable.",
-              "enum": null
-            },
-            {
-              "name": "CCK0EN",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "CCK0 clock enable. This bit is set and reset by software. It is used to control the generation of the bitstream clock on the CCK pin.",
-              "enum": "CCKEN"
-            },
-            {
-              "name": "CCK1EN",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "CCK1 clock enable. This bit is set and reset by software. It is used to control the generation of the bitstream clock on the CCK pin.",
-              "enum": "CCKEN"
-            },
-            {
-              "name": "CKGMOD",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "Clock generator mode. This bit is set and reset by software. It is used to define the way the clock generator is enabled. This bit must not be changed if the filter is enabled (DFTEN = 1).",
-              "enum": "CKGMOD"
-            },
-            {
-              "name": "CCK0DIR",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "CCK0 direction. This bit is set and reset by software. It is used to control the direction of the ADF_CCK0 pin.",
-              "enum": "CCKDIR"
-            },
-            {
-              "name": "CCK1DIR",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "CCK1 direction. This bit is set and reset by software. It is used to control the direction of the ADF_CCK1 pin.",
-              "enum": "CCKDIR"
-            },
-            {
-              "name": "TRGSENS",
-              "bit_offset": 8,
-              "bit_width": 1,
-              "description": "CKGEN trigger sensitivity selection. This bit is set and cleared by software. It is used to select the trigger sensitivity of the trigger signals. This bit is not significant if the CKGMOD = 0.",
-              "enum": "TRGSENS"
-            },
-            {
-              "name": "TRGSRC",
-              "bit_offset": 12,
-              "bit_width": 4,
-              "description": "Digital filter trigger signal selection. This bit is set and cleared by software. It is used to select the trigger signal for the digital filter. This bit is not significant if the CKGMOD = 0.",
-              "enum": "TRGSRC"
-            },
-            {
-              "name": "CCKDIV",
-              "bit_offset": 16,
-              "bit_width": 4,
-              "description": "Divider to control the CCK clock.",
-              "enum": "CCKDIV"
+              "description": "Clock generator active flag"
             },
             {
               "name": "PROCDIV",
               "bit_offset": 24,
               "bit_width": 7,
-              "description": "Divider to control the serial interface clock.",
-              "enum": null
+              "description": "Divider to control the serial interface clock"
             },
             {
-              "name": "CKGACTIVE",
-              "bit_offset": 31,
-              "bit_width": 1,
-              "description": "Clock generator active flag.",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "SITFCR",
-          "offset": 128,
-          "size": 32,
-          "description": "ADF serial interface control register 0.",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "ADF serial interface control register 0.",
-          "fields": [
-            {
-              "name": "SITFEN",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": null,
-              "enum": null
-            },
-            {
-              "name": "SCKSRC",
-              "bit_offset": 1,
-              "bit_width": 2,
-              "description": null,
-              "enum": "SCKSRC"
-            },
-            {
-              "name": "SITFMOD",
-              "bit_offset": 4,
-              "bit_width": 2,
-              "description": null,
-              "enum": "SITFMOD"
-            },
-            {
-              "name": "STH",
-              "bit_offset": 8,
-              "bit_width": 5,
-              "description": "Manchester symbol threshold/SPI threshold. This bitfield is set and cleared by software. It is used for Manchester mode to define the expected symbol threshold levels (seer to Manchester mode for details on computation). In addition this bitfield is used to define the timeout value for the clock absence detection in Normal SPI mode. STH[4:0] values lower than four are invalid.",
-              "enum": null
-            },
-            {
-              "name": "SITFACTIVE",
-              "bit_offset": 31,
-              "bit_width": 1,
-              "description": "SITFACTIVE.",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "BSMXCR",
-          "offset": 132,
-          "size": 32,
-          "description": "ADF bitstream matrix control register 0.",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "ADF bitstream matrix control register 0.",
-          "fields": [
-            {
-              "name": "BSSEL",
-              "bit_offset": 0,
-              "bit_width": 5,
-              "description": "Bitstream selection.",
-              "enum": "BSSEL"
-            },
-            {
-              "name": "BSMXACTIVE",
-              "bit_offset": 31,
-              "bit_width": 1,
-              "description": "BSMX active flag. This bit is set and cleared by hardware. It is used by the application to check if the BSMX is effectively enabled (active) or not. BSSEL[4:0] can only be updated when BSMXACTIVE is set to 0. This BSMXACTIVE flag cannot go to 0 if DFLT0 is enabled.",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "DFLTCR",
-          "offset": 136,
-          "size": 32,
-          "description": "ADF digital filter control register 0.",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "ADF digital filter control register 0.",
-          "fields": [
-            {
-              "name": "DFLTEN",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "DFLT enable. This bit is set and reset by software. It is used to enable the digital filter.",
-              "enum": null
-            },
-            {
-              "name": "DMAEN",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "DMA requests enable. This bit is set and reset by software. It is used to control the generation of DMA request to transfer the processed samples into the memory.",
-              "enum": null
-            },
-            {
-              "name": "FTH",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "RXFIFO threshold selection.",
-              "enum": "RXFIFO"
-            },
-            {
-              "name": "ACQMOD",
-              "bit_offset": 4,
-              "bit_width": 3,
-              "description": "DFLT trigger mode.",
-              "enum": "ACQMOD"
+              "name": "CCKDIV",
+              "bit_offset": 16,
+              "bit_width": 4,
+              "description": "Divider to control the ADF_CCK clock"
             },
             {
               "name": "TRGSRC",
               "bit_offset": 12,
               "bit_width": 4,
-              "description": "DFLT trigger signal selection.",
-              "enum": null
+              "description": "Digital filter trigger signal selection"
             },
             {
-              "name": "NBDIS",
-              "bit_offset": 20,
-              "bit_width": 8,
-              "description": "Number of samples to be discarded.",
-              "enum": null
+              "name": "TRGSENS",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "CKGEN trigger sensitivity selection"
+            },
+            {
+              "name": "CCK1DIR",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "ADF_CCK1 direction"
+            },
+            {
+              "name": "CCK0DIR",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "ADF_CCK0 direction"
+            },
+            {
+              "name": "CKGMOD",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Clock generator mode"
+            },
+            {
+              "name": "CCK1EN",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "ADF_CCK1 clock enable"
+            },
+            {
+              "name": "CCK0EN",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "ADF_CCK0 clock enable"
+            },
+            {
+              "name": "CKGDEN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "CKGEN dividers enable"
+            }
+          ]
+        },
+        {
+          "name": "SITF0CR",
+          "offset": 128,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 7936,
+          "description": "ADF serial interface control register 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "SITFACTIVE",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "SITFACTIVE"
+            },
+            {
+              "name": "STH",
+              "bit_offset": 8,
+              "bit_width": 5,
+              "description": "STH"
+            },
+            {
+              "name": "SITFMOD",
+              "bit_offset": 4,
+              "bit_width": 2,
+              "description": "SITFMOD"
+            },
+            {
+              "name": "SCKSRC",
+              "bit_offset": 1,
+              "bit_width": 2,
+              "description": "SCKSRC"
+            },
+            {
+              "name": "SITFEN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "SITFEN"
+            }
+          ]
+        },
+        {
+          "name": "BSMX0CR",
+          "offset": 132,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "ADF bitstream matrix control register 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "BSMXACTIVE",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "BSMX active flag"
+            },
+            {
+              "name": "BSSEL",
+              "bit_offset": 0,
+              "bit_width": 5,
+              "description": "Bitstream selection"
+            }
+          ]
+        },
+        {
+          "name": "DFLT0CR",
+          "offset": 136,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "ADF digital filter control register 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DFLTACTIVE",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "DFLT0 active flag"
             },
             {
               "name": "DFLTRUN",
               "bit_offset": 30,
               "bit_width": 1,
-              "description": "DFLT run status flag.",
-              "enum": null
+              "description": "DFLT0 run status flag"
             },
             {
-              "name": "DFLTACTIVE",
-              "bit_offset": 31,
+              "name": "NBDIS",
+              "bit_offset": 20,
+              "bit_width": 8,
+              "description": "Number of samples to be discarded"
+            },
+            {
+              "name": "TRGSRC",
+              "bit_offset": 12,
+              "bit_width": 4,
+              "description": "DFLT0 trigger signal selection"
+            },
+            {
+              "name": "ACQMOD",
+              "bit_offset": 4,
+              "bit_width": 3,
+              "description": "DFLT0 trigger mode"
+            },
+            {
+              "name": "FTH",
+              "bit_offset": 2,
               "bit_width": 1,
-              "description": "DFLT active flag.",
-              "enum": null
+              "description": "RXFIFO threshold selection"
+            },
+            {
+              "name": "DMAEN",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "DMA requests enable"
+            },
+            {
+              "name": "DFLTEN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "DFLT0 enable"
             }
           ]
         },
         {
-          "name": "DFLTCICR",
+          "name": "DFLT0CICR",
           "offset": 140,
           "size": 32,
-          "description": "ADF digital filer configuration register 0.",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "ADF digital filer configuration register 0",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "ADF digital filer configuration register 0.",
           "fields": [
             {
-              "name": "DATSRC",
-              "bit_offset": 0,
-              "bit_width": 2,
-              "description": "Source data for the digital filter.",
-              "enum": "DATSRC"
-            },
-            {
-              "name": "CICMOD",
-              "bit_offset": 4,
-              "bit_width": 3,
-              "description": "Select the CIC order.",
-              "enum": "CICMOD"
+              "name": "SCALE",
+              "bit_offset": 20,
+              "bit_width": 6,
+              "description": "Scaling factor selection"
             },
             {
               "name": "MCICD",
               "bit_offset": 8,
               "bit_width": 9,
-              "description": "CIC decimation ratio selection. This bitfield is set and cleared by software.It is used to select the CIC decimation ratio. A decimation ratio smaller than two is not allowed. The decimation ratio is given by (CICDEC+1).",
-              "enum": null
+              "description": "CIC decimation ratio selection"
             },
             {
-              "name": "SCALE",
-              "bit_offset": 20,
-              "bit_width": 6,
-              "description": "Scaling factor selection. This bitfield is set and cleared by software. It is used to select the gain to be applied at CIC output. If the application attempts to write a new gain value while the previous one is not yet applied, this new gain value is ignored. Reading back this bitfield informs the application on the current gain value.",
-              "enum": null
+              "name": "CICMOD",
+              "bit_offset": 4,
+              "bit_width": 3,
+              "description": "Select the CIC order"
+            },
+            {
+              "name": "DATSRC",
+              "bit_offset": 0,
+              "bit_width": 2,
+              "description": "Source data for the digital filter"
             }
           ]
         },
         {
-          "name": "DFLTRSFR",
+          "name": "DFLT0RSFR",
           "offset": 144,
           "size": 32,
-          "description": "ADF reshape filter configuration register 0.",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "ADF reshape filter configuration register 0",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "ADF reshape filter configuration register.",
           "fields": [
             {
-              "name": "RSFLTBYP",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Reshaper filter bypass.",
-              "enum": null
-            },
-            {
-              "name": "RSFLTD",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "Reshaper filter decimation ratio.",
-              "enum": "RSFLTD"
+              "name": "HPFC",
+              "bit_offset": 8,
+              "bit_width": 2,
+              "description": "High-pass filter cut-off frequency"
             },
             {
               "name": "HPFBYP",
               "bit_offset": 7,
               "bit_width": 1,
-              "description": "High-pass filter bypass. This bit is set and cleared by software. It is used to bypass the high-pass filter.",
-              "enum": null
+              "description": "High-pass filter bypass"
             },
             {
-              "name": "HPFC",
-              "bit_offset": 8,
-              "bit_width": 2,
-              "description": "High-pass filter cut-off frequency. This bitfield is set and cleared by software. it is used to select the cut-off frequency of the high-pass filter. F PCM represents the sampling frequency at HPF input.",
-              "enum": "HPFC"
+              "name": "RSFLTD",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Reshaper filter decimation ratio"
+            },
+            {
+              "name": "RSFLTBYP",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Reshaper filter bypass"
             }
           ]
         },
         {
-          "name": "DLYCR",
+          "name": "DLY0CR",
           "offset": 164,
           "size": 32,
-          "description": "ADF delay control register 0.",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "ADF delay control register 0",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "ADF delay control register.",
           "fields": [
-            {
-              "name": "SKPDLY",
-              "bit_offset": 0,
-              "bit_width": 7,
-              "description": "Delay to apply to a bitstream. This bitfield is set and cleared by software. It defines the number of input samples that are skipped. Skipping is applied immediately after writing to this bitfield, if SKPBF = 0 and DFLTEN = 1. If SKPBF = 1, the value written into the register is ignored by the delay state machine.",
-              "enum": null
-            },
             {
               "name": "SKPBF",
               "bit_offset": 31,
               "bit_width": 1,
-              "description": "Skip busy flag.",
-              "enum": null
+              "description": "Skip busy flag"
+            },
+            {
+              "name": "SKPDLY",
+              "bit_offset": 0,
+              "bit_width": 7,
+              "description": "Delay to apply to a bitstream"
             }
           ]
         },
         {
-          "name": "DFLTIER",
+          "name": "DFLT0IER",
           "offset": 172,
           "size": 32,
-          "description": "ADF DFLT0 interrupt enable register.",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "ADF DFLT0 interrupt enable register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "ADF DFLT interrupt enable register.",
           "fields": [
             {
-              "name": "FTHIE",
-              "bit_offset": 0,
+              "name": "SDLVLIE",
+              "bit_offset": 13,
               "bit_width": 1,
-              "description": "RXFIFO threshold interrupt enable.",
-              "enum": null
-            },
-            {
-              "name": "DOVRIE",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Data overflow interrupt enable.",
-              "enum": null
-            },
-            {
-              "name": "SATIE",
-              "bit_offset": 9,
-              "bit_width": 1,
-              "description": "Saturation detection interrupt enable.",
-              "enum": null
-            },
-            {
-              "name": "CKABIE",
-              "bit_offset": 10,
-              "bit_width": 1,
-              "description": "Clock absence detection interrupt enable.",
-              "enum": null
-            },
-            {
-              "name": "RFOVRIE",
-              "bit_offset": 11,
-              "bit_width": 1,
-              "description": "Reshape filter overrun interrupt enable.",
-              "enum": null
+              "description": "SAD sound-level value ready enable"
             },
             {
               "name": "SDDETIE",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "Sound activity detection interrupt enable.",
-              "enum": null
+              "description": "Sound activity detection interrupt enable"
             },
             {
-              "name": "SDLVLIE",
-              "bit_offset": 13,
+              "name": "RFOVRIE",
+              "bit_offset": 11,
               "bit_width": 1,
-              "description": "SAD sound-level value ready enable.",
-              "enum": null
+              "description": "Reshape filter overrun interrupt enable"
+            },
+            {
+              "name": "CKABIE",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Clock absence detection interrupt enable"
+            },
+            {
+              "name": "SATIE",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Saturation detection interrupt enable"
+            },
+            {
+              "name": "DOVRIE",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Data overflow interrupt enable"
+            },
+            {
+              "name": "FTHIE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "RXFIFO threshold interrupt enable"
             }
           ]
         },
         {
-          "name": "DFLTISR",
+          "name": "DFLT0ISR",
           "offset": 176,
           "size": 32,
-          "description": "ADF DFLT0 interrupt status register 0.",
+          "access": null,
+          "reset_value": 0,
+          "description": "ADF DFLT0 interrupt status register 0",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "ADF DFLT interrupt status register 0.",
           "fields": [
             {
-              "name": "FTHF",
-              "bit_offset": 0,
+              "name": "SDLVLF",
+              "bit_offset": 13,
               "bit_width": 1,
-              "description": "RXFIFO threshold flag.",
-              "enum": null
-            },
-            {
-              "name": "DOVRF",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Data overflow flag.",
-              "enum": null
-            },
-            {
-              "name": "RXNEF",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "RXFIFO not empty flag.",
-              "enum": null
-            },
-            {
-              "name": "SATF",
-              "bit_offset": 9,
-              "bit_width": 1,
-              "description": "Saturation detection flag.",
-              "enum": null
-            },
-            {
-              "name": "CKABF",
-              "bit_offset": 10,
-              "bit_width": 1,
-              "description": "Clock absence detection flag.",
-              "enum": null
-            },
-            {
-              "name": "RFOVRF",
-              "bit_offset": 11,
-              "bit_width": 1,
-              "description": "Reshape filter overrun detection flag.",
-              "enum": null
+              "description": "Sound level value ready flag",
+              "access": "read-write"
             },
             {
               "name": "SDDETF",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "Sound activity detection flag.",
-              "enum": null
+              "description": "Sound activity detection flag",
+              "access": "read-write"
             },
             {
-              "name": "SDLVLF",
-              "bit_offset": 13,
+              "name": "RFOVRF",
+              "bit_offset": 11,
               "bit_width": 1,
-              "description": "Sound level value ready flag.",
-              "enum": null
+              "description": "Reshape filter overrun detection flag",
+              "access": "read-write"
+            },
+            {
+              "name": "CKABF",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Clock absence detection flag",
+              "access": "read-write"
+            },
+            {
+              "name": "SATF",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Saturation detection flag",
+              "access": "read-write"
+            },
+            {
+              "name": "RXNEF",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "RXFIFO not empty flag",
+              "access": "read-only"
+            },
+            {
+              "name": "DOVRF",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Data overflow flag",
+              "access": "read-write"
+            },
+            {
+              "name": "FTHF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "RXFIFO threshold flag",
+              "access": "read-only"
             }
           ]
         },
@@ -486,66 +455,67 @@
           "name": "SADCR",
           "offset": 184,
           "size": 32,
-          "description": "ADF SAD control register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "ADF SAD control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "ADF Sound activity detector (SAD) control register.",
           "fields": [
             {
-              "name": "SADEN",
-              "bit_offset": 0,
+              "name": "SADACTIVE",
+              "bit_offset": 31,
               "bit_width": 1,
-              "description": "Sound activity detector enable.",
-              "enum": null
-            },
-            {
-              "name": "DATCAP",
-              "bit_offset": 1,
-              "bit_width": 2,
-              "description": "Data capture mode.",
-              "enum": "DATCAP"
-            },
-            {
-              "name": "DETCFG",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Sound trigger event configuration.",
-              "enum": "DETCFG"
-            },
-            {
-              "name": "SADST",
-              "bit_offset": 4,
-              "bit_width": 2,
-              "description": "SAD state.",
-              "enum": "SADST"
-            },
-            {
-              "name": "HYSTEN",
-              "bit_offset": 7,
-              "bit_width": 1,
-              "description": "Hysteresis enable.",
-              "enum": null
-            },
-            {
-              "name": "FRSIZE",
-              "bit_offset": 8,
-              "bit_width": 3,
-              "description": "Frame size.",
-              "enum": "FRSIZE"
+              "description": "SAD Active flag",
+              "access": "read-only"
             },
             {
               "name": "SADMOD",
               "bit_offset": 12,
               "bit_width": 2,
-              "description": "Sound activity detector working mode.",
-              "enum": "SADMOD"
+              "description": "SAD working mode",
+              "access": "read-write"
             },
             {
-              "name": "SADACTIVE",
-              "bit_offset": 31,
+              "name": "FRSIZE",
+              "bit_offset": 8,
+              "bit_width": 3,
+              "description": "Frame size",
+              "access": "read-write"
+            },
+            {
+              "name": "HYSTEN",
+              "bit_offset": 7,
               "bit_width": 1,
-              "description": "SAD Active flag.",
-              "enum": null
+              "description": "Hysteresis enable",
+              "access": "read-write"
+            },
+            {
+              "name": "SADST",
+              "bit_offset": 4,
+              "bit_width": 2,
+              "description": "SAD state",
+              "access": "read-only"
+            },
+            {
+              "name": "DETCFG",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Sound trigger event configuration",
+              "access": "read-write"
+            },
+            {
+              "name": "DATCAP",
+              "bit_offset": 1,
+              "bit_width": 2,
+              "description": "Data capture mode",
+              "access": "read-write"
+            },
+            {
+              "name": "SADEN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Sound activity detector enable",
+              "access": "read-write"
             }
           ]
         },
@@ -553,45 +523,41 @@
           "name": "SADCFGR",
           "offset": 188,
           "size": 32,
-          "description": "ADF SAD configuration register.",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "ADF SAD configuration register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "ADF SAD configuration register.",
           "fields": [
             {
-              "name": "SNTHR",
-              "bit_offset": 0,
-              "bit_width": 4,
-              "description": "SNTHR.",
-              "enum": "SNTHR"
-            },
-            {
-              "name": "ANSLP",
-              "bit_offset": 4,
-              "bit_width": 3,
-              "description": "ANSLP.",
-              "enum": null
-            },
-            {
-              "name": "LFRNB",
-              "bit_offset": 8,
-              "bit_width": 3,
-              "description": "LFRNB.",
-              "enum": "LFRNB"
+              "name": "ANMIN",
+              "bit_offset": 16,
+              "bit_width": 13,
+              "description": "ANMIN"
             },
             {
               "name": "HGOVR",
               "bit_offset": 12,
               "bit_width": 3,
-              "description": "Hangover time window.",
-              "enum": "HGOVR"
+              "description": "Hangover time window"
             },
             {
-              "name": "ANMIN",
-              "bit_offset": 16,
-              "bit_width": 13,
-              "description": "ANMIN.",
-              "enum": null
+              "name": "LFRNB",
+              "bit_offset": 8,
+              "bit_width": 3,
+              "description": "LFRNB"
+            },
+            {
+              "name": "ANSLP",
+              "bit_offset": 4,
+              "bit_width": 3,
+              "description": "ANSLP"
+            },
+            {
+              "name": "SNTHR",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "SNTHR"
             }
           ]
         },
@@ -599,17 +565,17 @@
           "name": "SADSDLVR",
           "offset": 192,
           "size": 32,
-          "description": "ADF SAD sound level register.",
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "ADF SAD sound level register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "ADF SAD sound level register.",
           "fields": [
             {
               "name": "SDLVL",
               "bit_offset": 0,
               "bit_width": 15,
-              "description": "Short term sound level. This bitfield is set by hardware. It contains the latest sound level computed by the SAD. To refresh this value, SDLVLF must be cleared.",
-              "enum": null
+              "description": "SDLVL"
             }
           ]
         },
@@ -617,781 +583,40 @@
           "name": "SADANLVR",
           "offset": 196,
           "size": 32,
-          "description": "ADF SAD ambient noise level register.",
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "ADF SAD ambient noise level register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "ADF SAD ambient noise level register. This bitfield is set by hardware. It contains the latest ambient noise level computed by the SAD. To refresh this bitfield, the SDLVLF flag must be cleared.",
           "fields": [
             {
               "name": "ANLVL",
               "bit_offset": 0,
               "bit_width": 15,
-              "description": "ANLVL.",
-              "enum": null
+              "description": "ANLVL"
             }
           ]
         },
         {
-          "name": "DFLTDR",
+          "name": "DFLT0DR",
           "offset": 240,
           "size": 32,
-          "description": "ADF digital filter data register 0.",
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "ADF digital filter data register 0",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "ADF digital filter data register 0.",
           "fields": [
             {
               "name": "DR",
               "bit_offset": 8,
               "bit_width": 24,
-              "description": "DR. Data processed by DFT",
-              "enum": null
+              "description": "DR"
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "ACQMOD": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "AsynchronousContinuous",
-          "value": 0,
-          "description": "Asynchronous continuous acquisition mode."
-        },
-        {
-          "name": "AsynchronousSingleShot",
-          "value": 1,
-          "description": "Asynchronous single-shot acquisition mode"
-        },
-        {
-          "name": "SyncronousContinuous",
-          "value": 2,
-          "description": "Synchronous continuous acquisition mode."
-        },
-        {
-          "name": "SyncronousSingleShot",
-          "value": 3,
-          "description": "Synchronous single-shot acquisition mode."
-        },
-        {
-          "name": "WindowContinuous",
-          "value": 4,
-          "description": "Window continuous acquisition mode."
-        }
-      ]
-    },
-    "BSSEL": {
-      "bit_size": 5,
-      "variants": [
-        {
-          "name": "BS0_R",
-          "value": 0,
-          "description": "bsx_r provided to DFLTy (and SCDy)."
-        },
-        {
-          "name": "BS0_F",
-          "value": 1,
-          "description": "bsx_f provided to DFLTy (and SCDy)."
-        },
-        {
-          "name": "BS1_R",
-          "value": 2,
-          "description": "bsx_r provided to DFLTy (and SCDy)."
-        },
-        {
-          "name": "BS1_F",
-          "value": 3,
-          "description": "bsx_f provided to DFLTy (and SCDy)."
-        },
-        {
-          "name": "BS2_R",
-          "value": 4,
-          "description": "bsx_r provided to DFLTy (and SCDy)."
-        },
-        {
-          "name": "BS2_F",
-          "value": 5,
-          "description": "bsx_f provided to DFLTy (and SCDy)."
-        },
-        {
-          "name": "BS3_R",
-          "value": 6,
-          "description": "bsx_r provided to DFLTy (and SCDy)."
-        },
-        {
-          "name": "BS3_F",
-          "value": 7,
-          "description": "bsx_f provided to DFLTy (and SCDy)."
-        },
-        {
-          "name": "BS4_R",
-          "value": 8,
-          "description": "bsx_r provided to DFLTy (and SCDy)."
-        },
-        {
-          "name": "BS4_F",
-          "value": 9,
-          "description": "bsx_f provided to DFLTy (and SCDy)."
-        },
-        {
-          "name": "BS5_R",
-          "value": 10,
-          "description": "bsx_r provided to DFLTy (and SCDy)."
-        },
-        {
-          "name": "BS5_F",
-          "value": 11,
-          "description": "bsx_f provided to DFLTy (and SCDy)."
-        },
-        {
-          "name": "BS6_R",
-          "value": 12,
-          "description": "bsx_r provided to DFLTy (and SCDy)."
-        },
-        {
-          "name": "BS6_F",
-          "value": 13,
-          "description": "bsx_f provided to DFLTy (and SCDy)."
-        },
-        {
-          "name": "BS7_R",
-          "value": 14,
-          "description": "bsx_r provided to DFLTy (and SCDy)."
-        },
-        {
-          "name": "BS7_F",
-          "value": 15,
-          "description": "bsx_f provided to DFLTy (and SCDy)."
-        },
-        {
-          "name": "BS8_R",
-          "value": 16,
-          "description": "bsx_r provided to DFLTy (and SCDy)."
-        },
-        {
-          "name": "BS8_F",
-          "value": 17,
-          "description": "bsx_f provided to DFLTy (and SCDy)."
-        },
-        {
-          "name": "BS9_R",
-          "value": 18,
-          "description": "bsx_r provided to DFLTy (and SCDy)."
-        },
-        {
-          "name": "BS9_F",
-          "value": 19,
-          "description": "bsx_f provided to DFLTy (and SCDy)."
-        },
-        {
-          "name": "BS10_R",
-          "value": 20,
-          "description": "bsx_r provided to DFLTy (and SCDy)."
-        },
-        {
-          "name": "BS10_F",
-          "value": 21,
-          "description": "bsx_f provided to DFLTy (and SCDy)."
-        },
-        {
-          "name": "BS11_R",
-          "value": 22,
-          "description": "bsx_r provided to DFLTy (and SCDy)."
-        },
-        {
-          "name": "BS11_F",
-          "value": 23,
-          "description": "bsx_f provided to DFLTy (and SCDy)."
-        },
-        {
-          "name": "BS12_R",
-          "value": 24,
-          "description": "bsx_r provided to DFLTy (and SCDy)."
-        },
-        {
-          "name": "BS12_F",
-          "value": 25,
-          "description": "bsx_f provided to DFLTy (and SCDy)."
-        },
-        {
-          "name": "BS13_R",
-          "value": 26,
-          "description": "bsx_r provided to DFLTy (and SCDy)."
-        },
-        {
-          "name": "BS13_F",
-          "value": 27,
-          "description": "bsx_f provided to DFLTy (and SCDy)."
-        },
-        {
-          "name": "BS14_R",
-          "value": 28,
-          "description": "bsx_r provided to DFLTy (and SCDy)."
-        },
-        {
-          "name": "BS14_F",
-          "value": 29,
-          "description": "bsx_f provided to DFLTy (and SCDy)."
-        },
-        {
-          "name": "BS15_R",
-          "value": 30,
-          "description": "bsx_r provided to DFLTy (and SCDy)."
-        },
-        {
-          "name": "BS15_F",
-          "value": 31,
-          "description": "bsx_f provided to DFLTy (and SCDy)."
-        }
-      ]
-    },
-    "CCKDIR": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Input",
-          "value": 0,
-          "description": "CCK is an input."
-        },
-        {
-          "name": "Output",
-          "value": 1,
-          "description": "CCK is an output."
-        }
-      ]
-    },
-    "CCKDIV": {
-      "bit_size": 4,
-      "variants": [
-        {
-          "name": "DIV1",
-          "value": 0,
-          "description": "The ADF_CCK clock is adf_proc_ck."
-        },
-        {
-          "name": "DIV2",
-          "value": 1,
-          "description": "The ADF_CCK clock is adf_proc_ck divided by 2."
-        },
-        {
-          "name": "DIV3",
-          "value": 2,
-          "description": "The ADF_CCK clock is adf_proc_ck divided by 3."
-        },
-        {
-          "name": "DIV4",
-          "value": 3,
-          "description": "The ADF_CCK clock is adf_proc_ck divided by 4."
-        },
-        {
-          "name": "DIV5",
-          "value": 4,
-          "description": "The ADF_CCK clock is adf_proc_ck divided by 5."
-        },
-        {
-          "name": "DIV6",
-          "value": 5,
-          "description": "The ADF_CCK clock is adf_proc_ck divided by 6."
-        },
-        {
-          "name": "DIV7",
-          "value": 6,
-          "description": "The ADF_CCK clock is adf_proc_ck divided by 7."
-        },
-        {
-          "name": "DIV8",
-          "value": 7,
-          "description": "The ADF_CCK clock is adf_proc_ck divided by 8."
-        },
-        {
-          "name": "DIV9",
-          "value": 8,
-          "description": "The ADF_CCK clock is adf_proc_ck divided by 9."
-        },
-        {
-          "name": "DIV10",
-          "value": 9,
-          "description": "The ADF_CCK clock is adf_proc_ck divided by 10."
-        },
-        {
-          "name": "DIV11",
-          "value": 10,
-          "description": "The ADF_CCK clock is adf_proc_ck divided by 11."
-        },
-        {
-          "name": "DIV12",
-          "value": 11,
-          "description": "The ADF_CCK clock is adf_proc_ck divided by 12."
-        },
-        {
-          "name": "DIV13",
-          "value": 12,
-          "description": "The ADF_CCK clock is adf_proc_ck divided by 13."
-        },
-        {
-          "name": "DIV14",
-          "value": 13,
-          "description": "The ADF_CCK clock is adf_proc_ck divided by 14."
-        },
-        {
-          "name": "DIV15",
-          "value": 14,
-          "description": "The ADF_CCK clock is adf_proc_ck divided by 15."
-        },
-        {
-          "name": "DIV16",
-          "value": 15,
-          "description": "The ADF_CCK clock is adf_proc_ck divided by 16."
-        }
-      ]
-    },
-    "CCKEN": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "NotGenerated",
-          "value": 0,
-          "description": "Bitstream clock not generated."
-        },
-        {
-          "name": "Generated",
-          "value": 1,
-          "description": "Bitstream clock generated on the CCK pin."
-        }
-      ]
-    },
-    "CICMOD": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "SINC4",
-          "value": 4,
-          "description": "MCIC configured in single Sinc4 filter."
-        },
-        {
-          "name": "SINC5",
-          "value": 5,
-          "description": "MCIC configured in single Sinc5 filter."
-        }
-      ]
-    },
-    "CKGMOD": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Immediate",
-          "value": 0,
-          "description": "The kernel clock is provided to the dividers as soon as CKGDEN is set to 1."
-        },
-        {
-          "name": "Trigger",
-          "value": 1,
-          "description": "The kernel clock is provided to the dividers when CKGDEN is set to 1 and the trigger condition met."
-        }
-      ]
-    },
-    "DATCAP": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Disabled",
-          "value": 0,
-          "description": "Samples from DFLT0 not transfered into the memory."
-        },
-        {
-          "name": "OnDetected",
-          "value": 1,
-          "description": "Samples from DFLT0 transfered into the memory when SAD is in DETECT state."
-        },
-        {
-          "name": "Enabled",
-          "value": 2,
-          "description": "Samples from DFLT0 transfered into memory when SAD and DFLT0 are enabled."
-        }
-      ]
-    },
-    "DATSRC": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "BSMX",
-          "value": 0,
-          "description": "Stream coming from the BSMX selected"
-        },
-        {
-          "name": "ADCITF1",
-          "value": 2,
-          "description": "Stream coming from the ADCITF1 selected"
-        },
-        {
-          "name": "ADCITF2",
-          "value": 3,
-          "description": "Stream coming from the ADCITF2 selected"
-        }
-      ]
-    },
-    "DETCFG": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Monitor",
-          "value": 0,
-          "description": "sddet_evt generated when SAD enters the MONITOR state."
-        },
-        {
-          "name": "Detect",
-          "value": 1,
-          "description": "sddet_evt generated when SAD enters or exits the DETECT state."
-        }
-      ]
-    },
-    "FRSIZE": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "Samples8",
-          "value": 0,
-          "description": "8 sample."
-        },
-        {
-          "name": "Samples16",
-          "value": 1,
-          "description": "16 samples."
-        },
-        {
-          "name": "Samples32",
-          "value": 2,
-          "description": "32 samples."
-        },
-        {
-          "name": "Samples64",
-          "value": 3,
-          "description": "64 samples."
-        },
-        {
-          "name": "Samples128",
-          "value": 4,
-          "description": "128 samples."
-        },
-        {
-          "name": "Samples256",
-          "value": 5,
-          "description": "256 samples."
-        },
-        {
-          "name": "Samples512",
-          "value": 6,
-          "description": "512 samples."
-        }
-      ]
-    },
-    "HGOVR": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "Frames 4",
-          "value": 0,
-          "description": "SAD back to MONITOR state if sound is below threshold for 4 frames."
-        },
-        {
-          "name": "Frames 8",
-          "value": 1,
-          "description": "SAD back to MONITOR state if sound is below threshold for 4 frames."
-        },
-        {
-          "name": "Frames 16",
-          "value": 2,
-          "description": "SAD back to MONITOR state if sound is below threshold for 4 frames."
-        },
-        {
-          "name": "Frames 32",
-          "value": 3,
-          "description": "SAD back to MONITOR state if sound is below threshold for 4 frames."
-        },
-        {
-          "name": "Frames 64",
-          "value": 4,
-          "description": "SAD back to MONITOR state if sound is below threshold for 4 frames."
-        },
-        {
-          "name": "Frames 128",
-          "value": 5,
-          "description": "SAD back to MONITOR state if sound is below threshold for 4 frames."
-        },
-        {
-          "name": "Frames 256",
-          "value": 6,
-          "description": "SAD back to MONITOR state if sound is below threshold for 4 frames."
-        },
-        {
-          "name": "Frames 512",
-          "value": 7,
-          "description": "SAD back to MONITOR state if sound is below threshold for 4 frames."
-        }
-      ]
-    },
-    "HPFC": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Low",
-          "value": 0,
-          "description": "Cut-off frequency = 0.000625 x FPCM."
-        },
-        {
-          "name": "Medium",
-          "value": 1,
-          "description": "Cut-off frequency = 0.00125 x FPCM."
-        },
-        {
-          "name": "High",
-          "value": 2,
-          "description": "Cut-off frequency = 0.00250 x FPCM"
-        },
-        {
-          "name": "Maximum",
-          "value": 3,
-          "description": "Cut-off frequency = 0.00950 x FPCM"
-        }
-      ]
-    },
-    "LFRNB": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "Frames 2",
-          "value": 0,
-          "description": "2 samples."
-        },
-        {
-          "name": "Frames 4",
-          "value": 1,
-          "description": "4 samples."
-        },
-        {
-          "name": "Frames 8",
-          "value": 2,
-          "description": "8 samples."
-        },
-        {
-          "name": "Frames 16",
-          "value": 3,
-          "description": "16 samples."
-        },
-        {
-          "name": "Frames 32",
-          "value": 4,
-          "description": "32 samples."
-        }
-      ]
-    },
-    "RSFLTD": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Decimation4",
-          "value": 0,
-          "description": "Decimation ratio is 4 (default value)."
-        },
-        {
-          "name": "Decimation1",
-          "value": 1,
-          "description": "Decimation ratio is 1."
-        }
-      ]
-    },
-    "RXFIFO": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "NotEmpty",
-          "value": 0,
-          "description": "RXFIFO threshold event generated when the RXFIFO is not empty"
-        },
-        {
-          "name": "HalfFull",
-          "value": 1,
-          "description": "RXFIFO threshold event generated when the RXFIFO is half-full"
-        }
-      ]
-    },
-    "SADMOD": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "ThresholdEstimatedAmbientNoise",
-          "value": 0,
-          "description": "Threshold value computed according to the estimated ambient noise. The SAD triggers when the sound level (SDLVL) is bigger than the defined threshold. In this mode, the SAD works like a voice activity detector."
-        },
-        {
-          "name": "ThresholdMinimumNoiselevel",
-          "value": 1,
-          "description": "Threshold value equal to ANMIN[12:0], multiplied by the gain selected by SNTHR[3:0] The SAD triggers when the sound level (SDLVL) is bigger than the defined threshold. In this mode, the SAD works like a sound detector."
-        },
-        {
-          "name": "ThresholdMinimumNoiselevelx4",
-          "value": 2,
-          "description": "Threshold value given by 4 x ANMIN[12:0]. The SAD triggers when the estimated ambient noise (ANLVL), multiplied by the gain selected by SNTHR[3:0] is bigger than the defined threshold. In this mode, the SAD is working like an ambient noise estimator. Hysteresis function cannot be used in this mode."
-        }
-      ]
-    },
-    "SADST": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Learn",
-          "value": 0,
-          "description": "SAD in LEARN state."
-        },
-        {
-          "name": "Monitor",
-          "value": 1,
-          "description": "SAD in MONITOR state."
-        },
-        {
-          "name": "Detect",
-          "value": 2,
-          "description": "SAD in DETECT state."
-        }
-      ]
-    },
-    "SCKSRC": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "CCK0",
-          "value": 0,
-          "description": "Serial clock source is CCK0."
-        },
-        {
-          "name": "CCK1",
-          "value": 1,
-          "description": "Serial clock source is CCK1."
-        },
-        {
-          "name": "CKI0",
-          "value": 2,
-          "description": "Serial clock source is CCI0."
-        },
-        {
-          "name": "CKI1",
-          "value": 3,
-          "description": "Serial clock source is CCI1."
-        }
-      ]
-    },
-    "SITFMOD": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "MasterSPI",
-          "value": 0,
-          "description": "LF_MASTER SPI mode."
-        },
-        {
-          "name": "NormalSPI",
-          "value": 1,
-          "description": "Normal SPI mode."
-        },
-        {
-          "name": "ManchesterFalling",
-          "value": 2,
-          "description": "Manchester mode rising edge = logic 0, falling edge = logic 1."
-        },
-        {
-          "name": "ManchesterRising",
-          "value": 3,
-          "description": "Manchester mode rising edge = logic 1, falling edge = logic 0."
-        }
-      ]
-    },
-    "SNTHR": {
-      "bit_size": 4,
-      "variants": [
-        {
-          "name": "NOISE PLUS 3_5",
-          "value": 0,
-          "description": "Threshold is 3.5 dB higher than ANLVL"
-        },
-        {
-          "name": "NOISE PLUS 6_0",
-          "value": 1,
-          "description": "Threshold is 6.0 dB higher than ANLVL"
-        },
-        {
-          "name": "NOISE PLUS 9_5",
-          "value": 2,
-          "description": "Threshold is 9.5 dB higher than ANLVL"
-        },
-        {
-          "name": "NOISE PLUS 12",
-          "value": 3,
-          "description": "Threshold is 12 dB higher than ANLVL"
-        },
-        {
-          "name": "NOISE PLUS 15_6",
-          "value": 4,
-          "description": "Threshold is 15.6 dB higher than ANLVL"
-        },
-        {
-          "name": "NOISE PLUS 18",
-          "value": 5,
-          "description": "Threshold is 18 dB higher than ANLVL"
-        },
-        {
-          "name": "NOISE PLUS 21_6",
-          "value": 6,
-          "description": "Threshold is 21.6 dB higher than ANLVL"
-        },
-        {
-          "name": "NOISE PLUS 24_1",
-          "value": 7,
-          "description": "Threshold is 24.1 dB higher than ANLVL"
-        },
-        {
-          "name": "NOISE PLUS 27_6",
-          "value": 8,
-          "description": "Threshold is 27.6 dB higher than ANLVL"
-        },
-        {
-          "name": "NOISE PLUS 30_1",
-          "value": 9,
-          "description": "Threshold is 30.1 dB higher than ANLVL"
-        }
-      ]
-    },
-    "TRGSENS": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "RisingEdge",
-          "value": 0,
-          "description": "A rising edge event triggers the activation of CKGEN dividers."
-        },
-        {
-          "name": "FallingEdge",
-          "value": 1,
-          "description": "A falling edge even triggers the activation of CKGEN dividers."
-        }
-      ]
-    },
-    "TRGSRC": {
-      "bit_size": 4,
-      "variants": [
-        {
-          "name": "TRGO",
-          "value": 0,
-          "description": "TRGO Selected."
-        },
-        {
-          "name": "TRG1",
-          "value": 2,
-          "description": "adf_trg1 selected."
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

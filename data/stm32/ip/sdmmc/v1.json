@@ -2,9 +2,12 @@
   "schema": 1,
   "kind": "sdmmc",
   "version": "v1",
+  "source": "stm32rs_svd",
+  "source_device": "stm32f730i8",
+  "source_file": "stm32f730.svd.patched",
   "blocks": {
-    "SDMMC": {
-      "name": "SDMMC",
+    "SDMMC1": {
+      "name": "SDMMC1",
       "description": "Secure digital input/output interface",
       "extends": null,
       "registers": [
@@ -12,17 +15,29 @@
           "name": "POWER",
           "offset": 0,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "power control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "power control register",
           "fields": [
             {
               "name": "PWRCTRL",
               "bit_offset": 0,
               "bit_width": 2,
               "description": "PWRCTRL",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "PowerOff",
+                  "value": 0,
+                  "description": "Power off"
+                },
+                {
+                  "name": "PowerOn",
+                  "value": 3,
+                  "description": "Power on"
+                }
+              ]
             }
           ]
         },
@@ -30,166 +45,302 @@
           "name": "CLKCR",
           "offset": 4,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "SDI clock control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "SDI clock control register",
           "fields": [
             {
-              "name": "CLKDIV",
-              "bit_offset": 0,
-              "bit_width": 8,
-              "description": "Clock divide factor",
-              "enum": null
-            },
-            {
-              "name": "CLKEN",
-              "bit_offset": 8,
+              "name": "HWFC_EN",
+              "bit_offset": 14,
               "bit_width": 1,
-              "description": "Clock enable bit",
-              "enum": null
-            },
-            {
-              "name": "PWRSAV",
-              "bit_offset": 9,
-              "bit_width": 1,
-              "description": "Power saving configuration bit",
-              "enum": null
-            },
-            {
-              "name": "BYPASS",
-              "bit_offset": 10,
-              "bit_width": 1,
-              "description": "Clock divider bypass enable bit",
-              "enum": null
-            },
-            {
-              "name": "WIDBUS",
-              "bit_offset": 11,
-              "bit_width": 2,
-              "description": "Wide bus mode enable bit",
-              "enum": null
+              "description": "HW Flow Control enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "HW Flow Control is disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "HW Flow Control is enabled"
+                }
+              ]
             },
             {
               "name": "NEGEDGE",
               "bit_offset": 13,
               "bit_width": 1,
               "description": "SDIO_CK dephasing selection bit",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Rising",
+                  "value": 0,
+                  "description": "SDIO_CK generated on the rising edge"
+                },
+                {
+                  "name": "Falling",
+                  "value": 1,
+                  "description": "SDIO_CK generated on the falling edge"
+                }
+              ]
             },
             {
-              "name": "HWFC_EN",
-              "bit_offset": 14,
+              "name": "WIDBUS",
+              "bit_offset": 11,
+              "bit_width": 2,
+              "description": "Wide bus mode enable bit",
+              "enum_values": [
+                {
+                  "name": "BusWidth1",
+                  "value": 0,
+                  "description": "1 lane wide bus"
+                },
+                {
+                  "name": "BusWidth4",
+                  "value": 1,
+                  "description": "4 lane wide bus"
+                },
+                {
+                  "name": "BusWidth8",
+                  "value": 2,
+                  "description": "8 lane wide bus"
+                }
+              ]
+            },
+            {
+              "name": "BYPASS",
+              "bit_offset": 10,
               "bit_width": 1,
-              "description": "HW Flow Control enable",
-              "enum": null
+              "description": "Clock divider bypass enable bit",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "SDIOCLK is divided according to the CLKDIV value before driving the SDIO_CK output signal."
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "SDIOCLK directly drives the SDIO_CK output signal"
+                }
+              ]
+            },
+            {
+              "name": "PWRSAV",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Power saving configuration bit",
+              "enum_values": [
+                {
+                  "name": "Enabled",
+                  "value": 0,
+                  "description": "SDIO_CK clock is always enabled"
+                },
+                {
+                  "name": "Disabled",
+                  "value": 1,
+                  "description": "SDIO_CK is only enabled when the bus is active"
+                }
+              ]
+            },
+            {
+              "name": "CLKEN",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Clock enable bit",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Disable clock"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Enable clock"
+                }
+              ]
+            },
+            {
+              "name": "CLKDIV",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "Clock divide factor"
             }
           ]
         },
         {
-          "name": "ARGR",
+          "name": "ARG",
           "offset": 8,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "argument register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "argument register",
           "fields": [
             {
               "name": "CMDARG",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Command argument",
-              "enum": null
+              "description": "Command argument"
             }
           ]
         },
         {
-          "name": "CMDR",
+          "name": "CMD",
           "offset": 12,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "command register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "command register",
           "fields": [
             {
-              "name": "CMDINDEX",
-              "bit_offset": 0,
-              "bit_width": 6,
-              "description": "Command index",
-              "enum": null
-            },
-            {
-              "name": "WAITRESP",
-              "bit_offset": 6,
-              "bit_width": 2,
-              "description": "Wait for response bits",
-              "enum": null
-            },
-            {
-              "name": "WAITINT",
-              "bit_offset": 8,
+              "name": "SDIOSuspend",
+              "bit_offset": 11,
               "bit_width": 1,
-              "description": "CPSM waits for interrupt request",
-              "enum": null
-            },
-            {
-              "name": "WAITPEND",
-              "bit_offset": 9,
-              "bit_width": 1,
-              "description": "CPSM Waits for ends of data transfer (CmdPend internal signal)",
-              "enum": null
+              "description": "SD I/O suspend command",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Next command is not a SDIO suspend command"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Next command send is a SDIO suspend command"
+                }
+              ]
             },
             {
               "name": "CPSMEN",
               "bit_offset": 10,
               "bit_width": 1,
               "description": "Command path state machine (CPSM) Enable bit",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Command path state machine disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Command path state machine enabled"
+                }
+              ]
             },
             {
-              "name": "SDIOSuspend",
-              "bit_offset": 11,
+              "name": "WAITPEND",
+              "bit_offset": 9,
               "bit_width": 1,
-              "description": "SD I/O suspend command",
-              "enum": null
+              "description": "CPSM Waits for ends of data transfer (CmdPend internal signal)",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Don't wait for data end"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Wait for end of data transfer signal before sending command"
+                }
+              ]
+            },
+            {
+              "name": "WAITINT",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "CPSM waits for interrupt request",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Don't wait for interrupt request"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Wait for interrupt request"
+                }
+              ]
+            },
+            {
+              "name": "WAITRESP",
+              "bit_offset": 6,
+              "bit_width": 2,
+              "description": "Wait for response bits",
+              "enum_values": [
+                {
+                  "name": "NoResponse",
+                  "value": 0,
+                  "description": "No response"
+                },
+                {
+                  "name": "ShortResponse",
+                  "value": 1,
+                  "description": "Short response"
+                },
+                {
+                  "name": "NoResponse2",
+                  "value": 2,
+                  "description": "No reponse"
+                },
+                {
+                  "name": "LongResponse",
+                  "value": 3,
+                  "description": "Long reponse"
+                }
+              ]
+            },
+            {
+              "name": "CMDINDEX",
+              "bit_offset": 0,
+              "bit_width": 6,
+              "description": "Command index"
             }
           ]
         },
         {
-          "name": "RESPCMDR",
+          "name": "RESPCMD",
           "offset": 16,
           "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
           "description": "command response register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "command response register",
           "fields": [
             {
               "name": "RESPCMD",
               "bit_offset": 0,
               "bit_width": 6,
-              "description": "Response command index",
-              "enum": null
+              "description": "Response command index"
             }
           ]
         },
         {
-          "name": "RESPR",
+          "name": "RESP%s",
           "offset": 20,
           "size": 32,
-          "description": "response 1..4 register",
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "SDIO response %s register",
           "array_len": 4,
           "array_stride": 4,
-          "fieldset_description": "response 1..4 register",
           "fields": [
             {
               "name": "CARDSTATUS",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "see Table 132",
-              "enum": null
+              "description": "Status of a card, which is part of the received response"
             }
           ]
         },
@@ -197,35 +348,35 @@
           "name": "DTIMER",
           "offset": 36,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "data timer register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "data timer register",
           "fields": [
             {
               "name": "DATATIME",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Data timeout period",
-              "enum": null
+              "description": "Data timeout period"
             }
           ]
         },
         {
-          "name": "DLENR",
+          "name": "DLEN",
           "offset": 40,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "data length register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "data length register",
           "fields": [
             {
               "name": "DATALENGTH",
               "bit_offset": 0,
               "bit_width": 25,
-              "description": "Data length value",
-              "enum": null
+              "description": "Data length value"
             }
           ]
         },
@@ -233,263 +384,587 @@
           "name": "DCTRL",
           "offset": 44,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "data control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "data control register",
           "fields": [
             {
-              "name": "DTEN",
-              "bit_offset": 0,
+              "name": "SDIOEN",
+              "bit_offset": 11,
               "bit_width": 1,
-              "description": "DTEN",
-              "enum": null
-            },
-            {
-              "name": "DTDIR",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Data transfer direction selection",
-              "enum": null
-            },
-            {
-              "name": "DTMODE",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Data transfer mode selection 1: Stream or SDIO multibyte data transfer",
-              "enum": null
-            },
-            {
-              "name": "DMAEN",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "DMA enable bit",
-              "enum": null
-            },
-            {
-              "name": "DBLOCKSIZE",
-              "bit_offset": 4,
-              "bit_width": 4,
-              "description": "Data block size",
-              "enum": null
-            },
-            {
-              "name": "RWSTART",
-              "bit_offset": 8,
-              "bit_width": 1,
-              "description": "Read wait start",
-              "enum": null
-            },
-            {
-              "name": "RWSTOP",
-              "bit_offset": 9,
-              "bit_width": 1,
-              "description": "Read wait stop",
-              "enum": null
+              "description": "SD I/O enable functions",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "SDIO operations disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "SDIO operations enabled"
+                }
+              ]
             },
             {
               "name": "RWMOD",
               "bit_offset": 10,
               "bit_width": 1,
               "description": "Read wait mode",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "D2",
+                  "value": 0,
+                  "description": "Read wait control stopping using SDIO_D2"
+                },
+                {
+                  "name": "Ck",
+                  "value": 1,
+                  "description": "Read wait control using SDIO_CK"
+                }
+              ]
             },
             {
-              "name": "SDIOEN",
-              "bit_offset": 11,
+              "name": "RWSTOP",
+              "bit_offset": 9,
               "bit_width": 1,
-              "description": "SD I/O enable functions",
-              "enum": null
+              "description": "Read wait stop",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Read wait in progress if RWSTART is enabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Enable for read wait stop if RWSTART is enabled"
+                }
+              ]
+            },
+            {
+              "name": "RWSTART",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Read wait start",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Don't start read wait operation"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Read wait operation starts"
+                }
+              ]
+            },
+            {
+              "name": "DBLOCKSIZE",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "Data block size"
+            },
+            {
+              "name": "DMAEN",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "DMA enable bit",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Dma disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Dma enabled"
+                }
+              ]
+            },
+            {
+              "name": "DTMODE",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Data transfer mode selection 1: Stream or SDIO multibyte data transfer",
+              "enum_values": [
+                {
+                  "name": "BlockMode",
+                  "value": 0,
+                  "description": "Bloack data transfer"
+                },
+                {
+                  "name": "StreamMode",
+                  "value": 1,
+                  "description": "Stream or SDIO multibyte data transfer"
+                }
+              ]
+            },
+            {
+              "name": "DTDIR",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Data transfer direction selection",
+              "enum_values": [
+                {
+                  "name": "ControllerToCard",
+                  "value": 0,
+                  "description": "From controller to card"
+                },
+                {
+                  "name": "CardToController",
+                  "value": 1,
+                  "description": "From card to controller"
+                }
+              ]
+            },
+            {
+              "name": "DTEN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "DTEN",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Start transfer"
+                }
+              ]
             }
           ]
         },
         {
-          "name": "DCNTR",
+          "name": "DCOUNT",
           "offset": 48,
           "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
           "description": "data counter register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "data counter register",
           "fields": [
             {
               "name": "DATACOUNT",
               "bit_offset": 0,
               "bit_width": 25,
-              "description": "Data count value",
-              "enum": null
+              "description": "Data count value"
             }
           ]
         },
         {
-          "name": "STAR",
+          "name": "STA",
           "offset": 52,
           "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
           "description": "status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "status register",
           "fields": [
             {
-              "name": "CCRCFAIL",
-              "bit_offset": 0,
+              "name": "SDIOIT",
+              "bit_offset": 22,
               "bit_width": 1,
-              "description": "Command response received (CRC check failed)",
-              "enum": null
-            },
-            {
-              "name": "DCRCFAIL",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Data block sent/received (CRC check failed)",
-              "enum": null
-            },
-            {
-              "name": "CTIMEOUT",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Command response timeout",
-              "enum": null
-            },
-            {
-              "name": "DTIMEOUT",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Data timeout",
-              "enum": null
-            },
-            {
-              "name": "TXUNDERR",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "Transmit FIFO underrun error",
-              "enum": null
-            },
-            {
-              "name": "RXOVERR",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "Received FIFO overrun error",
-              "enum": null
-            },
-            {
-              "name": "CMDREND",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "Command response received (CRC check passed)",
-              "enum": null
-            },
-            {
-              "name": "CMDSENT",
-              "bit_offset": 7,
-              "bit_width": 1,
-              "description": "Command sent (no response required)",
-              "enum": null
-            },
-            {
-              "name": "DATAEND",
-              "bit_offset": 8,
-              "bit_width": 1,
-              "description": "Data end (data counter, SDIDCOUNT, is zero)",
-              "enum": null
-            },
-            {
-              "name": "STBITERR",
-              "bit_offset": 9,
-              "bit_width": 1,
-              "description": "Start bit not detected on all data signals in wide bus mode",
-              "enum": null
-            },
-            {
-              "name": "DBCKEND",
-              "bit_offset": 10,
-              "bit_width": 1,
-              "description": "Data block sent/received (CRC check passed)",
-              "enum": null
-            },
-            {
-              "name": "CMDACT",
-              "bit_offset": 11,
-              "bit_width": 1,
-              "description": "Command transfer in progress",
-              "enum": null
-            },
-            {
-              "name": "TXACT",
-              "bit_offset": 12,
-              "bit_width": 1,
-              "description": "Data transmit in progress",
-              "enum": null
-            },
-            {
-              "name": "RXACT",
-              "bit_offset": 13,
-              "bit_width": 1,
-              "description": "Data receive in progress",
-              "enum": null
-            },
-            {
-              "name": "TXFIFOHE",
-              "bit_offset": 14,
-              "bit_width": 1,
-              "description": "Transmit FIFO half empty: at least 8 words can be written into the FIFO",
-              "enum": null
-            },
-            {
-              "name": "RXFIFOHF",
-              "bit_offset": 15,
-              "bit_width": 1,
-              "description": "Receive FIFO half full: there are at least 8 words in the FIFO",
-              "enum": null
-            },
-            {
-              "name": "TXFIFOF",
-              "bit_offset": 16,
-              "bit_width": 1,
-              "description": "Transmit FIFO full",
-              "enum": null
-            },
-            {
-              "name": "RXFIFOF",
-              "bit_offset": 17,
-              "bit_width": 1,
-              "description": "Receive FIFO full",
-              "enum": null
-            },
-            {
-              "name": "TXFIFOE",
-              "bit_offset": 18,
-              "bit_width": 1,
-              "description": "Transmit FIFO empty",
-              "enum": null
-            },
-            {
-              "name": "RXFIFOE",
-              "bit_offset": 19,
-              "bit_width": 1,
-              "description": "Receive FIFO empty",
-              "enum": null
-            },
-            {
-              "name": "TXDAVL",
-              "bit_offset": 20,
-              "bit_width": 1,
-              "description": "Data available in transmit FIFO",
-              "enum": null
+              "description": "SDIO interrupt received",
+              "enum_values": [
+                {
+                  "name": "NotReceived",
+                  "value": 0,
+                  "description": "SDIO interrupt not receieved"
+                },
+                {
+                  "name": "Received",
+                  "value": 1,
+                  "description": "SDIO interrupt received"
+                }
+              ]
             },
             {
               "name": "RXDAVL",
               "bit_offset": 21,
               "bit_width": 1,
               "description": "Data available in receive FIFO",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "NotAvailable",
+                  "value": 0,
+                  "description": "Data not available in receive FIFO"
+                },
+                {
+                  "name": "Available",
+                  "value": 1,
+                  "description": "Data available in receive FIFO"
+                }
+              ]
             },
             {
-              "name": "SDIOIT",
-              "bit_offset": 22,
+              "name": "TXDAVL",
+              "bit_offset": 20,
               "bit_width": 1,
-              "description": "SDIO interrupt received",
-              "enum": null
+              "description": "Data available in transmit FIFO",
+              "enum_values": [
+                {
+                  "name": "NotAvailable",
+                  "value": 0,
+                  "description": "Data not available in transmit FIFO"
+                },
+                {
+                  "name": "Available",
+                  "value": 1,
+                  "description": "Data available in transmit FIFO"
+                }
+              ]
+            },
+            {
+              "name": "RXFIFOE",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "Receive FIFO empty",
+              "enum_values": [
+                {
+                  "name": "NotEmpty",
+                  "value": 0,
+                  "description": "Receive FIFO not empty"
+                },
+                {
+                  "name": "Empty",
+                  "value": 1,
+                  "description": "Receive FIFO empty"
+                }
+              ]
+            },
+            {
+              "name": "TXFIFOE",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "Transmit FIFO empty",
+              "enum_values": [
+                {
+                  "name": "NotEmpty",
+                  "value": 0,
+                  "description": "Transmit FIFO not empty"
+                },
+                {
+                  "name": "Empty",
+                  "value": 1,
+                  "description": "Transmit FIFO empty. When HW Flow Control is enabled, TXFIFOE signals becomes activated when the FIFO contains 2 words."
+                }
+              ]
+            },
+            {
+              "name": "RXFIFOF",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "Receive FIFO full",
+              "enum_values": [
+                {
+                  "name": "NotFull",
+                  "value": 0,
+                  "description": "Transmit FIFO not full"
+                },
+                {
+                  "name": "Full",
+                  "value": 1,
+                  "description": "Receive FIFO full. When HW Flow Control is enabled, RXFIFOF signals becomes activated 2 words before the FIFO is full."
+                }
+              ]
+            },
+            {
+              "name": "TXFIFOF",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Transmit FIFO full",
+              "enum_values": [
+                {
+                  "name": "NotFull",
+                  "value": 0,
+                  "description": "Transmit FIFO not full"
+                },
+                {
+                  "name": "Full",
+                  "value": 1,
+                  "description": "Transmit FIFO full"
+                }
+              ]
+            },
+            {
+              "name": "RXFIFOHF",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Receive FIFO half full: there are at least 8 words in the FIFO",
+              "enum_values": [
+                {
+                  "name": "NotHalfFull",
+                  "value": 0,
+                  "description": "Receive FIFO not half full"
+                },
+                {
+                  "name": "HalfFull",
+                  "value": 1,
+                  "description": "Receive FIFO half full. At least 8 words in the FIFO"
+                }
+              ]
+            },
+            {
+              "name": "TXFIFOHE",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "Transmit FIFO half empty: at least 8 words can be written into the FIFO",
+              "enum_values": [
+                {
+                  "name": "NotHalfEmpty",
+                  "value": 0,
+                  "description": "Transmit FIFO not half empty"
+                },
+                {
+                  "name": "HalfEmpty",
+                  "value": 1,
+                  "description": "Transmit FIFO half empty. At least 8 words can be written into the FIFO"
+                }
+              ]
+            },
+            {
+              "name": "RXACT",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Data receive in progress",
+              "enum_values": [
+                {
+                  "name": "NotInProgress",
+                  "value": 0,
+                  "description": "Data receive not in progress"
+                },
+                {
+                  "name": "InProgress",
+                  "value": 1,
+                  "description": "Data receive in progress"
+                }
+              ]
+            },
+            {
+              "name": "TXACT",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "Data transmit in progress",
+              "enum_values": [
+                {
+                  "name": "NotInProgress",
+                  "value": 0,
+                  "description": "Data transmit is not in progress"
+                },
+                {
+                  "name": "InProgress",
+                  "value": 1,
+                  "description": "Data transmit in progress"
+                }
+              ]
+            },
+            {
+              "name": "CMDACT",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "Command transfer in progress",
+              "enum_values": [
+                {
+                  "name": "NotInProgress",
+                  "value": 0,
+                  "description": "Command transfer not in progress"
+                },
+                {
+                  "name": "InProgress",
+                  "value": 1,
+                  "description": "Command tranfer in progress"
+                }
+              ]
+            },
+            {
+              "name": "DBCKEND",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Data block sent/received (CRC check passed)",
+              "enum_values": [
+                {
+                  "name": "NotTransferred",
+                  "value": 0,
+                  "description": "Data block not sent/received (CRC check failed)"
+                },
+                {
+                  "name": "Transferred",
+                  "value": 1,
+                  "description": "Data block sent/received (CRC check passed)"
+                }
+              ]
+            },
+            {
+              "name": "DATAEND",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Data end (data counter, SDIDCOUNT, is zero)",
+              "enum_values": [
+                {
+                  "name": "NotDone",
+                  "value": 0,
+                  "description": "Not done"
+                },
+                {
+                  "name": "Done",
+                  "value": 1,
+                  "description": "Data end (DCOUNT, is zero)"
+                }
+              ]
+            },
+            {
+              "name": "CMDSENT",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Command sent (no response required)",
+              "enum_values": [
+                {
+                  "name": "NotSent",
+                  "value": 0,
+                  "description": "Command not sent"
+                },
+                {
+                  "name": "Sent",
+                  "value": 1,
+                  "description": "Command sent (no response required)"
+                }
+              ]
+            },
+            {
+              "name": "CMDREND",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Command response received (CRC check passed)",
+              "enum_values": [
+                {
+                  "name": "NotDone",
+                  "value": 0,
+                  "description": "Command not done"
+                },
+                {
+                  "name": "Done",
+                  "value": 1,
+                  "description": "Command response received (CRC check passed)"
+                }
+              ]
+            },
+            {
+              "name": "RXOVERR",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Received FIFO overrun error",
+              "enum_values": [
+                {
+                  "name": "NoOverrun",
+                  "value": 0,
+                  "description": "No FIFO overrun error"
+                },
+                {
+                  "name": "Overrun",
+                  "value": 1,
+                  "description": "Receive FIFO overrun error"
+                }
+              ]
+            },
+            {
+              "name": "TXUNDERR",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Transmit FIFO underrun error",
+              "enum_values": [
+                {
+                  "name": "NoUnderrun",
+                  "value": 0,
+                  "description": "No transmit FIFO underrun error"
+                },
+                {
+                  "name": "Underrun",
+                  "value": 1,
+                  "description": "Transmit FIFO underrun error"
+                }
+              ]
+            },
+            {
+              "name": "DTIMEOUT",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Data timeout",
+              "enum_values": [
+                {
+                  "name": "NoTimeout",
+                  "value": 0,
+                  "description": "No data timeout"
+                },
+                {
+                  "name": "Timeout",
+                  "value": 1,
+                  "description": "Data timeout"
+                }
+              ]
+            },
+            {
+              "name": "CTIMEOUT",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Command response timeout",
+              "enum_values": [
+                {
+                  "name": "NoTimeout",
+                  "value": 0,
+                  "description": "No Command timeout"
+                },
+                {
+                  "name": "Timeout",
+                  "value": 1,
+                  "description": "Command timeout"
+                }
+              ]
+            },
+            {
+              "name": "DCRCFAIL",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Data block sent/received (CRC check failed)",
+              "enum_values": [
+                {
+                  "name": "NotFailed",
+                  "value": 0,
+                  "description": "No Data block sent/received crc check fail"
+                },
+                {
+                  "name": "Failed",
+                  "value": 1,
+                  "description": "Data block sent/received crc failed"
+                }
+              ]
+            },
+            {
+              "name": "CCRCFAIL",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Command response received (CRC check failed)",
+              "enum_values": [
+                {
+                  "name": "NotFailed",
+                  "value": 0,
+                  "description": "Command response received, crc check passed"
+                },
+                {
+                  "name": "Failed",
+                  "value": 1,
+                  "description": "Command response received, crc check failed"
+                }
+              ]
             }
           ]
         },
@@ -497,266 +972,240 @@
           "name": "ICR",
           "offset": 56,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "interrupt clear register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "interrupt clear register",
           "fields": [
             {
               "name": "CCRCFAILC",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "CCRCFAIL flag clear bit",
-              "enum": null
-            },
-            {
-              "name": "DCRCFAILC",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "DCRCFAIL flag clear bit",
-              "enum": null
-            },
-            {
-              "name": "CTIMEOUTC",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "CTIMEOUT flag clear bit",
-              "enum": null
-            },
-            {
-              "name": "DTIMEOUTC",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "DTIMEOUT flag clear bit",
-              "enum": null
-            },
-            {
-              "name": "TXUNDERRC",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "TXUNDERR flag clear bit",
-              "enum": null
-            },
-            {
-              "name": "RXOVERRC",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "RXOVERR flag clear bit",
-              "enum": null
-            },
-            {
-              "name": "CMDRENDC",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "CMDREND flag clear bit",
-              "enum": null
-            },
-            {
-              "name": "CMDSENTC",
-              "bit_offset": 7,
-              "bit_width": 1,
-              "description": "CMDSENT flag clear bit",
-              "enum": null
-            },
-            {
-              "name": "DATAENDC",
-              "bit_offset": 8,
-              "bit_width": 1,
-              "description": "DATAEND flag clear bit",
-              "enum": null
-            },
-            {
-              "name": "STBITERRC",
-              "bit_offset": 9,
-              "bit_width": 1,
-              "description": "STBITERR flag clear bit",
-              "enum": null
-            },
-            {
-              "name": "DBCKENDC",
-              "bit_offset": 10,
-              "bit_width": 1,
-              "description": "DBCKEND flag clear bit",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clear flag"
+                }
+              ]
             },
             {
               "name": "SDIOITC",
               "bit_offset": 22,
               "bit_width": 1,
-              "description": "SDIOIT flag clear bit",
-              "enum": null
+              "description": "SDIOIT flag clear bit"
+            },
+            {
+              "name": "DBCKENDC",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "DBCKEND flag clear bit"
+            },
+            {
+              "name": "DATAENDC",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "DATAEND flag clear bit"
+            },
+            {
+              "name": "CMDSENTC",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "CMDSENT flag clear bit"
+            },
+            {
+              "name": "CMDRENDC",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "CMDREND flag clear bit"
+            },
+            {
+              "name": "RXOVERRC",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "RXOVERR flag clear bit"
+            },
+            {
+              "name": "TXUNDERRC",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "TXUNDERR flag clear bit"
+            },
+            {
+              "name": "DTIMEOUTC",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "DTIMEOUT flag clear bit"
+            },
+            {
+              "name": "CTIMEOUTC",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "CTIMEOUT flag clear bit"
+            },
+            {
+              "name": "DCRCFAILC",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "DCRCFAIL flag clear bit"
             }
           ]
         },
         {
-          "name": "MASKR",
+          "name": "MASK",
           "offset": 60,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "mask register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "mask register",
           "fields": [
             {
               "name": "CCRCFAILIE",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "Command CRC fail interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "DCRCFAILIE",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Data CRC fail interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "CTIMEOUTIE",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Command timeout interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "DTIMEOUTIE",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Data timeout interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "TXUNDERRIE",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "Tx FIFO underrun error interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "RXOVERRIE",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "Rx FIFO overrun error interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "CMDRENDIE",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "Command response received interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "CMDSENTIE",
-              "bit_offset": 7,
-              "bit_width": 1,
-              "description": "Command sent interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "DATAENDIE",
-              "bit_offset": 8,
-              "bit_width": 1,
-              "description": "Data end interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "STBITERRE",
-              "bit_offset": 9,
-              "bit_width": 1,
-              "description": "STBITERR interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "DBCKENDIE",
-              "bit_offset": 10,
-              "bit_width": 1,
-              "description": "Data block end interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "CMDACTIE",
-              "bit_offset": 11,
-              "bit_width": 1,
-              "description": "Command acting interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "TXACTIE",
-              "bit_offset": 12,
-              "bit_width": 1,
-              "description": "Data transmit acting interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "RXACTIE",
-              "bit_offset": 13,
-              "bit_width": 1,
-              "description": "Data receive acting interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "TXFIFOHEIE",
-              "bit_offset": 14,
-              "bit_width": 1,
-              "description": "Tx FIFO half empty interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "RXFIFOHFIE",
-              "bit_offset": 15,
-              "bit_width": 1,
-              "description": "Rx FIFO half full interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "TXFIFOFIE",
-              "bit_offset": 16,
-              "bit_width": 1,
-              "description": "Tx FIFO full interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "RXFIFOFIE",
-              "bit_offset": 17,
-              "bit_width": 1,
-              "description": "Rx FIFO full interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "TXFIFOEIE",
-              "bit_offset": 18,
-              "bit_width": 1,
-              "description": "Tx FIFO empty interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "RXFIFOEIE",
-              "bit_offset": 19,
-              "bit_width": 1,
-              "description": "Rx FIFO empty interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "TXDAVLIE",
-              "bit_offset": 20,
-              "bit_width": 1,
-              "description": "Data available in Tx FIFO interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "RXDAVLIE",
-              "bit_offset": 21,
-              "bit_width": 1,
-              "description": "Data available in Rx FIFO interrupt enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Interrupt enabled"
+                }
+              ]
             },
             {
               "name": "SDIOITIE",
               "bit_offset": 22,
               "bit_width": 1,
-              "description": "SDIO mode interrupt received interrupt enable",
-              "enum": null
+              "description": "SDIO mode interrupt received interrupt enable"
+            },
+            {
+              "name": "RXDAVLIE",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "Data available in Rx FIFO interrupt enable"
+            },
+            {
+              "name": "TXDAVLIE",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "Data available in Tx FIFO interrupt enable"
+            },
+            {
+              "name": "RXFIFOEIE",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "Rx FIFO empty interrupt enable"
+            },
+            {
+              "name": "TXFIFOEIE",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "Tx FIFO empty interrupt enable"
+            },
+            {
+              "name": "RXFIFOFIE",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "Rx FIFO full interrupt enable"
+            },
+            {
+              "name": "TXFIFOFIE",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Tx FIFO full interrupt enable"
+            },
+            {
+              "name": "RXFIFOHFIE",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Rx FIFO half full interrupt enable"
+            },
+            {
+              "name": "TXFIFOHEIE",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "Tx FIFO half empty interrupt enable"
+            },
+            {
+              "name": "RXACTIE",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Data receive acting interrupt enable"
+            },
+            {
+              "name": "TXACTIE",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "Data transmit acting interrupt enable"
+            },
+            {
+              "name": "CMDACTIE",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "Command acting interrupt enable"
+            },
+            {
+              "name": "DBCKENDIE",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Data block end interrupt enable"
+            },
+            {
+              "name": "DATAENDIE",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Data end interrupt enable"
+            },
+            {
+              "name": "CMDSENTIE",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Command sent interrupt enable"
+            },
+            {
+              "name": "CMDRENDIE",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Command response received interrupt enable"
+            },
+            {
+              "name": "RXOVERRIE",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Rx FIFO overrun error interrupt enable"
+            },
+            {
+              "name": "TXUNDERRIE",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Tx FIFO underrun error interrupt enable"
+            },
+            {
+              "name": "DTIMEOUTIE",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Data timeout interrupt enable"
+            },
+            {
+              "name": "CTIMEOUTIE",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Command timeout interrupt enable"
+            },
+            {
+              "name": "DCRCFAILIE",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Data CRC fail interrupt enable"
             }
           ]
         },
@@ -764,35 +1213,35 @@
           "name": "FIFOCNT",
           "offset": 72,
           "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
           "description": "FIFO counter register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "FIFO counter register",
           "fields": [
             {
               "name": "FIFOCOUNT",
               "bit_offset": 0,
               "bit_width": 24,
-              "description": "Remaining number of words to be written to or read from the FIFO",
-              "enum": null
+              "description": "Remaining number of words to be written to or read from the FIFO"
             }
           ]
         },
         {
-          "name": "FIFOR",
+          "name": "FIFO",
           "offset": 128,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "data FIFO register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "data FIFO register",
           "fields": [
             {
               "name": "FIFOData",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Receive and transmit FIFO data",
-              "enum": null
+              "description": "Receive and transmit FIFO data"
             }
           ]
         }

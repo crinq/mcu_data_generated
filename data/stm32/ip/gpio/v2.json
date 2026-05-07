@@ -2,9 +2,12 @@
   "schema": 1,
   "kind": "gpio",
   "version": "v2",
+  "source": "stm32rs_svd",
+  "source_device": "stm32h562ag",
+  "source_file": "stm32h562.svd.patched",
   "blocks": {
-    "GPIO": {
-      "name": "GPIO",
+    "GPIOA": {
+      "name": "GPIOA",
       "description": "General-purpose I/Os",
       "extends": null,
       "registers": [
@@ -12,17 +15,40 @@
           "name": "MODER",
           "offset": 0,
           "size": 32,
+          "access": null,
+          "reset_value": 2885681151,
           "description": "GPIO port mode register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "GPIO port mode register",
           "fields": [
             {
-              "name": "MODER",
+              "name": "MODE%s",
               "bit_offset": 0,
               "bit_width": 2,
-              "description": "Port x configuration bits (y = 0..15)",
-              "enum": "MODER"
+              "description": "Port x configuration pin %s",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Input",
+                  "value": 0,
+                  "description": "Input mode"
+                },
+                {
+                  "name": "Output",
+                  "value": 1,
+                  "description": "General purpose output mode"
+                },
+                {
+                  "name": "Alternate",
+                  "value": 2,
+                  "description": "Alternate function mode"
+                },
+                {
+                  "name": "Analog",
+                  "value": 3,
+                  "description": "Analog mode"
+                }
+              ]
             }
           ]
         },
@@ -30,17 +56,30 @@
           "name": "OTYPER",
           "offset": 4,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "GPIO port output type register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "GPIO port output type register",
           "fields": [
             {
-              "name": "OT",
+              "name": "OT%s",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Port x configuration bits (y = 0..15)",
-              "enum": "OT"
+              "description": "Port x configuration pin %s",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "PushPull",
+                  "value": 0,
+                  "description": "Output push-pull (reset state)"
+                },
+                {
+                  "name": "OpenDrain",
+                  "value": 1,
+                  "description": "Output open-drain"
+                }
+              ]
             }
           ]
         },
@@ -48,17 +87,40 @@
           "name": "OSPEEDR",
           "offset": 8,
           "size": 32,
+          "access": null,
+          "reset_value": 201326592,
           "description": "GPIO port output speed register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "GPIO port output speed register",
           "fields": [
             {
-              "name": "OSPEEDR",
+              "name": "OSPEED%s",
               "bit_offset": 0,
               "bit_width": 2,
-              "description": "Port x configuration bits (y = 0..15)",
-              "enum": "OSPEEDR"
+              "description": "Port x configuration pin %s",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "LowSpeed",
+                  "value": 0,
+                  "description": "Low speed"
+                },
+                {
+                  "name": "MediumSpeed",
+                  "value": 1,
+                  "description": "Medium speed"
+                },
+                {
+                  "name": "HighSpeed",
+                  "value": 2,
+                  "description": "High speed"
+                },
+                {
+                  "name": "VeryHighSpeed",
+                  "value": 3,
+                  "description": "Very high speed"
+                }
+              ]
             }
           ]
         },
@@ -66,17 +128,35 @@
           "name": "PUPDR",
           "offset": 12,
           "size": 32,
+          "access": null,
+          "reset_value": 1677721600,
           "description": "GPIO port pull-up/pull-down register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "GPIO port pull-up/pull-down register",
           "fields": [
             {
-              "name": "PUPDR",
+              "name": "PUPD%s",
               "bit_offset": 0,
               "bit_width": 2,
-              "description": "Port x configuration bits (y = 0..15)",
-              "enum": "PUPDR"
+              "description": "Port x configuration pin %s",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Floating",
+                  "value": 0,
+                  "description": "No pull-up, pull-down"
+                },
+                {
+                  "name": "PullUp",
+                  "value": 1,
+                  "description": "Pull-up"
+                },
+                {
+                  "name": "PullDown",
+                  "value": 2,
+                  "description": "Pull-down"
+                }
+              ]
             }
           ]
         },
@@ -84,17 +164,30 @@
           "name": "IDR",
           "offset": 16,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "GPIO port input data register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "GPIO port input data register",
           "fields": [
             {
-              "name": "IDR",
+              "name": "ID%s",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Port input data (y = 0..15)",
-              "enum": "IDR"
+              "description": "Port input data pin %s",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "Low",
+                  "value": 0,
+                  "description": "Input is logic low"
+                },
+                {
+                  "name": "High",
+                  "value": 1,
+                  "description": "Input is logic high"
+                }
+              ]
             }
           ]
         },
@@ -102,17 +195,30 @@
           "name": "ODR",
           "offset": 20,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "GPIO port output data register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "GPIO port output data register",
           "fields": [
             {
-              "name": "ODR",
+              "name": "OD%s",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Port output data (y = 0..15)",
-              "enum": "ODR"
+              "description": "Port output data pin %s",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Low",
+                  "value": 0,
+                  "description": "Set output to logic low"
+                },
+                {
+                  "name": "High",
+                  "value": 1,
+                  "description": "Set output to logic high"
+                }
+              ]
             }
           ]
         },
@@ -120,24 +226,39 @@
           "name": "BSRR",
           "offset": 24,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "GPIO port bit set/reset register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "GPIO port bit set/reset register",
           "fields": [
             {
-              "name": "BS",
+              "name": "BS%s",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Port x set bit y (y= 0..15)",
-              "enum": null
+              "description": "Port x set pin %s",
+              "access": "write-only",
+              "enum_values": [
+                {
+                  "name": "Set",
+                  "value": 1,
+                  "description": "Sets the corresponding ODx bit"
+                }
+              ]
             },
             {
-              "name": "BR",
+              "name": "BR%s",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "Port x set bit y (y= 0..15)",
-              "enum": null
+              "description": "Port x reset pin %s",
+              "access": "write-only",
+              "enum_values": [
+                {
+                  "name": "Reset",
+                  "value": 1,
+                  "description": "Resets the corresponding ODx bit"
+                }
+              ]
             }
           ]
         },
@@ -145,163 +266,267 @@
           "name": "LCKR",
           "offset": 28,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "GPIO port configuration lock register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "GPIO port configuration lock register",
           "fields": [
             {
-              "name": "LCK",
+              "name": "LCK%s",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Port configuration locked",
-              "enum": null
+              "description": "Port x lock pin %s",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Unlocked",
+                  "value": 0,
+                  "description": "Port configuration not locked"
+                },
+                {
+                  "name": "Locked",
+                  "value": 1,
+                  "description": "Port configuration locked"
+                }
+              ]
             },
             {
               "name": "LCKK",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "Port configuration lock key active",
-              "enum": null
+              "description": "Lock key This bit can be read any time. It can only be modified using the lock key write sequence. - LOCK key write sequence: WR LCKR[16] = 1 + LCKR[15:0] WR LCKR[16] = 0 + LCKR[15:0] WR LCKR[16] = 1 + LCKR[15:0] - LOCK key read RD LCKR[16] = 1 (this read operation is optional but it confirms that the lock is active) Note: During the LOCK key write sequence, the value of LCK[15:0] must not change. Any error in the lock sequence aborts the LOCK. After the first LOCK sequence on any bit of the port, any read access on the LCKK bit returns 1 until the next MCU reset or peripheral reset.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NotActive",
+                  "value": 0,
+                  "description": "Port configuration lock key not active"
+                },
+                {
+                  "name": "Active",
+                  "value": 1,
+                  "description": "Port configuration lock key active"
+                }
+              ]
             }
           ]
         },
         {
-          "name": "AFR",
+          "name": "AFRL",
           "offset": 32,
           "size": 32,
-          "description": "GPIO alternate function registers. The register described in the datasheet as AFRL is index 0 in this array, and AFRH is index 1. Note that when operating on AFRH, you need to subtract 8 from any operations on the field array it contains -- the alternate function for pin 9 is at index 1, for instance.",
-          "array_len": 2,
-          "array_stride": 4,
-          "fieldset_description": "GPIO alternate function register. This contains an array of 8 fields, which correspond to pins 0-7 of the port (for AFRL) or pins 8-15 of the port (for AFRH).",
+          "access": null,
+          "reset_value": 0,
+          "description": "GPIO alternate function low register",
+          "array_len": null,
+          "array_stride": null,
           "fields": [
             {
-              "name": "AFR",
+              "name": "AFSEL%s",
               "bit_offset": 0,
               "bit_width": 4,
-              "description": "Alternate function selection for one of the pins controlled by this register (0-7).",
-              "enum": null
+              "description": "Alternate function selection for port x I/O pin y (y = 7 to 0) These bits are written by software to configure alternate function I/Os. Note: The bitfield is reserved and must be kept to reset value when the corresponding I/O is not available on the selected package.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "AF0",
+                  "value": 0,
+                  "description": "AF0"
+                },
+                {
+                  "name": "AF1",
+                  "value": 1,
+                  "description": "AF1"
+                },
+                {
+                  "name": "AF2",
+                  "value": 2,
+                  "description": "AF2"
+                },
+                {
+                  "name": "AF3",
+                  "value": 3,
+                  "description": "AF3"
+                },
+                {
+                  "name": "AF4",
+                  "value": 4,
+                  "description": "AF4"
+                },
+                {
+                  "name": "AF5",
+                  "value": 5,
+                  "description": "AF5"
+                },
+                {
+                  "name": "AF6",
+                  "value": 6,
+                  "description": "AF6"
+                },
+                {
+                  "name": "AF7",
+                  "value": 7,
+                  "description": "AF7"
+                },
+                {
+                  "name": "AF8",
+                  "value": 8,
+                  "description": "AF8"
+                },
+                {
+                  "name": "AF9",
+                  "value": 9,
+                  "description": "AF9"
+                },
+                {
+                  "name": "AF10",
+                  "value": 10,
+                  "description": "AF10"
+                },
+                {
+                  "name": "AF11",
+                  "value": 11,
+                  "description": "AF11"
+                },
+                {
+                  "name": "AF12",
+                  "value": 12,
+                  "description": "AF12"
+                },
+                {
+                  "name": "AF13",
+                  "value": 13,
+                  "description": "AF13"
+                },
+                {
+                  "name": "AF14",
+                  "value": 14,
+                  "description": "AF14"
+                },
+                {
+                  "name": "AF15",
+                  "value": 15,
+                  "description": "AF15"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "AFRH",
+          "offset": 36,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "GPIO alternate function high register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "AFSEL%s",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "Alternate function selection for port x I/O pin y (y = 15 to 8) These bits are written by software to configure alternate function I/Os. Note: The bitfield is reserved and must be kept to reset value when the corresponding I/O is not available on the selected package.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "BRR",
+          "offset": 40,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "GPIO port bit reset register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "BR%s",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Port x reset pin %s",
+              "access": "write-only",
+              "enum_values": [
+                {
+                  "name": "NoAction",
+                  "value": 0,
+                  "description": "No action on the corresponding ODx bit"
+                },
+                {
+                  "name": "Reset",
+                  "value": 1,
+                  "description": "Reset the ODx bit"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "HSLVR",
+          "offset": 44,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "GPIO high-speed low-voltage register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "HSLV%s",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Port x high-speed low-voltage configuration (y = 15 to 0) These bits are written by software to optimize the I/O speed when the I/O supply is low. Each bit is active only if the corresponding IO_VDD_HSLV/IO_VDDIO2_HSLV user option bit is set. It must be used only if the I/O supply voltage is below 2.7 V. Setting these bits when the I/O supply (VDD or VDDIO2) is higher than 2.7 V may be destructive. Note: Not all I/Os support the HSLV mode. Refer to the I/O structure in the corresponding datasheet for the list of I/Os supporting this feature. Other I/Os HSLV configuration must be kept at reset value. The bit is reserved and must be kept to reset value when the corresponding I/O is not available on the selected package.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "I/O speed optimization disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "I/O speed optimization enabled"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "SECCFGR",
+          "offset": 48,
+          "size": 32,
+          "access": null,
+          "reset_value": 65535,
+          "description": "GPIO secure configuration register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "SEC%s",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "I/O pin of Port x secure bit enable y (y = 15 to 0) These bits are written by software to enable or disable the I/O port pin security. Note: The bit is reserved and must be kept to reset value when the corresponding I/O is not available on the selected package.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NonSecure",
+                  "value": 0,
+                  "description": "The I/O pin is non-secure"
+                },
+                {
+                  "name": "Secure",
+                  "value": 1,
+                  "description": "The I/O pin is secure"
+                }
+              ]
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "IDR": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Low",
-          "value": 0,
-          "description": "Input is logic low"
-        },
-        {
-          "name": "High",
-          "value": 1,
-          "description": "Input is logic high"
-        }
-      ]
-    },
-    "MODER": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Input",
-          "value": 0,
-          "description": "Input mode (reset state)"
-        },
-        {
-          "name": "Output",
-          "value": 1,
-          "description": "General purpose output mode"
-        },
-        {
-          "name": "Alternate",
-          "value": 2,
-          "description": "Alternate function mode"
-        },
-        {
-          "name": "Analog",
-          "value": 3,
-          "description": "Analog mode"
-        }
-      ]
-    },
-    "ODR": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Low",
-          "value": 0,
-          "description": "Set output to logic low"
-        },
-        {
-          "name": "High",
-          "value": 1,
-          "description": "Set output to logic high"
-        }
-      ]
-    },
-    "OSPEEDR": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "LowSpeed",
-          "value": 0,
-          "description": "Low speed"
-        },
-        {
-          "name": "MediumSpeed",
-          "value": 1,
-          "description": "Medium speed"
-        },
-        {
-          "name": "HighSpeed",
-          "value": 2,
-          "description": "High speed"
-        },
-        {
-          "name": "VeryHighSpeed",
-          "value": 3,
-          "description": "Very high speed"
-        }
-      ]
-    },
-    "OT": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "PushPull",
-          "value": 0,
-          "description": "Output push-pull (reset state)"
-        },
-        {
-          "name": "OpenDrain",
-          "value": 1,
-          "description": "Output open-drain"
-        }
-      ]
-    },
-    "PUPDR": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Floating",
-          "value": 0,
-          "description": "No pull-up, pull-down"
-        },
-        {
-          "name": "PullUp",
-          "value": 1,
-          "description": "Pull-up"
-        },
-        {
-          "name": "PullDown",
-          "value": 2,
-          "description": "Pull-down"
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

@@ -2,6 +2,9 @@
   "schema": 1,
   "kind": "bkp",
   "version": "v1",
+  "source": "stm32rs_svd",
+  "source_device": "stm32f100v8",
+  "source_file": "stm32f100.svd.patched",
   "blocks": {
     "BKP": {
       "name": "BKP",
@@ -9,166 +12,224 @@
       "extends": null,
       "registers": [
         {
-          "name": "DR",
+          "name": "DR%s",
           "offset": 0,
           "size": 32,
-          "description": "Data register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "Data register",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Backup data register (BKP_DR)",
+          "array_len": 10,
+          "array_stride": 4,
           "fields": [
             {
               "name": "D",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "Backup data",
-              "enum": null
+              "description": "Backup data"
+            }
+          ]
+        },
+        {
+          "name": "BKP_DR%s",
+          "offset": 60,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Backup data register (BKP_DR)",
+          "array_len": 32,
+          "array_stride": 4,
+          "fields": [
+            {
+              "name": "D",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Backup data"
             }
           ]
         },
         {
           "name": "RTCCR",
-          "offset": 44,
+          "offset": 40,
           "size": 32,
-          "description": "RTC clock calibration register",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "RTC clock calibration register (BKP_RTCCR)",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RTC clock calibration register",
           "fields": [
             {
               "name": "CAL",
               "bit_offset": 0,
               "bit_width": 7,
-              "description": "Calibration value",
-              "enum": null
+              "description": "Calibration value"
             },
             {
               "name": "CCO",
               "bit_offset": 7,
               "bit_width": 1,
-              "description": "Calibration Clock Output",
-              "enum": null
+              "description": "Calibration Clock Output"
             },
             {
               "name": "ASOE",
               "bit_offset": 8,
               "bit_width": 1,
               "description": "Alarm or second output enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Setting this bit outputs either the RTC Alarm pulse signal or the Second pulse signal on the TAMPER pin depending on the ASOS bit"
+                }
+              ]
             },
             {
               "name": "ASOS",
               "bit_offset": 9,
               "bit_width": 1,
               "description": "Alarm or second output selection",
-              "enum": "ASOS"
+              "enum_values": [
+                {
+                  "name": "Alarm",
+                  "value": 0,
+                  "description": "RTC Alarm pulse output selected"
+                },
+                {
+                  "name": "Second",
+                  "value": 1,
+                  "description": "RTC Second pulse output selected"
+                }
+              ]
             }
           ]
         },
         {
           "name": "CR",
-          "offset": 48,
+          "offset": 44,
           "size": 32,
-          "description": "Control register",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Backup control register (BKP_CR)",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Control register",
           "fields": [
             {
               "name": "TPE",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "Tamper pin enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "General",
+                  "value": 0,
+                  "description": "The TAMPER pin is free for general purpose I/O"
+                },
+                {
+                  "name": "Alternate",
+                  "value": 1,
+                  "description": "Tamper alternate I/O function is activated"
+                }
+              ]
             },
             {
               "name": "TPAL",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "Tamper pin active level",
-              "enum": "TPAL"
+              "enum_values": [
+                {
+                  "name": "High",
+                  "value": 0,
+                  "description": "A high level on the TAMPER pin resets all data backup registers (if TPE bit is set)"
+                },
+                {
+                  "name": "Low",
+                  "value": 1,
+                  "description": "A low level on the TAMPER pin resets all data backup registers (if TPE bit is set)"
+                }
+              ]
             }
           ]
         },
         {
           "name": "CSR",
-          "offset": 52,
+          "offset": 48,
           "size": 32,
-          "description": "Control/status register",
+          "access": null,
+          "reset_value": 0,
+          "description": "BKP_CSR control/status register (BKP_CSR)",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Control/status register",
           "fields": [
             {
               "name": "CTE",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "Clear Tamper event",
-              "enum": null
+              "access": "write-only",
+              "enum_values": [
+                {
+                  "name": "Reset",
+                  "value": 1,
+                  "description": "Reset the TEF Tamper event flag (and the Tamper detector)"
+                }
+              ]
             },
             {
               "name": "CTI",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "Clear Tamper Interrupt",
-              "enum": null
+              "access": "write-only",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clear the Tamper interrupt and the TIF Tamper interrupt flag"
+                }
+              ]
             },
             {
               "name": "TPIE",
               "bit_offset": 2,
               "bit_width": 1,
               "description": "Tamper Pin interrupt enable",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Tamper interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Tamper interrupt enabled (the TPE bit must also be set in the BKP_CR register"
+                }
+              ]
             },
             {
               "name": "TEF",
               "bit_offset": 8,
               "bit_width": 1,
               "description": "Tamper Event Flag",
-              "enum": null
+              "access": "read-only"
             },
             {
               "name": "TIF",
               "bit_offset": 9,
               "bit_width": 1,
               "description": "Tamper Interrupt Flag",
-              "enum": null
+              "access": "read-only"
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "ASOS": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Alarm",
-          "value": 0,
-          "description": "RTC Alarm pulse output selected"
-        },
-        {
-          "name": "Second",
-          "value": 1,
-          "description": "RTC Second pulse output selected"
-        }
-      ]
-    },
-    "TPAL": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "High",
-          "value": 0,
-          "description": "A high level on the TAMPER pin resets all data backup registers (if TPE bit is set)"
-        },
-        {
-          "name": "Low",
-          "value": 1,
-          "description": "A low level on the TAMPER pin resets all data backup registers (if TPE bit is set)"
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

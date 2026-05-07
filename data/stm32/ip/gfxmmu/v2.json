@@ -2,90 +2,115 @@
   "schema": 1,
   "kind": "gfxmmu",
   "version": "v2",
+  "source": "stm32rs_svd",
+  "source_device": "stm32u599bj",
+  "source_file": "stm32u599.svd.patched",
   "blocks": {
     "GFXMMU": {
       "name": "GFXMMU",
-      "description": "GFXMMU.",
+      "description": "GFXMMU",
       "extends": null,
       "registers": [
         {
           "name": "CR",
           "offset": 0,
           "size": 32,
-          "description": "GFXMMU configuration register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "GFXMMU configuration register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "GFXMMU configuration register.",
           "fields": [
             {
-              "name": "BOIE",
+              "name": "B0OIE",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Buffer overflow interrupt enable. This bit enables the buffer 0 overflow interrupt.",
-              "enum": null
+              "description": "Buffer 0 overflow interrupt enable This bit enables the buffer 0 overflow interrupt.",
+              "access": "read-write"
+            },
+            {
+              "name": "B1OIE",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Buffer 1 overflow interrupt enable This bit enables the buffer 1 overflow interrupt.",
+              "access": "read-write"
+            },
+            {
+              "name": "B2OIE",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Buffer 2 overflow interrupt enable This bit enables the buffer 2 overflow interrupt.",
+              "access": "read-write"
+            },
+            {
+              "name": "B3OIE",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Buffer 3 overflow interrupt enable This bit enables the buffer 3 overflow interrupt.",
+              "access": "read-write"
             },
             {
               "name": "AMEIE",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "AHB master error interrupt enable. This bit enables the AHB master error interrupt.",
-              "enum": null
+              "description": "AHB master error interrupt enable This bit enables the AHB master error interrupt.",
+              "access": "read-write"
             },
             {
-              "name": "BM",
+              "name": "BM192",
               "bit_offset": 6,
               "bit_width": 1,
-              "description": "192 Block mode. This bit defines the number of blocks per line.",
-              "enum": "BM192"
+              "description": "192 Block mode This bit defines the number of blocks per line",
+              "access": "read-write"
             },
             {
               "name": "CE",
               "bit_offset": 7,
               "bit_width": 1,
-              "description": "Cache enable. This bit enables the cache unit.",
-              "enum": null
+              "description": "Cache enable This bit enables the cache unit.",
+              "access": "read-write"
             },
             {
               "name": "CL",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "Cache lock. This bit lock the cache onto the buffer defined in the CLB field.",
-              "enum": null
+              "description": "Cache lock This bit lock the cache onto the buffer defined in the CLB field.",
+              "access": "read-write"
             },
             {
               "name": "CLB",
               "bit_offset": 9,
               "bit_width": 2,
-              "description": "Cache lock buffer. This field select the buffer on which the cache is locked.",
-              "enum": "CLB"
+              "description": "Cache lock buffer This field select the buffer on which the cache is locked.",
+              "access": "read-write"
             },
             {
               "name": "FC",
               "bit_offset": 11,
               "bit_width": 1,
-              "description": "Force caching. This bit force the caching into the cache regardless of the MPU attributes.  The cache must be enable (CE bit set).",
-              "enum": null
+              "description": "Force caching This bit force the caching into the cache regardless of the MPU attributes. The cache must be enable (CE bit set).",
+              "access": "read-write"
             },
             {
               "name": "PD",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "Prefetch disable. This bit disables the prefetch of the cache.",
-              "enum": null
+              "description": "Prefetch disable This bit disables the prefetch of the cache.",
+              "access": "read-write"
             },
             {
               "name": "OC",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "Outter cachability. This bit configure the cachability of an access generated by the GFXMMU cache.",
-              "enum": null
+              "description": "Outter cachability This bit configure the cachability of an access generated by the GFXMMU cache.",
+              "access": "read-write"
             },
             {
               "name": "OB",
               "bit_offset": 17,
               "bit_width": 1,
-              "description": "Outter bufferability. This bit configure the bufferability of an access generated by the GFXMMU cache.",
-              "enum": null
+              "description": "Outter bufferability This bit configure the bufferability of an access generated by the GFXMMU cache.",
+              "access": "read-write"
             }
           ]
         },
@@ -93,24 +118,46 @@
           "name": "SR",
           "offset": 4,
           "size": 32,
-          "description": "GFXMMU status register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "GFXMMU status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "GFXMMU status register.",
           "fields": [
             {
-              "name": "BOF",
+              "name": "B0OF",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Buffer overflow flag. This bit is set when an overflow occurs during the offset calculation of the buffer 0. It is cleared by writing 1 to CB0OF.",
-              "enum": null
+              "description": "Buffer 0 overflow flag This bit is set when an overflow occurs during the offset calculation of the buffer 0. It is cleared by writing 1 to CB0OF.",
+              "access": "read-only"
+            },
+            {
+              "name": "B1OF",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Buffer 1 overflow flag This bit is set when an overflow occurs during the offset calculation of the buffer 1. It is cleared by writing 1 to CB1OF.",
+              "access": "read-only"
+            },
+            {
+              "name": "B2OF",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Buffer 2 overflow flag This bit is set when an overflow occurs during the offset calculation of the buffer 2. It is cleared by writing 1 to CB2OF.",
+              "access": "read-only"
+            },
+            {
+              "name": "B3OF",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Buffer 3 overflow flag This bit is set when an overflow occurs during the offset calculation of the buffer 3. It is cleared by writing 1 to CB3OF.",
+              "access": "read-only"
             },
             {
               "name": "AMEF",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "AHB master error flag. This bit is set when an AHB error happens during a transaction. It is cleared by writing 1 to CAMEF.",
-              "enum": null
+              "description": "AHB master error flag This bit is set when an AHB error happens during a transaction. It is cleared by writing 1 to CAMEF.",
+              "access": "read-only"
             }
           ]
         },
@@ -118,24 +165,46 @@
           "name": "FCR",
           "offset": 8,
           "size": 32,
-          "description": "GFXMMU flag clear register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "GFXMMU flag clear register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "GFXMMU flag clear register.",
           "fields": [
             {
-              "name": "CBOF",
+              "name": "CB0OF",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Clear buffer overflow flag. Writing 1 clears the buffer 0 overflow flag in the GFXMMU_SR register.",
-              "enum": null
+              "description": "Clear buffer 0 overflow flag Writing 1 clears the buffer 0 overflow flag in the GFXMMU_SR register.",
+              "access": "read-write"
+            },
+            {
+              "name": "CB1OF",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Clear buffer 1 overflow flag Writing 1 clears the buffer 1 overflow flag in the GFXMMU_SR register.",
+              "access": "read-write"
+            },
+            {
+              "name": "CB2OF",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Clear buffer 2 overflow flag Writing 1 clears the buffer 2 overflow flag in the GFXMMU_SR register.",
+              "access": "read-write"
+            },
+            {
+              "name": "CB3OF",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Clear buffer 3 overflow flag Writing 1 clears the buffer 3 overflow flag in the GFXMMU_SR register.",
+              "access": "read-write"
             },
             {
               "name": "CAMEF",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "Clear AHB master error flag. Writing 1 clears the AHB master error flag in the GFXMMU_SR register.",
-              "enum": null
+              "description": "Clear AHB master error flag Writing 1 clears the AHB master error flag in the GFXMMU_SR register.",
+              "access": "read-write"
             }
           ]
         },
@@ -143,24 +212,25 @@
           "name": "CCR",
           "offset": 12,
           "size": 32,
-          "description": "GFXMMU cache control register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "GFXMMU cache control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "GFXMMU cache control register.",
           "fields": [
             {
               "name": "FF",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Force flush. When set, the cache entries are flushed. This bit is reset by hardware when the flushing is complete. Write 0 has no effect.",
-              "enum": null
+              "description": "Force flush When set, the cache entries are flushed. This bit is reset by hardware when the flushing is complete. Write 0 has no effect.",
+              "access": "read-write"
             },
             {
               "name": "FI",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Force invalidate. When set, the cache entries are invalidated. This bit is reset by hardware when the invalidation is complete. Write 0 has no effect.",
-              "enum": null
+              "description": "Force invalidate When set, the cache entries are invalidated. This bit is reset by hardware when the invalidation is complete. Write 0 has no effect.",
+              "access": "read-write"
             }
           ]
         },
@@ -168,138 +238,127 @@
           "name": "DVR",
           "offset": 16,
           "size": 32,
-          "description": "GFXMMU default value register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "GFXMMU default value register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "GFXMMU default value register.",
           "fields": [
             {
               "name": "DV",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Default value. This field indicates the default 32-bit value which is returned when a master accesses a virtual memory location not physically mapped.",
-              "enum": null
+              "description": "Default value This field indicates the default 32-bit value which is returned when a master accesses a virtual memory location not physically mapped.",
+              "access": "read-write"
             }
           ]
         },
         {
-          "name": "BCR",
+          "name": "B0CR",
           "offset": 32,
           "size": 32,
-          "description": "GFXMMU buffer 0 configuration register.",
-          "array_len": 4,
-          "array_stride": 4,
-          "fieldset_description": "GFXMMU buffer configuration register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "GFXMMU buffer 0 configuration register",
+          "array_len": null,
+          "array_stride": null,
           "fields": [
             {
               "name": "PBO",
               "bit_offset": 4,
               "bit_width": 19,
-              "description": "Physical buffer offset. Offset of the physical buffer.",
-              "enum": null
+              "description": "Physical buffer offset Offset of the physical buffer.",
+              "access": "read-write"
             },
             {
               "name": "PBBA",
               "bit_offset": 23,
               "bit_width": 9,
-              "description": "Physical buffer base address. Base address MSB of the physical buffer.",
-              "enum": null
+              "description": "Physical buffer base address Base address MSB of the physical buffer.",
+              "access": "read-write"
             }
           ]
         },
         {
-          "name": "LUTL",
-          "offset": 4096,
+          "name": "B1CR",
+          "offset": 36,
           "size": 32,
-          "description": "GFXMMU LUT entry 0 low.",
-          "array_len": 1024,
-          "array_stride": 8,
-          "fieldset_description": "GFXMMU LUT entry low.",
+          "access": null,
+          "reset_value": 0,
+          "description": "GFXMMU buffer 1 configuration register",
+          "array_len": null,
+          "array_stride": null,
           "fields": [
             {
-              "name": "EN",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Line enable.",
-              "enum": null
-            },
-            {
-              "name": "FVB",
-              "bit_offset": 8,
-              "bit_width": 8,
-              "description": "First Valid Block. Number of the first valid block of line number x.",
-              "enum": null
-            },
-            {
-              "name": "LVB",
-              "bit_offset": 16,
-              "bit_width": 8,
-              "description": "Last Valid Block. Number of the last valid block of line number X.",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "LUTH",
-          "offset": 4100,
-          "size": 32,
-          "description": "GFXMMU LUT entry 0 high.",
-          "array_len": 1024,
-          "array_stride": 8,
-          "fieldset_description": "GFXMMU LUT entry high.",
-          "fields": [
-            {
-              "name": "LO",
+              "name": "PBO",
               "bit_offset": 4,
-              "bit_width": 18,
-              "description": "Line offset. Line offset of line number x (i.e. offset of block 0 of line x).",
-              "enum": null
+              "bit_width": 19,
+              "description": "Physical buffer offset Offset of the physical buffer.",
+              "access": "read-write"
+            },
+            {
+              "name": "PBBA",
+              "bit_offset": 23,
+              "bit_width": 9,
+              "description": "Physical buffer base address Base address MSB of the physical buffer.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "B2CR",
+          "offset": 40,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "GFXMMU buffer 2 configuration register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "PBO",
+              "bit_offset": 4,
+              "bit_width": 19,
+              "description": "Physical buffer offset Offset of the physical buffer.",
+              "access": "read-write"
+            },
+            {
+              "name": "PBBA",
+              "bit_offset": 23,
+              "bit_width": 9,
+              "description": "Physical buffer base address Base address MSB of the physical buffer.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "B3CR",
+          "offset": 44,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "GFXMMU buffer 3 configuration register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "PBO",
+              "bit_offset": 4,
+              "bit_width": 19,
+              "description": "Physical buffer offset Offset of the physical buffer.",
+              "access": "read-write"
+            },
+            {
+              "name": "PBBA",
+              "bit_offset": 23,
+              "bit_width": 9,
+              "description": "Physical buffer base address Base address MSB of the physical buffer.",
+              "access": "read-write"
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "BM192": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "256BlocksPerLine",
-          "value": 0,
-          "description": "256 blocks per line."
-        },
-        {
-          "name": "192BlocksPerLine",
-          "value": 1,
-          "description": "192 blocks per line."
-        }
-      ]
-    },
-    "CLB": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "LockedOnBuffer0",
-          "value": 0,
-          "description": "Cache locked on buffer 0."
-        },
-        {
-          "name": "LockedOnBuffer1",
-          "value": 1,
-          "description": "Cache locked on buffer 1."
-        },
-        {
-          "name": "LockedOnBuffer2",
-          "value": 2,
-          "description": "Cache locked on buffer 2."
-        },
-        {
-          "name": "LockedOnBuffer3",
-          "value": 3,
-          "description": "Cache locked on buffer 3."
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

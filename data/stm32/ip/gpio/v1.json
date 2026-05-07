@@ -2,41 +2,104 @@
   "schema": 1,
   "kind": "gpio",
   "version": "v1",
+  "source": "stm32rs_svd",
+  "source_device": "stm32f100v8",
+  "source_file": "stm32f100.svd.patched",
   "blocks": {
-    "GPIO": {
-      "name": "GPIO",
+    "GPIOA": {
+      "name": "GPIOA",
       "description": "General purpose I/O",
       "extends": null,
       "registers": [
         {
-          "name": "CR",
+          "name": "CRL",
           "offset": 0,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 1145324612,
           "description": "Port configuration register low (GPIOn_CRL)",
-          "array_len": 2,
-          "array_stride": 4,
-          "fieldset_description": "Port configuration register (GPIOn_CRx)",
+          "array_len": null,
+          "array_stride": null,
           "fields": [
             {
-              "name": "MODE",
+              "name": "MODE%s",
               "bit_offset": 0,
               "bit_width": 2,
-              "description": "Port n mode bits",
-              "enum": "MODE"
+              "description": "Port n.%s mode bits",
+              "enum_values": [
+                {
+                  "name": "Input",
+                  "value": 0,
+                  "description": "Input mode (reset state)"
+                },
+                {
+                  "name": "Output",
+                  "value": 1,
+                  "description": "Output mode 10 MHz"
+                },
+                {
+                  "name": "Output2",
+                  "value": 2,
+                  "description": "Output mode 2 MHz"
+                },
+                {
+                  "name": "Output50",
+                  "value": 3,
+                  "description": "Output mode 50 MHz"
+                }
+              ]
             },
             {
-              "name": "CNF_IN",
+              "name": "CNF%s",
               "bit_offset": 2,
               "bit_width": 2,
-              "description": "Port n configuration bits, for input mode",
-              "enum": "CNF_IN"
+              "description": "Port n.%s configuration bits",
+              "enum_values": [
+                {
+                  "name": "PushPull",
+                  "value": 0,
+                  "description": "Analog mode / Push-Pull mode"
+                },
+                {
+                  "name": "OpenDrain",
+                  "value": 1,
+                  "description": "Floating input (reset state) / Open Drain-Mode"
+                },
+                {
+                  "name": "AltPushPull",
+                  "value": 2,
+                  "description": "Input with pull-up/pull-down / Alternate Function Push-Pull Mode"
+                },
+                {
+                  "name": "AltOpenDrain",
+                  "value": 3,
+                  "description": "Alternate Function Open-Drain Mode"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "CRH",
+          "offset": 4,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 1145324612,
+          "description": "Port configuration register high (GPIOn_CRL)",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "MODE%s",
+              "bit_offset": 0,
+              "bit_width": 2,
+              "description": "Port n.%s mode bits"
             },
             {
-              "name": "CNF_OUT",
+              "name": "CNF%s",
               "bit_offset": 2,
               "bit_width": 2,
-              "description": "Port n configuration bits, for output mode",
-              "enum": "CNF_OUT"
+              "description": "Port n.%s configuration bits"
             }
           ]
         },
@@ -44,17 +107,29 @@
           "name": "IDR",
           "offset": 8,
           "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
           "description": "Port input data register (GPIOn_IDR)",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Port input data register (GPIOn_IDR)",
           "fields": [
             {
-              "name": "IDR",
+              "name": "IDR%s",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "Port input data",
-              "enum": "IDR"
+              "enum_values": [
+                {
+                  "name": "Low",
+                  "value": 0,
+                  "description": "Input is logic low"
+                },
+                {
+                  "name": "High",
+                  "value": 1,
+                  "description": "Input is logic high"
+                }
+              ]
             }
           ]
         },
@@ -62,17 +137,29 @@
           "name": "ODR",
           "offset": 12,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "Port output data register (GPIOn_ODR)",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Port output data register (GPIOn_ODR)",
           "fields": [
             {
-              "name": "ODR",
+              "name": "ODR%s",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "Port output data",
-              "enum": "ODR"
+              "enum_values": [
+                {
+                  "name": "Low",
+                  "value": 0,
+                  "description": "Set output to logic low"
+                },
+                {
+                  "name": "High",
+                  "value": 1,
+                  "description": "Set output to logic high"
+                }
+              ]
             }
           ]
         },
@@ -80,24 +167,37 @@
           "name": "BSRR",
           "offset": 16,
           "size": 32,
+          "access": "write-only",
+          "reset_value": 0,
           "description": "Port bit set/reset register (GPIOn_BSRR)",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Port bit set/reset register (GPIOn_BSRR)",
           "fields": [
             {
-              "name": "BS",
+              "name": "BS%s",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Set bit",
-              "enum": null
+              "description": "Set bit %s",
+              "enum_values": [
+                {
+                  "name": "Set",
+                  "value": 1,
+                  "description": "Sets the corresponding ODRx bit"
+                }
+              ]
             },
             {
-              "name": "BR",
+              "name": "BR%s",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "Reset bit",
-              "enum": null
+              "description": "Reset bit %s",
+              "enum_values": [
+                {
+                  "name": "Reset",
+                  "value": 1,
+                  "description": "Resets the corresponding ODRx bit"
+                }
+              ]
             }
           ]
         },
@@ -105,17 +205,29 @@
           "name": "BRR",
           "offset": 20,
           "size": 32,
+          "access": "write-only",
+          "reset_value": 0,
           "description": "Port bit reset register (GPIOn_BRR)",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Port bit reset register (GPIOn_BRR)",
           "fields": [
             {
-              "name": "BR",
+              "name": "BR%s",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Reset bit",
-              "enum": null
+              "description": "Reset bit %s",
+              "enum_values": [
+                {
+                  "name": "NoAction",
+                  "value": 0,
+                  "description": "No action on the corresponding ODx bit"
+                },
+                {
+                  "name": "Reset",
+                  "value": 1,
+                  "description": "Reset the ODx bit"
+                }
+              ]
             }
           ]
         },
@@ -123,130 +235,52 @@
           "name": "LCKR",
           "offset": 24,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "Port configuration lock register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Port configuration lock register",
           "fields": [
             {
-              "name": "LCK",
+              "name": "LCK%s",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Port configuration locked",
-              "enum": null
+              "description": "Port A Lock bit %s",
+              "enum_values": [
+                {
+                  "name": "Unlocked",
+                  "value": 0,
+                  "description": "Port configuration not locked"
+                },
+                {
+                  "name": "Locked",
+                  "value": 1,
+                  "description": "Port configuration locked"
+                }
+              ]
             },
             {
               "name": "LCKK",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "Port configuration lock key active",
-              "enum": null
+              "description": "Lock key",
+              "enum_values": [
+                {
+                  "name": "NotActive",
+                  "value": 0,
+                  "description": "Port configuration lock key not active"
+                },
+                {
+                  "name": "Active",
+                  "value": 1,
+                  "description": "Port configuration lock key active"
+                }
+              ]
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "CNF_IN": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Analog",
-          "value": 0,
-          "description": "Analog mode"
-        },
-        {
-          "name": "Floating",
-          "value": 1,
-          "description": "Floating input (reset state)"
-        },
-        {
-          "name": "Pull",
-          "value": 2,
-          "description": "Input with pull-up/pull-down"
-        }
-      ]
-    },
-    "CNF_OUT": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "PushPull",
-          "value": 0,
-          "description": "Push-Pull mode"
-        },
-        {
-          "name": "OpenDrain",
-          "value": 1,
-          "description": "Open Drain-Mode"
-        },
-        {
-          "name": "AltPushPull",
-          "value": 2,
-          "description": "Alternate Function Push-Pull Mode"
-        },
-        {
-          "name": "AltOpenDrain",
-          "value": 3,
-          "description": "Alternate Function Open-Drain Mode"
-        }
-      ]
-    },
-    "IDR": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Low",
-          "value": 0,
-          "description": "Input is logic low"
-        },
-        {
-          "name": "High",
-          "value": 1,
-          "description": "Input is logic high"
-        }
-      ]
-    },
-    "MODE": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Input",
-          "value": 0,
-          "description": "Input mode (reset state)"
-        },
-        {
-          "name": "Output10Mhz",
-          "value": 1,
-          "description": "Output mode 10 MHz"
-        },
-        {
-          "name": "Output2Mhz",
-          "value": 2,
-          "description": "Output mode 2 MHz"
-        },
-        {
-          "name": "Output50Mhz",
-          "value": 3,
-          "description": "Output mode 50 MHz"
-        }
-      ]
-    },
-    "ODR": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Low",
-          "value": 0,
-          "description": "Set output to logic low"
-        },
-        {
-          "name": "High",
-          "value": 1,
-          "description": "Set output to logic high"
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

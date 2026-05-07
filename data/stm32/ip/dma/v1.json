@@ -2,557 +2,735 @@
   "schema": 1,
   "kind": "dma",
   "version": "v1",
+  "source": "stm32rs_svd",
+  "source_device": "stm32h7b3zi",
+  "source_file": "stm32h7b3.svd.patched",
   "blocks": {
-    "DMA": {
-      "name": "DMA",
+    "DMA1": {
+      "name": "DMA1",
       "description": "DMA controller",
       "extends": null,
       "registers": [
         {
-          "name": "ISR",
+          "name": "LISR",
           "offset": 0,
           "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
           "description": "low interrupt status register",
-          "array_len": 2,
-          "array_stride": 4,
-          "fieldset_description": "interrupt register",
-          "fields": [
-            {
-              "name": "FEIF",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Stream x FIFO error interrupt flag (x=3..0)",
-              "enum": null
-            },
-            {
-              "name": "DMEIF",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Stream x direct mode error interrupt flag (x=3..0)",
-              "enum": null
-            },
-            {
-              "name": "TEIF",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Stream x transfer error interrupt flag (x=3..0)",
-              "enum": null
-            },
-            {
-              "name": "HTIF",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "Stream x half transfer interrupt flag (x=3..0)",
-              "enum": null
-            },
-            {
-              "name": "TCIF",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "Stream x transfer complete interrupt flag (x = 3..0)",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "IFCR",
-          "offset": 8,
-          "size": 32,
-          "description": "low interrupt flag clear register",
-          "array_len": 2,
-          "array_stride": 4,
-          "fieldset_description": "interrupt register",
-          "fields": [
-            {
-              "name": "FEIF",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Stream x FIFO error interrupt flag (x=3..0)",
-              "enum": null
-            },
-            {
-              "name": "DMEIF",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Stream x direct mode error interrupt flag (x=3..0)",
-              "enum": null
-            },
-            {
-              "name": "TEIF",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Stream x transfer error interrupt flag (x=3..0)",
-              "enum": null
-            },
-            {
-              "name": "HTIF",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "Stream x half transfer interrupt flag (x=3..0)",
-              "enum": null
-            },
-            {
-              "name": "TCIF",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "Stream x transfer complete interrupt flag (x = 3..0)",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "ST",
-          "offset": 16,
-          "description": "Stream cluster: S?CR, S?NDTR, S?M0AR, S?M1AR and S?FCR registers",
-          "array_len": 8,
-          "array_stride": 24,
-          "fields": []
-        }
-      ]
-    },
-    "ST": {
-      "name": "ST",
-      "description": "Stream cluster: S?CR, S?NDTR, S?M0AR, S?M1AR and S?FCR registers",
-      "extends": null,
-      "registers": [
-        {
-          "name": "CR",
-          "offset": 0,
-          "size": 32,
-          "description": "stream x configuration register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "stream x configuration register",
           "fields": [
             {
-              "name": "EN",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Stream enable / flag stream ready when read low",
-              "enum": null
-            },
-            {
-              "name": "DMEIE",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Direct mode error interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "TEIE",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Transfer error interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "HTIE",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Half transfer interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "TCIE",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "Transfer complete interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "PFCTRL",
+              "name": "TCIF0",
               "bit_offset": 5,
               "bit_width": 1,
-              "description": "Peripheral flow controller",
-              "enum": "PFCTRL"
+              "description": "Stream x transfer complete interrupt flag (x = 3..0)",
+              "enum_values": [
+                {
+                  "name": "NotComplete",
+                  "value": 0,
+                  "description": "No transfer complete event on stream x"
+                },
+                {
+                  "name": "Complete",
+                  "value": 1,
+                  "description": "A transfer complete event occurred on stream x"
+                }
+              ]
             },
             {
-              "name": "DIR",
-              "bit_offset": 6,
-              "bit_width": 2,
-              "description": "Data transfer direction",
-              "enum": "DIR"
-            },
-            {
-              "name": "CIRC",
-              "bit_offset": 8,
+              "name": "TCIF3",
+              "bit_offset": 27,
               "bit_width": 1,
-              "description": "Circular mode enabled",
-              "enum": null
+              "description": "Stream x transfer complete interrupt flag (x = 3..0)"
             },
             {
-              "name": "PINC",
-              "bit_offset": 9,
+              "name": "HTIF0",
+              "bit_offset": 4,
               "bit_width": 1,
-              "description": "Peripheral increment mode enabled",
-              "enum": null
+              "description": "Stream x half transfer interrupt flag (x=3..0)",
+              "enum_values": [
+                {
+                  "name": "NotHalf",
+                  "value": 0,
+                  "description": "No half transfer event on stream x"
+                },
+                {
+                  "name": "Half",
+                  "value": 1,
+                  "description": "A half transfer event occurred on stream x"
+                }
+              ]
             },
             {
-              "name": "MINC",
-              "bit_offset": 10,
+              "name": "HTIF3",
+              "bit_offset": 26,
               "bit_width": 1,
-              "description": "Memory increment mode enabled",
-              "enum": null
+              "description": "Stream x half transfer interrupt flag (x=3..0)"
             },
             {
-              "name": "PSIZE",
-              "bit_offset": 11,
-              "bit_width": 2,
-              "description": "Peripheral data size",
-              "enum": "SIZE"
-            },
-            {
-              "name": "MSIZE",
-              "bit_offset": 13,
-              "bit_width": 2,
-              "description": "Memory data size",
-              "enum": "SIZE"
-            },
-            {
-              "name": "PINCOS",
-              "bit_offset": 15,
+              "name": "TEIF0",
+              "bit_offset": 3,
               "bit_width": 1,
-              "description": "Peripheral increment offset size",
-              "enum": "PINCOS"
+              "description": "Stream x transfer error interrupt flag (x=3..0)",
+              "enum_values": [
+                {
+                  "name": "NoError",
+                  "value": 0,
+                  "description": "No transfer error on stream x"
+                },
+                {
+                  "name": "Error",
+                  "value": 1,
+                  "description": "A transfer error occurred on stream x"
+                }
+              ]
             },
             {
-              "name": "PL",
-              "bit_offset": 16,
-              "bit_width": 2,
-              "description": "Priority level",
-              "enum": "PL"
-            },
-            {
-              "name": "DBM",
-              "bit_offset": 18,
+              "name": "TEIF3",
+              "bit_offset": 25,
               "bit_width": 1,
-              "description": "Double buffer mode enabled",
-              "enum": null
+              "description": "Stream x transfer error interrupt flag (x=3..0)"
             },
             {
-              "name": "CT",
-              "bit_offset": 19,
+              "name": "DMEIF0",
+              "bit_offset": 2,
               "bit_width": 1,
-              "description": "Current target (only in double buffer mode)",
-              "enum": "CT"
+              "description": "Stream x direct mode error interrupt flag (x=3..0)",
+              "enum_values": [
+                {
+                  "name": "NoError",
+                  "value": 0,
+                  "description": "No Direct Mode error on stream x"
+                },
+                {
+                  "name": "Error",
+                  "value": 1,
+                  "description": "A Direct Mode error occurred on stream x"
+                }
+              ]
             },
             {
-              "name": "TRBUFF",
+              "name": "DMEIF3",
+              "bit_offset": 24,
+              "bit_width": 1,
+              "description": "Stream x direct mode error interrupt flag (x=3..0)"
+            },
+            {
+              "name": "FEIF0",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Stream x FIFO error interrupt flag (x=3..0)",
+              "enum_values": [
+                {
+                  "name": "NoError",
+                  "value": 0,
+                  "description": "No FIFO error event on stream x"
+                },
+                {
+                  "name": "Error",
+                  "value": 1,
+                  "description": "A FIFO error event occurred on stream x"
+                }
+              ]
+            },
+            {
+              "name": "FEIF3",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "Stream x FIFO error interrupt flag (x=3..0)"
+            },
+            {
+              "name": "TCIF2",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "Stream x transfer complete interrupt flag (x = 3..0)"
+            },
+            {
+              "name": "HTIF2",
               "bit_offset": 20,
               "bit_width": 1,
-              "description": "Enable bufferable transfers",
-              "enum": null
+              "description": "Stream x half transfer interrupt flag (x=3..0)"
             },
             {
-              "name": "PBURST",
-              "bit_offset": 21,
-              "bit_width": 2,
-              "description": "Peripheral burst transfer configuration",
-              "enum": "BURST"
+              "name": "TEIF2",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "Stream x transfer error interrupt flag (x=3..0)"
             },
             {
-              "name": "MBURST",
-              "bit_offset": 23,
-              "bit_width": 2,
-              "description": "Memory burst transfer configuration",
-              "enum": "BURST"
+              "name": "DMEIF2",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "Stream x direct mode error interrupt flag (x=3..0)"
+            },
+            {
+              "name": "FEIF2",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Stream x FIFO error interrupt flag (x=3..0)"
+            },
+            {
+              "name": "TCIF1",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "Stream x transfer complete interrupt flag (x = 3..0)"
+            },
+            {
+              "name": "HTIF1",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Stream x half transfer interrupt flag (x=3..0)"
+            },
+            {
+              "name": "TEIF1",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Stream x transfer error interrupt flag (x=3..0)"
+            },
+            {
+              "name": "DMEIF1",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Stream x direct mode error interrupt flag (x=3..0)"
+            },
+            {
+              "name": "FEIF1",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Stream x FIFO error interrupt flag (x=3..0)"
             }
           ]
         },
         {
-          "name": "NDTR",
+          "name": "HISR",
           "offset": 4,
           "size": 32,
-          "description": "stream x number of data register",
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "high interrupt status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "stream x number of data register",
           "fields": [
             {
-              "name": "NDT",
+              "name": "TCIF4",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Stream x transfer complete interrupt flag (x=7..4)",
+              "enum_values": [
+                {
+                  "name": "NotComplete",
+                  "value": 0,
+                  "description": "No transfer complete event on stream x"
+                },
+                {
+                  "name": "Complete",
+                  "value": 1,
+                  "description": "A transfer complete event occurred on stream x"
+                }
+              ]
+            },
+            {
+              "name": "TCIF7",
+              "bit_offset": 27,
+              "bit_width": 1,
+              "description": "Stream x transfer complete interrupt flag (x=7..4)"
+            },
+            {
+              "name": "HTIF4",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Stream x half transfer interrupt flag (x=7..4)",
+              "enum_values": [
+                {
+                  "name": "NotHalf",
+                  "value": 0,
+                  "description": "No half transfer event on stream x"
+                },
+                {
+                  "name": "Half",
+                  "value": 1,
+                  "description": "A half transfer event occurred on stream x"
+                }
+              ]
+            },
+            {
+              "name": "HTIF7",
+              "bit_offset": 26,
+              "bit_width": 1,
+              "description": "Stream x half transfer interrupt flag (x=7..4)"
+            },
+            {
+              "name": "TEIF4",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Stream x transfer error interrupt flag (x=7..4)",
+              "enum_values": [
+                {
+                  "name": "NoError",
+                  "value": 0,
+                  "description": "No transfer error on stream x"
+                },
+                {
+                  "name": "Error",
+                  "value": 1,
+                  "description": "A transfer error occurred on stream x"
+                }
+              ]
+            },
+            {
+              "name": "TEIF7",
+              "bit_offset": 25,
+              "bit_width": 1,
+              "description": "Stream x transfer error interrupt flag (x=7..4)"
+            },
+            {
+              "name": "DMEIF4",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Stream x direct mode error interrupt flag (x=7..4)",
+              "enum_values": [
+                {
+                  "name": "NoError",
+                  "value": 0,
+                  "description": "No Direct Mode error on stream x"
+                },
+                {
+                  "name": "Error",
+                  "value": 1,
+                  "description": "A Direct Mode error occurred on stream x"
+                }
+              ]
+            },
+            {
+              "name": "DMEIF7",
+              "bit_offset": 24,
+              "bit_width": 1,
+              "description": "Stream x direct mode error interrupt flag (x=7..4)"
+            },
+            {
+              "name": "FEIF4",
               "bit_offset": 0,
-              "bit_width": 16,
-              "description": "Number of data items to transfer",
-              "enum": null
+              "bit_width": 1,
+              "description": "Stream x FIFO error interrupt flag (x=7..4)",
+              "enum_values": [
+                {
+                  "name": "NoError",
+                  "value": 0,
+                  "description": "No FIFO error event on stream x"
+                },
+                {
+                  "name": "Error",
+                  "value": 1,
+                  "description": "A FIFO error event occurred on stream x"
+                }
+              ]
+            },
+            {
+              "name": "FEIF7",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "Stream x FIFO error interrupt flag (x=7..4)"
+            },
+            {
+              "name": "TCIF6",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "Stream x transfer complete interrupt flag (x=7..4)"
+            },
+            {
+              "name": "HTIF6",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "Stream x half transfer interrupt flag (x=7..4)"
+            },
+            {
+              "name": "TEIF6",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "Stream x transfer error interrupt flag (x=7..4)"
+            },
+            {
+              "name": "DMEIF6",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "Stream x direct mode error interrupt flag (x=7..4)"
+            },
+            {
+              "name": "FEIF6",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Stream x FIFO error interrupt flag (x=7..4)"
+            },
+            {
+              "name": "TCIF5",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "Stream x transfer complete interrupt flag (x=7..4)"
+            },
+            {
+              "name": "HTIF5",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Stream x half transfer interrupt flag (x=7..4)"
+            },
+            {
+              "name": "TEIF5",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Stream x transfer error interrupt flag (x=7..4)"
+            },
+            {
+              "name": "DMEIF5",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Stream x direct mode error interrupt flag (x=7..4)"
+            },
+            {
+              "name": "FEIF5",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Stream x FIFO error interrupt flag (x=7..4)"
             }
           ]
         },
         {
-          "name": "PAR",
+          "name": "LIFCR",
           "offset": 8,
-          "description": "stream x peripheral address register",
-          "array_len": null,
-          "array_stride": null,
-          "fields": []
-        },
-        {
-          "name": "M0AR",
-          "offset": 12,
-          "description": "stream x memory 0 address register",
-          "array_len": null,
-          "array_stride": null,
-          "fields": []
-        },
-        {
-          "name": "M1AR",
-          "offset": 16,
-          "description": "stream x memory 1 address register",
-          "array_len": null,
-          "array_stride": null,
-          "fields": []
-        },
-        {
-          "name": "FCR",
-          "offset": 20,
           "size": 32,
-          "description": "stream x FIFO control register",
+          "access": "write-only",
+          "reset_value": 0,
+          "description": "low interrupt flag clear register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "stream x FIFO control register",
           "fields": [
             {
-              "name": "FTH",
-              "bit_offset": 0,
-              "bit_width": 2,
-              "description": "FIFO threshold selection",
-              "enum": "FTH"
+              "name": "CTCIF0",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Stream x clear transfer complete interrupt flag (x = 3..0)",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clear the corresponding TCIFx flag"
+                }
+              ]
             },
             {
-              "name": "DMDIS",
+              "name": "CTCIF3",
+              "bit_offset": 27,
+              "bit_width": 1,
+              "description": "Stream x clear transfer complete interrupt flag (x = 3..0)"
+            },
+            {
+              "name": "CHTIF0",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Stream x clear half transfer interrupt flag (x = 3..0)",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clear the corresponding HTIFx flag"
+                }
+              ]
+            },
+            {
+              "name": "CHTIF3",
+              "bit_offset": 26,
+              "bit_width": 1,
+              "description": "Stream x clear half transfer interrupt flag (x = 3..0)"
+            },
+            {
+              "name": "CTEIF0",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Stream x clear transfer error interrupt flag (x = 3..0)",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clear the corresponding TEIFx flag"
+                }
+              ]
+            },
+            {
+              "name": "CTEIF3",
+              "bit_offset": 25,
+              "bit_width": 1,
+              "description": "Stream x clear transfer error interrupt flag (x = 3..0)"
+            },
+            {
+              "name": "CDMEIF0",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "Direct mode disable",
-              "enum": "DMDIS"
+              "description": "Stream x clear direct mode error interrupt flag (x = 3..0)",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clear the corresponding DMEIFx flag"
+                }
+              ]
             },
             {
-              "name": "FS",
-              "bit_offset": 3,
-              "bit_width": 3,
-              "description": "FIFO status",
-              "enum": "FS"
-            },
-            {
-              "name": "FEIE",
-              "bit_offset": 7,
+              "name": "CDMEIF3",
+              "bit_offset": 24,
               "bit_width": 1,
-              "description": "FIFO error interrupt enable",
-              "enum": null
+              "description": "Stream x clear direct mode error interrupt flag (x = 3..0)"
+            },
+            {
+              "name": "CFEIF0",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Stream x clear FIFO error interrupt flag (x = 3..0)",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clear the corresponding CFEIFx flag"
+                }
+              ]
+            },
+            {
+              "name": "CFEIF3",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "Stream x clear FIFO error interrupt flag (x = 3..0)"
+            },
+            {
+              "name": "CTCIF2",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "Stream x clear transfer complete interrupt flag (x = 3..0)"
+            },
+            {
+              "name": "CHTIF2",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "Stream x clear half transfer interrupt flag (x = 3..0)"
+            },
+            {
+              "name": "CTEIF2",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "Stream x clear transfer error interrupt flag (x = 3..0)"
+            },
+            {
+              "name": "CDMEIF2",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "Stream x clear direct mode error interrupt flag (x = 3..0)"
+            },
+            {
+              "name": "CFEIF2",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Stream x clear FIFO error interrupt flag (x = 3..0)"
+            },
+            {
+              "name": "CTCIF1",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "Stream x clear transfer complete interrupt flag (x = 3..0)"
+            },
+            {
+              "name": "CHTIF1",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Stream x clear half transfer interrupt flag (x = 3..0)"
+            },
+            {
+              "name": "CTEIF1",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Stream x clear transfer error interrupt flag (x = 3..0)"
+            },
+            {
+              "name": "CDMEIF1",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Stream x clear direct mode error interrupt flag (x = 3..0)"
+            },
+            {
+              "name": "CFEIF1",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Stream x clear FIFO error interrupt flag (x = 3..0)"
+            }
+          ]
+        },
+        {
+          "name": "HIFCR",
+          "offset": 12,
+          "size": 32,
+          "access": "write-only",
+          "reset_value": 0,
+          "description": "high interrupt flag clear register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "CTCIF4",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Stream x clear transfer complete interrupt flag (x = 7..4)",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clear the corresponding TCIFx flag"
+                }
+              ]
+            },
+            {
+              "name": "CTCIF7",
+              "bit_offset": 27,
+              "bit_width": 1,
+              "description": "Stream x clear transfer complete interrupt flag (x = 7..4)"
+            },
+            {
+              "name": "CHTIF4",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Stream x clear half transfer interrupt flag (x = 7..4)",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clear the corresponding HTIFx flag"
+                }
+              ]
+            },
+            {
+              "name": "CHTIF7",
+              "bit_offset": 26,
+              "bit_width": 1,
+              "description": "Stream x clear half transfer interrupt flag (x = 7..4)"
+            },
+            {
+              "name": "CTEIF4",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Stream x clear transfer error interrupt flag (x = 7..4)",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clear the corresponding TEIFx flag"
+                }
+              ]
+            },
+            {
+              "name": "CTEIF7",
+              "bit_offset": 25,
+              "bit_width": 1,
+              "description": "Stream x clear transfer error interrupt flag (x = 7..4)"
+            },
+            {
+              "name": "CDMEIF4",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Stream x clear direct mode error interrupt flag (x = 7..4)",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clear the corresponding DMEIFx flag"
+                }
+              ]
+            },
+            {
+              "name": "CDMEIF7",
+              "bit_offset": 24,
+              "bit_width": 1,
+              "description": "Stream x clear direct mode error interrupt flag (x = 7..4)"
+            },
+            {
+              "name": "CFEIF4",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Stream x clear FIFO error interrupt flag (x = 7..4)",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clear the corresponding CFEIFx flag"
+                }
+              ]
+            },
+            {
+              "name": "CFEIF7",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "Stream x clear FIFO error interrupt flag (x = 7..4)"
+            },
+            {
+              "name": "CTCIF6",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "Stream x clear transfer complete interrupt flag (x = 7..4)"
+            },
+            {
+              "name": "CHTIF6",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "Stream x clear half transfer interrupt flag (x = 7..4)"
+            },
+            {
+              "name": "CTEIF6",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "Stream x clear transfer error interrupt flag (x = 7..4)"
+            },
+            {
+              "name": "CDMEIF6",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "Stream x clear direct mode error interrupt flag (x = 7..4)"
+            },
+            {
+              "name": "CFEIF6",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Stream x clear FIFO error interrupt flag (x = 7..4)"
+            },
+            {
+              "name": "CTCIF5",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "Stream x clear transfer complete interrupt flag (x = 7..4)"
+            },
+            {
+              "name": "CHTIF5",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Stream x clear half transfer interrupt flag (x = 7..4)"
+            },
+            {
+              "name": "CTEIF5",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Stream x clear transfer error interrupt flag (x = 7..4)"
+            },
+            {
+              "name": "CDMEIF5",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Stream x clear direct mode error interrupt flag (x = 7..4)"
+            },
+            {
+              "name": "CFEIF5",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Stream x clear FIFO error interrupt flag (x = 7..4)"
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "BURST": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Single",
-          "value": 0,
-          "description": "Single transfer"
-        },
-        {
-          "name": "INCR4",
-          "value": 1,
-          "description": "Incremental burst of 4 beats"
-        },
-        {
-          "name": "INCR8",
-          "value": 2,
-          "description": "Incremental burst of 8 beats"
-        },
-        {
-          "name": "INCR16",
-          "value": 3,
-          "description": "Incremental burst of 16 beats"
-        }
-      ]
-    },
-    "CT": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Memory0",
-          "value": 0,
-          "description": "The current target memory is Memory 0"
-        },
-        {
-          "name": "Memory1",
-          "value": 1,
-          "description": "The current target memory is Memory 1"
-        }
-      ]
-    },
-    "DIR": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "PeripheralToMemory",
-          "value": 0,
-          "description": "Peripheral-to-memory"
-        },
-        {
-          "name": "MemoryToPeripheral",
-          "value": 1,
-          "description": "Memory-to-peripheral"
-        },
-        {
-          "name": "MemoryToMemory",
-          "value": 2,
-          "description": "Memory-to-memory"
-        }
-      ]
-    },
-    "DMDIS": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Enabled",
-          "value": 0,
-          "description": "Direct mode is enabled"
-        },
-        {
-          "name": "Disabled",
-          "value": 1,
-          "description": "Direct mode is disabled"
-        }
-      ]
-    },
-    "FS": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "Quarter1",
-          "value": 0,
-          "description": "0 < fifo_level < 1/4"
-        },
-        {
-          "name": "Quarter2",
-          "value": 1,
-          "description": "1/4 <= fifo_level < 1/2"
-        },
-        {
-          "name": "Quarter3",
-          "value": 2,
-          "description": "1/2 <= fifo_level < 3/4"
-        },
-        {
-          "name": "Quarter4",
-          "value": 3,
-          "description": "3/4 <= fifo_level < full"
-        },
-        {
-          "name": "Empty",
-          "value": 4,
-          "description": "FIFO is empty"
-        },
-        {
-          "name": "Full",
-          "value": 5,
-          "description": "FIFO is full"
-        }
-      ]
-    },
-    "FTH": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Quarter",
-          "value": 0,
-          "description": "1/4 full FIFO"
-        },
-        {
-          "name": "Half",
-          "value": 1,
-          "description": "1/2 full FIFO"
-        },
-        {
-          "name": "ThreeQuarters",
-          "value": 2,
-          "description": "3/4 full FIFO"
-        },
-        {
-          "name": "Full",
-          "value": 3,
-          "description": "Full FIFO"
-        }
-      ]
-    },
-    "PFCTRL": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "DMA",
-          "value": 0,
-          "description": "The DMA is the flow controller"
-        },
-        {
-          "name": "Peripheral",
-          "value": 1,
-          "description": "The peripheral is the flow controller"
-        }
-      ]
-    },
-    "PINCOS": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "PSIZE",
-          "value": 0,
-          "description": "The offset size for the peripheral address calculation is linked to the PSIZE"
-        },
-        {
-          "name": "Fixed4",
-          "value": 1,
-          "description": "The offset size for the peripheral address calculation is fixed to 4 (32-bit alignment)"
-        }
-      ]
-    },
-    "PL": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Low",
-          "value": 0,
-          "description": "Low"
-        },
-        {
-          "name": "Medium",
-          "value": 1,
-          "description": "Medium"
-        },
-        {
-          "name": "High",
-          "value": 2,
-          "description": "High"
-        },
-        {
-          "name": "VeryHigh",
-          "value": 3,
-          "description": "Very high"
-        }
-      ]
-    },
-    "SIZE": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Bits8",
-          "value": 0,
-          "description": "Byte (8-bit)"
-        },
-        {
-          "name": "Bits16",
-          "value": 1,
-          "description": "Half-word (16-bit)"
-        },
-        {
-          "name": "Bits32",
-          "value": 2,
-          "description": "Word (32-bit)"
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

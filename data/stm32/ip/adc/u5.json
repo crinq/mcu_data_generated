@@ -2,1010 +2,235 @@
   "schema": 1,
   "kind": "adc",
   "version": "u5",
+  "source": "stm32rs_svd",
+  "source_device": "stm32u535cb",
+  "source_file": "stm32u535.svd.patched",
   "blocks": {
-    "ADC": {
-      "name": "ADC",
-      "description": "ADC1.",
+    "ADC1": {
+      "name": "ADC1",
+      "description": "ADC1",
       "extends": null,
       "registers": [
         {
           "name": "ISR",
           "offset": 0,
           "size": 32,
-          "description": "ADC interrupt and status register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "ADC interrupt and status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "ADC interrupt and status register.",
           "fields": [
             {
-              "name": "ADRDY",
-              "bit_offset": 0,
+              "name": "LDORDY",
+              "bit_offset": 12,
               "bit_width": 1,
-              "description": "ADRDY.",
-              "enum": null
+              "description": "LDORDY",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "ADC voltage regulator disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "ADC voltage regulator enabled"
+                }
+              ]
             },
             {
-              "name": "EOSMP",
-              "bit_offset": 1,
+              "name": "AWD%s",
+              "bit_offset": 7,
               "bit_width": 1,
-              "description": "EOSMP.",
-              "enum": null
-            },
-            {
-              "name": "EOC",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "EOC.",
-              "enum": null
-            },
-            {
-              "name": "EOS",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "EOS.",
-              "enum": null
-            },
-            {
-              "name": "OVR",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "OVR.",
-              "enum": null
-            },
-            {
-              "name": "JEOC",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "JEOC.",
-              "enum": null
+              "description": "Analog watchdog %s flag",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoEvent",
+                  "value": 0,
+                  "description": "No analog watchdog x event occurred (or the flag event was already acknowledged and cleared by software)"
+                },
+                {
+                  "name": "Event",
+                  "value": 1,
+                  "description": "Analog watchdog x event occurred"
+                },
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clear the analog watchdog x event flag"
+                }
+              ]
             },
             {
               "name": "JEOS",
               "bit_offset": 6,
               "bit_width": 1,
-              "description": "JEOS.",
-              "enum": null
+              "description": "JEOS",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NotComplete",
+                  "value": 0,
+                  "description": "Injected conversion sequence not complete (or the flag event was already acknowledged and cleared by software)"
+                },
+                {
+                  "name": "Complete",
+                  "value": 1,
+                  "description": "Injected conversions sequence complete"
+                },
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clear the injected conversion sequence flag"
+                }
+              ]
             },
             {
-              "name": "AWD",
-              "bit_offset": 7,
-              "bit_width": 1,
-              "description": "AWD1.",
-              "enum": null
-            },
-            {
-              "name": "LDORDY",
-              "bit_offset": 12,
-              "bit_width": 1,
-              "description": "LDORDY.",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "IER",
-          "offset": 4,
-          "size": 32,
-          "description": "ADC interrupt enable register.",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "ADC interrupt enable register.",
-          "fields": [
-            {
-              "name": "ADRDYIE",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "ADRDYIE.",
-              "enum": null
-            },
-            {
-              "name": "EOSMPIE",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "EOSMPIE.",
-              "enum": null
-            },
-            {
-              "name": "EOCIE",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "EOCIE.",
-              "enum": null
-            },
-            {
-              "name": "EOSIE",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "EOSIE.",
-              "enum": null
-            },
-            {
-              "name": "OVRIE",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "OVRIE.",
-              "enum": null
-            },
-            {
-              "name": "JEOCIE",
+              "name": "JEOC",
               "bit_offset": 5,
               "bit_width": 1,
-              "description": "JEOCIE.",
-              "enum": null
-            },
-            {
-              "name": "JEOSIE",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "JEOSIE.",
-              "enum": null
-            },
-            {
-              "name": "AWDIE",
-              "bit_offset": 7,
-              "bit_width": 1,
-              "description": "AWD1IE.",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "CR",
-          "offset": 8,
-          "size": 32,
-          "description": "ADC control register.",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "ADC control register.",
-          "fields": [
-            {
-              "name": "ADEN",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "ADEN.",
-              "enum": null
-            },
-            {
-              "name": "ADDIS",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "ADDIS.",
-              "enum": null
-            },
-            {
-              "name": "ADSTART",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "ADSTART.",
-              "enum": null
-            },
-            {
-              "name": "JADSTART",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "JADSTART.",
-              "enum": null
-            },
-            {
-              "name": "ADSTP",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "ADSTP.",
-              "enum": "ADSTP"
-            },
-            {
-              "name": "JADSTP",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "JADSTP.",
-              "enum": null
-            },
-            {
-              "name": "ADCALLIN",
-              "bit_offset": 16,
-              "bit_width": 1,
-              "description": "ADCALLIN.",
-              "enum": null
-            },
-            {
-              "name": "CALINDEX",
-              "bit_offset": 24,
-              "bit_width": 4,
-              "description": "CALINDEX.",
-              "enum": null
-            },
-            {
-              "name": "ADVREGEN",
-              "bit_offset": 28,
-              "bit_width": 1,
-              "description": "ADVREGEN.",
-              "enum": null
-            },
-            {
-              "name": "DEEPPWD",
-              "bit_offset": 29,
-              "bit_width": 1,
-              "description": "DEEPPWD.",
-              "enum": null
-            },
-            {
-              "name": "ADCAL",
-              "bit_offset": 31,
-              "bit_width": 1,
-              "description": "ADCAL.",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "CFGR",
-          "offset": 12,
-          "size": 32,
-          "description": "ADC configuration register.",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "ADC configuration register.",
-          "fields": [
-            {
-              "name": "DMNGT",
-              "bit_offset": 0,
-              "bit_width": 2,
-              "description": "DMNGT.",
-              "enum": "DMNGT"
-            },
-            {
-              "name": "RES",
-              "bit_offset": 2,
-              "bit_width": 2,
-              "description": "RES.",
-              "enum": "RES"
-            },
-            {
-              "name": "EXTSEL",
-              "bit_offset": 5,
-              "bit_width": 5,
-              "description": "EXTSEL.",
-              "enum": null
-            },
-            {
-              "name": "EXTEN",
-              "bit_offset": 10,
-              "bit_width": 2,
-              "description": "EXTEN.",
-              "enum": "EXTEN"
-            },
-            {
-              "name": "OVRMOD",
-              "bit_offset": 12,
-              "bit_width": 1,
-              "description": "OVRMOD.",
-              "enum": null
-            },
-            {
-              "name": "CONT",
-              "bit_offset": 13,
-              "bit_width": 1,
-              "description": "CONT.",
-              "enum": null
-            },
-            {
-              "name": "AUTDLY",
-              "bit_offset": 14,
-              "bit_width": 1,
-              "description": "AUTDLY.",
-              "enum": null
-            },
-            {
-              "name": "DISCEN",
-              "bit_offset": 16,
-              "bit_width": 1,
-              "description": "DISCEN.",
-              "enum": null
-            },
-            {
-              "name": "DISCNUM",
-              "bit_offset": 17,
-              "bit_width": 3,
-              "description": "DISCNUM.",
-              "enum": null
-            },
-            {
-              "name": "JDISCEN",
-              "bit_offset": 20,
-              "bit_width": 1,
-              "description": "JDISCEN.",
-              "enum": null
-            },
-            {
-              "name": "AWD1SGL",
-              "bit_offset": 22,
-              "bit_width": 1,
-              "description": "AWD1SGL.",
-              "enum": null
-            },
-            {
-              "name": "AWD1EN",
-              "bit_offset": 23,
-              "bit_width": 1,
-              "description": "AWD1EN.",
-              "enum": null
-            },
-            {
-              "name": "JAWD1EN",
-              "bit_offset": 24,
-              "bit_width": 1,
-              "description": "JAWD1EN.",
-              "enum": null
-            },
-            {
-              "name": "JAUTO",
-              "bit_offset": 25,
-              "bit_width": 1,
-              "description": "JAUTO.",
-              "enum": null
-            },
-            {
-              "name": "AWD1CH",
-              "bit_offset": 26,
-              "bit_width": 5,
-              "description": "AWD1CH.",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "CFGR2",
-          "offset": 16,
-          "size": 32,
-          "description": "ADC configuration register 2.",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "ADC configuration register 2.",
-          "fields": [
-            {
-              "name": "ROVSE",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "ROVSE.",
-              "enum": null
-            },
-            {
-              "name": "JOVSE",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "JOVSE.",
-              "enum": null
-            },
-            {
-              "name": "OVSS",
-              "bit_offset": 5,
-              "bit_width": 4,
-              "description": "OVSS.",
-              "enum": null
-            },
-            {
-              "name": "TROVS",
-              "bit_offset": 9,
-              "bit_width": 1,
-              "description": "TROVS.",
-              "enum": null
-            },
-            {
-              "name": "ROVSM",
-              "bit_offset": 10,
-              "bit_width": 1,
-              "description": "ROVSM.",
-              "enum": null
-            },
-            {
-              "name": "BULB",
-              "bit_offset": 13,
-              "bit_width": 1,
-              "description": "BULB.",
-              "enum": null
-            },
-            {
-              "name": "SWTRIG",
-              "bit_offset": 14,
-              "bit_width": 1,
-              "description": "SWTRIG.",
-              "enum": null
-            },
-            {
-              "name": "SMPTRIG",
-              "bit_offset": 15,
-              "bit_width": 1,
-              "description": "SMPTRIG.",
-              "enum": null
-            },
-            {
-              "name": "OVSR",
-              "bit_offset": 16,
-              "bit_width": 10,
-              "description": "OVSR.",
-              "enum": null
-            },
-            {
-              "name": "LFTRIG",
-              "bit_offset": 27,
-              "bit_width": 1,
-              "description": "LFTRIG.",
-              "enum": null
-            },
-            {
-              "name": "LSHIFT",
-              "bit_offset": 28,
-              "bit_width": 4,
-              "description": "LSHIFT.",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "SMPR",
-          "offset": 20,
-          "size": 32,
-          "description": "sampling time register 1-2",
-          "array_len": 2,
-          "array_stride": 4,
-          "fieldset_description": "ADC sample time register 1.",
-          "fields": [
-            {
-              "name": "SMP",
-              "bit_offset": 0,
-              "bit_width": 3,
-              "description": "SMP0.",
-              "enum": "SAMPLE_TIME"
-            }
-          ]
-        },
-        {
-          "name": "PCSEL",
-          "offset": 28,
-          "size": 32,
-          "description": "ADC channel preselection register.",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "ADC channel preselection register.",
-          "fields": [
-            {
-              "name": "PCSEL",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "PCSEL.",
-              "enum": "PCSEL"
-            }
-          ]
-        },
-        {
-          "name": "SQR1",
-          "offset": 48,
-          "size": 32,
-          "description": "ADC regular sequence register 1.",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "ADC regular sequence register 1.",
-          "fields": [
-            {
-              "name": "L",
-              "bit_offset": 0,
-              "bit_width": 4,
-              "description": "L.",
-              "enum": null
-            },
-            {
-              "name": "SQ",
-              "bit_offset": 6,
-              "bit_width": 5,
-              "description": "SQ1.",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "SQR2",
-          "offset": 52,
-          "size": 32,
-          "description": "ADC regular sequence register 2.",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "ADC regular sequence register 2.",
-          "fields": [
-            {
-              "name": "SQ",
-              "bit_offset": 0,
-              "bit_width": 5,
-              "description": "SQ5.",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "SQR3",
-          "offset": 56,
-          "size": 32,
-          "description": "ADC regular sequence register 3.",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "ADC regular sequence register 3.",
-          "fields": [
-            {
-              "name": "SQ",
-              "bit_offset": 0,
-              "bit_width": 5,
-              "description": "SQ10.",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "SQR4",
-          "offset": 60,
-          "size": 32,
-          "description": "ADC regular sequence register 4.",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "ADC regular sequence register 4.",
-          "fields": [
-            {
-              "name": "SQ",
-              "bit_offset": 0,
-              "bit_width": 5,
-              "description": "SQ15.",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "DR",
-          "offset": 64,
-          "size": 32,
-          "description": "ADC regular Data Register.",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "ADC regular Data Register.",
-          "fields": [
-            {
-              "name": "RDATA",
-              "bit_offset": 0,
-              "bit_width": 32,
-              "description": "RDATA.",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "JSQR",
-          "offset": 76,
-          "size": 32,
-          "description": "ADC injected sequence register.",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "ADC injected sequence register.",
-          "fields": [
-            {
-              "name": "JL",
-              "bit_offset": 0,
-              "bit_width": 2,
-              "description": "JL.",
-              "enum": null
-            },
-            {
-              "name": "JEXTSEL",
-              "bit_offset": 2,
-              "bit_width": 5,
-              "description": "JEXTSEL.",
-              "enum": null
-            },
-            {
-              "name": "JEXTEN",
-              "bit_offset": 7,
-              "bit_width": 2,
-              "description": "JEXTEN.",
-              "enum": null
-            },
-            {
-              "name": "JSQ",
-              "bit_offset": 9,
-              "bit_width": 5,
-              "description": "JSQ1.",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "OFR",
-          "offset": 96,
-          "size": 32,
-          "description": "ADC offset register.",
-          "array_len": 4,
-          "array_stride": 4,
-          "fieldset_description": "ADC offset register.",
-          "fields": [
-            {
-              "name": "OFFSET",
-              "bit_offset": 0,
-              "bit_width": 24,
-              "description": "OFFSET.",
-              "enum": null
-            },
-            {
-              "name": "POSOFF",
-              "bit_offset": 24,
-              "bit_width": 1,
-              "description": "POSOFF.",
-              "enum": null
-            },
-            {
-              "name": "USAT",
-              "bit_offset": 25,
-              "bit_width": 1,
-              "description": "USAT.",
-              "enum": null
-            },
-            {
-              "name": "SSAT",
-              "bit_offset": 26,
-              "bit_width": 1,
-              "description": "SSAT.",
-              "enum": null
-            },
-            {
-              "name": "OFFSET_CH",
-              "bit_offset": 27,
-              "bit_width": 5,
-              "description": "OFFSET_CH.",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "GCOMP",
-          "offset": 112,
-          "size": 32,
-          "description": "ADC gain compensation register.",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "ADC gain compensation register.",
-          "fields": [
-            {
-              "name": "GCOMPCOEFF",
-              "bit_offset": 0,
-              "bit_width": 14,
-              "description": "GCOMPCOEFF.",
-              "enum": null
-            },
-            {
-              "name": "GCOMP",
-              "bit_offset": 31,
-              "bit_width": 1,
-              "description": "GCOMP.",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "JDR",
-          "offset": 128,
-          "size": 32,
-          "description": "ADC injected data register.",
-          "array_len": 4,
-          "array_stride": 4,
-          "fieldset_description": "ADC injected data register.",
-          "fields": [
-            {
-              "name": "JDATA",
-              "bit_offset": 0,
-              "bit_width": 32,
-              "description": "JDATA.",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "AWD2CR",
-          "offset": 160,
-          "size": 32,
-          "description": "ADC analog watchdog 2 configuration register.",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "ADC analog watchdog 2 configuration register.",
-          "fields": [
-            {
-              "name": "AWD2CH",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "AWD2CH.",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "AWD3CR",
-          "offset": 164,
-          "size": 32,
-          "description": "ADC analog watchdog 3 configuration register.",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "ADC analog watchdog 3 configuration register.",
-          "fields": [
-            {
-              "name": "AWD3CH",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "AWD3CH.",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "LTR1",
-          "offset": 168,
-          "size": 32,
-          "description": "ADC watchdog threshold register 1.",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "ADC watchdog threshold register 1.",
-          "fields": [
-            {
-              "name": "LTR1",
-              "bit_offset": 0,
-              "bit_width": 25,
-              "description": "LTR1.",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "HTR1",
-          "offset": 172,
-          "size": 32,
-          "description": "ADC watchdog threshold register 1.",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "ADC watchdog threshold register 1.",
-          "fields": [
-            {
-              "name": "HTR1",
-              "bit_offset": 0,
-              "bit_width": 25,
-              "description": "HTR1.",
-              "enum": null
-            },
-            {
-              "name": "AWDFILT1",
-              "bit_offset": 29,
-              "bit_width": 3,
-              "description": "AWDFILT1.",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "LTR2",
-          "offset": 176,
-          "size": 32,
-          "description": "ADC watchdog lower threshold register 2.",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "ADC watchdog lower threshold register 2.",
-          "fields": [
-            {
-              "name": "LTR2",
-              "bit_offset": 0,
-              "bit_width": 25,
-              "description": "LTR2.",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "HTR2",
-          "offset": 180,
-          "size": 32,
-          "description": "ADC watchdog higher threshold register 2.",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "ADC watchdog higher threshold register 2.",
-          "fields": [
-            {
-              "name": "HTR2",
-              "bit_offset": 0,
-              "bit_width": 25,
-              "description": "HTR2.",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "LTR3",
-          "offset": 184,
-          "size": 32,
-          "description": "ADC watchdog lower threshold register 3.",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "ADC watchdog lower threshold register 3.",
-          "fields": [
-            {
-              "name": "LTR3",
-              "bit_offset": 0,
-              "bit_width": 25,
-              "description": "LTR3.",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "HTR3",
-          "offset": 188,
-          "size": 32,
-          "description": "ADC watchdog higher threshold register 3.",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "ADC watchdog higher threshold register 3.",
-          "fields": [
-            {
-              "name": "HTR3",
-              "bit_offset": 0,
-              "bit_width": 25,
-              "description": "HTR3.",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "DIFSEL",
-          "offset": 192,
-          "size": 32,
-          "description": "ADC differential mode selection register.",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "ADC differential mode selection register.",
-          "fields": [
-            {
-              "name": "DIFSEL",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "channel differential or single-ended mode for channel",
-              "enum": "DIFSEL"
-            }
-          ]
-        },
-        {
-          "name": "CALFACT",
-          "offset": 196,
-          "size": 32,
-          "description": "ADC user control register.",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "ADC user control register.",
-          "fields": [
-            {
-              "name": "I_APB_ADDR",
-              "bit_offset": 0,
-              "bit_width": 8,
-              "description": "I_APB_ADDR.",
-              "enum": null
-            },
-            {
-              "name": "I_APB_DATA",
-              "bit_offset": 8,
-              "bit_width": 8,
-              "description": "I_APB_DATA.",
-              "enum": null
-            },
-            {
-              "name": "VALIDITY",
-              "bit_offset": 16,
-              "bit_width": 1,
-              "description": "VALIDITY.",
-              "enum": null
-            },
-            {
-              "name": "LATCH_COEF",
-              "bit_offset": 24,
-              "bit_width": 1,
-              "description": "LATCH_COEF.",
-              "enum": null
-            },
-            {
-              "name": "CAPTURE_COEF",
-              "bit_offset": 25,
-              "bit_width": 1,
-              "description": "CAPTURE_COEF.",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "CALFACT2",
-          "offset": 200,
-          "size": 32,
-          "description": "ADC calibration factor register.",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "ADC calibration factor register.",
-          "fields": [
-            {
-              "name": "CALFACT",
-              "bit_offset": 0,
-              "bit_width": 32,
-              "description": "CALFACT.",
-              "enum": null
-            }
-          ]
-        }
-      ]
-    },
-    "ADC4": {
-      "name": "ADC4",
-      "description": "ADC4.",
-      "extends": null,
-      "registers": [
-        {
-          "name": "ISR",
-          "offset": 0,
-          "size": 32,
-          "description": "ADC interrupt and status register.",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "ADC interrupt and status register.",
-          "fields": [
-            {
-              "name": "ADRDY",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "ADRDY.",
-              "enum": null
-            },
-            {
-              "name": "EOSMP",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "EOSMP.",
-              "enum": null
-            },
-            {
-              "name": "EOC",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "EOC.",
-              "enum": null
-            },
-            {
-              "name": "EOS",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "EOS.",
-              "enum": null
+              "description": "JEOC",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NotComplete",
+                  "value": 0,
+                  "description": "Injected channel conversion not complete (or the flag event was already acknowledged and cleared by software)"
+                },
+                {
+                  "name": "Complete",
+                  "value": 1,
+                  "description": "Injected channel conversion complete"
+                },
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clear the injected channel conversion flag"
+                }
+              ]
             },
             {
               "name": "OVR",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "OVR.",
-              "enum": null
+              "description": "OVR",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoOverrun",
+                  "value": 0,
+                  "description": "No overrun occurred (or the flag event was already acknowledged and cleared by software)"
+                },
+                {
+                  "name": "Overrun",
+                  "value": 1,
+                  "description": "Overrun has occurred"
+                },
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clear the overrun flag"
+                }
+              ]
             },
             {
-              "name": "AWD",
-              "bit_offset": 7,
+              "name": "EOS",
+              "bit_offset": 3,
               "bit_width": 1,
-              "description": "AWD1.",
-              "enum": null
+              "description": "EOS",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NotComplete",
+                  "value": 0,
+                  "description": "Regular conversions sequence not complete (or the flag event was already acknowledged and cleared by software)"
+                },
+                {
+                  "name": "Complete",
+                  "value": 1,
+                  "description": "Regular conversions sequence complete"
+                },
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clear the regular conversion sequence flag"
+                }
+              ]
             },
             {
-              "name": "EOCAL",
-              "bit_offset": 11,
+              "name": "EOC",
+              "bit_offset": 2,
               "bit_width": 1,
-              "description": "EOCAL.",
-              "enum": null
+              "description": "EOC",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NotComplete",
+                  "value": 0,
+                  "description": "Regular channel conversion not complete (or the flag event was already acknowledged and cleared by software)"
+                },
+                {
+                  "name": "Complete",
+                  "value": 1,
+                  "description": "Regular channel conversion complete"
+                },
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clear the regular channel conversion flag"
+                }
+              ]
             },
             {
-              "name": "LDORDY",
-              "bit_offset": 12,
+              "name": "EOSMP",
+              "bit_offset": 1,
               "bit_width": 1,
-              "description": "LDORDY.",
-              "enum": null
+              "description": "EOSMP",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NotAtEnd",
+                  "value": 0,
+                  "description": "Not at the end of the sampling phase (or the flag event was already acknowledged and cleared by software)"
+                },
+                {
+                  "name": "AtEnd",
+                  "value": 1,
+                  "description": "End of sampling phase reached"
+                },
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clear the sampling phase flag"
+                }
+              ]
+            },
+            {
+              "name": "ADRDY",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "ADRDY",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NotReady",
+                  "value": 0,
+                  "description": "ADC not yet ready to start conversion (or the flag event was already acknowledged and cleared by software)"
+                },
+                {
+                  "name": "Ready",
+                  "value": 1,
+                  "description": "ADC is ready to start conversion"
+                },
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clear the ADC ready flag"
+                }
+              ]
             }
           ]
         },
@@ -1013,66 +238,155 @@
           "name": "IER",
           "offset": 4,
           "size": 32,
-          "description": "ADC interrupt enable register.",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "ADC interrupt enable register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "ADC interrupt enable register.",
           "fields": [
             {
-              "name": "ADRDYIE",
-              "bit_offset": 0,
+              "name": "AWD%sIE",
+              "bit_offset": 7,
               "bit_width": 1,
-              "description": "ADRDYIE.",
-              "enum": null
+              "description": "Analog watchdog %s interrupt enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Analog watchdog x interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Analog watchdog x interrupt enabled"
+                }
+              ]
             },
             {
-              "name": "EOSMPIE",
-              "bit_offset": 1,
+              "name": "JEOSIE",
+              "bit_offset": 6,
               "bit_width": 1,
-              "description": "EOSMPIE.",
-              "enum": null
+              "description": "JEOSIE",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "JEOS interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "JEOS interrupt enabled. An interrupt is generated when the JEOS bit is set."
+                }
+              ]
             },
             {
-              "name": "EOCIE",
-              "bit_offset": 2,
+              "name": "JEOCIE",
+              "bit_offset": 5,
               "bit_width": 1,
-              "description": "EOCIE.",
-              "enum": null
-            },
-            {
-              "name": "EOSIE",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "EOSIE.",
-              "enum": null
+              "description": "JEOCIE",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "JEOC interrupt disable"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "JEOC interrupt enabled. An interrupt is generated when the JEOC bit is set."
+                }
+              ]
             },
             {
               "name": "OVRIE",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "OVRIE.",
-              "enum": null
+              "description": "OVRIE",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Overrun interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Overrun interrupt enabled. An interrupt is generated when the OVR bit is set."
+                }
+              ]
             },
             {
-              "name": "AWDIE",
-              "bit_offset": 7,
+              "name": "EOSIE",
+              "bit_offset": 3,
               "bit_width": 1,
-              "description": "AWD1IE.",
-              "enum": null
+              "description": "EOSIE",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "EOS interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "EOS interrupt enabled. An interrupt is generated when the EOS bit is set."
+                }
+              ]
             },
             {
-              "name": "EOCALIE",
-              "bit_offset": 11,
+              "name": "EOCIE",
+              "bit_offset": 2,
               "bit_width": 1,
-              "description": "EOCALIE.",
-              "enum": null
+              "description": "EOCIE",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "EOC interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "EOC interrupt enabled. An interrupt is generated when the EOC bit is set."
+                }
+              ]
             },
             {
-              "name": "LDORDYIE",
-              "bit_offset": 12,
+              "name": "EOSMPIE",
+              "bit_offset": 1,
               "bit_width": 1,
-              "description": "LDORDYIE.",
-              "enum": null
+              "description": "EOSMPIE",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "EOSMP interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "EOSMP interrupt enabled. An interrupt is generated when the EOSMP bit is set."
+                }
+              ]
+            },
+            {
+              "name": "ADRDYIE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "ADRDYIE",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "ADRDY interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "ADRDY interrupt enabled. An interrupt is generated when the ADRDY bit is set."
+                }
+              ]
             }
           ]
         },
@@ -1080,52 +394,295 @@
           "name": "CR",
           "offset": 8,
           "size": 32,
-          "description": "ADC control register.",
+          "access": null,
+          "reset_value": 536870912,
+          "description": "ADC control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "ADC control register.",
           "fields": [
             {
-              "name": "ADEN",
-              "bit_offset": 0,
+              "name": "ADCAL",
+              "bit_offset": 31,
               "bit_width": 1,
-              "description": "ADEN.",
-              "enum": null
+              "description": "ADCAL",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NotCalibrating",
+                  "value": 0,
+                  "description": "Calibration complete"
+                },
+                {
+                  "name": "Calibrating",
+                  "value": 1,
+                  "description": "Calibration in progress"
+                },
+                {
+                  "name": "StartCalibration",
+                  "value": 1,
+                  "description": "Calibrate the ADC"
+                }
+              ]
             },
             {
-              "name": "ADDIS",
-              "bit_offset": 1,
+              "name": "DEEPPWD",
+              "bit_offset": 29,
               "bit_width": 1,
-              "description": "ADDIS.",
-              "enum": null
-            },
-            {
-              "name": "ADSTART",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "ADSTART.",
-              "enum": null
-            },
-            {
-              "name": "ADSTP",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "ADSTP.",
-              "enum": null
+              "description": "DEEPPWD",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "ADC not in deep-power down"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "ADC in deep-power down"
+                }
+              ]
             },
             {
               "name": "ADVREGEN",
               "bit_offset": 28,
               "bit_width": 1,
-              "description": "ADVREGEN.",
-              "enum": null
+              "description": "ADVREGEN",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "ADC voltage regulator disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "ADC voltage regulator enabled"
+                }
+              ]
             },
             {
-              "name": "ADCAL",
-              "bit_offset": 31,
+              "name": "CALINDEX",
+              "bit_offset": 24,
+              "bit_width": 4,
+              "description": "CALINDEX",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "OffsetCalFactor",
+                  "value": 0,
+                  "description": "Offset calibration factor"
+                },
+                {
+                  "name": "CalFactor1",
+                  "value": 1,
+                  "description": "Calibration factor 1"
+                },
+                {
+                  "name": "CalFactor2",
+                  "value": 2,
+                  "description": "Calibration factor 2"
+                },
+                {
+                  "name": "CalFactor3",
+                  "value": 3,
+                  "description": "Calibration factor 3"
+                },
+                {
+                  "name": "CalFactor4",
+                  "value": 4,
+                  "description": "Calibration factor 4"
+                },
+                {
+                  "name": "CalFactor5",
+                  "value": 5,
+                  "description": "Calibration factor 5"
+                },
+                {
+                  "name": "CalFactor6",
+                  "value": 6,
+                  "description": "Calibration factor 6"
+                },
+                {
+                  "name": "CalFactor7",
+                  "value": 7,
+                  "description": "Calibration factor 7 and (write access only) internal offset"
+                },
+                {
+                  "name": "InternalOffset",
+                  "value": 8,
+                  "description": "Internal offset (read access only)"
+                },
+                {
+                  "name": "CalibrationMode",
+                  "value": 9,
+                  "description": "Calibration mode selection"
+                }
+              ]
+            },
+            {
+              "name": "ADCALLIN",
+              "bit_offset": 16,
               "bit_width": 1,
-              "description": "ADCAL.",
-              "enum": null
+              "description": "ADCALLIN",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Writing ADCAL launches a calibration without the linearity calibration"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Writing ADCAL launches a calibration with he linearity calibration"
+                }
+              ]
+            },
+            {
+              "name": "JADSTP",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "JADSTP",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NotStopped",
+                  "value": 0,
+                  "description": "No ADC stop injected conversion command ongoing"
+                },
+                {
+                  "name": "Stopped",
+                  "value": 1,
+                  "description": "ADSTP command is in progress"
+                },
+                {
+                  "name": "Stop",
+                  "value": 1,
+                  "description": "Stop injected conversions ongoing"
+                }
+              ]
+            },
+            {
+              "name": "ADSTP",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "ADSTP",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NotStopping",
+                  "value": 0,
+                  "description": "No ADC stop regular conversion command ongoing"
+                },
+                {
+                  "name": "Stopping",
+                  "value": 1,
+                  "description": "ADSTP command is in progress"
+                },
+                {
+                  "name": "StopConversion",
+                  "value": 1,
+                  "description": "Stop regular conversions ongoing"
+                }
+              ]
+            },
+            {
+              "name": "JADSTART",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "JADSTART",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NotActive",
+                  "value": 0,
+                  "description": "No ADC injected conversion is ongoing"
+                },
+                {
+                  "name": "Active",
+                  "value": 1,
+                  "description": "ADC is operating and eventually converting an injected channel"
+                },
+                {
+                  "name": "Start",
+                  "value": 1,
+                  "description": "Start injected conversions"
+                }
+              ]
+            },
+            {
+              "name": "ADSTART",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "ADSTART",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NotActive",
+                  "value": 0,
+                  "description": "No ADC regular conversion is ongoing"
+                },
+                {
+                  "name": "Active",
+                  "value": 1,
+                  "description": "ADC is operating and eventually converting a regular channel"
+                },
+                {
+                  "name": "Start",
+                  "value": 1,
+                  "description": "Start regular conversions"
+                }
+              ]
+            },
+            {
+              "name": "ADDIS",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "ADDIS",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NotOngoing",
+                  "value": 0,
+                  "description": "No ADDIS command ongoing"
+                },
+                {
+                  "name": "InProgress",
+                  "value": 1,
+                  "description": "An ADDIS command is in progress"
+                },
+                {
+                  "name": "Disable",
+                  "value": 1,
+                  "description": "Disable the ADC"
+                }
+              ]
+            },
+            {
+              "name": "ADEN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "ADEN",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "ADC is disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "ADC is enabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Enable the ADC"
+                }
+              ]
             }
           ]
         },
@@ -1133,115 +690,424 @@
           "name": "CFGR1",
           "offset": 12,
           "size": 32,
-          "description": "ADC configuration register.",
+          "access": "read-write",
+          "reset_value": 2147483648,
+          "description": "ADC configuration register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "ADC configuration register.",
           "fields": [
             {
-              "name": "DMAEN",
-              "bit_offset": 0,
+              "name": "AWD1CH",
+              "bit_offset": 26,
+              "bit_width": 5,
+              "description": "AWD1CH"
+            },
+            {
+              "name": "JAUTO",
+              "bit_offset": 25,
               "bit_width": 1,
-              "description": "DMAEN.",
-              "enum": null
+              "description": "JAUTO",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Automatic injected group conversion disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Automatic injected group conversion enabled"
+                }
+              ]
             },
             {
-              "name": "DMACFG",
-              "bit_offset": 1,
+              "name": "JAWD1EN",
+              "bit_offset": 24,
               "bit_width": 1,
-              "description": "DMACFG.",
-              "enum": "ADC4_DMACFG"
-            },
-            {
-              "name": "RES",
-              "bit_offset": 2,
-              "bit_width": 2,
-              "description": "RES.",
-              "enum": "ADC4_RES"
-            },
-            {
-              "name": "SCANDIR",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "SCANDIR.",
-              "enum": null
-            },
-            {
-              "name": "ALIGN",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "ALIGN.",
-              "enum": null
-            },
-            {
-              "name": "EXTSEL",
-              "bit_offset": 6,
-              "bit_width": 3,
-              "description": "EXTSEL.",
-              "enum": null
-            },
-            {
-              "name": "EXTEN",
-              "bit_offset": 10,
-              "bit_width": 2,
-              "description": "EXTEN.",
-              "enum": "ADC4_EXTEN"
-            },
-            {
-              "name": "OVRMOD",
-              "bit_offset": 12,
-              "bit_width": 1,
-              "description": "OVRMOD.",
-              "enum": null
-            },
-            {
-              "name": "CONT",
-              "bit_offset": 13,
-              "bit_width": 1,
-              "description": "CONT.",
-              "enum": null
-            },
-            {
-              "name": "WAIT",
-              "bit_offset": 14,
-              "bit_width": 1,
-              "description": "WAIT.",
-              "enum": null
-            },
-            {
-              "name": "DISCEN",
-              "bit_offset": 16,
-              "bit_width": 1,
-              "description": "DISCEN.",
-              "enum": null
-            },
-            {
-              "name": "CHSELRMOD",
-              "bit_offset": 21,
-              "bit_width": 1,
-              "description": "CHSELRMOD.",
-              "enum": null
-            },
-            {
-              "name": "AWD1SGL",
-              "bit_offset": 22,
-              "bit_width": 1,
-              "description": "AWD1SGL.",
-              "enum": null
+              "description": "JAWD1EN",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Analog watchdog 1 disabled on injected channels"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Analog watchdog 1 enabled on injected channels"
+                }
+              ]
             },
             {
               "name": "AWD1EN",
               "bit_offset": 23,
               "bit_width": 1,
-              "description": "AWD1EN.",
-              "enum": null
+              "description": "AWD1EN",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Analog watchdog 1 disabled on regular channels"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Analog watchdog 1 enabled on regular channels"
+                }
+              ]
             },
             {
-              "name": "AWD1CH",
-              "bit_offset": 26,
+              "name": "AWD1SGL",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "AWD1SGL",
+              "enum_values": [
+                {
+                  "name": "AllChannels",
+                  "value": 0,
+                  "description": "Analog watchdog 1 enabled on all channels"
+                },
+                {
+                  "name": "SingleChannel",
+                  "value": 1,
+                  "description": "Analog watchdog 1 enabled on a single channel"
+                }
+              ]
+            },
+            {
+              "name": "JDISCEN",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "JDISCEN",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Discontinuous mode on injected channels disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Discontinuous mode on injected channels enabled"
+                }
+              ]
+            },
+            {
+              "name": "DISCNUM",
+              "bit_offset": 17,
+              "bit_width": 3,
+              "description": "DISCNUM",
+              "enum_values": [
+                {
+                  "name": "n1",
+                  "value": 0,
+                  "description": "1 channel"
+                },
+                {
+                  "name": "n2",
+                  "value": 1,
+                  "description": "2 channels"
+                },
+                {
+                  "name": "n3",
+                  "value": 2,
+                  "description": "3 channels"
+                },
+                {
+                  "name": "n4",
+                  "value": 3,
+                  "description": "4 channels"
+                },
+                {
+                  "name": "n5",
+                  "value": 4,
+                  "description": "5 channels"
+                },
+                {
+                  "name": "n6",
+                  "value": 5,
+                  "description": "6 channels"
+                },
+                {
+                  "name": "n7",
+                  "value": 6,
+                  "description": "7 channels"
+                },
+                {
+                  "name": "n8",
+                  "value": 7,
+                  "description": "8 channels"
+                }
+              ]
+            },
+            {
+              "name": "DISCEN",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "DISCEN",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Discontinuous mode for regular channels disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Discontinuous mode for regular channels enabled"
+                }
+              ]
+            },
+            {
+              "name": "AUTDLY",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "AUTDLY",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Auto-delayed conversion mode off"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Auto-delayed conversion mode on"
+                }
+              ]
+            },
+            {
+              "name": "CONT",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "CONT",
+              "enum_values": [
+                {
+                  "name": "Single",
+                  "value": 0,
+                  "description": "Single conversion mode"
+                },
+                {
+                  "name": "Continuous",
+                  "value": 1,
+                  "description": "Continuous conversion mode"
+                }
+              ]
+            },
+            {
+              "name": "OVRMOD",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "OVRMOD",
+              "enum_values": [
+                {
+                  "name": "Preserve",
+                  "value": 0,
+                  "description": "ADC_DR register is preserved with the old data when an overrun is detected"
+                },
+                {
+                  "name": "Overwrite",
+                  "value": 1,
+                  "description": "ADC_DR register is overwritten with the last conversion result when an overrun is detected"
+                }
+              ]
+            },
+            {
+              "name": "EXTEN",
+              "bit_offset": 10,
+              "bit_width": 2,
+              "description": "EXTEN",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Hardware trigger detection disabled (conversions can be launched by software)"
+                },
+                {
+                  "name": "RisingEdge",
+                  "value": 1,
+                  "description": "Hardware trigger detection on the rising edge"
+                },
+                {
+                  "name": "FallingEdge",
+                  "value": 2,
+                  "description": "Hardware trigger detection on the falling edge"
+                },
+                {
+                  "name": "BothEdges",
+                  "value": 3,
+                  "description": "Hardware trigger detection on both the rising and falling edges"
+                }
+              ]
+            },
+            {
+              "name": "EXTSEL",
+              "bit_offset": 5,
               "bit_width": 5,
-              "description": "AWD1CH.",
-              "enum": null
+              "description": "EXTSEL",
+              "enum_values": [
+                {
+                  "name": "TIM1_OC1",
+                  "value": 0,
+                  "description": "tim1_oc1"
+                },
+                {
+                  "name": "TIM1_OC2",
+                  "value": 1,
+                  "description": "tim1_oc2"
+                },
+                {
+                  "name": "TIM1_OC3",
+                  "value": 2,
+                  "description": "tim1_oc3"
+                },
+                {
+                  "name": "TIM2_OC2",
+                  "value": 3,
+                  "description": "tim2_oc2"
+                },
+                {
+                  "name": "TIM3_TRGO",
+                  "value": 4,
+                  "description": "tim3_trgo"
+                },
+                {
+                  "name": "TIM4_OC4",
+                  "value": 5,
+                  "description": "tim4_oc4"
+                },
+                {
+                  "name": "EXTI11",
+                  "value": 6,
+                  "description": "exti11"
+                },
+                {
+                  "name": "TIM8_TRGO",
+                  "value": 7,
+                  "description": "tim8_trgo"
+                },
+                {
+                  "name": "TIM8_TRGO2",
+                  "value": 8,
+                  "description": "tim8_trgo2"
+                },
+                {
+                  "name": "TIM1_TRGO",
+                  "value": 9,
+                  "description": "tim1_trgo"
+                },
+                {
+                  "name": "TIM1_TRGO2",
+                  "value": 10,
+                  "description": "tim1_trgo2"
+                },
+                {
+                  "name": "TIM2_TRGO",
+                  "value": 11,
+                  "description": "tim2_trgo"
+                },
+                {
+                  "name": "TIM4_TRGO",
+                  "value": 12,
+                  "description": "tim4_trgo"
+                },
+                {
+                  "name": "TIM6_TRGO",
+                  "value": 13,
+                  "description": "tim6_trgo"
+                },
+                {
+                  "name": "TIM15_TRGO",
+                  "value": 14,
+                  "description": "tim15_trgo"
+                },
+                {
+                  "name": "TIM3_OC4",
+                  "value": 15,
+                  "description": "tim3_oc4"
+                },
+                {
+                  "name": "EXTI15",
+                  "value": 16,
+                  "description": "exti15"
+                },
+                {
+                  "name": "LPTIM1_CH1",
+                  "value": 18,
+                  "description": "lptim1_ch1"
+                },
+                {
+                  "name": "LPTIM2_CH1",
+                  "value": 19,
+                  "description": "lptim2_ch1"
+                },
+                {
+                  "name": "LPTIM3_CH1",
+                  "value": 20,
+                  "description": "lptim3_ch1"
+                },
+                {
+                  "name": "LPTIM4_OUT",
+                  "value": 21,
+                  "description": "lptim4_out"
+                }
+              ]
+            },
+            {
+              "name": "RES",
+              "bit_offset": 2,
+              "bit_width": 2,
+              "description": "RES",
+              "enum_values": [
+                {
+                  "name": "FourteenBit",
+                  "value": 0,
+                  "description": "14 bits"
+                },
+                {
+                  "name": "TwelveBit",
+                  "value": 1,
+                  "description": "12 bits"
+                },
+                {
+                  "name": "TenBit",
+                  "value": 2,
+                  "description": "10 bits"
+                },
+                {
+                  "name": "EightBit",
+                  "value": 3,
+                  "description": "8 bits"
+                }
+              ]
+            },
+            {
+              "name": "DMNGT",
+              "bit_offset": 0,
+              "bit_width": 2,
+              "description": "DMNGT",
+              "enum_values": [
+                {
+                  "name": "DR",
+                  "value": 0,
+                  "description": "Store output data in DR only"
+                },
+                {
+                  "name": "DMA_OneShot",
+                  "value": 1,
+                  "description": "DMA One Shot Mode selected"
+                },
+                {
+                  "name": "DFSDM",
+                  "value": 2,
+                  "description": "DFSDM mode selected"
+                },
+                {
+                  "name": "DMA_Circular",
+                  "value": 3,
+                  "description": "DMA Circular Mode selected"
+                }
+              ]
             }
           ]
         },
@@ -1249,181 +1115,473 @@
           "name": "CFGR2",
           "offset": 16,
           "size": 32,
-          "description": "ADC configuration register 2.",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "ADC configuration register 2",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "ADC configuration register 2.",
           "fields": [
             {
-              "name": "OVSE",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "OVSE.",
-              "enum": null
+              "name": "LSHIFT",
+              "bit_offset": 28,
+              "bit_width": 4,
+              "description": "LSHIFT"
             },
             {
-              "name": "OVSR",
-              "bit_offset": 2,
-              "bit_width": 3,
-              "description": "OVSR.",
-              "enum": "ADC4_OVERSAMPLING_RATIO"
+              "name": "LFTRIG",
+              "bit_offset": 27,
+              "bit_width": 1,
+              "description": "LFTRIG",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Low-frequency trigger mode disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Low-frequency trigger mode enabled"
+                }
+              ]
+            },
+            {
+              "name": "OSR",
+              "bit_offset": 16,
+              "bit_width": 10,
+              "description": "OSR"
+            },
+            {
+              "name": "SMPTRIG",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "SMPTRIG",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Sampling time control trigger mode disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Sampling time control trigger mode enabled"
+                }
+              ]
+            },
+            {
+              "name": "SWTRIG",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "SWTRIG",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Software trigger starts the conversion for sampling time control trigger mode"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Software trigger starts the sampling for sampling time control trigger mode"
+                }
+              ]
+            },
+            {
+              "name": "BULB",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "BULB",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Bulb sampling mode disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Bulb sampling mode enabled. The sampling period starts just after the previous end of the conversion."
+                }
+              ]
+            },
+            {
+              "name": "ROVSM",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "ROVSM",
+              "enum_values": [
+                {
+                  "name": "Continued",
+                  "value": 0,
+                  "description": "When injected conversions are triggered, the oversampling is temporary stopped and continued after the injection sequence (oversampling buffer is maintained during injected sequence)"
+                },
+                {
+                  "name": "Resumed",
+                  "value": 1,
+                  "description": "When injected conversions are triggered, the current oversampling is aborted and resumed from start after the injection sequence (oversampling buffer is zeroed by injected sequence start)"
+                }
+              ]
+            },
+            {
+              "name": "TROVS",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "TROVS",
+              "enum_values": [
+                {
+                  "name": "Automatic",
+                  "value": 0,
+                  "description": "All oversampled conversions for a channel are done consecutively following a trigger"
+                },
+                {
+                  "name": "Triggered",
+                  "value": 1,
+                  "description": "Each oversampled conversion for a channel needs a new trigger"
+                }
+              ]
             },
             {
               "name": "OVSS",
               "bit_offset": 5,
               "bit_width": 4,
-              "description": "OVSS.",
-              "enum": null
+              "description": "OVSS"
             },
             {
-              "name": "TOVS",
-              "bit_offset": 9,
+              "name": "JOVSE",
+              "bit_offset": 1,
               "bit_width": 1,
-              "description": "TOVS.",
-              "enum": null
+              "description": "JOVSE",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Injected oversampling disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Injected oversampling enabled"
+                }
+              ]
             },
             {
-              "name": "LFTRIG",
-              "bit_offset": 29,
+              "name": "ROVSE",
+              "bit_offset": 0,
               "bit_width": 1,
-              "description": "LFTRIG.",
-              "enum": null
+              "description": "ROVSE",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Regular oversampling disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Regular oversampling enabled"
+                }
+              ]
             }
           ]
         },
         {
-          "name": "SMPR",
+          "name": "SMPR1",
           "offset": 20,
           "size": 32,
-          "description": "ADC sample time register.",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "ADC sample time register 1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "ADC sample time register.",
           "fields": [
             {
-              "name": "SMP",
+              "name": "SMP%s",
               "bit_offset": 0,
               "bit_width": 3,
-              "description": "SMP1.",
-              "enum": "ADC4_SAMPLE_TIME"
+              "description": "Channel %s sample time selection",
+              "enum_values": [
+                {
+                  "name": "Cycles5",
+                  "value": 0,
+                  "description": "5 ADC clock cycles"
+                },
+                {
+                  "name": "Cycles6",
+                  "value": 1,
+                  "description": "6 ADC clock cycles"
+                },
+                {
+                  "name": "Cycles12",
+                  "value": 2,
+                  "description": "12 ADC clock cycles"
+                },
+                {
+                  "name": "Cycles20",
+                  "value": 3,
+                  "description": "20 ADC clock cycles"
+                },
+                {
+                  "name": "Cycles36",
+                  "value": 4,
+                  "description": "36 ADC clock cycles"
+                },
+                {
+                  "name": "Cycles68",
+                  "value": 5,
+                  "description": "68 ADC clock cycles"
+                },
+                {
+                  "name": "Cycles391",
+                  "value": 6,
+                  "description": "391 ADC clock cycles"
+                },
+                {
+                  "name": "Cycles814",
+                  "value": 7,
+                  "description": "814 ADC clock cycles"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "SMPR2",
+          "offset": 24,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "ADC sample time register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "SMP%s",
+              "bit_offset": 0,
+              "bit_width": 3,
+              "description": "Channel %s sample time selection"
+            }
+          ]
+        },
+        {
+          "name": "PCSEL",
+          "offset": 28,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "ADC channel preselection register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "PCSEL0",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "PCSEL0",
+              "enum_values": [
+                {
+                  "name": "NotPreselected",
+                  "value": 0,
+                  "description": "Input channel x is not preselected for conversion, the ADC conversion of this channel shows a wrong result."
+                },
+                {
+                  "name": "Preselected",
+                  "value": 1,
+                  "description": "Input channel x is preselected for conversion"
+                }
+              ]
             },
             {
-              "name": "SMPSEL",
+              "name": "PCSEL19",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "PCSEL19"
+            },
+            {
+              "name": "PCSEL18",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "PCSEL18"
+            },
+            {
+              "name": "PCSEL17",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "PCSEL17"
+            },
+            {
+              "name": "PCSEL16",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "PCSEL16"
+            },
+            {
+              "name": "PCSEL15",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "PCSEL15"
+            },
+            {
+              "name": "PCSEL14",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "PCSEL14"
+            },
+            {
+              "name": "PCSEL13",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "PCSEL13"
+            },
+            {
+              "name": "PCSEL12",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "PCSEL12"
+            },
+            {
+              "name": "PCSEL11",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "PCSEL11"
+            },
+            {
+              "name": "PCSEL10",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "PCSEL10"
+            },
+            {
+              "name": "PCSEL9",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "PCSEL9"
+            },
+            {
+              "name": "PCSEL8",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "Channel sampling time selection",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "AWD1TR",
-          "offset": 32,
-          "size": 32,
-          "description": "ADC watchdog threshold register.",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "ADC watchdog threshold register.",
-          "fields": [
-            {
-              "name": "LT3",
-              "bit_offset": 0,
-              "bit_width": 12,
-              "description": "LT3.",
-              "enum": null
+              "description": "PCSEL8"
             },
             {
-              "name": "HT3",
-              "bit_offset": 16,
-              "bit_width": 12,
-              "description": "HT3.",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "AWD2TR",
-          "offset": 36,
-          "size": 32,
-          "description": "ADC watchdog threshold register.",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "ADC watchdog threshold register.",
-          "fields": [
-            {
-              "name": "LT3",
-              "bit_offset": 0,
-              "bit_width": 12,
-              "description": "LT3.",
-              "enum": null
-            },
-            {
-              "name": "HT3",
-              "bit_offset": 16,
-              "bit_width": 12,
-              "description": "HT3.",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "CHSELRMOD0",
-          "offset": 40,
-          "size": 32,
-          "description": "ADC channel selection register [alternate].",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "ADC channel selection register [alternate].",
-          "fields": [
-            {
-              "name": "CHSEL",
-              "bit_offset": 0,
+              "name": "PCSEL7",
+              "bit_offset": 7,
               "bit_width": 1,
-              "description": "CHSEL.",
-              "enum": null
+              "description": "PCSEL7"
+            },
+            {
+              "name": "PCSEL6",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "PCSEL6"
+            },
+            {
+              "name": "PCSEL5",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "PCSEL5"
+            },
+            {
+              "name": "PCSEL4",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "PCSEL4"
+            },
+            {
+              "name": "PCSEL3",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "PCSEL3"
+            },
+            {
+              "name": "PCSEL2",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "PCSEL2"
+            },
+            {
+              "name": "PCSEL1",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "PCSEL1"
             }
           ]
         },
         {
-          "name": "CHSELRMOD1",
-          "offset": 40,
+          "name": "SQR1",
+          "offset": 48,
           "size": 32,
-          "description": "ADC channel selection register [alternate].",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "ADC regular sequence register 1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "ADC channel selection register [alternate].",
           "fields": [
             {
-              "name": "SQ",
+              "name": "SQ%s",
+              "bit_offset": 6,
+              "bit_width": 5,
+              "description": "%s conversion in regular sequence"
+            },
+            {
+              "name": "L",
               "bit_offset": 0,
               "bit_width": 4,
-              "description": "SQ",
-              "enum": null
+              "description": "L"
             }
           ]
         },
         {
-          "name": "AWD3TR",
-          "offset": 44,
+          "name": "SQR2",
+          "offset": 52,
           "size": 32,
-          "description": "ADC watchdog threshold register.",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "ADC regular sequence register 2",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "ADC watchdog threshold register.",
           "fields": [
             {
-              "name": "LT3",
+              "name": "SQ%s",
               "bit_offset": 0,
-              "bit_width": 12,
-              "description": "LT3.",
-              "enum": null
-            },
+              "bit_width": 5,
+              "description": "%s conversion in regular sequence"
+            }
+          ]
+        },
+        {
+          "name": "SQR3",
+          "offset": 56,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "ADC regular sequence register 3",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
             {
-              "name": "HT3",
-              "bit_offset": 16,
-              "bit_width": 12,
-              "description": "HT3.",
-              "enum": null
+              "name": "SQ%s",
+              "bit_offset": 0,
+              "bit_width": 5,
+              "description": "%s conversion in regular sequence"
+            }
+          ]
+        },
+        {
+          "name": "SQR4",
+          "offset": 60,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "ADC regular sequence register 4",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "SQ%s",
+              "bit_offset": 0,
+              "bit_width": 5,
+              "description": "%s conversion in regular sequence"
             }
           ]
         },
@@ -1431,56 +1589,309 @@
           "name": "DR",
           "offset": 64,
           "size": 32,
-          "description": "ADC data register.",
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "ADC regular Data Register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "ADC data register.",
           "fields": [
             {
-              "name": "DATA",
+              "name": "RDATA",
               "bit_offset": 0,
-              "bit_width": 16,
-              "description": "DATA.",
-              "enum": null
+              "bit_width": 32,
+              "description": "RDATA"
             }
           ]
         },
         {
-          "name": "PWRR",
-          "offset": 68,
+          "name": "JSQR",
+          "offset": 76,
           "size": 32,
-          "description": "ADC power register.",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "ADC injected sequence register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "ADC data register.",
           "fields": [
             {
-              "name": "AUTOFF",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "AUTOFF.",
-              "enum": null
+              "name": "JSQ%s",
+              "bit_offset": 9,
+              "bit_width": 5,
+              "description": "%s conversion in injected sequence"
             },
             {
-              "name": "DPD",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "DPD.",
-              "enum": null
+              "name": "JEXTEN",
+              "bit_offset": 7,
+              "bit_width": 2,
+              "description": "JEXTEN",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Hardware trigger detection disabled (conversions can be launched by software)"
+                },
+                {
+                  "name": "RisingEdge",
+                  "value": 1,
+                  "description": "Hardware trigger detection on the rising edge"
+                },
+                {
+                  "name": "FallingEdge",
+                  "value": 2,
+                  "description": "Hardware trigger detection on the falling edge"
+                },
+                {
+                  "name": "BothEdges",
+                  "value": 3,
+                  "description": "Hardware trigger detection on both the rising and falling edges"
+                }
+              ]
             },
             {
-              "name": "VREFPROT",
+              "name": "JEXTSEL",
               "bit_offset": 2,
-              "bit_width": 1,
-              "description": "VREFPROT.",
-              "enum": null
+              "bit_width": 5,
+              "description": "JEXTSEL",
+              "enum_values": [
+                {
+                  "name": "TIM1_TRGO",
+                  "value": 0,
+                  "description": "tim1_trgo"
+                },
+                {
+                  "name": "TIM1_OC4",
+                  "value": 1,
+                  "description": "tim1_oc4"
+                },
+                {
+                  "name": "TIM2_TRGO",
+                  "value": 2,
+                  "description": "tim2_trgo"
+                },
+                {
+                  "name": "TIM2_OC1",
+                  "value": 3,
+                  "description": "tim2_oc1"
+                },
+                {
+                  "name": "TIM3_OC4",
+                  "value": 4,
+                  "description": "tim3_oc4"
+                },
+                {
+                  "name": "TIM4_TRGO",
+                  "value": 5,
+                  "description": "tim4_trgo"
+                },
+                {
+                  "name": "EXTI15",
+                  "value": 6,
+                  "description": "exti15"
+                },
+                {
+                  "name": "TIM8_OC4",
+                  "value": 7,
+                  "description": "tim8_oc4"
+                },
+                {
+                  "name": "TIM1_TRGO2",
+                  "value": 8,
+                  "description": "tim1_trgo2"
+                },
+                {
+                  "name": "TIM8_TRGO",
+                  "value": 9,
+                  "description": "tim8_trgo"
+                },
+                {
+                  "name": "TIM8_TRGO2",
+                  "value": 10,
+                  "description": "tim8_trgo2"
+                },
+                {
+                  "name": "TIM3_OC3",
+                  "value": 11,
+                  "description": "tim3_oc3"
+                },
+                {
+                  "name": "TIM3_TRGO",
+                  "value": 12,
+                  "description": "tim3_trgo"
+                },
+                {
+                  "name": "TIM3_OC1",
+                  "value": 13,
+                  "description": "tim3_oc1"
+                },
+                {
+                  "name": "TIM6_TRGO",
+                  "value": 14,
+                  "description": "tim6_trgo"
+                },
+                {
+                  "name": "TIM15_TRGO",
+                  "value": 15,
+                  "description": "tim15_trgo"
+                },
+                {
+                  "name": "LPTIM1_CH2",
+                  "value": 16,
+                  "description": "lptim1_ch2"
+                },
+                {
+                  "name": "LPTIM2_CH2",
+                  "value": 17,
+                  "description": "lptim2_ch2"
+                },
+                {
+                  "name": "LPTIM3_CH1",
+                  "value": 18,
+                  "description": "lptim3_ch1"
+                },
+                {
+                  "name": "LPTIM4_OUT1",
+                  "value": 19,
+                  "description": "lptim4_out1"
+                }
+              ]
             },
             {
-              "name": "VREFSECSMP",
-              "bit_offset": 3,
+              "name": "JL",
+              "bit_offset": 0,
+              "bit_width": 2,
+              "description": "JL"
+            }
+          ]
+        },
+        {
+          "name": "OFR%s",
+          "offset": 96,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "ADC offset register",
+          "array_len": 4,
+          "array_stride": 4,
+          "fields": [
+            {
+              "name": "OFFSET_CH",
+              "bit_offset": 27,
+              "bit_width": 5,
+              "description": "OFFSET_CH"
+            },
+            {
+              "name": "SSAT",
+              "bit_offset": 26,
               "bit_width": 1,
-              "description": "VREFSECSMP.",
-              "enum": null
+              "description": "SSAT",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Offset is subtracted maintaining data integrity and extending converted data size (9-bit and 15-bit signed format)"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Offset is subtracted and result is saturated to maintain converted data size"
+                }
+              ]
+            },
+            {
+              "name": "USAT",
+              "bit_offset": 25,
+              "bit_width": 1,
+              "description": "USAT",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Offset is subtracted maintaining data integrity and keeping converted data size"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Offset is subtracted and result is saturated to maintain converted data size"
+                }
+              ]
+            },
+            {
+              "name": "POSOFF",
+              "bit_offset": 24,
+              "bit_width": 1,
+              "description": "POSOFF",
+              "enum_values": [
+                {
+                  "name": "Negative",
+                  "value": 0,
+                  "description": "Negative offset"
+                },
+                {
+                  "name": "Positive",
+                  "value": 1,
+                  "description": "Positive offset"
+                }
+              ]
+            },
+            {
+              "name": "OFFSET",
+              "bit_offset": 0,
+              "bit_width": 24,
+              "description": "OFFSET"
+            }
+          ]
+        },
+        {
+          "name": "GCOMP",
+          "offset": 112,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "ADC gain compensation register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "GCOMP",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "GCOMP",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Regular ADC operating mode"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Gain compensation enabled and applied to all channels"
+                }
+              ]
+            },
+            {
+              "name": "GCOMPCOEFF",
+              "bit_offset": 0,
+              "bit_width": 14,
+              "description": "GCOMPCOEFF"
+            }
+          ]
+        },
+        {
+          "name": "JDR%s",
+          "offset": 128,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "ADC injected data register",
+          "array_len": 4,
+          "array_stride": 4,
+          "fields": [
+            {
+              "name": "JDATA",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "JDATA"
             }
           ]
         },
@@ -1488,17 +1899,29 @@
           "name": "AWD2CR",
           "offset": 160,
           "size": 32,
-          "description": "ADC Analog Watchdog 2 Configuration register.",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "ADC analog watchdog 2 configuration register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "ADC Analog Watchdog Configuration register.",
           "fields": [
             {
-              "name": "AWDCH",
+              "name": "AWD2CH%s",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "AWDCH0.",
-              "enum": null
+              "description": "AWD2CH",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "ADC analog input channel x is not monitored by AWDy"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "ADC analog input channel x is monitored by AWDy"
+                }
+              ]
             }
           ]
         },
@@ -1506,17 +1929,215 @@
           "name": "AWD3CR",
           "offset": 164,
           "size": 32,
-          "description": "ADC Analog Watchdog 3 Configuration register.",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "ADC analog watchdog 3 configuration register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "ADC Analog Watchdog Configuration register.",
           "fields": [
             {
-              "name": "AWDCH",
+              "name": "AWD3CH%s",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "AWDCH0.",
-              "enum": null
+              "description": "AWD3CH",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "ADC analog input channel x is not monitored by AWDy"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "ADC analog input channel x is monitored by AWDy"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "LTR1",
+          "offset": 168,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "ADC watchdog threshold register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "LTR1",
+              "bit_offset": 0,
+              "bit_width": 25,
+              "description": "LTR1"
+            }
+          ]
+        },
+        {
+          "name": "HTR1",
+          "offset": 172,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 33554431,
+          "description": "ADC watchdog threshold register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "AWDFILT1",
+              "bit_offset": 29,
+              "bit_width": 3,
+              "description": "AWDFILT1",
+              "enum_values": [
+                {
+                  "name": "NoFiltering",
+                  "value": 0,
+                  "description": "No filtering"
+                },
+                {
+                  "name": "Detections2",
+                  "value": 1,
+                  "description": "Two consecutive detections generates an AWDx flag or an interrupt"
+                },
+                {
+                  "name": "Detections3",
+                  "value": 2,
+                  "description": "Three consecutive detections generates an AWDx flag or an interrupt"
+                },
+                {
+                  "name": "Detections4",
+                  "value": 3,
+                  "description": "Four consecutive detections generates an AWDx flag or an interrupt"
+                },
+                {
+                  "name": "Detections5",
+                  "value": 4,
+                  "description": "Five consecutive detections generates an AWDx flag or an interrupt"
+                },
+                {
+                  "name": "Detections6",
+                  "value": 5,
+                  "description": "Six consecutive detections generates an AWDx flag or an interrupt"
+                },
+                {
+                  "name": "Detections7",
+                  "value": 6,
+                  "description": "Seven consecutive detections generates an AWDx flag or an interrupt"
+                },
+                {
+                  "name": "Detections8",
+                  "value": 7,
+                  "description": "Eight consecutive detections generates an AWDx flag or an interrupt"
+                }
+              ]
+            },
+            {
+              "name": "HTR1",
+              "bit_offset": 0,
+              "bit_width": 25,
+              "description": "HTR1"
+            }
+          ]
+        },
+        {
+          "name": "LTR2",
+          "offset": 176,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "ADC watchdog lower threshold register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "LTR2",
+              "bit_offset": 0,
+              "bit_width": 25,
+              "description": "LTR2"
+            }
+          ]
+        },
+        {
+          "name": "HTR2",
+          "offset": 180,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 33554431,
+          "description": "ADC watchdog higher threshold register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "HTR2",
+              "bit_offset": 0,
+              "bit_width": 25,
+              "description": "HTR2"
+            }
+          ]
+        },
+        {
+          "name": "LTR3",
+          "offset": 184,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "ADC watchdog lower threshold register 3",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "LTR3",
+              "bit_offset": 0,
+              "bit_width": 25,
+              "description": "LTR3"
+            }
+          ]
+        },
+        {
+          "name": "HTR3",
+          "offset": 188,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 33554431,
+          "description": "ADC watchdog higher threshold register 3",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "HTR3",
+              "bit_offset": 0,
+              "bit_width": 25,
+              "description": "HTR3"
+            }
+          ]
+        },
+        {
+          "name": "DIFSEL",
+          "offset": 192,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "ADC differential mode selection register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DIFSEL%s",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Differential mode for channel %s",
+              "enum_values": [
+                {
+                  "name": "SingleEnded",
+                  "value": 0,
+                  "description": "ADC analog input channel x is configured in single-ended mode"
+                },
+                {
+                  "name": "Differential",
+                  "value": 1,
+                  "description": "ADC analog input channel x is configured in differential mode"
+                }
+              ]
             }
           ]
         },
@@ -1524,460 +2145,105 @@
           "name": "CALFACT",
           "offset": 196,
           "size": 32,
-          "description": "ADC Calibration factor.",
+          "access": null,
+          "reset_value": 0,
+          "description": "ADC user control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "ADC Calibration factor.",
+          "fields": [
+            {
+              "name": "CAPTURE_COEF",
+              "bit_offset": 25,
+              "bit_width": 1,
+              "description": "CAPTURE_COEF",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Calibration factor not captured"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Calibration factor available in CALFACT[31:0] bits, the calibration factor index being defined by CALINDEX[3:0] bits"
+                }
+              ]
+            },
+            {
+              "name": "LATCH_COEF",
+              "bit_offset": 24,
+              "bit_width": 1,
+              "description": "LATCH_COEF",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoEffect",
+                  "value": 0,
+                  "description": "No effect"
+                },
+                {
+                  "name": "Latch",
+                  "value": 1,
+                  "description": "Calibration factor latched in the analog block on LATCH_COEF bit transition from 0 to 1. Prior to latching the calibration factor, CALFACT[31:0] bits must be programmed with the content of CALINDEX[3:0] bits."
+                }
+              ]
+            },
+            {
+              "name": "VALIDITY",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "VALIDITY",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "InProgress",
+                  "value": 0,
+                  "description": "Operation still in progress"
+                },
+                {
+                  "name": "Complete",
+                  "value": 1,
+                  "description": "Operation complete"
+                }
+              ]
+            },
+            {
+              "name": "I_APB_DATA",
+              "bit_offset": 8,
+              "bit_width": 8,
+              "description": "I_APB_DATA",
+              "access": "read-only"
+            },
+            {
+              "name": "I_APB_ADDR",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "I_APB_ADDR",
+              "access": "read-only"
+            }
+          ]
+        },
+        {
+          "name": "CALFACT2",
+          "offset": 200,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "ADC calibration factor register",
+          "array_len": null,
+          "array_stride": null,
           "fields": [
             {
               "name": "CALFACT",
               "bit_offset": 0,
-              "bit_width": 7,
-              "description": "CALFACT.",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "OR",
-          "offset": 208,
-          "size": 32,
-          "description": "ADC option register.",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "ADC option register.",
-          "fields": [
-            {
-              "name": "CHN21SEL",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "CHN21SEL.",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "CCR",
-          "offset": 776,
-          "size": 32,
-          "description": "ADC common configuration register.",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "ADC common configuration register.",
-          "fields": [
-            {
-              "name": "PRESC",
-              "bit_offset": 18,
-              "bit_width": 4,
-              "description": "PRESC.",
-              "enum": "ADC4_PRESC"
-            },
-            {
-              "name": "VREFEN",
-              "bit_offset": 22,
-              "bit_width": 1,
-              "description": "VREFEN.",
-              "enum": null
-            },
-            {
-              "name": "VSENSESEL",
-              "bit_offset": 23,
-              "bit_width": 1,
-              "description": "VSENSESEL.",
-              "enum": null
-            },
-            {
-              "name": "VBATEN",
-              "bit_offset": 24,
-              "bit_width": 1,
-              "description": "VBATEN.",
-              "enum": null
+              "bit_width": 32,
+              "description": "CALFACT"
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "ADC4_DMACFG": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "OneShot",
-          "value": 0,
-          "description": "DMA One Shot mode selected"
-        },
-        {
-          "name": "Circular",
-          "value": 1,
-          "description": "DMA Circular mode selected"
-        }
-      ]
-    },
-    "ADC4_EXTEN": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Disabled",
-          "value": 0,
-          "description": "Trigger detection disabled"
-        },
-        {
-          "name": "RisingEdge",
-          "value": 1,
-          "description": "Trigger detection on the rising edge"
-        },
-        {
-          "name": "FallingEdge",
-          "value": 2,
-          "description": "Trigger detection on the falling edge"
-        },
-        {
-          "name": "BothEdges",
-          "value": 3,
-          "description": "Trigger detection on both the rising and falling edges"
-        }
-      ]
-    },
-    "ADC4_OVERSAMPLING_RATIO": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "Oversample2x",
-          "value": 0,
-          "description": "Oversample 2 times"
-        },
-        {
-          "name": "Oversample4x",
-          "value": 1,
-          "description": "Oversample 4 times"
-        },
-        {
-          "name": "Oversample8x",
-          "value": 2,
-          "description": "Oversample 8 times"
-        },
-        {
-          "name": "Oversample16x",
-          "value": 3,
-          "description": "Oversample 16 times"
-        },
-        {
-          "name": "Oversample32x",
-          "value": 4,
-          "description": "Oversample 32 times"
-        },
-        {
-          "name": "Oversample64x",
-          "value": 5,
-          "description": "Oversample 64 times"
-        },
-        {
-          "name": "Oversample128x",
-          "value": 6,
-          "description": "Oversample 128 times"
-        },
-        {
-          "name": "Oversample256x",
-          "value": 7,
-          "description": "Oversample 256 times"
-        }
-      ]
-    },
-    "ADC4_PRESC": {
-      "bit_size": 4,
-      "variants": [
-        {
-          "name": "Div1",
-          "value": 0,
-          "description": "adc_ker_ck_input not divided"
-        },
-        {
-          "name": "Div2",
-          "value": 1,
-          "description": "adc_ker_ck_input divided by 2"
-        },
-        {
-          "name": "Div4",
-          "value": 2,
-          "description": "adc_ker_ck_input divided by 4"
-        },
-        {
-          "name": "Div6",
-          "value": 3,
-          "description": "adc_ker_ck_input divided by 6"
-        },
-        {
-          "name": "Div8",
-          "value": 4,
-          "description": "adc_ker_ck_input divided by 8"
-        },
-        {
-          "name": "Div10",
-          "value": 5,
-          "description": "adc_ker_ck_input divided by 10"
-        },
-        {
-          "name": "Div12",
-          "value": 6,
-          "description": "adc_ker_ck_input divided by 12"
-        },
-        {
-          "name": "Div16",
-          "value": 7,
-          "description": "adc_ker_ck_input divided by 16"
-        },
-        {
-          "name": "Div32",
-          "value": 8,
-          "description": "adc_ker_ck_input divided by 32"
-        },
-        {
-          "name": "Div64",
-          "value": 9,
-          "description": "adc_ker_ck_input divided by 64"
-        },
-        {
-          "name": "Div128",
-          "value": 10,
-          "description": "adc_ker_ck_input divided by 128"
-        },
-        {
-          "name": "Div256",
-          "value": 11,
-          "description": "adc_ker_ck_input divided by 256"
-        }
-      ]
-    },
-    "ADC4_RES": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Bits12",
-          "value": 0,
-          "description": "12-bit resolution"
-        },
-        {
-          "name": "Bits10",
-          "value": 1,
-          "description": "10-bit resolution"
-        },
-        {
-          "name": "Bits8",
-          "value": 2,
-          "description": "8-bit resolution"
-        },
-        {
-          "name": "Bits6",
-          "value": 3,
-          "description": "6-bit resolution"
-        }
-      ]
-    },
-    "ADC4_SAMPLE_TIME": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "Cycles1_5",
-          "value": 0,
-          "description": "1.5 ADC cycles"
-        },
-        {
-          "name": "Cycles3_5",
-          "value": 1,
-          "description": "3.5 ADC cycles"
-        },
-        {
-          "name": "Cycles7_5",
-          "value": 2,
-          "description": "7.5 ADC cycles"
-        },
-        {
-          "name": "Cycles12_5",
-          "value": 3,
-          "description": "12.5 ADC cycles"
-        },
-        {
-          "name": "Cycles19_5",
-          "value": 4,
-          "description": "19.5 ADC cycles"
-        },
-        {
-          "name": "Cycles39_5",
-          "value": 5,
-          "description": "39.5 ADC cycles"
-        },
-        {
-          "name": "Cycles79_5",
-          "value": 6,
-          "description": "79.5 ADC cycles"
-        },
-        {
-          "name": "Cycles814_5",
-          "value": 7,
-          "description": "160.5 ADC cycles"
-        }
-      ]
-    },
-    "ADSTP": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Stop",
-          "value": 1,
-          "description": "Stop conversion of channel"
-        }
-      ]
-    },
-    "DIFSEL": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "SingleEnded",
-          "value": 0,
-          "description": "Input channel is configured in single-ended mode"
-        },
-        {
-          "name": "Differential",
-          "value": 1,
-          "description": "Input channel is configured in differential mode"
-        }
-      ]
-    },
-    "DMNGT": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "DR",
-          "value": 0,
-          "description": "Store output data in DR only"
-        },
-        {
-          "name": "DMA_OneShot",
-          "value": 1,
-          "description": "DMA One Shot Mode selected"
-        },
-        {
-          "name": "MDF",
-          "value": 2,
-          "description": "MDF mode selected"
-        },
-        {
-          "name": "DMA_Circular",
-          "value": 3,
-          "description": "DMA Circular Mode selected"
-        }
-      ]
-    },
-    "EXTEN": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Disabled",
-          "value": 0,
-          "description": "Trigger detection disabled"
-        },
-        {
-          "name": "RisingEdge",
-          "value": 1,
-          "description": "Trigger detection on the rising edge"
-        },
-        {
-          "name": "FallingEdge",
-          "value": 2,
-          "description": "Trigger detection on the falling edge"
-        },
-        {
-          "name": "BothEdges",
-          "value": 3,
-          "description": "Trigger detection on both the rising and falling edges"
-        }
-      ]
-    },
-    "PCSEL": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "NotPreselected",
-          "value": 0,
-          "description": "Input channel x is not pre-selected"
-        },
-        {
-          "name": "Preselected",
-          "value": 1,
-          "description": "Pre-select input channel x"
-        }
-      ]
-    },
-    "RES": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Bits14",
-          "value": 0,
-          "description": "14-bit resolution"
-        },
-        {
-          "name": "Bits12",
-          "value": 1,
-          "description": "12-bit resolution"
-        },
-        {
-          "name": "Bits10",
-          "value": 2,
-          "description": "10-bit resolution"
-        },
-        {
-          "name": "Bits8",
-          "value": 3,
-          "description": "8-bit resolution"
-        }
-      ]
-    },
-    "SAMPLE_TIME": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "Cycles1_5",
-          "value": 0,
-          "description": "1.5 ADC cycles"
-        },
-        {
-          "name": "Cycles3_5",
-          "value": 1,
-          "description": "3.5 ADC cycles"
-        },
-        {
-          "name": "Cycles7_5",
-          "value": 2,
-          "description": "7.5 ADC cycles"
-        },
-        {
-          "name": "Cycles12_5",
-          "value": 3,
-          "description": "12.5 ADC cycles"
-        },
-        {
-          "name": "Cycles19_5",
-          "value": 4,
-          "description": "19.5 ADC cycles"
-        },
-        {
-          "name": "Cycles39_5",
-          "value": 5,
-          "description": "39.5 ADC cycles"
-        },
-        {
-          "name": "Cycles79_5",
-          "value": 6,
-          "description": "79.5 ADC cycles"
-        },
-        {
-          "name": "Cycles160_5",
-          "value": 7,
-          "description": "160.5 ADC cycles"
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

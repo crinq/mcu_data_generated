@@ -2,34 +2,38 @@
   "schema": 1,
   "kind": "ramcfg",
   "version": "wba",
+  "source": "stm32rs_svd",
+  "source_device": "stm32wba50ke",
+  "source_file": "stm32wba50.svd.patched",
   "blocks": {
     "RAMCFG": {
       "name": "RAMCFG",
-      "description": "RAMCFG address block description.",
+      "description": "RAMs configuration controller",
       "extends": null,
       "registers": [
         {
           "name": "M1CR",
           "offset": 0,
           "size": 32,
-          "description": "RAMCFG SRAM1 control register.",
+          "access": null,
+          "reset_value": 65536,
+          "description": "RAMCFG SRAM1 control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG SRAM1 control register.",
           "fields": [
             {
               "name": "SRAMER",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "SRAM1 erase.",
-              "enum": null
+              "description": "SRAM1 erase This bit can be set by software only after writing the unlock sequence in the ERASEKEY field of the RAMCFG_M1ERKEYR register. Setting this bit starts the SRAM1 erase. This bit is automatically cleared by hardware at the end of the erase operation.",
+              "access": "read-write"
             },
             {
               "name": "WSC",
               "bit_offset": 16,
               "bit_width": 3,
-              "description": "SRAM1 wait state configuration.",
-              "enum": null
+              "description": "SRAM1 wait state configuration This field is used to program the number of wait states inserted on the AHB when reading the SRAM1, depending on its access time. ... Note: Before entering Stop 1 mode software must set SRAM1 wait states to at least 1.",
+              "access": "read-write"
             }
           ]
         },
@@ -37,17 +41,18 @@
           "name": "M1ISR",
           "offset": 8,
           "size": 32,
-          "description": "RAMCFG SRAM1 interrupt status register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG SRAM1 interrupt status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG SRAM1 interrupt status register.",
           "fields": [
             {
               "name": "SRAMBUSY",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "SRAM busy with erase operation.",
-              "enum": null
+              "description": "SRAM busy with erase operation. Note: Depending on the SRAM, the erase operation can be performed due to software request, system reset if the enabled by user option, tamper detection or RDP regression. Refer to Table38.",
+              "access": "read-only"
             }
           ]
         },
@@ -55,17 +60,18 @@
           "name": "M1ERKEYR",
           "offset": 40,
           "size": 32,
-          "description": "RAMCFG SRAM1 erase key register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG SRAM1 erase key register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG SRAM1 erase key register.",
           "fields": [
             {
               "name": "ERASEKEY",
               "bit_offset": 0,
               "bit_width": 8,
-              "description": "Erase write protection key.",
-              "enum": null
+              "description": "Erase write protection key The following steps are required to unlock the write protection of the SRAMER bit in the RAMCFG_MxCR register. Write 0xCA into ERASEKEY[7:0] Write 0x53 into ERASEKEY[7:0] Note: Writing a wrong key reactivates the write protection.",
+              "access": "write-only"
             }
           ]
         },
@@ -73,31 +79,32 @@
           "name": "M2CR",
           "offset": 64,
           "size": 32,
-          "description": "RAMCFG SRAM2 control register.",
+          "access": null,
+          "reset_value": 65536,
+          "description": "RAMCFG SRAM2 control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG SRAM2 control register.",
           "fields": [
             {
               "name": "ALE",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "SRAM2 parity fail address latch enable.",
-              "enum": null
+              "description": "SRAM2 parity fail address latch enable",
+              "access": "read-write"
             },
             {
               "name": "SRAMER",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "SRAM2 erase.",
-              "enum": null
+              "description": "SRAM2 erase This bit can be set by software only after writing the unlock sequence in the ERASEKEY field of the RAMCFG_M2ERKEYR register. Setting this bit starts the SRAM2 erase. This bit is automatically cleared by hardware at the end of the erase operation.",
+              "access": "read-write"
             },
             {
               "name": "WSC",
               "bit_offset": 16,
               "bit_width": 3,
-              "description": "SRAM2 wait state configuration.",
-              "enum": null
+              "description": "SRAM2 wait state configuration This field is used to program the number of wait states inserted on the AHB when reading the SRAM2, depending on its access time. ... Note: Before entering Stop 1 mode software must set SRAM2 wait states to at least 1.",
+              "access": "read-write"
             }
           ]
         },
@@ -105,24 +112,25 @@
           "name": "M2IER",
           "offset": 68,
           "size": 32,
-          "description": "RAMCFG SRAM2 interrupt enable register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG SRAM2 interrupt enable register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG SRAM2 interrupt enable register.",
           "fields": [
             {
               "name": "PEIE",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Parity error interrupt enable.",
-              "enum": null
+              "description": "Parity error interrupt enable",
+              "access": "read-write"
             },
             {
               "name": "PENMI",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "Parity error NMI.",
-              "enum": null
+              "description": "Parity error NMI. This bit is set by software and cleared only by a global RAMCFG reset Note: When PENMI bit is set, the RAMCFG maskable interrupt is not generated for a parity error whatever PEIE bit value.",
+              "access": "read-write"
             }
           ]
         },
@@ -130,24 +138,25 @@
           "name": "M2ISR",
           "offset": 72,
           "size": 32,
-          "description": "RAMCFG SRAM2 interrupt status register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG SRAM2 interrupt status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG SRAM2 interrupt status register.",
           "fields": [
             {
               "name": "PED",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Parity error detected.",
-              "enum": null
+              "description": "Parity error detected",
+              "access": "read-only"
             },
             {
               "name": "SRAMBUSY",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "SRAM2 busy with erase operation.",
-              "enum": null
+              "description": "SRAM2 busy with erase operation. Note: Depending on the SRAM2, the erase operation can be performed due to software request, system reset if the enabled by user option, tamper detection or RDP regression. Refer to Table38.",
+              "access": "read-only"
             }
           ]
         },
@@ -155,31 +164,32 @@
           "name": "M2PEAR",
           "offset": 80,
           "size": 32,
-          "description": "RAMCFG SRAM2 parity error address register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG SRAM2 parity error address register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG SRAM2 parity error address register.",
           "fields": [
             {
               "name": "PEA",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "Parity error SRAM word aligned address offset.",
-              "enum": null
+              "description": "Parity error SRAM word aligned address offset.PEA[1:0] read 0b00. When ALE bit is set in RAMCFG_M2CR register, this field is updated when PED and CPED are zero and a new parity error is detected, with the SRAM word aligned address offset corresponding to the parity error.",
+              "access": "read-only"
             },
             {
               "name": "ID",
               "bit_offset": 24,
               "bit_width": 4,
-              "description": "Parity error AHB bus master ID.",
-              "enum": "ID"
+              "description": "Parity error AHB bus master ID. When ALE bit is set in RAMCFG_M2CR register, this field is updated when PED and CPED are zero and a new parity error is detected, with: Others: reserved",
+              "access": "read-only"
             },
             {
               "name": "BYTE",
               "bit_offset": 28,
               "bit_width": 4,
-              "description": "Byte parity error flag.",
-              "enum": null
+              "description": "Byte parity error flag. When ALE bit is set in RAMCFG_M2CR register, this field is updated when PED and CPED are zero and a new parity error is detected, with: 1xxx: parity error detected on fourth byte in word aligned address x1xx: parity error detected on third byte in word aligned address xx1x: parity error detected on second byte in word aligned address xxx1: parity error detected on first byte in word aligned address",
+              "access": "read-only"
             }
           ]
         },
@@ -187,17 +197,18 @@
           "name": "M2ICR",
           "offset": 84,
           "size": 32,
-          "description": "RAMCFG SRAM2 interrupt clear register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG SRAM2 interrupt clear register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG SRAM2 interrupt clear register.",
           "fields": [
             {
               "name": "CPED",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Clear parity error detect bit.",
-              "enum": null
+              "description": "Clear parity error detect bit Writing 1 to this bit clears the PED bit in RAMCFG_M2ISR. Reading this bit returns the value of the RAMCFG_M2ISR PED bit.",
+              "access": "read-write"
             }
           ]
         },
@@ -205,17 +216,235 @@
           "name": "M2WPR1",
           "offset": 88,
           "size": 32,
-          "description": "RAMCFG SRAM2 write protection register 1.",
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG SRAM2 write protection register 1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG SRAM2 write protection register 1.",
           "fields": [
             {
-              "name": "PWP",
+              "name": "P0WP",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "SRAM2 1-Kbyte write protect page y write protection.",
-              "enum": null
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P1WP",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P2WP",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P3WP",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P4WP",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P5WP",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P6WP",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P7WP",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P8WP",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P9WP",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P10WP",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P11WP",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P12WP",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P13WP",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P14WP",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P15WP",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P16WP",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P17WP",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P18WP",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P19WP",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P20WP",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P21WP",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P22WP",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P23WP",
+              "bit_offset": 23,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P24WP",
+              "bit_offset": 24,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P25WP",
+              "bit_offset": 25,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P26WP",
+              "bit_offset": 26,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P27WP",
+              "bit_offset": 27,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P28WP",
+              "bit_offset": 28,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P29WP",
+              "bit_offset": 29,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P30WP",
+              "bit_offset": 30,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P31WP",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
             }
           ]
         },
@@ -223,17 +452,235 @@
           "name": "M2WPR2",
           "offset": 92,
           "size": 32,
-          "description": "RAMCFG SRAM2 write protection register 2.",
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG SRAM2 write protection register 2",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG SRAM2 write protection register 2.",
           "fields": [
             {
-              "name": "PWP",
+              "name": "P32WP",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "SRAM2 1-Kbyte write protect page y write protection.",
-              "enum": null
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P33WP",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P34WP",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P35WP",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P36WP",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P37WP",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P38WP",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P39WP",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P40WP",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P41WP",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P42WP",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P43WP",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P44WP",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P45WP",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P46WP",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P47WP",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P48WP",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P49WP",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P50WP",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P51WP",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P52WP",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P53WP",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P54WP",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P55WP",
+              "bit_offset": 23,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P56WP",
+              "bit_offset": 24,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P57WP",
+              "bit_offset": 25,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P58WP",
+              "bit_offset": 26,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P59WP",
+              "bit_offset": 27,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P60WP",
+              "bit_offset": 28,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P61WP",
+              "bit_offset": 29,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P62WP",
+              "bit_offset": 30,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P63WP",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte write protect page y write protection These bits are set by software and cleared only by a system reset.",
+              "access": "read-write"
             }
           ]
         },
@@ -241,48 +688,23 @@
           "name": "M2ERKEYR",
           "offset": 104,
           "size": 32,
-          "description": "RAMCFG SRAM2 erase key register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG SRAM2 erase key register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG SRAM2 erase key register.",
           "fields": [
             {
               "name": "ERASEKEY",
               "bit_offset": 0,
               "bit_width": 8,
-              "description": "Erase write protection key.",
-              "enum": null
+              "description": "Erase write protection key The following steps are required to unlock the write protection of the SRAMER bit in the RAMCFG_MxCR register. Write 0xCA into ERASEKEY[7:0] Write 0x53 into ERASEKEY[7:0] Note: Writing a wrong key reactivates the write protection.",
+              "access": "write-only"
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "ID": {
-      "bit_size": 4,
-      "variants": [
-        {
-          "name": "B_0x2",
-          "value": 2,
-          "description": "parity error detected on CPU access."
-        },
-        {
-          "name": "B_0x3",
-          "value": 3,
-          "description": "parity error detected on Debugger access."
-        },
-        {
-          "name": "B_0x6",
-          "value": 6,
-          "description": "parity error detected on DMA master port o access."
-        },
-        {
-          "name": "B_0x7",
-          "value": 7,
-          "description": "parity error detected on DMA master port 1 access."
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

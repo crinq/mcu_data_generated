@@ -2,94 +2,99 @@
   "schema": 1,
   "kind": "dbgmcu",
   "version": "wba",
+  "source": "stm32rs_svd",
+  "source_device": "stm32wba50ke",
+  "source_file": "stm32wba50.svd.patched",
   "blocks": {
     "DBGMCU": {
       "name": "DBGMCU",
-      "description": "Microcontroller debug unit",
+      "description": "DBGMCU address block description",
       "extends": null,
       "registers": [
         {
-          "name": "IDCODE",
+          "name": "IDCODER",
           "offset": 0,
           "size": 32,
-          "description": "identity code register",
+          "access": "read-only",
+          "reset_value": 25746,
+          "description": "DBGMCU identity code register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "identity code register",
           "fields": [
             {
               "name": "DEV_ID",
               "bit_offset": 0,
               "bit_width": 12,
               "description": "Device ID",
-              "enum": null
+              "access": "read-only"
             },
             {
               "name": "REV_ID",
               "bit_offset": 16,
               "bit_width": 16,
               "description": "Revision ID",
-              "enum": null
+              "access": "read-only"
             }
           ]
         },
         {
-          "name": "CR",
+          "name": "SCR",
           "offset": 4,
           "size": 32,
-          "description": "status and configuration register",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "DBGMCU status and configuration register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "status and configuration register",
           "fields": [
             {
               "name": "DBG_STOP",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Allows debug in Stop mode\r Write access can be protected by PWR_SECCFGR.LPMSEC.\r The CPU debug and clocks remain active and the HSI oscillators is used as system clock during Stop debug mode, allowing CPU debug capability. On exit from Stop mode, the clock settings are set to the Stop mode exit state.",
-              "enum": null
+              "description": "Allows debug in Stop mode Write access can be protected by PWR_SECCFGR.LPMSEC. The CPU debug and DBGMCU clocks remain active and the HSI16 oscillators is used as system clock during Stop debug mode, allowing CPU debug capability. On exit from Stop mode, the clock settings are set to the Stop mode exit state.",
+              "access": "read-write"
             },
             {
               "name": "DBG_STANDBY",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "Allows debug in Standby mode\r Write access can be protected by PWR_SECCFGR.LPMSEC.\r The CPU debug and clocks remain active and the HSI oscillator is used as system clock, the supply and SRAM memory content is maintained during Standby debug mode, allowing CPU debug capability. On exit from Standby mode, a standby reset is performed.",
-              "enum": null
+              "description": "Allows debug in Standby mode Write access can be protected by PWR_SECCFGR.LPMSEC. The CPU debug and DBGMCU clocks remain active and the HSI16 oscillator is used as system clock, the supply and SRAM memory content is maintained during Standby debug mode, allowing CPU debug capability. On exit from Standby mode, a standby reset is performed.",
+              "access": "read-write"
             },
             {
               "name": "LPMS",
               "bit_offset": 16,
               "bit_width": 3,
-              "description": "Device low power mode selected\r 10x: Standby mode\r others reserved",
-              "enum": null
+              "description": "Device low power mode selected 10x: Standby mode others reserved",
+              "access": "read-only"
             },
             {
               "name": "STOPF",
               "bit_offset": 19,
               "bit_width": 1,
               "description": "Device Stop flag",
-              "enum": null
+              "access": "read-only"
             },
             {
               "name": "SBF",
               "bit_offset": 20,
               "bit_width": 1,
               "description": "Device Standby flag",
-              "enum": null
+              "access": "read-only"
             },
             {
               "name": "CS",
               "bit_offset": 24,
               "bit_width": 1,
               "description": "CPU Sleep",
-              "enum": null
+              "access": "read-only"
             },
             {
               "name": "CDS",
               "bit_offset": 25,
               "bit_width": 1,
               "description": "CPU DeepSleep",
-              "enum": null
+              "access": "read-only"
             }
           ]
         },
@@ -97,45 +102,46 @@
           "name": "APB1LFZR",
           "offset": 8,
           "size": 32,
-          "description": "APB1L peripheral freeze register",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "DBGMCU APB1L peripheral freeze register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "APB1L peripheral freeze register",
           "fields": [
             {
               "name": "DBG_TIM2_STOP",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "TIM2 stop in CPU debug\r Write access can be protected by GTZC_TZSC.TIM2SEC.",
-              "enum": null
+              "description": "TIM2 stop in CPU debug Write access can be protected by GTZC_TZSC.TIM2SEC.",
+              "access": "read-write"
             },
             {
               "name": "DBG_TIM3_STOP",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "TIM3 stop in CPU debug\r Write access can be protected by GTZC_TZSC.TIM3SEC.",
-              "enum": null
+              "description": "TIM3 stop in CPU debug Write access can be protected by GTZC_TZSC.TIM3SEC.",
+              "access": "read-write"
             },
             {
               "name": "DBG_WWDG_STOP",
               "bit_offset": 11,
               "bit_width": 1,
-              "description": "WWDG stop in CPU debug\r Write access can be protected by GTZC_TZSC.WWDGSEC",
-              "enum": null
+              "description": "WWDG stop in CPU debug Write access can be protected by GTZC_TZSC.WWDGSEC",
+              "access": "read-write"
             },
             {
               "name": "DBG_IWDG_STOP",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "IWDG stop in CPU debug\r Write access can be protected by GTZC_TZSC.IWDGSEC.",
-              "enum": null
+              "description": "IWDG stop in CPU debug Write access can be protected by GTZC_TZSC.IWDGSEC.",
+              "access": "read-write"
             },
             {
               "name": "DBG_I2C1_STOP",
               "bit_offset": 21,
               "bit_width": 1,
-              "description": "I2C1 SMBUS timeout stop in CPU debug\r Write access can be protected by GTZC_TZSC.I2C1SEC.",
-              "enum": null
+              "description": "I2C1 SMBUS timeout stop in CPU debug Write access can be protected by GTZC_TZSC.I2C1SEC.",
+              "access": "read-write"
             }
           ]
         },
@@ -143,17 +149,18 @@
           "name": "APB1HFZR",
           "offset": 12,
           "size": 32,
-          "description": "APB1H peripheral freeze register",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "DBGMCU APB1H peripheral freeze register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "APB1H peripheral freeze register",
           "fields": [
             {
               "name": "DBG_LPTIM2_STOP",
               "bit_offset": 5,
               "bit_width": 1,
-              "description": "LPTIM2 stop in CPU debug\r Write access can be protected by GTZC_TZSC.LPTIM2SEC.",
-              "enum": null
+              "description": "LPTIM2 stop in CPU debug Write access can be protected by GTZC_TZSC.LPTIM2SEC.",
+              "access": "read-write"
             }
           ]
         },
@@ -161,31 +168,32 @@
           "name": "APB2FZR",
           "offset": 16,
           "size": 32,
-          "description": "APB2 peripheral freeze register",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "DBGMCU APB2 peripheral freeze register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "APB2 peripheral freeze register",
           "fields": [
             {
               "name": "DBG_TIM1_STOP",
               "bit_offset": 11,
               "bit_width": 1,
-              "description": "TIM1 stop in CPU debug\r Write access can be protected by GTZC_TZSC.TIM1SEC.",
-              "enum": null
+              "description": "TIM1 stop in CPU debug Write access can be protected by GTZC_TZSC.TIM1SEC.",
+              "access": "read-write"
             },
             {
               "name": "DBG_TIM16_STOP",
               "bit_offset": 17,
               "bit_width": 1,
-              "description": "TIM16 stop in CPU debug\r Write access can be protected by GTZC_TZSC.TIM16SEC.",
-              "enum": null
+              "description": "TIM16 stop in CPU debug Write access can be protected by GTZC_TZSC.TIM16SEC.",
+              "access": "read-write"
             },
             {
               "name": "DBG_TIM17_STOP",
               "bit_offset": 18,
               "bit_width": 1,
-              "description": "TIM17 stop in CPU debug\r Write access can be protected by GTZC_TZSC.TIM17SEC.",
-              "enum": null
+              "description": "TIM17 stop in CPU debug Write access can be protected by GTZC_TZSC.TIM17SEC.",
+              "access": "read-write"
             }
           ]
         },
@@ -193,31 +201,32 @@
           "name": "APB7FZR",
           "offset": 36,
           "size": 32,
-          "description": "APB7 peripheral freeze register",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "DBGMCU APB7 peripheral freeze register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "APB7 peripheral freeze register",
           "fields": [
             {
               "name": "DBG_I2C3_STOP",
               "bit_offset": 10,
               "bit_width": 1,
-              "description": "I2C3 stop in CPU debug\r Access can be protected by GTZC_TZSC.I2C3SEC.",
-              "enum": null
+              "description": "I2C3 stop in CPU debug Access can be protected by GTZC_TZSC.I2C3SEC.",
+              "access": "read-write"
             },
             {
               "name": "DBG_LPTIM1_STOP",
               "bit_offset": 17,
               "bit_width": 1,
-              "description": "LPTIM1 stop in CPU debug\r Access can be protected by GTZC_TZSC.LPTIM1SEC.",
-              "enum": null
+              "description": "LPTIM1 stop in CPU debug Access can be protected by GTZC_TZSC.LPTIM1SEC.",
+              "access": "read-write"
             },
             {
               "name": "DBG_RTC_STOP",
               "bit_offset": 30,
               "bit_width": 1,
-              "description": "RTC stop in CPU debug\r Access can be protected by GTZC_TZSC.TIM17SEC.\r Can only be accessed secure when one or more features in the RTC or TAMP is/are secure.",
-              "enum": null
+              "description": "RTC stop in CPU debug Access can be protected by GTZC_TZSC.TIM17SEC. Can only be accessed secure when one or more features in the RTC or TAMP is/are secure.",
+              "access": "read-write"
             }
           ]
         },
@@ -225,66 +234,67 @@
           "name": "AHB1FZR",
           "offset": 40,
           "size": 32,
-          "description": "AHB1 peripheral freeze register",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "DBGMCU AHB1 peripheral freeze register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "AHB1 peripheral freeze register",
           "fields": [
             {
               "name": "DBG_GPDMA1_CH0_STOP",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "GPDMA 1 channel 0 stop in CPU debug\r Write access can be protected by GPDMA_SECCFGR.SEC0.",
-              "enum": null
+              "description": "GPDMA 1 channel 0 stop in CPU debug Write access can be protected by GPDMA_SECCFGR.SEC0.",
+              "access": "read-write"
             },
             {
               "name": "DBG_GPDMA1_CH1_STOP",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "GPDMA 1 channel 1 stop in CPU debug\r Write access can be protected by GPDMA_SECCFGR.SEC1.",
-              "enum": null
+              "description": "GPDMA 1 channel 1 stop in CPU debug Write access can be protected by GPDMA_SECCFGR.SEC1.",
+              "access": "read-write"
             },
             {
               "name": "DBG_GPDMA1_CH2_STOP",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "GPDMA 1 channel 2 stop in CPU debug\r Write access can be protected by GPDMA_SECCFGR.SEC2.",
-              "enum": null
+              "description": "GPDMA 1 channel 2 stop in CPU debug Write access can be protected by GPDMA_SECCFGR.SEC2.",
+              "access": "read-write"
             },
             {
               "name": "DBG_GPDMA1_CH3_STOP",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "GPDMA 1 channel 3 stop in CPU debug\r Write access can be protected by GPDMA_SECCFGR.SEC3.",
-              "enum": null
+              "description": "GPDMA 1 channel 3 stop in CPU debug Write access can be protected by GPDMA_SECCFGR.SEC3.",
+              "access": "read-write"
             },
             {
               "name": "DBG_GPDMA1_CH4_STOP",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "GPDMA 1 channel 4 stop in CPU debug\r Write access can be protected by GPDMA_SECCFGR.SEC4.",
-              "enum": null
+              "description": "GPDMA 1 channel 4 stop in CPU debug Write access can be protected by GPDMA_SECCFGR.SEC4.",
+              "access": "read-write"
             },
             {
               "name": "DBG_GPDMA1_CH5_STOP",
               "bit_offset": 5,
               "bit_width": 1,
-              "description": "GPDMA 1 channel 5 stop in CPU debug\r Write access can be protected by GPDMA_SECCFGR.SEC5.",
-              "enum": null
+              "description": "GPDMA 1 channel 5 stop in CPU debug Write access can be protected by GPDMA_SECCFGR.SEC5.",
+              "access": "read-write"
             },
             {
               "name": "DBG_GPDMA1_CH6_STOP",
               "bit_offset": 6,
               "bit_width": 1,
-              "description": "GPDMA 1 channel 6 stop in CPU debug\r Write access can be protected by GPDMA_SECCFGR.SEC6.",
-              "enum": null
+              "description": "GPDMA 1 channel 6 stop in CPU debug Write access can be protected by GPDMA_SECCFGR.SEC6.",
+              "access": "read-write"
             },
             {
               "name": "DBG_GPDMA1_CH7_STOP",
               "bit_offset": 7,
               "bit_width": 1,
-              "description": "GPDMA 1 channel 7 stop in CPU debug\r Write access can be protected by GPDMA_SECCFGR.SEC7.",
-              "enum": null
+              "description": "GPDMA 1 channel 7 stop in CPU debug Write access can be protected by GPDMA_SECCFGR.SEC7.",
+              "access": "read-write"
             }
           ]
         },
@@ -292,24 +302,25 @@
           "name": "SR",
           "offset": 252,
           "size": 32,
-          "description": "status register",
+          "access": "read-only",
+          "reset_value": 3,
+          "description": "DBGMCU status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "status register",
           "fields": [
             {
               "name": "AP_PRESENT",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "Bit n identifies whether access port APn is present in device \r Bit n�=�0: APn absent \r Bit n�=�1: APn present",
-              "enum": null
+              "description": "Bit n identifies whether access port APn is present in device Bit n = 0: APn absent Bit n = 1: APn present",
+              "access": "read-only"
             },
             {
               "name": "AP_ENABLED",
               "bit_offset": 16,
               "bit_width": 16,
-              "description": "Bit n identifies whether access port APn is open (can be accessed via the debug port) or locked (debug access to the APn is blocked, except for access) \r Bit n�=�0: APn locked (except for access to DBGMCU)\r Bit n�=�1: APn enabled",
-              "enum": null
+              "description": "Bit n identifies whether access port APn is open (can be accessed via the debug port) or locked (debug access to the APn is blocked, except for DBGMCU access) Bit n = 0: APn locked (except for access to DBGMCU) Bit n = 1: APn enabled",
+              "access": "read-only"
             }
           ]
         },
@@ -317,17 +328,18 @@
           "name": "DBG_AUTH_HOST",
           "offset": 256,
           "size": 32,
-          "description": "debug host authentication register",
+          "access": "write-only",
+          "reset_value": 0,
+          "description": "DBGMCU debug host authentication register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "debug host authentication register",
           "fields": [
             {
               "name": "AUTH_KEY",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Device authentication key\r The device specific 64-bit authentication key (OEMn key) must be written to this register (in two successive 32-bit writes, least significant word first) to permit RDP regression. Writing a wrong key locks access to the device and prevent code execution from the Flash memory.",
-              "enum": null
+              "description": "Device authentication key The device specific 64-bit authentication key (OEMn key) must be written to this register (in two successive 32-bit writes, least significant word first) to permit RDP regression. Writing a wrong key locks access to the device and prevent code execution from the Flash memory.",
+              "access": "write-only"
             }
           ]
         },
@@ -335,17 +347,18 @@
           "name": "DBG_AUTH_DEVICE",
           "offset": 260,
           "size": 32,
-          "description": "debug device authentication register",
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "DBGMCU debug device authentication register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "debug device authentication register",
           "fields": [
             {
               "name": "AUTH_ID",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Device specific ID\r Device specific ID used for RDP regression.",
-              "enum": null
+              "description": "Device specific ID Device specific ID used for RDP regression.",
+              "access": "read-only"
             }
           ]
         },
@@ -353,17 +366,18 @@
           "name": "PNCR",
           "offset": 2012,
           "size": 32,
-          "description": "part number codification register",
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "DBGMCU part number codification register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "part number codification register",
           "fields": [
             {
               "name": "CODIFICATION",
               "bit_offset": 0,
               "bit_width": 32,
               "description": "Part number codification",
-              "enum": null
+              "access": "read-only"
             }
           ]
         },
@@ -371,24 +385,25 @@
           "name": "PIDR4",
           "offset": 4048,
           "size": 32,
-          "description": "CoreSight peripheral identity register 4",
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "DBGMCU CoreSight peripheral identity register 4",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "CoreSight peripheral identity register 4",
           "fields": [
             {
               "name": "JEP106CON",
               "bit_offset": 0,
               "bit_width": 4,
               "description": "JEP106 continuation code",
-              "enum": null
+              "access": "read-only"
             },
             {
               "name": "F4KCOUNT",
               "bit_offset": 4,
               "bit_width": 4,
               "description": "Register file size",
-              "enum": null
+              "access": "read-only"
             }
           ]
         },
@@ -396,17 +411,18 @@
           "name": "PIDR0",
           "offset": 4064,
           "size": 32,
-          "description": "CoreSight peripheral identity register 0",
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "DBGMCU CoreSight peripheral identity register 0",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "CoreSight peripheral identity register 0",
           "fields": [
             {
               "name": "PARTNUM",
               "bit_offset": 0,
               "bit_width": 8,
               "description": "Part number bits [7:0]",
-              "enum": null
+              "access": "read-only"
             }
           ]
         },
@@ -414,24 +430,25 @@
           "name": "PIDR1",
           "offset": 4068,
           "size": 32,
-          "description": "CoreSight peripheral identity register 1",
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "DBGMCU CoreSight peripheral identity register 1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "CoreSight peripheral identity register 1",
           "fields": [
             {
               "name": "PARTNUM",
               "bit_offset": 0,
               "bit_width": 4,
               "description": "Part number bits [11:8]",
-              "enum": null
+              "access": "read-only"
             },
             {
               "name": "JEP106ID",
               "bit_offset": 4,
               "bit_width": 4,
               "description": "JEP106 identity code bits [3:0]",
-              "enum": null
+              "access": "read-only"
             }
           ]
         },
@@ -439,31 +456,32 @@
           "name": "PIDR2",
           "offset": 4072,
           "size": 32,
-          "description": "CoreSight peripheral identity register 2",
+          "access": "read-only",
+          "reset_value": 10,
+          "description": "DBGMCU CoreSight peripheral identity register 2",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "CoreSight peripheral identity register 2",
           "fields": [
             {
               "name": "JEP106ID",
               "bit_offset": 0,
               "bit_width": 3,
               "description": "JEP106 identity code bits [6:4]",
-              "enum": null
+              "access": "read-only"
             },
             {
               "name": "JEDEC",
               "bit_offset": 3,
               "bit_width": 1,
               "description": "JEDEC assigned value",
-              "enum": null
+              "access": "read-only"
             },
             {
               "name": "REVISION",
               "bit_offset": 4,
               "bit_width": 4,
               "description": "Component revision number",
-              "enum": null
+              "access": "read-only"
             }
           ]
         },
@@ -471,24 +489,25 @@
           "name": "PIDR3",
           "offset": 4076,
           "size": 32,
-          "description": "CoreSight peripheral identity register 3",
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "DBGMCU CoreSight peripheral identity register 3",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "CoreSight peripheral identity register 3",
           "fields": [
             {
               "name": "CMOD",
               "bit_offset": 0,
               "bit_width": 4,
               "description": "Customer modified",
-              "enum": null
+              "access": "read-only"
             },
             {
               "name": "REVAND",
               "bit_offset": 4,
               "bit_width": 4,
               "description": "Metal fix version",
-              "enum": null
+              "access": "read-only"
             }
           ]
         },
@@ -496,17 +515,18 @@
           "name": "CIDR0",
           "offset": 4080,
           "size": 32,
-          "description": "CoreSight component identity register 0",
+          "access": "read-only",
+          "reset_value": 13,
+          "description": "DBGMCU CoreSight component identity register 0",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "CoreSight component identity register 0",
           "fields": [
             {
               "name": "PREAMBLE",
               "bit_offset": 0,
               "bit_width": 8,
               "description": "Component ID bits [7:0]",
-              "enum": null
+              "access": "read-only"
             }
           ]
         },
@@ -514,24 +534,25 @@
           "name": "CIDR1",
           "offset": 4084,
           "size": 32,
-          "description": "CoreSight peripheral identity register 1",
+          "access": "read-only",
+          "reset_value": 240,
+          "description": "DBGMCU CoreSight peripheral identity register 1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "CoreSight peripheral identity register 1",
           "fields": [
             {
               "name": "PREAMBLE",
               "bit_offset": 0,
               "bit_width": 4,
               "description": "Component ID bits [11:8]",
-              "enum": null
+              "access": "read-only"
             },
             {
               "name": "CLASS",
               "bit_offset": 4,
               "bit_width": 4,
               "description": "Component ID bits [15:12] - component class",
-              "enum": null
+              "access": "read-only"
             }
           ]
         },
@@ -539,17 +560,18 @@
           "name": "CIDR2",
           "offset": 4088,
           "size": 32,
-          "description": "CoreSight component identity register 2",
+          "access": "read-only",
+          "reset_value": 5,
+          "description": "DBGMCU CoreSight component identity register 2",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "CoreSight component identity register 2",
           "fields": [
             {
               "name": "PREAMBLE",
               "bit_offset": 0,
               "bit_width": 8,
               "description": "Component ID bits [23:16]",
-              "enum": null
+              "access": "read-only"
             }
           ]
         },
@@ -557,17 +579,18 @@
           "name": "CIDR3",
           "offset": 4092,
           "size": 32,
-          "description": "CoreSight component identity register 3",
+          "access": "read-only",
+          "reset_value": 177,
+          "description": "DBGMCU CoreSight component identity register 3",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "CoreSight component identity register 3",
           "fields": [
             {
               "name": "PREAMBLE",
               "bit_offset": 0,
               "bit_width": 8,
               "description": "Component ID bits [31:24]",
-              "enum": null
+              "access": "read-only"
             }
           ]
         }

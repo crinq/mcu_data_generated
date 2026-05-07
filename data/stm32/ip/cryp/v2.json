@@ -2,76 +2,80 @@
   "schema": 1,
   "kind": "cryp",
   "version": "v2",
+  "source": "stm32rs_svd",
+  "source_device": "stm32f437ai",
+  "source_file": "stm32f427.svd.patched",
   "blocks": {
     "CRYP": {
       "name": "CRYP",
-      "description": "Cryptographic processor.",
+      "description": "Cryptographic processor",
       "extends": null,
       "registers": [
         {
           "name": "CR",
           "offset": 0,
           "size": 32,
-          "description": "control register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "control register.",
           "fields": [
             {
               "name": "ALGODIR",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "Algorithm direction.",
-              "enum": null
+              "description": "Algorithm direction",
+              "access": "read-write"
             },
             {
               "name": "ALGOMODE0",
               "bit_offset": 3,
               "bit_width": 3,
-              "description": "Algorithm mode.",
-              "enum": null
+              "description": "Algorithm mode",
+              "access": "read-write"
             },
             {
               "name": "DATATYPE",
               "bit_offset": 6,
               "bit_width": 2,
-              "description": "Data type selection.",
-              "enum": null
+              "description": "Data type selection",
+              "access": "read-write"
             },
             {
               "name": "KEYSIZE",
               "bit_offset": 8,
               "bit_width": 2,
-              "description": "Key size selection (AES mode only).",
-              "enum": null
+              "description": "Key size selection (AES mode only)",
+              "access": "read-write"
             },
             {
               "name": "FFLUSH",
               "bit_offset": 14,
               "bit_width": 1,
-              "description": "FIFO flush.",
-              "enum": null
+              "description": "FIFO flush",
+              "access": "write-only"
             },
             {
               "name": "CRYPEN",
               "bit_offset": 15,
               "bit_width": 1,
-              "description": "Cryptographic processor enable.",
-              "enum": null
+              "description": "Cryptographic processor enable",
+              "access": "read-write"
             },
             {
               "name": "GCM_CCMPH",
               "bit_offset": 16,
               "bit_width": 2,
-              "description": "GCM_CCMPH.",
-              "enum": null
+              "description": "GCM_CCMPH",
+              "access": "read-write"
             },
             {
               "name": "ALGOMODE3",
               "bit_offset": 19,
               "bit_width": 1,
-              "description": "ALGOMODE.",
-              "enum": null
+              "description": "ALGOMODE",
+              "access": "read-write"
             }
           ]
         },
@@ -79,86 +83,101 @@
           "name": "SR",
           "offset": 4,
           "size": 32,
-          "description": "status register.",
+          "access": "read-only",
+          "reset_value": 3,
+          "description": "status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "status register.",
           "fields": [
             {
-              "name": "IFEM",
-              "bit_offset": 0,
+              "name": "BUSY",
+              "bit_offset": 4,
               "bit_width": 1,
-              "description": "Input FIFO empty.",
-              "enum": null
-            },
-            {
-              "name": "IFNF",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Input FIFO not full.",
-              "enum": null
-            },
-            {
-              "name": "OFNE",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Output FIFO not empty.",
-              "enum": null
+              "description": "Busy bit"
             },
             {
               "name": "OFFU",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "Output FIFO full.",
-              "enum": null
+              "description": "Output FIFO full"
             },
             {
-              "name": "BUSY",
-              "bit_offset": 4,
+              "name": "OFNE",
+              "bit_offset": 2,
               "bit_width": 1,
-              "description": "Busy bit.",
-              "enum": null
+              "description": "Output FIFO not empty"
+            },
+            {
+              "name": "IFNF",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Input FIFO not full"
+            },
+            {
+              "name": "IFEM",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Input FIFO empty"
             }
           ]
         },
         {
           "name": "DIN",
           "offset": 8,
-          "description": "data input register.",
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "data input register",
           "array_len": null,
           "array_stride": null,
-          "fields": []
+          "fields": [
+            {
+              "name": "DATAIN",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Data input"
+            }
+          ]
         },
         {
           "name": "DOUT",
           "offset": 12,
-          "description": "data output register.",
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "data output register",
           "array_len": null,
           "array_stride": null,
-          "fields": []
+          "fields": [
+            {
+              "name": "DATAOUT",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Data output"
+            }
+          ]
         },
         {
           "name": "DMACR",
           "offset": 16,
           "size": 32,
-          "description": "DMA control register.",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "DMA control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "DMA control register.",
           "fields": [
-            {
-              "name": "DIEN",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "DMA input enable.",
-              "enum": null
-            },
             {
               "name": "DOEN",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "DMA output enable.",
-              "enum": null
+              "description": "DMA output enable"
+            },
+            {
+              "name": "DIEN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "DMA input enable"
             }
           ]
         },
@@ -166,24 +185,23 @@
           "name": "IMSCR",
           "offset": 20,
           "size": 32,
-          "description": "interrupt mask set/clear register.",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "interrupt mask set/clear register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "interrupt mask set/clear register.",
           "fields": [
-            {
-              "name": "INIM",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Input FIFO service interrupt mask.",
-              "enum": null
-            },
             {
               "name": "OUTIM",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Output FIFO service interrupt mask.",
-              "enum": null
+              "description": "Output FIFO service interrupt mask"
+            },
+            {
+              "name": "INIM",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Input FIFO service interrupt mask"
             }
           ]
         },
@@ -191,24 +209,23 @@
           "name": "RISR",
           "offset": 24,
           "size": 32,
-          "description": "raw interrupt status register.",
+          "access": "read-only",
+          "reset_value": 1,
+          "description": "raw interrupt status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "raw interrupt status register.",
           "fields": [
-            {
-              "name": "INRIS",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Input FIFO service raw interrupt status.",
-              "enum": null
-            },
             {
               "name": "OUTRIS",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Output FIFO service raw interrupt status.",
-              "enum": null
+              "description": "Output FIFO service raw interrupt status"
+            },
+            {
+              "name": "INRIS",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Input FIFO service raw interrupt status"
             }
           ]
         },
@@ -216,104 +233,61 @@
           "name": "MISR",
           "offset": 28,
           "size": 32,
-          "description": "masked interrupt status register.",
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "masked interrupt status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "masked interrupt status register.",
           "fields": [
-            {
-              "name": "INMIS",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Input FIFO service masked interrupt status.",
-              "enum": null
-            },
             {
               "name": "OUTMIS",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Output FIFO service masked interrupt status.",
-              "enum": null
+              "description": "Output FIFO service masked interrupt status"
+            },
+            {
+              "name": "INMIS",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Input FIFO service masked interrupt status"
             }
           ]
         },
         {
-          "name": "KEY",
-          "offset": 32,
-          "description": "Cluster KEY%s, containing K?LR, K?RR.",
-          "array_len": 4,
-          "array_stride": 8,
-          "fields": []
-        },
-        {
-          "name": "INIT",
-          "offset": 64,
-          "description": "Cluster INIT%s, containing IV?LR, IV?RR.",
-          "array_len": 2,
-          "array_stride": 8,
-          "fields": []
-        },
-        {
-          "name": "CSGCMCCMR",
+          "name": "CSGCMCCM%sR",
           "offset": 80,
-          "description": "context swap register.",
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "context swap register",
           "array_len": 8,
           "array_stride": 4,
-          "fields": []
+          "fields": [
+            {
+              "name": "CSGCMCCMR",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "CSGCMCCM0R"
+            }
+          ]
         },
         {
-          "name": "CSGCMR",
+          "name": "CSGCM%sR",
           "offset": 112,
-          "description": "context swap register.",
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "context swap register",
           "array_len": 8,
           "array_stride": 4,
-          "fields": []
-        }
-      ]
-    },
-    "INIT": {
-      "name": "INIT",
-      "description": "Cluster INIT%s, containing IV?LR, IV?RR.",
-      "extends": null,
-      "registers": [
-        {
-          "name": "IVLR",
-          "offset": 0,
-          "description": "initialization vector registers.",
-          "array_len": null,
-          "array_stride": null,
-          "fields": []
-        },
-        {
-          "name": "IVRR",
-          "offset": 4,
-          "description": "initialization vector registers.",
-          "array_len": null,
-          "array_stride": null,
-          "fields": []
-        }
-      ]
-    },
-    "KEY": {
-      "name": "KEY",
-      "description": "Cluster KEY%s, containing K?LR, K?RR.",
-      "extends": null,
-      "registers": [
-        {
-          "name": "KLR",
-          "offset": 0,
-          "description": "key registers.",
-          "array_len": null,
-          "array_stride": null,
-          "fields": []
-        },
-        {
-          "name": "KRR",
-          "offset": 4,
-          "description": "key registers.",
-          "array_len": null,
-          "array_stride": null,
-          "fields": []
+          "fields": [
+            {
+              "name": "CSGCMR",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "CSGCM0R"
+            }
+          ]
         }
       ]
     }

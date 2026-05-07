@@ -2,69 +2,73 @@
   "schema": 1,
   "kind": "pka",
   "version": "v1a",
+  "source": "stm32rs_svd",
+  "source_device": "stm32h573ai",
+  "source_file": "stm32h573.svd.patched",
   "blocks": {
     "PKA": {
       "name": "PKA",
-      "description": "Public key accelerator.",
+      "description": "Private key accelerator",
       "extends": null,
       "registers": [
         {
           "name": "CR",
           "offset": 0,
           "size": 32,
-          "description": "PKA control register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "PKA control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "PKA control register.",
           "fields": [
             {
               "name": "EN",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "PKA enable. When an illegal operation is selected while EN=1 OPERRF bit is set in PKA_SR. See PKA_CR.MODE bitfield for details. When EN=0 PKA RAM can still be accessed by the application.",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "START",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "start the operation Writing 1 to this bit starts the operation which is selected by MODE[5:0], using the operands and data already written to the PKA RAM. This bit is always read as 0. When an illegal operation is selected while START bit is set no operation is started, and OPERRF bit is set in PKA_SR. START is ignored if PKA is busy.",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "MODE",
               "bit_offset": 8,
               "bit_width": 6,
               "description": "PKA operation code When an operation not listed here is written by the application with EN bit set, OPERRF bit is set in PKA_SR register, and the write to MODE bitfield is ignored. When PKA is configured in limited mode (LMF = 1 in PKA_SR), writing a MODE different from 0x26 with EN bit to 1 triggers OPERRF bit to be set and write to MODE bit is ignored.",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "PROCENDIE",
               "bit_offset": 17,
               "bit_width": 1,
-              "description": "End of operation interrupt enable.",
-              "enum": null
+              "description": "End of operation interrupt enable",
+              "access": "read-write"
             },
             {
               "name": "RAMERRIE",
               "bit_offset": 19,
               "bit_width": 1,
-              "description": "RAM error interrupt enable.",
-              "enum": null
+              "description": "RAM error interrupt enable",
+              "access": "read-write"
             },
             {
               "name": "ADDRERRIE",
               "bit_offset": 20,
               "bit_width": 1,
-              "description": "Address error interrupt enable.",
-              "enum": null
+              "description": "Address error interrupt enable",
+              "access": "read-write"
             },
             {
               "name": "OPERRIE",
               "bit_offset": 21,
               "bit_width": 1,
-              "description": "Operation error interrupt enable.",
-              "enum": null
+              "description": "Operation error interrupt enable",
+              "access": "read-write"
             }
           ]
         },
@@ -72,59 +76,60 @@
           "name": "SR",
           "offset": 4,
           "size": 32,
-          "description": "PKA status register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "PKA status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "PKA status register.",
           "fields": [
             {
               "name": "INITOK",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "PKA initialization OK This bit is asserted when PKA initialization is complete. When RNG is not able to output proper random numbers INITOK stays at 0.",
-              "enum": null
+              "access": "read-only"
             },
             {
               "name": "LMF",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Limited mode flag This bit is updated when EN bit in PKA_CR is set.",
-              "enum": "LMF"
+              "description": "Limited mode flag This bit is updated when EN bit in PKA_CR is set",
+              "access": "read-only"
             },
             {
               "name": "BUSY",
               "bit_offset": 16,
               "bit_width": 1,
               "description": "PKA operation is in progress This bit is set to 1 whenever START bit in the PKA_CR is set. It is automatically cleared when the computation is complete, meaning that PKA RAM can be safely accessed and a new operation can be started. If PKA is started with a wrong opcode, it is busy for a couple of cycles, then it aborts automatically the operation and go back to ready (BUSY bit is set to 0).",
-              "enum": null
+              "access": "read-only"
             },
             {
               "name": "PROCENDF",
               "bit_offset": 17,
               "bit_width": 1,
-              "description": "PKA End of Operation flag.",
-              "enum": null
+              "description": "PKA End of Operation flag",
+              "access": "read-only"
             },
             {
               "name": "RAMERRF",
               "bit_offset": 19,
               "bit_width": 1,
               "description": "PKA RAM error flag This bit is cleared using RAMERRFC bit in PKA_CLRFR.",
-              "enum": null
+              "access": "read-only"
             },
             {
               "name": "ADDRERRF",
               "bit_offset": 20,
               "bit_width": 1,
               "description": "Address error flag This bit is cleared using ADDRERRFC bit in PKA_CLRFR.",
-              "enum": null
+              "access": "read-only"
             },
             {
               "name": "OPERRF",
               "bit_offset": 21,
               "bit_width": 1,
               "description": "Operation error flag This bit is cleared using OPERRFC bit in PKA_CLRFR.",
-              "enum": null
+              "access": "read-only"
             }
           ]
         },
@@ -132,67 +137,44 @@
           "name": "CLRFR",
           "offset": 8,
           "size": 32,
-          "description": "PKA clear flag register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "PKA clear flag register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "PKA clear flag register.",
           "fields": [
             {
               "name": "PROCENDFC",
               "bit_offset": 17,
               "bit_width": 1,
-              "description": "Clear PKA End of Operation flag.",
-              "enum": null
+              "description": "Clear PKA End of Operation flag",
+              "access": "write-only"
             },
             {
               "name": "RAMERRFC",
               "bit_offset": 19,
               "bit_width": 1,
-              "description": "Clear PKA RAM error flag.",
-              "enum": null
+              "description": "Clear PKA RAM error flag",
+              "access": "write-only"
             },
             {
               "name": "ADDRERRFC",
               "bit_offset": 20,
               "bit_width": 1,
-              "description": "Clear address error flag.",
-              "enum": null
+              "description": "Clear address error flag",
+              "access": "write-only"
             },
             {
               "name": "OPERRFC",
               "bit_offset": 21,
               "bit_width": 1,
-              "description": "Clear operation error flag.",
-              "enum": null
+              "description": "Clear operation error flag",
+              "access": "write-only"
             }
           ]
-        },
-        {
-          "name": "RAM",
-          "offset": 1024,
-          "description": "PKA internal memeory.",
-          "array_len": 1334,
-          "array_stride": 4,
-          "fields": []
         }
       ]
     }
   },
-  "enums": {
-    "LMF": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "All",
-          "value": 0,
-          "description": "All values documented in MODE bitfield can be used."
-        },
-        {
-          "name": "Limited",
-          "value": 1,
-          "description": "Only ECDSA verification (MODE = 0x26) is supported by the PKA."
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

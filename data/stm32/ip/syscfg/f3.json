@@ -2,6 +2,9 @@
   "schema": 1,
   "kind": "syscfg",
   "version": "f3",
+  "source": "stm32rs_svd",
+  "source_device": "stm32f398ve",
+  "source_file": "stm32f303.svd.patched",
   "blocks": {
     "SYSCFG": {
       "name": "SYSCFG",
@@ -12,221 +15,694 @@
           "name": "CFGR1",
           "offset": 0,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "configuration register 1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "configuration register 1",
           "fields": [
             {
               "name": "MEM_MODE",
               "bit_offset": 0,
-              "bit_width": 2,
+              "bit_width": 3,
               "description": "Memory mapping selection bits",
-              "enum": "MEM_MODE"
+              "enum_values": [
+                {
+                  "name": "MainFlash",
+                  "value": 0,
+                  "description": "Main Flash memory mapped at 0x0000_0000"
+                },
+                {
+                  "name": "SystemFlash",
+                  "value": 1,
+                  "description": "System Flash memory mapped at 0x0000_0000"
+                },
+                {
+                  "name": "SRAM",
+                  "value": 3,
+                  "description": "Embedded SRAM mapped at 0x0000_0000"
+                },
+                {
+                  "name": "FMC",
+                  "value": 4,
+                  "description": "FMC Bank (Only the first two banks) (Available on STM32F303xD/E only)"
+                }
+              ]
             },
             {
               "name": "USB_IT_RMP",
               "bit_offset": 5,
               "bit_width": 1,
-              "description": "USB interrupt remap\n0: USB_HP, USB_LP and USB_WAKEUP interrupts are mapped on interrupt lines 19, 20 and 42 respectively\n1: USB_HP, USB_LP and USB_WAKEUP interrupts are mapped on interrupt lines 74, 75 and 76 respectively",
-              "enum": null
+              "description": "USB interrupt remap",
+              "enum_values": [
+                {
+                  "name": "NotRemapped",
+                  "value": 0,
+                  "description": "USB_HP, USB_LP and USB_WAKEUP interrupts are mapped on interrupt lines 19, 20 and 42 respectively"
+                },
+                {
+                  "name": "Remapped",
+                  "value": 1,
+                  "description": "USB_HP, USB_LP and USB_WAKEUP interrupts are mapped on interrupt lines 74, 75 and 76 respectively"
+                }
+              ]
             },
             {
               "name": "TIM1_ITR3_RMP",
               "bit_offset": 6,
               "bit_width": 1,
-              "description": "Timer 1 ITR3 selection\n0: Not remapped\n1: TIM1_ITR3 = TIM17_OC",
-              "enum": null
+              "description": "Timer 1 ITR3 selection",
+              "enum_values": [
+                {
+                  "name": "NotRemapped",
+                  "value": 0,
+                  "description": "TIM1_ITR3 = TIM4_TRGO in STM32F303xB/C and STM32F358xC devices"
+                },
+                {
+                  "name": "Remapped",
+                  "value": 1,
+                  "description": "TIM1_ITR3 = TIM17_OC"
+                }
+              ]
             },
             {
               "name": "DAC1_TRIG_RMP",
               "bit_offset": 7,
               "bit_width": 1,
-              "description": "DAC trigger remap (when TSEL = 001)\n0: DAC trigger is TIM8_TRGO in STM32F303xB/C and STM32F358xC devices\n1: DAC trigger is TIM3_TRGO",
-              "enum": null
-            },
-            {
-              "name": "DAC_TRIG_RMP",
-              "bit_offset": 7,
-              "bit_width": 1,
-              "description": "DAC trigger remap (when TSEL = 001)\n0: Not remapped\n1: DAC trigger is TIM3_TRGO",
-              "enum": null
+              "description": "DAC trigger remap (when TSEL = 001)",
+              "enum_values": [
+                {
+                  "name": "NotRemapped",
+                  "value": 0,
+                  "description": "DAC trigger is TIM8_TRGO in STM32F303xB/C and STM32F358xC devices"
+                },
+                {
+                  "name": "Remapped",
+                  "value": 1,
+                  "description": "DAC trigger is TIM3_TRGO"
+                }
+              ]
             },
             {
               "name": "ADC2_DMA_RMP",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "ADC24 DMA remapping bit\n0: ADC24 DMA requests mapped on DMA2 channels 1 and 2\n1: ADC24 DMA requests mapped on DMA2 channels 3 and 4",
-              "enum": null
+              "description": "ADC24 DMA remapping bit",
+              "enum_values": [
+                {
+                  "name": "NotRemapped",
+                  "value": 0,
+                  "description": "ADC24 DMA requests mapped on DMA2 channels 1 and 2"
+                },
+                {
+                  "name": "Remapped",
+                  "value": 1,
+                  "description": "ADC24 DMA requests mapped on DMA2 channels 3 and 4"
+                }
+              ]
             },
             {
               "name": "TIM16_DMA_RMP",
               "bit_offset": 11,
               "bit_width": 1,
-              "description": "TIM16 DMA request remapping bit\n0: TIM16_CH1 and TIM16_UP DMA requests mapped on DMA channel 3\n1: TIM16_CH1 and TIM16_UP DMA requests mapped on DMA channel 4",
-              "enum": null
+              "description": "TIM16 DMA request remapping bit",
+              "enum_values": [
+                {
+                  "name": "NotRemapped",
+                  "value": 0,
+                  "description": "TIM16_CH1 and TIM16_UP DMA requests mapped on DMA channel 3"
+                },
+                {
+                  "name": "Remapped",
+                  "value": 1,
+                  "description": "TIM16_CH1 and TIM16_UP DMA requests mapped on DMA channel 4"
+                }
+              ]
             },
             {
               "name": "TIM17_DMA_RMP",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "TIM17 DMA request remapping bit\n0: TIM17_CH1 and TIM17_UP DMA requests mapped on DMA channel 1\n1: TIM17_CH1 and TIM17_UP DMA requests mapped on DMA channel 2",
-              "enum": null
+              "description": "TIM17 DMA request remapping bit",
+              "enum_values": [
+                {
+                  "name": "NotRemapped",
+                  "value": 0,
+                  "description": "TIM17_CH1 and TIM17_UP DMA requests mapped on DMA channel 1"
+                },
+                {
+                  "name": "Remapped",
+                  "value": 1,
+                  "description": "TIM17_CH1 and TIM17_UP DMA requests mapped on DMA channel 2"
+                }
+              ]
             },
             {
               "name": "TIM6_DAC1_CH1_DMA_RMP",
               "bit_offset": 13,
               "bit_width": 1,
-              "description": "TIM6 and DAC1 DMA request remapping bit\n0: TIM6_UP and DAC_CH1 DMA requests mapped on DMA2 channel 3\n1: TIM6_UP and DAC_CH1 DMA requests mapped on DMA1 channel 3",
-              "enum": null
-            },
-            {
-              "name": "TIM6_DAC1_DMA_RMP",
-              "bit_offset": 13,
-              "bit_width": 1,
-              "description": "TIM6 and DAC1 DMA request remapping bit\n0: TIM6_UP and DAC_CH1 DMA requests mapped on DMA2 channel 3\n1: TIM6_UP and DAC_CH1 DMA requests mapped on DMA1 channel 3",
-              "enum": null
-            },
-            {
-              "name": "TIM6_DAC1_OUT1_DMA_RMP",
-              "bit_offset": 13,
-              "bit_width": 1,
-              "description": "TIM6 and DAC1 DMA request remapping bit\n0: TIM7 and DAC1_OUT1 DMA requests mapped on DMA2 channel 3\n1: TIM7 and DAC1_OUT1 DMA requests mapped on DMA1 channel 3",
-              "enum": null
+              "description": "TIM6 and DAC1 DMA request remapping bit",
+              "enum_values": [
+                {
+                  "name": "NotRemapped",
+                  "value": 0,
+                  "description": "TIM6_UP and DAC_CH1 DMA requests mapped on DMA2 channel 3 in STM32F303xB/C and STM32F358xC"
+                },
+                {
+                  "name": "Remapped",
+                  "value": 1,
+                  "description": "TIM6_UP and DAC_CH1 DMA requests mapped on DMA1 channel 3"
+                }
+              ]
             },
             {
               "name": "TIM7_DAC1_CH2_DMA_RMP",
               "bit_offset": 14,
               "bit_width": 1,
-              "description": "TIM7 and DAC2 DMA request remapping bit\n0: Not remapped\n1: TIM7_UP and DAC_CH2 DMA requests mapped on DMA1 channel 4",
-              "enum": null
-            },
-            {
-              "name": "TIM7_DAC1_OUT2_DMA_RMP",
-              "bit_offset": 14,
-              "bit_width": 1,
-              "description": "TIM7 and DAC2 DMA request remapping bit\n0: TIM7 and DAC1_OUT2 DMA requests mapped on DMA2 channel 4\n1: TIM7 and DAC1_OUT2 DMA requests mapped on DMA1 channel 4",
-              "enum": null
-            },
-            {
-              "name": "DAC2_CH1_DMA_RMP",
-              "bit_offset": 15,
-              "bit_width": 1,
-              "description": "DAC2 channel1 DMA remap\n0: Not remapped\n1: DAC2_CH1 DMA requests mapped on DMA1 channel 5",
-              "enum": null
-            },
-            {
-              "name": "TIM18_DAC2_OUT1_DMA_RMP",
-              "bit_offset": 15,
-              "bit_width": 1,
-              "description": "TIM18 and DAC2_OUT1 DMA request remapping bit\n0: TIM18 and DAC2_OUT1 DMA requests mapped on DMA2 channel 5\n1: TIM18 and DAC2_OUT1 DMA requests mapped on DMA1 channel 5",
-              "enum": null
+              "description": "TIM7 and DAC2 DMA request remapping bit",
+              "enum_values": [
+                {
+                  "name": "NotRemapped",
+                  "value": 0,
+                  "description": "TIM7_UP and DAC_CH2 DMA requests mapped on DMA2 channel 4 in STM32F303xB/C and STM32F358xC devices"
+                },
+                {
+                  "name": "Remapped",
+                  "value": 1,
+                  "description": "TIM7_UP and DAC_CH2 DMA requests mapped on DMA1 channel 4"
+                }
+              ]
             },
             {
               "name": "I2C_PB6_FMP",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "Fast Mode Plus (FM+) driving capability activation bits.\n0: PB6 pin operate in standard mode\n1: I2C FM+ mode enabled on PB6 and the Speed control is bypassed",
-              "enum": "FMP"
+              "description": "Fast Mode Plus (FM+) driving capability activation bits.",
+              "enum_values": [
+                {
+                  "name": "Standard",
+                  "value": 0,
+                  "description": "PB6 pin operate in standard mode"
+                },
+                {
+                  "name": "FMP",
+                  "value": 1,
+                  "description": "I2C FM+ mode enabled on PB6 and the Speed control is bypassed"
+                }
+              ]
             },
             {
               "name": "I2C_PB7_FMP",
               "bit_offset": 17,
               "bit_width": 1,
-              "description": "Fast Mode Plus (FM+) driving capability activation bits.\n0: PB7 pin operate in standard mode\n1: I2C FM+ mode enabled on PB7 and the Speed control is bypassed",
-              "enum": "FMP"
+              "description": "Fast Mode Plus (FM+) driving capability activation bits.",
+              "enum_values": [
+                {
+                  "name": "Standard",
+                  "value": 0,
+                  "description": "PB7 pin operate in standard mode"
+                },
+                {
+                  "name": "FMP",
+                  "value": 1,
+                  "description": "I2C FM+ mode enabled on PB7 and the Speed control is bypassed"
+                }
+              ]
             },
             {
               "name": "I2C_PB8_FMP",
               "bit_offset": 18,
               "bit_width": 1,
-              "description": "Fast Mode Plus (FM+) driving capability activation bits.\n0: PB8 pin operate in standard mode\n1: I2C FM+ mode enabled on PB8 and the Speed control is bypassed",
-              "enum": "FMP"
+              "description": "Fast Mode Plus (FM+) driving capability activation bits.",
+              "enum_values": [
+                {
+                  "name": "Standard",
+                  "value": 0,
+                  "description": "PB8 pin operate in standard mode"
+                },
+                {
+                  "name": "FMP",
+                  "value": 1,
+                  "description": "I2C FM+ mode enabled on PB8 and the Speed control is bypassed"
+                }
+              ]
             },
             {
               "name": "I2C_PB9_FMP",
               "bit_offset": 19,
               "bit_width": 1,
-              "description": "Fast Mode Plus (FM+) driving capability activation bits.\n0: PB9 pin operate in standard mode\n1: I2C FM+ mode enabled on PB9 and the Speed control is bypassed",
-              "enum": "FMP"
+              "description": "Fast Mode Plus (FM+) driving capability activation bits.",
+              "enum_values": [
+                {
+                  "name": "Standard",
+                  "value": 0,
+                  "description": "PB9 pin operate in standard mode"
+                },
+                {
+                  "name": "FMP",
+                  "value": 1,
+                  "description": "I2C FM+ mode enabled on PB9 and the Speed control is bypassed"
+                }
+              ]
             },
             {
               "name": "I2C1_FMP",
               "bit_offset": 20,
               "bit_width": 1,
-              "description": "I2C1 Fast Mode Plus\n0: FM+ mode is controlled by I2C_Pxx_FMP bits only\n1: FM+ mode is enabled on all I2C1 pins selected through selection through IOPORT control registers AF selection bits",
-              "enum": "FMP"
+              "description": "I2C1 Fast Mode Plus",
+              "enum_values": [
+                {
+                  "name": "Standard",
+                  "value": 0,
+                  "description": "FM+ mode is controlled by I2C_Pxx_FMP bits only"
+                },
+                {
+                  "name": "FMP",
+                  "value": 1,
+                  "description": "FM+ mode is enabled on all I2C1 pins selected through selection through IOPORT control registers AF selection bits"
+                }
+              ]
             },
             {
               "name": "I2C2_FMP",
               "bit_offset": 21,
               "bit_width": 1,
-              "description": "I2C2 Fast Mode Plus\n0: FM+ mode is controlled by I2C_Pxx_FMP bits only\n1: FM+ mode is enabled on all I2C2 pins selected through selection through IOPORT control registers AF selection bits",
-              "enum": "FMP"
+              "description": "I2C2 Fast Mode Plus",
+              "enum_values": [
+                {
+                  "name": "Standard",
+                  "value": 0,
+                  "description": "FM+ mode is controlled by I2C_Pxx_FMP bits only"
+                },
+                {
+                  "name": "FMP",
+                  "value": 1,
+                  "description": "FM+ mode is enabled on all I2C2 pins selected through selection through IOPORT control registers AF selection bits"
+                }
+              ]
             },
             {
               "name": "ENCODER_MODE",
               "bit_offset": 22,
               "bit_width": 2,
               "description": "Encoder mode",
-              "enum": "ENCODER_MODE"
+              "enum_values": [
+                {
+                  "name": "NoRedirection",
+                  "value": 0,
+                  "description": "No redirection"
+                },
+                {
+                  "name": "MapTim2Tim15",
+                  "value": 1,
+                  "description": "TIM2 IC1 and TIM2 IC2 are connected to TIM15 IC1 and TIM15 IC2 respectively"
+                },
+                {
+                  "name": "MapTim3Tim15",
+                  "value": 2,
+                  "description": "TIM3 IC1 and TIM3 IC2 are connected to TIM15 IC1 and TIM15 IC2 respectively"
+                },
+                {
+                  "name": "MapTim4Tim15",
+                  "value": 3,
+                  "description": "TIM4 IC1 and TIM4 IC2 are connected to TIM15 IC1 and TIM15 IC2 respectively (STM32F303xB/C and STM32F358xC devices only)"
+                }
+              ]
+            },
+            {
+              "name": "FPU_IE5",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "Inexact interrupt enable",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Inexact interrupt disable"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Inexact interrupt enable"
+                }
+              ]
+            },
+            {
+              "name": "FPU_IE4",
+              "bit_offset": 30,
+              "bit_width": 1,
+              "description": "Input denormal interrupt enable",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Input denormal interrupt disable"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Input denormal interrupt enable"
+                }
+              ]
+            },
+            {
+              "name": "FPU_IE3",
+              "bit_offset": 29,
+              "bit_width": 1,
+              "description": "Overflow interrupt enable",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Overflow interrupt disable"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Overflow interrupt enable"
+                }
+              ]
+            },
+            {
+              "name": "FPU_IE2",
+              "bit_offset": 28,
+              "bit_width": 1,
+              "description": "Underflow interrupt enable",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Underflow interrupt disable"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Underflow interrupt enable"
+                }
+              ]
+            },
+            {
+              "name": "FPU_IE1",
+              "bit_offset": 27,
+              "bit_width": 1,
+              "description": "Devide-by-zero interrupt enable",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Devide-by-zero interrupt disable"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Devide-by-zero interrupt enable"
+                }
+              ]
+            },
+            {
+              "name": "FPU_IE0",
+              "bit_offset": 26,
+              "bit_width": 1,
+              "description": "Invalid operation interrupt enable",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Invalid operation interrupt disable"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Invalid operation interrupt enable"
+                }
+              ]
+            },
+            {
+              "name": "DAC2_CH1_DMA_RMP",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "DAC2 channel1 DMA remap",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NotRemapped",
+                  "value": 0,
+                  "description": "Not remapped"
+                },
+                {
+                  "name": "Remapped",
+                  "value": 1,
+                  "description": "DAC2_CH1 DMA requests mapped on DMA1 channel 5"
+                }
+              ]
             },
             {
               "name": "I2C3_FMP",
               "bit_offset": 24,
               "bit_width": 1,
-              "description": "I2C3 Fast Mode Plus\n0: FM+ mode is controlled by I2C_Pxx_FMP bits only\n1: FM+ mode is enabled on all I2C3 pins selected through selection trhough IOPORT control registers AF selection bits",
-              "enum": "FMP"
-            },
-            {
-              "name": "VBAT_MON",
-              "bit_offset": 24,
-              "bit_width": 1,
-              "description": "Enable the power switch to deliver VBAT voltage on ADC channel 18 input",
-              "enum": null
-            },
-            {
-              "name": "FPU_IE",
-              "bit_offset": 26,
-              "bit_width": 1,
-              "description": "Idx 0: Invalid operation interrupt enable;\nIdx 1: Devide-by-zero interrupt enable;\nIdx 2: Underflow interrupt enable;\nIdx 3: Overflow interrupt enable;\nIdx 4: Input denormal interrupt enable;\nIdx 5: Inexact interrupt enable",
-              "enum": null
+              "description": "I2C3 Fast Mode Plus",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Standard",
+                  "value": 0,
+                  "description": "FM+ mode is controlled by I2C_Pxx_FMP bits only"
+                },
+                {
+                  "name": "FMP",
+                  "value": 1,
+                  "description": "FM+ mode is enabled on all I2C3 pins selected through selection through IOPORT control registers AF selection bits"
+                }
+              ]
             }
           ]
         },
         {
-          "name": "RCR",
-          "offset": 4,
-          "size": 32,
-          "description": "CCM SRAM protection register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "CCM SRAM protection register",
-          "fields": [
-            {
-              "name": "PAGE_WP",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "CCM SRAM page x write protection enabled",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "EXTICR",
+          "name": "EXTICR1",
           "offset": 8,
           "size": 32,
-          "description": "external interrupt configuration register",
-          "array_len": 4,
-          "array_stride": 4,
-          "fieldset_description": "external interrupt configuration register",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "external interrupt configuration register 1",
+          "array_len": null,
+          "array_stride": null,
           "fields": [
             {
-              "name": "EXTI",
+              "name": "EXTI3",
+              "bit_offset": 12,
+              "bit_width": 4,
+              "description": "EXTI 3 configuration bits",
+              "enum_values": [
+                {
+                  "name": "PA",
+                  "value": 0,
+                  "description": "Select PAx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PB",
+                  "value": 1,
+                  "description": "Select PBx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PC",
+                  "value": 2,
+                  "description": "Select PCx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PD",
+                  "value": 3,
+                  "description": "Select PDx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PE",
+                  "value": 4,
+                  "description": "Select PEx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PF",
+                  "value": 5,
+                  "description": "Select PFx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PG",
+                  "value": 6,
+                  "description": "Select PGx as the source input for the EXTIx external interrupt"
+                }
+              ]
+            },
+            {
+              "name": "EXTI2",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "EXTI 2 configuration bits"
+            },
+            {
+              "name": "EXTI1",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "EXTI 1 configuration bits"
+            },
+            {
+              "name": "EXTI0",
               "bit_offset": 0,
               "bit_width": 4,
-              "description": "EXTI x configuration",
-              "enum": null
+              "description": "EXTI 0 configuration bits",
+              "enum_values": [
+                {
+                  "name": "PA",
+                  "value": 0,
+                  "description": "Select PAx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PB",
+                  "value": 1,
+                  "description": "Select PBx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PC",
+                  "value": 2,
+                  "description": "Select PCx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PD",
+                  "value": 3,
+                  "description": "Select PDx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PE",
+                  "value": 4,
+                  "description": "Select PEx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PF",
+                  "value": 5,
+                  "description": "Select PFx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PG",
+                  "value": 6,
+                  "description": "Select PGx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PH",
+                  "value": 7,
+                  "description": "Select PHx as the source input for the EXTIx external interrupt"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "EXTICR2",
+          "offset": 12,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "external interrupt configuration register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "EXTI7",
+              "bit_offset": 12,
+              "bit_width": 4,
+              "description": "EXTI 7 configuration bits"
+            },
+            {
+              "name": "EXTI6",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "EXTI 6 configuration bits"
+            },
+            {
+              "name": "EXTI5",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "EXTI 5 configuration bits"
+            },
+            {
+              "name": "EXTI4",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "EXTI 4 configuration bits"
+            }
+          ]
+        },
+        {
+          "name": "EXTICR3",
+          "offset": 16,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "external interrupt configuration register 3",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "EXTI11",
+              "bit_offset": 12,
+              "bit_width": 4,
+              "description": "EXTI 11 configuration bits"
+            },
+            {
+              "name": "EXTI10",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "EXTI 10 configuration bits"
+            },
+            {
+              "name": "EXTI9",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "EXTI 9 configuration bits"
+            },
+            {
+              "name": "EXTI8",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "EXTI 8 configuration bits"
+            }
+          ]
+        },
+        {
+          "name": "EXTICR4",
+          "offset": 20,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "external interrupt configuration register 4",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "EXTI15",
+              "bit_offset": 12,
+              "bit_width": 4,
+              "description": "EXTI 15 configuration bits"
+            },
+            {
+              "name": "EXTI14",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "EXTI 14 configuration bits"
+            },
+            {
+              "name": "EXTI13",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "EXTI 13 configuration bits"
+            },
+            {
+              "name": "EXTI12",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "EXTI 12 configuration bits"
             }
           ]
         },
@@ -234,154 +710,226 @@
           "name": "CFGR2",
           "offset": 24,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "configuration register 2",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "configuration register 2",
           "fields": [
             {
               "name": "LOCKUP_LOCK",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "Cortex-M0 LOCKUP bit enable bit",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disconnected",
+                  "value": 0,
+                  "description": "Cortex-M4F LOCKUP output disconnected from TIM1/15/16/17 Break input"
+                },
+                {
+                  "name": "Connected",
+                  "value": 1,
+                  "description": "Cortex-M4F LOCKUP output connected to TIM1/15/16/17 Break input"
+                }
+              ]
             },
             {
               "name": "SRAM_PARITY_LOCK",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "SRAM parity lock bit",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disconnected",
+                  "value": 0,
+                  "description": "SRAM parity error disconnected from TIM1/15/16/17 Break input"
+                },
+                {
+                  "name": "Connected",
+                  "value": 1,
+                  "description": "SRAM parity error connected to TIM1/15/16/17 Break input"
+                }
+              ]
             },
             {
               "name": "PVD_LOCK",
               "bit_offset": 2,
               "bit_width": 1,
               "description": "PVD lock enable bit",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disconnected",
+                  "value": 0,
+                  "description": "PVD interrupt disconnected from TIM15/16/17 Break input"
+                },
+                {
+                  "name": "Connected",
+                  "value": 1,
+                  "description": "PVD interrupt connected to TIM15/16/17 Break input"
+                }
+              ]
             },
             {
               "name": "BYP_ADDR_PAR",
               "bit_offset": 4,
               "bit_width": 1,
               "description": "Bypass address bit 29 in parity calculation",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "NoBypass",
+                  "value": 0,
+                  "description": "The ramload operation is performed taking into consideration bit 29 of the address when the parity is calculated"
+                },
+                {
+                  "name": "Bypass",
+                  "value": 1,
+                  "description": "The ramload operation is performed without taking into consideration bit 29 of the address when the parity is calculated"
+                }
+              ]
             },
             {
               "name": "SRAM_PEF",
               "bit_offset": 8,
               "bit_width": 1,
               "description": "SRAM parity flag",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "NoParityError",
+                  "value": 0,
+                  "description": "No SRAM parity error detected"
+                },
+                {
+                  "name": "ParityErrorDetected",
+                  "value": 1,
+                  "description": "SRAM parity error detected"
+                },
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clear SRAM parity error flag"
+                }
+              ]
             }
           ]
         },
         {
-          "name": "CFGR4",
-          "offset": 72,
+          "name": "RCR",
+          "offset": 4,
           "size": 32,
-          "description": "configuration register 4",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "CCM SRAM protection register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "configuration register 4",
           "fields": [
             {
-              "name": "ADC12_EXT2_RMP",
+              "name": "PAGE0_WP",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Controls the Input trigger of ADC12 regular channel EXT2",
-              "enum": "ADC12_EXT2_RMP"
+              "description": "CCM SRAM page write protection bit",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Write protection of pagex is disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Write protection of pagex is enabled"
+                }
+              ]
             },
             {
-              "name": "ADC12_EXT3_RMP",
+              "name": "PAGE1_WP",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Controls the Input trigger of ADC12 regular channel EXT3",
-              "enum": "ADC12_EXT3_RMP"
+              "description": "CCM SRAM page write protection bit"
             },
             {
-              "name": "ADC12_EXT5_RMP",
+              "name": "PAGE2_WP",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "Controls the Input trigger of ADC12 regular channel EXT5",
-              "enum": "ADC12_EXT5_RMP"
+              "description": "CCM SRAM page write protection bit"
             },
             {
-              "name": "ADC12_EXT13_RMP",
+              "name": "PAGE3_WP",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "Controls the Input trigger of ADC12 regular channel EXT13",
-              "enum": "ADC12_EXT13_RMP"
+              "description": "CCM SRAM page write protection bit"
             },
             {
-              "name": "ADC12_EXT15_RMP",
+              "name": "PAGE4_WP",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "Controls the Input trigger of ADC12 regular channel EXT15",
-              "enum": "ADC12_EXT15_RMP"
+              "description": "CCM SRAM page write protection bit"
             },
             {
-              "name": "ADC12_JEXT3_RMP",
+              "name": "PAGE5_WP",
               "bit_offset": 5,
               "bit_width": 1,
-              "description": "Controls the Input trigger of ADC12 injected channel JEXT3",
-              "enum": "ADC12_JEXT3_RMP"
+              "description": "CCM SRAM page write protection bit"
             },
             {
-              "name": "ADC12_JEXT6_RMP",
+              "name": "PAGE6_WP",
               "bit_offset": 6,
               "bit_width": 1,
-              "description": "Controls the Input trigger of ADC12 injected channel JEXT6",
-              "enum": "ADC12_JEXT6_RMP"
+              "description": "CCM SRAM page write protection bit"
             },
             {
-              "name": "ADC12_JEXT13_RMP",
+              "name": "PAGE7_WP",
               "bit_offset": 7,
               "bit_width": 1,
-              "description": "Controls the Input trigger of ADC12 injected channel JEXT13",
-              "enum": "ADC12_JEXT13_RMP"
+              "description": "CCM SRAM page write protection bit"
             },
             {
-              "name": "ADC34_EXT5_RMP",
+              "name": "PAGE8_WP",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "Controls the Input trigger of ADC34 regular channel EXT5",
-              "enum": "ADC34_EXT5_RMP"
+              "description": "CCM SRAM page write protection bit"
             },
             {
-              "name": "ADC34_EXT6_RMP",
+              "name": "PAGE9_WP",
               "bit_offset": 9,
               "bit_width": 1,
-              "description": "Controls the Input trigger of ADC34 regular channel EXT6",
-              "enum": "ADC34_EXT6_RMP"
+              "description": "CCM SRAM page write protection bit"
             },
             {
-              "name": "ADC34_EXT15_RMP",
+              "name": "PAGE10_WP",
               "bit_offset": 10,
               "bit_width": 1,
-              "description": "Controls the Input trigger of ADC34 regular channel EXT15",
-              "enum": "ADC34_EXT15_RMP"
+              "description": "CCM SRAM page write protection bit"
             },
             {
-              "name": "ADC34_JEXT5_RMP",
+              "name": "PAGE11_WP",
               "bit_offset": 11,
               "bit_width": 1,
-              "description": "Controls the Input trigger of ADC34 injected channel JEXT5",
-              "enum": "ADC34_JEXT5_RMP"
+              "description": "CCM SRAM page write protection bit"
             },
             {
-              "name": "ADC34_JEXT11_RMP",
+              "name": "PAGE12_WP",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "Controls the Input trigger of ADC34 injected channel JEXT11",
-              "enum": "ADC34_JEXT11_RMP"
+              "description": "CCM SRAM page write protection bit"
             },
             {
-              "name": "ADC34_JEXT14_RMP",
+              "name": "PAGE13_WP",
               "bit_offset": 13,
               "bit_width": 1,
-              "description": "Controls the Input trigger of ADC34 injected channel JEXT14",
-              "enum": "ADC34_JEXT14_RMP"
+              "description": "CCM SRAM page write protection bit"
+            },
+            {
+              "name": "PAGE14_WP",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "CCM SRAM page write protection bit"
+            },
+            {
+              "name": "PAGE15_WP",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "CCM SRAM page write protection bit"
             }
           ]
         },
@@ -389,445 +937,395 @@
           "name": "CFGR3",
           "offset": 80,
           "size": 32,
-          "description": "configuration register 3",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "SYSCFG configuration register 3",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "configuration register 3",
           "fields": [
             {
               "name": "SPI1_RX_DMA_RMP",
               "bit_offset": 0,
               "bit_width": 2,
               "description": "SPI1_RX DMA remapping bit",
-              "enum": "SPI1_RX_DMA_RMP"
+              "enum_values": [
+                {
+                  "name": "MapDma1Ch3",
+                  "value": 0,
+                  "description": "SPI1_RX mapped on DMA1 CH2"
+                },
+                {
+                  "name": "MapDma1Ch5",
+                  "value": 1,
+                  "description": "SPI1_RX mapped on DMA1 CH4"
+                },
+                {
+                  "name": "MapDma1Ch7",
+                  "value": 2,
+                  "description": "SPI1_RX mapped on DMA1 CH6"
+                }
+              ]
             },
             {
               "name": "SPI1_TX_DMA_RMP",
               "bit_offset": 2,
               "bit_width": 2,
               "description": "SPI1_TX DMA remapping bit",
-              "enum": "SPI1_TX_DMA_RMP"
+              "enum_values": [
+                {
+                  "name": "MapDma1Ch3",
+                  "value": 0,
+                  "description": "SPI1_TX mapped on DMA1 CH3"
+                },
+                {
+                  "name": "MapDma1Ch5",
+                  "value": 1,
+                  "description": "SPI1_TX mapped on DMA1 CH5"
+                },
+                {
+                  "name": "MapDma1Ch7",
+                  "value": 2,
+                  "description": "SPI1_TX mapped on DMA1 CH7"
+                }
+              ]
             },
             {
               "name": "I2C1_RX_DMA_RMP",
               "bit_offset": 4,
               "bit_width": 2,
               "description": "I2C1_RX DMA remapping bit",
-              "enum": "I2C1_RX_DMA_RMP"
+              "enum_values": [
+                {
+                  "name": "MapDma1Ch7",
+                  "value": 0,
+                  "description": "I2C1_RX mapped on DMA1 CH7"
+                },
+                {
+                  "name": "MapDma1Ch3",
+                  "value": 1,
+                  "description": "I2C1_RX mapped on DMA1 CH3"
+                },
+                {
+                  "name": "MapDma1Ch5",
+                  "value": 2,
+                  "description": "I2C1_RX mapped on DMA1 CH5"
+                }
+              ]
             },
             {
               "name": "I2C1_TX_DMA_RMP",
               "bit_offset": 6,
               "bit_width": 2,
               "description": "I2C1_TX DMA remapping bit",
-              "enum": "I2C1_TX_DMA_RMP"
+              "enum_values": [
+                {
+                  "name": "MapDma1Ch6",
+                  "value": 0,
+                  "description": "I2C1_TX mapped on DMA1 CH6"
+                },
+                {
+                  "name": "MapDma1Ch2",
+                  "value": 1,
+                  "description": "I2C1_TX mapped on DMA1 CH2"
+                },
+                {
+                  "name": "MapDma1Ch4",
+                  "value": 2,
+                  "description": "I2C1_TX mapped on DMA1 CH4"
+                }
+              ]
             },
             {
               "name": "ADC2_DMA_RMP",
               "bit_offset": 8,
               "bit_width": 2,
-              "description": "ADC2 DMA remapping bit",
-              "enum": "ADC2_DMA_RMP_CFGR3"
+              "description": "ADC2 DMA channel remapping bit",
+              "enum_values": [
+                {
+                  "name": "MapDma2",
+                  "value": 0,
+                  "description": "ADC2 mapped on DMA2"
+                },
+                {
+                  "name": "MapDma1Ch2",
+                  "value": 2,
+                  "description": "ADC2 mapped on DMA1 channel 2"
+                },
+                {
+                  "name": "MapDma1Ch4",
+                  "value": 3,
+                  "description": "ADC2 mapped on DMA1 channel 4"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "CFGR4",
+          "offset": 72,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "SYSCFG configuration register 4",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "ADC12_EXT2_RMP",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Controls the Input trigger of ADC12 regular channel EXT2",
+              "enum_values": [
+                {
+                  "name": "Tim1",
+                  "value": 0,
+                  "description": "Trigger source is TIM3_CC3"
+                },
+                {
+                  "name": "Tim20",
+                  "value": 1,
+                  "description": "rigger source is TIM20_TRGO"
+                }
+              ]
             },
             {
-              "name": "DAC1_TRIG3_RMP",
-              "bit_offset": 16,
+              "name": "ADC12_EXT3_RMP",
+              "bit_offset": 1,
               "bit_width": 1,
-              "description": "DAC1_CH1 / DAC1_CH2 Trigger remap",
-              "enum": "DAC1_TRIG3_RMP"
+              "description": "Controls the Input trigger of ADC12 regular channel EXT3",
+              "enum_values": [
+                {
+                  "name": "Tim2",
+                  "value": 0,
+                  "description": "Trigger source is TIM2_CC2"
+                },
+                {
+                  "name": "Tim20",
+                  "value": 1,
+                  "description": "rigger source is TIM20_TRGO2"
+                }
+              ]
             },
             {
-              "name": "DAC1_TRIG5_RMP",
-              "bit_offset": 17,
+              "name": "ADC12_EXT5_RMP",
+              "bit_offset": 2,
               "bit_width": 1,
-              "description": "DAC1_CH1 / DAC1_CH2 Trigger remap\n0: Not remapped\n1: DAC trigger is HRTIM1_DAC1_TRIG2",
-              "enum": null
+              "description": "Controls the Input trigger of ADC12 regular channel EXT5",
+              "enum_values": [
+                {
+                  "name": "Tim4",
+                  "value": 0,
+                  "description": "Trigger source is TIM4_CC4"
+                },
+                {
+                  "name": "Tim20",
+                  "value": 1,
+                  "description": "Trigger source is TIM20_CC1"
+                }
+              ]
+            },
+            {
+              "name": "ADC12_EXT13_RMP",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Controls the Input trigger of ADC12 regular channel EXT13",
+              "enum_values": [
+                {
+                  "name": "Tim6",
+                  "value": 0,
+                  "description": "Trigger source is TIM6_TRGO"
+                },
+                {
+                  "name": "Tim20",
+                  "value": 1,
+                  "description": "Trigger source is TIM20_CC2"
+                }
+              ]
+            },
+            {
+              "name": "ADC12_EXT15_RMP",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Controls the Input trigger of ADC12 regular channel EXT15",
+              "enum_values": [
+                {
+                  "name": "Tim3",
+                  "value": 0,
+                  "description": "Trigger source is TIM3_CC4"
+                },
+                {
+                  "name": "Tim20",
+                  "value": 1,
+                  "description": "Trigger source is TIM20_CC3"
+                }
+              ]
+            },
+            {
+              "name": "ADC12_JEXT3_RMP",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Controls the Input trigger of ADC12 injected channel EXTI3",
+              "enum_values": [
+                {
+                  "name": "Tim2",
+                  "value": 0,
+                  "description": "Trigger source is TIM2_CC1"
+                },
+                {
+                  "name": "Tim20",
+                  "value": 1,
+                  "description": "Trigger source is TIM20_TRGO"
+                }
+              ]
+            },
+            {
+              "name": "ADC12_JEXT6_RMP",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Controls the Input trigger of ADC12 injected channel EXTI6",
+              "enum_values": [
+                {
+                  "name": "Exti15",
+                  "value": 0,
+                  "description": "Trigger source is EXTI line 15"
+                },
+                {
+                  "name": "Tim20",
+                  "value": 1,
+                  "description": "Trigger source is TIM20_TRGO2"
+                }
+              ]
+            },
+            {
+              "name": "ADC12_JEXT13_RMP",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Controls the Input trigger of ADC12 injected channel EXTI13",
+              "enum_values": [
+                {
+                  "name": "Tim3",
+                  "value": 0,
+                  "description": "Trigger source is TIM3_CC1"
+                },
+                {
+                  "name": "Tim20",
+                  "value": 1,
+                  "description": "Trigger source is TIM20_CC4"
+                }
+              ]
+            },
+            {
+              "name": "ADC34_EXT5_RMP",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Controls the Input trigger of ADC34 regular channel EXT5",
+              "enum_values": [
+                {
+                  "name": "Exti2",
+                  "value": 0,
+                  "description": "Trigger source is EXTI line 2 when reset at 0"
+                },
+                {
+                  "name": "Tim20",
+                  "value": 1,
+                  "description": "Trigger source is TIM20_TRGO"
+                }
+              ]
+            },
+            {
+              "name": "ADC34_EXT6_RMP",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Controls the Input trigger of ADC34 regular channel EXT6",
+              "enum_values": [
+                {
+                  "name": "Tim4",
+                  "value": 0,
+                  "description": "Trigger source is TIM4_CC1"
+                },
+                {
+                  "name": "Tim20",
+                  "value": 1,
+                  "description": "Trigger source is TIM20_TRGO2"
+                }
+              ]
+            },
+            {
+              "name": "ADC34_EXT15_RMP",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Controls the Input trigger of ADC34 regular channel EXT15",
+              "enum_values": [
+                {
+                  "name": "Tim2",
+                  "value": 0,
+                  "description": "Trigger source is TIM2_CC1"
+                },
+                {
+                  "name": "Tim20",
+                  "value": 1,
+                  "description": "Trigger source is TIM20_CC1"
+                }
+              ]
+            },
+            {
+              "name": "ADC34_JEXT5_RMP",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "Controls the Input trigger of ADC34 injected channel JEXT5",
+              "enum_values": [
+                {
+                  "name": "Tim4",
+                  "value": 0,
+                  "description": "Trigger source is TIM4_CC3"
+                },
+                {
+                  "name": "Tim20",
+                  "value": 1,
+                  "description": "Trigger source is TIM20_TRGO"
+                }
+              ]
+            },
+            {
+              "name": "ADC34_JEXT11_RMP",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "Controls the Input trigger of ADC34 injected channel JEXT11",
+              "enum_values": [
+                {
+                  "name": "Tim1",
+                  "value": 0,
+                  "description": "Trigger source is TIM1_CC3"
+                },
+                {
+                  "name": "Tim20",
+                  "value": 1,
+                  "description": "Trigger source is TIM20_TRGO2"
+                }
+              ]
+            },
+            {
+              "name": "ADC34_JEXT14_RMP",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Controls the Input trigger of ADC34 injected channel JEXT14",
+              "enum_values": [
+                {
+                  "name": "Tim7",
+                  "value": 0,
+                  "description": "Trigger source is TIM7_TRGO"
+                },
+                {
+                  "name": "Tim20",
+                  "value": 1,
+                  "description": "Trigger source is TIM20_CC2"
+                }
+              ]
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "ADC12_EXT13_RMP": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Tim6",
-          "value": 0,
-          "description": "Trigger source is TIM6_TRGO"
-        },
-        {
-          "name": "Tim20",
-          "value": 1,
-          "description": "Trigger source is TIM20_CC2"
-        }
-      ]
-    },
-    "ADC12_EXT15_RMP": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Tim3",
-          "value": 0,
-          "description": "Trigger source is TIM3_CC4"
-        },
-        {
-          "name": "Tim20",
-          "value": 1,
-          "description": "Trigger source is TIM20_CC3"
-        }
-      ]
-    },
-    "ADC12_EXT2_RMP": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Tim1",
-          "value": 0,
-          "description": "Trigger source is TIM3_CC3"
-        },
-        {
-          "name": "Tim20",
-          "value": 1,
-          "description": "rigger source is TIM20_TRGO"
-        }
-      ]
-    },
-    "ADC12_EXT3_RMP": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Tim2",
-          "value": 0,
-          "description": "Trigger source is TIM2_CC2"
-        },
-        {
-          "name": "Tim20",
-          "value": 1,
-          "description": "rigger source is TIM20_TRGO2"
-        }
-      ]
-    },
-    "ADC12_EXT5_RMP": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Tim4",
-          "value": 0,
-          "description": "Trigger source is TIM4_CC4"
-        },
-        {
-          "name": "Tim20",
-          "value": 1,
-          "description": "Trigger source is TIM20_CC1"
-        }
-      ]
-    },
-    "ADC12_JEXT13_RMP": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Tim3",
-          "value": 0,
-          "description": "Trigger source is TIM3_CC1"
-        },
-        {
-          "name": "Tim20",
-          "value": 1,
-          "description": "Trigger source is TIM20_CC4"
-        }
-      ]
-    },
-    "ADC12_JEXT3_RMP": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Tim2",
-          "value": 0,
-          "description": "Trigger source is TIM2_CC1"
-        },
-        {
-          "name": "Tim20",
-          "value": 1,
-          "description": "Trigger source is TIM20_TRGO"
-        }
-      ]
-    },
-    "ADC12_JEXT6_RMP": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Exti15",
-          "value": 0,
-          "description": "Trigger source is EXTI line 15"
-        },
-        {
-          "name": "Tim20",
-          "value": 1,
-          "description": "Trigger source is TIM20_TRGO2"
-        }
-      ]
-    },
-    "ADC2_DMA_RMP_CFGR3": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "MapDma1Ch2",
-          "value": 2,
-          "description": "ADC2 mapped on DMA1 channel 2"
-        },
-        {
-          "name": "MapDma1Ch4",
-          "value": 3,
-          "description": "ADC2 mapped on DMA1 channel 4"
-        }
-      ]
-    },
-    "ADC34_EXT15_RMP": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Tim2",
-          "value": 0,
-          "description": "Trigger source is TIM2_CC1"
-        },
-        {
-          "name": "Tim20",
-          "value": 1,
-          "description": "Trigger source is TIM20_CC1"
-        }
-      ]
-    },
-    "ADC34_EXT5_RMP": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Exti2",
-          "value": 0,
-          "description": "Trigger source is EXTI line 2 when reset at 0"
-        },
-        {
-          "name": "Tim20",
-          "value": 1,
-          "description": "Trigger source is TIM20_TRGO"
-        }
-      ]
-    },
-    "ADC34_EXT6_RMP": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Tim4",
-          "value": 0,
-          "description": "Trigger source is TIM4_CC1"
-        },
-        {
-          "name": "Tim20",
-          "value": 1,
-          "description": "Trigger source is TIM20_TRGO2"
-        }
-      ]
-    },
-    "ADC34_JEXT11_RMP": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Tim1",
-          "value": 0,
-          "description": "Trigger source is TIM1_CC3"
-        },
-        {
-          "name": "Tim20",
-          "value": 1,
-          "description": "Trigger source is TIM20_TRGO2"
-        }
-      ]
-    },
-    "ADC34_JEXT14_RMP": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Tim7",
-          "value": 0,
-          "description": "Trigger source is TIM7_TRGO"
-        },
-        {
-          "name": "Tim20",
-          "value": 1,
-          "description": "Trigger source is TIM20_CC2"
-        }
-      ]
-    },
-    "ADC34_JEXT5_RMP": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Tim4",
-          "value": 0,
-          "description": "Trigger source is TIM4_CC3"
-        },
-        {
-          "name": "Tim20",
-          "value": 1,
-          "description": "Trigger source is TIM20_TRGO"
-        }
-      ]
-    },
-    "DAC1_TRIG3_RMP": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Tim15",
-          "value": 0,
-          "description": "DAC trigger is TIM15_TRGO"
-        },
-        {
-          "name": "HrTim1",
-          "value": 1,
-          "description": "DAC trigger is HRTIM1_DAC1_TRIG1"
-        }
-      ]
-    },
-    "ENCODER_MODE": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "NoRedirection",
-          "value": 0,
-          "description": "No redirection"
-        },
-        {
-          "name": "MapTim2Tim15",
-          "value": 1,
-          "description": "TIM2 IC1 and TIM2 IC2 are connected to TIM15 IC1 and TIM15 IC2 respectively"
-        },
-        {
-          "name": "MapTim3Tim15",
-          "value": 2,
-          "description": "TIM3 IC1 and TIM3 IC2 are connected to TIM15 IC1 and TIM15 IC2 respectively"
-        }
-      ]
-    },
-    "FMP": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Standard",
-          "value": 0,
-          "description": "Standard"
-        },
-        {
-          "name": "FMP",
-          "value": 1,
-          "description": "FM+"
-        }
-      ]
-    },
-    "I2C1_RX_DMA_RMP": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "MapDma1Ch7",
-          "value": 0,
-          "description": "I2C1_RX mapped on DMA1 CH7"
-        },
-        {
-          "name": "MapDma1Ch3",
-          "value": 1,
-          "description": "I2C1_RX mapped on DMA1 CH3"
-        },
-        {
-          "name": "MapDma1Ch5",
-          "value": 2,
-          "description": "I2C1_RX mapped on DMA1 CH5"
-        }
-      ]
-    },
-    "I2C1_TX_DMA_RMP": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "MapDma1Ch6",
-          "value": 0,
-          "description": "I2C1_TX mapped on DMA1 CH6"
-        },
-        {
-          "name": "MapDma1Ch2",
-          "value": 1,
-          "description": "I2C1_TX mapped on DMA1 CH2"
-        },
-        {
-          "name": "MapDma1Ch4",
-          "value": 2,
-          "description": "I2C1_TX mapped on DMA1 CH4"
-        }
-      ]
-    },
-    "MEM_MODE": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "MainFlash",
-          "value": 0,
-          "description": "Main Flash memory mapped at 0x0000_0000"
-        },
-        {
-          "name": "SystemFlash",
-          "value": 1,
-          "description": "System Flash memory mapped at 0x0000_0000"
-        },
-        {
-          "name": "MainFlash2",
-          "value": 2,
-          "description": "Main Flash memory mapped at 0x0000_0000"
-        },
-        {
-          "name": "SRAM",
-          "value": 3,
-          "description": "Embedded SRAM mapped at 0x0000_0000"
-        }
-      ]
-    },
-    "SPI1_RX_DMA_RMP": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "MapDma1Ch3",
-          "value": 0,
-          "description": "SPI1_RX mapped on DMA1 CH2"
-        },
-        {
-          "name": "MapDma1Ch5",
-          "value": 1,
-          "description": "SPI1_RX mapped on DMA1 CH4"
-        },
-        {
-          "name": "MapDma1Ch7",
-          "value": 2,
-          "description": "SPI1_RX mapped on DMA1 CH6"
-        }
-      ]
-    },
-    "SPI1_TX_DMA_RMP": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "MapDma1Ch3",
-          "value": 0,
-          "description": "SPI1_TX mapped on DMA1 CH3"
-        },
-        {
-          "name": "MapDma1Ch5",
-          "value": 1,
-          "description": "SPI1_TX mapped on DMA1 CH5"
-        },
-        {
-          "name": "MapDma1Ch7",
-          "value": 2,
-          "description": "SPI1_TX mapped on DMA1 CH7"
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

@@ -2,6 +2,9 @@
   "schema": 1,
   "kind": "syscfg",
   "version": "f4",
+  "source": "stm32rs_svd",
+  "source_device": "stm32f413cg",
+  "source_file": "stm32f413.svd.patched",
   "blocks": {
     "SYSCFG": {
       "name": "SYSCFG",
@@ -9,34 +12,37 @@
       "extends": null,
       "registers": [
         {
-          "name": "MEMRM",
+          "name": "MEMRMP",
           "offset": 0,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "memory remap register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "memory remap register",
           "fields": [
             {
               "name": "MEM_MODE",
               "bit_offset": 0,
-              "bit_width": 3,
-              "description": "Memory mapping selection",
-              "enum": null
-            },
-            {
-              "name": "FB_MODE",
-              "bit_offset": 8,
-              "bit_width": 1,
-              "description": "Flash bank mode selection",
-              "enum": null
-            },
-            {
-              "name": "SWP_FMC",
-              "bit_offset": 10,
               "bit_width": 2,
-              "description": "FMC memory mapping swap",
-              "enum": null
+              "description": "MEM_MODE",
+              "enum_values": [
+                {
+                  "name": "MainFlash",
+                  "value": 0,
+                  "description": "Main Flash memory mapped at 0x0000 0000"
+                },
+                {
+                  "name": "SystemFlash",
+                  "value": 1,
+                  "description": "System Flash memory mapped at 0x0000 0000"
+                },
+                {
+                  "name": "EmbeddedSRAM",
+                  "value": 3,
+                  "description": "Embedded SRAM mapped at 0x0000 0000"
+                }
+              ]
             }
           ]
         },
@@ -44,56 +50,246 @@
           "name": "PMC",
           "offset": 4,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "peripheral mode configuration register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "peripheral mode configuration register",
           "fields": [
             {
               "name": "ADC1DC2",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "ADC1DC2",
-              "enum": null
-            },
-            {
-              "name": "ADC2DC2",
-              "bit_offset": 17,
-              "bit_width": 1,
-              "description": "ADC2DC2",
-              "enum": null
-            },
-            {
-              "name": "ADC3DC2",
-              "bit_offset": 18,
-              "bit_width": 1,
-              "description": "ADC3DC2",
-              "enum": null
-            },
-            {
-              "name": "MII_RMII_SEL",
-              "bit_offset": 23,
-              "bit_width": 1,
-              "description": "Ethernet PHY interface selection",
-              "enum": null
+              "description": "ADC1DC2"
             }
           ]
         },
         {
-          "name": "EXTICR",
+          "name": "EXTICR1",
           "offset": 8,
           "size": 32,
-          "description": "external interrupt configuration register",
-          "array_len": 4,
-          "array_stride": 4,
-          "fieldset_description": "external interrupt configuration register",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "external interrupt configuration register 1",
+          "array_len": null,
+          "array_stride": null,
           "fields": [
             {
-              "name": "EXTI",
+              "name": "EXTI3",
+              "bit_offset": 12,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 0 to 3)"
+            },
+            {
+              "name": "EXTI2",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 0 to 3)"
+            },
+            {
+              "name": "EXTI1",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 0 to 3)"
+            },
+            {
+              "name": "EXTI0",
               "bit_offset": 0,
               "bit_width": 4,
-              "description": "EXTI x configuration",
-              "enum": null
+              "description": "EXTI x configuration (x = 0 to 3)",
+              "enum_values": [
+                {
+                  "name": "PA",
+                  "value": 0,
+                  "description": "Select PAx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PB",
+                  "value": 1,
+                  "description": "Select PBx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PC",
+                  "value": 2,
+                  "description": "Select PCx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PD",
+                  "value": 3,
+                  "description": "Select PDx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PE",
+                  "value": 4,
+                  "description": "Select PEx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PF",
+                  "value": 5,
+                  "description": "Select PFx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PG",
+                  "value": 6,
+                  "description": "Select PGx as the source input for the EXTIx external interrupt"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "EXTICR2",
+          "offset": 12,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "external interrupt configuration register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "EXTI7",
+              "bit_offset": 12,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 4 to 7)"
+            },
+            {
+              "name": "EXTI6",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 4 to 7)"
+            },
+            {
+              "name": "EXTI5",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 4 to 7)"
+            },
+            {
+              "name": "EXTI4",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 4 to 7)"
+            }
+          ]
+        },
+        {
+          "name": "EXTICR3",
+          "offset": 16,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "external interrupt configuration register 3",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "EXTI11",
+              "bit_offset": 12,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 8 to 11)"
+            },
+            {
+              "name": "EXTI10",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "EXTI10"
+            },
+            {
+              "name": "EXTI9",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 8 to 11)"
+            },
+            {
+              "name": "EXTI8",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 8 to 11)"
+            }
+          ]
+        },
+        {
+          "name": "EXTICR4",
+          "offset": 20,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "external interrupt configuration register 4",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "EXTI15",
+              "bit_offset": 12,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 12 to 15)"
+            },
+            {
+              "name": "EXTI14",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 12 to 15)"
+            },
+            {
+              "name": "EXTI13",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 12 to 15)"
+            },
+            {
+              "name": "EXTI12",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 12 to 15)"
+            }
+          ]
+        },
+        {
+          "name": "CFGR2",
+          "offset": 28,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "ADC Common status register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "PVDL",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "PVD lock",
+              "enum_values": [
+                {
+                  "name": "NotConnected",
+                  "value": 0,
+                  "description": "PVD interrupt not connected to TIM1/8 Break input. PVDE and PVDS[2:0] can be read and modified"
+                },
+                {
+                  "name": "Connected",
+                  "value": 1,
+                  "description": "PVD interrupt connected to TIM1/8 Break input. PVDE and PVDS[2:0] are read-only"
+                }
+              ]
+            },
+            {
+              "name": "CLL",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "core lockup lock",
+              "enum_values": [
+                {
+                  "name": "NotConnected",
+                  "value": 0,
+                  "description": "Cortex-M4 LOCKUP output not connected to TIM1/8 Break input"
+                },
+                {
+                  "name": "Connected",
+                  "value": 1,
+                  "description": "Cortex-M4 LOCKUP output connected to TIM1/8 Break input"
+                }
+              ]
             }
           ]
         },
@@ -101,24 +297,319 @@
           "name": "CMPCR",
           "offset": 32,
           "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
           "description": "Compensation cell control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Compensation cell control register",
           "fields": [
-            {
-              "name": "CMP_PD",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Compensation cell power-down",
-              "enum": null
-            },
             {
               "name": "READY",
               "bit_offset": 8,
               "bit_width": 1,
               "description": "READY",
-              "enum": null
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotReady",
+                  "value": 0,
+                  "description": "I/O compensation cell not ready"
+                },
+                {
+                  "name": "Ready",
+                  "value": 1,
+                  "description": "I/O compensation cell ready"
+                }
+              ]
+            },
+            {
+              "name": "CMP_PD",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Compensation cell power-down",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "PowerDown",
+                  "value": 0,
+                  "description": "I/O compensation cell power-down mode"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "I/O compensation cell enabled"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "CFGR",
+          "offset": 44,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Configuration register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "I2CFMP1_SCL",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "I2C4SCL",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 0,
+                  "description": null
+                },
+                {
+                  "name": "Forced",
+                  "value": 1,
+                  "description": "forces FM+ drive capability on I2CFMP1_SCL pin"
+                }
+              ]
+            },
+            {
+              "name": "I2CFMP1_SDA",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "I2C4SDA",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 0,
+                  "description": null
+                },
+                {
+                  "name": "Forced",
+                  "value": 1,
+                  "description": "forces FM+ drive capability on I2CFMP1_SDA pin"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "MCHDLYCR",
+          "offset": 48,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "DFSDM Multi-channel delay control register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DFSDM2_CKOSEL",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "Source selection for DFSDM2_CKOUT"
+            },
+            {
+              "name": "DFSDM2_CFG",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "CkIn source selection for DFSDM2"
+            },
+            {
+              "name": "DFSDM2_CK37SEL",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Distribution of the DFSDM2 bitstream clock gated by TIM3 OC1",
+              "enum_values": [
+                {
+                  "name": "CkIn3",
+                  "value": 0,
+                  "description": "The gated clock is distributed to CkIn3 (DM3 = 0)"
+                },
+                {
+                  "name": "CkIn7",
+                  "value": 1,
+                  "description": "The gated clock is distributed to CkIn7 (DM3 = 1)"
+                }
+              ]
+            },
+            {
+              "name": "DFSDM2_CK26SEL",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Distribution of the DFSDM2 bitstream clock gated by TIM3 OC2",
+              "enum_values": [
+                {
+                  "name": "CkIn2",
+                  "value": 0,
+                  "description": "The gated clock is distributed to CkIn2 (DM4 = 0)"
+                },
+                {
+                  "name": "CkIn6",
+                  "value": 1,
+                  "description": "The gated clock is distributed to CkIn6 (DM4 = 1)"
+                }
+              ]
+            },
+            {
+              "name": "DFSDM2_CK15SEL",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "Distribution of the DFSDM2 bitstream clock gated by TIM3 OC3",
+              "enum_values": [
+                {
+                  "name": "CkIn1",
+                  "value": 0,
+                  "description": "The gated clock is distributed to CkIn1 (DM5 = 0)"
+                },
+                {
+                  "name": "CkIn5",
+                  "value": 1,
+                  "description": "The gated clock is distributed to CkIn5 (DM5 = 1)"
+                }
+              ]
+            },
+            {
+              "name": "DFSDM2_CK04SEL",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Distribution of the DFSDM2 bitstream clock gated by TIM3 OC4",
+              "enum_values": [
+                {
+                  "name": "CkIn0",
+                  "value": 0,
+                  "description": "The gated clock is distributed to CkIn0 (DM6 = 0)"
+                },
+                {
+                  "name": "CkIn4",
+                  "value": 1,
+                  "description": "The gated clock is distributed to CkIn4 (DM6 = 1)"
+                }
+              ]
+            },
+            {
+              "name": "DFSDM2_D6SEL",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "Source selection for DatIn6 of DFSDM2"
+            },
+            {
+              "name": "DFSDM2_D4SEL",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "Source selection for DatIn4 of DFSDM2"
+            },
+            {
+              "name": "DFSDM2_D2SEL",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Source selection for DatIn2 of DFSDM2"
+            },
+            {
+              "name": "DFSDM2_D0SEL",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Source selection for DatIn0 of DFSDM2"
+            },
+            {
+              "name": "MCHDLYEN2",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "MCHDLY clock enable for DFSDM2",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Delay clock for DFSDM2 is disabled (G[6:3] = 0)"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Delay clock for DFSDM2 is enabled (G[6:3] = 1)"
+                }
+              ]
+            },
+            {
+              "name": "DFSDM1_CKOSEL",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Source selection for DFSDM1_CKOUT"
+            },
+            {
+              "name": "DFSDM1_CFG",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "CkIn source selection for DFSDM1"
+            },
+            {
+              "name": "DFSDM1_CK13SEL",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Distribution of the DFSDM1 bitstream clock gated by TIM4 OC1",
+              "enum_values": [
+                {
+                  "name": "CkIn1",
+                  "value": 0,
+                  "description": "The gated clock is distributed to CkIn1 (DM1 = 0)"
+                },
+                {
+                  "name": "CkIn3",
+                  "value": 1,
+                  "description": "The gated clock is distributed to CkIn3 (DM1 = 1)"
+                }
+              ]
+            },
+            {
+              "name": "DFSDM1_CK02SEL",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Distribution of the DFSDM1 bitstream clock gated by TIM4 OC2",
+              "enum_values": [
+                {
+                  "name": "CkIn0",
+                  "value": 0,
+                  "description": "The gated clock is distributed to CkIn0 (DM2 = 0)"
+                },
+                {
+                  "name": "CkIn2",
+                  "value": 1,
+                  "description": "The gated clock is distributed to CkIn2 (DM2 = 1)"
+                }
+              ]
+            },
+            {
+              "name": "DFSDM1_D2SEL",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Source selection for DatIn2 of DFSDM1"
+            },
+            {
+              "name": "DFSDM1_D0SEL",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Source selection for DatIn0 of DFSDM1"
+            },
+            {
+              "name": "MCHDLYEN1",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "MCHDLY clock enable for DFSDM1",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Delay clock for DFSDM1 is disabled (G[2:1] = 0)"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Delay clock for DFSDM1 is enabled (G[2:1] = 1)"
+                }
+              ]
+            },
+            {
+              "name": "BSCKSEL",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Bitstream clock source selection"
             }
           ]
         }

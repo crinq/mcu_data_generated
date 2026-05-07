@@ -2,41 +2,60 @@
   "schema": 1,
   "kind": "gfxmmu",
   "version": "v1",
+  "source": "stm32rs_svd",
+  "source_device": "stm32l4r9ag",
+  "source_file": "stm32l4r9.svd.patched",
   "blocks": {
     "GFXMMU": {
       "name": "GFXMMU",
-      "description": "GFXMMU.",
+      "description": "Graphic MMU",
       "extends": null,
       "registers": [
         {
           "name": "CR",
           "offset": 0,
           "size": 32,
-          "description": "GFXMMU configuration register.",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Graphic MMU configuration register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "GFXMMU configuration register.",
           "fields": [
             {
-              "name": "BOIE",
+              "name": "B0OIE",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Buffer overflow interrupt enable. This bit enables the buffer 0 overflow interrupt.",
-              "enum": null
+              "description": "Buffer 0 overflow interrupt enable"
+            },
+            {
+              "name": "B1OIE",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Buffer 1 overflow interrupt enable"
+            },
+            {
+              "name": "B2OIE",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Buffer 2 overflow interrupt enable"
+            },
+            {
+              "name": "B3OIE",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Buffer 3 overflow interrupt enable"
             },
             {
               "name": "AMEIE",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "AHB master error interrupt enable. This bit enables the AHB master error interrupt.",
-              "enum": null
+              "description": "AHB master error interrupt enable"
             },
             {
-              "name": "BM",
+              "name": "BM192",
               "bit_offset": 6,
               "bit_width": 1,
-              "description": "192 Block mode. This bit defines the number of blocks per line.",
-              "enum": "BM192"
+              "description": "192 Block mode"
             }
           ]
         },
@@ -44,24 +63,41 @@
           "name": "SR",
           "offset": 4,
           "size": 32,
-          "description": "GFXMMU status register.",
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "Graphic MMU status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "GFXMMU status register.",
           "fields": [
             {
-              "name": "BOF",
+              "name": "B0OF",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Buffer overflow flag. This bit is set when an overflow occurs during the offset calculation of the buffer 0. It is cleared by writing 1 to CB0OF.",
-              "enum": null
+              "description": "Buffer 0 overflow flag"
+            },
+            {
+              "name": "B1OF",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Buffer 1 overflow flag"
+            },
+            {
+              "name": "B2OF",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Buffer 2 overflow flag"
+            },
+            {
+              "name": "B3OF",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Buffer 3 overflow flag"
             },
             {
               "name": "AMEF",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "AHB master error flag. This bit is set when an AHB error happens during a transaction. It is cleared by writing 1 to CAMEF.",
-              "enum": null
+              "description": "AHB master error flag"
             }
           ]
         },
@@ -69,24 +105,41 @@
           "name": "FCR",
           "offset": 8,
           "size": 32,
-          "description": "GFXMMU flag clear register.",
+          "access": "write-only",
+          "reset_value": 0,
+          "description": "Graphic MMU flag clear register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "GFXMMU flag clear register.",
           "fields": [
             {
-              "name": "CBOF",
+              "name": "CB0OF",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Clear buffer overflow flag. Writing 1 clears the buffer 0 overflow flag in the GFXMMU_SR register.",
-              "enum": null
+              "description": "Clear buffer 0 overflow flag"
+            },
+            {
+              "name": "CB1OF",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Clear buffer 1 overflow flag"
+            },
+            {
+              "name": "CB2OF",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Clear buffer 2 overflow flag"
+            },
+            {
+              "name": "CB3OF",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Clear buffer 3 overflow flag"
             },
             {
               "name": "CAMEF",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "Clear AHB master error flag. Writing 1 clears the AHB master error flag in the GFXMMU_SR register.",
-              "enum": null
+              "description": "Clear AHB master error flag"
             }
           ]
         },
@@ -94,113 +147,178 @@
           "name": "DVR",
           "offset": 16,
           "size": 32,
-          "description": "GFXMMU default value register.",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Graphic MMU default value register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "GFXMMU default value register.",
           "fields": [
             {
               "name": "DV",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Default value. This field indicates the default 32-bit value which is returned when a master accesses a virtual memory location not physically mapped.",
-              "enum": null
+              "description": "Default value"
             }
           ]
         },
         {
-          "name": "BCR",
+          "name": "B0CR",
           "offset": 32,
           "size": 32,
-          "description": "GFXMMU buffer 0 configuration register.",
-          "array_len": 4,
-          "array_stride": 4,
-          "fieldset_description": "GFXMMU buffer configuration register.",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Graphic MMU buffer 0 configuration register",
+          "array_len": null,
+          "array_stride": null,
           "fields": [
             {
               "name": "PBO",
               "bit_offset": 4,
               "bit_width": 19,
-              "description": "Physical buffer offset. Offset of the physical buffer.",
-              "enum": null
+              "description": "Physical buffer offset"
             },
             {
               "name": "PBBA",
               "bit_offset": 23,
               "bit_width": 9,
-              "description": "Physical buffer base address. Base address MSB of the physical buffer.",
-              "enum": null
+              "description": "Physical buffer base address"
             }
           ]
         },
         {
-          "name": "LUTL",
-          "offset": 4096,
+          "name": "B1CR",
+          "offset": 36,
           "size": 32,
-          "description": "GFXMMU LUT entry 0 low.",
-          "array_len": 1024,
-          "array_stride": 8,
-          "fieldset_description": "GFXMMU LUT entry low.",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Graphic MMU buffer 1 configuration register",
+          "array_len": null,
+          "array_stride": null,
           "fields": [
             {
-              "name": "EN",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Line enable.",
-              "enum": null
-            },
-            {
-              "name": "FVB",
-              "bit_offset": 8,
-              "bit_width": 8,
-              "description": "First Valid Block. Number of the first valid block of line number x.",
-              "enum": null
-            },
-            {
-              "name": "LVB",
-              "bit_offset": 16,
-              "bit_width": 8,
-              "description": "Last Valid Block. Number of the last valid block of line number X.",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "LUTH",
-          "offset": 4100,
-          "size": 32,
-          "description": "GFXMMU LUT entry 0 high.",
-          "array_len": 1024,
-          "array_stride": 8,
-          "fieldset_description": "GFXMMU LUT entry high.",
-          "fields": [
-            {
-              "name": "LO",
+              "name": "PBO",
               "bit_offset": 4,
-              "bit_width": 18,
-              "description": "Line offset. Line offset of line number x (i.e. offset of block 0 of line x).",
-              "enum": null
+              "bit_width": 19,
+              "description": "Physical buffer offset"
+            },
+            {
+              "name": "PBBA",
+              "bit_offset": 23,
+              "bit_width": 9,
+              "description": "Physical buffer base address"
+            }
+          ]
+        },
+        {
+          "name": "B2CR",
+          "offset": 40,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Graphic MMU buffer 2 configuration register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "PBO",
+              "bit_offset": 4,
+              "bit_width": 19,
+              "description": "Physical buffer offset"
+            },
+            {
+              "name": "PBBA",
+              "bit_offset": 23,
+              "bit_width": 9,
+              "description": "Physical buffer base address"
+            }
+          ]
+        },
+        {
+          "name": "B3CR",
+          "offset": 44,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Graphic MMU buffer 3 configuration register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "PBO",
+              "bit_offset": 4,
+              "bit_width": 19,
+              "description": "Physical buffer offset"
+            },
+            {
+              "name": "PBBA",
+              "bit_offset": 23,
+              "bit_width": 9,
+              "description": "Physical buffer base address"
+            }
+          ]
+        },
+        {
+          "name": "VERR",
+          "offset": 4084,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 16,
+          "description": "Graphic MMU version register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "MINREV",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "Minor revision"
+            },
+            {
+              "name": "MAJREV",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "Major revision"
+            }
+          ]
+        },
+        {
+          "name": "IPIDR",
+          "offset": 4088,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 1441889,
+          "description": "Graphic MMU identification register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "ID",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Identification Code"
+            }
+          ]
+        },
+        {
+          "name": "SIDR",
+          "offset": 4092,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 2747653380,
+          "description": "Graphic MMU size identification register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "SID",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Size and ID"
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "BM192": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "256BlocksPerLine",
-          "value": 0,
-          "description": "256 blocks per line."
-        },
-        {
-          "name": "192BlocksPerLine",
-          "value": 1,
-          "description": "192 blocks per line."
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

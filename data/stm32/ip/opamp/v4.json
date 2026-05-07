@@ -2,308 +2,169 @@
   "schema": 1,
   "kind": "opamp",
   "version": "v4",
+  "source": "stm32rs_svd",
+  "source_device": "stm32h503cb",
+  "source_file": "stm32h503.svd.patched",
   "blocks": {
-    "OPAMP": {
-      "name": "OPAMP",
-      "description": "Operational amplifier",
+    "OPAMP1": {
+      "name": "OPAMP1",
+      "description": "Operational amplifiers",
       "extends": null,
       "registers": [
         {
-          "name": "CSR",
+          "name": "OPAMP1_CSR",
           "offset": 0,
           "size": 32,
-          "description": "Control/status register",
+          "access": null,
+          "reset_value": 0,
+          "description": "OPAMP1 control/status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Control/status register",
           "fields": [
             {
-              "name": "OPAMPEN",
+              "name": "OPAEN",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Enable",
-              "enum": null
+              "description": "Operational amplifier Enable Note: If OPAMP1 is unconnected in a specific package, it must remain disabled (keep OPAMP1_CSR register default value).",
+              "access": "read-write"
             },
             {
               "name": "FORCE_VP",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "Force internal reference on VP (reserved for test)",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "VP_SEL",
               "bit_offset": 2,
               "bit_width": 2,
-              "description": "Non-inverting input selection",
-              "enum": "VP_SEL"
+              "description": "Non inverted input selection",
+              "access": "read-write"
             },
             {
               "name": "VM_SEL",
               "bit_offset": 5,
               "bit_width": 2,
               "description": "Inverting input selection",
-              "enum": "VM_SEL"
+              "access": "read-write"
             },
             {
               "name": "OPAHSM",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "High-speed mode enable",
-              "enum": null
+              "description": "Operational amplifier high-speed mode The operational amplifier must be disable to change this configuration.",
+              "access": "read-write"
             },
             {
               "name": "CALON",
               "bit_offset": 11,
               "bit_width": 1,
-              "description": "Calibration mode enable",
-              "enum": null
+              "description": "Calibration mode enabled",
+              "access": "read-write"
             },
             {
               "name": "CALSEL",
               "bit_offset": 12,
               "bit_width": 2,
-              "description": "Calibration selection",
-              "enum": "CALSEL"
+              "description": "Calibration selection It is used to select the offset calibration bus used to generate the internal reference voltage when CALON = 1 or FORCE_VP= 1.",
+              "access": "read-write"
             },
             {
               "name": "PGA_GAIN",
               "bit_offset": 14,
               "bit_width": 4,
-              "description": "Gain in PGA mode",
-              "enum": "PGA_GAIN"
+              "description": "Operational amplifier Programmable amplifier gain value",
+              "access": "read-write"
             },
             {
               "name": "USERTRIM",
               "bit_offset": 18,
               "bit_width": 1,
-              "description": "User trimming enable",
-              "enum": null
+              "description": "User trimming enable This bit allows to switch from 'factory' AOP offset trimmed values to 'user' AOP offset trimmed values This bit is active for both mode normal and high-power.",
+              "access": "read-write"
             },
             {
               "name": "TSTREF",
               "bit_offset": 29,
               "bit_width": 1,
-              "description": "Output the internal reference voltage",
-              "enum": null
+              "description": "OPAMP calibration reference voltage output control (reserved for test)",
+              "access": "read-write"
             },
             {
               "name": "CALOUT",
               "bit_offset": 30,
               "bit_width": 1,
-              "description": "Calibration output",
-              "enum": null
+              "description": "Operational amplifier calibration output OPAMP output status flag. During the calibration mode, OPAMP is used as comparator.",
+              "access": "read-only"
             }
           ]
         },
         {
-          "name": "OTR",
+          "name": "OPAMP1_OTR",
           "offset": 4,
           "size": 32,
-          "description": "Offset trimming register in normal mode",
+          "access": null,
+          "reset_value": 0,
+          "description": "OPAMP1 trimming register in normal mode",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Offset trimming register in normal mode",
           "fields": [
             {
               "name": "TRIMOFFSETN",
               "bit_offset": 0,
               "bit_width": 5,
-              "description": "Offset trimming value (NMOS)",
-              "enum": null
+              "description": "Trim for NMOS differential pairs",
+              "access": "read-write"
             },
             {
               "name": "TRIMOFFSETP",
               "bit_offset": 8,
               "bit_width": 5,
-              "description": "Offset trimming value (PMOS)",
-              "enum": null
+              "description": "Trim for PMOS differential pairs",
+              "access": "read-write"
             }
           ]
         },
         {
-          "name": "HSOTR",
+          "name": "OPAMP1_HSOTR",
           "offset": 8,
           "size": 32,
-          "description": "Offset trimming register in low-power mode",
+          "access": null,
+          "reset_value": 0,
+          "description": "OPAMP1 trimming register in high-speed mode",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Offset trimming register in low-power mode",
           "fields": [
             {
-              "name": "TRIMLPOFFSETN",
+              "name": "TRIMHSOFFSETN",
               "bit_offset": 0,
               "bit_width": 5,
-              "description": "Offset trimming value (NMOS)",
-              "enum": null
+              "description": "High-speed mode trim for NMOS differential pairs",
+              "access": "read-write"
             },
             {
-              "name": "TRIMLPOFFSETP",
+              "name": "TRIMHSOFFSETP",
               "bit_offset": 8,
               "bit_width": 5,
-              "description": "Offset trimming value (PMOS)",
-              "enum": null
+              "description": "High-speed mode trim for PMOS differential pairs",
+              "access": "read-write"
             }
           ]
+        },
+        {
+          "name": "OPAMP_OR",
+          "offset": 12,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "OPAMP option register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": []
         }
       ]
     }
   },
-  "enums": {
-    "CALSEL": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Percent3_3",
-          "value": 0,
-          "description": "VREFOPAMP = 3.3% VDDA"
-        },
-        {
-          "name": "Percent10",
-          "value": 1,
-          "description": "VREFOPAMP = 10% VDDA"
-        },
-        {
-          "name": "Percent50",
-          "value": 2,
-          "description": "VREFOPAMP = 50% VDDA"
-        },
-        {
-          "name": "Percent90",
-          "value": 3,
-          "description": "VREFOPAMP = 90% VDDA"
-        }
-      ]
-    },
-    "PGA_GAIN": {
-      "bit_size": 4,
-      "variants": [
-        {
-          "name": "Gain2",
-          "value": 0,
-          "description": "Non-inverting internal gain 2, VREF- referenced"
-        },
-        {
-          "name": "Gain4",
-          "value": 1,
-          "description": "Non-inverting internal gain 4, VREF- referenced"
-        },
-        {
-          "name": "Gain8",
-          "value": 2,
-          "description": "Non-inverting internal gain 8, VREF- referenced"
-        },
-        {
-          "name": "Gain16",
-          "value": 3,
-          "description": "Non-inverting internal gain 16, VREF- referenced"
-        },
-        {
-          "name": "Gain2_FilteringVINM0",
-          "value": 4,
-          "description": "Non-inverting internal gain 2 with filtering on INM0, VREF- referenced"
-        },
-        {
-          "name": "Gain4_FilteringVINM0",
-          "value": 5,
-          "description": "Non-inverting internal gain 4 with filtering on INM0, VREF- referenced"
-        },
-        {
-          "name": "Gain8_FilteringVINM0",
-          "value": 6,
-          "description": "Non-inverting internal gain 8 with filtering on INM0, VREF- referenced"
-        },
-        {
-          "name": "Gain16_FilteringVINM0",
-          "value": 7,
-          "description": "Non-inverting internal gain 8 with filtering on INM0, VREF- referenced"
-        },
-        {
-          "name": "Gain2InvGainNeg1_InputVINM0",
-          "value": 8,
-          "description": "Inverting gain=-1/ Non-inverting gain =2 with INM0 node for input or bias"
-        },
-        {
-          "name": "Gain4InvGainNeg3_InputVINM0",
-          "value": 9,
-          "description": "Inverting gain=-3/ Non-inverting gain =4 with INM0 node for input or bias"
-        },
-        {
-          "name": "Gain8InvGainNeg7_InputVINM0",
-          "value": 10,
-          "description": "Inverting gain=-7/ Non-inverting gain =8 with INM0 node for input or bias"
-        },
-        {
-          "name": "Gain16InvGainNeg15_InputVINM0",
-          "value": 11,
-          "description": "Inverting gain=-15/ Non-inverting gain =16 with INM0 node for input or bias"
-        },
-        {
-          "name": "Gain2InvGainNeg1_InputVINM0FilteringVINM1",
-          "value": 12,
-          "description": "Inverting gain=-1/ Non-inverting gain =2 with INM0 node for input or bias, INM1 node for filtering"
-        },
-        {
-          "name": "Gain4InvGainNeg3_InputVINM0FilteringVINM1",
-          "value": 13,
-          "description": "Inverting gain=-3/ Non-inverting gain =4 with INM0 node for input or bias, INM1 node for filtering"
-        },
-        {
-          "name": "Gain8InvGainNeg7_InputVINM0FilteringVINM1",
-          "value": 14,
-          "description": "Inverting gain=-7/ Non-inverting gain =8 with INM0 node for input or bias, INM1 node for filtering"
-        },
-        {
-          "name": "Gain16InvGainNeg15_InputVINM0FilteringVINM1",
-          "value": 15,
-          "description": "Inverting gain=-15/ Non-inverting gain =16 with INM0 node for input or bias, INM1 node for filtering"
-        }
-      ]
-    },
-    "VM_SEL": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Inm0",
-          "value": 0,
-          "description": "INM0 connected to OPAMP_VINM input"
-        },
-        {
-          "name": "Inm1",
-          "value": 1,
-          "description": "INM1 connected to OPAMP_VINM input"
-        },
-        {
-          "name": "Pga",
-          "value": 2,
-          "description": "Feedback resistor connected to the OPAMP_VINM input (PGA mode), Inverting input selection depends on the PGA_GAIN setting"
-        },
-        {
-          "name": "Follower",
-          "value": 3,
-          "description": "opamp_out connected to OPAMP_VINM input (Follower mode)"
-        }
-      ]
-    },
-    "VP_SEL": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "GpioInp0",
-          "value": 0,
-          "description": "GPIO INP0 connected to VINP"
-        },
-        {
-          "name": "DacOut",
-          "value": 1,
-          "description": "DAC connected to VINP"
-        },
-        {
-          "name": "GpioInp2",
-          "value": 2,
-          "description": "GPIO INP2 connected to OPAMP_VINP (not available on all chips)"
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

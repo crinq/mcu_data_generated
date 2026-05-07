@@ -2,69 +2,73 @@
   "schema": 1,
   "kind": "dts",
   "version": "v1",
+  "source": "stm32rs_svd",
+  "source_device": "stm32h503cb",
+  "source_file": "stm32h503.svd.patched",
   "blocks": {
     "DTS": {
       "name": "DTS",
-      "description": "Digital temperature sensor.",
+      "description": "Digital temperature sensor",
       "extends": null,
       "registers": [
         {
           "name": "CFGR1",
           "offset": 0,
           "size": 32,
-          "description": "Temperature sensor configuration register 1.",
+          "access": null,
+          "reset_value": 0,
+          "description": "Temperature sensor configuration register 1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Temperature sensor configuration register 1.",
           "fields": [
             {
-              "name": "EN",
+              "name": "TS1_EN",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "Temperature sensor 1 enable bit This bit is set and cleared by software. Note: Once enabled, the temperature sensor is active after a specific delay time. The TS1_RDY flag will be set when the sensor is ready.",
-              "enum": null
+              "access": "read-write"
             },
             {
-              "name": "START",
+              "name": "TS1_START",
               "bit_offset": 4,
               "bit_width": 1,
               "description": "Start frequency measurement on temperature sensor 1 This bit is set and cleared by software.",
-              "enum": null
+              "access": "read-write"
             },
             {
-              "name": "INTRIG_SEL",
+              "name": "TS1_INTRIG_SEL",
               "bit_offset": 8,
               "bit_width": 4,
               "description": "Input trigger selection bit for temperature sensor 1 These bits are set and cleared by software. They select which input triggers a temperature measurement. Refer to Section 19.3.10: Trigger input.",
-              "enum": null
+              "access": "read-write"
             },
             {
-              "name": "SMP_TIME",
+              "name": "TS1_SMP_TIME",
               "bit_offset": 16,
               "bit_width": 4,
               "description": "Sampling time for temperature sensor 1 These bits allow increasing the sampling time to improve measurement precision. When the PCLK clock is selected as reference clock (REFCLK_SEL = 0), the measurement will be performed at TS1_SMP_TIME period of CLK_PTAT. When the LSE is selected as reference clock (REFCLK_SEL =1), the measurement will be performed at TS1_SMP_TIME period of LSE.",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "REFCLK_SEL",
               "bit_offset": 20,
               "bit_width": 1,
               "description": "Reference clock selection bit This bit is set and cleared by software. It indicates whether the reference clock is the high speed clock (PCLK) or the low speed clock (LSE).",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "Q_MEAS_OPT",
               "bit_offset": 21,
               "bit_width": 1,
               "description": "Quick measurement option bit This bit is set and cleared by software. It is used to increase the measurement speed by suppressing the calibration step. It is effective only when the LSE clock is used as reference clock (REFCLK_SEL=1).",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "HSREF_CLK_DIV",
               "bit_offset": 24,
               "bit_width": 7,
               "description": "High speed clock division ratio These bits are set and cleared by software. They can be used to define the division ratio for the main clock in order to obtain the internal frequency lower than 1 MHz required for the calibration. They are applicable only for calibration when PCLK is selected as reference clock (REFCLK_SEL=0). ...",
-              "enum": null
+              "access": "read-write"
             }
           ]
         },
@@ -72,24 +76,25 @@
           "name": "T0VALR1",
           "offset": 8,
           "size": 32,
-          "description": "Temperature sensor T0 value register 1.",
+          "access": null,
+          "reset_value": 0,
+          "description": "Temperature sensor T0 value register 1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Temperature sensor T0 value register 1.",
           "fields": [
             {
-              "name": "FMT0",
+              "name": "TS1_FMT0",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "Engineering value of the frequency measured at T0 for.  temperature sensor 1 This value is expressed in 0.1 kHz.",
-              "enum": null
+              "description": "Engineering value of the frequency measured at T0 for temperature sensor 1 This value is expressed in 0.1 kHz.",
+              "access": "read-only"
             },
             {
-              "name": "T0",
+              "name": "TS1_T0",
               "bit_offset": 16,
               "bit_width": 2,
               "description": "Engineering value of the T0 temperature for temperature sensor 1. Others: Reserved, must not be used.",
-              "enum": null
+              "access": "read-only"
             }
           ]
         },
@@ -97,17 +102,18 @@
           "name": "RAMPVALR",
           "offset": 16,
           "size": 32,
-          "description": "Temperature sensor ramp value register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "Temperature sensor ramp value register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Temperature sensor ramp value register.",
           "fields": [
             {
-              "name": "RAMP_COEFF",
+              "name": "TS1_RAMP_COEFF",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "Engineering value of the ramp coefficient for the temperature sensor 1. This value is expressed in Hz/�C.",
-              "enum": null
+              "description": "Engineering value of the ramp coefficient for the temperature sensor 1. This value is expressed in Hz/ C.",
+              "access": "read-only"
             }
           ]
         },
@@ -115,24 +121,25 @@
           "name": "ITR1",
           "offset": 20,
           "size": 32,
-          "description": "Temperature sensor interrupt threshold register 1.",
+          "access": null,
+          "reset_value": 0,
+          "description": "Temperature sensor interrupt threshold register 1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Temperature sensor interrupt threshold register 1.",
           "fields": [
             {
-              "name": "LITTHD",
+              "name": "TS1_LITTHD",
               "bit_offset": 0,
               "bit_width": 16,
               "description": "Low interrupt threshold for temperature sensor 1 These bits are set and cleared by software. They indicate the lowest value than can be reached before raising an interrupt signal.",
-              "enum": null
+              "access": "read-write"
             },
             {
-              "name": "HITTHD",
+              "name": "TS1_HITTHD",
               "bit_offset": 16,
               "bit_width": 16,
               "description": "High interrupt threshold for temperature sensor 1 These bits are set and cleared by software. They indicate the highest value than can be reached before raising an interrupt signal.",
-              "enum": null
+              "access": "read-write"
             }
           ]
         },
@@ -140,17 +147,18 @@
           "name": "DR",
           "offset": 28,
           "size": 32,
-          "description": "Temperature sensor data register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "Temperature sensor data register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Temperature sensor data register.",
           "fields": [
             {
-              "name": "MFREQ",
+              "name": "TS1_MFREQ",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "Value of the counter output value for temperature sensor 1.",
-              "enum": null
+              "description": "Value of the counter output value for temperature sensor 1",
+              "access": "read-write"
             }
           ]
         },
@@ -158,59 +166,60 @@
           "name": "SR",
           "offset": 32,
           "size": 32,
-          "description": "Temperature sensor status register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "Temperature sensor status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Temperature sensor status register.",
           "fields": [
             {
-              "name": "ITEF",
+              "name": "TS1_ITEF",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Interrupt flag for end of measurement on temperature sensor 1, synchronized on PCLK. This bit is set by hardware when a temperature measure is done. It is cleared by software by writing 1 to the TS2_CITEF bit in the DTS_ICIFR register. Note: This bit is active only when the TS1_ITEFEN bit is set.",
-              "enum": null
+              "description": "Interrupt flag for end of measurement on temperature sensor 1, synchronized on PCLK. This bit is set by hardware when a temperature measure is done. It is cleared by software by writing 1 to the TS2_CITEF bit in the DTS_ICIFR register. Note: This bit is active only when the TS1_ITEFEN bit is set",
+              "access": "read-only"
             },
             {
-              "name": "ITLF",
+              "name": "TS1_ITLF",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Interrupt flag for low threshold on temperature sensor 1, synchronized on PCLK. This bit is set by hardware when the low threshold is set and reached. It is cleared by software by writing 1 to the TS1_CITLF bit in the DTS_ICIFR register. Note: This bit is active only when the TS1_ITLFEN bit is set.",
-              "enum": null
+              "description": "Interrupt flag for low threshold on temperature sensor 1, synchronized on PCLK. This bit is set by hardware when the low threshold is set and reached. It is cleared by software by writing 1 to the TS1_CITLF bit in the DTS_ICIFR register. Note: This bit is active only when the TS1_ITLFEN bit is set",
+              "access": "read-only"
             },
             {
-              "name": "ITHF",
+              "name": "TS1_ITHF",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "Interrupt flag for high threshold on temperature sensor 1, synchronized on PCLK This bit is set by hardware when the high threshold is set and reached. It is cleared by software by writing 1 to the TS1_CITHF bit in the DTS_ICIFR register. Note: This bit is active only when the TS1_ITHFEN bit is set.",
-              "enum": null
+              "description": "Interrupt flag for high threshold on temperature sensor 1, synchronized on PCLK This bit is set by hardware when the high threshold is set and reached. It is cleared by software by writing 1 to the TS1_CITHF bit in the DTS_ICIFR register. Note: This bit is active only when the TS1_ITHFEN bit is set",
+              "access": "read-only"
             },
             {
-              "name": "AITEF",
+              "name": "TS1_AITEF",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "Asynchronous interrupt flag for end of measure on temperature sensor 1 This bit is set by hardware when a temperature measure is done. It is cleared by software by writing 1 to the TS1_CAITEF bit in the DTS_ICIFR register. Note: This bit is active only when the TS1_AITEFEN bit is set.",
-              "enum": null
+              "description": "Asynchronous interrupt flag for end of measure on temperature sensor 1 This bit is set by hardware when a temperature measure is done. It is cleared by software by writing 1 to the TS1_CAITEF bit in the DTS_ICIFR register. Note: This bit is active only when the TS1_AITEFEN bit is set",
+              "access": "read-only"
             },
             {
-              "name": "AITLF",
+              "name": "TS1_AITLF",
               "bit_offset": 5,
               "bit_width": 1,
-              "description": "Asynchronous interrupt flag for low threshold on temperature sensor 1 This bit is set by hardware when the low threshold is reached. It is cleared by software by writing 1 to the TS1_CAITLF bit in the DTS_ICIFR register. Note: This bit is active only when the TS1_AITLFEN bit is set.",
-              "enum": null
+              "description": "Asynchronous interrupt flag for low threshold on temperature sensor 1 This bit is set by hardware when the low threshold is reached. It is cleared by software by writing 1 to the TS1_CAITLF bit in the DTS_ICIFR register. Note: This bit is active only when the TS1_AITLFEN bit is set",
+              "access": "read-only"
             },
             {
-              "name": "AITHF",
+              "name": "TS1_AITHF",
               "bit_offset": 6,
               "bit_width": 1,
-              "description": "Asynchronous interrupt flag for high threshold on temperature sensor 1 This bit is set by hardware when the high threshold is reached. It is cleared by software by writing 1 to the TS1_CAITHF bit in the DTS_ICIFR register. Note: This bit is active only when the TS1_AITHFEN bit is set.",
-              "enum": null
+              "description": "Asynchronous interrupt flag for high threshold on temperature sensor 1 This bit is set by hardware when the high threshold is reached. It is cleared by software by writing 1 to the TS1_CAITHF bit in the DTS_ICIFR register. Note: This bit is active only when the TS1_AITHFEN bit is set",
+              "access": "read-only"
             },
             {
-              "name": "RDY",
+              "name": "TS1_RDY",
               "bit_offset": 15,
               "bit_width": 1,
               "description": "Temperature sensor 1 ready flag This bit is set and reset by hardware. It indicates that a measurement is ongoing.",
-              "enum": null
+              "access": "read-only"
             }
           ]
         },
@@ -218,52 +227,53 @@
           "name": "ITENR",
           "offset": 36,
           "size": 32,
-          "description": "Temperature sensor interrupt enable register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "Temperature sensor interrupt enable register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Temperature sensor interrupt enable register.",
           "fields": [
             {
-              "name": "ITEEN",
+              "name": "TS1_ITEEN",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "Interrupt enable flag for end of measurement on temperature sensor 1, synchronized on PCLK. This bit are set and cleared by software. It enables the synchronous interrupt for end of measurement.",
-              "enum": null
+              "access": "read-write"
             },
             {
-              "name": "ITLEN",
+              "name": "TS1_ITLEN",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "Interrupt enable flag for low threshold on temperature sensor 1, synchronized on PCLK. This bit are set and cleared by software. It enables the synchronous interrupt when the measure reaches or is below the low threshold.",
-              "enum": null
+              "access": "read-write"
             },
             {
-              "name": "ITHEN",
+              "name": "TS1_ITHEN",
               "bit_offset": 2,
               "bit_width": 1,
               "description": "Interrupt enable flag for high threshold on temperature sensor 1, synchronized on PCLK. This bit are set and cleared by software. It enables the interrupt when the measure reaches or is above the high threshold.",
-              "enum": null
+              "access": "read-write"
             },
             {
-              "name": "AITEEN",
+              "name": "TS1_AITEEN",
               "bit_offset": 4,
               "bit_width": 1,
               "description": "Asynchronous interrupt enable flag for end of measurement on temperature sensor 1 This bit are set and cleared by software. It enables the asynchronous interrupt for end of measurement (only when REFCLK_SEL = 1).",
-              "enum": null
+              "access": "read-write"
             },
             {
-              "name": "AITLEN",
+              "name": "TS1_AITLEN",
               "bit_offset": 5,
               "bit_width": 1,
-              "description": "Asynchronous interrupt enable flag for low threshold on temperature sensor 1. This bit are set and cleared by software. It enables the asynchronous interrupt when the temperature is below the low threshold (only when REFCLK_SEL= 1).",
-              "enum": null
+              "description": "Asynchronous interrupt enable flag for low threshold on temperature sensor 1. This bit are set and cleared by software. It enables the asynchronous interrupt when the temperature is below the low threshold (only when REFCLK_SEL= 1)",
+              "access": "read-write"
             },
             {
-              "name": "AITHEN",
+              "name": "TS1_AITHEN",
               "bit_offset": 6,
               "bit_width": 1,
-              "description": "Asynchronous interrupt enable flag on high threshold for temperature sensor 1. This bit are set and cleared by software. It enables the asynchronous interrupt when the temperature is above the high threshold (only when REFCLK_SEL= 1’’).",
-              "enum": null
+              "description": "Asynchronous interrupt enable flag on high threshold for temperature sensor 1. This bit are set and cleared by software. It enables the asynchronous interrupt when the temperature is above the high threshold (only when REFCLK_SEL= 1'')",
+              "access": "read-write"
             }
           ]
         },
@@ -271,52 +281,53 @@
           "name": "ICIFR",
           "offset": 40,
           "size": 32,
-          "description": "Temperature sensor clear interrupt flag register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "Temperature sensor clear interrupt flag register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Temperature sensor clear interrupt flag register.",
           "fields": [
             {
-              "name": "CITEF",
+              "name": "TS1_CITEF",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "Interrupt clear flag for end of measurement on temperature sensor 1 Writing 1 to this bit clears the TS1_ITEF flag in the DTS_SR register.",
-              "enum": null
+              "access": "read-write"
             },
             {
-              "name": "CITLF",
+              "name": "TS1_CITLF",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "Interrupt clear flag for low threshold on temperature sensor 1 Writing 1 to this bit clears the TS1_ITLF flag in the DTS_SR register.",
-              "enum": null
+              "access": "read-write"
             },
             {
-              "name": "CITHF",
+              "name": "TS1_CITHF",
               "bit_offset": 2,
               "bit_width": 1,
               "description": "Interrupt clear flag for high threshold on temperature sensor 1 Writing this bit to 1 clears the TS1_ITHF flag in the DTS_SR register.",
-              "enum": null
+              "access": "read-write"
             },
             {
-              "name": "CAITEF",
+              "name": "TS1_CAITEF",
               "bit_offset": 4,
               "bit_width": 1,
               "description": "Write once bit. Clear the asynchronous IT flag for End Of Measure for thermal sensor 1. Writing 1 clears the TS1_AITEF flag of the DTS_SR register.",
-              "enum": null
+              "access": "read-write"
             },
             {
-              "name": "CAITLF",
+              "name": "TS1_CAITLF",
               "bit_offset": 5,
               "bit_width": 1,
               "description": "Asynchronous interrupt clear flag for low threshold on temperature sensor 1 Writing 1 to this bit clears the TS1_AITLF flag in the DTS_SR register.",
-              "enum": null
+              "access": "read-write"
             },
             {
-              "name": "CAITHF",
+              "name": "TS1_CAITHF",
               "bit_offset": 6,
               "bit_width": 1,
               "description": "Asynchronous interrupt clear flag for high threshold on temperature sensor 1 Writing 1 to this bit clears the TS1_AITHF flag in the DTS_SR register.",
-              "enum": null
+              "access": "read-write"
             }
           ]
         },
@@ -324,17 +335,235 @@
           "name": "OR",
           "offset": 44,
           "size": 32,
-          "description": "Temperature sensor option register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "Temperature sensor option register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Temperature sensor option register.",
           "fields": [
             {
-              "name": "OP",
+              "name": "TS_OP0",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "general purpose option bits.",
-              "enum": null
+              "description": "general purpose option bits",
+              "access": "read-write"
+            },
+            {
+              "name": "TS_OP1",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "general purpose option bits",
+              "access": "read-write"
+            },
+            {
+              "name": "TS_OP2",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "general purpose option bits",
+              "access": "read-write"
+            },
+            {
+              "name": "TS_OP3",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "general purpose option bits",
+              "access": "read-write"
+            },
+            {
+              "name": "TS_OP4",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "general purpose option bits",
+              "access": "read-write"
+            },
+            {
+              "name": "TS_OP5",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "general purpose option bits",
+              "access": "read-write"
+            },
+            {
+              "name": "TS_OP6",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "general purpose option bits",
+              "access": "read-write"
+            },
+            {
+              "name": "TS_OP7",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "general purpose option bits",
+              "access": "read-write"
+            },
+            {
+              "name": "TS_OP8",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "general purpose option bits",
+              "access": "read-write"
+            },
+            {
+              "name": "TS_OP9",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "general purpose option bits",
+              "access": "read-write"
+            },
+            {
+              "name": "TS_OP10",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "general purpose option bits",
+              "access": "read-write"
+            },
+            {
+              "name": "TS_OP11",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "general purpose option bits",
+              "access": "read-write"
+            },
+            {
+              "name": "TS_OP12",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "general purpose option bits",
+              "access": "read-write"
+            },
+            {
+              "name": "TS_OP13",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "general purpose option bits",
+              "access": "read-write"
+            },
+            {
+              "name": "TS_OP14",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "general purpose option bits",
+              "access": "read-write"
+            },
+            {
+              "name": "TS_OP15",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "general purpose option bits",
+              "access": "read-write"
+            },
+            {
+              "name": "TS_OP16",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "general purpose option bits",
+              "access": "read-write"
+            },
+            {
+              "name": "TS_OP17",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "general purpose option bits",
+              "access": "read-write"
+            },
+            {
+              "name": "TS_OP18",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "general purpose option bits",
+              "access": "read-write"
+            },
+            {
+              "name": "TS_OP19",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "general purpose option bits",
+              "access": "read-write"
+            },
+            {
+              "name": "TS_OP20",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "general purpose option bits",
+              "access": "read-write"
+            },
+            {
+              "name": "TS_OP21",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "general purpose option bits",
+              "access": "read-write"
+            },
+            {
+              "name": "TS_OP22",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "general purpose option bits",
+              "access": "read-write"
+            },
+            {
+              "name": "TS_OP23",
+              "bit_offset": 23,
+              "bit_width": 1,
+              "description": "general purpose option bits",
+              "access": "read-write"
+            },
+            {
+              "name": "TS_OP24",
+              "bit_offset": 24,
+              "bit_width": 1,
+              "description": "general purpose option bits",
+              "access": "read-write"
+            },
+            {
+              "name": "TS_OP25",
+              "bit_offset": 25,
+              "bit_width": 1,
+              "description": "general purpose option bits",
+              "access": "read-write"
+            },
+            {
+              "name": "TS_OP26",
+              "bit_offset": 26,
+              "bit_width": 1,
+              "description": "general purpose option bits",
+              "access": "read-write"
+            },
+            {
+              "name": "TS_OP27",
+              "bit_offset": 27,
+              "bit_width": 1,
+              "description": "general purpose option bits",
+              "access": "read-write"
+            },
+            {
+              "name": "TS_OP28",
+              "bit_offset": 28,
+              "bit_width": 1,
+              "description": "general purpose option bits",
+              "access": "read-write"
+            },
+            {
+              "name": "TS_OP29",
+              "bit_offset": 29,
+              "bit_width": 1,
+              "description": "general purpose option bits",
+              "access": "read-write"
+            },
+            {
+              "name": "TS_OP30",
+              "bit_offset": 30,
+              "bit_width": 1,
+              "description": "general purpose option bits",
+              "access": "read-write"
+            },
+            {
+              "name": "TS_OP31",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "general purpose option bits",
+              "access": "read-write"
             }
           ]
         }

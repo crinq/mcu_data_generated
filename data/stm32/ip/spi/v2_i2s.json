@@ -2,950 +2,962 @@
   "schema": 1,
   "kind": "spi",
   "version": "v2_i2s",
+  "source": "stm32rs_svd",
+  "source_device": "stm32f205rb",
+  "source_file": "stm32f215.svd.patched",
   "blocks": {
-    "SPI": {
-      "name": "SPI",
+    "SPI1": {
+      "name": "SPI1",
       "description": "Serial peripheral interface",
       "extends": null,
       "registers": [
         {
           "name": "CR1",
           "offset": 0,
-          "size": 32,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "control register 1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "control register 1",
           "fields": [
             {
-              "name": "CPHA",
-              "bit_offset": 0,
+              "name": "BIDIMODE",
+              "bit_offset": 15,
               "bit_width": 1,
-              "description": "Clock phase",
-              "enum": "CPHA"
+              "description": "Bidirectional data mode enable",
+              "enum_values": [
+                {
+                  "name": "Unidirectional",
+                  "value": 0,
+                  "description": "2-line unidirectional data mode selected"
+                },
+                {
+                  "name": "Bidirectional",
+                  "value": 1,
+                  "description": "1-line bidirectional data mode selected"
+                }
+              ]
             },
             {
-              "name": "CPOL",
-              "bit_offset": 1,
+              "name": "BIDIOE",
+              "bit_offset": 14,
               "bit_width": 1,
-              "description": "Clock polarity",
-              "enum": "CPOL"
-            },
-            {
-              "name": "MSTR",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Master selection",
-              "enum": "MSTR"
-            },
-            {
-              "name": "BR",
-              "bit_offset": 3,
-              "bit_width": 3,
-              "description": "Baud rate control",
-              "enum": "BR"
-            },
-            {
-              "name": "SPE",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "SPI enable",
-              "enum": null
-            },
-            {
-              "name": "LSBFIRST",
-              "bit_offset": 7,
-              "bit_width": 1,
-              "description": "Frame format",
-              "enum": "LSBFIRST"
-            },
-            {
-              "name": "SSI",
-              "bit_offset": 8,
-              "bit_width": 1,
-              "description": "Internal slave select",
-              "enum": null
-            },
-            {
-              "name": "SSM",
-              "bit_offset": 9,
-              "bit_width": 1,
-              "description": "Software slave management",
-              "enum": null
-            },
-            {
-              "name": "RXONLY",
-              "bit_offset": 10,
-              "bit_width": 1,
-              "description": "Receive only",
-              "enum": "RXONLY"
-            },
-            {
-              "name": "DFF",
-              "bit_offset": 11,
-              "bit_width": 1,
-              "description": "Data frame format",
-              "enum": "DFF"
-            },
-            {
-              "name": "CRCL",
-              "bit_offset": 11,
-              "bit_width": 1,
-              "description": "CRC length",
-              "enum": "CRCL"
-            },
-            {
-              "name": "CRCNEXT",
-              "bit_offset": 12,
-              "bit_width": 1,
-              "description": "CRC transfer next",
-              "enum": "CRCNEXT"
+              "description": "Output enable in bidirectional mode",
+              "enum_values": [
+                {
+                  "name": "OutputDisabled",
+                  "value": 0,
+                  "description": "Output disabled (receive-only mode)"
+                },
+                {
+                  "name": "OutputEnabled",
+                  "value": 1,
+                  "description": "Output enabled (transmit-only mode)"
+                }
+              ]
             },
             {
               "name": "CRCEN",
               "bit_offset": 13,
               "bit_width": 1,
               "description": "Hardware CRC calculation enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "CRC calculation disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "CRC calculation enabled"
+                }
+              ]
             },
             {
-              "name": "BIDIOE",
-              "bit_offset": 14,
+              "name": "CRCNEXT",
+              "bit_offset": 12,
               "bit_width": 1,
-              "description": "Select the direction of transfer in bidirectional mode",
-              "enum": "BIDIOE"
+              "description": "CRC transfer next",
+              "enum_values": [
+                {
+                  "name": "TxBuffer",
+                  "value": 0,
+                  "description": "Next transmit value is from Tx buffer"
+                },
+                {
+                  "name": "CRC",
+                  "value": 1,
+                  "description": "Next transmit value is from Tx CRC register"
+                }
+              ]
             },
             {
-              "name": "BIDIMODE",
-              "bit_offset": 15,
+              "name": "DFF",
+              "bit_offset": 11,
               "bit_width": 1,
-              "description": "Bidirectional data mode enable",
-              "enum": "BIDIMODE"
+              "description": "Data frame format",
+              "enum_values": [
+                {
+                  "name": "EightBit",
+                  "value": 0,
+                  "description": "8-bit data frame format is selected for transmission/reception"
+                },
+                {
+                  "name": "SixteenBit",
+                  "value": 1,
+                  "description": "16-bit data frame format is selected for transmission/reception"
+                }
+              ]
+            },
+            {
+              "name": "RXONLY",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Receive only",
+              "enum_values": [
+                {
+                  "name": "FullDuplex",
+                  "value": 0,
+                  "description": "Full duplex (Transmit and receive)"
+                },
+                {
+                  "name": "OutputDisabled",
+                  "value": 1,
+                  "description": "Output disabled (Receive-only mode)"
+                }
+              ]
+            },
+            {
+              "name": "SSM",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Software slave management",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Software slave management disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Software slave management enabled"
+                }
+              ]
+            },
+            {
+              "name": "SSI",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Internal slave select",
+              "enum_values": [
+                {
+                  "name": "SlaveSelected",
+                  "value": 0,
+                  "description": "0 is forced onto the NSS pin and the I/O value of the NSS pin is ignored"
+                },
+                {
+                  "name": "SlaveNotSelected",
+                  "value": 1,
+                  "description": "1 is forced onto the NSS pin and the I/O value of the NSS pin is ignored"
+                }
+              ]
+            },
+            {
+              "name": "LSBFIRST",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Frame format",
+              "enum_values": [
+                {
+                  "name": "MSBFirst",
+                  "value": 0,
+                  "description": "Data is transmitted/received with the MSB first"
+                },
+                {
+                  "name": "LSBFirst",
+                  "value": 1,
+                  "description": "Data is transmitted/received with the LSB first"
+                }
+              ]
+            },
+            {
+              "name": "SPE",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "SPI enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Peripheral disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Peripheral enabled"
+                }
+              ]
+            },
+            {
+              "name": "BR",
+              "bit_offset": 3,
+              "bit_width": 3,
+              "description": "Baud rate control",
+              "enum_values": [
+                {
+                  "name": "Div2",
+                  "value": 0,
+                  "description": "f_PCLK / 2"
+                },
+                {
+                  "name": "Div4",
+                  "value": 1,
+                  "description": "f_PCLK / 4"
+                },
+                {
+                  "name": "Div8",
+                  "value": 2,
+                  "description": "f_PCLK / 8"
+                },
+                {
+                  "name": "Div16",
+                  "value": 3,
+                  "description": "f_PCLK / 16"
+                },
+                {
+                  "name": "Div32",
+                  "value": 4,
+                  "description": "f_PCLK / 32"
+                },
+                {
+                  "name": "Div64",
+                  "value": 5,
+                  "description": "f_PCLK / 64"
+                },
+                {
+                  "name": "Div128",
+                  "value": 6,
+                  "description": "f_PCLK / 128"
+                },
+                {
+                  "name": "Div256",
+                  "value": 7,
+                  "description": "f_PCLK / 256"
+                }
+              ]
+            },
+            {
+              "name": "MSTR",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Master selection",
+              "enum_values": [
+                {
+                  "name": "Slave",
+                  "value": 0,
+                  "description": "Slave configuration"
+                },
+                {
+                  "name": "Master",
+                  "value": 1,
+                  "description": "Master configuration"
+                }
+              ]
+            },
+            {
+              "name": "CPOL",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Clock polarity",
+              "enum_values": [
+                {
+                  "name": "IdleLow",
+                  "value": 0,
+                  "description": "CK to 0 when idle"
+                },
+                {
+                  "name": "IdleHigh",
+                  "value": 1,
+                  "description": "CK to 1 when idle"
+                }
+              ]
+            },
+            {
+              "name": "CPHA",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Clock phase",
+              "enum_values": [
+                {
+                  "name": "FirstEdge",
+                  "value": 0,
+                  "description": "The first clock transition is the first data capture edge"
+                },
+                {
+                  "name": "SecondEdge",
+                  "value": 1,
+                  "description": "The second clock transition is the first data capture edge"
+                }
+              ]
             }
           ]
         },
         {
           "name": "CR2",
           "offset": 4,
-          "size": 32,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "control register 2",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "control register 2",
           "fields": [
             {
-              "name": "RXDMAEN",
-              "bit_offset": 0,
+              "name": "TXEIE",
+              "bit_offset": 7,
               "bit_width": 1,
-              "description": "Rx buffer DMA enable",
-              "enum": null
-            },
-            {
-              "name": "TXDMAEN",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Tx buffer DMA enable",
-              "enum": null
-            },
-            {
-              "name": "SSOE",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "SS output enable",
-              "enum": null
-            },
-            {
-              "name": "NSSP",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "NSS pulse management",
-              "enum": null
-            },
-            {
-              "name": "FRF",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "Frame format",
-              "enum": "FRF"
-            },
-            {
-              "name": "ERRIE",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "Error interrupt enable",
-              "enum": null
+              "description": "Tx buffer empty interrupt enable",
+              "enum_values": [
+                {
+                  "name": "Masked",
+                  "value": 0,
+                  "description": "TXE interrupt masked"
+                },
+                {
+                  "name": "NotMasked",
+                  "value": 1,
+                  "description": "TXE interrupt not masked"
+                }
+              ]
             },
             {
               "name": "RXNEIE",
               "bit_offset": 6,
               "bit_width": 1,
               "description": "RX buffer not empty interrupt enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Masked",
+                  "value": 0,
+                  "description": "RXE interrupt masked"
+                },
+                {
+                  "name": "NotMasked",
+                  "value": 1,
+                  "description": "RXE interrupt not masked"
+                }
+              ]
             },
             {
-              "name": "TXEIE",
-              "bit_offset": 7,
+              "name": "ERRIE",
+              "bit_offset": 5,
               "bit_width": 1,
-              "description": "Tx buffer empty interrupt enable",
-              "enum": null
+              "description": "Error interrupt enable",
+              "enum_values": [
+                {
+                  "name": "Masked",
+                  "value": 0,
+                  "description": "Error interrupt masked"
+                },
+                {
+                  "name": "NotMasked",
+                  "value": 1,
+                  "description": "Error interrupt not masked"
+                }
+              ]
             },
             {
-              "name": "DS",
-              "bit_offset": 8,
-              "bit_width": 4,
-              "description": "Data size",
-              "enum": "DS"
-            },
-            {
-              "name": "FRXTH",
-              "bit_offset": 12,
+              "name": "FRF",
+              "bit_offset": 4,
               "bit_width": 1,
-              "description": "FIFO reception threshold",
-              "enum": "FRXTH"
+              "description": "Frame format",
+              "enum_values": [
+                {
+                  "name": "Motorola",
+                  "value": 0,
+                  "description": "SPI Motorola mode"
+                },
+                {
+                  "name": "TI",
+                  "value": 1,
+                  "description": "SPI TI mode"
+                }
+              ]
             },
             {
-              "name": "LDMA_RX",
-              "bit_offset": 13,
+              "name": "SSOE",
+              "bit_offset": 2,
               "bit_width": 1,
-              "description": "Last DMA transfer for reception",
-              "enum": "ODD"
+              "description": "SS output enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "SS output is disabled in master mode"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "SS output is enabled in master mode"
+                }
+              ]
             },
             {
-              "name": "LDMA_TX",
-              "bit_offset": 14,
+              "name": "TXDMAEN",
+              "bit_offset": 1,
               "bit_width": 1,
-              "description": "Last DMA transfer for transmission",
-              "enum": "ODD"
+              "description": "Tx buffer DMA enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Tx buffer DMA disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Tx buffer DMA enabled"
+                }
+              ]
+            },
+            {
+              "name": "RXDMAEN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Rx buffer DMA enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Rx buffer DMA disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Rx buffer DMA enabled"
+                }
+              ]
             }
           ]
         },
         {
           "name": "SR",
           "offset": 8,
-          "size": 32,
+          "size": 16,
+          "access": null,
+          "reset_value": 2,
           "description": "status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "status register",
           "fields": [
             {
-              "name": "RXNE",
-              "bit_offset": 0,
+              "name": "TIFRFE",
+              "bit_offset": 8,
               "bit_width": 1,
-              "description": "Receive buffer not empty",
-              "enum": null
-            },
-            {
-              "name": "TXE",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Transmit buffer empty",
-              "enum": null
-            },
-            {
-              "name": "CHSIDE",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Channel side",
-              "enum": "CHSIDE"
-            },
-            {
-              "name": "UDR",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Underrun flag",
-              "enum": null
-            },
-            {
-              "name": "CRCERR",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "CRC error flag",
-              "enum": null
-            },
-            {
-              "name": "MODF",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "Mode fault",
-              "enum": null
-            },
-            {
-              "name": "OVR",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "Overrun flag",
-              "enum": null
+              "description": "TI frame format error",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NoError",
+                  "value": 0,
+                  "description": "No frame format error"
+                },
+                {
+                  "name": "Error",
+                  "value": 1,
+                  "description": "A frame format error occurred"
+                }
+              ]
             },
             {
               "name": "BSY",
               "bit_offset": 7,
               "bit_width": 1,
               "description": "Busy flag",
-              "enum": null
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotBusy",
+                  "value": 0,
+                  "description": "SPI not busy"
+                },
+                {
+                  "name": "Busy",
+                  "value": 1,
+                  "description": "SPI busy"
+                }
+              ]
             },
             {
-              "name": "FRE",
-              "bit_offset": 8,
+              "name": "OVR",
+              "bit_offset": 6,
               "bit_width": 1,
-              "description": "TI frame format error",
-              "enum": null
+              "description": "Overrun flag",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NoOverrun",
+                  "value": 0,
+                  "description": "No overrun occurred"
+                },
+                {
+                  "name": "Overrun",
+                  "value": 1,
+                  "description": "Overrun occurred"
+                }
+              ]
             },
             {
-              "name": "FRLVL",
-              "bit_offset": 9,
-              "bit_width": 2,
-              "description": "FIFO reception level",
-              "enum": "FRL"
+              "name": "MODF",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Mode fault",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NoFault",
+                  "value": 0,
+                  "description": "No mode fault occurred"
+                },
+                {
+                  "name": "Fault",
+                  "value": 1,
+                  "description": "Mode fault occurred"
+                }
+              ]
             },
             {
-              "name": "FTLVL",
-              "bit_offset": 11,
-              "bit_width": 2,
-              "description": "FIFO transmission level",
-              "enum": "FRL"
+              "name": "CRCERR",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "CRC error flag",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Match",
+                  "value": 0,
+                  "description": "CRC value received matches the SPIx_RXCRCR value"
+                },
+                {
+                  "name": "NoMatch",
+                  "value": 1,
+                  "description": "CRC value received does not match the SPIx_RXCRCR value"
+                },
+                {
+                  "name": "Clear",
+                  "value": 0,
+                  "description": "Clear flag"
+                }
+              ]
+            },
+            {
+              "name": "UDR",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Underrun flag",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NoUnderrun",
+                  "value": 0,
+                  "description": "No underrun occurred"
+                },
+                {
+                  "name": "Underrun",
+                  "value": 1,
+                  "description": "Underrun occurred"
+                }
+              ]
+            },
+            {
+              "name": "CHSIDE",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Channel side",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "Left",
+                  "value": 0,
+                  "description": "Channel left has to be transmitted or has been received"
+                },
+                {
+                  "name": "Right",
+                  "value": 1,
+                  "description": "Channel right has to be transmitted or has been received"
+                }
+              ]
+            },
+            {
+              "name": "TXE",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Transmit buffer empty",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotEmpty",
+                  "value": 0,
+                  "description": "Tx buffer not empty"
+                },
+                {
+                  "name": "Empty",
+                  "value": 1,
+                  "description": "Tx buffer empty"
+                }
+              ]
+            },
+            {
+              "name": "RXNE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Receive buffer not empty",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "Empty",
+                  "value": 0,
+                  "description": "Rx buffer empty"
+                },
+                {
+                  "name": "NotEmpty",
+                  "value": 1,
+                  "description": "Rx buffer not empty"
+                }
+              ]
             }
           ]
         },
         {
           "name": "DR",
           "offset": 12,
-          "size": 32,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "data register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "data register",
           "fields": [
             {
               "name": "DR",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "Data register",
-              "enum": null
+              "description": "Data register"
+            }
+          ]
+        },
+        {
+          "name": "DR8",
+          "offset": 12,
+          "size": 8,
+          "access": "read-write",
+          "reset_value": null,
+          "description": "Direct 8-bit access to data register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DR",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "Data register"
             }
           ]
         },
         {
           "name": "CRCPR",
           "offset": 16,
-          "size": 32,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 7,
           "description": "CRC polynomial register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "CRC polynomial register",
           "fields": [
             {
               "name": "CRCPOLY",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "CRC polynomial register",
-              "enum": null
+              "description": "CRC polynomial register"
             }
           ]
         },
         {
           "name": "RXCRCR",
           "offset": 20,
-          "size": 32,
+          "size": 16,
+          "access": "read-only",
+          "reset_value": 0,
           "description": "RX CRC register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RX CRC register",
           "fields": [
             {
               "name": "RxCRC",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "Rx CRC register",
-              "enum": null
+              "description": "Rx CRC register"
             }
           ]
         },
         {
           "name": "TXCRCR",
           "offset": 24,
-          "size": 32,
+          "size": 16,
+          "access": "read-only",
+          "reset_value": 0,
           "description": "TX CRC register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "TX CRC register",
           "fields": [
             {
               "name": "TxCRC",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "Tx CRC register",
-              "enum": null
+              "description": "Tx CRC register"
             }
           ]
         },
         {
           "name": "I2SCFGR",
           "offset": 28,
-          "size": 32,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "I2S configuration register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "I2S configuration register",
           "fields": [
             {
-              "name": "CHLEN",
-              "bit_offset": 0,
+              "name": "I2SMOD",
+              "bit_offset": 11,
               "bit_width": 1,
-              "description": "Channel length (number of bits per audio channel)",
-              "enum": "CHLEN"
-            },
-            {
-              "name": "DATLEN",
-              "bit_offset": 1,
-              "bit_width": 2,
-              "description": "Data length to be transferred",
-              "enum": "DATLEN"
-            },
-            {
-              "name": "CKPOL",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Steady state clock polarity",
-              "enum": "CKPOL"
-            },
-            {
-              "name": "I2SSTD",
-              "bit_offset": 4,
-              "bit_width": 2,
-              "description": "I2S standard selection",
-              "enum": "I2SSTD"
-            },
-            {
-              "name": "PCMSYNC",
-              "bit_offset": 7,
-              "bit_width": 1,
-              "description": "PCM frame synchronization",
-              "enum": "PCMSYNC"
-            },
-            {
-              "name": "I2SCFG",
-              "bit_offset": 8,
-              "bit_width": 2,
-              "description": "I2S configuration mode",
-              "enum": "I2SCFG"
+              "description": "I2S mode selection",
+              "enum_values": [
+                {
+                  "name": "SPIMode",
+                  "value": 0,
+                  "description": "SPI mode is selected"
+                },
+                {
+                  "name": "I2SMode",
+                  "value": 1,
+                  "description": "I2S mode is selected"
+                }
+              ]
             },
             {
               "name": "I2SE",
               "bit_offset": 10,
               "bit_width": 1,
               "description": "I2S Enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "I2S peripheral is disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "I2S peripheral is enabled"
+                }
+              ]
             },
             {
-              "name": "I2SMOD",
-              "bit_offset": 11,
+              "name": "I2SCFG",
+              "bit_offset": 8,
+              "bit_width": 2,
+              "description": "I2S configuration mode",
+              "enum_values": [
+                {
+                  "name": "SlaveTx",
+                  "value": 0,
+                  "description": "Slave - transmit"
+                },
+                {
+                  "name": "SlaveRx",
+                  "value": 1,
+                  "description": "Slave - receive"
+                },
+                {
+                  "name": "MasterTx",
+                  "value": 2,
+                  "description": "Master - transmit"
+                },
+                {
+                  "name": "MasterRx",
+                  "value": 3,
+                  "description": "Master - receive"
+                }
+              ]
+            },
+            {
+              "name": "PCMSYNC",
+              "bit_offset": 7,
               "bit_width": 1,
-              "description": "I2S mode selection",
-              "enum": null
+              "description": "PCM frame synchronization",
+              "enum_values": [
+                {
+                  "name": "Short",
+                  "value": 0,
+                  "description": "Short frame synchronisation"
+                },
+                {
+                  "name": "Long",
+                  "value": 1,
+                  "description": "Long frame synchronisation"
+                }
+              ]
+            },
+            {
+              "name": "I2SSTD",
+              "bit_offset": 4,
+              "bit_width": 2,
+              "description": "I2S standard selection",
+              "enum_values": [
+                {
+                  "name": "Philips",
+                  "value": 0,
+                  "description": "I2S Philips standard"
+                },
+                {
+                  "name": "MSB",
+                  "value": 1,
+                  "description": "MSB justified standard"
+                },
+                {
+                  "name": "LSB",
+                  "value": 2,
+                  "description": "LSB justified standard"
+                },
+                {
+                  "name": "PCM",
+                  "value": 3,
+                  "description": "PCM standard"
+                }
+              ]
+            },
+            {
+              "name": "CKPOL",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Steady state clock polarity",
+              "enum_values": [
+                {
+                  "name": "IdleLow",
+                  "value": 0,
+                  "description": "I2S clock inactive state is low level"
+                },
+                {
+                  "name": "IdleHigh",
+                  "value": 1,
+                  "description": "I2S clock inactive state is high level"
+                }
+              ]
+            },
+            {
+              "name": "DATLEN",
+              "bit_offset": 1,
+              "bit_width": 2,
+              "description": "Data length to be transferred",
+              "enum_values": [
+                {
+                  "name": "SixteenBit",
+                  "value": 0,
+                  "description": "16-bit data length"
+                },
+                {
+                  "name": "TwentyFourBit",
+                  "value": 1,
+                  "description": "24-bit data length"
+                },
+                {
+                  "name": "ThirtyTwoBit",
+                  "value": 2,
+                  "description": "32-bit data length"
+                }
+              ]
+            },
+            {
+              "name": "CHLEN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Channel length (number of bits per audio channel)",
+              "enum_values": [
+                {
+                  "name": "SixteenBit",
+                  "value": 0,
+                  "description": "16-bit wide"
+                },
+                {
+                  "name": "ThirtyTwoBit",
+                  "value": 1,
+                  "description": "32-bit wide"
+                }
+              ]
             }
           ]
         },
         {
           "name": "I2SPR",
           "offset": 32,
-          "size": 32,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 10,
           "description": "I2S prescaler register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "I2S prescaler register",
           "fields": [
             {
-              "name": "I2SDIV",
-              "bit_offset": 0,
-              "bit_width": 8,
-              "description": "I2S Linear prescaler",
-              "enum": null
+              "name": "MCKOE",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Master clock output enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Master clock output is disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Master clock output is enabled"
+                }
+              ]
             },
             {
               "name": "ODD",
               "bit_offset": 8,
               "bit_width": 1,
               "description": "Odd factor for the prescaler",
-              "enum": "ODD"
+              "enum_values": [
+                {
+                  "name": "Even",
+                  "value": 0,
+                  "description": "Real divider value is I2SDIV * 2"
+                },
+                {
+                  "name": "Odd",
+                  "value": 1,
+                  "description": "Real divider value is (I2SDIV * 2) + 1"
+                }
+              ]
             },
             {
-              "name": "MCKOE",
-              "bit_offset": 9,
-              "bit_width": 1,
-              "description": "Master clock output enable",
-              "enum": null
+              "name": "I2SDIV",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "I2S Linear prescaler"
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "BIDIMODE": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Unidirectional",
-          "value": 0,
-          "description": "2-line unidirectional data mode selected"
-        },
-        {
-          "name": "Bidirectional",
-          "value": 1,
-          "description": "1-line bidirectional data mode selected"
-        }
-      ]
-    },
-    "BIDIOE": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Receive",
-          "value": 0,
-          "description": "Output disabled (receive-only mode)"
-        },
-        {
-          "name": "Transmit",
-          "value": 1,
-          "description": "Output enabled (transmit-only mode)"
-        }
-      ]
-    },
-    "BR": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "Div2",
-          "value": 0,
-          "description": "f_PCLK / 2"
-        },
-        {
-          "name": "Div4",
-          "value": 1,
-          "description": "f_PCLK / 4"
-        },
-        {
-          "name": "Div8",
-          "value": 2,
-          "description": "f_PCLK / 8"
-        },
-        {
-          "name": "Div16",
-          "value": 3,
-          "description": "f_PCLK / 16"
-        },
-        {
-          "name": "Div32",
-          "value": 4,
-          "description": "f_PCLK / 32"
-        },
-        {
-          "name": "Div64",
-          "value": 5,
-          "description": "f_PCLK / 64"
-        },
-        {
-          "name": "Div128",
-          "value": 6,
-          "description": "f_PCLK / 128"
-        },
-        {
-          "name": "Div256",
-          "value": 7,
-          "description": "f_PCLK / 256"
-        }
-      ]
-    },
-    "CHLEN": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Bits16",
-          "value": 0,
-          "description": "16-bit wide"
-        },
-        {
-          "name": "Bits32",
-          "value": 1,
-          "description": "32-bit wide"
-        }
-      ]
-    },
-    "CHSIDE": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Left",
-          "value": 0,
-          "description": "Channel left has to be transmitted or has been received"
-        },
-        {
-          "name": "Right",
-          "value": 1,
-          "description": "Channel right has to be transmitted or has been received"
-        }
-      ]
-    },
-    "CKPOL": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "IdleLow",
-          "value": 0,
-          "description": "I2S clock inactive state is low level"
-        },
-        {
-          "name": "IdleHigh",
-          "value": 1,
-          "description": "I2S clock inactive state is high level"
-        }
-      ]
-    },
-    "CPHA": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "FirstEdge",
-          "value": 0,
-          "description": "The first clock transition is the first data capture edge"
-        },
-        {
-          "name": "SecondEdge",
-          "value": 1,
-          "description": "The second clock transition is the first data capture edge"
-        }
-      ]
-    },
-    "CPOL": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "IdleLow",
-          "value": 0,
-          "description": "CK to 0 when idle"
-        },
-        {
-          "name": "IdleHigh",
-          "value": 1,
-          "description": "CK to 1 when idle"
-        }
-      ]
-    },
-    "CRCL": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Bits8",
-          "value": 0,
-          "description": "8-bit CRC length"
-        },
-        {
-          "name": "Bits16",
-          "value": 1,
-          "description": "16-bit CRC length"
-        }
-      ]
-    },
-    "CRCNEXT": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "TxBuffer",
-          "value": 0,
-          "description": "Next transmit value is from Tx buffer"
-        },
-        {
-          "name": "CRC",
-          "value": 1,
-          "description": "Next transmit value is from Tx CRC register"
-        }
-      ]
-    },
-    "DATLEN": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Bits16",
-          "value": 0,
-          "description": "16-bit data length"
-        },
-        {
-          "name": "Bits24",
-          "value": 1,
-          "description": "24-bit data length"
-        },
-        {
-          "name": "Bits32",
-          "value": 2,
-          "description": "32-bit data length"
-        }
-      ]
-    },
-    "DFF": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Bits8",
-          "value": 0,
-          "description": "8-bit data frame format is selected for transmission/reception"
-        },
-        {
-          "name": "Bits16",
-          "value": 1,
-          "description": "16-bit data frame format is selected for transmission/reception"
-        }
-      ]
-    },
-    "DS": {
-      "bit_size": 4,
-      "variants": [
-        {
-          "name": "Bits4",
-          "value": 3,
-          "description": "4-bit"
-        },
-        {
-          "name": "Bits5",
-          "value": 4,
-          "description": "5-bit"
-        },
-        {
-          "name": "Bits6",
-          "value": 5,
-          "description": "6-bit"
-        },
-        {
-          "name": "Bits7",
-          "value": 6,
-          "description": "7-bit"
-        },
-        {
-          "name": "Bits8",
-          "value": 7,
-          "description": "8-bit"
-        },
-        {
-          "name": "Bits9",
-          "value": 8,
-          "description": "9-bit"
-        },
-        {
-          "name": "Bits10",
-          "value": 9,
-          "description": "10-bit"
-        },
-        {
-          "name": "Bits11",
-          "value": 10,
-          "description": "11-bit"
-        },
-        {
-          "name": "Bits12",
-          "value": 11,
-          "description": "12-bit"
-        },
-        {
-          "name": "Bits13",
-          "value": 12,
-          "description": "13-bit"
-        },
-        {
-          "name": "Bits14",
-          "value": 13,
-          "description": "14-bit"
-        },
-        {
-          "name": "Bits15",
-          "value": 14,
-          "description": "15-bit"
-        },
-        {
-          "name": "Bits16",
-          "value": 15,
-          "description": "16-bit"
-        }
-      ]
-    },
-    "FRF": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Motorola",
-          "value": 0,
-          "description": "SPI Motorola mode"
-        },
-        {
-          "name": "TI",
-          "value": 1,
-          "description": "SPI TI mode"
-        }
-      ]
-    },
-    "FRL": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Empty",
-          "value": 0,
-          "description": "Rx FIFO Empty"
-        },
-        {
-          "name": "Quarter",
-          "value": 1,
-          "description": "Rx 1/4 FIFO"
-        },
-        {
-          "name": "Half",
-          "value": 2,
-          "description": "Rx 1/2 FIFO"
-        },
-        {
-          "name": "Full",
-          "value": 3,
-          "description": "Rx FIFO full"
-        }
-      ]
-    },
-    "FRXTH": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Half",
-          "value": 0,
-          "description": "RXNE event is generated if the FIFO level is greater than or equal to 1/2 (16-bit)"
-        },
-        {
-          "name": "Quarter",
-          "value": 1,
-          "description": "RXNE event is generated if the FIFO level is greater than or equal to 1/4 (8-bit)"
-        }
-      ]
-    },
-    "I2SCFG": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "SlaveTx",
-          "value": 0,
-          "description": "Slave - transmit"
-        },
-        {
-          "name": "SlaveRx",
-          "value": 1,
-          "description": "Slave - receive"
-        },
-        {
-          "name": "MasterTx",
-          "value": 2,
-          "description": "Master - transmit"
-        },
-        {
-          "name": "MasterRx",
-          "value": 3,
-          "description": "Master - receive"
-        }
-      ]
-    },
-    "I2SSTD": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Philips",
-          "value": 0,
-          "description": "I2S Philips standard"
-        },
-        {
-          "name": "MSB",
-          "value": 1,
-          "description": "MSB justified standard"
-        },
-        {
-          "name": "LSB",
-          "value": 2,
-          "description": "LSB justified standard"
-        },
-        {
-          "name": "PCM",
-          "value": 3,
-          "description": "PCM standard"
-        }
-      ]
-    },
-    "LSBFIRST": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "MSBFirst",
-          "value": 0,
-          "description": "Data is transmitted/received with the MSB first"
-        },
-        {
-          "name": "LSBFirst",
-          "value": 1,
-          "description": "Data is transmitted/received with the LSB first"
-        }
-      ]
-    },
-    "MSTR": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Slave",
-          "value": 0,
-          "description": "Slave configuration"
-        },
-        {
-          "name": "Master",
-          "value": 1,
-          "description": "Master configuration"
-        }
-      ]
-    },
-    "ODD": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Even",
-          "value": 0,
-          "description": "Even Value"
-        },
-        {
-          "name": "Odd",
-          "value": 1,
-          "description": "Odd Value"
-        }
-      ]
-    },
-    "PCMSYNC": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Short",
-          "value": 0,
-          "description": "Short frame synchronisation"
-        },
-        {
-          "name": "Long",
-          "value": 1,
-          "description": "Long frame synchronisation"
-        }
-      ]
-    },
-    "RXONLY": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "FullDuplex",
-          "value": 0,
-          "description": "Full duplex (Transmit and receive)"
-        },
-        {
-          "name": "OutputDisabled",
-          "value": 1,
-          "description": "Output disabled (Receive-only mode)"
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

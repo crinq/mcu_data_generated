@@ -2,6 +2,9 @@
   "schema": 1,
   "kind": "flash",
   "version": "f7",
+  "source": "stm32rs_svd",
+  "source_device": "stm32f730i8",
+  "source_file": "stm32f730.svd.patched",
   "blocks": {
     "FLASH": {
       "name": "FLASH",
@@ -12,121 +15,388 @@
           "name": "ACR",
           "offset": 0,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "Flash access control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Flash access control register",
           "fields": [
             {
               "name": "LATENCY",
               "bit_offset": 0,
               "bit_width": 4,
               "description": "Latency",
-              "enum": "LATENCY"
+              "enum_values": [
+                {
+                  "name": "WS0",
+                  "value": 0,
+                  "description": "0 wait states"
+                },
+                {
+                  "name": "WS1",
+                  "value": 1,
+                  "description": "1 wait states"
+                },
+                {
+                  "name": "WS2",
+                  "value": 2,
+                  "description": "2 wait states"
+                },
+                {
+                  "name": "WS3",
+                  "value": 3,
+                  "description": "3 wait states"
+                },
+                {
+                  "name": "WS4",
+                  "value": 4,
+                  "description": "4 wait states"
+                },
+                {
+                  "name": "WS5",
+                  "value": 5,
+                  "description": "5 wait states"
+                },
+                {
+                  "name": "WS6",
+                  "value": 6,
+                  "description": "6 wait states"
+                },
+                {
+                  "name": "WS7",
+                  "value": 7,
+                  "description": "7 wait states"
+                },
+                {
+                  "name": "WS8",
+                  "value": 8,
+                  "description": "8 wait states"
+                },
+                {
+                  "name": "WS9",
+                  "value": 9,
+                  "description": "9 wait states"
+                },
+                {
+                  "name": "WS10",
+                  "value": 10,
+                  "description": "10 wait states"
+                },
+                {
+                  "name": "WS11",
+                  "value": 11,
+                  "description": "11 wait states"
+                },
+                {
+                  "name": "WS12",
+                  "value": 12,
+                  "description": "12 wait states"
+                },
+                {
+                  "name": "WS13",
+                  "value": 13,
+                  "description": "13 wait states"
+                },
+                {
+                  "name": "WS14",
+                  "value": 14,
+                  "description": "14 wait states"
+                },
+                {
+                  "name": "WS15",
+                  "value": 15,
+                  "description": "15 wait states"
+                }
+              ]
             },
             {
               "name": "PRFTEN",
               "bit_offset": 8,
               "bit_width": 1,
               "description": "Prefetch enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Prefetch is disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Prefetch is enabled"
+                }
+              ]
             },
             {
               "name": "ARTEN",
               "bit_offset": 9,
               "bit_width": 1,
               "description": "ART Accelerator Enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "ART Accelerator is disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "ART Accelerator is enabled"
+                }
+              ]
             },
             {
               "name": "ARTRST",
               "bit_offset": 11,
               "bit_width": 1,
               "description": "ART Accelerator reset",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "NoReset",
+                  "value": 0,
+                  "description": "Accelerator is not reset"
+                },
+                {
+                  "name": "Reset",
+                  "value": 1,
+                  "description": "Accelerator is reset"
+                }
+              ]
             }
           ]
         },
         {
           "name": "KEYR",
           "offset": 4,
+          "size": 32,
+          "access": "write-only",
+          "reset_value": 0,
           "description": "Flash key register",
           "array_len": null,
           "array_stride": null,
-          "fields": []
+          "fields": [
+            {
+              "name": "KEY",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "FPEC key"
+            }
+          ]
         },
         {
           "name": "OPTKEYR",
           "offset": 8,
+          "size": 32,
+          "access": "write-only",
+          "reset_value": 0,
           "description": "Flash option key register",
           "array_len": null,
           "array_stride": null,
-          "fields": []
+          "fields": [
+            {
+              "name": "OPTKEYR",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Option byte key"
+            }
+          ]
         },
         {
           "name": "SR",
           "offset": 12,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "Status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Status register",
           "fields": [
             {
               "name": "EOP",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "End of operation",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Inactive",
+                  "value": 0,
+                  "description": "No error"
+                },
+                {
+                  "name": "Active",
+                  "value": 1,
+                  "description": "One or more Flash operations has/have completed successfully"
+                },
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clear error flag"
+                }
+              ]
             },
             {
               "name": "OPERR",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "Operation error",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Inactive",
+                  "value": 0,
+                  "description": "No error"
+                },
+                {
+                  "name": "Active",
+                  "value": 1,
+                  "description": "A Flash operation request is detected and cannot be run because of parallelism"
+                },
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clear error flag"
+                }
+              ]
             },
             {
               "name": "WRPERR",
               "bit_offset": 4,
               "bit_width": 1,
               "description": "Write protection error",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Inactive",
+                  "value": 0,
+                  "description": "No error"
+                },
+                {
+                  "name": "Active",
+                  "value": 1,
+                  "description": "The address to be erased/programmed belongs to a write-protected part of the Flash memory"
+                },
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clear error flag"
+                }
+              ]
             },
             {
               "name": "PGAERR",
               "bit_offset": 5,
               "bit_width": 1,
               "description": "Programming alignment error",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Inactive",
+                  "value": 0,
+                  "description": "No error"
+                },
+                {
+                  "name": "Active",
+                  "value": 1,
+                  "description": "The data to program cannot be contained in the same 128-bit Flash memory row"
+                },
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clear error flag"
+                }
+              ]
             },
             {
               "name": "PGPERR",
               "bit_offset": 6,
               "bit_width": 1,
               "description": "Programming parallelism error",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Inactive",
+                  "value": 0,
+                  "description": "No error"
+                },
+                {
+                  "name": "Active",
+                  "value": 1,
+                  "description": "The size of the access during the program sequence doesn't correspond to the parallelism configuration PSIZE"
+                },
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clear error flag"
+                }
+              ]
             },
             {
               "name": "ERSERR",
               "bit_offset": 7,
               "bit_width": 1,
               "description": "Erase Sequence Error",
-              "enum": null
-            },
-            {
-              "name": "RDERR",
-              "bit_offset": 8,
-              "bit_width": 1,
-              "description": "RDERR",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Inactive",
+                  "value": 0,
+                  "description": "No error"
+                },
+                {
+                  "name": "Active",
+                  "value": 1,
+                  "description": "A write access to the Flash memory is performed by the code while the control register has not been correctly configured"
+                },
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clear error flag"
+                }
+              ]
             },
             {
               "name": "BSY",
               "bit_offset": 16,
               "bit_width": 1,
               "description": "Busy",
-              "enum": null
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotBusy",
+                  "value": 0,
+                  "description": "No Flash memory operation ongoing"
+                },
+                {
+                  "name": "Busy",
+                  "value": 1,
+                  "description": "Flash memory operation ongoing"
+                }
+              ]
+            },
+            {
+              "name": "RDERR",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "RDERR",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Inactive",
+                  "value": 0,
+                  "description": "No error"
+                },
+                {
+                  "name": "Active",
+                  "value": 1,
+                  "description": "A read access through the D-bus is performed to an address belonging to a proprietary readout protected Flash sector"
+                },
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clear error flag"
+                }
+              ]
             }
           ]
         },
@@ -134,80 +404,169 @@
           "name": "CR",
           "offset": 16,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 2147483648,
           "description": "Control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Control register",
           "fields": [
             {
               "name": "PG",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "Programming",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Program",
+                  "value": 1,
+                  "description": "Flash programming activated"
+                }
+              ]
             },
             {
               "name": "SER",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "Sector Erase",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "SectorErase",
+                  "value": 1,
+                  "description": "Erase activated for selected sector"
+                }
+              ]
             },
             {
               "name": "MER",
               "bit_offset": 2,
               "bit_width": 1,
               "description": "Mass Erase of sectors 0 to 11",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "MassErase",
+                  "value": 1,
+                  "description": "Erase activated for all user sectors"
+                }
+              ]
             },
             {
               "name": "SNB",
               "bit_offset": 3,
               "bit_width": 4,
-              "description": "Sector number",
-              "enum": null
+              "description": "Sector number"
             },
             {
               "name": "PSIZE",
               "bit_offset": 8,
               "bit_width": 2,
               "description": "Program size",
-              "enum": "PSIZE"
+              "enum_values": [
+                {
+                  "name": "PSIZE8",
+                  "value": 0,
+                  "description": "Program x8"
+                },
+                {
+                  "name": "PSIZE16",
+                  "value": 1,
+                  "description": "Program x16"
+                },
+                {
+                  "name": "PSIZE32",
+                  "value": 2,
+                  "description": "Program x32"
+                },
+                {
+                  "name": "PSIZE64",
+                  "value": 3,
+                  "description": "Program x64"
+                }
+              ]
             },
             {
               "name": "STRT",
               "bit_offset": 16,
               "bit_width": 1,
               "description": "Start",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Start",
+                  "value": 1,
+                  "description": "Trigger an erase operation"
+                }
+              ]
             },
             {
               "name": "EOPIE",
               "bit_offset": 24,
               "bit_width": 1,
               "description": "End of operation interrupt enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "End of operation interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "End of operation interrupt enabled"
+                }
+              ]
             },
             {
               "name": "ERRIE",
               "bit_offset": 25,
               "bit_width": 1,
               "description": "Error interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "RDERRIE",
-              "bit_offset": 26,
-              "bit_width": 1,
-              "description": "PCROP error interrupt enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Error interrupt generation disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Error interrupt generation enabled"
+                }
+              ]
             },
             {
               "name": "LOCK",
               "bit_offset": 31,
               "bit_width": 1,
               "description": "Lock",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Unlocked",
+                  "value": 0,
+                  "description": "FLASH_CR register is unlocked"
+                },
+                {
+                  "name": "Locked",
+                  "value": 1,
+                  "description": "FLASH_CR register is locked"
+                }
+              ]
+            },
+            {
+              "name": "RDERRIE",
+              "bit_offset": 26,
+              "bit_width": 1,
+              "description": "PCROP error interrupt enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "PCROP error interrupt generation disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "PCROP error interrupt generation enabled"
+                }
+              ]
             }
           ]
         },
@@ -215,101 +574,229 @@
           "name": "OPTCR",
           "offset": 20,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 3237980925,
           "description": "Flash option control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Flash option control register",
           "fields": [
             {
               "name": "OPTLOCK",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "Option lock",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Unlocked",
+                  "value": 0,
+                  "description": "The write and erase operations in the Option bytes area are disabled"
+                },
+                {
+                  "name": "Locked",
+                  "value": 1,
+                  "description": "The write and erase operations in the Option bytes area are enabled"
+                },
+                {
+                  "name": "Set",
+                  "value": 1,
+                  "description": "Lock the FLASH_OPTCR register"
+                }
+              ]
             },
             {
               "name": "OPTSTRT",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "Option start",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Complete",
+                  "value": 0,
+                  "description": "Cleared when BSY bit is cleared in SR"
+                },
+                {
+                  "name": "Requested",
+                  "value": 1,
+                  "description": "Options modification requested"
+                },
+                {
+                  "name": "Set",
+                  "value": 1,
+                  "description": "This bit triggers an options operation when set"
+                }
+              ]
             },
             {
               "name": "BOR_LEV",
               "bit_offset": 2,
               "bit_width": 2,
               "description": "BOR reset Level",
-              "enum": null
-            },
-            {
-              "name": "WWDG_SW",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "User option bytes",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "BOR_Off",
+                  "value": 0,
+                  "description": "Reset threshold level for POR/PDR (around 1.7V)"
+                },
+                {
+                  "name": "BOR_Level1",
+                  "value": 1,
+                  "description": "Reset threshold level for VBOR1 (around 2.2 V)"
+                },
+                {
+                  "name": "BOR_Level2",
+                  "value": 2,
+                  "description": "Reset threshold level for VBOR2 (around 2.5 V)"
+                },
+                {
+                  "name": "BOR_Level3",
+                  "value": 3,
+                  "description": "Reset threshold level for VBOR3 (around 2.8 V)"
+                }
+              ]
             },
             {
               "name": "IWDG_SW",
               "bit_offset": 5,
               "bit_width": 1,
               "description": "WDG_SW User option bytes",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Hardware",
+                  "value": 0,
+                  "description": "Hardware independant watchdog"
+                },
+                {
+                  "name": "Software",
+                  "value": 1,
+                  "description": "Software independant watchdog"
+                }
+              ]
             },
             {
               "name": "nRST_STOP",
               "bit_offset": 6,
               "bit_width": 1,
               "description": "nRST_STOP User option bytes",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Reset",
+                  "value": 0,
+                  "description": "Reset generated when entering Stop mode"
+                },
+                {
+                  "name": "NoReset",
+                  "value": 1,
+                  "description": "No reset generated"
+                }
+              ]
             },
             {
               "name": "nRST_STDBY",
               "bit_offset": 7,
               "bit_width": 1,
               "description": "nRST_STDBY User option bytes",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Reset",
+                  "value": 0,
+                  "description": "Reset generated when entering Standby mode"
+                },
+                {
+                  "name": "NoReset",
+                  "value": 1,
+                  "description": "No reset generated"
+                }
+              ]
             },
             {
               "name": "RDP",
               "bit_offset": 8,
               "bit_width": 8,
               "description": "Read protect",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Level0",
+                  "value": 170,
+                  "description": "Read protection not active"
+                },
+                {
+                  "name": "Level2",
+                  "value": 204,
+                  "description": "Chip read protection active"
+                }
+              ]
             },
             {
-              "name": "nWRP",
-              "bit_offset": 16,
-              "bit_width": 8,
-              "description": "Not write protect",
-              "enum": null
-            },
-            {
-              "name": "nDBOOT",
-              "bit_offset": 28,
+              "name": "WWDG_SW",
+              "bit_offset": 4,
               "bit_width": 1,
-              "description": "Dual Boot mode (valid only when nDBANK=0)",
-              "enum": null
-            },
-            {
-              "name": "nDBANK",
-              "bit_offset": 29,
-              "bit_width": 1,
-              "description": "Not dual bank mode",
-              "enum": null
-            },
-            {
-              "name": "IWDG_STDBY",
-              "bit_offset": 30,
-              "bit_width": 1,
-              "description": "Independent watchdog counter freeze in standby mode",
-              "enum": null
+              "description": "User option bytes",
+              "enum_values": [
+                {
+                  "name": "Hardware",
+                  "value": 0,
+                  "description": "Hardware window watchdog"
+                },
+                {
+                  "name": "Software",
+                  "value": 1,
+                  "description": "Software window watchdog"
+                }
+              ]
             },
             {
               "name": "IWDG_STOP",
               "bit_offset": 31,
               "bit_width": 1,
               "description": "Independent watchdog counter freeze in Stop mode",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Inactive",
+                  "value": 0,
+                  "description": "IWDG counter frozen in Stop mode"
+                },
+                {
+                  "name": "Active",
+                  "value": 1,
+                  "description": "IWDG counter active in Stop mode"
+                }
+              ]
+            },
+            {
+              "name": "IWDG_STDBY",
+              "bit_offset": 30,
+              "bit_width": 1,
+              "description": "Independent watchdog counter freeze in standby mode",
+              "enum_values": [
+                {
+                  "name": "Inactive",
+                  "value": 0,
+                  "description": "IWDG counter frozen in Standby mode"
+                },
+                {
+                  "name": "Active",
+                  "value": 1,
+                  "description": "IWDG counter active in Standby mode"
+                }
+              ]
+            },
+            {
+              "name": "nWRP%s",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Not write protect",
+              "enum_values": [
+                {
+                  "name": "Active",
+                  "value": 0,
+                  "description": "Write protection active on sector %s"
+                },
+                {
+                  "name": "Inactive",
+                  "value": 1,
+                  "description": "Write protection inactive on sector %s"
+                }
+              ]
             }
           ]
         },
@@ -317,24 +804,97 @@
           "name": "OPTCR1",
           "offset": 24,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 4194432,
           "description": "Flash option control register 1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Flash option control register 1",
           "fields": [
-            {
-              "name": "BOOT_ADD0",
-              "bit_offset": 0,
-              "bit_width": 16,
-              "description": "Boot base address when Boot pin =0",
-              "enum": null
-            },
             {
               "name": "BOOT_ADD1",
               "bit_offset": 16,
               "bit_width": 16,
               "description": "Boot base address when Boot pin =1",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "ItcmRam",
+                  "value": 0,
+                  "description": "Boot from ITCM RAM (0x0000 0000)"
+                },
+                {
+                  "name": "SystemMemoryBootloader",
+                  "value": 64,
+                  "description": "Boot from System memory bootloader (0x0010 0000)"
+                },
+                {
+                  "name": "FlashItcmInterface",
+                  "value": 128,
+                  "description": "Boot from Flash on ITCM interface (0x0020 0000)"
+                },
+                {
+                  "name": "FlashAximInterface",
+                  "value": 8192,
+                  "description": "Boot from Flash on AXIM interface (0x0800 0000)"
+                },
+                {
+                  "name": "DtcmRam",
+                  "value": 32768,
+                  "description": "Boot from DTCM RAM (0x2000 0000)"
+                },
+                {
+                  "name": "Sram1",
+                  "value": 32772,
+                  "description": "Boot from SRAM1 (0x2001 0000)"
+                },
+                {
+                  "name": "Sram2",
+                  "value": 32787,
+                  "description": "Boot from SRAM2 (0x2003 C000)"
+                }
+              ]
+            },
+            {
+              "name": "BOOT_ADD0",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Boot base address when Boot pin =0",
+              "enum_values": [
+                {
+                  "name": "ItcmRam",
+                  "value": 0,
+                  "description": "Boot from ITCM RAM (0x0000 0000)"
+                },
+                {
+                  "name": "SystemMemoryBootloader",
+                  "value": 64,
+                  "description": "Boot from System memory bootloader (0x0010 0000)"
+                },
+                {
+                  "name": "FlashItcmInterface",
+                  "value": 128,
+                  "description": "Boot from Flash on ITCM interface (0x0020 0000)"
+                },
+                {
+                  "name": "FlashAximInterface",
+                  "value": 8192,
+                  "description": "Boot from Flash on AXIM interface (0x0800 0000)"
+                },
+                {
+                  "name": "DtcmRam",
+                  "value": 32768,
+                  "description": "Boot from DTCM RAM (0x2000 0000)"
+                },
+                {
+                  "name": "Sram1",
+                  "value": 32772,
+                  "description": "Boot from SRAM1 (0x2001 0000)"
+                },
+                {
+                  "name": "Sram2",
+                  "value": 32787,
+                  "description": "Boot from SRAM2 (0x2003 C000)"
+                }
+              ]
             }
           ]
         },
@@ -342,140 +902,40 @@
           "name": "OPTCR2",
           "offset": 28,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 2147483903,
           "description": "Flash option control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Flash option control register",
           "fields": [
             {
-              "name": "PCROPi",
+              "name": "PCROP%s",
               "bit_offset": 0,
-              "bit_width": 8,
+              "bit_width": 1,
               "description": "PCROP option byte",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Inactive",
+                  "value": 0,
+                  "description": "PCROP protection inactive on sector %s"
+                },
+                {
+                  "name": "Active",
+                  "value": 1,
+                  "description": "PCROP protection active on sector %s"
+                }
+              ]
             },
             {
               "name": "PCROP_RDP",
               "bit_offset": 31,
               "bit_width": 1,
-              "description": "PCROP zone preserved when RDP level decreased",
-              "enum": null
+              "description": "PCROP zone preserved when RDP level decreased"
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "LATENCY": {
-      "bit_size": 4,
-      "variants": [
-        {
-          "name": "WS0",
-          "value": 0,
-          "description": "0 wait states"
-        },
-        {
-          "name": "WS1",
-          "value": 1,
-          "description": "1 wait states"
-        },
-        {
-          "name": "WS2",
-          "value": 2,
-          "description": "2 wait states"
-        },
-        {
-          "name": "WS3",
-          "value": 3,
-          "description": "3 wait states"
-        },
-        {
-          "name": "WS4",
-          "value": 4,
-          "description": "4 wait states"
-        },
-        {
-          "name": "WS5",
-          "value": 5,
-          "description": "5 wait states"
-        },
-        {
-          "name": "WS6",
-          "value": 6,
-          "description": "6 wait states"
-        },
-        {
-          "name": "WS7",
-          "value": 7,
-          "description": "7 wait states"
-        },
-        {
-          "name": "WS8",
-          "value": 8,
-          "description": "8 wait states"
-        },
-        {
-          "name": "WS9",
-          "value": 9,
-          "description": "9 wait states"
-        },
-        {
-          "name": "WS10",
-          "value": 10,
-          "description": "10 wait states"
-        },
-        {
-          "name": "WS11",
-          "value": 11,
-          "description": "11 wait states"
-        },
-        {
-          "name": "WS12",
-          "value": 12,
-          "description": "12 wait states"
-        },
-        {
-          "name": "WS13",
-          "value": 13,
-          "description": "13 wait states"
-        },
-        {
-          "name": "WS14",
-          "value": 14,
-          "description": "14 wait states"
-        },
-        {
-          "name": "WS15",
-          "value": 15,
-          "description": "15 wait states"
-        }
-      ]
-    },
-    "PSIZE": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "PSIZE8",
-          "value": 0,
-          "description": "Program x8"
-        },
-        {
-          "name": "PSIZE16",
-          "value": 1,
-          "description": "Program x16"
-        },
-        {
-          "name": "PSIZE32",
-          "value": 2,
-          "description": "Program x32"
-        },
-        {
-          "name": "PSIZE64",
-          "value": 3,
-          "description": "Program x64"
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

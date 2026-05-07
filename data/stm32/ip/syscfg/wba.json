@@ -2,6 +2,9 @@
   "schema": 1,
   "kind": "syscfg",
   "version": "wba",
+  "source": "stm32rs_svd",
+  "source_device": "stm32wba50ke",
+  "source_file": "stm32wba50.svd.patched",
   "blocks": {
     "SYSCFG": {
       "name": "SYSCFG",
@@ -12,31 +15,32 @@
           "name": "SECCFGR",
           "offset": 0,
           "size": 32,
-          "description": "secure configuration register",
+          "access": null,
+          "reset_value": 0,
+          "description": "SYSCFG secure configuration register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "secure configuration register",
           "fields": [
             {
               "name": "SYSCFGSEC",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "clock control, memory erase status and compensation cell registers security",
-              "enum": null
+              "description": "SYSCFG clock control, memory erase status and compensation cell registers security",
+              "access": "read-write"
             },
             {
               "name": "CLASSBSEC",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "Class B security",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "FPUSEC",
               "bit_offset": 3,
               "bit_width": 1,
               "description": "FPU security",
-              "enum": null
+              "access": "read-write"
             }
           ]
         },
@@ -44,52 +48,53 @@
           "name": "CFGR1",
           "offset": 4,
           "size": 32,
-          "description": "configuration register 1",
+          "access": null,
+          "reset_value": 0,
+          "description": "SYSCFG configuration register 1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "configuration register 1",
           "fields": [
             {
               "name": "BOOSTEN",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "I/O analog switch voltage booster enable\r Access can be protected by GTZC_TZSC ADC4SEC.\r Note: Refer to Table�121 for setting.",
-              "enum": null
+              "description": "I/O analog switch voltage booster enable Access can be protected by GTZC_TZSC ADC4SEC. Note: Refer to Table121 for setting.",
+              "access": "read-write"
             },
             {
               "name": "ANASWVDD",
               "bit_offset": 9,
               "bit_width": 1,
-              "description": "GPIO analog switch control voltage selection\r Access can be protected by GTZC_TZSC ADC4SEC.\r Note: Refer to Table�121 for setting.",
-              "enum": null
+              "description": "GPIO analog switch control voltage selection Access can be protected by GTZC_TZSC ADC4SEC. Note: Refer to Table121 for setting.",
+              "access": "read-write"
             },
             {
               "name": "PA6_FMP",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "Fast-mode Plus drive capability activation on PA6\r This bit can be read and written only with secure access if PA6 is secure in GPIOA. This bit enables the Fast-mode Plus drive mode for PA6 when PA6 is not used by I2C peripheral. This can be used to dive a LED for instance.\r Access can be protected by GPIOA SEC6.",
-              "enum": null
+              "description": "Fast-mode Plus drive capability activation on PA6 This bit can be read and written only with secure access if PA6 is secure in GPIOA. This bit enables the Fast-mode Plus drive mode for PA6 when PA6 is not used by I2C peripheral. This can be used to dive a LED for instance. Access can be protected by GPIOA SEC6.",
+              "access": "read-write"
             },
             {
               "name": "PA7_FMP",
               "bit_offset": 17,
               "bit_width": 1,
-              "description": "Fast-mode Plus drive capability activation on PA7\r This bit can be read and written only with secure access if PA7 is secure in GPIOA. This bit enables the Fast-mode Plus drive mode for PA7 when PA7 is not used by I2C peripheral. This can be used to dive a LED for instance.\r Access can be protected by GPIOA SEC7.",
-              "enum": null
+              "description": "Fast-mode Plus drive capability activation on PA7 This bit can be read and written only with secure access if PA7 is secure in GPIOA. This bit enables the Fast-mode Plus drive mode for PA7 when PA7 is not used by I2C peripheral. This can be used to dive a LED for instance. Access can be protected by GPIOA SEC7.",
+              "access": "read-write"
             },
             {
               "name": "PA15_FMP",
               "bit_offset": 18,
               "bit_width": 1,
-              "description": "Fast-mode Plus drive capability activation on PA15\r This bit can be read and written only with secure access if PA15 is secure in GPIOA. This bit enables the Fast-mode Plus drive mode for PA15 when PA15 is not used by I2C peripheral. This can be used to dive a LED for instance.\r Access can be protected by GPIOA SEC15.",
-              "enum": null
+              "description": "Fast-mode Plus drive capability activation on PA15 This bit can be read and written only with secure access if PA15 is secure in GPIOA. This bit enables the Fast-mode Plus drive mode for PA15 when PA15 is not used by I2C peripheral. This can be used to dive a LED for instance. Access can be protected by GPIOA SEC15.",
+              "access": "read-write"
             },
             {
               "name": "PB3_FMP",
               "bit_offset": 19,
               "bit_width": 1,
-              "description": "Fast-mode Plus drive capability activation on PB3\r This bit can be read and written only with secure access if PB3 is secure in GPIOB. This bit enables the Fast-mode Plus drive mode for PB3 when PB3 is not used by I2C peripheral. This can be used to dive a LED for instance.\r Access can be protected by GPIOB SEC3.",
-              "enum": null
+              "description": "Fast-mode Plus drive capability activation on PB3 This bit can be read and written only with secure access if PB3 is secure in GPIOB. This bit enables the Fast-mode Plus drive mode for PB3 when PB3 is not used by I2C peripheral. This can be used to dive a LED for instance. Access can be protected by GPIOB SEC3.",
+              "access": "read-write"
             }
           ]
         },
@@ -97,17 +102,18 @@
           "name": "FPUIMR",
           "offset": 8,
           "size": 32,
-          "description": "FPU interrupt mask register",
+          "access": null,
+          "reset_value": 63,
+          "description": "SYSCFG FPU interrupt mask register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "FPU interrupt mask register",
           "fields": [
             {
               "name": "FPU_IE",
               "bit_offset": 0,
               "bit_width": 6,
-              "description": "Floating point unit interrupts enable bits\r FPU_IE[5]: Inexact interrupt enable (interrupt disable at reset)\r FPU_IE[4]: Input abnormal interrupt enable\r FPU_IE[3]: Overflow interrupt enable\r FPU_IE[2]: Underflow interrupt enable\r FPU_IE[1]: Divide-by-zero interrupt enable\r FPU_IE[0]: Invalid operation Interrupt enable",
-              "enum": null
+              "description": "Floating point unit interrupts enable bits FPU_IE[5]: Inexact interrupt enable (interrupt disable at reset) FPU_IE[4]: Input abnormal interrupt enable FPU_IE[3]: Overflow interrupt enable FPU_IE[2]: Underflow interrupt enable FPU_IE[1]: Divide-by-zero interrupt enable FPU_IE[0]: Invalid operation Interrupt enable",
+              "access": "read-write"
             }
           ]
         },
@@ -115,24 +121,25 @@
           "name": "CNSLCKR",
           "offset": 12,
           "size": 32,
-          "description": "CPU non-secure lock register",
+          "access": null,
+          "reset_value": 0,
+          "description": "SYSCFG CPU non-secure lock register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "CPU non-secure lock register",
           "fields": [
             {
               "name": "LOCKNSVTOR",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "VTOR_NS register lock\r This bit is set by software and cleared only by a system reset.",
-              "enum": null
+              "description": "VTOR_NS register lock This bit is set by software and cleared only by a system reset.",
+              "access": "read-write"
             },
             {
               "name": "LOCKNSMPU",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Non-secure MPU registers lock\r This bit is set by software and cleared only by a system reset. When set, this bit disables write access to non-secure MPU_CTRL_NS, MPU_RNR_NS and MPU_RBAR_NS registers.",
-              "enum": null
+              "description": "Non-secure MPU registers lock This bit is set by software and cleared only by a system reset. When set, this bit disables write access to non-secure MPU_CTRL_NS, MPU_RNR_NS and MPU_RBAR_NS registers.",
+              "access": "read-write"
             }
           ]
         },
@@ -140,31 +147,32 @@
           "name": "CSLOCKR",
           "offset": 16,
           "size": 32,
-          "description": "CPU secure lock register",
+          "access": null,
+          "reset_value": 0,
+          "description": "SYSCFG CPU secure lock register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "CPU secure lock register",
           "fields": [
             {
               "name": "LOCKSVTAIRCR",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "VTOR_S register and AIRCR register bits lock\r This bit is set by software and cleared only by a system reset. When set, it disables write access to VTOR_S register, PRIS and BFHFNMINS bits in the AIRCR register.",
-              "enum": null
+              "description": "VTOR_S register and AIRCR register bits lock This bit is set by software and cleared only by a system reset. When set, it disables write access to VTOR_S register, PRIS and BFHFNMINS bits in the AIRCR register.",
+              "access": "read-write"
             },
             {
               "name": "LOCKSMPU",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Secure MPU registers lock\r This bit is set by software and cleared only by a system reset. When set, it disables write access to secure MPU_CTRL, MPU_RNR and MPU_RBAR registers.",
-              "enum": null
+              "description": "Secure MPU registers lock This bit is set by software and cleared only by a system reset. When set, it disables write access to secure MPU_CTRL, MPU_RNR and MPU_RBAR registers.",
+              "access": "read-write"
             },
             {
               "name": "LOCKSAU",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "SAU registers lock\r This bit is set by software and cleared only by a system reset. When set, it disables write access to SAU_CTRL, SAU_RNR, SAU_RBAR and SAU_RLAR registers.",
-              "enum": null
+              "description": "SAU registers lock This bit is set by software and cleared only by a system reset. When set, it disables write access to SAU_CTRL, SAU_RNR, SAU_RBAR and SAU_RLAR registers.",
+              "access": "read-write"
             }
           ]
         },
@@ -172,38 +180,39 @@
           "name": "CFGR2",
           "offset": 20,
           "size": 32,
-          "description": "configuration register 2",
+          "access": null,
+          "reset_value": 0,
+          "description": "SYSCFG configuration register 2",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "configuration register 2",
           "fields": [
             {
               "name": "CLL",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Cortex-M33 LOCKUP (hardfault) output enable\r This bit is set by software and cleared only by a system reset. It can be used to enable and lock the connection of Cortex-M33 LOCKUP (hardfault) output to TIM1/16/17 break input.",
-              "enum": null
+              "description": "Cortex-M33 LOCKUP (hardfault) output enable This bit is set by software and cleared only by a system reset. It can be used to enable and lock the connection of Cortex-M33 LOCKUP (hardfault) output to TIM1/16/17 break input.",
+              "access": "read-write"
             },
             {
               "name": "SPL",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "SRAM2 parity lock bit\r This bit is set by software and cleared only by a system reset. It can be used to enable and lock the SRAM2 parity error signal connection to TIM1/16/17 break inputs.",
-              "enum": null
+              "description": "SRAM2 parity lock bit This bit is set by software and cleared only by a system reset. It can be used to enable and lock the SRAM2 parity error signal connection to TIM1/16/17 break inputs.",
+              "access": "read-write"
             },
             {
               "name": "PVDL",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "PVD lock enable bit\r This bit is set by software and cleared only by a system reset. It can be used to enable and lock the PVD connection to TIM1/16/17 break input, as well as the PVDE and PVDLS[2:0] in the PWR register.",
-              "enum": null
+              "description": "PVD lock enable bit This bit is set by software and cleared only by a system reset. It can be used to enable and lock the PVD connection to TIM1/16/17 break input, as well as the PVDE and PVDLS[2:0] in the PWR register.",
+              "access": "read-write"
             },
             {
               "name": "ECCL",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "ECC lock\r This bit is set by software and cleared only by a system reset. It can be used to enable and lock the Flash ECC double error signal connection to TIM1/16/17 break input.",
-              "enum": null
+              "description": "ECC lock This bit is set by software and cleared only by a system reset. It can be used to enable and lock the Flash ECC double error signal connection to TIM1/16/17 break input.",
+              "access": "read-write"
             }
           ]
         },
@@ -211,24 +220,25 @@
           "name": "MESR",
           "offset": 24,
           "size": 32,
-          "description": "memory erase status register",
+          "access": null,
+          "reset_value": 0,
+          "description": "SYSCFG memory erase status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "memory erase status register",
           "fields": [
             {
               "name": "MCLR",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Device memories erase status\r This bit is set by hardware when SRAM2, ICACHE, PKA SRAM erase is completed after power-on reset or tamper detection (refer to Section�75: Tamper and backup registers (TAMP) for more details). This bit is not reset by system reset and is cleared by software by writing 1 to it.",
-              "enum": null
+              "description": "Device memories erase status This bit is set by hardware when SRAM2, ICACHE, PKA SRAM erase is completed after power-on reset or tamper detection (refer to Section75: Tamper and backup registers (TAMP) for more details). This bit is not reset by system reset and is cleared by software by writing 1 to it.",
+              "access": "read-write"
             },
             {
               "name": "IPMEE",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "ICACHE and PKA SRAM erase status\r This bit is set by hardware when ICACHE and PKA SRAM erase is completed after potential tamper detection (refer to Section�75: Tamper and backup registers (TAMP) for more details). This bit is cleared by software by writing 1 to it.",
-              "enum": null
+              "description": "ICACHE and PKA SRAM erase status This bit is set by hardware when ICACHE and PKA SRAM erase is completed after potential tamper detection (refer to Section75: Tamper and backup registers (TAMP) for more details). This bit is cleared by software by writing 1 to it.",
+              "access": "read-write"
             }
           ]
         },
@@ -236,52 +246,32 @@
           "name": "CCCSR",
           "offset": 28,
           "size": 32,
-          "description": "compensation cell control/status register",
+          "access": null,
+          "reset_value": 2,
+          "description": "SYSCFG compensation cell control/status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "compensation cell control/status register",
           "fields": [
             {
               "name": "EN1",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "VDD I/Os compensation cell enable\r This bit enables the compensation cell of the I/Os supplied by V<sub>DD</sub>.",
-              "enum": null
+              "description": "VDD I/Os compensation cell enable This bit enables the compensation cell of the I/Os supplied by VsubDD/sub.",
+              "access": "read-write"
             },
             {
               "name": "CS1",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "VDD I/Os code selection\r This bit selects the code to be applied for the compensation cell of the I/Os supplied by V<sub>DD</sub>.",
-              "enum": null
-            },
-            {
-              "name": "EN2",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "VDDIO2 I/Os compensation cell enable\r This bit enables the compensation cell of the I/Os supplied by V<sub>DDIO2</sub>.",
-              "enum": null
-            },
-            {
-              "name": "CS2",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "VDDIO2 I/Os code selection\r This bit selects the code to be applied for the compensation cell of the I/Os supplied by V<sub>DDIO2</sub>.",
-              "enum": null
+              "description": "VDD I/Os code selection This bit selects the code to be applied for the compensation cell of the I/Os supplied by VsubDD/sub.",
+              "access": "read-write"
             },
             {
               "name": "RDY1",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "VDD I/Os compensation cell ready flag\r This bit provides the compensation cell status of the I/Os supplied by V<sub>DD</sub>.\r Note: The HSI clock is required for the compensation cell to work properly. The compensation cell ready bit (RDY1) is not set if the HSI clock is not enabled (HSION).",
-              "enum": null
-            },
-            {
-              "name": "RDY2",
-              "bit_offset": 9,
-              "bit_width": 1,
-              "description": "VDDIO2 I/Os compensation cell ready flag\r This bit provides the compensation cell status of the I/Os supplied by V<sub>DDIO2</sub>.\r Note: The HSI clock is required for the compensation cell to work properly. The compensation cell ready bit (RDY2) is not set if the HSI clock is not enabled (HSION).",
-              "enum": null
+              "description": "VDD I/Os compensation cell ready flag This bit provides the compensation cell status of the I/Os supplied by VsubDD/sub. Note: The HSI16 clock is required for the compensation cell to work properly. The compensation cell ready bit (RDY1) is not set if the HSI16 clock is not enabled (HSION).",
+              "access": "read-only"
             }
           ]
         },
@@ -289,38 +279,25 @@
           "name": "CCVR",
           "offset": 32,
           "size": 32,
-          "description": "compensation cell value register",
+          "access": null,
+          "reset_value": 0,
+          "description": "SYSCFG compensation cell value register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "compensation cell value register",
           "fields": [
             {
               "name": "NCV1",
               "bit_offset": 0,
               "bit_width": 4,
-              "description": "NMOS compensation value of the I/Os supplied by V<sub>DD</sub>\r This value is provided by the cell and can be used by the CPU to compute an I/Os compensation cell code for NMOS transistors. This code is applied to the I/Os compensation cell when the CS1 bit of the CCCSR is reset.",
-              "enum": null
+              "description": "NMOS compensation value of the I/Os supplied by VsubDD/sub This value is provided by the cell and can be used by the CPU to compute an I/Os compensation cell code for NMOS transistors. This code is applied to the I/Os compensation cell when the CS1 bit of the SYSCFG_CCCSR is reset.",
+              "access": "read-only"
             },
             {
               "name": "PCV1",
               "bit_offset": 4,
               "bit_width": 4,
-              "description": "PMOS compensation value of the I/Os supplied by V<sub>DD</sub>\r This value is provided by the cell and can be used by the CPU to compute an I/Os compensation cell code for PMOS transistors. This code is applied to the I/Os compensation cell when the CS1 bit of the CCCSR is reset.",
-              "enum": null
-            },
-            {
-              "name": "NCV2",
-              "bit_offset": 8,
-              "bit_width": 4,
-              "description": "NMOS compensation value of the I/Os supplied by V<sub>DDIO2</sub>\r This value is provided by the cell and can be used by the CPU to compute an I/Os compensation cell code for NMOS transistors. This code is applied to the I/Os compensation cell when the CS2 bit of the CCCSR is reset.",
-              "enum": null
-            },
-            {
-              "name": "PCV2",
-              "bit_offset": 12,
-              "bit_width": 4,
-              "description": "PMOS compensation value of the I/Os supplied by V<sub>DDIO2</sub>\r This value is provided by the cell and can be used by the CPU to compute an I/Os compensation cell code for PMOS transistors. This code is applied to the I/Os compensation cell when the CS2 bit of the CCCSR is reset.",
-              "enum": null
+              "description": "PMOS compensation value of the I/Os supplied by VsubDD/sub This value is provided by the cell and can be used by the CPU to compute an I/Os compensation cell code for PMOS transistors. This code is applied to the I/Os compensation cell when the CS1 bit of the SYSCFG_CCCSR is reset.",
+              "access": "read-only"
             }
           ]
         },
@@ -328,38 +305,25 @@
           "name": "CCCR",
           "offset": 36,
           "size": 32,
-          "description": "compensation cell code register",
+          "access": null,
+          "reset_value": 120,
+          "description": "SYSCFG compensation cell code register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "compensation cell code register",
           "fields": [
             {
               "name": "NCC1",
               "bit_offset": 0,
               "bit_width": 4,
-              "description": "NMOS compensation code of the I/Os supplied by V<sub>DD</sub>\r These bits are written by software to define an I/Os compensation cell code for NMOS transistors. This code is applied to the I/Os compensation cell when the CS1 bit of the CCCSR is set.",
-              "enum": null
+              "description": "NMOS compensation code of the I/Os supplied by VsubDD/sub These bits are written by software to define an I/Os compensation cell code for NMOS transistors. This code is applied to the I/Os compensation cell when the CS1 bit of the SYSCFG_CCCSR is set.",
+              "access": "read-write"
             },
             {
               "name": "PCC1",
               "bit_offset": 4,
               "bit_width": 4,
-              "description": "PMOS compensation code of the I/Os supplied by V<sub>DD</sub>\r These bits are written by software to define an I/Os compensation cell code for PMOS transistors. This code is applied to the I/Os compensation cell when the CS1 bit of the CCCSR is set.",
-              "enum": null
-            },
-            {
-              "name": "NCC2",
-              "bit_offset": 8,
-              "bit_width": 4,
-              "description": "NMOS compensation code of the I/Os supplied by V<sub>DDIO2</sub>\r These bits are written by software to define an I/Os compensation cell code for NMOS transistors. This code is applied to the I/Os compensation cell when the CS2 bit of the CCCSR is set.",
-              "enum": null
-            },
-            {
-              "name": "PCC2",
-              "bit_offset": 12,
-              "bit_width": 4,
-              "description": "PMOS compensation code of the I/Os supplied by V<sub>DDIO2</sub>\r These bits are written by software to define an I/Os compensation cell code for PMOS transistors. This code is applied to the I/Os compensation cell when the CS2 bit of the CCCSR is set.",
-              "enum": null
+              "description": "PMOS compensation code of the I/Os supplied by VsubDD/sub These bits are written by software to define an I/Os compensation cell code for PMOS transistors. This code is applied to the I/Os compensation cell when the CS1 bit of the SYSCFG_CCCSR is set.",
+              "access": "read-write"
             }
           ]
         },
@@ -367,122 +331,23 @@
           "name": "RSSCMDR",
           "offset": 44,
           "size": 32,
-          "description": "RSS command register",
+          "access": null,
+          "reset_value": 0,
+          "description": "SYSCFG RSS command register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RSS command register",
           "fields": [
             {
               "name": "RSSCMD",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "RSS commands\r This field defines a command to be executed by the RSS.",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "OTGHSPHYCR",
-          "offset": 116,
-          "size": 32,
-          "description": "OTG_HS PHY register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "OTG_HS PHY register",
-          "fields": [
-            {
-              "name": "EN",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "PHY Enable",
-              "enum": null
-            },
-            {
-              "name": "PDCTRL",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Common block power-down control",
-              "enum": null
-            },
-            {
-              "name": "CLKSEL",
-              "bit_offset": 2,
-              "bit_width": 4,
-              "description": "Reference clock frequency selection",
-              "enum": "USBREFCKSEL"
-            }
-          ]
-        },
-        {
-          "name": "OTGHSPHYTUNER2",
-          "offset": 124,
-          "size": 32,
-          "description": "OTG_HS PHY tune register 2",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "OTG_HS tune register 2",
-          "fields": [
-            {
-              "name": "COMPDISTUNE",
-              "bit_offset": 0,
-              "bit_width": 3,
-              "description": "Disconnect threshold adjustment",
-              "enum": null
-            },
-            {
-              "name": "SQRXTUNE",
-              "bit_offset": 4,
-              "bit_width": 3,
-              "description": "Squelch threshold adjustment",
-              "enum": null
-            },
-            {
-              "name": "TXPREEMPAMPTUNE",
-              "bit_offset": 13,
-              "bit_width": 2,
-              "description": "HS transmitter preemphasis current control",
-              "enum": null
+              "description": "RSS commands This field defines a command to be executed by the RSS.",
+              "access": "read-write"
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "USBREFCKSEL": {
-      "bit_size": 4,
-      "variants": [
-        {
-          "name": "Mhz16",
-          "value": 3,
-          "description": "The kernel clock frequency provided to the OTG_HS PHY is 16 MHz."
-        },
-        {
-          "name": "Mhz19_2",
-          "value": 8,
-          "description": "The kernel clock frequency provided to the OTG_HS PHY is 19.2 MHz."
-        },
-        {
-          "name": "Mhz20",
-          "value": 9,
-          "description": "The kernel clock frequency provided to the OTG_HS PHY is 20MHz."
-        },
-        {
-          "name": "Mhz24",
-          "value": 10,
-          "description": "The kernel clock frequency provided to the OTG_HS PHY is 24 MHz (default after reset)."
-        },
-        {
-          "name": "Mhz32",
-          "value": 11,
-          "description": "The kernel clock frequency provided to the OTG_HS PHY is 32 MHz."
-        },
-        {
-          "name": "Mhz26",
-          "value": 14,
-          "description": "The kernel clock frequency provided to the OTG_HS PHY is 26 MHz."
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

@@ -2,6 +2,9 @@
   "schema": 1,
   "kind": "rrm",
   "version": "v1",
+  "source": "stm32rs_svd",
+  "source_device": "stm32wb05kz",
+  "source_file": "stm32wb05.svd.patched",
   "blocks": {
     "RRM": {
       "name": "RRM",
@@ -12,17 +15,18 @@
           "name": "UDRA_CTRL0",
           "offset": 16,
           "size": 32,
-          "description": "UDRA_CTRL0 register.",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "UDRA_CTRL0 register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "UDRA_CTRL0 register.",
           "fields": [
             {
               "name": "RELOAD_RDCFGPTR",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "reload the radio configuration pointer from RAM.",
-              "enum": null
+              "access": "read-write"
             }
           ]
         },
@@ -30,31 +34,32 @@
           "name": "UDRA_IRQ_ENABLE",
           "offset": 20,
           "size": 32,
-          "description": "UDRA_IRQ_ENABLE register.",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "UDRA_IRQ_ENABLE register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "UDRA_IRQ_ENABLE register.",
           "fields": [
             {
               "name": "RADIO_CFG_PTR_RELOADED",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "UDRA interrupt enable (reload radio config pointer).",
-              "enum": null
+              "description": "UDRA interrupt enable (reload radio config pointer)",
+              "access": "read-write"
             },
             {
               "name": "CMD_START",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "UDRA interrupt enable (command start).",
-              "enum": null
+              "description": "UDRA interrupt enable (command start)",
+              "access": "read-write"
             },
             {
               "name": "CMD_END",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "UDRA interrupt enable (command end).",
-              "enum": null
+              "description": "UDRA interrupt enable (command end)",
+              "access": "read-write"
             }
           ]
         },
@@ -62,31 +67,32 @@
           "name": "UDRA_IRQ_STATUS",
           "offset": 24,
           "size": 32,
-          "description": "UDRA_IRQ_STATUS register.",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "UDRA_IRQ_STATUS register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "UDRA_IRQ_STATUS register.",
           "fields": [
             {
               "name": "RADIO_CFG_PTR_RELOADED",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "On read, returns the UDRA reload radio configuration pointer interrupt status.",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "CMD_STARD",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "On read, returns the UDRA command start interrupt status.",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "CMD_END",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "On read, returns the UDRA command end interrupt status.",
-              "enum": null
+              "description": "On read, returns the UDRA command end interrupt status",
+              "access": "read-write"
             }
           ]
         },
@@ -94,17 +100,18 @@
           "name": "UDRA_RADIO_CFG_PTR",
           "offset": 28,
           "size": 32,
-          "description": "UDRA_RADIO_CFG_PTR register.",
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "UDRA_RADIO_CFG_PTR register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "UDRA_RADIO_CFG_PTR register.",
           "fields": [
             {
               "name": "RADIO_CONFIG_ADDRESS",
               "bit_offset": 0,
               "bit_width": 32,
               "description": "UDRA radio configuration address.",
-              "enum": null
+              "access": "read-only"
             }
           ]
         },
@@ -112,24 +119,25 @@
           "name": "SEMA_IRQ_ENABLE",
           "offset": 32,
           "size": 32,
-          "description": "SEMA_IRQ_ENABLE register.",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "SEMA_IRQ_ENABLE register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "SEMA_IRQ_ENABLE register.",
           "fields": [
             {
               "name": "LOCK",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "semaphore locked (= one port granted) interrupt enable.",
-              "enum": null
+              "description": "semaphore locked (= one port granted) interrupt enable",
+              "access": "read-write"
             },
             {
               "name": "UNLOCK",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "semaphore unlocked (=no port selected) interrupt enable.",
-              "enum": null
+              "description": "semaphore unlocked (=no port selected) interrupt enable",
+              "access": "read-write"
             }
           ]
         },
@@ -137,24 +145,25 @@
           "name": "SEMA_IRQ_STATUS",
           "offset": 36,
           "size": 32,
-          "description": "SEMA_IRQ_STATUS register.",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "SEMA_IRQ_STATUS register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "SEMA_IRQ_STATUS register.",
           "fields": [
             {
               "name": "LOCK",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "On read, returns the semaphore locked interrupt status.",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "UNLOCK",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "On read, returns the semaphore unlocked interrupt status.",
-              "enum": null
+              "access": "read-write"
             }
           ]
         },
@@ -162,38 +171,39 @@
           "name": "BLE_IRQ_ENABLE",
           "offset": 40,
           "size": 32,
-          "description": "BLE_IRQ_ENABLE register.",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "BLE_IRQ_ENABLE register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "BLE_IRQ_ENABLE register.",
           "fields": [
             {
               "name": "PORT_GRANT",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "IP_BLE Port grant interrupt enable.",
-              "enum": null
+              "description": "IP_BLE Port grant interrupt enable",
+              "access": "read-write"
             },
             {
               "name": "PORT_RELEASE",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "IP_BLE Port release interrupt enable.",
-              "enum": null
+              "description": "IP_BLE Port release interrupt enable",
+              "access": "read-write"
             },
             {
               "name": "PORT_CMD_START",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "IP_BLE Port command start interrup enable.",
-              "enum": null
+              "description": "IP_BLE Port command start interrup enable",
+              "access": "read-write"
             },
             {
               "name": "PORT_CMD_END",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "IP_BLE Port command end interrup enable.",
-              "enum": null
+              "description": "IP_BLE Port command end interrup enable",
+              "access": "read-write"
             }
           ]
         },
@@ -201,38 +211,39 @@
           "name": "BLE_IRQ_STATUS",
           "offset": 44,
           "size": 32,
-          "description": "BLE_IRQ_STATUS register.",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "BLE_IRQ_STATUS register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "BLE_IRQ_STATUS register.",
           "fields": [
             {
               "name": "PORT_GRANT",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "IP_BLE hardware port granted interrupt status:.",
-              "enum": null
+              "description": "IP_BLE hardware port granted interrupt status:",
+              "access": "read-write"
             },
             {
               "name": "PORT_RELEASE",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "IP_BLE hardware port released interrupt status.",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "CMD_START",
               "bit_offset": 3,
               "bit_width": 1,
               "description": "IP_BLE hardware port command start interrupt status.",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "CMD_END",
               "bit_offset": 4,
               "bit_width": 1,
               "description": "IP_BLE hardware port command end interrupt status.",
-              "enum": null
+              "access": "read-write"
             }
           ]
         },
@@ -240,24 +251,25 @@
           "name": "VP_CPU_CMD_BUS",
           "offset": 96,
           "size": 32,
-          "description": "VP_CPU_CMD_BUS register.",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "VP_CPU_CMD_BUS register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "VP_CPU_CMD_BUS register.",
           "fields": [
             {
               "name": "COMMAND",
               "bit_offset": 0,
               "bit_width": 3,
-              "description": "command number.",
-              "enum": null
+              "description": "command number",
+              "access": "read-write"
             },
             {
               "name": "COMMAND_REQ",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "CPU Virtual port command request:.",
-              "enum": null
+              "description": "CPU Virtual port command request:",
+              "access": "read-write"
             }
           ]
         },
@@ -265,24 +277,25 @@
           "name": "VP_CPU_SEMA_BUS",
           "offset": 100,
           "size": 32,
-          "description": "VP_CPU_SEMA_BUS register.",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "VP_CPU_SEMA_BUS register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "VP_CPU_SEMA_BUS register.",
           "fields": [
             {
               "name": "TAKE_PRIO",
               "bit_offset": 0,
               "bit_width": 3,
               "description": "semaphore priority: priority value (between 0 and 7) of the take request.",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "TAKE_REQ",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "semaphore token request:.",
-              "enum": null
+              "description": "semaphore token request:",
+              "access": "read-write"
             }
           ]
         },
@@ -290,38 +303,39 @@
           "name": "VP_CPU_IRQ_ENABLE",
           "offset": 104,
           "size": 32,
-          "description": "VP_CPU_IRQ_ENABLE register.",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "VP_CPU_IRQ_ENABLE register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "VP_CPU_IRQ_ENABLE register.",
           "fields": [
             {
               "name": "PORT_GRANT",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "CPU virtual port grant interrupt enable.",
-              "enum": null
+              "description": "CPU virtual port grant interrupt enable",
+              "access": "read-write"
             },
             {
               "name": "PORT_RELEASE",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "CPU virtual port release interrupt enable.",
-              "enum": null
+              "description": "CPU virtual port release interrupt enable",
+              "access": "read-write"
             },
             {
               "name": "PORT_CMD_START",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "CPU virtual port command start interrup enable.",
-              "enum": null
+              "description": "CPU virtual port command start interrup enable",
+              "access": "read-write"
             },
             {
               "name": "PORT_CMD_END",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "CPU virtual port command end interrup enable.",
-              "enum": null
+              "description": "CPU virtual port command end interrup enable",
+              "access": "read-write"
             }
           ]
         },
@@ -329,45 +343,46 @@
           "name": "VP_CPU_IRQ_STATUS",
           "offset": 108,
           "size": 32,
-          "description": "VP_CPU_IRQ_STATUS register.",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "VP_CPU_IRQ_STATUS register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "VP_CPU_IRQ_STATUS register.",
           "fields": [
             {
               "name": "PORT_GRANT",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "CPU virtual port granted interrupt status.",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "PORT_RELEASE",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "virtual port released interrupt status.",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "PORT_PREEMPT",
               "bit_offset": 2,
               "bit_width": 1,
               "description": "CPU virtual port preemption (at semaphore level) interrupt status.",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "CMD_START",
               "bit_offset": 3,
               "bit_width": 1,
               "description": "CPU virtual port command start interrupt status.",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "CMD_END",
               "bit_offset": 4,
               "bit_width": 1,
               "description": "CPU virtual port command end interrupt status.",
-              "enum": null
+              "access": "read-write"
             }
           ]
         }

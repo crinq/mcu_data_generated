@@ -2,41 +2,78 @@
   "schema": 1,
   "kind": "rtc",
   "version": "v1",
+  "source": "stm32rs_svd",
+  "source_device": "stm32f100v8",
+  "source_file": "stm32f100.svd.patched",
   "blocks": {
     "RTC": {
       "name": "RTC",
-      "description": "Real-time clock",
+      "description": "Real time clock",
       "extends": null,
       "registers": [
         {
           "name": "CRH",
           "offset": 0,
           "size": 32,
-          "description": "Control Register High",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "RTC Control Register High",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Control Register High",
           "fields": [
             {
               "name": "SECIE",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Second interrupt enable",
-              "enum": null
+              "description": "Second interrupt Enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Second interrupt is masked"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Second interrupt is enabled"
+                }
+              ]
             },
             {
               "name": "ALRIE",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Alarm interrupt enable",
-              "enum": null
+              "description": "Alarm interrupt Enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Alarm interrupt is masked"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Alarm interrupt is enabled"
+                }
+              ]
             },
             {
               "name": "OWIE",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "Overflow interrupt enable",
-              "enum": null
+              "description": "Overflow interrupt Enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Overflow interrupt is masked"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Overflow interrupt is enabled"
+                }
+              ]
             }
           ]
         },
@@ -44,52 +81,130 @@
           "name": "CRL",
           "offset": 4,
           "size": 32,
-          "description": "Control Register Low",
+          "access": null,
+          "reset_value": 32,
+          "description": "RTC Control Register Low",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Control Register Low",
           "fields": [
             {
               "name": "SECF",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Second flag",
-              "enum": null
+              "description": "Second Flag",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoPrescalerOverflow",
+                  "value": 0,
+                  "description": "Second flag condition not met"
+                },
+                {
+                  "name": "PrescalerOverflow",
+                  "value": 1,
+                  "description": "Second flag condition met"
+                },
+                {
+                  "name": "Clear",
+                  "value": 0,
+                  "description": "Clear flag"
+                }
+              ]
             },
             {
               "name": "ALRF",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Alarm flag",
-              "enum": null
+              "description": "Alarm Flag",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoAlarm",
+                  "value": 0,
+                  "description": "Alarm not detected"
+                },
+                {
+                  "name": "Alarm",
+                  "value": 1,
+                  "description": "Alarm detected"
+                }
+              ]
             },
             {
               "name": "OWF",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "Overflow flag",
-              "enum": null
+              "description": "Overflow Flag",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoOverflow",
+                  "value": 0,
+                  "description": "Overflow not detected"
+                },
+                {
+                  "name": "Overflow",
+                  "value": 1,
+                  "description": "32-bit programmable counter overflow occurred"
+                }
+              ]
             },
             {
               "name": "RSF",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "Registers synchronized flag",
-              "enum": null
+              "description": "Registers Synchronized Flag",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NotSynchronized",
+                  "value": 0,
+                  "description": "Registers not yet synchronized"
+                },
+                {
+                  "name": "Synchronized",
+                  "value": 1,
+                  "description": "Registers synchronized"
+                }
+              ]
             },
             {
               "name": "CNF",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "Enter configuration mode",
-              "enum": null
+              "description": "Configuration Flag",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Exit",
+                  "value": 0,
+                  "description": "Exit configuration mode (start update of RTC registers)"
+                },
+                {
+                  "name": "Enter",
+                  "value": 1,
+                  "description": "Enter configuration mode"
+                }
+              ]
             },
             {
               "name": "RTOFF",
               "bit_offset": 5,
               "bit_width": 1,
               "description": "RTC operation OFF",
-              "enum": "RTOFF"
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "Enabled",
+                  "value": 0,
+                  "description": "Last write operation on RTC registers is still ongoing"
+                },
+                {
+                  "name": "Disabled",
+                  "value": 1,
+                  "description": "Last write operation on RTC registers terminated"
+                }
+              ]
             }
           ]
         },
@@ -97,17 +212,17 @@
           "name": "PRLH",
           "offset": 8,
           "size": 32,
-          "description": "Prescaler Load Register High",
+          "access": "write-only",
+          "reset_value": 0,
+          "description": "RTC Prescaler Load Register High",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Prescaler Load Register High",
           "fields": [
             {
               "name": "PRLH",
               "bit_offset": 0,
               "bit_width": 4,
-              "description": "Prescaler load register high",
-              "enum": null
+              "description": "RTC Prescaler Load Register High"
             }
           ]
         },
@@ -115,17 +230,17 @@
           "name": "PRLL",
           "offset": 12,
           "size": 32,
-          "description": "Prescaler Load Register Low",
+          "access": "write-only",
+          "reset_value": 32768,
+          "description": "RTC Prescaler Load Register Low",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Prescaler Load Register Low",
           "fields": [
             {
               "name": "PRLL",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "Prescaler divider register low",
-              "enum": null
+              "description": "RTC Prescaler Divider Register Low"
             }
           ]
         },
@@ -133,17 +248,17 @@
           "name": "DIVH",
           "offset": 16,
           "size": 32,
-          "description": "Prescaler Divider Register High",
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "RTC Prescaler Divider Register High",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Prescaler Divider Register High",
           "fields": [
             {
               "name": "DIVH",
               "bit_offset": 0,
               "bit_width": 4,
-              "description": "Prescaler divider register high",
-              "enum": null
+              "description": "RTC prescaler divider register high"
             }
           ]
         },
@@ -151,17 +266,17 @@
           "name": "DIVL",
           "offset": 20,
           "size": 32,
-          "description": "Prescaler Divider Register Low",
+          "access": "read-only",
+          "reset_value": 32768,
+          "description": "RTC Prescaler Divider Register Low",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Prescaler Divider Register Low",
           "fields": [
             {
               "name": "DIVL",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "Prescaler divider register low",
-              "enum": null
+              "description": "RTC prescaler divider register Low"
             }
           ]
         },
@@ -169,17 +284,17 @@
           "name": "CNTH",
           "offset": 24,
           "size": 32,
-          "description": "Counter Register High",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "RTC Counter Register High",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Counter Register High",
           "fields": [
             {
               "name": "CNTH",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "Counter register high",
-              "enum": null
+              "description": "RTC counter register high"
             }
           ]
         },
@@ -187,17 +302,17 @@
           "name": "CNTL",
           "offset": 28,
           "size": 32,
-          "description": "Counter Register Low",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "RTC Counter Register Low",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Counter Register Low",
           "fields": [
             {
               "name": "CNTL",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "Counter register low",
-              "enum": null
+              "description": "RTC counter register Low"
             }
           ]
         },
@@ -205,17 +320,17 @@
           "name": "ALRH",
           "offset": 32,
           "size": 32,
-          "description": "Alarm Register High",
+          "access": "write-only",
+          "reset_value": 65535,
+          "description": "RTC Alarm Register High",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Alarm Register High",
           "fields": [
             {
               "name": "ALRH",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "Alarm register high",
-              "enum": null
+              "description": "RTC alarm register high"
             }
           ]
         },
@@ -223,38 +338,22 @@
           "name": "ALRL",
           "offset": 36,
           "size": 32,
-          "description": "Alarm Register Low",
+          "access": "write-only",
+          "reset_value": 65535,
+          "description": "RTC Alarm Register Low",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Alarm Register Low",
           "fields": [
             {
               "name": "ALRL",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "Alarm register low",
-              "enum": null
+              "description": "RTC alarm register low"
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "RTOFF": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Ongoing",
-          "value": 0,
-          "description": "Last write operation on RTC registers is still ongoing"
-        },
-        {
-          "name": "Terminated",
-          "value": 1,
-          "description": "Last write operation on RTC registers terminated"
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

@@ -2,6 +2,9 @@
   "schema": 1,
   "kind": "flash",
   "version": "l4",
+  "source": "stm32rs_svd",
+  "source_device": "stm32l4r5ag",
+  "source_file": "stm32l4r5.svd.patched",
   "blocks": {
     "FLASH": {
       "name": "FLASH",
@@ -12,185 +15,593 @@
           "name": "ACR",
           "offset": 0,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 1536,
           "description": "Access control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Access control register",
           "fields": [
             {
               "name": "LATENCY",
               "bit_offset": 0,
-              "bit_width": 3,
+              "bit_width": 4,
               "description": "Latency",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "WS0",
+                  "value": 0,
+                  "description": "0 wait states"
+                },
+                {
+                  "name": "WS1",
+                  "value": 1,
+                  "description": "1 wait states"
+                },
+                {
+                  "name": "WS2",
+                  "value": 2,
+                  "description": "2 wait states"
+                },
+                {
+                  "name": "WS3",
+                  "value": 3,
+                  "description": "3 wait states"
+                },
+                {
+                  "name": "WS4",
+                  "value": 4,
+                  "description": "4 wait states"
+                },
+                {
+                  "name": "WS5",
+                  "value": 5,
+                  "description": "5 wait states"
+                },
+                {
+                  "name": "WS6",
+                  "value": 6,
+                  "description": "6 wait states"
+                },
+                {
+                  "name": "WS7",
+                  "value": 7,
+                  "description": "7 wait states"
+                },
+                {
+                  "name": "WS8",
+                  "value": 8,
+                  "description": "8 wait states"
+                },
+                {
+                  "name": "WS9",
+                  "value": 9,
+                  "description": "9 wait states"
+                },
+                {
+                  "name": "WS10",
+                  "value": 10,
+                  "description": "10 wait states"
+                },
+                {
+                  "name": "WS11",
+                  "value": 11,
+                  "description": "11 wait states"
+                },
+                {
+                  "name": "WS12",
+                  "value": 12,
+                  "description": "12 wait states"
+                },
+                {
+                  "name": "WS13",
+                  "value": 13,
+                  "description": "13 wait states"
+                },
+                {
+                  "name": "WS14",
+                  "value": 14,
+                  "description": "14 wait states"
+                },
+                {
+                  "name": "WS15",
+                  "value": 15,
+                  "description": "15 wait states"
+                }
+              ]
             },
             {
               "name": "PRFTEN",
               "bit_offset": 8,
               "bit_width": 1,
               "description": "Prefetch enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Prefetch is disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Prefetch is enabled"
+                }
+              ]
             },
             {
               "name": "ICEN",
               "bit_offset": 9,
               "bit_width": 1,
               "description": "Instruction cache enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Instruction cache is disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Instruction cache is enabled"
+                }
+              ]
             },
             {
               "name": "DCEN",
               "bit_offset": 10,
               "bit_width": 1,
               "description": "Data cache enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Data cache is disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Data cache is enabled"
+                }
+              ]
             },
             {
               "name": "ICRST",
               "bit_offset": 11,
               "bit_width": 1,
               "description": "Instruction cache reset",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "NotReset",
+                  "value": 0,
+                  "description": "Instruction cache is not reset"
+                },
+                {
+                  "name": "Reset",
+                  "value": 1,
+                  "description": "Instruction cache is reset"
+                }
+              ]
             },
             {
               "name": "DCRST",
               "bit_offset": 12,
               "bit_width": 1,
               "description": "Data cache reset",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "NotReset",
+                  "value": 0,
+                  "description": "Data cache is not reset"
+                },
+                {
+                  "name": "Reset",
+                  "value": 1,
+                  "description": "Data cache is reset"
+                }
+              ]
             },
             {
               "name": "RUN_PD",
               "bit_offset": 13,
               "bit_width": 1,
               "description": "Flash Power-down mode during Low-power run mode",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Idle",
+                  "value": 0,
+                  "description": "Flash in idle mode"
+                },
+                {
+                  "name": "PowerDown",
+                  "value": 1,
+                  "description": "Flash in Power-down mode"
+                }
+              ]
             },
             {
               "name": "SLEEP_PD",
               "bit_offset": 14,
               "bit_width": 1,
               "description": "Flash Power-down mode during Low-power sleep mode",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Idle",
+                  "value": 0,
+                  "description": "Flash in idle mode during Sleep and Low-power sleep modes"
+                },
+                {
+                  "name": "PowerDown",
+                  "value": 1,
+                  "description": "Flash in Power-down mode during Sleep and Low-power sleep modes"
+                }
+              ]
             }
           ]
         },
         {
           "name": "PDKEYR",
           "offset": 4,
+          "size": 32,
+          "access": "write-only",
+          "reset_value": 0,
           "description": "Power down key register",
           "array_len": null,
           "array_stride": null,
-          "fields": []
+          "fields": [
+            {
+              "name": "PDKEYR",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "RUN_PD in FLASH_ACR key"
+            }
+          ]
         },
         {
           "name": "KEYR",
           "offset": 8,
+          "size": 32,
+          "access": "write-only",
+          "reset_value": 0,
           "description": "Flash key register",
           "array_len": null,
           "array_stride": null,
-          "fields": []
+          "fields": [
+            {
+              "name": "KEYR",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "KEYR"
+            }
+          ]
         },
         {
           "name": "OPTKEYR",
           "offset": 12,
+          "size": 32,
+          "access": "write-only",
+          "reset_value": 0,
           "description": "Option byte key register",
           "array_len": null,
           "array_stride": null,
-          "fields": []
+          "fields": [
+            {
+              "name": "OPTKEYR",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Option byte key"
+            }
+          ]
         },
         {
           "name": "SR",
           "offset": 16,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "Status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Status register",
           "fields": [
             {
               "name": "EOP",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "End of operation",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoError",
+                  "value": 0,
+                  "description": "No error"
+                },
+                {
+                  "name": "Error",
+                  "value": 1,
+                  "description": "Set by hardware when one or more Flash memory operation (programming / erase) has been completed successfully"
+                },
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Cleared by writing 1"
+                }
+              ]
             },
             {
               "name": "OPERR",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "Operation error",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoError",
+                  "value": 0,
+                  "description": "No error"
+                },
+                {
+                  "name": "Error",
+                  "value": 1,
+                  "description": "Set by hardware when a Flash memory operation (program / erase) completes unsuccessfully"
+                },
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Cleared by writing 1"
+                }
+              ]
             },
             {
               "name": "PROGERR",
               "bit_offset": 3,
               "bit_width": 1,
               "description": "Programming error",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoError",
+                  "value": 0,
+                  "description": "No error"
+                },
+                {
+                  "name": "Error",
+                  "value": 1,
+                  "description": "Set by hardware when a double-word address to be programmed contains a value different from '0xFFFF FFFF' before programming, except if the data to write is '0x0000 0000'"
+                },
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Cleared by writing 1"
+                }
+              ]
             },
             {
               "name": "WRPERR",
               "bit_offset": 4,
               "bit_width": 1,
               "description": "Write protected error",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoError",
+                  "value": 0,
+                  "description": "No error"
+                },
+                {
+                  "name": "Error",
+                  "value": 1,
+                  "description": "Set by hardware when an address to be erased/programmed belongs to a writeprotected part (by WRP, PCROP or RDP level 1) of the Flash memory"
+                },
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Cleared by writing 1"
+                }
+              ]
             },
             {
               "name": "PGAERR",
               "bit_offset": 5,
               "bit_width": 1,
               "description": "Programming alignment error",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoError",
+                  "value": 0,
+                  "description": "No error"
+                },
+                {
+                  "name": "Error",
+                  "value": 1,
+                  "description": "Set by hardware when the data to program cannot be contained in the same 64-bit Flash memory row in case of standard programming, or if there is a change of page during fast programming"
+                },
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Cleared by writing 1"
+                }
+              ]
             },
             {
               "name": "SIZERR",
               "bit_offset": 6,
               "bit_width": 1,
               "description": "Size error",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoError",
+                  "value": 0,
+                  "description": "No error"
+                },
+                {
+                  "name": "Error",
+                  "value": 1,
+                  "description": "Set by hardware when the size of the access is a byte or half-word during a program or a fast program sequence. Only double word programming is allowed (consequently: word access)"
+                },
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Cleared by writing 1"
+                }
+              ]
             },
             {
               "name": "PGSERR",
               "bit_offset": 7,
               "bit_width": 1,
               "description": "Programming sequence error",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoError",
+                  "value": 0,
+                  "description": "No error"
+                },
+                {
+                  "name": "Error",
+                  "value": 1,
+                  "description": "Set by hardware when a write access to the Flash memory is performed by the code while PG or FSTPG have not been set previously. Set also by hardware when PROGERR, SIZERR, PGAERR, WRPERR, MISSERR or FASTERR is set due to a previous programming error. Set also when trying to perform bank erase when DBANK=0 (or DB1M = 0)"
+                },
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Cleared by writing 1"
+                }
+              ]
             },
             {
               "name": "MISERR",
               "bit_offset": 8,
               "bit_width": 1,
               "description": "Fast programming data miss error",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoError",
+                  "value": 0,
+                  "description": "No error"
+                },
+                {
+                  "name": "Error",
+                  "value": 1,
+                  "description": "In fast programming mode, 32 double words must be sent to Flash successively, and the new data must be sent to the Flash logic control before the current data is fully programmed. MISSERR is set by hardware when the new data is not present in time"
+                },
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Cleared by writing 1"
+                }
+              ]
             },
             {
               "name": "FASTERR",
               "bit_offset": 9,
               "bit_width": 1,
               "description": "Fast programming error",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoError",
+                  "value": 0,
+                  "description": "No error"
+                },
+                {
+                  "name": "Error",
+                  "value": 1,
+                  "description": "Set by hardware when a fast programming sequence (activated by FSTPG) is interrupted due to an error (alignment, size, write protection or data miss). The corresponding status bit (PGAERR, SIZERR, WRPERR or MISSERR) is set at the same time"
+                },
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Cleared by writing 1"
+                }
+              ]
             },
             {
               "name": "RDERR",
               "bit_offset": 14,
               "bit_width": 1,
               "description": "PCROP read error",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoError",
+                  "value": 0,
+                  "description": "No error"
+                },
+                {
+                  "name": "Error",
+                  "value": 1,
+                  "description": "Set by hardware when an address to be read through the D-bus belongs to a read protected area of the Flash (PCROP protection)"
+                },
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Cleared by writing 1"
+                }
+              ]
             },
             {
               "name": "OPTVERR",
               "bit_offset": 15,
               "bit_width": 1,
               "description": "Option validity error",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoError",
+                  "value": 0,
+                  "description": "No error"
+                },
+                {
+                  "name": "Error",
+                  "value": 1,
+                  "description": "Set by hardware when the options read may not be the one configured by the user. If option haven’t been properly loaded, OPTVERR is set again after each system reset"
+                },
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Cleared by writing 1"
+                }
+              ]
             },
             {
               "name": "BSY",
               "bit_offset": 16,
               "bit_width": 1,
               "description": "Busy",
-              "enum": null
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotBusy",
+                  "value": 0,
+                  "description": "Not busy"
+                },
+                {
+                  "name": "Busy",
+                  "value": 1,
+                  "description": "Busy"
+                }
+              ]
+            },
+            {
+              "name": "PEMPTY",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "Program EMPTY",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Toggling",
+                  "value": 0,
+                  "description": "The bit value is toggling"
+                },
+                {
+                  "name": "NoEffect",
+                  "value": 1,
+                  "description": "No effect"
+                }
+              ]
             }
           ]
         },
@@ -198,108 +609,284 @@
           "name": "CR",
           "offset": 20,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 3221225472,
           "description": "Flash control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Flash control register",
           "fields": [
             {
               "name": "PG",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "Programming",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Flash programming disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Flash programming enabled"
+                }
+              ]
             },
             {
               "name": "PER",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "Page erase",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Page erase disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Page erase enabled"
+                }
+              ]
             },
             {
-              "name": "MER",
+              "name": "MER1",
               "bit_offset": 2,
               "bit_width": 1,
               "description": "Bank 1 Mass erase",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "MassErase",
+                  "value": 1,
+                  "description": "This bit triggers the bank 1 mass erase (all bank 1 user pages) when set"
+                }
+              ]
             },
             {
               "name": "PNB",
               "bit_offset": 3,
               "bit_width": 8,
-              "description": "Page number",
-              "enum": null
+              "description": "Page number"
             },
             {
               "name": "BKER",
               "bit_offset": 11,
               "bit_width": 1,
               "description": "Bank erase",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Bank1",
+                  "value": 0,
+                  "description": "Bank 1 is selected for page erase"
+                },
+                {
+                  "name": "Bank2",
+                  "value": 1,
+                  "description": "Bank 2 is selected for page erase"
+                }
+              ]
+            },
+            {
+              "name": "MER2",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Bank 2 Mass erase",
+              "enum_values": [
+                {
+                  "name": "MassErase",
+                  "value": 1,
+                  "description": "This bit triggers the bank 2 mass erase (all bank 2 user pages) when set"
+                }
+              ]
             },
             {
               "name": "START",
               "bit_offset": 16,
               "bit_width": 1,
               "description": "Start",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Complete",
+                  "value": 0,
+                  "description": "Cleared when BSY bit is cleared in SR"
+                },
+                {
+                  "name": "Requested",
+                  "value": 1,
+                  "description": "Erase operation requested"
+                },
+                {
+                  "name": "Start",
+                  "value": 1,
+                  "description": "Trigger an erase operation"
+                }
+              ]
             },
             {
               "name": "OPTSTRT",
               "bit_offset": 17,
               "bit_width": 1,
               "description": "Options modification start",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Complete",
+                  "value": 0,
+                  "description": "Cleared when BSY bit is cleared in SR"
+                },
+                {
+                  "name": "Requested",
+                  "value": 1,
+                  "description": "Options modification requested"
+                },
+                {
+                  "name": "Set",
+                  "value": 1,
+                  "description": "This bit triggers an options operation when set"
+                }
+              ]
             },
             {
               "name": "FSTPG",
               "bit_offset": 18,
               "bit_width": 1,
               "description": "Fast programming",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Fast programming disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Fast programming enabled"
+                }
+              ]
             },
             {
               "name": "EOPIE",
               "bit_offset": 24,
               "bit_width": 1,
               "description": "End of operation interrupt enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "End of operation interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "End of operation interrupt enabled"
+                }
+              ]
             },
             {
               "name": "ERRIE",
               "bit_offset": 25,
               "bit_width": 1,
               "description": "Error interrupt enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Error interrupt generation disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Error interrupt generation enabled"
+                }
+              ]
             },
             {
               "name": "RDERRIE",
               "bit_offset": 26,
               "bit_width": 1,
               "description": "PCROP read error interrupt enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "PCROP read error interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "PCROP read error interrupt enabled"
+                }
+              ]
             },
             {
               "name": "OBL_LAUNCH",
               "bit_offset": 27,
               "bit_width": 1,
               "description": "Force the option byte loading",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Complete",
+                  "value": 0,
+                  "description": "Option byte loading complete"
+                },
+                {
+                  "name": "Requested",
+                  "value": 1,
+                  "description": "Option byte loading requested"
+                },
+                {
+                  "name": "Set",
+                  "value": 1,
+                  "description": "Force option byte reloading"
+                }
+              ]
             },
             {
               "name": "OPTLOCK",
               "bit_offset": 30,
               "bit_width": 1,
               "description": "Options Lock",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Unlocked",
+                  "value": 0,
+                  "description": "Option page is unlocked"
+                },
+                {
+                  "name": "Locked",
+                  "value": 1,
+                  "description": "All bits concerning user option in FLASH_CR register and so option page are locked"
+                },
+                {
+                  "name": "Set",
+                  "value": 1,
+                  "description": "This bit is set only. When set, all bits concerning user option in FLASH_CR register and so option page are locked"
+                }
+              ]
             },
             {
               "name": "LOCK",
               "bit_offset": 31,
               "bit_width": 1,
               "description": "FLASH_CR Lock",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Unlocked",
+                  "value": 0,
+                  "description": "FLASH_CR register is unlocked"
+                },
+                {
+                  "name": "Locked",
+                  "value": 1,
+                  "description": "FLASH_CR register is locked"
+                },
+                {
+                  "name": "Set",
+                  "value": 1,
+                  "description": "This bit is set only. When set, the FLASH_CR register is locked"
+                }
+              ]
             }
           ]
         },
@@ -307,52 +894,166 @@
           "name": "ECCR",
           "offset": 24,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "Flash ECC register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Flash ECC register",
           "fields": [
             {
               "name": "ADDR_ECC",
               "bit_offset": 0,
-              "bit_width": 19,
+              "bit_width": 21,
               "description": "ECC fail address",
-              "enum": null
+              "access": "read-only"
             },
             {
               "name": "BK_ECC",
-              "bit_offset": 19,
+              "bit_offset": 21,
               "bit_width": 1,
               "description": "ECC fail bank",
-              "enum": null
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "Bank1",
+                  "value": 0,
+                  "description": "Bank 1"
+                },
+                {
+                  "name": "Bank2",
+                  "value": 1,
+                  "description": "Bank 2"
+                }
+              ]
             },
             {
               "name": "SYSF_ECC",
-              "bit_offset": 20,
+              "bit_offset": 22,
               "bit_width": 1,
               "description": "System Flash ECC fail",
-              "enum": null
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "InSystemFlash",
+                  "value": 1,
+                  "description": "This bit indicates that the ECC error correction or double ECC error detection is located in the System Flash"
+                }
+              ]
             },
             {
               "name": "ECCIE",
               "bit_offset": 24,
               "bit_width": 1,
               "description": "ECC correction interrupt enable",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "ECCC interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "ECCC interrupt enabled"
+                }
+              ]
+            },
+            {
+              "name": "ECCC2",
+              "bit_offset": 28,
+              "bit_width": 1,
+              "description": "ECC correction",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoError",
+                  "value": 0,
+                  "description": "No ECC error detected on MSB"
+                },
+                {
+                  "name": "Error",
+                  "value": 1,
+                  "description": "Set by hardware when one ECC errors have been detected and corrected on MSB"
+                },
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Cleared by writing 1"
+                }
+              ]
+            },
+            {
+              "name": "ECCD2",
+              "bit_offset": 29,
+              "bit_width": 1,
+              "description": "ECC2 detection",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoError",
+                  "value": 0,
+                  "description": "No double ECC errors detected on MSB"
+                },
+                {
+                  "name": "Error",
+                  "value": 1,
+                  "description": "Set by hardware when two ECC errors have been detected on MSB"
+                },
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Cleared by writing 1"
+                }
+              ]
             },
             {
               "name": "ECCC",
               "bit_offset": 30,
               "bit_width": 1,
               "description": "ECC correction",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoError",
+                  "value": 0,
+                  "description": "No ECC error detected on LSB"
+                },
+                {
+                  "name": "Error",
+                  "value": 1,
+                  "description": "Set by hardware when one ECC errors have been detected and corrected on LSB"
+                },
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Cleared by writing 1"
+                }
+              ]
             },
             {
               "name": "ECCD",
               "bit_offset": 31,
               "bit_width": 1,
               "description": "ECC detection",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoError",
+                  "value": 0,
+                  "description": "No double ECC errors detected on LSB"
+                },
+                {
+                  "name": "Error",
+                  "value": 1,
+                  "description": "Set by hardware when two ECC errors have been detected on LSB"
+                },
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Cleared by writing 1"
+                }
+              ]
             }
           ]
         },
@@ -360,122 +1061,245 @@
           "name": "OPTR",
           "offset": 32,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 4293916842,
           "description": "Flash option register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Flash option register",
           "fields": [
             {
               "name": "RDP",
               "bit_offset": 0,
               "bit_width": 8,
-              "description": "Read protection level",
-              "enum": null
+              "description": "Read protection level"
             },
             {
               "name": "BOR_LEV",
               "bit_offset": 8,
               "bit_width": 3,
-              "description": "BOR reset Level",
-              "enum": null
+              "description": "BOR reset Level"
             },
             {
               "name": "nRST_STOP",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "nRST_STOP",
-              "enum": null
+              "description": "nRST_STOP"
             },
             {
               "name": "nRST_STDBY",
               "bit_offset": 13,
               "bit_width": 1,
-              "description": "nRST_STDBY",
-              "enum": null
+              "description": "nRST_STDBY"
             },
             {
               "name": "nRST_SHDW",
               "bit_offset": 14,
               "bit_width": 1,
-              "description": "nRST_SHDW",
-              "enum": null
+              "description": "nRST_SHDW"
             },
             {
-              "name": "IDWG_SW",
+              "name": "IWDG_SW",
               "bit_offset": 16,
               "bit_width": 1,
               "description": "Independent watchdog selection",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Hardware",
+                  "value": 0,
+                  "description": "Hardware independent watchdog"
+                },
+                {
+                  "name": "Software",
+                  "value": 1,
+                  "description": "Software independent watchdog"
+                }
+              ]
             },
             {
               "name": "IWDG_STOP",
               "bit_offset": 17,
               "bit_width": 1,
               "description": "Independent watchdog counter freeze in Stop mode",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Frozen",
+                  "value": 0,
+                  "description": "Independent watchdog counter is frozen in Stop mode"
+                },
+                {
+                  "name": "Running",
+                  "value": 1,
+                  "description": "Independent watchdog counter is running in Stop mode"
+                }
+              ]
             },
             {
               "name": "IWDG_STDBY",
               "bit_offset": 18,
               "bit_width": 1,
               "description": "Independent watchdog counter freeze in Standby mode",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Frozen",
+                  "value": 0,
+                  "description": "Independent watchdog counter is frozen in Standby mode"
+                },
+                {
+                  "name": "Running",
+                  "value": 1,
+                  "description": "Independent watchdog counter is running in Standby mode"
+                }
+              ]
             },
             {
               "name": "WWDG_SW",
               "bit_offset": 19,
               "bit_width": 1,
               "description": "Window watchdog selection",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Hardware",
+                  "value": 0,
+                  "description": "Hardware window watchdog"
+                },
+                {
+                  "name": "Software",
+                  "value": 1,
+                  "description": "Software window watchdog"
+                }
+              ]
             },
             {
-              "name": "BFB",
+              "name": "BFB2",
               "bit_offset": 20,
               "bit_width": 1,
               "description": "Dual-bank boot",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Dual-bank boot disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Dual-bank boot enabled"
+                }
+              ]
             },
             {
-              "name": "DUALBANK",
+              "name": "DB1M",
               "bit_offset": 21,
               "bit_width": 1,
-              "description": "Dual-Bank on 512 KB or 256 KB Flash memory devices",
-              "enum": null
+              "description": "Dual-bank on 1 Mbyte Flash memory devices",
+              "enum_values": [
+                {
+                  "name": "SingleBank",
+                  "value": 0,
+                  "description": "Single Flash contiguous address in Bank 1"
+                },
+                {
+                  "name": "DualBank",
+                  "value": 1,
+                  "description": "Dual-bank Flash with contiguous addresses"
+                }
+              ]
+            },
+            {
+              "name": "DBANK",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "DBANK",
+              "enum_values": [
+                {
+                  "name": "SingleBankMode",
+                  "value": 0,
+                  "description": "Single-bank mode with 128 bits data read width"
+                },
+                {
+                  "name": "DualBankMode",
+                  "value": 1,
+                  "description": "Dual-bank mode with 64 bits data"
+                }
+              ]
             },
             {
               "name": "nBOOT1",
               "bit_offset": 23,
               "bit_width": 1,
-              "description": "Boot configuration",
-              "enum": null
+              "description": "Boot configuration"
             },
             {
               "name": "SRAM2_PE",
               "bit_offset": 24,
               "bit_width": 1,
               "description": "SRAM2 parity check enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Enabled",
+                  "value": 0,
+                  "description": "SRAM2 parity check enabled"
+                },
+                {
+                  "name": "Disabled",
+                  "value": 1,
+                  "description": "SRAM2 parity check disabled"
+                }
+              ]
             },
             {
               "name": "SRAM2_RST",
               "bit_offset": 25,
               "bit_width": 1,
               "description": "SRAM2 Erase when system reset",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Enabled",
+                  "value": 0,
+                  "description": "SRAM2 erased when a system reset occurs"
+                },
+                {
+                  "name": "Disabled",
+                  "value": 1,
+                  "description": "SRAM2 is not erased when a system reset occurs"
+                }
+              ]
             },
             {
               "name": "nSWBOOT0",
               "bit_offset": 26,
               "bit_width": 1,
               "description": "Software BOOT0",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "OptionBit",
+                  "value": 0,
+                  "description": "BOOT0 taken from the option bit nBOOT0"
+                },
+                {
+                  "name": "Pin",
+                  "value": 1,
+                  "description": "BOOT0 taken from PH3/BOOT0 pin"
+                }
+              ]
             },
             {
               "name": "nBOOT0",
               "bit_offset": 27,
               "bit_width": 1,
               "description": "nBOOT0 option bit",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "nBOOT0 = 0"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "nBOOT0 = 1"
+                }
+              ]
             }
           ]
         },
@@ -483,17 +1307,17 @@
           "name": "PCROP1SR",
           "offset": 36,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 4294967295,
           "description": "Flash Bank 1 PCROP Start address register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Flash Bank 1 PCROP Start address register",
           "fields": [
             {
               "name": "PCROP1_STRT",
               "bit_offset": 0,
-              "bit_width": 16,
-              "description": "Bank 1 PCROP area start offset",
-              "enum": null
+              "bit_width": 17,
+              "description": "Bank 1 PCROP area start offset"
             }
           ]
         },
@@ -501,24 +1325,35 @@
           "name": "PCROP1ER",
           "offset": 40,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 267386880,
           "description": "Flash Bank 1 PCROP End address register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Flash Bank 1 PCROP End address register",
           "fields": [
             {
               "name": "PCROP1_END",
               "bit_offset": 0,
-              "bit_width": 16,
-              "description": "Bank 1 PCROP area end offset",
-              "enum": null
+              "bit_width": 17,
+              "description": "Bank 1 PCROP area end offset"
             },
             {
               "name": "PCROP_RDP",
               "bit_offset": 31,
               "bit_width": 1,
               "description": "PCROP area preserved when RDP level decreased",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "PCROP area is not erased when the RDP level is decreased from Level 1 to Level 0"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "PCROP area is erased when the RDP level is decreased from Level 1 to Level 0"
+                }
+              ]
             }
           ]
         },
@@ -526,49 +1361,47 @@
           "name": "WRP1AR",
           "offset": 44,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 4278255360,
           "description": "Flash Bank 1 WRP area A address register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Flash Bank 1 WRP area A address register",
           "fields": [
             {
               "name": "WRP1A_STRT",
               "bit_offset": 0,
               "bit_width": 8,
-              "description": "Bank 1 WRP first area tart offset",
-              "enum": null
+              "description": "Bank 1 WRP first area start offset"
             },
             {
               "name": "WRP1A_END",
               "bit_offset": 16,
               "bit_width": 8,
-              "description": "Bank 1 WRP first area A end offset",
-              "enum": null
+              "description": "Bank 1 WRP first area A end offset"
             }
           ]
         },
         {
-          "name": "WRP1BR",
+          "name": "WRP2AR",
           "offset": 48,
           "size": 32,
-          "description": "Flash Bank 1 WRP area B address register",
+          "access": "read-write",
+          "reset_value": 4278255360,
+          "description": "Flash WRP2 area A address register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Flash Bank 1 WRP area B address register",
           "fields": [
             {
-              "name": "WRP1B_STRT",
-              "bit_offset": 0,
-              "bit_width": 8,
-              "description": "Bank 1 WRP second area B start offset",
-              "enum": null
-            },
-            {
-              "name": "WRP1B_END",
+              "name": "WRP2A_END",
               "bit_offset": 16,
               "bit_width": 8,
-              "description": "Bank 1 WRP second area B end offset",
-              "enum": null
+              "description": "WRP first area A end offset"
+            },
+            {
+              "name": "WRP2A_STRT",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "WRP first area A start offset"
             }
           ]
         },
@@ -576,17 +1409,17 @@
           "name": "PCROP2SR",
           "offset": 68,
           "size": 32,
-          "description": "Flash Bank 2 PCROP Start address register",
+          "access": "read-write",
+          "reset_value": 4294967295,
+          "description": "Flash PCROP2 Start address register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Flash Bank 2 PCROP Start address register",
           "fields": [
             {
               "name": "PCROP2_STRT",
               "bit_offset": 0,
-              "bit_width": 16,
-              "description": "Bank 2 PCROP area start offset",
-              "enum": null
+              "bit_width": 17,
+              "description": "PCROP area start offset"
             }
           ]
         },
@@ -594,42 +1427,41 @@
           "name": "PCROP2ER",
           "offset": 72,
           "size": 32,
-          "description": "Flash Bank 2 PCROP End address register",
+          "access": "read-write",
+          "reset_value": 267386880,
+          "description": "Flash PCROP2 End address register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Flash Bank 2 PCROP End address register",
           "fields": [
             {
               "name": "PCROP2_END",
               "bit_offset": 0,
-              "bit_width": 16,
-              "description": "Bank 2 PCROP area end offset",
-              "enum": null
+              "bit_width": 17,
+              "description": "Bank 2 PCROP area end offset"
             }
           ]
         },
         {
-          "name": "WRP2AR",
+          "name": "WRP1BR",
           "offset": 76,
           "size": 32,
-          "description": "Flash Bank 2 WRP area A address register",
+          "access": "read-write",
+          "reset_value": 4278255360,
+          "description": "Flash WRP1 area B address register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Flash Bank 2 WRP area A address register",
           "fields": [
             {
-              "name": "WRP2A_STRT",
+              "name": "WRP1B_STRT",
               "bit_offset": 0,
               "bit_width": 8,
-              "description": "Bank 2 WRP first area A start offset",
-              "enum": null
+              "description": "Bank 2 WRP first area A start offset"
             },
             {
-              "name": "WRP2A_END",
+              "name": "WRP1B_END",
               "bit_offset": 16,
               "bit_width": 8,
-              "description": "Bank 2 WRP first area A end offset",
-              "enum": null
+              "description": "Bank 2 WRP first area A end offset"
             }
           ]
         },
@@ -637,24 +1469,53 @@
           "name": "WRP2BR",
           "offset": 80,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 4278255360,
           "description": "Flash Bank 2 WRP area B address register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Flash Bank 2 WRP area B address register",
           "fields": [
             {
               "name": "WRP2B_STRT",
               "bit_offset": 0,
               "bit_width": 8,
-              "description": "Bank 2 WRP second area B start offset",
-              "enum": null
+              "description": "Bank 2 WRP second area B start offset"
             },
             {
               "name": "WRP2B_END",
               "bit_offset": 16,
               "bit_width": 8,
-              "description": "Bank 2 WRP second area B end offset",
-              "enum": null
+              "description": "Bank 2 WRP second area B end offset"
+            }
+          ]
+        },
+        {
+          "name": "CFGR",
+          "offset": 304,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Flash configuration register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "LVEN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Low voltage enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Flash low voltage disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Flash low voltage enabled"
+                }
+              ]
             }
           ]
         }

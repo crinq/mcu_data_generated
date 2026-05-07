@@ -2,6 +2,9 @@
   "schema": 1,
   "kind": "lcd",
   "version": "v1",
+  "source": "stm32rs_svd",
+  "source_device": "stm32l152c6",
+  "source_file": "stm32l151.svd.patched",
   "blocks": {
     "LCD": {
       "name": "LCD",
@@ -12,45 +15,41 @@
           "name": "CR",
           "offset": 0,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "control register",
           "fields": [
             {
-              "name": "LCDEN",
-              "bit_offset": 0,
+              "name": "MUX_SEG",
+              "bit_offset": 7,
               "bit_width": 1,
-              "description": "LCD controller enable",
-              "enum": null
-            },
-            {
-              "name": "VSEL",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Voltage source selection",
-              "enum": null
-            },
-            {
-              "name": "DUTY",
-              "bit_offset": 2,
-              "bit_width": 3,
-              "description": "Duty selection",
-              "enum": null
+              "description": "Mux segment enable"
             },
             {
               "name": "BIAS",
               "bit_offset": 5,
               "bit_width": 2,
-              "description": "Bias selector",
-              "enum": null
+              "description": "Bias selector"
             },
             {
-              "name": "MUX_SEG",
-              "bit_offset": 7,
+              "name": "DUTY",
+              "bit_offset": 2,
+              "bit_width": 3,
+              "description": "Duty selection"
+            },
+            {
+              "name": "VSEL",
+              "bit_offset": 1,
               "bit_width": 1,
-              "description": "Mux segment enable",
-              "enum": null
+              "description": "Voltage source selection"
+            },
+            {
+              "name": "LCDEN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "LCD controller enable"
             }
           ]
         },
@@ -58,80 +57,71 @@
           "name": "FCR",
           "offset": 4,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "frame control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "frame control register",
           "fields": [
             {
-              "name": "HD",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "High drive enable",
-              "enum": null
-            },
-            {
-              "name": "SOFIE",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Start of frame interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "UDDIE",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Update display done interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "PON",
-              "bit_offset": 4,
-              "bit_width": 3,
-              "description": "Pulse ON duration",
-              "enum": null
-            },
-            {
-              "name": "DEAD",
-              "bit_offset": 7,
-              "bit_width": 3,
-              "description": "Dead time duration",
-              "enum": null
-            },
-            {
-              "name": "CC",
-              "bit_offset": 10,
-              "bit_width": 3,
-              "description": "Contrast control",
-              "enum": null
-            },
-            {
-              "name": "BLINKF",
-              "bit_offset": 13,
-              "bit_width": 3,
-              "description": "Blink frequency selection",
-              "enum": null
-            },
-            {
-              "name": "BLINK",
-              "bit_offset": 16,
-              "bit_width": 2,
-              "description": "Blink mode selection",
-              "enum": null
+              "name": "PS",
+              "bit_offset": 22,
+              "bit_width": 4,
+              "description": "PS 16-bit prescaler"
             },
             {
               "name": "DIV",
               "bit_offset": 18,
               "bit_width": 4,
-              "description": "DIV clock divider",
-              "enum": null
+              "description": "DIV clock divider"
             },
             {
-              "name": "PS",
-              "bit_offset": 22,
-              "bit_width": 4,
-              "description": "PS 16-bit prescaler",
-              "enum": null
+              "name": "BLINK",
+              "bit_offset": 16,
+              "bit_width": 2,
+              "description": "Blink mode selection"
+            },
+            {
+              "name": "BLINKF",
+              "bit_offset": 13,
+              "bit_width": 3,
+              "description": "Blink frequency selection"
+            },
+            {
+              "name": "CC",
+              "bit_offset": 10,
+              "bit_width": 3,
+              "description": "Contrast control"
+            },
+            {
+              "name": "DEAD",
+              "bit_offset": 7,
+              "bit_width": 3,
+              "description": "Dead time duration"
+            },
+            {
+              "name": "PON",
+              "bit_offset": 4,
+              "bit_width": 3,
+              "description": "Pulse ON duration"
+            },
+            {
+              "name": "UDDIE",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Update display done interrupt enable"
+            },
+            {
+              "name": "SOFIE",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Start of frame interrupt enable"
+            },
+            {
+              "name": "HD",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "High drive enable"
             }
           ]
         },
@@ -139,52 +129,53 @@
           "name": "SR",
           "offset": 8,
           "size": 32,
+          "access": null,
+          "reset_value": 32,
           "description": "status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "status register",
           "fields": [
             {
-              "name": "ENS",
-              "bit_offset": 0,
+              "name": "FCRSF",
+              "bit_offset": 5,
               "bit_width": 1,
-              "description": "LCD enabled status",
-              "enum": null
-            },
-            {
-              "name": "SOF",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Start of frame flag",
-              "enum": null
-            },
-            {
-              "name": "UDR",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Update display request",
-              "enum": null
-            },
-            {
-              "name": "UDD",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Update Display Done",
-              "enum": null
+              "description": "LCD Frame Control Register Synchronization flag",
+              "access": "read-only"
             },
             {
               "name": "RDY",
               "bit_offset": 4,
               "bit_width": 1,
               "description": "Ready flag",
-              "enum": null
+              "access": "read-only"
             },
             {
-              "name": "FCRSF",
-              "bit_offset": 5,
+              "name": "UDD",
+              "bit_offset": 3,
               "bit_width": 1,
-              "description": "LCD Frame Control Register Synchronization flag",
-              "enum": null
+              "description": "Update Display Done",
+              "access": "read-only"
+            },
+            {
+              "name": "UDR",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Update display request",
+              "access": "read-write"
+            },
+            {
+              "name": "SOF",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Start of frame flag",
+              "access": "read-only"
+            },
+            {
+              "name": "ENS",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "LCD enabled status",
+              "access": "read-only"
             }
           ]
         },
@@ -192,54 +183,124 @@
           "name": "CLR",
           "offset": 12,
           "size": 32,
+          "access": "write-only",
+          "reset_value": 0,
           "description": "clear register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "clear register",
           "fields": [
-            {
-              "name": "SOFC",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Start of frame flag clear",
-              "enum": null
-            },
             {
               "name": "UDDC",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "Update display done clear",
-              "enum": null
+              "description": "Update display done clear"
+            },
+            {
+              "name": "SOFC",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Start of frame flag clear"
             }
           ]
         },
         {
-          "name": "RAM_COM",
+          "name": "RAM_COM0",
           "offset": 20,
-          "description": "display memory",
-          "array_len": 8,
-          "array_stride": 8,
-          "fields": []
-        }
-      ]
-    },
-    "RAM_COM": {
-      "name": "RAM_COM",
-      "description": "display memory",
-      "extends": null,
-      "registers": [
+          "size": 64,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "LCD display memory",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "SEGS",
+              "bit_offset": 0,
+              "bit_width": 40,
+              "description": "Segment states, one bit per segment, LSB: S00, MSB: S39"
+            }
+          ]
+        },
         {
-          "name": "LOW",
-          "offset": 0,
-          "description": "display memory low word",
+          "name": "RAM_COM4",
+          "offset": 52,
+          "size": 64,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "LCD display memory",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "SEGS",
+              "bit_offset": 0,
+              "bit_width": 44,
+              "description": "Segment states, one bit per segment, LSB: S00, MSB: S43"
+            }
+          ]
+        },
+        {
+          "name": "RAM_COM1",
+          "offset": 28,
+          "size": 32,
+          "access": null,
+          "reset_value": null,
+          "description": null,
           "array_len": null,
           "array_stride": null,
           "fields": []
         },
         {
-          "name": "HIGH",
-          "offset": 4,
-          "description": "display memory high word",
+          "name": "RAM_COM2",
+          "offset": 36,
+          "size": 32,
+          "access": null,
+          "reset_value": null,
+          "description": null,
+          "array_len": null,
+          "array_stride": null,
+          "fields": []
+        },
+        {
+          "name": "RAM_COM3",
+          "offset": 44,
+          "size": 32,
+          "access": null,
+          "reset_value": null,
+          "description": null,
+          "array_len": null,
+          "array_stride": null,
+          "fields": []
+        },
+        {
+          "name": "RAM_COM5",
+          "offset": 60,
+          "size": 32,
+          "access": null,
+          "reset_value": null,
+          "description": null,
+          "array_len": null,
+          "array_stride": null,
+          "fields": []
+        },
+        {
+          "name": "RAM_COM6",
+          "offset": 68,
+          "size": 32,
+          "access": null,
+          "reset_value": null,
+          "description": null,
+          "array_len": null,
+          "array_stride": null,
+          "fields": []
+        },
+        {
+          "name": "RAM_COM7",
+          "offset": 76,
+          "size": 32,
+          "access": null,
+          "reset_value": null,
+          "description": null,
           "array_len": null,
           "array_stride": null,
           "fields": []

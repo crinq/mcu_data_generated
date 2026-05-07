@@ -2,118 +2,108 @@
   "schema": 1,
   "kind": "sdadc",
   "version": "v1",
+  "source": "stm32rs_svd",
+  "source_device": "stm32f373v8",
+  "source_file": "stm32f373.svd.patched",
   "blocks": {
-    "SDADC": {
-      "name": "SDADC",
-      "description": "Sigma-delta analog-to-digital converter.",
+    "SDADC1": {
+      "name": "SDADC1",
+      "description": "Sigma-delta analog-to-digital converter",
       "extends": null,
       "registers": [
         {
           "name": "CR1",
           "offset": 0,
           "size": 32,
-          "description": "control register 1.",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "control register 1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "control register 1.",
           "fields": [
             {
               "name": "EOCALIE",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "End of calibration interrupt enable.",
-              "enum": null
+              "description": "End of calibration interrupt enable"
             },
             {
               "name": "JEOCIE",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Injected end of conversion interrupt enable.",
-              "enum": null
+              "description": "Injected end of conversion interrupt enable"
             },
             {
               "name": "JOVRIE",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "Injected data overrun interrupt enable.",
-              "enum": null
+              "description": "Injected data overrun interrupt enable"
             },
             {
               "name": "REOCIE",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "Regular end of conversion interrupt enable.",
-              "enum": null
+              "description": "Regular end of conversion interrupt enable"
             },
             {
               "name": "ROVRIE",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "Regular data overrun interrupt enable.",
-              "enum": null
+              "description": "Regular data overrun interrupt enable"
             },
             {
               "name": "REFV",
               "bit_offset": 8,
               "bit_width": 2,
-              "description": "Reference voltage selection.",
-              "enum": null
+              "description": "Reference voltage selection"
             },
             {
               "name": "SLOWCK",
               "bit_offset": 10,
               "bit_width": 1,
-              "description": "Slow clock mode enable.",
-              "enum": null
+              "description": "Slow clock mode enable"
             },
             {
               "name": "SBI",
               "bit_offset": 11,
               "bit_width": 1,
-              "description": "Enter Standby mode when idle.",
-              "enum": null
+              "description": "Enter Standby mode when idle"
             },
             {
               "name": "PDI",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "Enter power down mode when idle.",
-              "enum": null
+              "description": "Enter power down mode when idle"
             },
             {
               "name": "JSYNC",
               "bit_offset": 14,
               "bit_width": 1,
-              "description": "Launch a injected conversion synchronously with SDADC1.",
-              "enum": null
+              "description": "Launch a injected conversion synchronously with SDADC1"
             },
             {
               "name": "RSYNC",
               "bit_offset": 15,
               "bit_width": 1,
-              "description": "Launch regular conversion synchronously with SDADC1.",
-              "enum": null
+              "description": "Launch regular conversion synchronously with SDADC1"
             },
             {
               "name": "JDMAEN",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "DMA channel enabled to read data for the injected channel group.",
-              "enum": null
+              "description": "DMA channel enabled to read data for the injected channel group"
             },
             {
               "name": "RDMAEN",
               "bit_offset": 17,
               "bit_width": 1,
-              "description": "DMA channel enabled to read data for the regular channel.",
-              "enum": null
+              "description": "DMA channel enabled to read data for the regular channel"
             },
             {
               "name": "INIT",
               "bit_offset": 31,
               "bit_width": 1,
-              "description": "Initialization mode request.",
-              "enum": null
+              "description": "Initialization mode request"
             }
           ]
         },
@@ -121,94 +111,83 @@
           "name": "CR2",
           "offset": 4,
           "size": 32,
-          "description": "control register 2.",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "control register 2",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "control register 2.",
           "fields": [
             {
-              "name": "ADON",
-              "bit_offset": 0,
+              "name": "FAST",
+              "bit_offset": 24,
               "bit_width": 1,
-              "description": "SDADC enable.",
-              "enum": null
-            },
-            {
-              "name": "CALIBCNT",
-              "bit_offset": 1,
-              "bit_width": 2,
-              "description": "Number of calibration sequences to be performed (number of valid configurations).",
-              "enum": null
-            },
-            {
-              "name": "STARTCALIB",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "Start calibration.",
-              "enum": null
-            },
-            {
-              "name": "JCONT",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "Continuous mode selection for injected conversions.",
-              "enum": null
-            },
-            {
-              "name": "JDS",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "Delay start of injected conversions.",
-              "enum": null
-            },
-            {
-              "name": "JEXTSEL",
-              "bit_offset": 8,
-              "bit_width": 4,
-              "description": "Trigger signal selection for launching injected conversions.",
-              "enum": null
-            },
-            {
-              "name": "JEXTEN",
-              "bit_offset": 13,
-              "bit_width": 2,
-              "description": "Trigger enable and trigger edge selection for injected conversions.",
-              "enum": null
-            },
-            {
-              "name": "JSWSTART",
-              "bit_offset": 15,
-              "bit_width": 1,
-              "description": "Start a conversion of the injected group of channels.",
-              "enum": null
-            },
-            {
-              "name": "RCH",
-              "bit_offset": 16,
-              "bit_width": 4,
-              "description": "Regular channel selection.",
-              "enum": null
-            },
-            {
-              "name": "RCONT",
-              "bit_offset": 22,
-              "bit_width": 1,
-              "description": "Continuous mode selection for regular conversions.",
-              "enum": null
+              "description": "Fast conversion mode selection"
             },
             {
               "name": "RSWSTART",
               "bit_offset": 23,
               "bit_width": 1,
-              "description": "Software start of a conversion on the regular channel.",
-              "enum": null
+              "description": "Software start of a conversion on the regular channel"
             },
             {
-              "name": "FAST",
-              "bit_offset": 24,
+              "name": "RCONT",
+              "bit_offset": 22,
               "bit_width": 1,
-              "description": "Fast conversion mode selection.",
-              "enum": null
+              "description": "Continuous mode selection for regular conversions"
+            },
+            {
+              "name": "RCH",
+              "bit_offset": 16,
+              "bit_width": 4,
+              "description": "Regular channel selection"
+            },
+            {
+              "name": "JSWSTART",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Start a conversion of the injected group of channels"
+            },
+            {
+              "name": "JEXTEN",
+              "bit_offset": 13,
+              "bit_width": 2,
+              "description": "Trigger enable and trigger edge selection for injected conversions"
+            },
+            {
+              "name": "JEXTSEL",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "Trigger signal selection for launching injected conversions"
+            },
+            {
+              "name": "JDS",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Delay start of injected conversions."
+            },
+            {
+              "name": "JCONT",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Continuous mode selection for injected conversions"
+            },
+            {
+              "name": "STARTCALIB",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Start calibration"
+            },
+            {
+              "name": "CALIBCNT",
+              "bit_offset": 1,
+              "bit_width": 2,
+              "description": "Number of calibration sequences to be performed (number of valid configurations)"
+            },
+            {
+              "name": "ADON",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "SDADC enable"
             }
           ]
         },
@@ -216,80 +195,71 @@
           "name": "ISR",
           "offset": 8,
           "size": 32,
-          "description": "interrupt and status register.",
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "interrupt and status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "interrupt and status register.",
           "fields": [
             {
-              "name": "EOCALF",
-              "bit_offset": 0,
+              "name": "INITRDY",
+              "bit_offset": 31,
               "bit_width": 1,
-              "description": "End of calibration flag.",
-              "enum": null
-            },
-            {
-              "name": "JEOCF",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "End of injected conversion flag.",
-              "enum": null
-            },
-            {
-              "name": "JOVRF",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Injected conversion overrun flag.",
-              "enum": null
-            },
-            {
-              "name": "REOCF",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "End of regular conversion flag.",
-              "enum": null
-            },
-            {
-              "name": "ROVRF",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "Regular conversion overrun flag.",
-              "enum": null
-            },
-            {
-              "name": "CALIBIP",
-              "bit_offset": 12,
-              "bit_width": 1,
-              "description": "Calibration in progress status.",
-              "enum": null
-            },
-            {
-              "name": "JCIP",
-              "bit_offset": 13,
-              "bit_width": 1,
-              "description": "Injected conversion in progress status.",
-              "enum": null
-            },
-            {
-              "name": "RCIP",
-              "bit_offset": 14,
-              "bit_width": 1,
-              "description": "Regular conversion in progress status.",
-              "enum": null
+              "description": "Initialization mode is ready"
             },
             {
               "name": "STABIP",
               "bit_offset": 15,
               "bit_width": 1,
-              "description": "Stabilization in progress status.",
-              "enum": null
+              "description": "Stabilization in progress status"
             },
             {
-              "name": "INITRDY",
-              "bit_offset": 31,
+              "name": "RCIP",
+              "bit_offset": 14,
               "bit_width": 1,
-              "description": "Initialization mode is ready.",
-              "enum": null
+              "description": "Regular conversion in progress status"
+            },
+            {
+              "name": "JCIP",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Injected conversion in progress status"
+            },
+            {
+              "name": "CALIBIP",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "Calibration in progress status"
+            },
+            {
+              "name": "ROVRF",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Regular conversion overrun flag"
+            },
+            {
+              "name": "REOCF",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "End of regular conversion flag"
+            },
+            {
+              "name": "JOVRF",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Injected conversion overrun flag"
+            },
+            {
+              "name": "JEOCF",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "End of injected conversion flag"
+            },
+            {
+              "name": "EOCALF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "End of calibration flag"
             }
           ]
         },
@@ -297,31 +267,29 @@
           "name": "CLRISR",
           "offset": 12,
           "size": 32,
-          "description": "interrupt and status clear register.",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "interrupt and status clear register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "interrupt and status clear register.",
           "fields": [
             {
-              "name": "CLREOCALF",
-              "bit_offset": 0,
+              "name": "CLRROVRF",
+              "bit_offset": 4,
               "bit_width": 1,
-              "description": "Clear the end of calibration flag.",
-              "enum": null
+              "description": "Clear the regular conversion overrun flag"
             },
             {
               "name": "CLRJOVRF",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "Clear the injected conversion overrun flag.",
-              "enum": null
+              "description": "Clear the injected conversion overrun flag"
             },
             {
-              "name": "CLRROVRF",
-              "bit_offset": 4,
+              "name": "CLREOCALF",
+              "bit_offset": 0,
               "bit_width": 1,
-              "description": "Clear the regular conversion overrun flag.",
-              "enum": null
+              "description": "Clear the end of calibration flag"
             }
           ]
         },
@@ -329,17 +297,125 @@
           "name": "JCHGR",
           "offset": 20,
           "size": 32,
-          "description": "injected channel group selection register.",
+          "access": "read-write",
+          "reset_value": 1,
+          "description": "injected channel group selection register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "injected channel group selection register.",
           "fields": [
             {
               "name": "JCHG",
               "bit_offset": 0,
               "bit_width": 9,
-              "description": "Injected channel group selection.",
-              "enum": null
+              "description": "Injected channel group selection"
+            }
+          ]
+        },
+        {
+          "name": "CONF0R",
+          "offset": 32,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "configuration 0 register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "COMMON0",
+              "bit_offset": 30,
+              "bit_width": 2,
+              "description": "Common mode for configuration 0"
+            },
+            {
+              "name": "SE0",
+              "bit_offset": 26,
+              "bit_width": 2,
+              "description": "Single-ended mode for configuration 0"
+            },
+            {
+              "name": "GAIN0",
+              "bit_offset": 20,
+              "bit_width": 3,
+              "description": "Gain setting for configuration 0"
+            },
+            {
+              "name": "OFFSET0",
+              "bit_offset": 0,
+              "bit_width": 12,
+              "description": "Twelve-bit calibration offset for configuration 0"
+            }
+          ]
+        },
+        {
+          "name": "CONF1R",
+          "offset": 36,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "configuration 1 register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "COMMON1",
+              "bit_offset": 30,
+              "bit_width": 2,
+              "description": "Common mode for configuration 1"
+            },
+            {
+              "name": "SE1",
+              "bit_offset": 26,
+              "bit_width": 2,
+              "description": "Single-ended mode for configuration 1"
+            },
+            {
+              "name": "GAIN1",
+              "bit_offset": 20,
+              "bit_width": 3,
+              "description": "Gain setting for configuration 1"
+            },
+            {
+              "name": "OFFSET1",
+              "bit_offset": 0,
+              "bit_width": 12,
+              "description": "Twelve-bit calibration offset for configuration 1"
+            }
+          ]
+        },
+        {
+          "name": "CONF2R",
+          "offset": 40,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "configuration 2 register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "COMMON2",
+              "bit_offset": 30,
+              "bit_width": 2,
+              "description": "Common mode for configuration 2"
+            },
+            {
+              "name": "SE2",
+              "bit_offset": 26,
+              "bit_width": 2,
+              "description": "Single-ended mode for configuration 2"
+            },
+            {
+              "name": "GAIN2",
+              "bit_offset": 20,
+              "bit_width": 3,
+              "description": "Gain setting for configuration 2"
+            },
+            {
+              "name": "OFFSET2",
+              "bit_offset": 0,
+              "bit_width": 12,
+              "description": "Twelve-bit calibration offset for configuration 2"
             }
           ]
         },
@@ -347,17 +423,59 @@
           "name": "CONFCHR1",
           "offset": 64,
           "size": 32,
-          "description": "channel configuration register 1.",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "channel configuration register 1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "channel configuration register 1.",
           "fields": [
             {
-              "name": "CONFCH",
+              "name": "CONFCH7",
+              "bit_offset": 28,
+              "bit_width": 2,
+              "description": "CONFCH7"
+            },
+            {
+              "name": "CONFCH6",
+              "bit_offset": 24,
+              "bit_width": 2,
+              "description": "CONFCH6"
+            },
+            {
+              "name": "CONFCH5",
+              "bit_offset": 20,
+              "bit_width": 2,
+              "description": "CONFCH5"
+            },
+            {
+              "name": "CONFCH4",
+              "bit_offset": 16,
+              "bit_width": 2,
+              "description": "CONFCH4"
+            },
+            {
+              "name": "CONFCH3",
+              "bit_offset": 12,
+              "bit_width": 2,
+              "description": "CONFCH3"
+            },
+            {
+              "name": "CONFCH2",
+              "bit_offset": 8,
+              "bit_width": 2,
+              "description": "CONFCH2"
+            },
+            {
+              "name": "CONFCH1",
+              "bit_offset": 4,
+              "bit_width": 2,
+              "description": "CONFCH1"
+            },
+            {
+              "name": "CONFCH0",
               "bit_offset": 0,
               "bit_width": 2,
-              "description": "CONFCH0.",
-              "enum": null
+              "description": "CONFCH0"
             }
           ]
         },
@@ -365,17 +483,17 @@
           "name": "CONFCHR2",
           "offset": 68,
           "size": 32,
-          "description": "channel configuration register 2.",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "channel configuration register 2",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "channel configuration register 2.",
           "fields": [
             {
-              "name": "CONFCH",
+              "name": "CONFCH8",
               "bit_offset": 0,
               "bit_width": 2,
-              "description": "Channel 8 configuration.",
-              "enum": null
+              "description": "Channel 8 configuration"
             }
           ]
         },
@@ -383,24 +501,23 @@
           "name": "JDATAR",
           "offset": 96,
           "size": 32,
-          "description": "data register for injected group.",
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "data register for injected group",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "data register for injected group.",
           "fields": [
+            {
+              "name": "JDATACH",
+              "bit_offset": 25,
+              "bit_width": 4,
+              "description": "Injected channel most recently converted"
+            },
             {
               "name": "JDATA",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "Injected group conversion data.",
-              "enum": null
-            },
-            {
-              "name": "JDATACH",
-              "bit_offset": 24,
-              "bit_width": 4,
-              "description": "Injected channel most recently converted.",
-              "enum": null
+              "description": "Injected group conversion data"
             }
           ]
         },
@@ -408,88 +525,113 @@
           "name": "RDATAR",
           "offset": 100,
           "size": 32,
-          "description": "data register for the regular channel.",
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "data register for the regular channel",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "data register for the regular channel.",
           "fields": [
             {
               "name": "RDATA",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "Regular channel conversion data.",
-              "enum": null
+              "description": "Regular channel conversion data"
             }
           ]
         },
         {
           "name": "JDATA12R",
           "offset": 112,
-          "description": "SDADC1 and SDADC2 injected data register.",
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "SDADC1 and SDADC2 injected data register",
           "array_len": null,
           "array_stride": null,
-          "fields": []
+          "fields": [
+            {
+              "name": "JDATA2",
+              "bit_offset": 16,
+              "bit_width": 16,
+              "description": "Injected group conversion data for SDADC2"
+            },
+            {
+              "name": "JDATA1",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Injected group conversion data for SDADC1"
+            }
+          ]
         },
         {
           "name": "RDATA12R",
           "offset": 116,
-          "description": "SDADC1 and SDADC2 regular data register.",
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "SDADC1 and SDADC2 regular data register",
           "array_len": null,
           "array_stride": null,
-          "fields": []
+          "fields": [
+            {
+              "name": "RDATA2",
+              "bit_offset": 16,
+              "bit_width": 16,
+              "description": "Regular conversion data for SDADC2"
+            },
+            {
+              "name": "RDATA1",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Regular conversion data for SDADC1"
+            }
+          ]
         },
         {
           "name": "JDATA13R",
           "offset": 120,
-          "description": "SDADC1 and SDADC3 injected data register.",
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "SDADC1 and SDADC3 injected data register",
           "array_len": null,
           "array_stride": null,
-          "fields": []
+          "fields": [
+            {
+              "name": "JDATA3",
+              "bit_offset": 16,
+              "bit_width": 16,
+              "description": "Injected group conversion data for SDADC3"
+            },
+            {
+              "name": "JDATA1",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Injected group conversion data for SDADC1"
+            }
+          ]
         },
         {
           "name": "RDATA13R",
           "offset": 124,
-          "description": "SDADC1 and SDADC3 regular data register.",
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "SDADC1 and SDADC3 regular data register",
           "array_len": null,
           "array_stride": null,
-          "fields": []
-        },
-        {
-          "name": "CONFR",
-          "offset": 32,
-          "size": 32,
-          "description": "configuration 0 register.",
-          "array_len": 3,
-          "array_stride": 4,
-          "fieldset_description": "configuration 0 register.",
           "fields": [
             {
-              "name": "OFFSET",
+              "name": "RDATA3",
+              "bit_offset": 16,
+              "bit_width": 16,
+              "description": "Regular conversion data for SDADC3"
+            },
+            {
+              "name": "RDATA1",
               "bit_offset": 0,
-              "bit_width": 12,
-              "description": "Twelve-bit calibration offset for configuration 0.",
-              "enum": null
-            },
-            {
-              "name": "GAIN",
-              "bit_offset": 20,
-              "bit_width": 3,
-              "description": "Gain setting for configuration 0.",
-              "enum": null
-            },
-            {
-              "name": "SE",
-              "bit_offset": 26,
-              "bit_width": 2,
-              "description": "Single-ended mode for configuration 0.",
-              "enum": null
-            },
-            {
-              "name": "COMMON",
-              "bit_offset": 30,
-              "bit_width": 2,
-              "description": "Common mode for configuration 0.",
-              "enum": null
+              "bit_width": 16,
+              "description": "Regular conversion data for SDADC1"
             }
           ]
         }

@@ -2,6 +2,9 @@
   "schema": 1,
   "kind": "wwdg",
   "version": "v1",
+  "source": "stm32rs_svd",
+  "source_device": "stm32f100v8",
+  "source_file": "stm32f100.svd.patched",
   "blocks": {
     "WWDG": {
       "name": "WWDG",
@@ -11,106 +14,135 @@
         {
           "name": "CR",
           "offset": 0,
-          "size": 32,
-          "description": "Control register",
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 127,
+          "description": "Control register (WWDG_CR)",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Control register",
           "fields": [
             {
               "name": "T",
               "bit_offset": 0,
               "bit_width": 7,
-              "description": "7-bit counter (MSB to LSB)",
-              "enum": null
+              "description": "7-bit counter (MSB to LSB)"
             },
             {
               "name": "WDGA",
               "bit_offset": 7,
               "bit_width": 1,
-              "description": "Watchdog activated",
-              "enum": null
+              "description": "Activation bit",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Watchdog disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Watchdog enabled"
+                }
+              ]
             }
           ]
         },
         {
           "name": "CFR",
           "offset": 4,
-          "size": 32,
-          "description": "Configuration register",
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 127,
+          "description": "Configuration register (WWDG_CFR)",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Configuration register",
           "fields": [
             {
               "name": "W",
               "bit_offset": 0,
               "bit_width": 7,
-              "description": "7-bit window value",
-              "enum": null
+              "description": "7-bit window value"
             },
             {
               "name": "WDGTB",
               "bit_offset": 7,
               "bit_width": 2,
-              "description": "Timer base",
-              "enum": "WDGTB"
+              "description": "Timer Base",
+              "enum_values": [
+                {
+                  "name": "Div1",
+                  "value": 0,
+                  "description": "Counter clock (PCLK1 div 4096) div 1"
+                },
+                {
+                  "name": "Div2",
+                  "value": 1,
+                  "description": "Counter clock (PCLK1 div 4096) div 2"
+                },
+                {
+                  "name": "Div4",
+                  "value": 2,
+                  "description": "Counter clock (PCLK1 div 4096) div 4"
+                },
+                {
+                  "name": "Div8",
+                  "value": 3,
+                  "description": "Counter clock (PCLK1 div 4096) div 8"
+                }
+              ]
             },
             {
               "name": "EWI",
               "bit_offset": 9,
               "bit_width": 1,
-              "description": "Early wakeup interrupt",
-              "enum": null
+              "description": "Early Wakeup Interrupt",
+              "enum_values": [
+                {
+                  "name": "Enable",
+                  "value": 1,
+                  "description": "interrupt occurs whenever the counter reaches the value 0x40"
+                }
+              ]
             }
           ]
         },
         {
           "name": "SR",
           "offset": 8,
-          "size": 32,
-          "description": "Status register",
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Status register (WWDG_SR)",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Status register",
           "fields": [
             {
               "name": "EWIF",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Early wakeup interrupt flag",
-              "enum": null
+              "description": "Early Wakeup Interrupt",
+              "enum_values": [
+                {
+                  "name": "Finished",
+                  "value": 0,
+                  "description": "The EWI Interrupt Service Routine has been serviced"
+                },
+                {
+                  "name": "Pending",
+                  "value": 1,
+                  "description": "The EWI Interrupt Service Routine has been triggered"
+                },
+                {
+                  "name": "Finished",
+                  "value": 0,
+                  "description": "The EWI Interrupt Service Routine has been serviced"
+                }
+              ]
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "WDGTB": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Div1",
-          "value": 0,
-          "description": "Counter clock (PCLK1 div 4096) div 1"
-        },
-        {
-          "name": "Div2",
-          "value": 1,
-          "description": "Counter clock (PCLK1 div 4096) div 2"
-        },
-        {
-          "name": "Div4",
-          "value": 2,
-          "description": "Counter clock (PCLK1 div 4096) div 4"
-        },
-        {
-          "name": "Div8",
-          "value": 3,
-          "description": "Counter clock (PCLK1 div 4096) div 8"
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

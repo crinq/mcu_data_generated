@@ -2,43 +2,73 @@
   "schema": 1,
   "kind": "crc",
   "version": "v1",
+  "source": "stm32rs_svd",
+  "source_device": "stm32f100v8",
+  "source_file": "stm32f100.svd.patched",
   "blocks": {
     "CRC": {
       "name": "CRC",
-      "description": "Cyclic Redundancy Check calculation unit",
+      "description": "CRC calculation unit",
       "extends": null,
       "registers": [
         {
           "name": "DR",
           "offset": 0,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 4294967295,
           "description": "Data register",
           "array_len": null,
           "array_stride": null,
-          "fields": []
+          "fields": [
+            {
+              "name": "DR",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Data Register"
+            }
+          ]
         },
         {
           "name": "IDR",
           "offset": 4,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "Independent Data register",
           "array_len": null,
           "array_stride": null,
-          "fields": []
+          "fields": [
+            {
+              "name": "IDR",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "Independent Data register"
+            }
+          ]
         },
         {
           "name": "CR",
           "offset": 8,
           "size": 32,
+          "access": "write-only",
+          "reset_value": 0,
           "description": "Control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Control register",
           "fields": [
             {
               "name": "RESET",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "RESET bit",
-              "enum": null
+              "description": "Reset bit",
+              "enum_values": [
+                {
+                  "name": "Reset",
+                  "value": 1,
+                  "description": "Resets the CRC calculation unit and sets the data register to 0xFFFF FFFF"
+                }
+              ]
             }
           ]
         }

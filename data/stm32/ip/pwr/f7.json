@@ -2,6 +2,9 @@
   "schema": 1,
   "kind": "pwr",
   "version": "f7",
+  "source": "stm32rs_svd",
+  "source_device": "stm32f730i8",
+  "source_file": "stm32f730.svd.patched",
   "blocks": {
     "PWR": {
       "name": "PWR",
@@ -12,108 +15,124 @@
           "name": "CR1",
           "offset": 0,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 49152,
           "description": "power control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "power control register",
           "fields": [
             {
               "name": "LPDS",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Low-power deep sleep",
-              "enum": null
+              "description": "Low-power deep sleep"
             },
             {
               "name": "PDDS",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "Power down deepsleep",
-              "enum": "PDDS"
+              "enum_values": [
+                {
+                  "name": "STOP_MODE",
+                  "value": 0,
+                  "description": "Enter Stop mode when the CPU enters deepsleep"
+                },
+                {
+                  "name": "STANDBY_MODE",
+                  "value": 1,
+                  "description": "Enter Standby mode when the CPU enters deepsleep"
+                }
+              ]
             },
             {
               "name": "CSBF",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "Clear standby flag",
-              "enum": null
+              "description": "Clear standby flag"
             },
             {
               "name": "PVDE",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "Power voltage detector enable",
-              "enum": null
+              "description": "Power voltage detector enable"
             },
             {
               "name": "PLS",
               "bit_offset": 5,
               "bit_width": 3,
-              "description": "PVD level selection",
-              "enum": null
+              "description": "PVD level selection"
             },
             {
               "name": "DBP",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "Disable backup domain write protection",
-              "enum": null
+              "description": "Disable backup domain write protection"
             },
             {
               "name": "FPDS",
               "bit_offset": 9,
               "bit_width": 1,
-              "description": "Flash power down in Stop mode",
-              "enum": null
+              "description": "Flash power down in Stop mode"
             },
             {
               "name": "LPUDS",
               "bit_offset": 10,
               "bit_width": 1,
-              "description": "Low-power regulator in deepsleep under-drive mode",
-              "enum": null
+              "description": "Low-power regulator in deepsleep under-drive mode"
             },
             {
               "name": "MRUDS",
               "bit_offset": 11,
               "bit_width": 1,
-              "description": "Main regulator in deepsleep under-drive mode",
-              "enum": null
+              "description": "Main regulator in deepsleep under-drive mode"
             },
             {
               "name": "ADCDC1",
               "bit_offset": 13,
               "bit_width": 1,
-              "description": "ADCDC1",
-              "enum": null
+              "description": "ADCDC1"
             },
             {
               "name": "VOS",
               "bit_offset": 14,
               "bit_width": 2,
               "description": "Regulator voltage scaling output selection",
-              "enum": "VOS"
+              "enum_values": [
+                {
+                  "name": "SCALE3",
+                  "value": 1,
+                  "description": "Scale 3 mode"
+                },
+                {
+                  "name": "SCALE2",
+                  "value": 2,
+                  "description": "Scale 2 mode"
+                },
+                {
+                  "name": "SCALE1",
+                  "value": 3,
+                  "description": "Scale 1 mode (reset value)"
+                }
+              ]
             },
             {
               "name": "ODEN",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "Over-drive enable",
-              "enum": null
+              "description": "Over-drive enable"
             },
             {
               "name": "ODSWEN",
               "bit_offset": 17,
               "bit_width": 1,
-              "description": "Over-drive switching enabled",
-              "enum": null
+              "description": "Over-drive switching enabled"
             },
             {
               "name": "UDEN",
               "bit_offset": 18,
               "bit_width": 2,
-              "description": "Under-drive enable in stop mode",
-              "enum": null
+              "description": "Under-drive enable in stop mode"
             }
           ]
         },
@@ -121,80 +140,81 @@
           "name": "CSR1",
           "offset": 4,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "power control/status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "power control/status register",
           "fields": [
             {
               "name": "WUIF",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "Wakeup internal flag",
-              "enum": null
+              "access": "read-only"
             },
             {
               "name": "SBF",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "Standby flag",
-              "enum": null
+              "access": "read-only"
             },
             {
               "name": "PVDO",
               "bit_offset": 2,
               "bit_width": 1,
               "description": "PVD output",
-              "enum": null
+              "access": "read-only"
             },
             {
               "name": "BRR",
               "bit_offset": 3,
               "bit_width": 1,
               "description": "Backup regulator ready",
-              "enum": null
-            },
-            {
-              "name": "EIWUP",
-              "bit_offset": 8,
-              "bit_width": 1,
-              "description": "Enable internal wakeup",
-              "enum": null
+              "access": "read-only"
             },
             {
               "name": "BRE",
               "bit_offset": 9,
               "bit_width": 1,
               "description": "Backup regulator enable",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "VOSRDY",
               "bit_offset": 14,
               "bit_width": 1,
               "description": "Regulator voltage scaling output selection ready bit",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "ODRDY",
               "bit_offset": 16,
               "bit_width": 1,
               "description": "Over-drive mode ready",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "ODSWRDY",
               "bit_offset": 17,
               "bit_width": 1,
               "description": "Over-drive mode switching ready",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "UDRDY",
               "bit_offset": 18,
               "bit_width": 2,
               "description": "Under-drive ready flag",
-              "enum": null
+              "access": "read-write"
+            },
+            {
+              "name": "EIWUP",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Enable internal wakeup",
+              "access": "read-write"
             }
           ]
         },
@@ -202,24 +222,95 @@
           "name": "CR2",
           "offset": 8,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "power control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "power control register",
           "fields": [
             {
-              "name": "CWUPF",
+              "name": "CWUPF1",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "Clear Wakeup Pin flag for PA0",
-              "enum": null
+              "access": "read-only"
             },
             {
-              "name": "WUPP",
+              "name": "CWUPF2",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Clear Wakeup Pin flag for PA2",
+              "access": "read-only"
+            },
+            {
+              "name": "CWUPF3",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Clear Wakeup Pin flag for PC1",
+              "access": "read-only"
+            },
+            {
+              "name": "CWUPF4",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Clear Wakeup Pin flag for PC13",
+              "access": "read-only"
+            },
+            {
+              "name": "CWUPF5",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Clear Wakeup Pin flag for PI8",
+              "access": "read-only"
+            },
+            {
+              "name": "CWUPF6",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Clear Wakeup Pin flag for PI11",
+              "access": "read-only"
+            },
+            {
+              "name": "WUPP1",
               "bit_offset": 8,
               "bit_width": 1,
               "description": "Wakeup pin polarity bit for PA0",
-              "enum": null
+              "access": "read-write"
+            },
+            {
+              "name": "WUPP2",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Wakeup pin polarity bit for PA2",
+              "access": "read-write"
+            },
+            {
+              "name": "WUPP3",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Wakeup pin polarity bit for PC1",
+              "access": "read-write"
+            },
+            {
+              "name": "WUPP4",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "Wakeup pin polarity bit for PC13",
+              "access": "read-write"
+            },
+            {
+              "name": "WUPP5",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "Wakeup pin polarity bit for PI8",
+              "access": "read-write"
+            },
+            {
+              "name": "WUPP6",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Wakeup pin polarity bit for PI11",
+              "access": "read-write"
             }
           ]
         },
@@ -227,65 +318,100 @@
           "name": "CSR2",
           "offset": 12,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "power control/status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "power control/status register",
           "fields": [
             {
-              "name": "WUPF",
+              "name": "WUPF1",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "Wakeup Pin flag for PA0",
-              "enum": null
+              "access": "read-only"
             },
             {
-              "name": "EWUP",
+              "name": "WUPF2",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Wakeup Pin flag for PA2",
+              "access": "read-only"
+            },
+            {
+              "name": "WUPF3",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Wakeup Pin flag for PC1",
+              "access": "read-only"
+            },
+            {
+              "name": "WUPF4",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Wakeup Pin flag for PC13",
+              "access": "read-only"
+            },
+            {
+              "name": "WUPF5",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Wakeup Pin flag for PI8",
+              "access": "read-only"
+            },
+            {
+              "name": "WUPF6",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Wakeup Pin flag for PI11",
+              "access": "read-only"
+            },
+            {
+              "name": "EWUP1",
               "bit_offset": 8,
               "bit_width": 1,
               "description": "Enable Wakeup pin for PA0",
-              "enum": null
+              "access": "read-write"
+            },
+            {
+              "name": "EWUP2",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Enable Wakeup pin for PA2",
+              "access": "read-write"
+            },
+            {
+              "name": "EWUP3",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Enable Wakeup pin for PC1",
+              "access": "read-write"
+            },
+            {
+              "name": "EWUP4",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "Enable Wakeup pin for PC13",
+              "access": "read-write"
+            },
+            {
+              "name": "EWUP5",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "Enable Wakeup pin for PI8",
+              "access": "read-write"
+            },
+            {
+              "name": "EWUP6",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Enable Wakeup pin for PI11",
+              "access": "read-write"
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "PDDS": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "STOP_MODE",
-          "value": 0,
-          "description": "Enter Stop mode when the CPU enters deepsleep"
-        },
-        {
-          "name": "STANDBY_MODE",
-          "value": 1,
-          "description": "Enter Standby mode when the CPU enters deepsleep"
-        }
-      ]
-    },
-    "VOS": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "SCALE3",
-          "value": 1,
-          "description": "Scale 3 mode"
-        },
-        {
-          "name": "SCALE2",
-          "value": 2,
-          "description": "Scale 2 mode"
-        },
-        {
-          "name": "SCALE1",
-          "value": 3,
-          "description": "Scale 1 mode (reset value)"
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

@@ -2,9 +2,12 @@
   "schema": 1,
   "kind": "gpio",
   "version": "v2_l478",
+  "source": "stm32rs_svd",
+  "source_device": "stm32l475rc",
+  "source_file": "stm32l4x5.svd.patched",
   "blocks": {
-    "GPIO": {
-      "name": "GPIO",
+    "GPIOA": {
+      "name": "GPIOA",
       "description": "General-purpose I/Os",
       "extends": null,
       "registers": [
@@ -12,17 +15,39 @@
           "name": "MODER",
           "offset": 0,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 2818572288,
           "description": "GPIO port mode register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "GPIO port mode register",
           "fields": [
             {
-              "name": "MODER",
+              "name": "MODER%s",
               "bit_offset": 0,
               "bit_width": 2,
-              "description": "Port x configuration bits (y = 0..15)",
-              "enum": "MODER"
+              "description": "Port x configuration pin %s",
+              "enum_values": [
+                {
+                  "name": "Input",
+                  "value": 0,
+                  "description": "Input mode (reset state)"
+                },
+                {
+                  "name": "Output",
+                  "value": 1,
+                  "description": "General purpose output mode"
+                },
+                {
+                  "name": "Alternate",
+                  "value": 2,
+                  "description": "Alternate function mode"
+                },
+                {
+                  "name": "Analog",
+                  "value": 3,
+                  "description": "Analog mode"
+                }
+              ]
             }
           ]
         },
@@ -30,17 +55,29 @@
           "name": "OTYPER",
           "offset": 4,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "GPIO port output type register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "GPIO port output type register",
           "fields": [
             {
-              "name": "OT",
+              "name": "OT%s",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Port x configuration bits (y = 0..15)",
-              "enum": "OT"
+              "description": "Port x configuration pin %s",
+              "enum_values": [
+                {
+                  "name": "PushPull",
+                  "value": 0,
+                  "description": "Output push-pull (reset state)"
+                },
+                {
+                  "name": "OpenDrain",
+                  "value": 1,
+                  "description": "Output open-drain"
+                }
+              ]
             }
           ]
         },
@@ -48,17 +85,39 @@
           "name": "OSPEEDR",
           "offset": 8,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "GPIO port output speed register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "GPIO port output speed register",
           "fields": [
             {
-              "name": "OSPEEDR",
+              "name": "OSPEEDR%s",
               "bit_offset": 0,
               "bit_width": 2,
-              "description": "Port x configuration bits (y = 0..15)",
-              "enum": "OSPEEDR"
+              "description": "Port x configuration pin %s",
+              "enum_values": [
+                {
+                  "name": "LowSpeed",
+                  "value": 0,
+                  "description": "Low speed"
+                },
+                {
+                  "name": "MediumSpeed",
+                  "value": 1,
+                  "description": "Medium speed"
+                },
+                {
+                  "name": "HighSpeed",
+                  "value": 2,
+                  "description": "High speed"
+                },
+                {
+                  "name": "VeryHighSpeed",
+                  "value": 3,
+                  "description": "Very high speed"
+                }
+              ]
             }
           ]
         },
@@ -66,17 +125,34 @@
           "name": "PUPDR",
           "offset": 12,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 1677721600,
           "description": "GPIO port pull-up/pull-down register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "GPIO port pull-up/pull-down register",
           "fields": [
             {
-              "name": "PUPDR",
+              "name": "PUPDR%s",
               "bit_offset": 0,
               "bit_width": 2,
-              "description": "Port x configuration bits (y = 0..15)",
-              "enum": "PUPDR"
+              "description": "Port x configuration pin %s",
+              "enum_values": [
+                {
+                  "name": "Floating",
+                  "value": 0,
+                  "description": "No pull-up, pull-down"
+                },
+                {
+                  "name": "PullUp",
+                  "value": 1,
+                  "description": "Pull-up"
+                },
+                {
+                  "name": "PullDown",
+                  "value": 2,
+                  "description": "Pull-down"
+                }
+              ]
             }
           ]
         },
@@ -84,17 +160,29 @@
           "name": "IDR",
           "offset": 16,
           "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
           "description": "GPIO port input data register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "GPIO port input data register",
           "fields": [
             {
-              "name": "IDR",
+              "name": "IDR%s",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Port input data (y = 0..15)",
-              "enum": "IDR"
+              "description": "Port input data pin %s",
+              "enum_values": [
+                {
+                  "name": "Low",
+                  "value": 0,
+                  "description": "Input is logic low"
+                },
+                {
+                  "name": "High",
+                  "value": 1,
+                  "description": "Input is logic high"
+                }
+              ]
             }
           ]
         },
@@ -102,17 +190,29 @@
           "name": "ODR",
           "offset": 20,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "GPIO port output data register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "GPIO port output data register",
           "fields": [
             {
-              "name": "ODR",
+              "name": "ODR%s",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Port output data (y = 0..15)",
-              "enum": "ODR"
+              "description": "Port output data pin %s",
+              "enum_values": [
+                {
+                  "name": "Low",
+                  "value": 0,
+                  "description": "Set output to logic low"
+                },
+                {
+                  "name": "High",
+                  "value": 1,
+                  "description": "Set output to logic high"
+                }
+              ]
             }
           ]
         },
@@ -120,24 +220,37 @@
           "name": "BSRR",
           "offset": 24,
           "size": 32,
+          "access": "write-only",
+          "reset_value": 0,
           "description": "GPIO port bit set/reset register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "GPIO port bit set/reset register",
           "fields": [
             {
-              "name": "BS",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Port x set bit y (y= 0..15)",
-              "enum": null
-            },
-            {
-              "name": "BR",
+              "name": "BR%s",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "Port x set bit y (y= 0..15)",
-              "enum": null
+              "description": "Port x reset pin %s",
+              "enum_values": [
+                {
+                  "name": "Reset",
+                  "value": 1,
+                  "description": "Resets the corresponding ODRx bit"
+                }
+              ]
+            },
+            {
+              "name": "BS%s",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Port x set pin %s",
+              "enum_values": [
+                {
+                  "name": "Set",
+                  "value": 1,
+                  "description": "Sets the corresponding ODRx bit"
+                }
+              ]
             }
           ]
         },
@@ -145,42 +258,195 @@
           "name": "LCKR",
           "offset": 28,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "GPIO port configuration lock register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "GPIO port configuration lock register",
           "fields": [
-            {
-              "name": "LCK",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Port configuration locked",
-              "enum": null
-            },
             {
               "name": "LCKK",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "Port configuration lock key active",
-              "enum": null
+              "description": "Port x lock bit y (y= 0..15)",
+              "enum_values": [
+                {
+                  "name": "NotActive",
+                  "value": 0,
+                  "description": "Port configuration lock key not active"
+                },
+                {
+                  "name": "Active",
+                  "value": 1,
+                  "description": "Port configuration lock key active"
+                }
+              ]
+            },
+            {
+              "name": "LCK%s",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Port x lock pin %s",
+              "enum_values": [
+                {
+                  "name": "Unlocked",
+                  "value": 0,
+                  "description": "Port configuration not locked"
+                },
+                {
+                  "name": "Locked",
+                  "value": 1,
+                  "description": "Port configuration locked"
+                }
+              ]
             }
           ]
         },
         {
-          "name": "AFR",
+          "name": "AFRL",
           "offset": 32,
           "size": 32,
-          "description": "GPIO alternate function registers. The register described in the datasheet as AFRL is index 0 in this array, and AFRH is index 1. Note that when operating on AFRH, you need to subtract 8 from any operations on the field array it contains -- the alternate function for pin 9 is at index 1, for instance.",
-          "array_len": 2,
-          "array_stride": 4,
-          "fieldset_description": "GPIO alternate function register. This contains an array of 8 fields, which correspond to pins 0-7 of the port (for AFRL) or pins 8-15 of the port (for AFRH).",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "GPIO alternate function low register",
+          "array_len": null,
+          "array_stride": null,
           "fields": [
             {
-              "name": "AFR",
+              "name": "AFR%s",
               "bit_offset": 0,
               "bit_width": 4,
-              "description": "Alternate function selection for one of the pins controlled by this register (0-7).",
-              "enum": null
+              "description": "Alternate function selection for port x bit y (y = 0..7)",
+              "enum_values": [
+                {
+                  "name": "AF0",
+                  "value": 0,
+                  "description": "AF0"
+                },
+                {
+                  "name": "AF1",
+                  "value": 1,
+                  "description": "AF1"
+                },
+                {
+                  "name": "AF2",
+                  "value": 2,
+                  "description": "AF2"
+                },
+                {
+                  "name": "AF3",
+                  "value": 3,
+                  "description": "AF3"
+                },
+                {
+                  "name": "AF4",
+                  "value": 4,
+                  "description": "AF4"
+                },
+                {
+                  "name": "AF5",
+                  "value": 5,
+                  "description": "AF5"
+                },
+                {
+                  "name": "AF6",
+                  "value": 6,
+                  "description": "AF6"
+                },
+                {
+                  "name": "AF7",
+                  "value": 7,
+                  "description": "AF7"
+                },
+                {
+                  "name": "AF8",
+                  "value": 8,
+                  "description": "AF8"
+                },
+                {
+                  "name": "AF9",
+                  "value": 9,
+                  "description": "AF9"
+                },
+                {
+                  "name": "AF10",
+                  "value": 10,
+                  "description": "AF10"
+                },
+                {
+                  "name": "AF11",
+                  "value": 11,
+                  "description": "AF11"
+                },
+                {
+                  "name": "AF12",
+                  "value": 12,
+                  "description": "AF12"
+                },
+                {
+                  "name": "AF13",
+                  "value": 13,
+                  "description": "AF13"
+                },
+                {
+                  "name": "AF14",
+                  "value": 14,
+                  "description": "AF14"
+                },
+                {
+                  "name": "AF15",
+                  "value": 15,
+                  "description": "AF15"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "AFRH",
+          "offset": 36,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "GPIO alternate function high register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "AFR%s",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "Alternate function selection for port x bit y (y = 8..15)"
+            }
+          ]
+        },
+        {
+          "name": "BRR",
+          "offset": 40,
+          "size": 32,
+          "access": null,
+          "reset_value": null,
+          "description": "GPIO port bit reset register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "BR%s",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Port x reset pin %s",
+              "enum_values": [
+                {
+                  "name": "NoAction",
+                  "value": 0,
+                  "description": "No action on the corresponding ODx bit"
+                },
+                {
+                  "name": "Reset",
+                  "value": 1,
+                  "description": "Reset the ODx bit"
+                }
+              ]
             }
           ]
         },
@@ -188,138 +454,124 @@
           "name": "ASCR",
           "offset": 44,
           "size": 32,
+          "access": null,
+          "reset_value": null,
           "description": "GPIO port analog switch control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "GPIO port analog switch control register",
           "fields": [
             {
-              "name": "ASC",
+              "name": "ASC0",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Port x analog switch control I/O pin y (y= 0..15)",
-              "enum": null
+              "description": "These bits are written by software to configure the analog connection of the IOs.",
+              "enum_values": [
+                {
+                  "name": "NoAction",
+                  "value": 0,
+                  "description": "Disconnect analog switch to the ADC input"
+                },
+                {
+                  "name": "Reset",
+                  "value": 1,
+                  "description": "Connect analog switch to the ADC input"
+                }
+              ]
+            },
+            {
+              "name": "ASC1",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "These bits are written by software to configure the analog connection of the IOs."
+            },
+            {
+              "name": "ASC2",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "These bits are written by software to configure the analog connection of the IOs."
+            },
+            {
+              "name": "ASC3",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "These bits are written by software to configure the analog connection of the IOs."
+            },
+            {
+              "name": "ASC4",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "These bits are written by software to configure the analog connection of the IOs."
+            },
+            {
+              "name": "ASC5",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "These bits are written by software to configure the analog connection of the IOs."
+            },
+            {
+              "name": "ASC6",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "These bits are written by software to configure the analog connection of the IOs."
+            },
+            {
+              "name": "ASC7",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "These bits are written by software to configure the analog connection of the IOs."
+            },
+            {
+              "name": "ASC8",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "These bits are written by software to configure the analog connection of the IOs."
+            },
+            {
+              "name": "ASC9",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "These bits are written by software to configure the analog connection of the IOs."
+            },
+            {
+              "name": "ASC10",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "These bits are written by software to configure the analog connection of the IOs."
+            },
+            {
+              "name": "ASC11",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "These bits are written by software to configure the analog connection of the IOs."
+            },
+            {
+              "name": "ASC12",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "These bits are written by software to configure the analog connection of the IOs."
+            },
+            {
+              "name": "ASC13",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "These bits are written by software to configure the analog connection of the IOs."
+            },
+            {
+              "name": "ASC14",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "These bits are written by software to configure the analog connection of the IOs."
+            },
+            {
+              "name": "ASC15",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "These bits are written by software to configure the analog connection of the IOs."
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "IDR": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Low",
-          "value": 0,
-          "description": "Input is logic low"
-        },
-        {
-          "name": "High",
-          "value": 1,
-          "description": "Input is logic high"
-        }
-      ]
-    },
-    "MODER": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Input",
-          "value": 0,
-          "description": "Input mode (reset state)"
-        },
-        {
-          "name": "Output",
-          "value": 1,
-          "description": "General purpose output mode"
-        },
-        {
-          "name": "Alternate",
-          "value": 2,
-          "description": "Alternate function mode"
-        },
-        {
-          "name": "Analog",
-          "value": 3,
-          "description": "Analog mode"
-        }
-      ]
-    },
-    "ODR": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Low",
-          "value": 0,
-          "description": "Set output to logic low"
-        },
-        {
-          "name": "High",
-          "value": 1,
-          "description": "Set output to logic high"
-        }
-      ]
-    },
-    "OSPEEDR": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "LowSpeed",
-          "value": 0,
-          "description": "Low speed"
-        },
-        {
-          "name": "MediumSpeed",
-          "value": 1,
-          "description": "Medium speed"
-        },
-        {
-          "name": "HighSpeed",
-          "value": 2,
-          "description": "High speed"
-        },
-        {
-          "name": "VeryHighSpeed",
-          "value": 3,
-          "description": "Very high speed"
-        }
-      ]
-    },
-    "OT": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "PushPull",
-          "value": 0,
-          "description": "Output push-pull (reset state)"
-        },
-        {
-          "name": "OpenDrain",
-          "value": 1,
-          "description": "Output open-drain"
-        }
-      ]
-    },
-    "PUPDR": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Floating",
-          "value": 0,
-          "description": "No pull-up, pull-down"
-        },
-        {
-          "name": "PullUp",
-          "value": 1,
-          "description": "Pull-up"
-        },
-        {
-          "name": "PullDown",
-          "value": 2,
-          "description": "Pull-down"
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

@@ -2,6 +2,9 @@
   "schema": 1,
   "kind": "dcmi",
   "version": "v1",
+  "source": "stm32rs_svd",
+  "source_device": "stm32f407ie",
+  "source_file": "stm32f407.svd.patched",
   "blocks": {
     "DCMI": {
       "name": "DCMI",
@@ -12,87 +15,224 @@
           "name": "CR",
           "offset": 0,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "control register 1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "control register 1",
           "fields": [
             {
-              "name": "CAPTURE",
-              "bit_offset": 0,
+              "name": "ENABLE",
+              "bit_offset": 14,
               "bit_width": 1,
-              "description": "Capture enable",
-              "enum": null
-            },
-            {
-              "name": "CM",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Capture mode",
-              "enum": null
-            },
-            {
-              "name": "CROP",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Crop feature",
-              "enum": null
-            },
-            {
-              "name": "JPEG",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "JPEG format",
-              "enum": null
-            },
-            {
-              "name": "ESS",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "Embedded synchronization select",
-              "enum": null
-            },
-            {
-              "name": "PCKPOL",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "Pixel clock polarity",
-              "enum": null
-            },
-            {
-              "name": "HSPOL",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "Horizontal synchronization polarity",
-              "enum": null
-            },
-            {
-              "name": "VSPOL",
-              "bit_offset": 7,
-              "bit_width": 1,
-              "description": "Vertical synchronization polarity",
-              "enum": null
-            },
-            {
-              "name": "FCRC",
-              "bit_offset": 8,
-              "bit_width": 2,
-              "description": "Frame capture rate control",
-              "enum": null
+              "description": "DCMI enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "DCMI disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "DCMI enabled"
+                }
+              ]
             },
             {
               "name": "EDM",
               "bit_offset": 10,
               "bit_width": 2,
               "description": "Extended data mode",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "BitWidth8",
+                  "value": 0,
+                  "description": "Interface captures 8-bit data on every pixel clock"
+                },
+                {
+                  "name": "BitWidth10",
+                  "value": 1,
+                  "description": "Interface captures 10-bit data on every pixel clock"
+                },
+                {
+                  "name": "BitWidth12",
+                  "value": 2,
+                  "description": "Interface captures 12-bit data on every pixel clock"
+                },
+                {
+                  "name": "BitWidth14",
+                  "value": 3,
+                  "description": "Interface captures 14-bit data on every pixel clock"
+                }
+              ]
             },
             {
-              "name": "ENABLE",
-              "bit_offset": 14,
+              "name": "FCRC",
+              "bit_offset": 8,
+              "bit_width": 2,
+              "description": "Frame capture rate control",
+              "enum_values": [
+                {
+                  "name": "All",
+                  "value": 0,
+                  "description": "All frames are captured"
+                },
+                {
+                  "name": "Alternate",
+                  "value": 1,
+                  "description": "Every alternate frame captured (50% bandwidth reduction)"
+                },
+                {
+                  "name": "OneOfFour",
+                  "value": 2,
+                  "description": "One frame out of four captured (75% bandwidth reduction)"
+                }
+              ]
+            },
+            {
+              "name": "VSPOL",
+              "bit_offset": 7,
               "bit_width": 1,
-              "description": "DCMI enable",
-              "enum": null
+              "description": "Vertical synchronization polarity",
+              "enum_values": [
+                {
+                  "name": "ActiveLow",
+                  "value": 0,
+                  "description": "DCMI_VSYNC active low"
+                },
+                {
+                  "name": "ActiveHigh",
+                  "value": 1,
+                  "description": "DCMI_VSYNC active high"
+                }
+              ]
+            },
+            {
+              "name": "HSPOL",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Horizontal synchronization polarity",
+              "enum_values": [
+                {
+                  "name": "ActiveLow",
+                  "value": 0,
+                  "description": "DCMI_HSYNC active low"
+                },
+                {
+                  "name": "ActiveHigh",
+                  "value": 1,
+                  "description": "DCMI_HSYNC active high"
+                }
+              ]
+            },
+            {
+              "name": "PCKPOL",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Pixel clock polarity",
+              "enum_values": [
+                {
+                  "name": "FallingEdge",
+                  "value": 0,
+                  "description": "Falling edge active"
+                },
+                {
+                  "name": "RisingEdge",
+                  "value": 1,
+                  "description": "Rising edge active"
+                }
+              ]
+            },
+            {
+              "name": "ESS",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Embedded synchronization select",
+              "enum_values": [
+                {
+                  "name": "Hardware",
+                  "value": 0,
+                  "description": "Hardware synchronization data capture (frame/line start/stop) is synchronized with the DCMI_HSYNC/DCMI_VSYNC signals"
+                },
+                {
+                  "name": "Embedded",
+                  "value": 1,
+                  "description": "Embedded synchronization data capture is synchronized with synchronization codes embedded in the data flow"
+                }
+              ]
+            },
+            {
+              "name": "JPEG",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "JPEG format",
+              "enum_values": [
+                {
+                  "name": "Uncompressed",
+                  "value": 0,
+                  "description": "Uncompressed video format"
+                },
+                {
+                  "name": "JPEG",
+                  "value": 1,
+                  "description": "This bit is used for JPEG data transfers. The DCMI_HSYNC signal is used as data enable. The crop and embedded synchronization features (ESS bit) cannot be used in this mode"
+                }
+              ]
+            },
+            {
+              "name": "CROP",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Crop feature",
+              "enum_values": [
+                {
+                  "name": "Full",
+                  "value": 0,
+                  "description": "The full image is captured. In this case the total number of bytes in an image frame must be a multiple of four"
+                },
+                {
+                  "name": "Cropped",
+                  "value": 1,
+                  "description": "Only the data inside the window specified by the crop register is captured. If the size of the crop window exceeds the picture size, then only the picture size is captured"
+                }
+              ]
+            },
+            {
+              "name": "CM",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Capture mode",
+              "enum_values": [
+                {
+                  "name": "Continuous",
+                  "value": 0,
+                  "description": "Continuous grab mode - The received data are transferred into the destination memory through the DMA. The buffer location and mode (linear or circular buffer) is controlled through the system DMA"
+                },
+                {
+                  "name": "Snapshot",
+                  "value": 1,
+                  "description": "Snapshot mode (single frame) - Once activated, the interface waits for the start of frame and then transfers a single frame through the DMA. At the end of the frame, the CAPTURE bit is automatically reset"
+                }
+              ]
+            },
+            {
+              "name": "CAPTURE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Capture enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Capture disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Capture enabled"
+                }
+              ]
             }
           ]
         },
@@ -100,31 +240,65 @@
           "name": "SR",
           "offset": 4,
           "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
           "description": "status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "status register",
           "fields": [
             {
-              "name": "HSYNC",
-              "bit_offset": 0,
+              "name": "FNE",
+              "bit_offset": 2,
               "bit_width": 1,
-              "description": "HSYNC",
-              "enum": null
+              "description": "FIFO not empty",
+              "enum_values": [
+                {
+                  "name": "NotEmpty",
+                  "value": 0,
+                  "description": "FIFO contains valid data"
+                },
+                {
+                  "name": "Empty",
+                  "value": 1,
+                  "description": "FIFO empty"
+                }
+              ]
             },
             {
               "name": "VSYNC",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "VSYNC",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "ActiveFrame",
+                  "value": 0,
+                  "description": "Active frame"
+                },
+                {
+                  "name": "BetweenFrames",
+                  "value": 1,
+                  "description": "Synchronization between frames"
+                }
+              ]
             },
             {
-              "name": "FNE",
-              "bit_offset": 2,
+              "name": "HSYNC",
+              "bit_offset": 0,
               "bit_width": 1,
-              "description": "FIFO not empty",
-              "enum": null
+              "description": "HSYNC",
+              "enum_values": [
+                {
+                  "name": "ActiveLine",
+                  "value": 0,
+                  "description": "Active line"
+                },
+                {
+                  "name": "BetweenLines",
+                  "value": 1,
+                  "description": "Synchronization between lines"
+                }
+              ]
             }
           ]
         },
@@ -132,45 +306,101 @@
           "name": "RIS",
           "offset": 8,
           "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
           "description": "raw interrupt status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "raw interrupt status register",
           "fields": [
             {
-              "name": "FRAME_RIS",
-              "bit_offset": 0,
+              "name": "LINE_RIS",
+              "bit_offset": 4,
               "bit_width": 1,
-              "description": "Capture complete raw interrupt status",
-              "enum": null
-            },
-            {
-              "name": "OVR_RIS",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Overrun raw interrupt status",
-              "enum": null
-            },
-            {
-              "name": "ERR_RIS",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Synchronization error raw interrupt status",
-              "enum": null
+              "description": "Line raw interrupt status",
+              "enum_values": [
+                {
+                  "name": "Cleared",
+                  "value": 0,
+                  "description": "Interrupt cleared"
+                },
+                {
+                  "name": "Set",
+                  "value": 1,
+                  "description": "Interrupt set"
+                }
+              ]
             },
             {
               "name": "VSYNC_RIS",
               "bit_offset": 3,
               "bit_width": 1,
               "description": "VSYNC raw interrupt status",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Cleared",
+                  "value": 0,
+                  "description": "Interrupt cleared"
+                },
+                {
+                  "name": "Set",
+                  "value": 1,
+                  "description": "Interrupt set"
+                }
+              ]
             },
             {
-              "name": "LINE_RIS",
-              "bit_offset": 4,
+              "name": "ERR_RIS",
+              "bit_offset": 2,
               "bit_width": 1,
-              "description": "Line raw interrupt status",
-              "enum": null
+              "description": "Synchronization error raw interrupt status",
+              "enum_values": [
+                {
+                  "name": "NoError",
+                  "value": 0,
+                  "description": "No synchronization error detected"
+                },
+                {
+                  "name": "SynchronizationError",
+                  "value": 1,
+                  "description": "Embedded synchronization characters are not received in the correct order"
+                }
+              ]
+            },
+            {
+              "name": "OVR_RIS",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Overrun raw interrupt status",
+              "enum_values": [
+                {
+                  "name": "NoOverrun",
+                  "value": 0,
+                  "description": "No data buffer overrun occurred"
+                },
+                {
+                  "name": "OverrunOccured",
+                  "value": 1,
+                  "description": "A data buffer overrun occurred and the data FIFO is corrupted. The bit is cleared by setting the OVR_ISC bit of the DCMI_ICR register"
+                }
+              ]
+            },
+            {
+              "name": "FRAME_RIS",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Capture complete raw interrupt status",
+              "enum_values": [
+                {
+                  "name": "NoNewCapture",
+                  "value": 0,
+                  "description": "No new capture"
+                },
+                {
+                  "name": "FrameCaptured",
+                  "value": 1,
+                  "description": "A frame has been captured"
+                }
+              ]
             }
           ]
         },
@@ -178,45 +408,101 @@
           "name": "IER",
           "offset": 12,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "interrupt enable register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "interrupt enable register",
           "fields": [
             {
-              "name": "FRAME_IE",
-              "bit_offset": 0,
+              "name": "LINE_IE",
+              "bit_offset": 4,
               "bit_width": 1,
-              "description": "Capture complete interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "OVR_IE",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Overrun interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "ERR_IE",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Synchronization error interrupt enable",
-              "enum": null
+              "description": "Line interrupt enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "No interrupt generation when the line is received"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "An Interrupt is generated when a line has been completely received"
+                }
+              ]
             },
             {
               "name": "VSYNC_IE",
               "bit_offset": 3,
               "bit_width": 1,
               "description": "VSYNC interrupt enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "No interrupt generation"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "An interrupt is generated on each DCMI_VSYNC transition from the inactive to the active state"
+                }
+              ]
             },
             {
-              "name": "LINE_IE",
-              "bit_offset": 4,
+              "name": "ERR_IE",
+              "bit_offset": 2,
               "bit_width": 1,
-              "description": "Line interrupt enable",
-              "enum": null
+              "description": "Synchronization error interrupt enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "No interrupt generation"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "An interrupt is generated if the embedded synchronization codes are not received in the correct order"
+                }
+              ]
+            },
+            {
+              "name": "OVR_IE",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Overrun interrupt enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "No interrupt generation"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "An interrupt is generated if the DMA was not able to transfer the last data before new data (32-bit) are received"
+                }
+              ]
+            },
+            {
+              "name": "FRAME_IE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Capture complete interrupt enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "No interrupt generation"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "An interrupt is generated at the end of each received frame/crop window (in crop mode)"
+                }
+              ]
             }
           ]
         },
@@ -224,45 +510,101 @@
           "name": "MIS",
           "offset": 16,
           "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
           "description": "masked interrupt status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "masked interrupt status register",
           "fields": [
             {
-              "name": "FRAME_MIS",
-              "bit_offset": 0,
+              "name": "LINE_MIS",
+              "bit_offset": 4,
               "bit_width": 1,
-              "description": "Capture complete masked interrupt status",
-              "enum": null
-            },
-            {
-              "name": "OVR_MIS",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Overrun masked interrupt status",
-              "enum": null
-            },
-            {
-              "name": "ERR_MIS",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Synchronization error masked interrupt status",
-              "enum": null
+              "description": "Line masked interrupt status",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "No interrupt generation when the line is received"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "An Interrupt is generated when a line has been completely received and the LINE_IE bit is set in DCMI_IER"
+                }
+              ]
             },
             {
               "name": "VSYNC_MIS",
               "bit_offset": 3,
               "bit_width": 1,
               "description": "VSYNC masked interrupt status",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "No interrupt is generated on DCMI_VSYNC transitions"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "An interrupt is generated on each DCMI_VSYNC transition from the inactive to the active state and the VSYNC_IE bit is set in DCMI_IER"
+                }
+              ]
             },
             {
-              "name": "LINE_MIS",
-              "bit_offset": 4,
+              "name": "ERR_MIS",
+              "bit_offset": 2,
               "bit_width": 1,
-              "description": "Line masked interrupt status",
-              "enum": null
+              "description": "Synchronization error masked interrupt status",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "No interrupt is generated on a synchronization error"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "An interrupt is generated if the embedded synchronization codes are not received in the correct order and the ERR_IE bit in DCMI_IER is set"
+                }
+              ]
+            },
+            {
+              "name": "OVR_MIS",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Overrun masked interrupt status",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "No interrupt is generated on overrun"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "An interrupt is generated if the DMA was not able to transfer the last data before new data (32-bit) are received and the OVR_IE bit is set in DCMI_IER"
+                }
+              ]
+            },
+            {
+              "name": "FRAME_MIS",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Capture complete masked interrupt status",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "No interrupt is generated after a complete capture"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "An interrupt is generated at the end of each received frame/crop window (in crop mode) and the FRAME_IE bit is set in DCMI_IER"
+                }
+              ]
             }
           ]
         },
@@ -270,45 +612,76 @@
           "name": "ICR",
           "offset": 20,
           "size": 32,
+          "access": "write-only",
+          "reset_value": 0,
           "description": "interrupt clear register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "interrupt clear register",
           "fields": [
             {
-              "name": "FRAME_ISC",
-              "bit_offset": 0,
+              "name": "LINE_ISC",
+              "bit_offset": 4,
               "bit_width": 1,
-              "description": "Capture complete interrupt status clear",
-              "enum": null
-            },
-            {
-              "name": "OVR_ISC",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Overrun interrupt status clear",
-              "enum": null
-            },
-            {
-              "name": "ERR_ISC",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Synchronization error interrupt status clear",
-              "enum": null
+              "description": "line interrupt status clear",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Setting this bit clears the LINE_RIS flag in the DCMI_RIS register"
+                }
+              ]
             },
             {
               "name": "VSYNC_ISC",
               "bit_offset": 3,
               "bit_width": 1,
               "description": "Vertical synch interrupt status clear",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Setting this bit clears the VSYNC_RIS flag in the DCMI_RIS register"
+                }
+              ]
             },
             {
-              "name": "LINE_ISC",
-              "bit_offset": 4,
+              "name": "ERR_ISC",
+              "bit_offset": 2,
               "bit_width": 1,
-              "description": "line interrupt status clear",
-              "enum": null
+              "description": "Synchronization error interrupt status clear",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Setting this bit clears the ERR_RIS flag in the DCMI_RIS register"
+                }
+              ]
+            },
+            {
+              "name": "OVR_ISC",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Overrun interrupt status clear",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Setting this bit clears the OVR_RIS flag in the DCMI_RIS register"
+                }
+              ]
+            },
+            {
+              "name": "FRAME_ISC",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Capture complete interrupt status clear",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Setting this bit clears the FRAME_RIS flag in the DCMI_RIS register"
+                }
+              ]
             }
           ]
         },
@@ -316,38 +689,35 @@
           "name": "ESCR",
           "offset": 24,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "embedded synchronization code register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "embedded synchronization code register",
           "fields": [
             {
-              "name": "FSC",
-              "bit_offset": 0,
+              "name": "FEC",
+              "bit_offset": 24,
               "bit_width": 8,
-              "description": "Frame start delimiter code",
-              "enum": null
-            },
-            {
-              "name": "LSC",
-              "bit_offset": 8,
-              "bit_width": 8,
-              "description": "Line start delimiter code",
-              "enum": null
+              "description": "Frame end delimiter code"
             },
             {
               "name": "LEC",
               "bit_offset": 16,
               "bit_width": 8,
-              "description": "Line end delimiter code",
-              "enum": null
+              "description": "Line end delimiter code"
             },
             {
-              "name": "FEC",
-              "bit_offset": 24,
+              "name": "LSC",
+              "bit_offset": 8,
               "bit_width": 8,
-              "description": "Frame end delimiter code",
-              "enum": null
+              "description": "Line start delimiter code"
+            },
+            {
+              "name": "FSC",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "Frame start delimiter code"
             }
           ]
         },
@@ -355,38 +725,35 @@
           "name": "ESUR",
           "offset": 28,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "embedded synchronization unmask register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "embedded synchronization unmask register",
           "fields": [
             {
-              "name": "FSU",
-              "bit_offset": 0,
+              "name": "FEU",
+              "bit_offset": 24,
               "bit_width": 8,
-              "description": "Frame start delimiter unmask",
-              "enum": null
-            },
-            {
-              "name": "LSU",
-              "bit_offset": 8,
-              "bit_width": 8,
-              "description": "Line start delimiter unmask",
-              "enum": null
+              "description": "Frame end delimiter unmask"
             },
             {
               "name": "LEU",
               "bit_offset": 16,
               "bit_width": 8,
-              "description": "Line end delimiter unmask",
-              "enum": null
+              "description": "Line end delimiter unmask"
             },
             {
-              "name": "FEU",
-              "bit_offset": 24,
+              "name": "LSU",
+              "bit_offset": 8,
               "bit_width": 8,
-              "description": "Frame end delimiter unmask",
-              "enum": null
+              "description": "Line start delimiter unmask"
+            },
+            {
+              "name": "FSU",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "Frame start delimiter unmask"
             }
           ]
         },
@@ -394,24 +761,23 @@
           "name": "CWSTRT",
           "offset": 32,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "crop window start",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "crop window start",
           "fields": [
-            {
-              "name": "HOFFCNT",
-              "bit_offset": 0,
-              "bit_width": 14,
-              "description": "Horizontal offset count",
-              "enum": null
-            },
             {
               "name": "VST",
               "bit_offset": 16,
               "bit_width": 13,
-              "description": "Vertical start line count",
-              "enum": null
+              "description": "Vertical start line count"
+            },
+            {
+              "name": "HOFFCNT",
+              "bit_offset": 0,
+              "bit_width": 14,
+              "description": "Horizontal offset count"
             }
           ]
         },
@@ -419,24 +785,23 @@
           "name": "CWSIZE",
           "offset": 36,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "crop window size",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "crop window size",
           "fields": [
-            {
-              "name": "CAPCNT",
-              "bit_offset": 0,
-              "bit_width": 14,
-              "description": "Capture count",
-              "enum": null
-            },
             {
               "name": "VLINE",
               "bit_offset": 16,
               "bit_width": 14,
-              "description": "Vertical line count",
-              "enum": null
+              "description": "Vertical line count"
+            },
+            {
+              "name": "CAPCNT",
+              "bit_offset": 0,
+              "bit_width": 14,
+              "description": "Capture count"
             }
           ]
         },
@@ -444,38 +809,17 @@
           "name": "DR",
           "offset": 40,
           "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
           "description": "data register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "data register",
           "fields": [
             {
-              "name": "Byte0",
+              "name": "BYTE%s",
               "bit_offset": 0,
               "bit_width": 8,
-              "description": "Data byte 0",
-              "enum": null
-            },
-            {
-              "name": "Byte1",
-              "bit_offset": 8,
-              "bit_width": 8,
-              "description": "Data byte 1",
-              "enum": null
-            },
-            {
-              "name": "Byte2",
-              "bit_offset": 16,
-              "bit_width": 8,
-              "description": "Data byte 2",
-              "enum": null
-            },
-            {
-              "name": "Byte3",
-              "bit_offset": 24,
-              "bit_width": 8,
-              "description": "Data byte 3",
-              "enum": null
+              "description": "Data byte %s"
             }
           ]
         }

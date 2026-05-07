@@ -2,9 +2,12 @@
   "schema": 1,
   "kind": "fmpi2c",
   "version": "v2",
+  "source": "stm32rs_svd",
+  "source_device": "stm32f410c8",
+  "source_file": "stm32f410.svd.patched",
   "blocks": {
-    "FMPI2C": {
-      "name": "FMPI2C",
+    "FMPI2C1": {
+      "name": "FMPI2C1",
       "description": "Inter-integrated circuit",
       "extends": null,
       "registers": [
@@ -12,143 +15,441 @@
           "name": "CR1",
           "offset": 0,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "Control register 1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Control register 1",
           "fields": [
             {
               "name": "PE",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "Peripheral enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Peripheral disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Peripheral enabled"
+                }
+              ]
             },
             {
               "name": "TXIE",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "TX Interrupt enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Transmit (TXIS) interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Transmit (TXIS) interrupt enabled"
+                }
+              ]
             },
             {
               "name": "RXIE",
               "bit_offset": 2,
               "bit_width": 1,
               "description": "RX Interrupt enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Receive (RXNE) interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Receive (RXNE) interrupt enabled"
+                }
+              ]
             },
             {
               "name": "ADDRIE",
               "bit_offset": 3,
               "bit_width": 1,
               "description": "Address match interrupt enable (slave only)",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Address match (ADDR) interrupts disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Address match (ADDR) interrupts enabled"
+                }
+              ]
             },
             {
               "name": "NACKIE",
               "bit_offset": 4,
               "bit_width": 1,
               "description": "Not acknowledge received interrupt enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Not acknowledge (NACKF) received interrupts disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Not acknowledge (NACKF) received interrupts enabled"
+                }
+              ]
             },
             {
               "name": "STOPIE",
               "bit_offset": 5,
               "bit_width": 1,
               "description": "STOP detection Interrupt enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Stop detection (STOPF) interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Stop detection (STOPF) interrupt enabled"
+                }
+              ]
             },
             {
               "name": "TCIE",
               "bit_offset": 6,
               "bit_width": 1,
               "description": "Transfer Complete interrupt enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Transfer Complete interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Transfer Complete interrupt enabled"
+                }
+              ]
             },
             {
               "name": "ERRIE",
               "bit_offset": 7,
               "bit_width": 1,
               "description": "Error interrupts enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Error detection interrupts disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Error detection interrupts enabled"
+                }
+              ]
             },
             {
               "name": "DNF",
               "bit_offset": 8,
               "bit_width": 4,
               "description": "Digital noise filter",
-              "enum": "DNF"
+              "enum_values": [
+                {
+                  "name": "NoFilter",
+                  "value": 0,
+                  "description": "Digital filter disabled"
+                },
+                {
+                  "name": "Filter1",
+                  "value": 1,
+                  "description": "Digital filter enabled and filtering capability up to 1 tI2CCLK"
+                },
+                {
+                  "name": "Filter2",
+                  "value": 2,
+                  "description": "Digital filter enabled and filtering capability up to 2 tI2CCLK"
+                },
+                {
+                  "name": "Filter3",
+                  "value": 3,
+                  "description": "Digital filter enabled and filtering capability up to 3 tI2CCLK"
+                },
+                {
+                  "name": "Filter4",
+                  "value": 4,
+                  "description": "Digital filter enabled and filtering capability up to 4 tI2CCLK"
+                },
+                {
+                  "name": "Filter5",
+                  "value": 5,
+                  "description": "Digital filter enabled and filtering capability up to 5 tI2CCLK"
+                },
+                {
+                  "name": "Filter6",
+                  "value": 6,
+                  "description": "Digital filter enabled and filtering capability up to 6 tI2CCLK"
+                },
+                {
+                  "name": "Filter7",
+                  "value": 7,
+                  "description": "Digital filter enabled and filtering capability up to 7 tI2CCLK"
+                },
+                {
+                  "name": "Filter8",
+                  "value": 8,
+                  "description": "Digital filter enabled and filtering capability up to 8 tI2CCLK"
+                },
+                {
+                  "name": "Filter9",
+                  "value": 9,
+                  "description": "Digital filter enabled and filtering capability up to 9 tI2CCLK"
+                },
+                {
+                  "name": "Filter10",
+                  "value": 10,
+                  "description": "Digital filter enabled and filtering capability up to 10 tI2CCLK"
+                },
+                {
+                  "name": "Filter11",
+                  "value": 11,
+                  "description": "Digital filter enabled and filtering capability up to 11 tI2CCLK"
+                },
+                {
+                  "name": "Filter12",
+                  "value": 12,
+                  "description": "Digital filter enabled and filtering capability up to 12 tI2CCLK"
+                },
+                {
+                  "name": "Filter13",
+                  "value": 13,
+                  "description": "Digital filter enabled and filtering capability up to 13 tI2CCLK"
+                },
+                {
+                  "name": "Filter14",
+                  "value": 14,
+                  "description": "Digital filter enabled and filtering capability up to 14 tI2CCLK"
+                },
+                {
+                  "name": "Filter15",
+                  "value": 15,
+                  "description": "Digital filter enabled and filtering capability up to 15 tI2CCLK"
+                }
+              ]
             },
             {
               "name": "ANFOFF",
               "bit_offset": 12,
               "bit_width": 1,
               "description": "Analog noise filter OFF",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Enabled",
+                  "value": 0,
+                  "description": "Analog noise filter enabled"
+                },
+                {
+                  "name": "Disabled",
+                  "value": 1,
+                  "description": "Analog noise filter disabled"
+                }
+              ]
             },
             {
               "name": "TXDMAEN",
               "bit_offset": 14,
               "bit_width": 1,
               "description": "DMA transmission requests enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "DMA mode disabled for transmission"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "DMA mode enabled for transmission"
+                }
+              ]
             },
             {
               "name": "RXDMAEN",
               "bit_offset": 15,
               "bit_width": 1,
               "description": "DMA reception requests enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "DMA mode disabled for reception"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "DMA mode enabled for reception"
+                }
+              ]
             },
             {
               "name": "SBC",
               "bit_offset": 16,
               "bit_width": 1,
               "description": "Slave byte control",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Slave byte control disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Slave byte control enabled"
+                }
+              ]
             },
             {
               "name": "NOSTRETCH",
               "bit_offset": 17,
               "bit_width": 1,
               "description": "Clock stretching disable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Enabled",
+                  "value": 0,
+                  "description": "Clock stretching enabled"
+                },
+                {
+                  "name": "Disabled",
+                  "value": 1,
+                  "description": "Clock stretching disabled"
+                }
+              ]
+            },
+            {
+              "name": "WUPEN",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "Wakeup from STOP enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Wakeup from Stop mode disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Wakeup from Stop mode enabled"
+                }
+              ]
             },
             {
               "name": "GCEN",
               "bit_offset": 19,
               "bit_width": 1,
               "description": "General call enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "General call disabled. Address 0b00000000 is NACKed"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "General call enabled. Address 0b00000000 is ACKed"
+                }
+              ]
             },
             {
               "name": "SMBHEN",
               "bit_offset": 20,
               "bit_width": 1,
               "description": "SMBus Host address enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Host address disabled. Address 0b0001000x is NACKed"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Host address enabled. Address 0b0001000x is ACKed"
+                }
+              ]
             },
             {
               "name": "SMBDEN",
               "bit_offset": 21,
               "bit_width": 1,
               "description": "SMBus Device Default address enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Device default address disabled. Address 0b1100001x is NACKed"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Device default address enabled. Address 0b1100001x is ACKed"
+                }
+              ]
             },
             {
               "name": "ALERTEN",
               "bit_offset": 22,
               "bit_width": 1,
               "description": "SMBUS alert enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "In device mode (SMBHEN=Disabled) Releases SMBA pin high and Alert Response Address Header disabled (0001100x) followed by NACK. In host mode (SMBHEN=Enabled) SMBus Alert pin (SMBA) not supported"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "In device mode (SMBHEN=Disabled) Drives SMBA pin low and Alert Response Address Header enabled (0001100x) followed by ACK.In host mode (SMBHEN=Enabled) SMBus Alert pin (SMBA) supported"
+                }
+              ]
             },
             {
               "name": "PECEN",
               "bit_offset": 23,
               "bit_width": 1,
               "description": "PEC enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "PEC calculation disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "PEC calculation enabled"
+                }
+              ]
             }
           ]
         },
@@ -156,87 +457,205 @@
           "name": "CR2",
           "offset": 4,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "Control register 2",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Control register 2",
           "fields": [
             {
-              "name": "SADD",
-              "bit_offset": 0,
-              "bit_width": 10,
-              "description": "Slave address bit (master mode)",
-              "enum": null
-            },
-            {
-              "name": "DIR",
-              "bit_offset": 10,
+              "name": "PECBYTE",
+              "bit_offset": 26,
               "bit_width": 1,
-              "description": "Transfer direction (master mode)",
-              "enum": "DIR"
-            },
-            {
-              "name": "ADD10",
-              "bit_offset": 11,
-              "bit_width": 1,
-              "description": "10-bit addressing mode (master mode)",
-              "enum": "ADDMODE"
-            },
-            {
-              "name": "HEAD10R",
-              "bit_offset": 12,
-              "bit_width": 1,
-              "description": "10-bit address header only read direction (master receiver mode)",
-              "enum": "HEADR"
-            },
-            {
-              "name": "START",
-              "bit_offset": 13,
-              "bit_width": 1,
-              "description": "Start generation",
-              "enum": null
-            },
-            {
-              "name": "STOP",
-              "bit_offset": 14,
-              "bit_width": 1,
-              "description": "Stop generation (master mode)",
-              "enum": null
-            },
-            {
-              "name": "NACK",
-              "bit_offset": 15,
-              "bit_width": 1,
-              "description": "NACK generation (slave mode)",
-              "enum": null
-            },
-            {
-              "name": "NBYTES",
-              "bit_offset": 16,
-              "bit_width": 8,
-              "description": "Number of bytes",
-              "enum": null
-            },
-            {
-              "name": "RELOAD",
-              "bit_offset": 24,
-              "bit_width": 1,
-              "description": "NBYTES reload mode",
-              "enum": "RELOAD"
+              "description": "Packet error checking byte",
+              "enum_values": [
+                {
+                  "name": "NoPec",
+                  "value": 0,
+                  "description": "No PEC transfer"
+                },
+                {
+                  "name": "Pec",
+                  "value": 1,
+                  "description": "PEC transmission/reception is requested"
+                },
+                {
+                  "name": "Pec",
+                  "value": 1,
+                  "description": "PEC transmission/reception is requested"
+                }
+              ]
             },
             {
               "name": "AUTOEND",
               "bit_offset": 25,
               "bit_width": 1,
               "description": "Automatic end mode (master mode)",
-              "enum": "AUTOEND"
+              "enum_values": [
+                {
+                  "name": "Software",
+                  "value": 0,
+                  "description": "Software end mode: TC flag is set when NBYTES data are transferred, stretching SCL low"
+                },
+                {
+                  "name": "Automatic",
+                  "value": 1,
+                  "description": "Automatic end mode: a STOP condition is automatically sent when NBYTES data are transferred"
+                }
+              ]
             },
             {
-              "name": "PECBYTE",
-              "bit_offset": 26,
+              "name": "RELOAD",
+              "bit_offset": 24,
               "bit_width": 1,
-              "description": "Packet error checking byte",
-              "enum": null
+              "description": "NBYTES reload mode",
+              "enum_values": [
+                {
+                  "name": "Completed",
+                  "value": 0,
+                  "description": "The transfer is completed after the NBYTES data transfer (STOP or RESTART will follow)"
+                },
+                {
+                  "name": "NotCompleted",
+                  "value": 1,
+                  "description": "The transfer is not completed after the NBYTES data transfer (NBYTES will be reloaded)"
+                }
+              ]
+            },
+            {
+              "name": "NBYTES",
+              "bit_offset": 16,
+              "bit_width": 8,
+              "description": "Number of bytes"
+            },
+            {
+              "name": "NACK",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "NACK generation (slave mode)",
+              "enum_values": [
+                {
+                  "name": "Ack",
+                  "value": 0,
+                  "description": "an ACK is sent after current received byte"
+                },
+                {
+                  "name": "Nack",
+                  "value": 1,
+                  "description": "a NACK is sent after current received byte"
+                },
+                {
+                  "name": "Nack",
+                  "value": 1,
+                  "description": "a NACK is sent after current received byte"
+                }
+              ]
+            },
+            {
+              "name": "STOP",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "Stop generation (master mode)",
+              "enum_values": [
+                {
+                  "name": "NoStop",
+                  "value": 0,
+                  "description": "No Stop generation"
+                },
+                {
+                  "name": "Stop",
+                  "value": 1,
+                  "description": "Stop generation after current byte transfer"
+                },
+                {
+                  "name": "Stop",
+                  "value": 1,
+                  "description": "Stop generation after current byte transfer"
+                }
+              ]
+            },
+            {
+              "name": "START",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Start generation",
+              "enum_values": [
+                {
+                  "name": "NoStart",
+                  "value": 0,
+                  "description": "No Start generation"
+                },
+                {
+                  "name": "Start",
+                  "value": 1,
+                  "description": "Restart/Start generation"
+                },
+                {
+                  "name": "Start",
+                  "value": 1,
+                  "description": "Restart/Start generation"
+                }
+              ]
+            },
+            {
+              "name": "HEAD10R",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "10-bit address header only read direction (master receiver mode)",
+              "enum_values": [
+                {
+                  "name": "Complete",
+                  "value": 0,
+                  "description": "The master sends the complete 10 bit slave address read sequence"
+                },
+                {
+                  "name": "Partial",
+                  "value": 1,
+                  "description": "The master only sends the 1st 7 bits of the 10 bit address, followed by Read direction"
+                }
+              ]
+            },
+            {
+              "name": "ADD10",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "10-bit addressing mode (master mode)",
+              "enum_values": [
+                {
+                  "name": "Bit7",
+                  "value": 0,
+                  "description": "The master operates in 7-bit addressing mode"
+                },
+                {
+                  "name": "Bit10",
+                  "value": 1,
+                  "description": "The master operates in 10-bit addressing mode"
+                }
+              ]
+            },
+            {
+              "name": "RD_WRN",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Transfer direction (master mode)",
+              "enum_values": [
+                {
+                  "name": "Write",
+                  "value": 0,
+                  "description": "Master requests a write transfer"
+                },
+                {
+                  "name": "Read",
+                  "value": 1,
+                  "description": "Master requests a read transfer"
+                }
+              ]
+            },
+            {
+              "name": "SADD",
+              "bit_offset": 0,
+              "bit_width": 10,
+              "description": "Slave address bit (master mode)"
             }
           ]
         },
@@ -244,31 +663,53 @@
           "name": "OAR1",
           "offset": 8,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "Own address register 1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Own address register 1",
           "fields": [
             {
               "name": "OA1",
               "bit_offset": 0,
               "bit_width": 10,
-              "description": "Interface address",
-              "enum": null
+              "description": "Interface address"
             },
             {
               "name": "OA1MODE",
               "bit_offset": 10,
               "bit_width": 1,
               "description": "Own Address 1 10-bit mode",
-              "enum": "ADDMODE"
+              "enum_values": [
+                {
+                  "name": "Bit7",
+                  "value": 0,
+                  "description": "Own address 1 is a 7-bit address"
+                },
+                {
+                  "name": "Bit10",
+                  "value": 1,
+                  "description": "Own address 1 is a 10-bit address"
+                }
+              ]
             },
             {
               "name": "OA1EN",
               "bit_offset": 15,
               "bit_width": 1,
               "description": "Own Address 1 enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Own address 1 disabled. The received slave address OA1 is NACKed"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Own address 1 enabled. The received slave address OA1 is ACKed"
+                }
+              ]
             }
           ]
         },
@@ -276,31 +717,83 @@
           "name": "OAR2",
           "offset": 12,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "Own address register 2",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Own address register 2",
           "fields": [
             {
               "name": "OA2",
               "bit_offset": 1,
               "bit_width": 7,
-              "description": "Interface address",
-              "enum": null
+              "description": "Interface address"
             },
             {
               "name": "OA2MSK",
               "bit_offset": 8,
               "bit_width": 3,
               "description": "Own Address 2 masks",
-              "enum": "OAMSK"
+              "enum_values": [
+                {
+                  "name": "NoMask",
+                  "value": 0,
+                  "description": "No mask"
+                },
+                {
+                  "name": "Mask1",
+                  "value": 1,
+                  "description": "OA2[1] is masked and don’t care. Only OA2[7:2] are compared"
+                },
+                {
+                  "name": "Mask2",
+                  "value": 2,
+                  "description": "OA2[2:1] are masked and don’t care. Only OA2[7:3] are compared"
+                },
+                {
+                  "name": "Mask3",
+                  "value": 3,
+                  "description": "OA2[3:1] are masked and don’t care. Only OA2[7:4] are compared"
+                },
+                {
+                  "name": "Mask4",
+                  "value": 4,
+                  "description": "OA2[4:1] are masked and don’t care. Only OA2[7:5] are compared"
+                },
+                {
+                  "name": "Mask5",
+                  "value": 5,
+                  "description": "OA2[5:1] are masked and don’t care. Only OA2[7:6] are compared"
+                },
+                {
+                  "name": "Mask6",
+                  "value": 6,
+                  "description": "OA2[6:1] are masked and don’t care. Only OA2[7] is compared."
+                },
+                {
+                  "name": "Mask7",
+                  "value": 7,
+                  "description": "OA2[7:1] are masked and don’t care. No comparison is done, and all (except reserved) 7-bit received addresses are acknowledged"
+                }
+              ]
             },
             {
               "name": "OA2EN",
               "bit_offset": 15,
               "bit_width": 1,
               "description": "Own Address 2 enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Own address 2 disabled. The received slave address OA2 is NACKed"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Own address 2 enabled. The received slave address OA2 is ACKed"
+                }
+              ]
             }
           ]
         },
@@ -308,45 +801,41 @@
           "name": "TIMINGR",
           "offset": 16,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "Timing register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Timing register",
           "fields": [
             {
               "name": "SCLL",
               "bit_offset": 0,
               "bit_width": 8,
-              "description": "SCL low period (master mode)",
-              "enum": null
+              "description": "SCL low period (master mode)"
             },
             {
               "name": "SCLH",
               "bit_offset": 8,
               "bit_width": 8,
-              "description": "SCL high period (master mode)",
-              "enum": null
+              "description": "SCL high period (master mode)"
             },
             {
               "name": "SDADEL",
               "bit_offset": 16,
               "bit_width": 4,
-              "description": "Data hold time",
-              "enum": null
+              "description": "Data hold time"
             },
             {
               "name": "SCLDEL",
               "bit_offset": 20,
               "bit_width": 4,
-              "description": "Data setup time",
-              "enum": null
+              "description": "Data setup time"
             },
             {
               "name": "PRESC",
               "bit_offset": 28,
               "bit_width": 4,
-              "description": "Timing prescaler",
-              "enum": null
+              "description": "Timing prescaler"
             }
           ]
         },
@@ -354,45 +843,77 @@
           "name": "TIMEOUTR",
           "offset": 20,
           "size": 32,
-          "description": "Timeout register",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Status register 1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Timeout register",
           "fields": [
             {
               "name": "TIMEOUTA",
               "bit_offset": 0,
               "bit_width": 12,
-              "description": "Bus timeout A",
-              "enum": null
+              "description": "Bus timeout A"
             },
             {
               "name": "TIDLE",
               "bit_offset": 12,
               "bit_width": 1,
               "description": "Idle clock timeout detection",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "TIMEOUTA is used to detect SCL low timeout"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "TIMEOUTA is used to detect both SCL and SDA high timeout (bus idle condition)"
+                }
+              ]
             },
             {
               "name": "TIMOUTEN",
               "bit_offset": 15,
               "bit_width": 1,
               "description": "Clock timeout enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "SCL timeout detection is disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "SCL timeout detection is enabled"
+                }
+              ]
             },
             {
               "name": "TIMEOUTB",
               "bit_offset": 16,
               "bit_width": 12,
-              "description": "Bus timeout B",
-              "enum": null
+              "description": "Bus timeout B"
             },
             {
               "name": "TEXTEN",
               "bit_offset": 31,
               "bit_width": 1,
               "description": "Extended clock timeout enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Extended clock timeout detection is disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Extended clock timeout detection is enabled"
+                }
+              ]
             }
           ]
         },
@@ -400,129 +921,332 @@
           "name": "ISR",
           "offset": 24,
           "size": 32,
+          "access": null,
+          "reset_value": 1,
           "description": "Interrupt and Status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Interrupt and Status register",
           "fields": [
             {
-              "name": "TXE",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Transmit data register empty (transmitters)",
-              "enum": null
-            },
-            {
-              "name": "TXIS",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Transmit interrupt status (transmitters)",
-              "enum": null
-            },
-            {
-              "name": "RXNE",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Receive data register not empty (receivers)",
-              "enum": null
-            },
-            {
-              "name": "ADDR",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Address matched (slave mode)",
-              "enum": null
-            },
-            {
-              "name": "NACKF",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "Not acknowledge received flag",
-              "enum": null
-            },
-            {
-              "name": "STOPF",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "Stop detection flag",
-              "enum": null
-            },
-            {
-              "name": "TC",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "Transfer Complete (master mode)",
-              "enum": null
-            },
-            {
-              "name": "TCR",
-              "bit_offset": 7,
-              "bit_width": 1,
-              "description": "Transfer Complete Reload",
-              "enum": null
-            },
-            {
-              "name": "BERR",
-              "bit_offset": 8,
-              "bit_width": 1,
-              "description": "Bus error",
-              "enum": null
-            },
-            {
-              "name": "ARLO",
-              "bit_offset": 9,
-              "bit_width": 1,
-              "description": "Arbitration lost",
-              "enum": null
-            },
-            {
-              "name": "OVR",
-              "bit_offset": 10,
-              "bit_width": 1,
-              "description": "Overrun/Underrun (slave mode)",
-              "enum": null
-            },
-            {
-              "name": "PECERR",
-              "bit_offset": 11,
-              "bit_width": 1,
-              "description": "PEC Error in reception",
-              "enum": null
-            },
-            {
-              "name": "TIMEOUT",
-              "bit_offset": 12,
-              "bit_width": 1,
-              "description": "Timeout or t_low detection flag",
-              "enum": null
-            },
-            {
-              "name": "ALERT",
-              "bit_offset": 13,
-              "bit_width": 1,
-              "description": "SMBus alert",
-              "enum": null
-            },
-            {
-              "name": "BUSY",
-              "bit_offset": 15,
-              "bit_width": 1,
-              "description": "Bus busy",
-              "enum": null
+              "name": "ADDCODE",
+              "bit_offset": 17,
+              "bit_width": 7,
+              "description": "Address match code (Slave mode)",
+              "access": "read-only"
             },
             {
               "name": "DIR",
               "bit_offset": 16,
               "bit_width": 1,
               "description": "Transfer direction (Slave mode)",
-              "enum": "DIR"
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "Write",
+                  "value": 0,
+                  "description": "Write transfer, slave enters receiver mode"
+                },
+                {
+                  "name": "Read",
+                  "value": 1,
+                  "description": "Read transfer, slave enters transmitter mode"
+                }
+              ]
             },
             {
-              "name": "ADDCODE",
-              "bit_offset": 17,
-              "bit_width": 7,
-              "description": "Address match code (Slave mode)",
-              "enum": null
+              "name": "BUSY",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Bus busy",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotBusy",
+                  "value": 0,
+                  "description": "No communication is in progress on the bus"
+                },
+                {
+                  "name": "Busy",
+                  "value": 1,
+                  "description": "A communication is in progress on the bus"
+                }
+              ]
+            },
+            {
+              "name": "ALERT",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "SMBus alert",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NoAlert",
+                  "value": 0,
+                  "description": "SMBA alert is not detected"
+                },
+                {
+                  "name": "Alert",
+                  "value": 1,
+                  "description": "SMBA alert event is detected on SMBA pin"
+                }
+              ]
+            },
+            {
+              "name": "TIMEOUT",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "Timeout or t_low detection flag",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NoTimeout",
+                  "value": 0,
+                  "description": "No timeout occured"
+                },
+                {
+                  "name": "Timeout",
+                  "value": 1,
+                  "description": "Timeout occured"
+                }
+              ]
+            },
+            {
+              "name": "PECERR",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "PEC Error in reception",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "Match",
+                  "value": 0,
+                  "description": "Received PEC does match with PEC register"
+                },
+                {
+                  "name": "NoMatch",
+                  "value": 1,
+                  "description": "Received PEC does not match with PEC register"
+                }
+              ]
+            },
+            {
+              "name": "OVR",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Overrun/Underrun (slave mode)",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NoOverrun",
+                  "value": 0,
+                  "description": "No overrun/underrun error occurs"
+                },
+                {
+                  "name": "Overrun",
+                  "value": 1,
+                  "description": "slave mode with NOSTRETCH=1, when an overrun/underrun error occurs"
+                }
+              ]
+            },
+            {
+              "name": "ARLO",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Arbitration lost",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotLost",
+                  "value": 0,
+                  "description": "No arbitration lost"
+                },
+                {
+                  "name": "Lost",
+                  "value": 1,
+                  "description": "Arbitration lost"
+                }
+              ]
+            },
+            {
+              "name": "BERR",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Bus error",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NoError",
+                  "value": 0,
+                  "description": "No bus error"
+                },
+                {
+                  "name": "Error",
+                  "value": 1,
+                  "description": "Misplaced Start and Stop condition is detected"
+                }
+              ]
+            },
+            {
+              "name": "TCR",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Transfer Complete Reload",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotComplete",
+                  "value": 0,
+                  "description": "Transfer is not complete"
+                },
+                {
+                  "name": "Complete",
+                  "value": 1,
+                  "description": "NBYTES has been transfered"
+                }
+              ]
+            },
+            {
+              "name": "TC",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Transfer Complete (master mode)",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotComplete",
+                  "value": 0,
+                  "description": "Transfer is not complete"
+                },
+                {
+                  "name": "Complete",
+                  "value": 1,
+                  "description": "NBYTES has been transfered"
+                }
+              ]
+            },
+            {
+              "name": "STOPF",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Stop detection flag",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NoStop",
+                  "value": 0,
+                  "description": "No Stop condition detected"
+                },
+                {
+                  "name": "Stop",
+                  "value": 1,
+                  "description": "Stop condition detected"
+                }
+              ]
+            },
+            {
+              "name": "NACKF",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Not acknowledge received flag",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NoNack",
+                  "value": 0,
+                  "description": "No NACK has been received"
+                },
+                {
+                  "name": "Nack",
+                  "value": 1,
+                  "description": "NACK has been received"
+                }
+              ]
+            },
+            {
+              "name": "ADDR",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Address matched (slave mode)",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotMatch",
+                  "value": 0,
+                  "description": "Adress mismatched or not received"
+                },
+                {
+                  "name": "Match",
+                  "value": 1,
+                  "description": "Received slave address matched with one of the enabled slave addresses"
+                }
+              ]
+            },
+            {
+              "name": "RXNE",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Receive data register not empty (receivers)",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "Empty",
+                  "value": 0,
+                  "description": "The RXDR register is empty"
+                },
+                {
+                  "name": "NotEmpty",
+                  "value": 1,
+                  "description": "Received data is copied into the RXDR register, and is ready to be read"
+                }
+              ]
+            },
+            {
+              "name": "TXIS",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Transmit interrupt status (transmitters)",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NotEmpty",
+                  "value": 0,
+                  "description": "The TXDR register is not empty"
+                },
+                {
+                  "name": "Empty",
+                  "value": 1,
+                  "description": "The TXDR register is empty and the data to be transmitted must be written in the TXDR register"
+                },
+                {
+                  "name": "Trigger",
+                  "value": 1,
+                  "description": "Generate a TXIS event"
+                }
+              ]
+            },
+            {
+              "name": "TXE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Transmit data register empty (transmitters)",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NotEmpty",
+                  "value": 0,
+                  "description": "TXDR register not empty"
+                },
+                {
+                  "name": "Empty",
+                  "value": 1,
+                  "description": "TXDR register empty"
+                },
+                {
+                  "name": "Flush",
+                  "value": 1,
+                  "description": "Flush the transmit data register"
+                }
+              ]
             }
           ]
         },
@@ -530,73 +1254,128 @@
           "name": "ICR",
           "offset": 28,
           "size": 32,
+          "access": "write-only",
+          "reset_value": 0,
           "description": "Interrupt clear register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Interrupt clear register",
           "fields": [
             {
-              "name": "ADDRCF",
-              "bit_offset": 3,
+              "name": "ALERTCF",
+              "bit_offset": 13,
               "bit_width": 1,
-              "description": "Address Matched flag clear",
-              "enum": null
-            },
-            {
-              "name": "NACKCF",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "Not Acknowledge flag clear",
-              "enum": null
-            },
-            {
-              "name": "STOPCF",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "Stop detection flag clear",
-              "enum": null
-            },
-            {
-              "name": "BERRCF",
-              "bit_offset": 8,
-              "bit_width": 1,
-              "description": "Bus error flag clear",
-              "enum": null
-            },
-            {
-              "name": "ARLOCF",
-              "bit_offset": 9,
-              "bit_width": 1,
-              "description": "Arbitration lost flag clear",
-              "enum": null
-            },
-            {
-              "name": "OVRCF",
-              "bit_offset": 10,
-              "bit_width": 1,
-              "description": "Overrun/Underrun flag clear",
-              "enum": null
-            },
-            {
-              "name": "PECCF",
-              "bit_offset": 11,
-              "bit_width": 1,
-              "description": "PEC Error flag clear",
-              "enum": null
+              "description": "Alert flag clear",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clears the ALERT flag in ISR register"
+                }
+              ]
             },
             {
               "name": "TIMOUTCF",
               "bit_offset": 12,
               "bit_width": 1,
               "description": "Timeout detection flag clear",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clears the TIMOUT flag in ISR register"
+                }
+              ]
             },
             {
-              "name": "ALERTCF",
-              "bit_offset": 13,
+              "name": "PECCF",
+              "bit_offset": 11,
               "bit_width": 1,
-              "description": "Alert flag clear",
-              "enum": null
+              "description": "PEC Error flag clear",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clears the PEC flag in ISR register"
+                }
+              ]
+            },
+            {
+              "name": "OVRCF",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Overrun/Underrun flag clear",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clears the OVR flag in ISR register"
+                }
+              ]
+            },
+            {
+              "name": "ARLOCF",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Arbitration lost flag clear",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clears the ARLO flag in ISR register"
+                }
+              ]
+            },
+            {
+              "name": "BERRCF",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Bus error flag clear",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clears the BERR flag in ISR register"
+                }
+              ]
+            },
+            {
+              "name": "STOPCF",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Stop detection flag clear",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clears the STOP flag in ISR register"
+                }
+              ]
+            },
+            {
+              "name": "NACKCF",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Not Acknowledge flag clear",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clears the NACK flag in ISR register"
+                }
+              ]
+            },
+            {
+              "name": "ADDRCF",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Address Matched flag clear",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clears the ADDR flag in ISR register"
+                }
+              ]
             }
           ]
         },
@@ -604,17 +1383,17 @@
           "name": "PECR",
           "offset": 32,
           "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
           "description": "PEC register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "PEC register",
           "fields": [
             {
               "name": "PEC",
               "bit_offset": 0,
               "bit_width": 8,
-              "description": "Packet error checking register",
-              "enum": null
+              "description": "Packet error checking register"
             }
           ]
         },
@@ -622,17 +1401,17 @@
           "name": "RXDR",
           "offset": 36,
           "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
           "description": "Receive data register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Receive data register",
           "fields": [
             {
               "name": "RXDATA",
               "bit_offset": 0,
               "bit_width": 8,
-              "description": "8-bit receive data",
-              "enum": null
+              "description": "8-bit receive data"
             }
           ]
         },
@@ -640,228 +1419,22 @@
           "name": "TXDR",
           "offset": 40,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "Transmit data register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Transmit data register",
           "fields": [
             {
               "name": "TXDATA",
               "bit_offset": 0,
               "bit_width": 8,
-              "description": "8-bit transmit data",
-              "enum": null
+              "description": "8-bit transmit data"
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "ADDMODE": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Bit7",
-          "value": 0,
-          "description": "7-bit addressing mode"
-        },
-        {
-          "name": "Bit10",
-          "value": 1,
-          "description": "10-bit addressing mode"
-        }
-      ]
-    },
-    "AUTOEND": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Software",
-          "value": 0,
-          "description": "Software end mode: TC flag is set when NBYTES data are transferred, stretching SCL low"
-        },
-        {
-          "name": "Automatic",
-          "value": 1,
-          "description": "Automatic end mode: a STOP condition is automatically sent when NBYTES data are transferred"
-        }
-      ]
-    },
-    "DIR": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Write",
-          "value": 0,
-          "description": "Write transfer, slave enters receiver mode"
-        },
-        {
-          "name": "Read",
-          "value": 1,
-          "description": "Read transfer, slave enters transmitter mode"
-        }
-      ]
-    },
-    "DNF": {
-      "bit_size": 4,
-      "variants": [
-        {
-          "name": "NoFilter",
-          "value": 0,
-          "description": "Digital filter disabled"
-        },
-        {
-          "name": "Filter1",
-          "value": 1,
-          "description": "Digital filter enabled and filtering capability up to 1 tI2CCLK"
-        },
-        {
-          "name": "Filter2",
-          "value": 2,
-          "description": "Digital filter enabled and filtering capability up to 2 tI2CCLK"
-        },
-        {
-          "name": "Filter3",
-          "value": 3,
-          "description": "Digital filter enabled and filtering capability up to 3 tI2CCLK"
-        },
-        {
-          "name": "Filter4",
-          "value": 4,
-          "description": "Digital filter enabled and filtering capability up to 4 tI2CCLK"
-        },
-        {
-          "name": "Filter5",
-          "value": 5,
-          "description": "Digital filter enabled and filtering capability up to 5 tI2CCLK"
-        },
-        {
-          "name": "Filter6",
-          "value": 6,
-          "description": "Digital filter enabled and filtering capability up to 6 tI2CCLK"
-        },
-        {
-          "name": "Filter7",
-          "value": 7,
-          "description": "Digital filter enabled and filtering capability up to 7 tI2CCLK"
-        },
-        {
-          "name": "Filter8",
-          "value": 8,
-          "description": "Digital filter enabled and filtering capability up to 8 tI2CCLK"
-        },
-        {
-          "name": "Filter9",
-          "value": 9,
-          "description": "Digital filter enabled and filtering capability up to 9 tI2CCLK"
-        },
-        {
-          "name": "Filter10",
-          "value": 10,
-          "description": "Digital filter enabled and filtering capability up to 10 tI2CCLK"
-        },
-        {
-          "name": "Filter11",
-          "value": 11,
-          "description": "Digital filter enabled and filtering capability up to 11 tI2CCLK"
-        },
-        {
-          "name": "Filter12",
-          "value": 12,
-          "description": "Digital filter enabled and filtering capability up to 12 tI2CCLK"
-        },
-        {
-          "name": "Filter13",
-          "value": 13,
-          "description": "Digital filter enabled and filtering capability up to 13 tI2CCLK"
-        },
-        {
-          "name": "Filter14",
-          "value": 14,
-          "description": "Digital filter enabled and filtering capability up to 14 tI2CCLK"
-        },
-        {
-          "name": "Filter15",
-          "value": 15,
-          "description": "Digital filter enabled and filtering capability up to 15 tI2CCLK"
-        }
-      ]
-    },
-    "HEADR": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Complete",
-          "value": 0,
-          "description": "The master sends the complete 10 bit slave address read sequence"
-        },
-        {
-          "name": "Partial",
-          "value": 1,
-          "description": "The master only sends the 1st 7 bits of the 10 bit address, followed by Read direction"
-        }
-      ]
-    },
-    "OAMSK": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "NoMask",
-          "value": 0,
-          "description": "No mask"
-        },
-        {
-          "name": "Mask1",
-          "value": 1,
-          "description": "OA2[1] is masked and don’t care. Only OA2[7:2] are compared"
-        },
-        {
-          "name": "Mask2",
-          "value": 2,
-          "description": "OA2[2:1] are masked and don’t care. Only OA2[7:3] are compared"
-        },
-        {
-          "name": "Mask3",
-          "value": 3,
-          "description": "OA2[3:1] are masked and don’t care. Only OA2[7:4] are compared"
-        },
-        {
-          "name": "Mask4",
-          "value": 4,
-          "description": "OA2[4:1] are masked and don’t care. Only OA2[7:5] are compared"
-        },
-        {
-          "name": "Mask5",
-          "value": 5,
-          "description": "OA2[5:1] are masked and don’t care. Only OA2[7:6] are compared"
-        },
-        {
-          "name": "Mask6",
-          "value": 6,
-          "description": "OA2[6:1] are masked and don’t care. Only OA2[7] is compared."
-        },
-        {
-          "name": "Mask7",
-          "value": 7,
-          "description": "OA2[7:1] are masked and don’t care. No comparison is done, and all (except reserved) 7-bit received addresses are acknowledged"
-        }
-      ]
-    },
-    "RELOAD": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Completed",
-          "value": 0,
-          "description": "The transfer is completed after the NBYTES data transfer (STOP or RESTART will follow)"
-        },
-        {
-          "name": "NotCompleted",
-          "value": 1,
-          "description": "The transfer is not completed after the NBYTES data transfer (NBYTES will be reloaded)"
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

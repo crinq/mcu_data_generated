@@ -2,27 +2,52 @@
   "schema": 1,
   "kind": "syscfg",
   "version": "wb",
+  "source": "stm32rs_svd",
+  "source_device": "stm32wb55cc",
+  "source_file": "stm32wb55.svd.patched",
   "blocks": {
     "SYSCFG": {
       "name": "SYSCFG",
-      "description": "System configuration controller",
+      "description": "SYSCFG_VREFBUF",
       "extends": null,
       "registers": [
         {
           "name": "MEMRMP",
           "offset": 0,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "memory remap register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "memory remap register",
           "fields": [
             {
               "name": "MEM_MODE",
               "bit_offset": 0,
               "bit_width": 3,
               "description": "Memory mapping selection",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "MainFlash",
+                  "value": 0,
+                  "description": "Main Flash memory mapped at 0x0000_0000"
+                },
+                {
+                  "name": "SystemFlash",
+                  "value": 1,
+                  "description": "System Flash memory mapped at 0x0000_0000"
+                },
+                {
+                  "name": "SRAM",
+                  "value": 3,
+                  "description": "Embedded SRAM mapped at 0x0000_0000"
+                },
+                {
+                  "name": "QUADSPI",
+                  "value": 6,
+                  "description": "QUADSPI memory mapped at 0x0000_0000"
+                }
+              ]
             }
           ]
         },
@@ -30,84 +55,470 @@
           "name": "CFGR1",
           "offset": 4,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 2080374785,
           "description": "configuration register 1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "configuration register 1",
           "fields": [
             {
-              "name": "BOOSTEN",
-              "bit_offset": 8,
+              "name": "I2C3_FMP",
+              "bit_offset": 22,
               "bit_width": 1,
-              "description": "I/O analog switch voltage booster enable",
-              "enum": null
-            },
-            {
-              "name": "I2C_PB6_FMP",
-              "bit_offset": 16,
-              "bit_width": 1,
-              "description": "Fast-mode Plus (Fm+) driving capability activation on PB6",
-              "enum": null
-            },
-            {
-              "name": "I2C_PB7_FMP",
-              "bit_offset": 17,
-              "bit_width": 1,
-              "description": "Fast-mode Plus (Fm+) driving capability activation on PB7",
-              "enum": null
-            },
-            {
-              "name": "I2C_PB8_FMP",
-              "bit_offset": 18,
-              "bit_width": 1,
-              "description": "Fast-mode Plus (Fm+) driving capability activation on PB8",
-              "enum": null
-            },
-            {
-              "name": "I2C_PB9_FMP",
-              "bit_offset": 19,
-              "bit_width": 1,
-              "description": "Fast-mode Plus (Fm+) driving capability activation on PB9",
-              "enum": null
+              "description": "I2C3 Fast-mode Plus driving capability activation",
+              "enum_values": [
+                {
+                  "name": "Standard",
+                  "value": 0,
+                  "description": "FM+ mode is controlled by I2C_Pxx_FMP bits only"
+                },
+                {
+                  "name": "FMP",
+                  "value": 1,
+                  "description": "FM+ mode is enabled on all I2C3 pins selected through selection bits in GPIOx_AFR registers"
+                }
+              ]
             },
             {
               "name": "I2C1_FMP",
               "bit_offset": 20,
               "bit_width": 1,
               "description": "I2C1 Fast-mode Plus driving capability activation",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Standard",
+                  "value": 0,
+                  "description": "FM+ mode is controlled by I2C_Pxx_FMP bits only"
+                },
+                {
+                  "name": "FMP",
+                  "value": 1,
+                  "description": "FM+ mode is enabled on all I2C1 pins selected through selection bits in GPIOx_AFR registers"
+                }
+              ]
             },
             {
-              "name": "I2C3_FMP",
-              "bit_offset": 22,
+              "name": "I2C_PB9_FMP",
+              "bit_offset": 19,
               "bit_width": 1,
-              "description": "I2C3 Fast-mode Plus driving capability activation",
-              "enum": null
+              "description": "Fast-mode Plus (Fm+) driving capability activation on PB9",
+              "enum_values": [
+                {
+                  "name": "Standard",
+                  "value": 0,
+                  "description": "PB9 pin operate in standard mode"
+                },
+                {
+                  "name": "FMP",
+                  "value": 1,
+                  "description": "I2C FM+ mode enabled on PB9 and the Speed control is bypassed"
+                }
+              ]
             },
             {
-              "name": "FPU_IE",
+              "name": "I2C_PB8_FMP",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "Fast-mode Plus (Fm+) driving capability activation on PB8",
+              "enum_values": [
+                {
+                  "name": "Standard",
+                  "value": 0,
+                  "description": "PB8 pin operate in standard mode"
+                },
+                {
+                  "name": "FMP",
+                  "value": 1,
+                  "description": "I2C FM+ mode enabled on PB8 and the Speed control is bypassed"
+                }
+              ]
+            },
+            {
+              "name": "I2C_PB7_FMP",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "Fast-mode Plus (Fm+) driving capability activation on PB7",
+              "enum_values": [
+                {
+                  "name": "Standard",
+                  "value": 0,
+                  "description": "PB7 pin operate in standard mode"
+                },
+                {
+                  "name": "FMP",
+                  "value": 1,
+                  "description": "I2C FM+ mode enabled on PB7 and the Speed control is bypassed"
+                }
+              ]
+            },
+            {
+              "name": "I2C_PB6_FMP",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Fast-mode Plus (Fm+) driving capability activation on PB6",
+              "enum_values": [
+                {
+                  "name": "Standard",
+                  "value": 0,
+                  "description": "PB6 pin operate in standard mode"
+                },
+                {
+                  "name": "FMP",
+                  "value": 1,
+                  "description": "I2C FM+ mode enabled on PB6 and the Speed control is bypassed"
+                }
+              ]
+            },
+            {
+              "name": "BOOSTEN",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "I/O analog switch voltage booster enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "I/O analog switches are supplied by VDDA voltage. This is the recommended configuration when using the ADC in high VDDA voltage operation"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "I/O analog switches are supplied by a dedicated voltage booster (supplied by VDD). This is the recommended configuration when using the ADC in low VDDA voltage operation"
+                }
+              ]
+            },
+            {
+              "name": "FPU_IE0",
               "bit_offset": 26,
-              "bit_width": 6,
+              "bit_width": 1,
               "description": "Floating Point Unit interrupts enable bits",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Invalid operation interrupt disable"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Invalid operation interrupt enable"
+                }
+              ]
+            },
+            {
+              "name": "FPU_IE1",
+              "bit_offset": 27,
+              "bit_width": 1,
+              "description": "Floating Point Unit interrupts enable bits",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Devide-by-zero interrupt disable"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Devide-by-zero interrupt enable"
+                }
+              ]
+            },
+            {
+              "name": "FPU_IE2",
+              "bit_offset": 28,
+              "bit_width": 1,
+              "description": "Floating Point Unit interrupts enable bits",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Underflow interrupt disable"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Underflow interrupt enable"
+                }
+              ]
+            },
+            {
+              "name": "FPU_IE3",
+              "bit_offset": 29,
+              "bit_width": 1,
+              "description": "Floating Point Unit interrupts enable bits",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Overflow interrupt disable"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Overflow interrupt enable"
+                }
+              ]
+            },
+            {
+              "name": "FPU_IE4",
+              "bit_offset": 30,
+              "bit_width": 1,
+              "description": "Floating Point Unit interrupts enable bits",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Input denormal interrupt disable"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Input denormal interrupt enable"
+                }
+              ]
+            },
+            {
+              "name": "FPU_IE5",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "Floating Point Unit interrupts enable bits",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Inexact interrupt disable"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Inexact interrupt enable"
+                }
+              ]
             }
           ]
         },
         {
-          "name": "EXTICR",
+          "name": "EXTICR1",
           "offset": 8,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "external interrupt configuration register 1",
-          "array_len": 4,
-          "array_stride": 4,
-          "fieldset_description": "external interrupt configuration register 1",
+          "array_len": null,
+          "array_stride": null,
           "fields": [
             {
-              "name": "EXTI",
+              "name": "EXTI3",
+              "bit_offset": 12,
+              "bit_width": 3,
+              "description": "EXTI 3 configuration bits"
+            },
+            {
+              "name": "EXTI2",
+              "bit_offset": 8,
+              "bit_width": 3,
+              "description": "EXTI 2 configuration bits",
+              "enum_values": [
+                {
+                  "name": "PA",
+                  "value": 0,
+                  "description": "Select PAx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PB",
+                  "value": 1,
+                  "description": "Select PBx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PC",
+                  "value": 2,
+                  "description": "Select PCx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PD",
+                  "value": 3,
+                  "description": "Select PDx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PE",
+                  "value": 4,
+                  "description": "Select PEx as the source input for the EXTIx external interrupt"
+                }
+              ]
+            },
+            {
+              "name": "EXTI1",
+              "bit_offset": 4,
+              "bit_width": 3,
+              "description": "EXTI 1 configuration bits"
+            },
+            {
+              "name": "EXTI0",
               "bit_offset": 0,
               "bit_width": 3,
               "description": "EXTI 0 configuration bits",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "PA",
+                  "value": 0,
+                  "description": "Select PAx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PB",
+                  "value": 1,
+                  "description": "Select PBx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PC",
+                  "value": 2,
+                  "description": "Select PCx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PD",
+                  "value": 3,
+                  "description": "Select PDx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PE",
+                  "value": 4,
+                  "description": "Select PEx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PH",
+                  "value": 7,
+                  "description": "Select PHx as the source input for the EXTIx external interrupt"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "EXTICR2",
+          "offset": 12,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "external interrupt configuration register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "EXTI7",
+              "bit_offset": 12,
+              "bit_width": 3,
+              "description": "EXTI 7 configuration bits"
+            },
+            {
+              "name": "EXTI6",
+              "bit_offset": 8,
+              "bit_width": 3,
+              "description": "EXTI 6 configuration bits"
+            },
+            {
+              "name": "EXTI5",
+              "bit_offset": 4,
+              "bit_width": 3,
+              "description": "EXTI 5 configuration bits",
+              "enum_values": [
+                {
+                  "name": "PA",
+                  "value": 0,
+                  "description": "Select PAx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PB",
+                  "value": 1,
+                  "description": "Select PBx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PC",
+                  "value": 2,
+                  "description": "Select PCx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PD",
+                  "value": 3,
+                  "description": "Select PDx as the source input for the EXTIx external interrupt"
+                }
+              ]
+            },
+            {
+              "name": "EXTI4",
+              "bit_offset": 0,
+              "bit_width": 3,
+              "description": "EXTI 4 configuration bits"
+            }
+          ]
+        },
+        {
+          "name": "EXTICR3",
+          "offset": 16,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "external interrupt configuration register 3",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "EXTI11",
+              "bit_offset": 12,
+              "bit_width": 3,
+              "description": "EXTI 11 configuration bits"
+            },
+            {
+              "name": "EXTI10",
+              "bit_offset": 8,
+              "bit_width": 3,
+              "description": "EXTI 10 configuration bits"
+            },
+            {
+              "name": "EXTI9",
+              "bit_offset": 4,
+              "bit_width": 3,
+              "description": "EXTI 9 configuration bits"
+            },
+            {
+              "name": "EXTI8",
+              "bit_offset": 0,
+              "bit_width": 3,
+              "description": "EXTI 8 configuration bits"
+            }
+          ]
+        },
+        {
+          "name": "EXTICR4",
+          "offset": 20,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "external interrupt configuration register 4",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "EXTI15",
+              "bit_offset": 12,
+              "bit_width": 3,
+              "description": "EXTI15 configuration bits"
+            },
+            {
+              "name": "EXTI14",
+              "bit_offset": 8,
+              "bit_width": 3,
+              "description": "EXTI14 configuration bits"
+            },
+            {
+              "name": "EXTI13",
+              "bit_offset": 4,
+              "bit_width": 3,
+              "description": "EXTI13 configuration bits"
+            },
+            {
+              "name": "EXTI12",
+              "bit_offset": 0,
+              "bit_width": 3,
+              "description": "EXTI12 configuration bits"
             }
           ]
         },
@@ -115,31 +526,63 @@
           "name": "SCSR",
           "offset": 24,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "SCSR",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "SCSR",
           "fields": [
-            {
-              "name": "SRAM2ER",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "SRAM2 Erase",
-              "enum": null
-            },
             {
               "name": "SRAM2BSY",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "SRAM2 busy by erase operation",
-              "enum": null
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "Idle",
+                  "value": 0,
+                  "description": "No SRAM2 or PKA RAM erase operation is ongoing"
+                },
+                {
+                  "name": "Busy",
+                  "value": 1,
+                  "description": "SRAM2 and/or PKA RAM erase operation is ongoing"
+                }
+              ]
+            },
+            {
+              "name": "SRAM2ER",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "SRAM2 Erase",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Erase",
+                  "value": 1,
+                  "description": "Start SRAM2 erase operation"
+                }
+              ]
             },
             {
               "name": "C2RFD",
               "bit_offset": 31,
               "bit_width": 1,
               "description": "CPU2 SRAM fetch (execution) disable.",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "CPU2 fetch from SRAM1, SRAM2a and SRAM2b enabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "CPU2 fetch from SRAM1, SRAM2a and SRAM2b disabled"
+                }
+              ]
             }
           ]
         },
@@ -147,45 +590,131 @@
           "name": "CFGR2",
           "offset": 28,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "CFGR2",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "CFGR2",
           "fields": [
             {
-              "name": "CLL",
-              "bit_offset": 0,
+              "name": "SPF",
+              "bit_offset": 8,
               "bit_width": 1,
-              "description": "Cortex-M4 LOCKUP (Hardfault) output enable bit",
-              "enum": null
-            },
-            {
-              "name": "SPL",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "SRAM2 parity lock bit",
-              "enum": null
-            },
-            {
-              "name": "PVDL",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "PVD lock enable bit",
-              "enum": null
+              "description": "SRAM2 parity error flag",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Nominal",
+                  "value": 0,
+                  "description": "No SRAM2 parity error detected"
+                },
+                {
+                  "name": "Error",
+                  "value": 1,
+                  "description": "SRAM2 parity error detected"
+                },
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clear SRAM2 parity error flag"
+                }
+              ]
             },
             {
               "name": "ECCL",
               "bit_offset": 3,
               "bit_width": 1,
               "description": "ECC Lock",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disconnected",
+                  "value": 0,
+                  "description": "ECC error disconnected from TIM1/16/17 break input"
+                },
+                {
+                  "name": "Connected",
+                  "value": 1,
+                  "description": "ECC error connected to TIM1/16/17 break input"
+                },
+                {
+                  "name": "Connect",
+                  "value": 1,
+                  "description": "Connect ECC error to TIM1/16/17 break input"
+                }
+              ]
             },
             {
-              "name": "SPF",
-              "bit_offset": 8,
+              "name": "PVDL",
+              "bit_offset": 2,
               "bit_width": 1,
-              "description": "SRAM2 parity error flag",
-              "enum": null
+              "description": "PVD lock enable bit",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disconnected",
+                  "value": 0,
+                  "description": "PVD interrupt disconnected from TIM1/16/17 break input. PVDE and PLS[2:0] bits can be programmed by the application"
+                },
+                {
+                  "name": "Connected",
+                  "value": 1,
+                  "description": "PVD interrupt connected to TIM1/16/17 break input. PVDE and PLS[2:0] bits are read only"
+                },
+                {
+                  "name": "Connect",
+                  "value": 1,
+                  "description": "Connect PVD interretup to TIM1/16/17 break input"
+                }
+              ]
+            },
+            {
+              "name": "SPL",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "SRAM2 parity lock bit",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disconnected",
+                  "value": 0,
+                  "description": "SRAM2 parity error signal disconnected from TIM1/16/17 break input"
+                },
+                {
+                  "name": "Connected",
+                  "value": 1,
+                  "description": "SRAM2 parity error signal connected to TIM1/16/17 break input"
+                },
+                {
+                  "name": "Connect",
+                  "value": 1,
+                  "description": "Connect SRAM2 parity error signal to TIM1/16/17 break input"
+                }
+              ]
+            },
+            {
+              "name": "CLL",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Cortex-M4 LOCKUP (Hardfault) output enable bit",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disconnected",
+                  "value": 0,
+                  "description": "CPU LOCKUP output disconnected from TIM1/16/17 break input"
+                },
+                {
+                  "name": "Connected",
+                  "value": 1,
+                  "description": "CPU LOCKUP output connected to TIM1/16/17 break input"
+                },
+                {
+                  "name": "Connect",
+                  "value": 1,
+                  "description": "Connect CPU LOCKUP output to TIM1/16/17 break input"
+                }
+              ]
             }
           ]
         },
@@ -193,17 +722,227 @@
           "name": "SWPR",
           "offset": 32,
           "size": 32,
+          "access": "write-only",
+          "reset_value": 0,
           "description": "SRAM2 write protection register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "SRAM2 write protection register",
           "fields": [
             {
-              "name": "PWP",
+              "name": "P10WP",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "P10WP",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "SRAM2 1 KB page protection disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "SRAM2 1 KB page protection enabled"
+                }
+              ]
+            },
+            {
+              "name": "P31WP",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "SRAM2 page 31 write protection"
+            },
+            {
+              "name": "P30WP",
+              "bit_offset": 30,
+              "bit_width": 1,
+              "description": "P30WP"
+            },
+            {
+              "name": "P29WP",
+              "bit_offset": 29,
+              "bit_width": 1,
+              "description": "P29WP"
+            },
+            {
+              "name": "P28WP",
+              "bit_offset": 28,
+              "bit_width": 1,
+              "description": "P28WP"
+            },
+            {
+              "name": "P27WP",
+              "bit_offset": 27,
+              "bit_width": 1,
+              "description": "P27WP"
+            },
+            {
+              "name": "P26WP",
+              "bit_offset": 26,
+              "bit_width": 1,
+              "description": "P26WP"
+            },
+            {
+              "name": "P25WP",
+              "bit_offset": 25,
+              "bit_width": 1,
+              "description": "P25WP"
+            },
+            {
+              "name": "P24WP",
+              "bit_offset": 24,
+              "bit_width": 1,
+              "description": "P24WP"
+            },
+            {
+              "name": "P23WP",
+              "bit_offset": 23,
+              "bit_width": 1,
+              "description": "P23WP"
+            },
+            {
+              "name": "P22WP",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "P22WP"
+            },
+            {
+              "name": "P21WP",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "P21WP"
+            },
+            {
+              "name": "P20WP",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "P20WP"
+            },
+            {
+              "name": "P19WP",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "P19WP"
+            },
+            {
+              "name": "P18WP",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "P18WP"
+            },
+            {
+              "name": "P17WP",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "P17WP"
+            },
+            {
+              "name": "P16WP",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "P16WP"
+            },
+            {
+              "name": "P15WP",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "P15WP"
+            },
+            {
+              "name": "P14WP",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "P14WP"
+            },
+            {
+              "name": "P13WP",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "P13WP"
+            },
+            {
+              "name": "P12WP",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "P12WP"
+            },
+            {
+              "name": "P11WP",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "P11WP"
+            },
+            {
+              "name": "P0WP",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "P0WP",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "SRAM2 1 KB page protection disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "SRAM2 1 KB page protection enabled"
+                }
+              ]
+            },
+            {
+              "name": "P9WP",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "P9WP"
+            },
+            {
+              "name": "P8WP",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "P8WP"
+            },
+            {
+              "name": "P7WP",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "P7WP"
+            },
+            {
+              "name": "P6WP",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "P6WP"
+            },
+            {
+              "name": "P5WP",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "P5WP"
+            },
+            {
+              "name": "P4WP",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "P4WP"
+            },
+            {
+              "name": "P3WP",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "P3WP"
+            },
+            {
+              "name": "P2WP",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "P2WP"
+            },
+            {
+              "name": "P1WP",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "P1WP"
             }
           ]
         },
@@ -211,17 +950,34 @@
           "name": "SKR",
           "offset": 36,
           "size": 32,
+          "access": "write-only",
+          "reset_value": 0,
           "description": "SKR",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "SKR",
           "fields": [
             {
               "name": "KEY",
               "bit_offset": 0,
               "bit_width": 8,
               "description": "SRAM2 write protection key for software erase",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "WriteProtect",
+                  "value": 17,
+                  "description": "Activate SRAM2ER bits write protection"
+                },
+                {
+                  "name": "Step2",
+                  "value": 83,
+                  "description": "Step 2 to remove SRAM2ER bits write protection"
+                },
+                {
+                  "name": "Step1",
+                  "value": 202,
+                  "description": "Step 1 to remove SRAM2ER bits write protection"
+                }
+              ]
             }
           ]
         },
@@ -229,17 +985,273 @@
           "name": "SWPR2",
           "offset": 40,
           "size": 32,
+          "access": "write-only",
+          "reset_value": 0,
           "description": "SRAM2 write protection register 2",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "SRAM2 write protection register 2",
           "fields": [
             {
-              "name": "PWP",
+              "name": "P32WP",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "P32WP",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "SRAM2 1 KB page protection disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "SRAM2 1 KB page protection enabled"
+                }
+              ]
+            },
+            {
+              "name": "P63WP",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "SRAM2 page 63 write protection"
+            },
+            {
+              "name": "P62WP",
+              "bit_offset": 30,
+              "bit_width": 1,
+              "description": "P62WP"
+            },
+            {
+              "name": "P61WP",
+              "bit_offset": 29,
+              "bit_width": 1,
+              "description": "P61WP"
+            },
+            {
+              "name": "P60WP",
+              "bit_offset": 28,
+              "bit_width": 1,
+              "description": "P60WP"
+            },
+            {
+              "name": "P59WP",
+              "bit_offset": 27,
+              "bit_width": 1,
+              "description": "P59WP"
+            },
+            {
+              "name": "P58WP",
+              "bit_offset": 26,
+              "bit_width": 1,
+              "description": "P58WP"
+            },
+            {
+              "name": "P57WP",
+              "bit_offset": 25,
+              "bit_width": 1,
+              "description": "P57WP"
+            },
+            {
+              "name": "P56WP",
+              "bit_offset": 24,
+              "bit_width": 1,
+              "description": "P56WP"
+            },
+            {
+              "name": "P55WP",
+              "bit_offset": 23,
+              "bit_width": 1,
+              "description": "P55WP"
+            },
+            {
+              "name": "P54WP",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "P54WP"
+            },
+            {
+              "name": "P53WP",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "P53WP"
+            },
+            {
+              "name": "P52WP",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "P52WP"
+            },
+            {
+              "name": "P51WP",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "P51WP"
+            },
+            {
+              "name": "P50WP",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "P50WP"
+            },
+            {
+              "name": "P49WP",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "P49WP"
+            },
+            {
+              "name": "P48WP",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "P48WP"
+            },
+            {
+              "name": "P47WP",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "P47WP"
+            },
+            {
+              "name": "P46WP",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "P46WP"
+            },
+            {
+              "name": "P45WP",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "P45WP"
+            },
+            {
+              "name": "P44WP",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "P44WP"
+            },
+            {
+              "name": "P43WP",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "P43WP"
+            },
+            {
+              "name": "P42WP",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "P42WP"
+            },
+            {
+              "name": "P41WP",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "P41WP"
+            },
+            {
+              "name": "P40WP",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "P40WP"
+            },
+            {
+              "name": "P39WP",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "P39WP"
+            },
+            {
+              "name": "P38WP",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "P38WP"
+            },
+            {
+              "name": "P37WP",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "P37WP"
+            },
+            {
+              "name": "P36WP",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "P36WP"
+            },
+            {
+              "name": "P35WP",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "P35WP"
+            },
+            {
+              "name": "P34WP",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "P34WP"
+            },
+            {
+              "name": "P33WP",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "P33WP"
+            }
+          ]
+        },
+        {
+          "name": "VREFBUF_CSR",
+          "offset": 48,
+          "size": 32,
+          "access": null,
+          "reset_value": 2,
+          "description": "VREF control and status register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "ENVR",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Voltage reference buffer enable",
+              "access": "read-write"
+            },
+            {
+              "name": "HIZ",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "High impedance mode",
+              "access": "read-write"
+            },
+            {
+              "name": "VRS",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Voltage reference scale",
+              "access": "read-write"
+            },
+            {
+              "name": "VRR",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Voltage reference buffer ready",
+              "access": "read-only"
+            }
+          ]
+        },
+        {
+          "name": "VREFBUF_CCR",
+          "offset": 52,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "calibration control register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "TRIM",
+              "bit_offset": 0,
+              "bit_width": 6,
+              "description": "Trimming code"
             }
           ]
         },
@@ -247,108 +1259,107 @@
           "name": "IMR1",
           "offset": 256,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "CPU1 interrupt mask register 1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "CPU1 interrupt mask register 1",
           "fields": [
             {
               "name": "TIM1IM",
               "bit_offset": 13,
               "bit_width": 1,
               "description": "Peripheral TIM1 interrupt mask to CPU1",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Unmasked",
+                  "value": 0,
+                  "description": "Peripheral interrupt forwarded to CPU1"
+                },
+                {
+                  "name": "Masked",
+                  "value": 1,
+                  "description": "Peripheral interrupt to CPU1 masked"
+                }
+              ]
             },
             {
               "name": "TIM16IM",
               "bit_offset": 14,
               "bit_width": 1,
-              "description": "Peripheral TIM16 interrupt mask to CPU1",
-              "enum": null
+              "description": "Peripheral TIM16 interrupt mask to CPU1"
             },
             {
               "name": "TIM17IM",
               "bit_offset": 15,
               "bit_width": 1,
-              "description": "Peripheral TIM17 interrupt mask to CPU1",
-              "enum": null
+              "description": "Peripheral TIM17 interrupt mask to CPU1"
             },
             {
               "name": "EXIT5IM",
               "bit_offset": 21,
               "bit_width": 1,
-              "description": "Peripheral EXIT5 interrupt mask to CPU1",
-              "enum": null
+              "description": "Peripheral EXIT5 interrupt mask to CPU1"
             },
             {
               "name": "EXIT6IM",
               "bit_offset": 22,
               "bit_width": 1,
-              "description": "Peripheral EXIT6 interrupt mask to CPU1",
-              "enum": null
+              "description": "Peripheral EXIT6 interrupt mask to CPU1"
             },
             {
               "name": "EXIT7IM",
               "bit_offset": 23,
               "bit_width": 1,
-              "description": "Peripheral EXIT7 interrupt mask to CPU1",
-              "enum": null
+              "description": "Peripheral EXIT7 interrupt mask to CPU1"
             },
             {
               "name": "EXIT8IM",
               "bit_offset": 24,
               "bit_width": 1,
-              "description": "Peripheral EXIT8 interrupt mask to CPU1",
-              "enum": null
+              "description": "Peripheral EXIT8 interrupt mask to CPU1"
             },
             {
               "name": "EXIT9IM",
               "bit_offset": 25,
               "bit_width": 1,
-              "description": "Peripheral EXIT9 interrupt mask to CPU1",
-              "enum": null
+              "description": "Peripheral EXIT9 interrupt mask to CPU1"
             },
             {
               "name": "EXIT10IM",
               "bit_offset": 26,
               "bit_width": 1,
-              "description": "Peripheral EXIT10 interrupt mask to CPU1",
-              "enum": null
+              "description": "Peripheral EXIT10 interrupt mask to CPU1"
             },
             {
               "name": "EXIT11IM",
               "bit_offset": 27,
               "bit_width": 1,
-              "description": "Peripheral EXIT11 interrupt mask to CPU1",
-              "enum": null
+              "description": "Peripheral EXIT11 interrupt mask to CPU1"
             },
             {
               "name": "EXIT12IM",
               "bit_offset": 28,
               "bit_width": 1,
-              "description": "Peripheral EXIT12 interrupt mask to CPU1",
-              "enum": null
+              "description": "Peripheral EXIT12 interrupt mask to CPU1"
             },
             {
               "name": "EXIT13IM",
               "bit_offset": 29,
               "bit_width": 1,
-              "description": "Peripheral EXIT13 interrupt mask to CPU1",
-              "enum": null
+              "description": "Peripheral EXIT13 interrupt mask to CPU1"
             },
             {
               "name": "EXIT14IM",
               "bit_offset": 30,
               "bit_width": 1,
-              "description": "Peripheral EXIT14 interrupt mask to CPU1",
-              "enum": null
+              "description": "Peripheral EXIT14 interrupt mask to CPU1"
             },
             {
               "name": "EXIT15IM",
               "bit_offset": 31,
               "bit_width": 1,
-              "description": "Peripheral EXIT15 interrupt mask to CPU1",
-              "enum": null
+              "description": "Peripheral EXIT15 interrupt mask to CPU1"
             }
           ]
         },
@@ -356,31 +1367,41 @@
           "name": "IMR2",
           "offset": 260,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "CPU1 interrupt mask register 2",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "CPU1 interrupt mask register 2",
           "fields": [
             {
               "name": "PVM1IM",
               "bit_offset": 16,
               "bit_width": 1,
               "description": "Peripheral PVM1 interrupt mask to CPU1",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Unmasked",
+                  "value": 0,
+                  "description": "Peripheral interrupt forwarded to CPU1"
+                },
+                {
+                  "name": "Masked",
+                  "value": 1,
+                  "description": "Peripheral interrupt to CPU1 masked"
+                }
+              ]
             },
             {
               "name": "PVM3IM",
               "bit_offset": 18,
               "bit_width": 1,
-              "description": "Peripheral PVM3 interrupt mask to CPU1",
-              "enum": null
+              "description": "Peripheral PVM3 interrupt mask to CPU1"
             },
             {
               "name": "PVDIM",
               "bit_offset": 20,
               "bit_width": 1,
-              "description": "Peripheral PVD interrupt mask to CPU1",
-              "enum": null
+              "description": "Peripheral PVD interrupt mask to CPU1"
             }
           ]
         },
@@ -388,80 +1409,83 @@
           "name": "C2IMR1",
           "offset": 264,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "CPU2 interrupt mask register 1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "CPU2 interrupt mask register 1",
           "fields": [
             {
               "name": "RTCSTAMP",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "Peripheral RTCSTAMP interrupt mask to CPU2",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Unmasked",
+                  "value": 0,
+                  "description": "Peripheral interrupt forwarded to CPU2"
+                },
+                {
+                  "name": "Masked",
+                  "value": 1,
+                  "description": "Peripheral interrupt to CPU2 masked"
+                }
+              ]
             },
             {
               "name": "RTCWKUP",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "Peripheral RTCWKUP interrupt mask to CPU2",
-              "enum": null
+              "description": "Peripheral RTCWKUP interrupt mask to CPU2"
             },
             {
               "name": "RTCALARM",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "Peripheral RTCALARM interrupt mask to CPU2",
-              "enum": null
+              "description": "Peripheral RTCALARM interrupt mask to CPU2"
             },
             {
               "name": "RCC",
               "bit_offset": 5,
               "bit_width": 1,
-              "description": "Peripheral RCC interrupt mask to CPU2",
-              "enum": null
+              "description": "Peripheral RCC interrupt mask to CPU2"
             },
             {
               "name": "FLASH",
               "bit_offset": 6,
               "bit_width": 1,
-              "description": "Peripheral FLASH interrupt mask to CPU2",
-              "enum": null
+              "description": "Peripheral FLASH interrupt mask to CPU2"
             },
             {
               "name": "PKA",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "Peripheral PKA interrupt mask to CPU2",
-              "enum": null
+              "description": "Peripheral PKA interrupt mask to CPU2"
             },
             {
               "name": "RNG",
               "bit_offset": 9,
               "bit_width": 1,
-              "description": "Peripheral RNG interrupt mask to CPU2",
-              "enum": null
+              "description": "Peripheral RNG interrupt mask to CPU2"
             },
             {
               "name": "AES1",
               "bit_offset": 10,
               "bit_width": 1,
-              "description": "Peripheral AES1 interrupt mask to CPU2",
-              "enum": null
+              "description": "Peripheral AES1 interrupt mask to CPU2"
             },
             {
               "name": "COMP",
               "bit_offset": 11,
               "bit_width": 1,
-              "description": "Peripheral COMP interrupt mask to CPU2",
-              "enum": null
+              "description": "Peripheral COMP interrupt mask to CPU2"
             },
             {
               "name": "ADC",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "Peripheral ADC interrupt mask to CPU2",
-              "enum": null
+              "description": "Peripheral ADC interrupt mask to CPU2"
             }
           ]
         },
@@ -469,150 +1493,143 @@
           "name": "C2IMR2",
           "offset": 268,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "CPU2 interrupt mask register 1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "CPU2 interrupt mask register 1",
           "fields": [
             {
               "name": "DMA1_CH1_IM",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "Peripheral DMA1 CH1 interrupt mask to CPU2",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Unmasked",
+                  "value": 0,
+                  "description": "Peripheral interrupt forwarded to CPU2"
+                },
+                {
+                  "name": "Masked",
+                  "value": 1,
+                  "description": "Peripheral interrupt to CPU2 masked"
+                }
+              ]
             },
             {
               "name": "DMA1_CH2_IM",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Peripheral DMA1 CH2 interrupt mask to CPU2",
-              "enum": null
+              "description": "Peripheral DMA1 CH2 interrupt mask to CPU2"
             },
             {
               "name": "DMA1_CH3_IM",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "Peripheral DMA1 CH3 interrupt mask to CPU2",
-              "enum": null
+              "description": "Peripheral DMA1 CH3 interrupt mask to CPU2"
             },
             {
               "name": "DMA1_CH4_IM",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "Peripheral DMA1 CH4 interrupt mask to CPU2",
-              "enum": null
+              "description": "Peripheral DMA1 CH4 interrupt mask to CPU2"
             },
             {
               "name": "DMA1_CH5_IM",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "Peripheral DMA1 CH5 interrupt mask to CPU2",
-              "enum": null
+              "description": "Peripheral DMA1 CH5 interrupt mask to CPU2"
             },
             {
               "name": "DMA1_CH6_IM",
               "bit_offset": 5,
               "bit_width": 1,
-              "description": "Peripheral DMA1 CH6 interrupt mask to CPU2",
-              "enum": null
+              "description": "Peripheral DMA1 CH6 interrupt mask to CPU2"
             },
             {
               "name": "DMA1_CH7_IM",
               "bit_offset": 6,
               "bit_width": 1,
-              "description": "Peripheral DMA1 CH7 interrupt mask to CPU2",
-              "enum": null
+              "description": "Peripheral DMA1 CH7 interrupt mask to CPU2"
             },
             {
               "name": "DMA2_CH1_IM",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "Peripheral DMA2 CH1 interrupt mask to CPU1",
-              "enum": null
+              "description": "Peripheral DMA2 CH1 interrupt mask to CPU1"
             },
             {
               "name": "DMA2_CH2_IM",
               "bit_offset": 9,
               "bit_width": 1,
-              "description": "Peripheral DMA2 CH2 interrupt mask to CPU1",
-              "enum": null
+              "description": "Peripheral DMA2 CH2 interrupt mask to CPU1"
             },
             {
               "name": "DMA2_CH3_IM",
               "bit_offset": 10,
               "bit_width": 1,
-              "description": "Peripheral DMA2 CH3 interrupt mask to CPU1",
-              "enum": null
+              "description": "Peripheral DMA2 CH3 interrupt mask to CPU1"
             },
             {
               "name": "DMA2_CH4_IM",
               "bit_offset": 11,
               "bit_width": 1,
-              "description": "Peripheral DMA2 CH4 interrupt mask to CPU1",
-              "enum": null
+              "description": "Peripheral DMA2 CH4 interrupt mask to CPU1"
             },
             {
               "name": "DMA2_CH5_IM",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "Peripheral DMA2 CH5 interrupt mask to CPU1",
-              "enum": null
+              "description": "Peripheral DMA2 CH5 interrupt mask to CPU1"
             },
             {
               "name": "DMA2_CH6_IM",
               "bit_offset": 13,
               "bit_width": 1,
-              "description": "Peripheral DMA2 CH6 interrupt mask to CPU1",
-              "enum": null
+              "description": "Peripheral DMA2 CH6 interrupt mask to CPU1"
             },
             {
               "name": "DMA2_CH7_IM",
               "bit_offset": 14,
               "bit_width": 1,
-              "description": "Peripheral DMA2 CH7 interrupt mask to CPU1",
-              "enum": null
+              "description": "Peripheral DMA2 CH7 interrupt mask to CPU1"
             },
             {
               "name": "DMAM_UX1_IM",
               "bit_offset": 15,
               "bit_width": 1,
-              "description": "Peripheral DMAM UX1 interrupt mask to CPU1",
-              "enum": null
+              "description": "Peripheral DMAM UX1 interrupt mask to CPU1"
             },
             {
               "name": "PVM1IM",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "Peripheral PVM1IM interrupt mask to CPU1",
-              "enum": null
+              "description": "Peripheral PVM1IM interrupt mask to CPU1"
             },
             {
               "name": "PVM3IM",
               "bit_offset": 18,
               "bit_width": 1,
-              "description": "Peripheral PVM3IM interrupt mask to CPU1",
-              "enum": null
+              "description": "Peripheral PVM3IM interrupt mask to CPU1"
             },
             {
               "name": "PVDIM",
               "bit_offset": 20,
               "bit_width": 1,
-              "description": "Peripheral PVDIM interrupt mask to CPU1",
-              "enum": null
+              "description": "Peripheral PVDIM interrupt mask to CPU1"
             },
             {
               "name": "TSCIM",
               "bit_offset": 21,
               "bit_width": 1,
-              "description": "Peripheral TSCIM interrupt mask to CPU1",
-              "enum": null
+              "description": "Peripheral TSCIM interrupt mask to CPU1"
             },
             {
               "name": "LCDIM",
               "bit_offset": 22,
               "bit_width": 1,
-              "description": "Peripheral LCDIM interrupt mask to CPU1",
-              "enum": null
+              "description": "Peripheral LCDIM interrupt mask to CPU1"
             }
           ]
         },
@@ -620,31 +1637,83 @@
           "name": "SIPCR",
           "offset": 272,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "secure IP control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "secure IP control register",
           "fields": [
             {
-              "name": "SAES",
+              "name": "SAES1",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "Enable AES1 KEY[7:0] security.",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "AES1 KEY[7:0] security disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "AES1 KEY[7:0] security enabled"
+                }
+              ]
+            },
+            {
+              "name": "SAES2",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Enable AES2 security.",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "AES2 security disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "AES2 security enabled"
+                }
+              ]
             },
             {
               "name": "SPKA",
               "bit_offset": 2,
               "bit_width": 1,
               "description": "Enable PKA security",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "PKA security disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "PKA security enabled"
+                }
+              ]
             },
             {
               "name": "SRNG",
               "bit_offset": 3,
               "bit_width": 1,
               "description": "Enable True RNG security",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "True RNG security disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "True RNG security enabled"
+                }
+              ]
             }
           ]
         }

@@ -2,6 +2,9 @@
   "schema": 1,
   "kind": "pwr",
   "version": "f1",
+  "source": "stm32rs_svd",
+  "source_device": "stm32f100v8",
+  "source_file": "stm32f100.svd.patched",
   "blocks": {
     "PWR": {
       "name": "PWR",
@@ -12,59 +15,65 @@
           "name": "CR",
           "offset": 0,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "Power control register (PWR_CR)",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Power control register (PWR_CR)",
           "fields": [
             {
               "name": "LPDS",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Low Power Deep Sleep",
-              "enum": null
+              "description": "Low Power Deep Sleep"
             },
             {
               "name": "PDDS",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "Power Down Deep Sleep",
-              "enum": "PDDS"
+              "enum_values": [
+                {
+                  "name": "STOP_MODE",
+                  "value": 0,
+                  "description": "Enter Stop mode when the CPU enters deepsleep"
+                },
+                {
+                  "name": "STANDBY_MODE",
+                  "value": 1,
+                  "description": "Enter Standby mode when the CPU enters deepsleep"
+                }
+              ]
             },
             {
               "name": "CWUF",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "Clear Wake-up Flag",
-              "enum": null
+              "description": "Clear Wake-up Flag"
             },
             {
               "name": "CSBF",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "Clear STANDBY Flag",
-              "enum": null
+              "description": "Clear STANDBY Flag"
             },
             {
               "name": "PVDE",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "Power Voltage Detector Enable",
-              "enum": null
+              "description": "Power Voltage Detector Enable"
             },
             {
               "name": "PLS",
               "bit_offset": 5,
               "bit_width": 3,
-              "description": "PVD Level Selection",
-              "enum": null
+              "description": "PVD Level Selection"
             },
             {
               "name": "DBP",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "Disable Backup Domain write protection",
-              "enum": null
+              "description": "Disable Backup Domain write protection"
             }
           ]
         },
@@ -72,59 +81,44 @@
           "name": "CSR",
           "offset": 4,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "Power control register (PWR_CR)",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Power control register (PWR_CR)",
           "fields": [
             {
               "name": "WUF",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "Wake-Up Flag",
-              "enum": null
+              "access": "read-only"
             },
             {
               "name": "SBF",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "STANDBY Flag",
-              "enum": null
+              "access": "read-only"
             },
             {
               "name": "PVDO",
               "bit_offset": 2,
               "bit_width": 1,
               "description": "PVD Output",
-              "enum": null
+              "access": "read-only"
             },
             {
               "name": "EWUP",
               "bit_offset": 8,
               "bit_width": 1,
               "description": "Enable WKUP pin",
-              "enum": null
+              "access": "read-write"
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "PDDS": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "STOP_MODE",
-          "value": 0,
-          "description": "Enter Stop mode when the CPU enters deepsleep"
-        },
-        {
-          "name": "STANDBY_MODE",
-          "value": 1,
-          "description": "Enter Standby mode when the CPU enters deepsleep"
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

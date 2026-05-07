@@ -2,9 +2,12 @@
   "schema": 1,
   "kind": "spi",
   "version": "v5_i2s",
+  "source": "stm32rs_svd",
+  "source_device": "stm32h503cb",
+  "source_file": "stm32h503.svd.patched",
   "blocks": {
-    "SPI": {
-      "name": "SPI",
+    "SPI1": {
+      "name": "SPI1",
       "description": "Serial peripheral interface",
       "extends": null,
       "registers": [
@@ -12,80 +15,201 @@
           "name": "CR1",
           "offset": 0,
           "size": 32,
-          "description": "control register 1",
+          "access": null,
+          "reset_value": 0,
+          "description": "SPI/I2S control register 1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "control register 1",
           "fields": [
             {
               "name": "SPE",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Serial Peripheral Enable",
-              "enum": null
+              "description": "serial peripheral enable This bit is set by and cleared by software. When SPE=1, SPI data transfer is enabled, SPI_CFG1 and SPI_CFG2 configuration registers, CRCPOLY, UDRDR, IOLOCK bit in the SPI_CR1 register are write protected. They can be changed only when SPE=0. When SPE=0 any SPI operation is stopped and disabled, all the pending requests of the events with enabled interrupt are blocked except the MODF interrupt request (but their pending still propagates the request of the spi_plck clock), the SS output is deactivated at master, the RDY signal keeps not ready status at slave, the internal state machine is reseted, all the FIFOs content is flushed, CRC calculation initialized, receive data register is read zero. SPE is cleared and cannot be set when MODF error flag is active.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Peripheral disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Peripheral enabled"
+                }
+              ]
             },
             {
               "name": "MASRX",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "Master automatic SUSP in Receive mode",
-              "enum": null
+              "description": "master automatic suspension in Receive mode This bit is set and cleared by software to control continuous SPI transfer in master receiver mode and automatic management in order to avoid overrun condition. When SPI communication is suspended by hardware automatically, it could happen that few bits of next frame are already clocked out due to internal synchronization delay. This is why, the automatic suspension is not quite reliable when size of data drops below 8 bits. In this case, a safe suspension can be achieved by combination with delay inserted between data frames applied when MIDI parameter keeps a non zero value; sum of data size and the interleaved SPI cycles should always produce interval at length of 8 SPI clock periods at minimum. After software clearing of the SUSP bit, the communication resumes and continues by subsequent bits transaction without any next constraint. Prior the SUSP bit is cleared, the user must release the RxFIFO space as much as possible by reading out all the data packets available at RxFIFO based on the RXP flag indication to prevent any subsequent suspension.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Automatic suspend in master receive-only mode disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Automatic suspend in master receive-only mode enabled"
+                }
+              ]
             },
             {
               "name": "CSTART",
               "bit_offset": 9,
               "bit_width": 1,
-              "description": "Master transfer start",
-              "enum": null
+              "description": "master transfer start This bit can be set by software if SPI is enabled only to start an SPI or I2S/PCM communication. In SPI mode, it is cleared by hardware when end of transfer (EOT) flag is set or when a transaction suspend request is accepted. In I2S/PCM mode, it is also cleared by hardware as described in the . In SPI mode, the bit is taken into account at master mode only. If transmission is enabled, communication starts or continues only if any data is available in the transmission FIFO.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NotStarted",
+                  "value": 0,
+                  "description": "Do not start master transfer"
+                },
+                {
+                  "name": "Started",
+                  "value": 1,
+                  "description": "Start master transfer"
+                }
+              ]
             },
             {
               "name": "CSUSP",
               "bit_offset": 10,
               "bit_width": 1,
-              "description": "Master SUSPend request",
-              "enum": null
+              "description": "master SUSPend request This bit reads as zero. In Master mode, when this bit is set by software, the CSTART bit is reset at the end of the current frame and communication is suspended. The user has to check SUSP flag to check end of the frame transaction. The Master mode communication must be suspended (using this bit or keeping TXDR empty) before going to Low-power mode. Can be used in SPI or I2S mode. After software suspension, SUSP flag has to be cleared and SPI disabled and re-enabled before the next transaction starts.",
+              "access": "write-only",
+              "enum_values": [
+                {
+                  "name": "NotRequested",
+                  "value": 0,
+                  "description": "Do not request master suspend"
+                },
+                {
+                  "name": "Requested",
+                  "value": 1,
+                  "description": "Request master suspend"
+                }
+              ]
             },
             {
               "name": "HDDIR",
               "bit_offset": 11,
               "bit_width": 1,
-              "description": "Rx/Tx direction at Half-duplex mode",
-              "enum": "HDDIR"
+              "description": "Rx/Tx direction at Half-duplex mode In Half-Duplex configuration the HDDIR bit establishes the Rx/Tx direction of the data transfer. This bit is ignored in Full-Duplex or any Simplex configuration.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Receiver",
+                  "value": 0,
+                  "description": "Receiver in half duplex mode"
+                },
+                {
+                  "name": "Transmitter",
+                  "value": 1,
+                  "description": "Transmitter in half duplex mode"
+                }
+              ]
             },
             {
               "name": "SSI",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "Internal SS signal input level",
-              "enum": null
+              "description": "internal SS signal input level This bit has an effect only when the SSM bit is set. The value of this bit is forced onto the peripheral SS input internally and the I/O value of the SS pin is ignored.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "SlaveSelected",
+                  "value": 0,
+                  "description": "0 is forced onto the SS signal and the I/O value of the SS pin is ignored"
+                },
+                {
+                  "name": "SlaveNotSelected",
+                  "value": 1,
+                  "description": "1 is forced onto the SS signal and the I/O value of the SS pin is ignored"
+                }
+              ]
             },
             {
               "name": "CRC33_17",
               "bit_offset": 13,
               "bit_width": 1,
-              "description": "Full size (33-bit or 17-bit) CRC polynomial is used",
-              "enum": null
+              "description": "32-bit CRC polynomial configuration",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Full size (33/17 bit) CRC polynomial is not used"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Full size (33/17 bit) CRC polynomial is used"
+                }
+              ]
             },
             {
               "name": "RCRCINI",
               "bit_offset": 14,
               "bit_width": 1,
               "description": "CRC calculation initialization pattern control for receiver",
-              "enum": "RCRCINI"
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "AllZeros",
+                  "value": 0,
+                  "description": "All zeros RX CRC initialization pattern"
+                },
+                {
+                  "name": "AllOnes",
+                  "value": 1,
+                  "description": "All ones RX CRC initialization pattern"
+                }
+              ]
             },
             {
               "name": "TCRCINI",
               "bit_offset": 15,
               "bit_width": 1,
               "description": "CRC calculation initialization pattern control for transmitter",
-              "enum": "TCRCINI"
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "AllZeros",
+                  "value": 0,
+                  "description": "All zeros TX CRC initialization pattern"
+                },
+                {
+                  "name": "AllOnes",
+                  "value": 1,
+                  "description": "All ones TX CRC initialization pattern"
+                }
+              ]
             },
             {
               "name": "IOLOCK",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "Locking the AF configuration of associated IOs",
-              "enum": null
+              "description": "locking the AF configuration of associated IOs This bit is set by software and cleared by hardware whenever the SPE bit is changed from 1 to 0. When this bit is set, SPI_CFG2 register content cannot be modified. This bit can be set when SPI is disabled only else it is write protected. It is cleared and cannot be set when MODF bit is set.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Unlocked",
+                  "value": 0,
+                  "description": "IO configuration unlocked"
+                },
+                {
+                  "name": "Locked",
+                  "value": 1,
+                  "description": "IO configuration locked"
+                }
+              ]
             }
           ]
         },
@@ -93,17 +217,18 @@
           "name": "CR2",
           "offset": 4,
           "size": 32,
-          "description": "control register 2",
+          "access": null,
+          "reset_value": 0,
+          "description": "SPI/I2S control register 2",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "control register 2",
           "fields": [
             {
               "name": "TSIZE",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "Number of data at current transfer",
-              "enum": null
+              "description": "number of data at current transfer When these bits are changed by software, the SPI has to be disabled. Endless transaction is initialized when CSTART is set while zero value is stored at TSIZE. TSIZE cannot be set to 0xFFFF respective 0x3FFF value when CRC is enabled. Note: TSIZE[15:10] bits are reserved at limited feature set instances and must be kept at reset value.",
+              "access": "read-write"
             }
           ]
         },
@@ -111,73 +236,258 @@
           "name": "CFG1",
           "offset": 8,
           "size": 32,
-          "description": "configuration register 1",
+          "access": null,
+          "reset_value": 458759,
+          "description": "SPI/I2S configuration register 1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "configuration register 1",
           "fields": [
             {
               "name": "DSIZE",
               "bit_offset": 0,
               "bit_width": 5,
-              "description": "Number of bits in at single SPI data frame",
-              "enum": null
+              "description": "number of bits in at single SPI data frame ..... Note: Maximum data size can be limited up to 16-bits at some instances. At instances with limited set of features, DSIZE2:0] bits are reserved and must be kept at reset state. DSIZE[4:3] bits then control next settings of data size: 00xxx: 8-bits 01xxx: 16-bits 10xxx: 24-bits 11xxx: 32-bits.",
+              "access": "read-write"
             },
             {
               "name": "FTHLV",
               "bit_offset": 5,
               "bit_width": 4,
-              "description": "threshold level",
-              "enum": "FTHLV"
+              "description": "FIFO threshold level Defines number of data frames at single data packet. Size of the packet should not exceed 1/2 of FIFO space.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "OneFrame",
+                  "value": 0,
+                  "description": "1 frame"
+                },
+                {
+                  "name": "TwoFrames",
+                  "value": 1,
+                  "description": "2 frames"
+                },
+                {
+                  "name": "ThreeFrames",
+                  "value": 2,
+                  "description": "3 frames"
+                },
+                {
+                  "name": "FourFrames",
+                  "value": 3,
+                  "description": "4 frames"
+                },
+                {
+                  "name": "FiveFrames",
+                  "value": 4,
+                  "description": "5 frames"
+                },
+                {
+                  "name": "SixFrames",
+                  "value": 5,
+                  "description": "6 frames"
+                },
+                {
+                  "name": "SevenFrames",
+                  "value": 6,
+                  "description": "7 frames"
+                },
+                {
+                  "name": "EightFrames",
+                  "value": 7,
+                  "description": "8 frames"
+                },
+                {
+                  "name": "NineFrames",
+                  "value": 8,
+                  "description": "9 frames"
+                },
+                {
+                  "name": "TenFrames",
+                  "value": 9,
+                  "description": "10 frames"
+                },
+                {
+                  "name": "ElevenFrames",
+                  "value": 10,
+                  "description": "11 frames"
+                },
+                {
+                  "name": "TwelveFrames",
+                  "value": 11,
+                  "description": "12 frames"
+                },
+                {
+                  "name": "ThirteenFrames",
+                  "value": 12,
+                  "description": "13 frames"
+                },
+                {
+                  "name": "FourteenFrames",
+                  "value": 13,
+                  "description": "14 frames"
+                },
+                {
+                  "name": "FifteenFrames",
+                  "value": 14,
+                  "description": "15 frames"
+                },
+                {
+                  "name": "SixteenFrames",
+                  "value": 15,
+                  "description": "16 frames"
+                }
+              ]
             },
             {
               "name": "UDRCFG",
               "bit_offset": 9,
-              "bit_width": 2,
-              "description": "Behavior of slave transmitter at underrun condition",
-              "enum": "UDRCFG"
+              "bit_width": 1,
+              "description": "behavior of slave transmitter at underrun condition For more details see underrun condition.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Constant",
+                  "value": 0,
+                  "description": "Slave sends a constant underrun pattern"
+                },
+                {
+                  "name": "RepeatReceived",
+                  "value": 1,
+                  "description": "Slave repeats last received data frame from master"
+                }
+              ]
             },
             {
               "name": "RXDMAEN",
               "bit_offset": 14,
               "bit_width": 1,
               "description": "Rx DMA stream enable",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Rx buffer DMA disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Rx buffer DMA enabled"
+                }
+              ]
             },
             {
               "name": "TXDMAEN",
               "bit_offset": 15,
               "bit_width": 1,
               "description": "Tx DMA stream enable",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Tx buffer DMA disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Tx buffer DMA enabled"
+                }
+              ]
             },
             {
               "name": "CRCSIZE",
               "bit_offset": 16,
               "bit_width": 5,
-              "description": "Length of CRC frame to be transacted and compared",
-              "enum": null
+              "description": "length of CRC frame to be transacted and compared Most significant bits are taken into account from polynomial calculation when CRC result is transacted or compared. The length of the polynomial is not affected by this setting. ..... The value must be set equal or multiply of data size (DSIZE[4:0]). Its maximum size corresponds to DSIZE maximum at the instance. Note: The most significant bit at CRCSIZE bit field is reserved at the peripheral instances where data size is limited to 16-bit.",
+              "access": "read-write"
             },
             {
               "name": "CRCEN",
               "bit_offset": 22,
               "bit_width": 1,
-              "description": "Hardware CRC computation enable",
-              "enum": null
+              "description": "hardware CRC computation enable",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "CRC calculation disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "CRC calculation enabled"
+                }
+              ]
             },
             {
               "name": "MBR",
               "bit_offset": 28,
               "bit_width": 3,
-              "description": "Master baud rate",
-              "enum": "MBR"
+              "description": "master baud rate prescaler setting Note: MBR setting is considered at slave working at TI mode, too (see mode).",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Div2",
+                  "value": 0,
+                  "description": "f_spi_ker_ck / 2"
+                },
+                {
+                  "name": "Div4",
+                  "value": 1,
+                  "description": "f_spi_ker_ck / 4"
+                },
+                {
+                  "name": "Div8",
+                  "value": 2,
+                  "description": "f_spi_ker_ck / 8"
+                },
+                {
+                  "name": "Div16",
+                  "value": 3,
+                  "description": "f_spi_ker_ck / 16"
+                },
+                {
+                  "name": "Div32",
+                  "value": 4,
+                  "description": "f_spi_ker_ck / 32"
+                },
+                {
+                  "name": "Div64",
+                  "value": 5,
+                  "description": "f_spi_ker_ck / 64"
+                },
+                {
+                  "name": "Div128",
+                  "value": 6,
+                  "description": "f_spi_ker_ck / 128"
+                },
+                {
+                  "name": "Div256",
+                  "value": 7,
+                  "description": "f_spi_ker_ck / 256"
+                }
+              ]
             },
             {
               "name": "BPASS",
               "bit_offset": 31,
               "bit_width": 1,
               "description": "bypass of the prescaler at master baud rate clock generator",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Bypass is disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Bypass is enabled"
+                }
+              ]
             }
           ]
         },
@@ -185,122 +495,301 @@
           "name": "CFG2",
           "offset": 12,
           "size": 32,
-          "description": "configuration register 2",
+          "access": null,
+          "reset_value": 0,
+          "description": "SPI/I2S configuration register 2",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "configuration register 2",
           "fields": [
             {
               "name": "MSSI",
               "bit_offset": 0,
               "bit_width": 4,
-              "description": "Master SS Idleness",
-              "enum": null
+              "description": "Master SS Idleness Specifies an extra delay, expressed in number of SPI clock cycle periods, inserted additionally between active edge of SS opening a session and the beginning of the first data frame of the session in Master mode when SSOE is enabled. ... Note: This feature is not supported in TI mode. To include the delay, the SPI must be disabled and re-enabled between sessions.",
+              "access": "read-write"
             },
             {
               "name": "MIDI",
               "bit_offset": 4,
               "bit_width": 4,
-              "description": "Master Inter-Data Idleness",
-              "enum": null
+              "description": "master Inter-Data Idleness Specifies minimum time delay (expressed in SPI clock cycles periods) inserted between two consecutive data frames in Master mode. ... Note: This feature is not supported in TI mode.",
+              "access": "read-write"
             },
             {
               "name": "RDIOM",
               "bit_offset": 13,
               "bit_width": 1,
-              "description": "RDY signal input/output management\n Note: When DSIZE at the CFG1 register is configured shorter than 8-bit, the RDIOM bit has to be kept at zero.",
-              "enum": "RDIOM"
+              "description": "RDY signal input/output management Note: When DSIZE at the SPI_CFG1 register is configured shorter than 8-bit, the RDIOM bit has to be kept at zero.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Active",
+                  "value": 0,
+                  "description": "RDY signal is defined internally fixed as permanently active (RDIOP setting has no effect)"
+                },
+                {
+                  "name": "Pin",
+                  "value": 1,
+                  "description": "RDY signal is overtaken from alternate function input (at master case) or output (at slave case) of the dedicated pin (RDIOP setting takes effect)"
+                }
+              ]
             },
             {
               "name": "RDIOP",
               "bit_offset": 14,
               "bit_width": 1,
               "description": "RDY signal input/output polarity",
-              "enum": "RDIOP"
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "High",
+                  "value": 0,
+                  "description": "high level of the signal means the slave is ready for communication"
+                },
+                {
+                  "name": "Low",
+                  "value": 1,
+                  "description": "low level of the signal means the slave is ready for communication"
+                }
+              ]
             },
             {
               "name": "IOSWP",
               "bit_offset": 15,
               "bit_width": 1,
-              "description": "Swap functionality of MISO and MOSI pins",
-              "enum": null
+              "description": "swap functionality of MISO and MOSI pins When this bit is set, the function of MISO and MOSI pins alternate functions are inverted. Original MISO pin becomes MOSI and original MOSI pin becomes MISO. Note: This bit can be also used in PCM and I2S modes to swap SDO and SDI pins.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "MISO and MOSI not swapped"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "MISO and MOSI swapped"
+                }
+              ]
             },
             {
               "name": "COMM",
               "bit_offset": 17,
               "bit_width": 2,
               "description": "SPI Communication Mode",
-              "enum": "COMM"
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "FullDuplex",
+                  "value": 0,
+                  "description": "Full duplex"
+                },
+                {
+                  "name": "Transmitter",
+                  "value": 1,
+                  "description": "Simplex transmitter only"
+                },
+                {
+                  "name": "Receiver",
+                  "value": 2,
+                  "description": "Simplex receiver only"
+                },
+                {
+                  "name": "HalfDuplex",
+                  "value": 3,
+                  "description": "Half duplex"
+                }
+              ]
             },
             {
               "name": "SP",
               "bit_offset": 19,
               "bit_width": 3,
-              "description": "Serial Protocol",
-              "enum": "SP"
+              "description": "serial protocol others: reserved, must not be used",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Motorola",
+                  "value": 0,
+                  "description": "Motorola SPI protocol"
+                },
+                {
+                  "name": "TI",
+                  "value": 1,
+                  "description": "TI SPI protocol"
+                }
+              ]
             },
             {
               "name": "MASTER",
               "bit_offset": 22,
               "bit_width": 1,
               "description": "SPI Master",
-              "enum": "MASTER"
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Slave",
+                  "value": 0,
+                  "description": "Slave configuration"
+                },
+                {
+                  "name": "Master",
+                  "value": 1,
+                  "description": "Master configuration"
+                }
+              ]
             },
             {
-              "name": "LSBFIRST",
+              "name": "LSBFRST",
               "bit_offset": 23,
               "bit_width": 1,
-              "description": "Data frame format",
-              "enum": "LSBFIRST"
+              "description": "data frame format Note: This bit can be also used in PCM and I2S modes.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "MSBFirst",
+                  "value": 0,
+                  "description": "Data is transmitted/received with the MSB first"
+                },
+                {
+                  "name": "LSBFirst",
+                  "value": 1,
+                  "description": "Data is transmitted/received with the LSB first"
+                }
+              ]
             },
             {
               "name": "CPHA",
               "bit_offset": 24,
               "bit_width": 1,
-              "description": "Clock phase",
-              "enum": "CPHA"
+              "description": "clock phase",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "FirstEdge",
+                  "value": 0,
+                  "description": "The first clock transition is the first data capture edge"
+                },
+                {
+                  "name": "SecondEdge",
+                  "value": 1,
+                  "description": "The second clock transition is the first data capture edge"
+                }
+              ]
             },
             {
               "name": "CPOL",
               "bit_offset": 25,
               "bit_width": 1,
-              "description": "Clock polarity",
-              "enum": "CPOL"
+              "description": "clock polarity",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "IdleLow",
+                  "value": 0,
+                  "description": "CK to 0 when idle"
+                },
+                {
+                  "name": "IdleHigh",
+                  "value": 1,
+                  "description": "CK to 1 when idle"
+                }
+              ]
             },
             {
               "name": "SSM",
               "bit_offset": 26,
               "bit_width": 1,
-              "description": "Software management of SS signal input",
-              "enum": null
+              "description": "software management of SS signal input When master uses hardware SS output (SSM=0 and SSOE=1) the SS signal input is forced to not active state internally to prevent master mode fault error.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Software slave management disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Software slave management enabled"
+                }
+              ]
             },
             {
               "name": "SSIOP",
               "bit_offset": 28,
               "bit_width": 1,
               "description": "SS input/output polarity",
-              "enum": "SSIOP"
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "ActiveLow",
+                  "value": 0,
+                  "description": "Low level is active for SS signal"
+                },
+                {
+                  "name": "ActiveHigh",
+                  "value": 1,
+                  "description": "High level is active for SS signal"
+                }
+              ]
             },
             {
               "name": "SSOE",
               "bit_offset": 29,
               "bit_width": 1,
-              "description": "SS output enable",
-              "enum": null
+              "description": "SS output enable This bit is taken into account in Master mode only",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "SS output is disabled in master mode"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "SS output is enabled in master mode"
+                }
+              ]
             },
             {
               "name": "SSOM",
               "bit_offset": 30,
               "bit_width": 1,
-              "description": "SS output management in master mode",
-              "enum": "SSOM"
+              "description": "SS output management in Master mode This bit is taken into account in Master mode when SSOE is enabled. It allows the SS output to be configured between two consecutive data transfers.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Asserted",
+                  "value": 0,
+                  "description": "SS is asserted until data transfer complete"
+                },
+                {
+                  "name": "NotAsserted",
+                  "value": 1,
+                  "description": "Data frames interleaved with SS not asserted during MIDI"
+                }
+              ]
             },
             {
               "name": "AFCNTR",
               "bit_offset": 31,
               "bit_width": 1,
-              "description": "Alternate function always control GPIOs",
-              "enum": null
+              "description": "alternate function GPIOs control This bit is taken into account when SPE=0 only When SPI has to be disabled temporary for a specific configuration reason (e.g. CRC reset, CPHA or HDDIR change) setting this bit prevents any glitches on the associated outputs configured at alternate function mode by keeping them forced at state corresponding the current SPI configuration. Note: This bit can be also used in PCM and I2S modes. Note: The bit AFCNTR must not be set to 1, when the block is in slave mode.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NotControlled",
+                  "value": 0,
+                  "description": "Peripheral takes no control of GPIOs while disabled"
+                },
+                {
+                  "name": "Controlled",
+                  "value": 1,
+                  "description": "Peripheral controls GPIOs while disabled"
+                }
+              ]
             }
           ]
         },
@@ -308,80 +797,93 @@
           "name": "IER",
           "offset": 16,
           "size": 32,
-          "description": "Interrupt Enable Register",
+          "access": null,
+          "reset_value": 0,
+          "description": "SPI/I2S interrupt enable register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Interrupt Enable Register",
           "fields": [
             {
               "name": "RXPIE",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "RXP Interrupt Enable",
-              "enum": null
+              "description": "RXP interrupt enable",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Interrupt enabled"
+                }
+              ]
             },
             {
               "name": "TXPIE",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "TXP interrupt enable",
-              "enum": null
+              "description": "TXP interrupt enable TXPIE is set by software and cleared by TXTF flag set event.",
+              "access": "read-write"
             },
             {
               "name": "DXPIE",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "DXP interrupt enabled",
-              "enum": null
+              "description": "DXP interrupt enabled DXPIE is set by software and cleared by TXTF flag set event.",
+              "access": "read-write"
             },
             {
               "name": "EOTIE",
               "bit_offset": 3,
               "bit_width": 1,
               "description": "EOT, SUSP and TXC interrupt enable",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "TXTFIE",
               "bit_offset": 4,
               "bit_width": 1,
               "description": "TXTFIE interrupt enable",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "UDRIE",
               "bit_offset": 5,
               "bit_width": 1,
               "description": "UDR interrupt enable",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "OVRIE",
               "bit_offset": 6,
               "bit_width": 1,
               "description": "OVR interrupt enable",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "CRCEIE",
               "bit_offset": 7,
               "bit_width": 1,
-              "description": "CRC Interrupt enable",
-              "enum": null
+              "description": "CRC error interrupt enable",
+              "access": "read-write"
             },
             {
               "name": "TIFREIE",
               "bit_offset": 8,
               "bit_width": 1,
               "description": "TIFRE interrupt enable",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "MODFIE",
               "bit_offset": 9,
               "bit_width": 1,
-              "description": "Mode Fault interrupt enable",
-              "enum": null
+              "description": "mode Fault interrupt enable",
+              "access": "read-write"
             }
           ]
         },
@@ -389,115 +891,294 @@
           "name": "SR",
           "offset": 20,
           "size": 32,
-          "description": "Status Register",
+          "access": null,
+          "reset_value": 4098,
+          "description": "SPI/I2S status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Status Register",
           "fields": [
             {
               "name": "RXP",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Rx-Packet available",
-              "enum": null
+              "description": "Rx-Packet available In I2S mode, it must be interpreted as follow: RxFIFO level is lower than FTHLV In I2S mode, it must be interpreted as follow: RxFIFO level is higher or equal to FTHLV RXP flag is changed by hardware. It monitors number of overall data currently available at RxFIFO if SPI is enabled. It has to be checked once a data packet is completely read out from RxFIFO.",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "Empty",
+                  "value": 0,
+                  "description": "Rx buffer empty"
+                },
+                {
+                  "name": "NotEmpty",
+                  "value": 1,
+                  "description": "Rx buffer not empty"
+                }
+              ]
             },
             {
               "name": "TXP",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Tx-Packet space available",
-              "enum": null
+              "description": "Tx-Packet space available In I2S mode, it must be interpreted as follow: there is less than FTHLV free locations in the TxFIFO In I2S mode, it must be interpreted as follow: there is FTHLV or more than FTHLV free locations in the TxFIFO TXP flag is changed by hardware. It monitors overall space currently available at TxFIFO no matter if SPI is enabled or not. It has to be checked once a complete data packet is stored at TxFIFO.",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "Full",
+                  "value": 0,
+                  "description": "Tx buffer full"
+                },
+                {
+                  "name": "NotFull",
+                  "value": 1,
+                  "description": "Tx buffer not full"
+                }
+              ]
             },
             {
               "name": "DXP",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "Duplex Packet",
-              "enum": null
+              "description": "duplex packet DXP flag is set whenever both TXP and RXP flags are set regardless SPI mode.",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "Unavailable",
+                  "value": 0,
+                  "description": "Duplex packet unavailable: no space for transmission and/or no data received"
+                },
+                {
+                  "name": "Available",
+                  "value": 1,
+                  "description": "Duplex packet available: space for transmission and data received"
+                }
+              ]
             },
             {
               "name": "EOT",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "End Of Transfer",
-              "enum": null
+              "description": "end of transfer EOT is set by hardware as soon as a full transfer is complete, that is when SPI is re-enabled or when TSIZE number of data have been transmitted and/or received on the SPI. EOT is cleared when SPI is re-enabled or by writing 1 to EOTC bit of SPI_IFCR optionally. EOT flag triggers an interrupt if EOTIE bit is set. If DXP flag is used until TXTF flag is set and DXPIE is cleared, EOT can be used to download the last packets contained into RxFIFO in one-shot. In master, EOT event terminates the data transaction and handles SS output optionally. When CRC is applied, the EOT event is extended over the CRC frame transaction. To restart the internal state machine properly, SPI is strongly suggested to be disabled and re-enabled before next transaction starts despite its setting is not changed.",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotCompleted",
+                  "value": 0,
+                  "description": "Transfer ongoing or not started"
+                },
+                {
+                  "name": "Completed",
+                  "value": 1,
+                  "description": "Transfer complete"
+                }
+              ]
             },
             {
               "name": "TXTF",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "Transmission Transfer Filled",
-              "enum": null
+              "description": "transmission transfer filled TXTF is set by hardware as soon as all of the data packets in a transfer have been submitted for transmission by application software or DMA, that is when TSIZE number of data have been pushed into the TxFIFO. This bit is cleared by software write 1 to TXTFC bit of SPI_IFCR exclusively. TXTF flag triggers an interrupt if TXTFIE bit is set. TXTF setting clears the TXPIE and DXPIE masks so to off-load application software from calculating when to disable TXP and DXP interrupts.",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotCompleted",
+                  "value": 0,
+                  "description": "Transmission buffer incomplete"
+                },
+                {
+                  "name": "Completed",
+                  "value": 1,
+                  "description": "Transmission buffer filled with at least one transfer"
+                }
+              ]
             },
             {
               "name": "UDR",
               "bit_offset": 5,
               "bit_width": 1,
-              "description": "Underrun at slave transmission mode",
-              "enum": null
+              "description": "underrun This bit is cleared when SPI is re-enabled or by writing 1 to UDRC bit of SPI_IFCR optionally. Note: In SPI mode, the UDR flag applies to Slave mode only. In I2S/PCM mode, (when available) this flag applies to Master and Slave mode",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NoUnderrun",
+                  "value": 0,
+                  "description": "No underrun occurred"
+                },
+                {
+                  "name": "Underrun",
+                  "value": 1,
+                  "description": "Underrun occurred"
+                }
+              ]
             },
             {
               "name": "OVR",
               "bit_offset": 6,
               "bit_width": 1,
-              "description": "Overrun",
-              "enum": null
+              "description": "overrun This bit is cleared when SPI is re-enabled or by writing 1 to OVRC bit of SPI_IFCR optionally.",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NoOverrun",
+                  "value": 0,
+                  "description": "No overrun occurred"
+                },
+                {
+                  "name": "Overrun",
+                  "value": 1,
+                  "description": "Overrun occurred"
+                }
+              ]
             },
             {
               "name": "CRCE",
               "bit_offset": 7,
               "bit_width": 1,
-              "description": "CRC Error",
-              "enum": null
+              "description": "CRC error This bit is cleared when SPI is re-enabled or by writing 1 to CRCEC bit of SPI_IFCR optionally.",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NoError",
+                  "value": 0,
+                  "description": "No CRC error detected"
+                },
+                {
+                  "name": "Error",
+                  "value": 1,
+                  "description": "CRC error detected"
+                }
+              ]
             },
             {
               "name": "TIFRE",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "TI frame format error",
-              "enum": null
+              "description": "TI frame format error This bit is cleared by writing 1 to TIFREC bit of SPI_IFCR exclusively.",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NoError",
+                  "value": 0,
+                  "description": "TI frame format error detected"
+                },
+                {
+                  "name": "Error",
+                  "value": 1,
+                  "description": "TI frame format error detected"
+                }
+              ]
             },
             {
               "name": "MODF",
               "bit_offset": 9,
               "bit_width": 1,
-              "description": "Mode Fault",
-              "enum": null
+              "description": "mode fault This bit is cleared by writing 1 to MODFC bit of SPI_IFCR exclusively.",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NoFault",
+                  "value": 0,
+                  "description": "No mode fault detected"
+                },
+                {
+                  "name": "Fault",
+                  "value": 1,
+                  "description": "Mode fault detected"
+                }
+              ]
             },
             {
               "name": "SUSP",
               "bit_offset": 11,
               "bit_width": 1,
-              "description": "SUSPend",
-              "enum": null
+              "description": "suspension status In Master mode, SUSP is set by hardware either as soon as the current frame is completed after CSUSP request is done or at master automatic suspend receive mode (MASRX bit is set at SPI_CR1 register) on RxFIFO full condition. SUSP generates an interrupt when EOTIE is set. This bit has to be cleared prior SPI is disabled and this is done by writing 1 to SUSPC bit of SPI_IFCR exclusively.",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotSuspended",
+                  "value": 0,
+                  "description": "Master not suspended"
+                },
+                {
+                  "name": "Suspended",
+                  "value": 1,
+                  "description": "Master suspended"
+                }
+              ]
             },
             {
               "name": "TXC",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "TxFIFO transmission complete",
-              "enum": null
+              "description": "TxFIFO transmission complete The flag behavior depends on TSIZE setting. When TSIZE=0 the TXC is changed by hardware exclusively and it raises each time the TxFIFO becomes empty and there is no activity on the bus. If TSIZE 0 there is no specific reason to monitor TXC as it just copies the EOT flag value including its software clearing. The TXC generates an interrupt when EOTIE is set.",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "Ongoing",
+                  "value": 0,
+                  "description": "Transmission ongoing"
+                },
+                {
+                  "name": "Completed",
+                  "value": 1,
+                  "description": "Transmission completed"
+                }
+              ]
             },
             {
               "name": "RXPLVL",
               "bit_offset": 13,
               "bit_width": 2,
-              "description": "RxFIFO Packing LeVeL",
-              "enum": "RXPLVL"
+              "description": "RxFIFO packing level When RXWNE=0 and data size is set up to 16-bit, the value gives number of remaining data frames persisting at RxFIFO. Note: (*): Optional value when data size is set up to 8-bit only. When data size is greater than 16-bit, these bits are always read as 00. In that consequence, the single data frame received at the FIFO cannot be detected neither by RWNE nor by RXPLVL bits if data size is set from 17 to 24 bits. The user then must apply other methods like TSIZE0 or FTHLV=0.",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "ZeroFrames",
+                  "value": 0,
+                  "description": "Zero frames beyond packing ratio available"
+                },
+                {
+                  "name": "OneFrame",
+                  "value": 1,
+                  "description": "One frame beyond packing ratio available"
+                },
+                {
+                  "name": "TwoFrames",
+                  "value": 2,
+                  "description": "Two frame beyond packing ratio available"
+                },
+                {
+                  "name": "ThreeFrames",
+                  "value": 3,
+                  "description": "Three frame beyond packing ratio available"
+                }
+              ]
             },
             {
               "name": "RXWNE",
               "bit_offset": 15,
               "bit_width": 1,
-              "description": "RxFIFO Word Not Empty",
-              "enum": "RXWNE"
+              "description": "RxFIFO word not empty Note: This bit value does not depend on DSIZE setting and keeps together with RXPLVL[1:0] information about RxFIFO occupancy by residual data.",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "LessThan32",
+                  "value": 0,
+                  "description": "Less than 32-bit data frame received"
+                },
+                {
+                  "name": "AtLeast32",
+                  "value": 1,
+                  "description": "At least 32-bit data frame received"
+                }
+              ]
             },
             {
               "name": "CTSIZE",
               "bit_offset": 16,
               "bit_width": 16,
-              "description": "Number of data frames remaining in current TSIZE session",
-              "enum": null
+              "description": "number of data frames remaining in current TSIZE session The value is not quite reliable when traffic is ongoing on bus or during autonomous operation in low-power mode. Note: CTSIZE[15:0] bits are not available in instances with limited set of features.",
+              "access": "read-only"
             }
           ]
         },
@@ -505,132 +1186,203 @@
           "name": "IFCR",
           "offset": 24,
           "size": 32,
-          "description": "Interrupt/Status Flags Clear Register",
+          "access": null,
+          "reset_value": 0,
+          "description": "SPI/I2S interrupt/status flags clear register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Interrupt/Status Flags Clear Register",
           "fields": [
             {
               "name": "EOTC",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "End Of Transfer flag clear",
-              "enum": null
+              "description": "end of transfer flag clear Writing a 1 into this bit clears EOT flag in the SPI_SR register",
+              "access": "write-only",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clear interrupt flag"
+                }
+              ]
             },
             {
               "name": "TXTFC",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "Transmission Transfer Filled flag clear",
-              "enum": null
+              "description": "transmission transfer filled flag clear Writing a 1 into this bit clears TXTF flag in the SPI_SR register",
+              "access": "write-only"
             },
             {
               "name": "UDRC",
               "bit_offset": 5,
               "bit_width": 1,
-              "description": "Underrun flag clear",
-              "enum": null
+              "description": "underrun flag clear Writing a 1 into this bit clears UDR flag in the SPI_SR register",
+              "access": "write-only"
             },
             {
               "name": "OVRC",
               "bit_offset": 6,
               "bit_width": 1,
-              "description": "Overrun flag clear",
-              "enum": null
+              "description": "overrun flag clear Writing a 1 into this bit clears OVR flag in the SPI_SR register",
+              "access": "write-only"
             },
             {
               "name": "CRCEC",
               "bit_offset": 7,
               "bit_width": 1,
-              "description": "CRC Error flag clear",
-              "enum": null
+              "description": "CRC error flag clear Writing a 1 into this bit clears CRCE flag in the SPI_SR register",
+              "access": "write-only"
             },
             {
               "name": "TIFREC",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "TI frame format error flag clear",
-              "enum": null
+              "description": "TI frame format error flag clear Writing a 1 into this bit clears TIFRE flag in the SPI_SR register",
+              "access": "write-only"
             },
             {
               "name": "MODFC",
               "bit_offset": 9,
               "bit_width": 1,
-              "description": "Mode Fault flag clear",
-              "enum": null
+              "description": "mode fault flag clear Writing a 1 into this bit clears MODF flag in the SPI_SR register",
+              "access": "write-only"
             },
             {
               "name": "SUSPC",
               "bit_offset": 11,
               "bit_width": 1,
-              "description": "SUSPend flag clear",
-              "enum": null
+              "description": "SUSPend flag clear Writing a 1 into this bit clears SUSP flag in the SPI_SR register",
+              "access": "write-only"
+            }
+          ]
+        },
+        {
+          "name": "TXDR",
+          "offset": 32,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "SPI/I2S transmit data register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "TXDR",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "transmit data register The register serves as an interface with TxFIFO. A write to it accesses TxFIFO. Note: In SPI mode, data is always right-aligned. Alignment of data at I2S mode depends on DATLEN and DATFMT setting. Unused bits are ignored when writing to the register, and read as zero when the register is read. Note: DR can be accessed byte-wise (8-bit access): in this case only one data-byte is written by single access. halfword-wise (16 bit access) in this case 2 data-bytes or 1 halfword-data can be written by single access. word-wise (32 bit access). In this case 4 data-bytes or 2 halfword-data or word-data can be written by single access. Write access of this register less than the configured data size is forbidden.",
+              "access": "write-only"
             }
           ]
         },
         {
           "name": "TXDR16",
           "offset": 32,
-          "description": "Transmit Data Register - half-word sized",
+          "size": 16,
+          "access": "write-only",
+          "reset_value": null,
+          "description": "Direct 16-bit access to transmit data register",
           "array_len": null,
           "array_stride": null,
-          "fields": []
-        },
-        {
-          "name": "TXDR32",
-          "offset": 32,
-          "description": "Transmit Data Register",
-          "array_len": null,
-          "array_stride": null,
-          "fields": []
+          "fields": [
+            {
+              "name": "TXDR",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Transmit data register"
+            }
+          ]
         },
         {
           "name": "TXDR8",
           "offset": 32,
-          "description": "Transmit Data Register - byte sized",
+          "size": 8,
+          "access": "write-only",
+          "reset_value": null,
+          "description": "Direct 8-bit access to transmit data register",
           "array_len": null,
           "array_stride": null,
-          "fields": []
+          "fields": [
+            {
+              "name": "TXDR",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "Transmit data register"
+            }
+          ]
+        },
+        {
+          "name": "RXDR",
+          "offset": 48,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "SPI/I2S receive data register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "RXDR",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "receive data register The register serves as an interface with RxFIFO. When it is read, RxFIFO is accessed. Note: In SPI mode, data is always right-aligned. Alignment of data at I2S mode depends on DATLEN and DATFMT setting. Unused bits are read as zero when the register is read. Writing to the register is ignored. Note: DR can be accessed byte-wise (8-bit access): in this case only one data-byte is read by single access halfword-wise (16 bit access) in this case 2 data-bytes or 1 halfword-data can be read by single access word-wise (32 bit access). In this case 4 data-bytes or 2 halfword-data or word-data can be read by single access. Read access of this register less than the configured data size is forbidden.",
+              "access": "read-only"
+            }
+          ]
         },
         {
           "name": "RXDR16",
           "offset": 48,
-          "description": "Receive Data Register - half-word sized",
+          "size": 16,
+          "access": "read-only",
+          "reset_value": null,
+          "description": "Direct 16-bit access to receive data register",
           "array_len": null,
           "array_stride": null,
-          "fields": []
-        },
-        {
-          "name": "RXDR32",
-          "offset": 48,
-          "description": "Receive Data Register",
-          "array_len": null,
-          "array_stride": null,
-          "fields": []
+          "fields": [
+            {
+              "name": "RXDR",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Receive data register"
+            }
+          ]
         },
         {
           "name": "RXDR8",
           "offset": 48,
-          "description": "Receive Data Register - byte sized",
+          "size": 8,
+          "access": "read-only",
+          "reset_value": null,
+          "description": "Direct 8-bit access to receive data register",
           "array_len": null,
           "array_stride": null,
-          "fields": []
+          "fields": [
+            {
+              "name": "RXDR",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "Receive data register"
+            }
+          ]
         },
         {
           "name": "CRCPOLY",
           "offset": 64,
           "size": 32,
-          "description": "Polynomial Register",
+          "access": null,
+          "reset_value": 263,
+          "description": "SPI/I2S polynomial register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Polynomial Register",
           "fields": [
             {
               "name": "CRCPOLY",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "CRC polynomial register",
-              "enum": null
+              "description": "CRC polynomial register This register contains the polynomial for the CRC calculation. The default 9-bit polynomial setting 0x107 corresponds to default 8-bit setting of DSIZE. It is compatible with setting 0x07 used at some other ST products with fixed length of the polynomial string where the most significant bit of the string is always kept hidden. Length of the polynomial is given by the most significant bit of the value stored at this register. It has to be set greater than DSIZE. CRC33_17 bit has to be set additionally with CRCPOLY register when DSIZE is configured to maximum 32-bit or 16-bit size and CRC is enabled (to keep polynomial length grater than data size). Note: CRCPOLY[31:16] bits are reserved at instances with data size limited to 16-bit. There is no constrain when 32-bit access is applied at these addresses. Reserved bits 31-16 are always read zero while any write to them is ignored.",
+              "access": "read-write"
             }
           ]
         },
@@ -638,17 +1390,18 @@
           "name": "TXCRC",
           "offset": 68,
           "size": 32,
-          "description": "Transmitter CRC Register",
+          "access": null,
+          "reset_value": 0,
+          "description": "SPI/I2S transmitter CRC register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Transmitter CRC Register",
           "fields": [
             {
               "name": "TXCRC",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "CRC register for transmitter",
-              "enum": null
+              "description": "CRC register for transmitter When CRC calculation is enabled, the TXCRC[31:0] bits contain the computed CRC value of the subsequently transmitted bytes. CRC calculation is initialized when the CRCEN bit of SPI_CR1 is written to 1 or when a data block is transacted completely. The CRC is calculated serially using the polynomial programmed in the SPI_CRCPOLY register. The number of bits considered at calculation depends on SPI_CRCPOLY register and CRCSIZE bits settings at SPI_CFG1 register. Note: a read to this register when the communication is ongoing could return an incorrect value. Note: not used for the I2S mode. Note: TXCRC[31-16] bits are reserved at instances with data size limited to 16-bit. There is no constrain when 32-bit access is applied at these addresses. Reserved bits 31-16 are always read zero while any write to them is ignored. Note: The configuration of CRCSIZE bit field is not taken into account when the content of this register is read by software. No masking is applied for unused bits at this case.",
+              "access": "read-only"
             }
           ]
         },
@@ -656,17 +1409,18 @@
           "name": "RXCRC",
           "offset": 72,
           "size": 32,
-          "description": "Receiver CRC Register",
+          "access": null,
+          "reset_value": 0,
+          "description": "SPI/I2S receiver CRC register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Receiver CRC Register",
           "fields": [
             {
               "name": "RXCRC",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "CRC register for receiver",
-              "enum": null
+              "description": "CRC register for receiver When CRC calculation is enabled, the RXCRC[31:0] bits contain the computed CRC value of the subsequently received bytes. CRC calculation is initialized when the CRCEN bit of SPI_CR1 is written to 1 or when a data block is transacted completely. The CRC is calculated serially using the polynomial programmed in the SPI_CRCPOLY register. The number of bits considered at calculation depends on SPI_CRCPOLY register and CRCSIZE bits settings at SPI_CFG1 register. Note: a read to this register when the communication is ongoing could return an incorrect value. Not used for the I2S mode. RXCRC[31-16] bits are reserved at the peripheral instances with data size limited to 16-bit. There is no constrain when 32-bit access is applied at these addresses. Reserved bits 31-16 are always read zero while any write to them is ignored. Note: The configuration of CRCSIZE bit field is not taken into account when the content of this register is read by software. No masking is applied for unused bits at this case.",
+              "access": "read-only"
             }
           ]
         },
@@ -674,17 +1428,18 @@
           "name": "UDRDR",
           "offset": 76,
           "size": 32,
-          "description": "Underrun Data Register",
+          "access": null,
+          "reset_value": 0,
+          "description": "SPI/I2S underrun data register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Underrun Data Register",
           "fields": [
             {
               "name": "UDRDR",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Data at slave underrun condition",
-              "enum": null
+              "description": "data at slave underrun condition The register is taken into account in Slave mode and at underrun condition only. The number of bits considered depends on DSIZE bit settings of the SPI_CFG1 register. Underrun condition handling depends on setting UDRCFG bit at SPI_CFG1 register. Note: UDRDR[31-16] bits are reserved at the peripheral instances with data size limited to 16-bit. There is no constraint when 32-bit access is applied at these addresses. Reserved bits 31-16 are always read zero while any write to them is ignored.",
+              "access": "read-write"
             }
           ]
         },
@@ -692,672 +1447,286 @@
           "name": "I2SCFGR",
           "offset": 80,
           "size": 32,
-          "description": "I2S Configuration Register",
+          "access": null,
+          "reset_value": 0,
+          "description": "SPI/I2S configuration register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "I2S Configuration Register",
           "fields": [
             {
-              "name": "MCKOE",
-              "bit_offset": 25,
+              "name": "I2SMOD",
+              "bit_offset": 0,
               "bit_width": 1,
-              "description": "Master clock output enable",
-              "enum": null
+              "description": "I2S mode selection",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "SPI",
+                  "value": 0,
+                  "description": "SPI mode selected"
+                },
+                {
+                  "name": "I2S",
+                  "value": 1,
+                  "description": "I2S/PCM mode selected"
+                }
+              ]
             },
             {
-              "name": "ODD",
-              "bit_offset": 24,
-              "bit_width": 1,
-              "description": "Odd factor for the prescaler",
-              "enum": "ODD"
+              "name": "I2SCFG",
+              "bit_offset": 1,
+              "bit_width": 3,
+              "description": "I2S configuration mode others, not used",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "SlaveTransmit",
+                  "value": 0,
+                  "description": "Slave, transmit"
+                },
+                {
+                  "name": "SlaveReceive",
+                  "value": 1,
+                  "description": "Slave, recteive"
+                },
+                {
+                  "name": "MasterTransmit",
+                  "value": 2,
+                  "description": "Master, transmit"
+                },
+                {
+                  "name": "MasterReceive",
+                  "value": 3,
+                  "description": "Master, receive"
+                },
+                {
+                  "name": "SlaveFullDuplex",
+                  "value": 4,
+                  "description": "Slave, full duplex"
+                },
+                {
+                  "name": "MasterFullDuplex",
+                  "value": 5,
+                  "description": "Master, full duplex"
+                }
+              ]
             },
             {
-              "name": "I2SDIV",
-              "bit_offset": 16,
-              "bit_width": 8,
-              "description": "I2S linear prescaler",
-              "enum": null
-            },
-            {
-              "name": "DATFMT",
-              "bit_offset": 14,
-              "bit_width": 1,
-              "description": "Data format",
-              "enum": "DATFMT"
-            },
-            {
-              "name": "WSINV",
-              "bit_offset": 13,
-              "bit_width": 1,
-              "description": "Word select inversion",
-              "enum": null
-            },
-            {
-              "name": "FIXCH",
-              "bit_offset": 12,
-              "bit_width": 1,
-              "description": "Fixed channel length in slave",
-              "enum": "FIXCH"
-            },
-            {
-              "name": "CKPOL",
-              "bit_offset": 11,
-              "bit_width": 1,
-              "description": "Serial audio clock polarity",
-              "enum": "CKPOL"
-            },
-            {
-              "name": "CHLEN",
-              "bit_offset": 10,
-              "bit_width": 1,
-              "description": "Channel length (number of bits per audio channel)",
-              "enum": "CHLEN"
-            },
-            {
-              "name": "DATLEN",
-              "bit_offset": 8,
+              "name": "I2SSTD",
+              "bit_offset": 4,
               "bit_width": 2,
-              "description": "Data length to be transferred",
-              "enum": "DATLEN"
+              "description": "I2S standard selection For more details on I2S standards, refer to",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Philips",
+                  "value": 0,
+                  "description": "I2S Philips standard"
+                },
+                {
+                  "name": "LeftAligned",
+                  "value": 1,
+                  "description": "MSB/left justified standard"
+                },
+                {
+                  "name": "RightAligned",
+                  "value": 2,
+                  "description": "LSB/right justified standard"
+                },
+                {
+                  "name": "PCM",
+                  "value": 3,
+                  "description": "PCM standard"
+                }
+              ]
             },
             {
               "name": "PCMSYNC",
               "bit_offset": 7,
               "bit_width": 1,
               "description": "PCM frame synchronization",
-              "enum": "PCMSYNC"
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Short",
+                  "value": 0,
+                  "description": "Short PCM frame synchronization"
+                },
+                {
+                  "name": "Long",
+                  "value": 1,
+                  "description": "Long PCM frame synchronization"
+                }
+              ]
             },
             {
-              "name": "I2SSTD",
-              "bit_offset": 4,
+              "name": "DATLEN",
+              "bit_offset": 8,
               "bit_width": 2,
-              "description": "I2S standard selection",
-              "enum": "I2SSTD"
+              "description": "data length to be transferred",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Bits16",
+                  "value": 0,
+                  "description": "16 bit data length"
+                },
+                {
+                  "name": "Bits24",
+                  "value": 1,
+                  "description": "24 bit data length"
+                },
+                {
+                  "name": "Bits32",
+                  "value": 2,
+                  "description": "32 bit data length"
+                }
+              ]
             },
             {
-              "name": "I2SCFG",
-              "bit_offset": 1,
-              "bit_width": 3,
-              "description": "I2S configuration mode",
-              "enum": "I2SCFG"
-            },
-            {
-              "name": "I2SMOD",
-              "bit_offset": 0,
+              "name": "CHLEN",
+              "bit_offset": 10,
               "bit_width": 1,
-              "description": "I2S mode selection",
-              "enum": null
+              "description": "channel length (number of bits per audio channel)",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Bits16",
+                  "value": 0,
+                  "description": "16 bit per channel"
+                },
+                {
+                  "name": "Bits32",
+                  "value": 1,
+                  "description": "32 bit per channel"
+                }
+              ]
+            },
+            {
+              "name": "CKPOL",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "serial audio clock polarity",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "SampleOnRising",
+                  "value": 0,
+                  "description": "Signals are sampled on rising and changed on falling clock edges"
+                },
+                {
+                  "name": "SampleOnFalling",
+                  "value": 1,
+                  "description": "Signals are sampled on falling and changed on rising clock edges"
+                }
+              ]
+            },
+            {
+              "name": "FIXCH",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "fixed channel length in slave",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NotFixed",
+                  "value": 0,
+                  "description": "The channel length in slave mode is different from 16 or 32 bits (CHLEN not taken into account)"
+                },
+                {
+                  "name": "Fixed",
+                  "value": 1,
+                  "description": "The channel length in slave mode is supposed to be 16 or 32 bits (according to CHLEN)"
+                }
+              ]
+            },
+            {
+              "name": "WSINV",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "word select inversion This bit is used to invert the default polarity of WS signal. WS is LOW. In PCM mode the start of frame is indicated by a rising edge. WS is HIGH. In PCM mode the start of frame is indicated by a falling edge.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Word select inversion disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Word select inversion enabled"
+                }
+              ]
+            },
+            {
+              "name": "DATFMT",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "data format",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "RightAligned",
+                  "value": 0,
+                  "description": "The data inside RXDR and TXDR are right aligned"
+                },
+                {
+                  "name": "LeftAligned",
+                  "value": 1,
+                  "description": "The data inside RXDR and TXDR are left aligned"
+                }
+              ]
+            },
+            {
+              "name": "I2SDIV",
+              "bit_offset": 16,
+              "bit_width": 8,
+              "description": "I2S linear prescaler I2SDIV can take any values except the value 1, when ODD is also equal to 1. Refer to for details",
+              "access": "read-write"
+            },
+            {
+              "name": "ODD",
+              "bit_offset": 24,
+              "bit_width": 1,
+              "description": "odd factor for the prescaler Refer to for details",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Even",
+                  "value": 0,
+                  "description": "Real divider value is I2SDIV*2"
+                },
+                {
+                  "name": "Odd",
+                  "value": 1,
+                  "description": "Real divider value is I2SDIV*2 + 1"
+                }
+              ]
+            },
+            {
+              "name": "MCKOE",
+              "bit_offset": 25,
+              "bit_width": 1,
+              "description": "master clock output enable",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Master clock output disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Master clock output enabled"
+                }
+              ]
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "CHLEN": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Bits16",
-          "value": 0,
-          "description": "16 bits per channel"
-        },
-        {
-          "name": "Bits32",
-          "value": 1,
-          "description": "32 bits per channel"
-        }
-      ]
-    },
-    "CKPOL": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "IdleLow",
-          "value": 0,
-          "description": "CK idle Level is Low. Signals are sampled on rising and changed on falling clock edges"
-        },
-        {
-          "name": "IdleHigh",
-          "value": 1,
-          "description": "CK idle level is High. Signals are sampled on falling and changed on rising clock edges"
-        }
-      ]
-    },
-    "COMM": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "FullDuplex",
-          "value": 0,
-          "description": "Full duplex"
-        },
-        {
-          "name": "Transmitter",
-          "value": 1,
-          "description": "Simplex transmitter only"
-        },
-        {
-          "name": "Receiver",
-          "value": 2,
-          "description": "Simplex receiver only"
-        },
-        {
-          "name": "HalfDuplex",
-          "value": 3,
-          "description": "Half duplex"
-        }
-      ]
-    },
-    "CPHA": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "FirstEdge",
-          "value": 0,
-          "description": "The first clock transition is the first data capture edge"
-        },
-        {
-          "name": "SecondEdge",
-          "value": 1,
-          "description": "The second clock transition is the first data capture edge"
-        }
-      ]
-    },
-    "CPOL": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "IdleLow",
-          "value": 0,
-          "description": "SCK to 0 when idle"
-        },
-        {
-          "name": "IdleHigh",
-          "value": 1,
-          "description": "SCK to 1 when idle"
-        }
-      ]
-    },
-    "DATFMT": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "RightAligned",
-          "value": 0,
-          "description": "The data inside RXDR and TXDR are right aligned"
-        },
-        {
-          "name": "LeftAligned",
-          "value": 1,
-          "description": "The data inside RXDR and TXDR are left aligned"
-        }
-      ]
-    },
-    "DATLEN": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Bits16",
-          "value": 0,
-          "description": "16-bit data length"
-        },
-        {
-          "name": "Bits24",
-          "value": 1,
-          "description": "24-bit data length"
-        },
-        {
-          "name": "Bits32",
-          "value": 2,
-          "description": "32-bit data length"
-        }
-      ]
-    },
-    "FIXCH": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "NotFixed",
-          "value": 0,
-          "description": "The channel length in slave mode is different from 16 or 32 bits (CHLEN not taken into account)"
-        },
-        {
-          "name": "Fixed",
-          "value": 1,
-          "description": "The channel length in slave mode is supposed to be 16 or 32 bits (according to CHLEN)"
-        }
-      ]
-    },
-    "FTHLV": {
-      "bit_size": 4,
-      "variants": [
-        {
-          "name": "OneFrame",
-          "value": 0,
-          "description": "1 frame"
-        },
-        {
-          "name": "TwoFrames",
-          "value": 1,
-          "description": "2 frames"
-        },
-        {
-          "name": "ThreeFrames",
-          "value": 2,
-          "description": "3 frames"
-        },
-        {
-          "name": "FourFrames",
-          "value": 3,
-          "description": "4 frames"
-        },
-        {
-          "name": "FiveFrames",
-          "value": 4,
-          "description": "5 frames"
-        },
-        {
-          "name": "SixFrames",
-          "value": 5,
-          "description": "6 frames"
-        },
-        {
-          "name": "SevenFrames",
-          "value": 6,
-          "description": "7 frames"
-        },
-        {
-          "name": "EightFrames",
-          "value": 7,
-          "description": "8 frames"
-        },
-        {
-          "name": "NineFrames",
-          "value": 8,
-          "description": "9 frames"
-        },
-        {
-          "name": "TenFrames",
-          "value": 9,
-          "description": "10 frames"
-        },
-        {
-          "name": "ElevenFrames",
-          "value": 10,
-          "description": "11 frames"
-        },
-        {
-          "name": "TwelveFrames",
-          "value": 11,
-          "description": "12 frames"
-        },
-        {
-          "name": "ThirteenFrames",
-          "value": 12,
-          "description": "13 frames"
-        },
-        {
-          "name": "FourteenFrames",
-          "value": 13,
-          "description": "14 frames"
-        },
-        {
-          "name": "FifteenFrames",
-          "value": 14,
-          "description": "15 frames"
-        },
-        {
-          "name": "SixteenFrames",
-          "value": 15,
-          "description": "16 frames"
-        }
-      ]
-    },
-    "HDDIR": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Receiver",
-          "value": 0,
-          "description": "Receiver in half duplex mode"
-        },
-        {
-          "name": "Transmitter",
-          "value": 1,
-          "description": "Transmitter in half duplex mode"
-        }
-      ]
-    },
-    "I2SCFG": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "SlaveTx",
-          "value": 0,
-          "description": "Slave, transmit"
-        },
-        {
-          "name": "SlaveRx",
-          "value": 1,
-          "description": "Slave, receive"
-        },
-        {
-          "name": "MasterTx",
-          "value": 2,
-          "description": "Master, transmit"
-        },
-        {
-          "name": "MasterRx",
-          "value": 3,
-          "description": "Master, receive"
-        },
-        {
-          "name": "SlaveFullDuplex",
-          "value": 4,
-          "description": "Slave, full duplex"
-        },
-        {
-          "name": "MasterFullDuplex",
-          "value": 5,
-          "description": "Master, full duplex"
-        }
-      ]
-    },
-    "I2SSTD": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Philips",
-          "value": 0,
-          "description": "I2S Philips standard"
-        },
-        {
-          "name": "MSB",
-          "value": 1,
-          "description": "MSB/left justified standard"
-        },
-        {
-          "name": "LSB",
-          "value": 2,
-          "description": "LSB/right justified standard"
-        },
-        {
-          "name": "PCM",
-          "value": 3,
-          "description": "PCM standard"
-        }
-      ]
-    },
-    "LSBFIRST": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "MSBFirst",
-          "value": 0,
-          "description": "Data is transmitted/received with the MSB first"
-        },
-        {
-          "name": "LSBFirst",
-          "value": 1,
-          "description": "Data is transmitted/received with the LSB first"
-        }
-      ]
-    },
-    "MASTER": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Slave",
-          "value": 0,
-          "description": "Slave configuration"
-        },
-        {
-          "name": "Master",
-          "value": 1,
-          "description": "Master configuration"
-        }
-      ]
-    },
-    "MBR": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "Div2",
-          "value": 0,
-          "description": "f_spi_ker_ck / 2"
-        },
-        {
-          "name": "Div4",
-          "value": 1,
-          "description": "f_spi_ker_ck / 4"
-        },
-        {
-          "name": "Div8",
-          "value": 2,
-          "description": "f_spi_ker_ck / 8"
-        },
-        {
-          "name": "Div16",
-          "value": 3,
-          "description": "f_spi_ker_ck / 16"
-        },
-        {
-          "name": "Div32",
-          "value": 4,
-          "description": "f_spi_ker_ck / 32"
-        },
-        {
-          "name": "Div64",
-          "value": 5,
-          "description": "f_spi_ker_ck / 64"
-        },
-        {
-          "name": "Div128",
-          "value": 6,
-          "description": "f_spi_ker_ck / 128"
-        },
-        {
-          "name": "Div256",
-          "value": 7,
-          "description": "f_spi_ker_ck / 256"
-        }
-      ]
-    },
-    "ODD": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Even",
-          "value": 0,
-          "description": "Real divider value is I2SDIV*2"
-        },
-        {
-          "name": "Odd",
-          "value": 1,
-          "description": "Real divider value is I2SDIV*2 + 1"
-        }
-      ]
-    },
-    "PCMSYNC": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Short",
-          "value": 0,
-          "description": "Short PCM frame synchronization"
-        },
-        {
-          "name": "Long",
-          "value": 1,
-          "description": "Long PCM frame synchronization"
-        }
-      ]
-    },
-    "RCRCINI": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "AllZeros",
-          "value": 0,
-          "description": "All zeros RX CRC initialization pattern"
-        },
-        {
-          "name": "AllOnes",
-          "value": 1,
-          "description": "All ones RX CRC initialization pattern"
-        }
-      ]
-    },
-    "RDIOM": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "PermanentlyActive",
-          "value": 0,
-          "description": "RDY signal is defined internally fixed as permanently active (RDIOP setting has no effect)"
-        },
-        {
-          "name": "FromInput",
-          "value": 1,
-          "description": "RDY signal is overtaken from alternate function input (at master case) or output (at slave case) of the dedicated pin (RDIOP setting takes effect)"
-        }
-      ]
-    },
-    "RDIOP": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "ReadyHigh",
-          "value": 0,
-          "description": "high level of the signal means the slave is ready for communication"
-        },
-        {
-          "name": "ReadyLow",
-          "value": 1,
-          "description": "low level of the signal means the slave is ready for communication"
-        }
-      ]
-    },
-    "RXPLVL": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "ZeroFrames",
-          "value": 0,
-          "description": "Zero frames beyond packing ratio available"
-        },
-        {
-          "name": "OneFrame",
-          "value": 1,
-          "description": "One frame beyond packing ratio available"
-        },
-        {
-          "name": "TwoFrames",
-          "value": 2,
-          "description": "Two frame beyond packing ratio available"
-        },
-        {
-          "name": "ThreeFrames",
-          "value": 3,
-          "description": "Three frame beyond packing ratio available"
-        }
-      ]
-    },
-    "RXWNE": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "LessThan32",
-          "value": 0,
-          "description": "Less than 32-bit data frame received"
-        },
-        {
-          "name": "AtLeast32",
-          "value": 1,
-          "description": "At least 32-bit data frame received"
-        }
-      ]
-    },
-    "SP": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "Motorola",
-          "value": 0,
-          "description": "Motorola SPI protocol"
-        },
-        {
-          "name": "TI",
-          "value": 1,
-          "description": "TI SPI protocol"
-        }
-      ]
-    },
-    "SSIOP": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "ActiveLow",
-          "value": 0,
-          "description": "Low level is active for SS signal"
-        },
-        {
-          "name": "ActiveHigh",
-          "value": 1,
-          "description": "High level is active for SS signal"
-        }
-      ]
-    },
-    "SSOM": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Asserted",
-          "value": 0,
-          "description": "SS is asserted until data transfer complete"
-        },
-        {
-          "name": "NotAsserted",
-          "value": 1,
-          "description": "Data frames interleaved with SS not asserted during MIDI"
-        }
-      ]
-    },
-    "TCRCINI": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "AllZeros",
-          "value": 0,
-          "description": "All zeros TX CRC initialization pattern"
-        },
-        {
-          "name": "AllOnes",
-          "value": 1,
-          "description": "All ones TX CRC initialization pattern"
-        }
-      ]
-    },
-    "UDRCFG": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Constant",
-          "value": 0,
-          "description": "Slave sends a constant underrun pattern"
-        },
-        {
-          "name": "RepeatReceived",
-          "value": 1,
-          "description": "Slave repeats last received data frame from master"
-        },
-        {
-          "name": "RepeatTransmitted",
-          "value": 2,
-          "description": "Slave repeats last transmitted data frame"
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

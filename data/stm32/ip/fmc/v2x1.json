@@ -2,6 +2,9 @@
   "schema": 1,
   "kind": "fmc",
   "version": "v2x1",
+  "source": "stm32rs_svd",
+  "source_device": "stm32f446vc",
+  "source_file": "stm32f446.svd.patched",
   "blocks": {
     "FMC": {
       "name": "FMC",
@@ -12,694 +15,1364 @@
           "name": "BCR1",
           "offset": 0,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 12496,
           "description": "SRAM/NOR-Flash chip-select control register 1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "SRAM/NOR-Flash chip-select control register 1",
           "fields": [
             {
-              "name": "MBKEN",
-              "bit_offset": 0,
+              "name": "CCLKEN",
+              "bit_offset": 20,
               "bit_width": 1,
-              "description": "Memory bank enable bit",
-              "enum": null
-            },
-            {
-              "name": "MUXEN",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Address/data multiplexing enable bit",
-              "enum": null
-            },
-            {
-              "name": "MTYP",
-              "bit_offset": 2,
-              "bit_width": 2,
-              "description": "Memory type",
-              "enum": "MTYP"
-            },
-            {
-              "name": "MWID",
-              "bit_offset": 4,
-              "bit_width": 2,
-              "description": "Memory data bus width",
-              "enum": "MWID"
-            },
-            {
-              "name": "FACCEN",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "Flash access enable",
-              "enum": null
-            },
-            {
-              "name": "BURSTEN",
-              "bit_offset": 8,
-              "bit_width": 1,
-              "description": "Burst enable bit",
-              "enum": null
-            },
-            {
-              "name": "WAITPOL",
-              "bit_offset": 9,
-              "bit_width": 1,
-              "description": "Wait signal polarity bit",
-              "enum": "WAITPOL"
-            },
-            {
-              "name": "WAITCFG",
-              "bit_offset": 11,
-              "bit_width": 1,
-              "description": "Wait timing configuration",
-              "enum": "WAITCFG"
-            },
-            {
-              "name": "WREN",
-              "bit_offset": 12,
-              "bit_width": 1,
-              "description": "Write enable bit",
-              "enum": null
-            },
-            {
-              "name": "WAITEN",
-              "bit_offset": 13,
-              "bit_width": 1,
-              "description": "Wait enable bit",
-              "enum": null
-            },
-            {
-              "name": "EXTMOD",
-              "bit_offset": 14,
-              "bit_width": 1,
-              "description": "Extended mode enable",
-              "enum": null
-            },
-            {
-              "name": "ASYNCWAIT",
-              "bit_offset": 15,
-              "bit_width": 1,
-              "description": "Wait signal during asynchronous transfers",
-              "enum": null
-            },
-            {
-              "name": "CPSIZE",
-              "bit_offset": 16,
-              "bit_width": 3,
-              "description": "CRAM page size",
-              "enum": "CPSIZE"
+              "description": "CCLKEN",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "The FMC_CLK is generated continuously during asynchronous and synchronous access. The FMC_CLK clock is activated when the CCLKEN is set"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "The FMC_CLK is only generated during the synchronous memory access (read/write transaction)"
+                }
+              ]
             },
             {
               "name": "CBURSTRW",
               "bit_offset": 19,
               "bit_width": 1,
-              "description": "Write burst enable",
-              "enum": null
+              "description": "CBURSTRW",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Write operations are always performed in asynchronous mode"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Write operations are performed in synchronous mode"
+                }
+              ]
             },
             {
-              "name": "CCLKEN",
-              "bit_offset": 20,
+              "name": "ASYNCWAIT",
+              "bit_offset": 15,
               "bit_width": 1,
-              "description": "Continuous clock enable",
-              "enum": null
+              "description": "ASYNCWAIT",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Wait signal not used in asynchronous mode"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Wait signal used even in asynchronous mode"
+                }
+              ]
+            },
+            {
+              "name": "EXTMOD",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "EXTMOD",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Values inside the FMC_BWTR are not taken into account"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Values inside the FMC_BWTR are taken into account"
+                }
+              ]
+            },
+            {
+              "name": "WAITEN",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "WAITEN",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Values inside the FMC_BWTR are taken into account"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "NWAIT signal enabled"
+                }
+              ]
+            },
+            {
+              "name": "WREN",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "WREN",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Write operations disabled for the bank by the FMC"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Write operations enabled for the bank by the FMC"
+                }
+              ]
+            },
+            {
+              "name": "WAITCFG",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "WAITCFG",
+              "enum_values": [
+                {
+                  "name": "BeforeWaitState",
+                  "value": 0,
+                  "description": "NWAIT signal is active one data cycle before wait state"
+                },
+                {
+                  "name": "DuringWaitState",
+                  "value": 1,
+                  "description": "NWAIT signal is active during wait state"
+                }
+              ]
+            },
+            {
+              "name": "WAITPOL",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "WAITPOL",
+              "enum_values": [
+                {
+                  "name": "ActiveLow",
+                  "value": 0,
+                  "description": "NWAIT active low"
+                },
+                {
+                  "name": "ActiveHigh",
+                  "value": 1,
+                  "description": "NWAIT active high"
+                }
+              ]
+            },
+            {
+              "name": "BURSTEN",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "BURSTEN",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Burst mode disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Burst mode enabled"
+                }
+              ]
+            },
+            {
+              "name": "FACCEN",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "FACCEN",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Corresponding NOR Flash memory access is disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Corresponding NOR Flash memory access is enabled"
+                }
+              ]
+            },
+            {
+              "name": "MWID",
+              "bit_offset": 4,
+              "bit_width": 2,
+              "description": "MWID",
+              "enum_values": [
+                {
+                  "name": "Bits8",
+                  "value": 0,
+                  "description": "Memory data bus width 8 bits"
+                },
+                {
+                  "name": "Bits16",
+                  "value": 1,
+                  "description": "Memory data bus width 16 bits"
+                },
+                {
+                  "name": "Bits32",
+                  "value": 2,
+                  "description": "Memory data bus width 32 bits"
+                }
+              ]
+            },
+            {
+              "name": "MTYP",
+              "bit_offset": 2,
+              "bit_width": 2,
+              "description": "MTYP",
+              "enum_values": [
+                {
+                  "name": "SRAM",
+                  "value": 0,
+                  "description": "SRAM memory type"
+                },
+                {
+                  "name": "PSRAM",
+                  "value": 1,
+                  "description": "PSRAM (CRAM) memory type"
+                },
+                {
+                  "name": "Flash",
+                  "value": 2,
+                  "description": "NOR Flash/OneNAND Flash"
+                }
+              ]
+            },
+            {
+              "name": "MUXEN",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "MUXEN",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Address/Data non-multiplexed"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Address/Data multiplexed on databus"
+                }
+              ]
+            },
+            {
+              "name": "MBKEN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "MBKEN",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Corresponding memory bank is disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Corresponding memory bank is enabled"
+                }
+              ]
+            },
+            {
+              "name": "WRAPMOD",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "WRAPMOD",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Direct wrapped burst is not enabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Direct wrapped burst is enabled"
+                }
+              ]
             },
             {
               "name": "WFDIS",
               "bit_offset": 21,
               "bit_width": 1,
               "description": "Write FIFO disable",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "BTR",
-          "offset": 4,
-          "size": 32,
-          "description": "SRAM/NOR-Flash chip-select timing register 1-4",
-          "array_len": 4,
-          "array_stride": 8,
-          "fieldset_description": "SRAM/NOR-Flash chip-select timing register",
-          "fields": [
-            {
-              "name": "ADDSET",
-              "bit_offset": 0,
-              "bit_width": 4,
-              "description": "Address setup phase duration",
-              "enum": null
-            },
-            {
-              "name": "ADDHLD",
-              "bit_offset": 4,
-              "bit_width": 4,
-              "description": "Address-hold phase duration",
-              "enum": null
-            },
-            {
-              "name": "DATAST",
-              "bit_offset": 8,
-              "bit_width": 8,
-              "description": "Data-phase duration",
-              "enum": null
-            },
-            {
-              "name": "BUSTURN",
-              "bit_offset": 16,
-              "bit_width": 4,
-              "description": "Bus turnaround phase duration",
-              "enum": null
-            },
-            {
-              "name": "CLKDIV",
-              "bit_offset": 20,
-              "bit_width": 4,
-              "description": "Clock divide ratio (for FMC_CLK signal)",
-              "enum": null
-            },
-            {
-              "name": "DATLAT",
-              "bit_offset": 24,
-              "bit_width": 4,
-              "description": "Data latency for synchronous memory",
-              "enum": null
-            },
-            {
-              "name": "ACCMOD",
-              "bit_offset": 28,
-              "bit_width": 2,
-              "description": "Access mode",
-              "enum": "ACCMOD"
-            }
-          ]
-        },
-        {
-          "name": "BCR",
-          "offset": 8,
-          "size": 32,
-          "description": "SRAM/NOR-Flash chip-select control register 2-4",
-          "array_len": 3,
-          "array_stride": 8,
-          "fieldset_description": "SRAM/NOR-Flash chip-select control register 2-4",
-          "fields": [
-            {
-              "name": "MBKEN",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Memory bank enable bit",
-              "enum": null
-            },
-            {
-              "name": "MUXEN",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Address/data multiplexing enable bit",
-              "enum": null
-            },
-            {
-              "name": "MTYP",
-              "bit_offset": 2,
-              "bit_width": 2,
-              "description": "Memory type",
-              "enum": "MTYP"
-            },
-            {
-              "name": "MWID",
-              "bit_offset": 4,
-              "bit_width": 2,
-              "description": "Memory data bus width",
-              "enum": "MWID"
-            },
-            {
-              "name": "FACCEN",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "Flash access enable",
-              "enum": null
-            },
-            {
-              "name": "BURSTEN",
-              "bit_offset": 8,
-              "bit_width": 1,
-              "description": "Burst enable bit",
-              "enum": null
-            },
-            {
-              "name": "WAITPOL",
-              "bit_offset": 9,
-              "bit_width": 1,
-              "description": "Wait signal polarity bit",
-              "enum": "WAITPOL"
-            },
-            {
-              "name": "WAITCFG",
-              "bit_offset": 11,
-              "bit_width": 1,
-              "description": "Wait timing configuration",
-              "enum": "WAITCFG"
-            },
-            {
-              "name": "WREN",
-              "bit_offset": 12,
-              "bit_width": 1,
-              "description": "Write enable bit",
-              "enum": null
-            },
-            {
-              "name": "WAITEN",
-              "bit_offset": 13,
-              "bit_width": 1,
-              "description": "Wait enable bit",
-              "enum": null
-            },
-            {
-              "name": "EXTMOD",
-              "bit_offset": 14,
-              "bit_width": 1,
-              "description": "Extended mode enable",
-              "enum": null
-            },
-            {
-              "name": "ASYNCWAIT",
-              "bit_offset": 15,
-              "bit_width": 1,
-              "description": "Wait signal during asynchronous transfers",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Enabled",
+                  "value": 0,
+                  "description": "Write FIFO enabled"
+                },
+                {
+                  "name": "Disabled",
+                  "value": 1,
+                  "description": "Write FIFO disabled"
+                }
+              ]
             },
             {
               "name": "CPSIZE",
               "bit_offset": 16,
               "bit_width": 3,
               "description": "CRAM page size",
-              "enum": "CPSIZE"
-            },
-            {
-              "name": "CBURSTRW",
-              "bit_offset": 19,
-              "bit_width": 1,
-              "description": "Write burst enable",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoBurstSplit",
+                  "value": 0,
+                  "description": "No burst split when crossing page boundary"
+                },
+                {
+                  "name": "Bytes128",
+                  "value": 1,
+                  "description": "128 bytes CRAM page size"
+                },
+                {
+                  "name": "Bytes256",
+                  "value": 2,
+                  "description": "256 bytes CRAM page size"
+                },
+                {
+                  "name": "Bytes512",
+                  "value": 3,
+                  "description": "512 bytes CRAM page size"
+                },
+                {
+                  "name": "Bytes1024",
+                  "value": 4,
+                  "description": "1024 bytes CRAM page size"
+                }
+              ]
             }
           ]
         },
         {
-          "name": "PCR",
-          "offset": 128,
+          "name": "BTR%s",
+          "offset": 4,
           "size": 32,
-          "description": "PC Card/NAND Flash control register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "PC Card/NAND Flash control register",
-          "fields": [
-            {
-              "name": "PWAITEN",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Wait feature enable bit",
-              "enum": null
-            },
-            {
-              "name": "PBKEN",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "NAND Flash memory bank enable bit",
-              "enum": null
-            },
-            {
-              "name": "PTYP",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Memory type",
-              "enum": "PTYP"
-            },
-            {
-              "name": "PWID",
-              "bit_offset": 4,
-              "bit_width": 2,
-              "description": "Data bus width",
-              "enum": "PWID"
-            },
-            {
-              "name": "ECCEN",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "ECC computation logic enable bit",
-              "enum": null
-            },
-            {
-              "name": "TCLR",
-              "bit_offset": 9,
-              "bit_width": 4,
-              "description": "CLE to RE delay",
-              "enum": null
-            },
-            {
-              "name": "TAR",
-              "bit_offset": 13,
-              "bit_width": 4,
-              "description": "ALE to RE delay",
-              "enum": null
-            },
-            {
-              "name": "ECCPS",
-              "bit_offset": 17,
-              "bit_width": 3,
-              "description": "ECC page size",
-              "enum": "ECCPS"
-            }
-          ]
-        },
-        {
-          "name": "SR",
-          "offset": 132,
-          "size": 32,
-          "description": "FIFO status and interrupt register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "FIFO status and interrupt register",
-          "fields": [
-            {
-              "name": "IRS",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Interrupt rising edge status",
-              "enum": null
-            },
-            {
-              "name": "ILS",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Interrupt high-level status",
-              "enum": null
-            },
-            {
-              "name": "IFS",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Interrupt falling edge status",
-              "enum": null
-            },
-            {
-              "name": "IREN",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Interrupt rising edge detection enable bit",
-              "enum": null
-            },
-            {
-              "name": "ILEN",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "Interrupt high-level detection enable bit",
-              "enum": null
-            },
-            {
-              "name": "IFEN",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "Interrupt falling edge detection enable bit",
-              "enum": null
-            },
-            {
-              "name": "FEMPT",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "FIFO empty status",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "PMEM",
-          "offset": 136,
-          "size": 32,
-          "description": "Common memory space timing register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "Common memory space timing register",
-          "fields": [
-            {
-              "name": "MEMSET",
-              "bit_offset": 0,
-              "bit_width": 8,
-              "description": "Common memory x setup time",
-              "enum": null
-            },
-            {
-              "name": "MEMWAIT",
-              "bit_offset": 8,
-              "bit_width": 8,
-              "description": "Common memory wait time",
-              "enum": null
-            },
-            {
-              "name": "MEMHOLD",
-              "bit_offset": 16,
-              "bit_width": 8,
-              "description": "Common memory hold time",
-              "enum": null
-            },
-            {
-              "name": "MEMHIZ",
-              "bit_offset": 24,
-              "bit_width": 8,
-              "description": "Common memory x data bus Hi-Z time",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "PATT",
-          "offset": 140,
-          "size": 32,
-          "description": "Attribute memory space timing register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "Attribute memory space timing register",
-          "fields": [
-            {
-              "name": "ATTSET",
-              "bit_offset": 0,
-              "bit_width": 8,
-              "description": "Attribute memory setup time",
-              "enum": null
-            },
-            {
-              "name": "ATTWAIT",
-              "bit_offset": 8,
-              "bit_width": 8,
-              "description": "Attribute memory wait time",
-              "enum": null
-            },
-            {
-              "name": "ATTHOLD",
-              "bit_offset": 16,
-              "bit_width": 8,
-              "description": "Attribute memory hold time",
-              "enum": null
-            },
-            {
-              "name": "ATTHIZ",
-              "bit_offset": 24,
-              "bit_width": 8,
-              "description": "Attribute memory data bus Hi-Z time",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "ECCR",
-          "offset": 148,
-          "size": 32,
-          "description": "ECC result register",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "ECC result register",
-          "fields": [
-            {
-              "name": "ECC",
-              "bit_offset": 0,
-              "bit_width": 32,
-              "description": "ECC computation result value",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "BWTR",
-          "offset": 260,
-          "size": 32,
-          "description": "SRAM/NOR-Flash write timing registers 1-4",
+          "access": "read-write",
+          "reset_value": 4294967295,
+          "description": "SRAM/NOR-Flash chip-select timing register %s",
           "array_len": 4,
           "array_stride": 8,
-          "fieldset_description": "SRAM/NOR-Flash write timing registers",
           "fields": [
             {
-              "name": "ADDSET",
-              "bit_offset": 0,
-              "bit_width": 4,
-              "description": "Address setup phase duration",
-              "enum": null
+              "name": "ACCMOD",
+              "bit_offset": 28,
+              "bit_width": 2,
+              "description": "ACCMOD",
+              "enum_values": [
+                {
+                  "name": "A",
+                  "value": 0,
+                  "description": "Access mode A"
+                },
+                {
+                  "name": "B",
+                  "value": 1,
+                  "description": "Access mode B"
+                },
+                {
+                  "name": "C",
+                  "value": 2,
+                  "description": "Access mode C"
+                },
+                {
+                  "name": "D",
+                  "value": 3,
+                  "description": "Access mode D"
+                }
+              ]
             },
             {
-              "name": "ADDHLD",
-              "bit_offset": 4,
+              "name": "DATLAT",
+              "bit_offset": 24,
               "bit_width": 4,
-              "description": "Address-hold phase duration",
-              "enum": null
+              "description": "DATLAT"
+            },
+            {
+              "name": "CLKDIV",
+              "bit_offset": 20,
+              "bit_width": 4,
+              "description": "CLKDIV"
+            },
+            {
+              "name": "BUSTURN",
+              "bit_offset": 16,
+              "bit_width": 4,
+              "description": "BUSTURN"
             },
             {
               "name": "DATAST",
               "bit_offset": 8,
               "bit_width": 8,
-              "description": "Data-phase duration",
-              "enum": null
+              "description": "DATAST"
+            },
+            {
+              "name": "ADDHLD",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "ADDHLD"
+            },
+            {
+              "name": "ADDSET",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "ADDSET"
+            }
+          ]
+        },
+        {
+          "name": "BCR%s",
+          "offset": 8,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 12496,
+          "description": "SRAM/NOR-Flash chip-select control register %s",
+          "array_len": 3,
+          "array_stride": 8,
+          "fields": [
+            {
+              "name": "CBURSTRW",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "CBURSTRW"
+            },
+            {
+              "name": "ASYNCWAIT",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "ASYNCWAIT"
+            },
+            {
+              "name": "EXTMOD",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "EXTMOD"
+            },
+            {
+              "name": "WAITEN",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "WAITEN"
+            },
+            {
+              "name": "WREN",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "WREN"
+            },
+            {
+              "name": "WAITCFG",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "WAITCFG"
+            },
+            {
+              "name": "WRAPMOD",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "WRAPMOD"
+            },
+            {
+              "name": "WAITPOL",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "WAITPOL"
+            },
+            {
+              "name": "BURSTEN",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "BURSTEN"
+            },
+            {
+              "name": "FACCEN",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "FACCEN"
+            },
+            {
+              "name": "MWID",
+              "bit_offset": 4,
+              "bit_width": 2,
+              "description": "MWID"
+            },
+            {
+              "name": "MTYP",
+              "bit_offset": 2,
+              "bit_width": 2,
+              "description": "MTYP"
+            },
+            {
+              "name": "MUXEN",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "MUXEN"
+            },
+            {
+              "name": "MBKEN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "MBKEN"
+            },
+            {
+              "name": "CPSIZE",
+              "bit_offset": 16,
+              "bit_width": 3,
+              "description": "CRAM page size",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "PCR%s",
+          "offset": 96,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 24,
+          "description": "PC Card/NAND Flash control register %s",
+          "array_len": 3,
+          "array_stride": 32,
+          "fields": [
+            {
+              "name": "ECCPS",
+              "bit_offset": 17,
+              "bit_width": 3,
+              "description": "ECCPS",
+              "enum_values": [
+                {
+                  "name": "Bytes256",
+                  "value": 0,
+                  "description": "ECC page size 256 bytes"
+                },
+                {
+                  "name": "Bytes512",
+                  "value": 1,
+                  "description": "ECC page size 512 bytes"
+                },
+                {
+                  "name": "Bytes1024",
+                  "value": 2,
+                  "description": "ECC page size 1024 bytes"
+                },
+                {
+                  "name": "Bytes2048",
+                  "value": 3,
+                  "description": "ECC page size 2048 bytes"
+                },
+                {
+                  "name": "Bytes4096",
+                  "value": 4,
+                  "description": "ECC page size 4096 bytes"
+                },
+                {
+                  "name": "Bytes8192",
+                  "value": 5,
+                  "description": "ECC page size 8192 bytes"
+                }
+              ]
+            },
+            {
+              "name": "TAR",
+              "bit_offset": 13,
+              "bit_width": 4,
+              "description": "TAR"
+            },
+            {
+              "name": "TCLR",
+              "bit_offset": 9,
+              "bit_width": 4,
+              "description": "TCLR"
+            },
+            {
+              "name": "ECCEN",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "ECCEN",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "ECC logic is disabled and reset"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "ECC logic is enabled"
+                }
+              ]
+            },
+            {
+              "name": "PWID",
+              "bit_offset": 4,
+              "bit_width": 2,
+              "description": "PWID",
+              "enum_values": [
+                {
+                  "name": "Bits8",
+                  "value": 0,
+                  "description": "External memory device width 8 bits"
+                },
+                {
+                  "name": "Bits16",
+                  "value": 1,
+                  "description": "External memory device width 16 bits"
+                }
+              ]
+            },
+            {
+              "name": "PTYP",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "PTYP",
+              "enum_values": [
+                {
+                  "name": "NANDFlash",
+                  "value": 1,
+                  "description": "NAND Flash"
+                }
+              ]
+            },
+            {
+              "name": "PBKEN",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "PBKEN",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Corresponding memory bank is disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Corresponding memory bank is enabled"
+                }
+              ]
+            },
+            {
+              "name": "PWAITEN",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "PWAITEN",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Wait feature disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Wait feature enabled"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "SR%s",
+          "offset": 100,
+          "size": 32,
+          "access": null,
+          "reset_value": 64,
+          "description": "FIFO status and interrupt register %s",
+          "array_len": 3,
+          "array_stride": 32,
+          "fields": [
+            {
+              "name": "FEMPT",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "FEMPT",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotEmpty",
+                  "value": 0,
+                  "description": "FIFO not empty"
+                },
+                {
+                  "name": "Empty",
+                  "value": 1,
+                  "description": "FIFO empty"
+                }
+              ]
+            },
+            {
+              "name": "IFEN",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "IFEN",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Interrupt falling edge detection request disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Interrupt falling edge detection request enabled"
+                }
+              ]
+            },
+            {
+              "name": "ILEN",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "ILEN",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Interrupt high-level detection request disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Interrupt high-level detection request enabled"
+                }
+              ]
+            },
+            {
+              "name": "IREN",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "IREN",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Interrupt rising edge detection request disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Interrupt rising edge detection request enabled"
+                }
+              ]
+            },
+            {
+              "name": "IFS",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "IFS",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "DidNotOccur",
+                  "value": 0,
+                  "description": "Interrupt falling edge did not occur"
+                },
+                {
+                  "name": "Occurred",
+                  "value": 1,
+                  "description": "Interrupt falling edge occurred"
+                }
+              ]
+            },
+            {
+              "name": "ILS",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "ILS",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "DidNotOccur",
+                  "value": 0,
+                  "description": "Interrupt high-level did not occur"
+                },
+                {
+                  "name": "Occurred",
+                  "value": 1,
+                  "description": "Interrupt high-level occurred"
+                }
+              ]
+            },
+            {
+              "name": "IRS",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "IRS",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "DidNotOccur",
+                  "value": 0,
+                  "description": "Interrupt rising edge did not occur"
+                },
+                {
+                  "name": "Occurred",
+                  "value": 1,
+                  "description": "Interrupt rising edge occurred"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "PMEM%s",
+          "offset": 104,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 4244438268,
+          "description": "Common memory space timing register %s",
+          "array_len": 3,
+          "array_stride": 32,
+          "fields": [
+            {
+              "name": "MEMHIZ",
+              "bit_offset": 24,
+              "bit_width": 8,
+              "description": "MEMHIZx"
+            },
+            {
+              "name": "MEMHOLD",
+              "bit_offset": 16,
+              "bit_width": 8,
+              "description": "MEMHOLDx"
+            },
+            {
+              "name": "MEMWAIT",
+              "bit_offset": 8,
+              "bit_width": 8,
+              "description": "MEMWAITx"
+            },
+            {
+              "name": "MEMSET",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "MEMSETx"
+            }
+          ]
+        },
+        {
+          "name": "PATT%s",
+          "offset": 108,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 4244438268,
+          "description": "Attribute memory space timing register %s",
+          "array_len": 3,
+          "array_stride": 32,
+          "fields": [
+            {
+              "name": "ATTHIZ",
+              "bit_offset": 24,
+              "bit_width": 8,
+              "description": "ATTHIZx"
+            },
+            {
+              "name": "ATTHOLD",
+              "bit_offset": 16,
+              "bit_width": 8,
+              "description": "ATTHOLDx"
+            },
+            {
+              "name": "ATTWAIT",
+              "bit_offset": 8,
+              "bit_width": 8,
+              "description": "ATTWAITx"
+            },
+            {
+              "name": "ATTSET",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "ATTSETx"
+            }
+          ]
+        },
+        {
+          "name": "ECCR%s",
+          "offset": 116,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "ECC result register %s",
+          "array_len": 2,
+          "array_stride": 32,
+          "fields": [
+            {
+              "name": "ECC",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "ECCx"
+            }
+          ]
+        },
+        {
+          "name": "PIO4",
+          "offset": 176,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 4244438268,
+          "description": "I/O space timing register 4",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "IOHIZ",
+              "bit_offset": 24,
+              "bit_width": 8,
+              "description": "IOHIZx"
+            },
+            {
+              "name": "IOHOLD",
+              "bit_offset": 16,
+              "bit_width": 8,
+              "description": "IOHOLDx"
+            },
+            {
+              "name": "IOWAIT",
+              "bit_offset": 8,
+              "bit_width": 8,
+              "description": "IOWAITx"
+            },
+            {
+              "name": "IOSET",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "IOSETx"
+            }
+          ]
+        },
+        {
+          "name": "BWTR%s",
+          "offset": 260,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 268435455,
+          "description": "SRAM/NOR-Flash write timing registers %s",
+          "array_len": 4,
+          "array_stride": 8,
+          "fields": [
+            {
+              "name": "ACCMOD",
+              "bit_offset": 28,
+              "bit_width": 2,
+              "description": "ACCMOD",
+              "enum_values": [
+                {
+                  "name": "A",
+                  "value": 0,
+                  "description": "Access mode A"
+                },
+                {
+                  "name": "B",
+                  "value": 1,
+                  "description": "Access mode B"
+                },
+                {
+                  "name": "C",
+                  "value": 2,
+                  "description": "Access mode C"
+                },
+                {
+                  "name": "D",
+                  "value": 3,
+                  "description": "Access mode D"
+                }
+              ]
+            },
+            {
+              "name": "DATAST",
+              "bit_offset": 8,
+              "bit_width": 8,
+              "description": "DATAST"
+            },
+            {
+              "name": "ADDHLD",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "ADDHLD"
+            },
+            {
+              "name": "ADDSET",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "ADDSET"
             },
             {
               "name": "BUSTURN",
               "bit_offset": 16,
               "bit_width": 4,
               "description": "Bus turnaround phase duration",
-              "enum": null
-            },
-            {
-              "name": "ACCMOD",
-              "bit_offset": 28,
-              "bit_width": 2,
-              "description": "Access mode",
-              "enum": "ACCMOD"
+              "access": "read-write"
             }
           ]
         },
         {
-          "name": "SDCR",
+          "name": "SDCR1",
           "offset": 320,
           "size": 32,
-          "description": "SDRAM Control Register 1-2",
-          "array_len": 2,
-          "array_stride": 4,
-          "fieldset_description": "SDRAM Control Register",
+          "access": "read-write",
+          "reset_value": 720,
+          "description": "SDRAM Control Register 1",
+          "array_len": null,
+          "array_stride": null,
           "fields": [
             {
               "name": "NC",
               "bit_offset": 0,
               "bit_width": 2,
               "description": "Number of column address bits",
-              "enum": "NC"
+              "enum_values": [
+                {
+                  "name": "Bits8",
+                  "value": 0,
+                  "description": "8 bits"
+                },
+                {
+                  "name": "Bits9",
+                  "value": 1,
+                  "description": "9 bits"
+                },
+                {
+                  "name": "Bits10",
+                  "value": 2,
+                  "description": "10 bits"
+                },
+                {
+                  "name": "Bits11",
+                  "value": 3,
+                  "description": "11 bits"
+                }
+              ]
             },
             {
               "name": "NR",
               "bit_offset": 2,
               "bit_width": 2,
               "description": "Number of row address bits",
-              "enum": "NR"
+              "enum_values": [
+                {
+                  "name": "Bits11",
+                  "value": 0,
+                  "description": "11 bits"
+                },
+                {
+                  "name": "Bits12",
+                  "value": 1,
+                  "description": "12 bits"
+                },
+                {
+                  "name": "Bits13",
+                  "value": 2,
+                  "description": "13 bits"
+                }
+              ]
             },
             {
               "name": "MWID",
               "bit_offset": 4,
               "bit_width": 2,
               "description": "Memory data bus width",
-              "enum": "MWID"
+              "enum_values": [
+                {
+                  "name": "Bits8",
+                  "value": 0,
+                  "description": "Memory data bus width 8 bits"
+                },
+                {
+                  "name": "Bits16",
+                  "value": 1,
+                  "description": "Memory data bus width 16 bits"
+                },
+                {
+                  "name": "Bits32",
+                  "value": 2,
+                  "description": "Memory data bus width 32 bits"
+                }
+              ]
             },
             {
               "name": "NB",
               "bit_offset": 6,
               "bit_width": 1,
               "description": "Number of internal banks",
-              "enum": "NB"
+              "enum_values": [
+                {
+                  "name": "NB2",
+                  "value": 0,
+                  "description": "Two internal Banks"
+                },
+                {
+                  "name": "NB4",
+                  "value": 1,
+                  "description": "Four internal Banks"
+                }
+              ]
             },
             {
               "name": "CAS",
               "bit_offset": 7,
               "bit_width": 2,
               "description": "CAS latency",
-              "enum": "CAS"
+              "enum_values": [
+                {
+                  "name": "Clocks1",
+                  "value": 1,
+                  "description": "1 cycle"
+                },
+                {
+                  "name": "Clocks2",
+                  "value": 2,
+                  "description": "2 cycles"
+                },
+                {
+                  "name": "Clocks3",
+                  "value": 3,
+                  "description": "3 cycles"
+                }
+              ]
             },
             {
               "name": "WP",
               "bit_offset": 9,
               "bit_width": 1,
               "description": "Write protection",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Write accesses allowed"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Write accesses ignored"
+                }
+              ]
             },
             {
               "name": "SDCLK",
               "bit_offset": 10,
               "bit_width": 2,
               "description": "SDRAM clock configuration",
-              "enum": "SDCLK"
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "SDCLK clock disabled"
+                },
+                {
+                  "name": "Div2",
+                  "value": 2,
+                  "description": "SDCLK period = 2 x HCLK period"
+                },
+                {
+                  "name": "Div3",
+                  "value": 3,
+                  "description": "SDCLK period = 3 x HCLK period"
+                }
+              ]
             },
             {
               "name": "RBURST",
               "bit_offset": 12,
               "bit_width": 1,
               "description": "Burst read",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Single read requests are not managed as bursts"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Single read requests are always managed as bursts"
+                }
+              ]
             },
             {
               "name": "RPIPE",
               "bit_offset": 13,
               "bit_width": 2,
               "description": "Read pipe",
-              "enum": "RPIPE"
+              "enum_values": [
+                {
+                  "name": "NoDelay",
+                  "value": 0,
+                  "description": "No clock cycle delay"
+                },
+                {
+                  "name": "Clocks1",
+                  "value": 1,
+                  "description": "One clock cycle delay"
+                },
+                {
+                  "name": "Clocks2",
+                  "value": 2,
+                  "description": "Two clock cycles delay"
+                }
+              ]
             }
           ]
         },
         {
-          "name": "SDTR",
+          "name": "SDCR2",
+          "offset": 324,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 720,
+          "description": "SDRAM Control Register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "NC",
+              "bit_offset": 0,
+              "bit_width": 2,
+              "description": "Number of column address bits"
+            },
+            {
+              "name": "NR",
+              "bit_offset": 2,
+              "bit_width": 2,
+              "description": "Number of row address bits"
+            },
+            {
+              "name": "MWID",
+              "bit_offset": 4,
+              "bit_width": 2,
+              "description": "Memory data bus width"
+            },
+            {
+              "name": "NB",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Number of internal banks"
+            },
+            {
+              "name": "CAS",
+              "bit_offset": 7,
+              "bit_width": 2,
+              "description": "CAS latency"
+            },
+            {
+              "name": "WP",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Write protection"
+            },
+            {
+              "name": "SDCLK",
+              "bit_offset": 10,
+              "bit_width": 2,
+              "description": "SDRAM clock configuration"
+            },
+            {
+              "name": "RBURST",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "Burst read",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Single read requests are not managed as bursts"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Single read requests are always managed as bursts"
+                }
+              ]
+            },
+            {
+              "name": "RPIPE",
+              "bit_offset": 13,
+              "bit_width": 2,
+              "description": "Read pipe",
+              "enum_values": [
+                {
+                  "name": "NoDelay",
+                  "value": 0,
+                  "description": "No clock cycle delay"
+                },
+                {
+                  "name": "Clocks1",
+                  "value": 1,
+                  "description": "One clock cycle delay"
+                },
+                {
+                  "name": "Clocks2",
+                  "value": 2,
+                  "description": "Two clock cycles delay"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "SDTR%s",
           "offset": 328,
           "size": 32,
-          "description": "SDRAM Timing register 1-2",
+          "access": "read-write",
+          "reset_value": 268435455,
+          "description": "SDRAM Timing register %s",
           "array_len": 2,
           "array_stride": 4,
-          "fieldset_description": "SDRAM Timing register",
           "fields": [
             {
               "name": "TMRD",
               "bit_offset": 0,
               "bit_width": 4,
-              "description": "Load Mode Register to Active",
-              "enum": null
+              "description": "Load Mode Register to Active"
             },
             {
               "name": "TXSR",
               "bit_offset": 4,
               "bit_width": 4,
-              "description": "Exit self-refresh delay",
-              "enum": null
+              "description": "Exit self-refresh delay"
             },
             {
               "name": "TRAS",
               "bit_offset": 8,
               "bit_width": 4,
-              "description": "Self refresh time",
-              "enum": null
+              "description": "Self refresh time"
             },
             {
               "name": "TRC",
               "bit_offset": 12,
               "bit_width": 4,
-              "description": "Row cycle delay",
-              "enum": null
+              "description": "Row cycle delay"
             },
             {
               "name": "TWR",
               "bit_offset": 16,
               "bit_width": 4,
-              "description": "Recovery delay",
-              "enum": null
+              "description": "Recovery delay"
             },
             {
               "name": "TRP",
               "bit_offset": 20,
               "bit_width": 4,
-              "description": "Row precharge delay",
-              "enum": null
+              "description": "Row precharge delay"
             },
             {
               "name": "TRCD",
               "bit_offset": 24,
               "bit_width": 4,
-              "description": "Row to column delay",
-              "enum": null
+              "description": "Row to column delay"
             }
           ]
         },
@@ -707,45 +1380,95 @@
           "name": "SDCMR",
           "offset": 336,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "SDRAM Command Mode register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "SDRAM Command Mode register",
           "fields": [
             {
               "name": "MODE",
               "bit_offset": 0,
               "bit_width": 3,
               "description": "Command mode",
-              "enum": "MODE"
+              "access": "write-only",
+              "enum_values": [
+                {
+                  "name": "Normal",
+                  "value": 0,
+                  "description": "Normal Mode"
+                },
+                {
+                  "name": "ClockConfigurationEnable",
+                  "value": 1,
+                  "description": "Clock Configuration Enable"
+                },
+                {
+                  "name": "PALL",
+                  "value": 2,
+                  "description": "PALL (All Bank Precharge) command"
+                },
+                {
+                  "name": "AutoRefreshCommand",
+                  "value": 3,
+                  "description": "Auto-refresh command"
+                },
+                {
+                  "name": "LoadModeRegister",
+                  "value": 4,
+                  "description": "Load Mode Resgier"
+                },
+                {
+                  "name": "SelfRefreshCommand",
+                  "value": 5,
+                  "description": "Self-refresh command"
+                },
+                {
+                  "name": "PowerDownCommand",
+                  "value": 6,
+                  "description": "Power-down command"
+                }
+              ]
             },
             {
               "name": "CTB2",
               "bit_offset": 3,
               "bit_width": 1,
               "description": "Command target bank 2",
-              "enum": null
+              "access": "write-only",
+              "enum_values": [
+                {
+                  "name": "NotIssued",
+                  "value": 0,
+                  "description": "Command not issued to SDRAM Bank 1"
+                },
+                {
+                  "name": "Issued",
+                  "value": 1,
+                  "description": "Command issued to SDRAM Bank 1"
+                }
+              ]
             },
             {
               "name": "CTB1",
               "bit_offset": 4,
               "bit_width": 1,
               "description": "Command target bank 1",
-              "enum": null
+              "access": "write-only"
             },
             {
               "name": "NRFS",
               "bit_offset": 5,
               "bit_width": 4,
               "description": "Number of Auto-refresh",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "MRD",
               "bit_offset": 9,
               "bit_width": 13,
               "description": "Mode Register definition",
-              "enum": null
+              "access": "read-write"
             }
           ]
         },
@@ -753,31 +1476,51 @@
           "name": "SDRTR",
           "offset": 340,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "SDRAM Refresh Timer register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "SDRAM Refresh Timer register",
           "fields": [
             {
               "name": "CRE",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "Clear Refresh error flag",
-              "enum": null
+              "access": "write-only",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Refresh Error Flag is cleared"
+                }
+              ]
             },
             {
               "name": "COUNT",
               "bit_offset": 1,
               "bit_width": 13,
               "description": "Refresh Timer Count",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "REIE",
               "bit_offset": 14,
               "bit_width": 1,
               "description": "RES Interrupt Enable",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Interrupt is disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Interrupt is generated if RE = 1"
+                }
+              ]
             }
           ]
         },
@@ -785,409 +1528,81 @@
           "name": "SDSR",
           "offset": 344,
           "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
           "description": "SDRAM Status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "SDRAM Status register",
           "fields": [
             {
               "name": "RE",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "Refresh error flag",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "NoError",
+                  "value": 0,
+                  "description": "No refresh error has been detected"
+                },
+                {
+                  "name": "Error",
+                  "value": 1,
+                  "description": "A refresh error has been detected"
+                }
+              ]
             },
             {
               "name": "MODES1",
               "bit_offset": 1,
               "bit_width": 2,
               "description": "Status Mode for Bank 1",
-              "enum": "MODES"
+              "enum_values": [
+                {
+                  "name": "Normal",
+                  "value": 0,
+                  "description": "Normal Mode"
+                },
+                {
+                  "name": "SelfRefresh",
+                  "value": 1,
+                  "description": "Self-refresh mode"
+                },
+                {
+                  "name": "PowerDown",
+                  "value": 2,
+                  "description": "Power-down mode"
+                }
+              ]
             },
             {
               "name": "MODES2",
               "bit_offset": 3,
               "bit_width": 2,
-              "description": "Status Mode for Bank 2",
-              "enum": "MODES"
+              "description": "Status Mode for Bank 2"
             },
             {
               "name": "BUSY",
               "bit_offset": 5,
               "bit_width": 1,
               "description": "Busy status",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "NotBusy",
+                  "value": 0,
+                  "description": "SDRAM Controller is ready to accept a new request"
+                },
+                {
+                  "name": "Busy",
+                  "value": 1,
+                  "description": "SDRAM Controller is not ready to accept a new request"
+                }
+              ]
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "ACCMOD": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "A",
-          "value": 0,
-          "description": "Access mode A"
-        },
-        {
-          "name": "B",
-          "value": 1,
-          "description": "Access mode B"
-        },
-        {
-          "name": "C",
-          "value": 2,
-          "description": "Access mode C"
-        },
-        {
-          "name": "D",
-          "value": 3,
-          "description": "Access mode D"
-        }
-      ]
-    },
-    "CAS": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Clocks1",
-          "value": 1,
-          "description": "1 cycle"
-        },
-        {
-          "name": "Clocks2",
-          "value": 2,
-          "description": "2 cycles"
-        },
-        {
-          "name": "Clocks3",
-          "value": 3,
-          "description": "3 cycles"
-        }
-      ]
-    },
-    "CPSIZE": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "NoBurstSplit",
-          "value": 0,
-          "description": "No burst split when crossing page boundary"
-        },
-        {
-          "name": "Bytes128",
-          "value": 1,
-          "description": "128 bytes CRAM page size"
-        },
-        {
-          "name": "Bytes256",
-          "value": 2,
-          "description": "256 bytes CRAM page size"
-        },
-        {
-          "name": "Bytes512",
-          "value": 3,
-          "description": "512 bytes CRAM page size"
-        },
-        {
-          "name": "Bytes1024",
-          "value": 4,
-          "description": "1024 bytes CRAM page size"
-        }
-      ]
-    },
-    "ECCPS": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "Bytes256",
-          "value": 0,
-          "description": "ECC page size 256 bytes"
-        },
-        {
-          "name": "Bytes512",
-          "value": 1,
-          "description": "ECC page size 512 bytes"
-        },
-        {
-          "name": "Bytes1024",
-          "value": 2,
-          "description": "ECC page size 1024 bytes"
-        },
-        {
-          "name": "Bytes2048",
-          "value": 3,
-          "description": "ECC page size 2048 bytes"
-        },
-        {
-          "name": "Bytes4096",
-          "value": 4,
-          "description": "ECC page size 4096 bytes"
-        },
-        {
-          "name": "Bytes8192",
-          "value": 5,
-          "description": "ECC page size 8192 bytes"
-        }
-      ]
-    },
-    "MODE": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "Normal",
-          "value": 0,
-          "description": "Normal Mode"
-        },
-        {
-          "name": "ClockConfigurationEnable",
-          "value": 1,
-          "description": "Clock Configuration Enable"
-        },
-        {
-          "name": "PALL",
-          "value": 2,
-          "description": "PALL (All Bank Precharge) command"
-        },
-        {
-          "name": "AutoRefreshCommand",
-          "value": 3,
-          "description": "Auto-refresh command"
-        },
-        {
-          "name": "LoadModeRegister",
-          "value": 4,
-          "description": "Load Mode Resgier"
-        },
-        {
-          "name": "SelfRefreshCommand",
-          "value": 5,
-          "description": "Self-refresh command"
-        },
-        {
-          "name": "PowerDownCommand",
-          "value": 6,
-          "description": "Power-down command"
-        }
-      ]
-    },
-    "MODES": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Normal",
-          "value": 0,
-          "description": "Normal Mode"
-        },
-        {
-          "name": "SelfRefresh",
-          "value": 1,
-          "description": "Self-refresh mode"
-        },
-        {
-          "name": "PowerDown",
-          "value": 2,
-          "description": "Power-down mode"
-        }
-      ]
-    },
-    "MTYP": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "SRAM",
-          "value": 0,
-          "description": "SRAM memory type"
-        },
-        {
-          "name": "PSRAM",
-          "value": 1,
-          "description": "PSRAM (CRAM) memory type"
-        },
-        {
-          "name": "Flash",
-          "value": 2,
-          "description": "NOR Flash/OneNAND Flash"
-        }
-      ]
-    },
-    "MWID": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Bits8",
-          "value": 0,
-          "description": "Memory data bus width 8 bits"
-        },
-        {
-          "name": "Bits16",
-          "value": 1,
-          "description": "Memory data bus width 16 bits"
-        },
-        {
-          "name": "Bits32",
-          "value": 2,
-          "description": "Memory data bus width 32 bits"
-        }
-      ]
-    },
-    "NB": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "NB2",
-          "value": 0,
-          "description": "Two internal Banks"
-        },
-        {
-          "name": "NB4",
-          "value": 1,
-          "description": "Four internal Banks"
-        }
-      ]
-    },
-    "NC": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Bits8",
-          "value": 0,
-          "description": "8 bits"
-        },
-        {
-          "name": "Bits9",
-          "value": 1,
-          "description": "9 bits"
-        },
-        {
-          "name": "Bits10",
-          "value": 2,
-          "description": "10 bits"
-        },
-        {
-          "name": "Bits11",
-          "value": 3,
-          "description": "11 bits"
-        }
-      ]
-    },
-    "NR": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Bits11",
-          "value": 0,
-          "description": "11 bits"
-        },
-        {
-          "name": "Bits12",
-          "value": 1,
-          "description": "12 bits"
-        },
-        {
-          "name": "Bits13",
-          "value": 2,
-          "description": "13 bits"
-        }
-      ]
-    },
-    "PTYP": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "NANDFlash",
-          "value": 1,
-          "description": "NAND Flash"
-        }
-      ]
-    },
-    "PWID": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Bits8",
-          "value": 0,
-          "description": "External memory device width 8 bits"
-        },
-        {
-          "name": "Bits16",
-          "value": 1,
-          "description": "External memory device width 16 bits"
-        }
-      ]
-    },
-    "RPIPE": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "NoDelay",
-          "value": 0,
-          "description": "No clock cycle delay"
-        },
-        {
-          "name": "Clocks1",
-          "value": 1,
-          "description": "One clock cycle delay"
-        },
-        {
-          "name": "Clocks2",
-          "value": 2,
-          "description": "Two clock cycles delay"
-        }
-      ]
-    },
-    "SDCLK": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Disabled",
-          "value": 0,
-          "description": "SDCLK clock disabled"
-        },
-        {
-          "name": "Div2",
-          "value": 2,
-          "description": "SDCLK period = 2 x HCLK period"
-        },
-        {
-          "name": "Div3",
-          "value": 3,
-          "description": "SDCLK period = 3 x HCLK period"
-        }
-      ]
-    },
-    "WAITCFG": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "BeforeWaitState",
-          "value": 0,
-          "description": "NWAIT signal is active one data cycle before wait state"
-        },
-        {
-          "name": "DuringWaitState",
-          "value": 1,
-          "description": "NWAIT signal is active during wait state"
-        }
-      ]
-    },
-    "WAITPOL": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "ActiveLow",
-          "value": 0,
-          "description": "NWAIT active low"
-        },
-        {
-          "name": "ActiveHigh",
-          "value": 1,
-          "description": "NWAIT active high"
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

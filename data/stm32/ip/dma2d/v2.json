@@ -2,97 +2,101 @@
   "schema": 1,
   "kind": "dma2d",
   "version": "v2",
+  "source": "stm32rs_svd",
+  "source_device": "stm32h7r3a8",
+  "source_file": "stm32h7r.svd.patched",
   "blocks": {
     "DMA2D": {
       "name": "DMA2D",
-      "description": "DMA2D",
+      "description": "Chrom-Art Accelerator controller",
       "extends": null,
       "registers": [
         {
           "name": "CR",
           "offset": 0,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "DMA2D control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "DMA2D control register",
           "fields": [
             {
               "name": "START",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Start. This bit can be used to launch the DMA2D according to the parameters loaded in the various configuration registers",
-              "enum": "CR_START"
+              "description": "Start This bit can be used to launch the DMA2D according to parameters loaded in the various configuration registers. This bit is automatically reset by the following events: at the end of the transfer when the data transfer is aborted by the user by setting ABORT in this register when a data transfer error occurs when the data transfer has not started due to a configuration error, or another transfer operation already ongoing (automatic CLUT loading)",
+              "access": "read-write"
             },
             {
               "name": "SUSP",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Suspend. This bit can be used to suspend the current transfer. This bit is set and reset by software. It is automatically reset by hardware when the START bit is reset.",
-              "enum": null
+              "description": "Suspend This bit can be used to suspend the current transfer. This bit is set and reset by software. It is automatically reset by hardware when START = 0.",
+              "access": "read-write"
             },
             {
               "name": "ABORT",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "Abort. This bit can be used to abort the current transfer. This bit is set by software and is automatically reset by hardware when the START bit is reset.",
-              "enum": "ABORT"
+              "description": "Abort This bit can be used to abort the current transfer. This bit is set by software, and is automatically reset by hardware when START = 0.",
+              "access": "read-write"
             },
             {
               "name": "LOM",
               "bit_offset": 6,
               "bit_width": 1,
-              "description": "Line offset mode. This bit configures how the line offset is expressed (in pixels or bytes) for the foreground, background and output. This bit is set and cleared by software. It can not be modified while a transfer is ongoing.",
-              "enum": "LOM"
+              "description": "Line offset mode This bit configures how the line offset is expressed (pixels or bytes) for the foreground, background and output. This bit is set and cleared by software. It can not be modified while a transfer is ongoing.",
+              "access": "read-write"
             },
             {
               "name": "TEIE",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "Transfer error interrupt enable. This bit is set and cleared by software.",
-              "enum": null
+              "description": "Transfer error (TE) interrupt enable This bit is set and cleared by software.",
+              "access": "read-write"
             },
             {
               "name": "TCIE",
               "bit_offset": 9,
               "bit_width": 1,
-              "description": "Transfer complete interrupt enable. This bit is set and cleared by software.",
-              "enum": null
+              "description": "Transfer complete (TC) interrupt enable This bit is set and cleared by software.",
+              "access": "read-write"
             },
             {
               "name": "TWIE",
               "bit_offset": 10,
               "bit_width": 1,
-              "description": "Transfer watermark interrupt enable. This bit is set and cleared by software.",
-              "enum": null
+              "description": "Transfer watermark (TW) interrupt enable This bit is set and cleared by software.",
+              "access": "read-write"
             },
             {
               "name": "CAEIE",
               "bit_offset": 11,
               "bit_width": 1,
-              "description": "CLUT access error interrupt enable. This bit is set and cleared by software.",
-              "enum": null
+              "description": "CLUT access error (CAE) interrupt enable This bit is set and cleared by software.",
+              "access": "read-write"
             },
             {
               "name": "CTCIE",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "CLUT transfer complete interrupt enable. This bit is set and cleared by software.",
-              "enum": null
+              "description": "CLUT transfer complete (CTC) interrupt enable This bit is set and cleared by software.",
+              "access": "read-write"
             },
             {
               "name": "CEIE",
               "bit_offset": 13,
               "bit_width": 1,
-              "description": "Configuration error interrupt enable. This bit is set and cleared by software.",
-              "enum": null
+              "description": "Configuration error (CE) interrupt enable This bit is set and cleared by software.",
+              "access": "read-write"
             },
             {
               "name": "MODE",
               "bit_offset": 16,
               "bit_width": 3,
-              "description": "DMA2D mode This bit is set and cleared by software. It cannot be modified while a transfer is ongoing.",
-              "enum": "MODE"
+              "description": "DMA2D mode This bit is set and cleared by software. It cannot be modified while a transfer is ongoing. Others: Reserved",
+              "access": "read-write"
             }
           ]
         },
@@ -100,52 +104,53 @@
           "name": "ISR",
           "offset": 4,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "DMA2D interrupt status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "DMA2D Interrupt Status Register",
           "fields": [
             {
               "name": "TEIF",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Transfer error interrupt flag. This bit is set when an error occurs during a DMA transfer (data transfer or automatic CLUT loading).",
-              "enum": null
+              "description": "Transfer error interrupt flag This bit is set when an error occurs during a DMA transfer (data transfer or automatic CLUT loading).",
+              "access": "read-only"
             },
             {
               "name": "TCIF",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Transfer complete interrupt flag. This bit is set when a DMA2D transfer operation is complete (data transfer only).",
-              "enum": null
+              "description": "Transfer complete interrupt flag This bit is set when a DMA2D transfer operation is complete (data transfer only).",
+              "access": "read-only"
             },
             {
               "name": "TWIF",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "Transfer watermark interrupt flag. This bit is set when the last pixel of the watermarked line has been transferred.",
-              "enum": null
+              "description": "Transfer watermark interrupt flag This bit is set when the last pixel of the watermarked line has been transferred.",
+              "access": "read-only"
             },
             {
               "name": "CAEIF",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "CLUT access error interrupt flag. This bit is set when the CPU accesses the CLUT while the CLUT is being automatically copied from a system memory to the internal DMA2D.",
-              "enum": null
+              "description": "CLUT access error interrupt flag This bit is set when the CPU accesses the CLUT while the CLUT is being automatically copied from a system memory to the internal DMA2D.",
+              "access": "read-only"
             },
             {
               "name": "CTCIF",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "CLUT transfer complete interrupt flag. This bit is set when the CLUT copy from a system memory area to the internal DMA2D memory is complete.",
-              "enum": null
+              "description": "CLUT transfer complete interrupt flag This bit is set when the CLUT copy from a system memory area to the internal DMA2D memory is complete.",
+              "access": "read-only"
             },
             {
               "name": "CEIF",
               "bit_offset": 5,
               "bit_width": 1,
-              "description": "Configuration error interrupt flag. This bit is set when the START bit of DMA2D_CR, DMA2DFGPFCCR or DMA2D_BGPFCCR is set and a wrong configuration has been programmed.",
-              "enum": null
+              "description": "Configuration error interrupt flag This bit is set when START is set in DMA2D_CR, DMA2DFGPFCCR or DMA2D_BGPFCCR, and a wrong configuration has been programmed.",
+              "access": "read-only"
             }
           ]
         },
@@ -153,52 +158,53 @@
           "name": "IFCR",
           "offset": 8,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "DMA2D interrupt flag clear register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "DMA2D interrupt flag clear register",
           "fields": [
             {
               "name": "CTEIF",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Clear transfer error interrupt flag. Programming this bit to 1 clears the TEIF flag in the DMA2D_ISR register",
-              "enum": "CTEIF"
+              "description": "Clear transfer error interrupt flag Programming this bit to 1 clears the TEIF flag in DMA2D_ISR.",
+              "access": "read-write"
             },
             {
               "name": "CTCIF",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Clear transfer complete interrupt flag. Programming this bit to 1 clears the TCIF flag in the DMA2D_ISR register",
-              "enum": "CTCIF"
+              "description": "Clear transfer complete interrupt flag Programming this bit to 1 clears the TCIF flag in DMA2D_ISR.",
+              "access": "read-write"
             },
             {
               "name": "CTWIF",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "Clear transfer watermark interrupt flag. Programming this bit to 1 clears the TWIF flag in the DMA2D_ISR register",
-              "enum": "CTWIF"
+              "description": "Clear transfer watermark interrupt flag Programming this bit to 1 clears the TWIF flag in DMA2D_ISR.",
+              "access": "read-write"
             },
             {
               "name": "CAECIF",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "Clear CLUT access error interrupt flag. Programming this bit to 1 clears the CAEIF flag in the DMA2D_ISR register",
-              "enum": "CAECIF"
+              "description": "Clear CLUT access error interrupt flag Programming this bit to 1 clears the CAEIF flag in DMA2D_ISR.",
+              "access": "read-write"
             },
             {
               "name": "CCTCIF",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "Clear CLUT transfer complete interrupt flag. Programming this bit to 1 clears the CTCIF flag in the DMA2D_ISR register",
-              "enum": "CCTCIF"
+              "description": "Clear CLUT transfer complete interrupt flag Programming this bit to 1 clears the CTCIF flag in DMA2D_ISR.",
+              "access": "read-write"
             },
             {
               "name": "CCEIF",
               "bit_offset": 5,
               "bit_width": 1,
-              "description": "Clear configuration error interrupt flag. Programming this bit to 1 clears the CEIF flag in the DMA2D_ISR register",
-              "enum": "CCEIF"
+              "description": "Clear configuration error interrupt flag Programming this bit to 1 clears the CEIF flag in DMA2D_ISR.",
+              "access": "read-write"
             }
           ]
         },
@@ -206,17 +212,18 @@
           "name": "FGMAR",
           "offset": 12,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "DMA2D foreground memory address register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "DMA2D foreground memory address register",
           "fields": [
             {
               "name": "MA",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Memory address. Address of the data used for the foreground image. This register can only be written when data transfers are disabled. Once the data transfer has started, this register is read-only. The address alignment must match the image format selected e.g. a 32-bit per pixel format must be 32-bit aligned, a 16-bit per pixel format must be 16-bit aligned and a 4-bit per pixel format must be 8-bit aligned.",
-              "enum": null
+              "description": "Memory address, address of the data used for the foreground image The address alignment must match the image format selected: a 32-bit per pixel format must be 32-bit aligned, a 16-bit per pixel format must be 16-bit aligned, and a 4-bit per pixel format must be 8-bit aligned.",
+              "access": "read-write"
             }
           ]
         },
@@ -224,17 +231,18 @@
           "name": "FGOR",
           "offset": 16,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "DMA2D foreground offset register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "DMA2D foreground offset register",
           "fields": [
             {
               "name": "LO",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "Line offset. Line offset used for the foreground expressed in pixel. This value is used to generate the address. It is added at the end of each line to determine the starting address of the next line. These bits can only be written when data transfers are disabled. Once a data transfer has started, they become read-only. If the image format is 4-bit per pixel, the line offset must be even.",
-              "enum": null
+              "description": "Line offset This field gives the line offset used for the foreground image, expressed: in pixels when LOM = 0 in DMA2D_CR. Only LO[13:0] bits are considered, LO[15:14] bits are ignored. in bytes when LOM = 1 This value is used for the address generation. It is added at the end of each line to determine the starting address of the next line. If the image format is 4-bit per pixel, the line offset must be even.",
+              "access": "read-write"
             }
           ]
         },
@@ -242,17 +250,18 @@
           "name": "BGMAR",
           "offset": 20,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "DMA2D background memory address register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "DMA2D background memory address register",
           "fields": [
             {
               "name": "MA",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Memory address. Address of the data used for the background image. This register can only be written when data transfers are disabled. Once a data transfer has started, this register is read-only. The address alignment must match the image format selected e.g. a 32-bit per pixel format must be 32-bit aligned, a 16-bit per pixel format must be 16-bit aligned and a 4-bit per pixel format must be 8-bit aligned.",
-              "enum": null
+              "description": "Memory address, address of the data used for the background image The address alignment must match the image format selected: a 32-bit per pixel format must be 32-bit aligned, a 16-bit per pixel format must be 16-bit aligned and a 4-bit per pixel format must be 8-bit aligned.",
+              "access": "read-write"
             }
           ]
         },
@@ -260,17 +269,18 @@
           "name": "BGOR",
           "offset": 24,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "DMA2D background offset register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "DMA2D background offset register",
           "fields": [
             {
               "name": "LO",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "Line offset used for the background image (expressed in pixels (default) or bytes as per LOM in CR). This value is used for the address generation. It is added at the end of each line to determine the starting address of the next line. These bits can only be written when data transfers are disabled. Once data transfer has started, they become read-only. If the image format is 4-bit per pixel, the line offset must be even.",
-              "enum": null
+              "description": "Line offset This field gives the line offset used for the background image, expressed: in pixels when LOM = 0 in DMA2D_CR. Only LO[13:0] bits are considered, LO[15:14] bits are ignored. in bytes when LOM = 1 This value is used for the address generation. It is added at the end of each line to determine the starting address of the next line. If the image format is 4-bit per pixel, the line offset must be even.",
+              "access": "read-write"
             }
           ]
         },
@@ -278,73 +288,74 @@
           "name": "FGPFCCR",
           "offset": 28,
           "size": 32,
-          "description": "DMA2D foreground PFC (pixel format converter) control register",
+          "access": null,
+          "reset_value": 0,
+          "description": "DMA2D foreground PFC control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "DMA2D foreground PFC (pixel format converter) control register",
           "fields": [
             {
               "name": "CM",
               "bit_offset": 0,
               "bit_width": 4,
-              "description": "Color mode. These bits define the color format of the foreground image. They can only be written when data transfers are disabled. Once the transfer has started, they are read-only. others: meaningless",
-              "enum": "FGPFCCR_CM"
+              "description": "Color mode These bits defines the color format of the foreground image. Others: Reserved",
+              "access": "read-write"
             },
             {
               "name": "CCM",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "CLUT color mode. This bit defines the color format of the CLUT. It can only be written when the transfer is disabled. Once the CLUT transfer has started, this bit is read-only.",
-              "enum": "FGPFCCR_CCM"
+              "description": "CLUT color mode This bit defines the color format of the CLUT.",
+              "access": "read-write"
             },
             {
               "name": "START",
               "bit_offset": 5,
               "bit_width": 1,
-              "description": "Start. This bit can be set to start the automatic loading of the CLUT. It is automatically reset: ** at the end of the transfer ** when the transfer is aborted by the user application by setting the ABORT bit in DMA2D_CR ** when a transfer error occurs ** when the transfer has not started due to a configuration error or another transfer operation already ongoing (data transfer or automatic background CLUT transfer).",
-              "enum": "FGPFCCR_START"
+              "description": "Start This bit can be set to start the automatic loading of the CLUT. It is automatically reset: at the end of the transfer when the transfer is aborted by the user by setting ABORT in DMA2D_CR when a transfer error occurs when the transfer has not started due to a configuration error or another transfer operation already ongoing (data transfer or automatic background CLUT transfer)",
+              "access": "read-write"
             },
             {
               "name": "CS",
               "bit_offset": 8,
               "bit_width": 8,
-              "description": "CLUT size. These bits define the size of the CLUT used for the foreground image. Once the CLUT transfer has started, this field is read-only. The number of CLUT entries is equal to CS[7:0] + 1.",
-              "enum": null
+              "description": "CLUT size These bits define the size of the CLUT used for the foreground image. The number of CLUT entries is equal to CS[7:0] + 1.",
+              "access": "read-write"
             },
             {
               "name": "AM",
               "bit_offset": 16,
               "bit_width": 2,
-              "description": "Alpha mode. These bits select the alpha channel value to be used for the foreground image. They can only be written data the transfer are disabled. Once the transfer has started, they become read-only. other configurations are meaningless",
-              "enum": "FGPFCCR_AM"
+              "description": "Alpha mode These bits select the alpha channel value to be used for the foreground image. Others: Reserved",
+              "access": "read-write"
             },
             {
               "name": "CSS",
               "bit_offset": 18,
               "bit_width": 2,
-              "description": "Chroma Sub-Sampling. These bits define the chroma sub-sampling mode for YCbCr color mode. Once the transfer has started, these bits are read-only. others: meaningless",
-              "enum": null
+              "description": "Chroma subsampling These bits define the chroma subsampling mode for YCbCr color mode. Others: Reserved",
+              "access": "read-write"
             },
             {
               "name": "AI",
               "bit_offset": 20,
               "bit_width": 1,
-              "description": "Alpha inverted. This bit inverts the alpha value. Once the transfer has started, this bit is read-only.",
-              "enum": "FGPFCCR_AI"
+              "description": "Alpha inverted This bit inverts the alpha value.",
+              "access": "read-write"
             },
             {
               "name": "RBS",
               "bit_offset": 21,
               "bit_width": 1,
-              "description": "Red blue swap. This bit allows to swap the R and B to support BGR or ABGR color formats. Once the transfer has started, this bit is read-only.",
-              "enum": "FGPFCCR_RBS"
+              "description": "Red/Blue swap This bit allows to swap Red and Blue to support BGR or ABGR color formats.",
+              "access": "read-write"
             },
             {
               "name": "ALPHA",
               "bit_offset": 24,
               "bit_width": 8,
-              "description": "Alpha value. These bits define a fixed alpha channel value which can replace the original alpha value or be multiplied by the original alpha value according to the alpha mode selected through the AM[1:0] bits. These bits can only be written when data transfers are disabled. Once a transfer has started, they become read-only.",
-              "enum": null
+              "description": "Alpha value These bits define a fixed alpha channel value which can replace the original alpha value, or be multiplied by the original alpha value, according to the alpha mode selected through AM[1:0] in this register.",
+              "access": "read-write"
             }
           ]
         },
@@ -352,31 +363,32 @@
           "name": "FGCOLR",
           "offset": 32,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "DMA2D foreground color register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "DMA2D foreground color register",
           "fields": [
             {
               "name": "BLUE",
               "bit_offset": 0,
               "bit_width": 8,
-              "description": "Blue Value. These bits define the blue value for the A4 or A8 mode of the foreground image. They can only be written when data transfers are disabled. Once the transfer has started, They are read-only.",
-              "enum": null
+              "description": "Blue value for the A4 or A8 mode of the foreground image Used also for fixed color FG in memory-to-memory mode with blending and fixed color FG (BG fetch only with FG and BG PFC active).",
+              "access": "read-write"
             },
             {
               "name": "GREEN",
               "bit_offset": 8,
               "bit_width": 8,
-              "description": "Green Value. These bits define the green value for the A4 or A8 mode of the foreground image. They can only be written when data transfers are disabled. Once the transfer has started, They are read-only.",
-              "enum": null
+              "description": "Green value for the A4 or A8 mode of the foreground image Used also for fixed color FG in memory-to-memory mode with blending and fixed color FG (BG fetch only with FG and BG PFC active).",
+              "access": "read-write"
             },
             {
               "name": "RED",
               "bit_offset": 16,
               "bit_width": 8,
-              "description": "Red Value. These bits define the red value for the A4 or A8 mode of the foreground image. They can only be written when data transfers are disabled. Once the transfer has started, they are read-only.",
-              "enum": null
+              "description": "Red value for the A4 or A8 mode of the foreground image Used also for fixed color FG in memory-to-memory mode with blending and fixed color FG (BG fetch only with FG and BG PFC active).",
+              "access": "read-write"
             }
           ]
         },
@@ -384,66 +396,67 @@
           "name": "BGPFCCR",
           "offset": 36,
           "size": 32,
-          "description": "DMA2D background PFC (pixel format converter) control register",
+          "access": null,
+          "reset_value": 0,
+          "description": "DMA2D background PFC control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "DMA2D background PFC (pixel format converter) control register",
           "fields": [
             {
               "name": "CM",
               "bit_offset": 0,
               "bit_width": 4,
-              "description": "Color mode. These bits define the color format of the foreground image. These bits can only be written when data transfers are disabled. Once the transfer has started, they are read-only. others: meaningless",
-              "enum": "BGPFCCR_CM"
+              "description": "Color mode These bits define the color format of the foreground image. Others: Reserved",
+              "access": "read-write"
             },
             {
               "name": "CCM",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "CLUT (color lookup table) color mode. These bits define the color format of the CLUT. This register can only be written when the transfer is disabled. Once the CLUT transfer has started, this bit is read-only.",
-              "enum": "BGPFCCR_CCM"
+              "description": "CLUT color mode These bits define the color format of the CLUT.",
+              "access": "read-write"
             },
             {
               "name": "START",
               "bit_offset": 5,
               "bit_width": 1,
-              "description": "Start. This bit is set to start the automatic loading of the CLUT. This bit is automatically reset: ** at the end of the transfer ** when the transfer is aborted by the user application by setting the ABORT bit in the DMA2D_CR ** when a transfer error occurs ** when the transfer has not started due to a configuration error or another transfer operation already on going (data transfer or automatic BackGround CLUT transfer).",
-              "enum": "BGPFCCR_START"
+              "description": "Start This bit is set to start the automatic loading of the CLUT. This bit is automatically reset: at the end of the transfer when the transfer is aborted by the user by setting ABORT bit in DMA2D_CR when a transfer error occurs when the transfer has not started due to a configuration error or another transfer operation already on going (data transfer or automatic background CLUT transfer)",
+              "access": "read-write"
             },
             {
               "name": "CS",
               "bit_offset": 8,
               "bit_width": 8,
-              "description": "CLUT size. These bits define the size of the CLUT used for the BG. Once the CLUT transfer has started, this field is read-only. The number of CLUT entries is equal to CS[7:0] + 1.",
-              "enum": null
+              "description": "CLUT size These bits define the size of the CLUT used for the BG. The number of CLUT entries is equal to CS[7:0] + 1.",
+              "access": "read-write"
             },
             {
               "name": "AM",
               "bit_offset": 16,
               "bit_width": 2,
-              "description": "Alpha mode. These bits define which alpha channel value to be used for the background image. These bits can only be written when data transfers are disabled. Once the transfer has started, they are read-only. others: meaningless",
-              "enum": "BGPFCCR_AM"
+              "description": "Alpha mode These bits define which alpha channel value to be used for the background image. Others: Reserved",
+              "access": "read-write"
             },
             {
               "name": "AI",
               "bit_offset": 20,
               "bit_width": 1,
-              "description": "Alpha inverted. This bit inverts the alpha value. Once the transfer has started, this bit is read-only.",
-              "enum": "BGPFCCR_AI"
+              "description": "Alpha Inverted This bit inverts the alpha value.",
+              "access": "read-write"
             },
             {
               "name": "RBS",
               "bit_offset": 21,
               "bit_width": 1,
-              "description": "Red blue swap. This bit allows to swap the R and B to support BGR or ABGR color formats. Once the transfer has started, this bit is read-only.",
-              "enum": "BGPFCCR_RBS"
+              "description": "Red/Blue swap This bit allows to swap Red and Blue to support BGR or ABGR color formats.",
+              "access": "read-write"
             },
             {
               "name": "ALPHA",
               "bit_offset": 24,
               "bit_width": 8,
-              "description": "Alpha value. These bits define a fixed alpha channel value which can replace the original alpha value or be multiplied with the original alpha value according to the alpha mode selected with bits AM[1: 0]. These bits can only be written when data transfers are disabled. Once the transfer has started, they are read-only.",
-              "enum": null
+              "description": "Alpha value These bits define a fixed alpha channel value which can replace the original alpha value, or be multiplied with the original alpha value according to the alpha mode selected with AM[1:0].",
+              "access": "read-write"
             }
           ]
         },
@@ -451,31 +464,32 @@
           "name": "BGCOLR",
           "offset": 40,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "DMA2D background color register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "DMA2D background color register",
           "fields": [
             {
               "name": "BLUE",
               "bit_offset": 0,
               "bit_width": 8,
-              "description": "Blue value. These bits define the blue value for the A4 or A8 mode of the background. These bits can only be written when data transfers are disabled. Once the transfer has started, they are read-only.",
-              "enum": null
+              "description": "Blue value for the A4 or A8 mode of the background Used also for fixed color BG in memory-to-memory mode with blending and fixed color BG (FG fetch only with FG and BG PFC active).",
+              "access": "read-write"
             },
             {
               "name": "GREEN",
               "bit_offset": 8,
               "bit_width": 8,
-              "description": "Green value. These bits define the green value for the A4 or A8 mode of the background. These bits can only be written when data transfers are disabled. Once the transfer has started, they are read-only.",
-              "enum": null
+              "description": "Green value for the A4 or A8 mode of the background Used also for fixed color BG in memory-to-memory mode with blending and fixed color BG (FG fetch only with FG and BG PFC active).",
+              "access": "read-write"
             },
             {
               "name": "RED",
               "bit_offset": 16,
               "bit_width": 8,
-              "description": "Red value. These bits define the red value for the A4 or A8 mode of the background. These bits can only be written when data transfers are disabled. Once the transfer has started, they are read-only.",
-              "enum": null
+              "description": "Red value for the A4 or A8 mode of the background Used also for fixed color BG in memory-to-memory mode with blending and fixed color BG (FG fetch only with FG and BG PFC active).",
+              "access": "read-write"
             }
           ]
         },
@@ -483,17 +497,18 @@
           "name": "FGCMAR",
           "offset": 44,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "DMA2D foreground CLUT memory address register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "DMA2D foreground CLUT memory address register",
           "fields": [
             {
               "name": "MA",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Memory Address. Address of the data used for the CLUT address dedicated to the foreground image. This register can only be written when no transfer is ongoing. Once the CLUT transfer has started, this register is read-only. If the foreground CLUT format is 32-bit, the address must be 32-bit aligned.",
-              "enum": null
+              "description": "Memory address Address of the data used for the CLUT address dedicated to the foreground image. If the foreground CLUT format is 32-bit, the address must be 32-bit aligned.",
+              "access": "read-write"
             }
           ]
         },
@@ -501,17 +516,18 @@
           "name": "BGCMAR",
           "offset": 48,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "DMA2D background CLUT memory address register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "DMA2D background CLUT memory address register",
           "fields": [
             {
               "name": "MA",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Memory address. Address of the data used for the CLUT address dedicated to the background image. This register can only be written when no transfer is on going. Once the CLUT transfer has started, this register is read-only. If the background CLUT format is 32-bit, the address must be 32-bit aligned.",
-              "enum": null
+              "description": "Memory address Address of the data used for the CLUT address dedicated to the background image. If the background CLUT format is 32-bit, the address must be 32-bit aligned.",
+              "access": "read-write"
             }
           ]
         },
@@ -519,56 +535,192 @@
           "name": "OPFCCR",
           "offset": 52,
           "size": 32,
-          "description": "DMA2D output PFC (pixel format converter) control register",
+          "access": null,
+          "reset_value": 0,
+          "description": "DMA2D output PFC control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "DMA2D output PFC control register",
           "fields": [
             {
               "name": "CM",
               "bit_offset": 0,
               "bit_width": 3,
-              "description": "Color mode. These bits define the color format of the output image. These bits can only be written when data transfers are disabled. Once the transfer has started, they are read-only. others: meaningless",
-              "enum": "OPFCCR_CM"
+              "description": "Color mode These bits define the color format of the output image. Others: Reserved",
+              "access": "read-write"
             },
             {
               "name": "SB",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "Swap Bytes",
-              "enum": "SB"
+              "description": "Swap bytes When this bit is set, the bytes in the output FIFO are swapped two by two. The number of pixels per line (PL) must be even, and the output memory address (OMAR) must be even.",
+              "access": "read-write"
             },
             {
               "name": "AI",
               "bit_offset": 20,
               "bit_width": 1,
-              "description": "Alpha inverted. This bit inverts the alpha value. Once the transfer has started, this bit is read-only.",
-              "enum": "OPFCCR_AI"
+              "description": "Alpha Inverted This bit inverts the alpha value.",
+              "access": "read-write"
             },
             {
               "name": "RBS",
               "bit_offset": 21,
               "bit_width": 1,
-              "description": "Red blue swap. This bit allows to swap the R and B to support BGR or ABGR color formats. Once the transfer has started, this bit is read-only.",
-              "enum": "OPFCCR_RBS"
+              "description": "Red/Blue swap This bit allows to swap Red and Blue to support BGR or ABGR color formats.",
+              "access": "read-write"
             }
           ]
         },
         {
-          "name": "OCOLR",
+          "name": "OCOLR_ARGB8888",
           "offset": 56,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "DMA2D output color register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "DMA2D output color register",
           "fields": [
             {
-              "name": "COLOR",
+              "name": "BLUE",
               "bit_offset": 0,
-              "bit_width": 32,
-              "description": "Color. Color in the format specified by color mode in OPFCCR (16, 24 or 32 bits). These bits can only be written when data transfers are disabled. Once the transfer has started, they are read-only.",
-              "enum": null
+              "bit_width": 8,
+              "description": "Blue value of the output image in ARGB8888 or RGB888",
+              "access": "read-write"
+            },
+            {
+              "name": "GREEN",
+              "bit_offset": 8,
+              "bit_width": 8,
+              "description": "Green value of the output image in ARGB8888 or RGB888",
+              "access": "read-write"
+            },
+            {
+              "name": "RED",
+              "bit_offset": 16,
+              "bit_width": 8,
+              "description": "Red value of the output image in ARGB8888 or RGB888 mode",
+              "access": "read-write"
+            },
+            {
+              "name": "ALPHA",
+              "bit_offset": 24,
+              "bit_width": 8,
+              "description": "Alpha channel value of the output color in ARGB8888 mode (otherwise reserved)",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "OCOLR_RGB565",
+          "offset": 56,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "DMA2D output color register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "BLUE",
+              "bit_offset": 0,
+              "bit_width": 5,
+              "description": "Blue value of the output image in RGB565 mode",
+              "access": "read-write"
+            },
+            {
+              "name": "GREEN",
+              "bit_offset": 5,
+              "bit_width": 6,
+              "description": "Green value of the output image in RGB565 mode",
+              "access": "read-write"
+            },
+            {
+              "name": "RED",
+              "bit_offset": 11,
+              "bit_width": 5,
+              "description": "Red value of the output image in RGB565 mode",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "OCOLR_ARGB1555",
+          "offset": 56,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "DMA2D output color register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "BLUE",
+              "bit_offset": 0,
+              "bit_width": 5,
+              "description": "Blue value of the output image in ARGB1555 mode",
+              "access": "read-write"
+            },
+            {
+              "name": "GREEN",
+              "bit_offset": 5,
+              "bit_width": 5,
+              "description": "Green value of the output image in ARGB1555 mode",
+              "access": "read-write"
+            },
+            {
+              "name": "RED",
+              "bit_offset": 10,
+              "bit_width": 5,
+              "description": "Red value of the output image in ARGB1555 mode",
+              "access": "read-write"
+            },
+            {
+              "name": "A",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Alpha channel value of the output color in ARGB1555 mode",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "OCOLR_ARGB4444",
+          "offset": 56,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "DMA2D output color register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "BLUE",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "Blue value of the output image in ARGB4444 mode",
+              "access": "read-write"
+            },
+            {
+              "name": "GREEN",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "Green value of the output image in ARGB4444 mode",
+              "access": "read-write"
+            },
+            {
+              "name": "RED",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "Red value of the output image in ARGB4444 mode",
+              "access": "read-write"
+            },
+            {
+              "name": "ALPHA",
+              "bit_offset": 12,
+              "bit_width": 4,
+              "description": "Alpha channel of the output color value in ARGB4444",
+              "access": "read-write"
             }
           ]
         },
@@ -576,17 +728,18 @@
           "name": "OMAR",
           "offset": 60,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "DMA2D output memory address register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "DMA2D output memory address register",
           "fields": [
             {
               "name": "MA",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Memory Address. Address of the data used for the output FIFO. These bits can only be written when data transfers are disabled. Once the transfer has started, they are read-only. The address alignment must match the image format selected e.g. a 32-bit per pixel format must be 32-bit aligned and a 16-bit per pixel format must be 16-bit aligned.",
-              "enum": null
+              "description": "Memory address Address of the data used for the output FIFO. The address alignment must match the image format selected: a 32-bit per pixel format must be 32-bit aligned and a 16-bit per pixel format must be 16-bit aligned.",
+              "access": "read-write"
             }
           ]
         },
@@ -594,17 +747,18 @@
           "name": "OOR",
           "offset": 64,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "DMA2D output offset register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "DMA2D output offset register",
           "fields": [
             {
               "name": "LO",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "Line offset. Line offset used for the output (expressed in pixels). This value is used for the address generation. It is added at the end of each line to determine the starting address of the next line. These bits can only be written when data transfers are disabled. Once the transfer has started, they are read-only.",
-              "enum": null
+              "description": "Line offset This field gives the line offset used for the output, expressed: in pixels when LOM = 0 in DMA2D_CR. Only LO[13:0] bits are considered, LO[15:14] bits are ignored. in bytes when LOM = 1 This value is used for the address generation. It is added at the end of each line to determine the starting address of the next line.",
+              "access": "read-write"
             }
           ]
         },
@@ -612,24 +766,25 @@
           "name": "NLR",
           "offset": 68,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "DMA2D number of line register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "DMA2D number of line register",
           "fields": [
             {
               "name": "NL",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "Number of lines. Number of lines of the area to be transferred. These bits can only be written when data transfers are disabled. Once the transfer has started, they are read-only.",
-              "enum": null
+              "description": "Number of lines of the area to be transferred.",
+              "access": "read-write"
             },
             {
               "name": "PL",
               "bit_offset": 16,
               "bit_width": 14,
-              "description": "Pixel per lines. Number of pixels per lines of the area to be transferred. These bits can only be written when data transfers are disabled. Once the transfer has started, they are read-only. If any of the input image format is 4-bit per pixel, pixel per lines must be even.",
-              "enum": null
+              "description": "Pixel per lines per lines of the area to be transferred If any of the input image format is 4-bit per pixel, pixel per lines must be even.",
+              "access": "read-write"
             }
           ]
         },
@@ -637,17 +792,18 @@
           "name": "LWR",
           "offset": 72,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "DMA2D line watermark register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "DMA2D line watermark register",
           "fields": [
             {
               "name": "LW",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "Line watermark. These bits allow to configure the line watermark for interrupt generation. An interrupt is raised when the last pixel of the watermarked line has been transferred. These bits can only be written when data transfers are disabled. Once the transfer has started, they are read-only.",
-              "enum": null
+              "description": "Line watermark for interrupt generation An interrupt is raised when the last pixel of the watermarked line has been transferred.",
+              "access": "read-write"
             }
           ]
         },
@@ -655,510 +811,110 @@
           "name": "AMTCR",
           "offset": 76,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "DMA2D AXI master timer configuration register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "DMA2D AXI master timer configuration register",
           "fields": [
             {
               "name": "EN",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Enable. Enables the dead time functionality.",
-              "enum": null
+              "description": "Dead-time functionality enable",
+              "access": "read-write"
             },
             {
               "name": "DT",
               "bit_offset": 8,
               "bit_width": 8,
-              "description": "Dead time. Dead time value in the AXI clock cycle inserted between two consecutive accesses on the AXI master port. These bits represent the minimum guaranteed number of cycles between two consecutive AXI accesses.",
-              "enum": null
+              "description": "Dead time Dead time value in the AXI clock cycle inserted between two consecutive accesses on the AXI master port. These bits represent the minimum guaranteed number of cycles between two consecutive AXI accesses.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "FGCLUT%s",
+          "offset": 1024,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "DMA2D foreground CLUT",
+          "array_len": 256,
+          "array_stride": 4,
+          "fields": [
+            {
+              "name": "BLUE",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "Blue Blue value for index 0 for the foreground",
+              "access": "read-write"
+            },
+            {
+              "name": "GREEN",
+              "bit_offset": 8,
+              "bit_width": 8,
+              "description": "Green Green value for index 0 for the foreground",
+              "access": "read-write"
+            },
+            {
+              "name": "RED",
+              "bit_offset": 16,
+              "bit_width": 8,
+              "description": "Red Red value for index 0 for the foreground",
+              "access": "read-write"
+            },
+            {
+              "name": "ALPHA",
+              "bit_offset": 24,
+              "bit_width": 8,
+              "description": "Alpha Alpha value for index 0 for the foreground",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "BGCLUT%s",
+          "offset": 2048,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "DMA2D background CLUT",
+          "array_len": 256,
+          "array_stride": 4,
+          "fields": [
+            {
+              "name": "BLUE",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "Blue Blue value for index 0 for the background",
+              "access": "read-write"
+            },
+            {
+              "name": "GREEN",
+              "bit_offset": 8,
+              "bit_width": 8,
+              "description": "Green Green value for index 0 for the background",
+              "access": "read-write"
+            },
+            {
+              "name": "RED",
+              "bit_offset": 16,
+              "bit_width": 8,
+              "description": "Red Red value for index 0 for the background",
+              "access": "read-write"
+            },
+            {
+              "name": "ALPHA",
+              "bit_offset": 24,
+              "bit_width": 8,
+              "description": "Alpha Alpha value for index 0 for the background",
+              "access": "read-write"
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "ABORT": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "AbortRequest",
-          "value": 1,
-          "description": "Transfer abort requested"
-        }
-      ]
-    },
-    "BGPFCCR_AI": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "RegularAlpha",
-          "value": 0,
-          "description": "Regular alpha"
-        },
-        {
-          "name": "InvertedAlpha",
-          "value": 1,
-          "description": "Inverted alpha"
-        }
-      ]
-    },
-    "BGPFCCR_AM": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "NoModify",
-          "value": 0,
-          "description": "No modification of alpha channel"
-        },
-        {
-          "name": "Replace",
-          "value": 1,
-          "description": "Replace with value in ALPHA[7:0]"
-        },
-        {
-          "name": "Multiply",
-          "value": 2,
-          "description": "Multiply with value in ALPHA[7:0]"
-        }
-      ]
-    },
-    "BGPFCCR_CCM": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "ARGB8888",
-          "value": 0,
-          "description": "CLUT color format ARGB8888"
-        },
-        {
-          "name": "RGB888",
-          "value": 1,
-          "description": "CLUT color format RGB888"
-        }
-      ]
-    },
-    "BGPFCCR_CM": {
-      "bit_size": 4,
-      "variants": [
-        {
-          "name": "ARGB8888",
-          "value": 0,
-          "description": "Color mode ARGB8888"
-        },
-        {
-          "name": "RGB888",
-          "value": 1,
-          "description": "Color mode RGB888"
-        },
-        {
-          "name": "RGB565",
-          "value": 2,
-          "description": "Color mode RGB565"
-        },
-        {
-          "name": "ARGB1555",
-          "value": 3,
-          "description": "Color mode ARGB1555"
-        },
-        {
-          "name": "ARGB4444",
-          "value": 4,
-          "description": "Color mode ARGB4444"
-        },
-        {
-          "name": "L8",
-          "value": 5,
-          "description": "Color mode L8"
-        },
-        {
-          "name": "AL44",
-          "value": 6,
-          "description": "Color mode AL44"
-        },
-        {
-          "name": "AL88",
-          "value": 7,
-          "description": "Color mode AL88"
-        },
-        {
-          "name": "L4",
-          "value": 8,
-          "description": "Color mode L4"
-        },
-        {
-          "name": "A8",
-          "value": 9,
-          "description": "Color mode A8"
-        },
-        {
-          "name": "A4",
-          "value": 10,
-          "description": "Color mode A4"
-        }
-      ]
-    },
-    "BGPFCCR_RBS": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Regular",
-          "value": 0,
-          "description": "No red blue swap (RGB or ARGB)"
-        },
-        {
-          "name": "Swap",
-          "value": 1,
-          "description": "Red blue swap (BGR or ABGR)"
-        }
-      ]
-    },
-    "BGPFCCR_START": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Start",
-          "value": 1,
-          "description": "Start the automatic loading of the CLUT"
-        }
-      ]
-    },
-    "CAECIF": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Clear",
-          "value": 1,
-          "description": "Clear the CAEIF flag in the ISR register"
-        }
-      ]
-    },
-    "CCEIF": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Clear",
-          "value": 1,
-          "description": "Clear the CEIF flag in the ISR register"
-        }
-      ]
-    },
-    "CCTCIF": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Clear",
-          "value": 1,
-          "description": "Clear the CTCIF flag in the ISR register"
-        }
-      ]
-    },
-    "CR_START": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Start",
-          "value": 1,
-          "description": "Launch the DMA2D"
-        }
-      ]
-    },
-    "CTCIF": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Clear",
-          "value": 1,
-          "description": "Clear the TCIF flag in the ISR register"
-        }
-      ]
-    },
-    "CTEIF": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Clear",
-          "value": 1,
-          "description": "Clear the TEIF flag in the ISR register"
-        }
-      ]
-    },
-    "CTWIF": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Clear",
-          "value": 1,
-          "description": "Clear the TWIF flag in the ISR register"
-        }
-      ]
-    },
-    "FGPFCCR_AI": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "RegularAlpha",
-          "value": 0,
-          "description": "Regular alpha"
-        },
-        {
-          "name": "InvertedAlpha",
-          "value": 1,
-          "description": "Inverted alpha"
-        }
-      ]
-    },
-    "FGPFCCR_AM": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "NoModify",
-          "value": 0,
-          "description": "No modification of alpha channel"
-        },
-        {
-          "name": "Replace",
-          "value": 1,
-          "description": "Replace with value in ALPHA[7:0]"
-        },
-        {
-          "name": "Multiply",
-          "value": 2,
-          "description": "Multiply with value in ALPHA[7:0]"
-        }
-      ]
-    },
-    "FGPFCCR_CCM": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "ARGB8888",
-          "value": 0,
-          "description": "CLUT color format ARGB8888"
-        },
-        {
-          "name": "RGB888",
-          "value": 1,
-          "description": "CLUT color format RGB888"
-        }
-      ]
-    },
-    "FGPFCCR_CM": {
-      "bit_size": 4,
-      "variants": [
-        {
-          "name": "ARGB8888",
-          "value": 0,
-          "description": "Color mode ARGB8888"
-        },
-        {
-          "name": "RGB888",
-          "value": 1,
-          "description": "Color mode RGB888"
-        },
-        {
-          "name": "RGB565",
-          "value": 2,
-          "description": "Color mode RGB565"
-        },
-        {
-          "name": "ARGB1555",
-          "value": 3,
-          "description": "Color mode ARGB1555"
-        },
-        {
-          "name": "ARGB4444",
-          "value": 4,
-          "description": "Color mode ARGB4444"
-        },
-        {
-          "name": "L8",
-          "value": 5,
-          "description": "Color mode L8"
-        },
-        {
-          "name": "AL44",
-          "value": 6,
-          "description": "Color mode AL44"
-        },
-        {
-          "name": "AL88",
-          "value": 7,
-          "description": "Color mode AL88"
-        },
-        {
-          "name": "L4",
-          "value": 8,
-          "description": "Color mode L4"
-        },
-        {
-          "name": "A8",
-          "value": 9,
-          "description": "Color mode A8"
-        },
-        {
-          "name": "A4",
-          "value": 10,
-          "description": "Color mode A4"
-        },
-        {
-          "name": "YCbCr",
-          "value": 11,
-          "description": "Color mode YCbCr"
-        }
-      ]
-    },
-    "FGPFCCR_RBS": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Regular",
-          "value": 0,
-          "description": "No red blue swap (RGB or ARGB)"
-        },
-        {
-          "name": "Swap",
-          "value": 1,
-          "description": "red blue swap (BGR or ABGR)"
-        }
-      ]
-    },
-    "FGPFCCR_START": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Start",
-          "value": 1,
-          "description": "Start the automatic loading of the CLUT"
-        }
-      ]
-    },
-    "LOM": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Pixels",
-          "value": 0,
-          "description": "Line offsets expressed in pixels"
-        },
-        {
-          "name": "Bytes",
-          "value": 1,
-          "description": "Line offsets expressed in bytes"
-        }
-      ]
-    },
-    "MODE": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "MemoryToMemory",
-          "value": 0,
-          "description": "Memory-to-memory (FG fetch only)"
-        },
-        {
-          "name": "MemoryToMemoryPFC",
-          "value": 1,
-          "description": "Memory-to-memory with PFC (pixel format converter) (FG fetch only with FG PFC active)"
-        },
-        {
-          "name": "MemoryToMemoryPFCBlending",
-          "value": 2,
-          "description": "Memory-to-memory with blending (FG and BG fetch with PFC and blending)"
-        },
-        {
-          "name": "RegisterToMemory",
-          "value": 3,
-          "description": "Register-to-memory (no FG nor BG, only output stage active)"
-        },
-        {
-          "name": "MemoryToMemoryPFCBlendingFixedColorFG",
-          "value": 4,
-          "description": "Memory-to-memory with blending and fixed color FG (BG fetch only with FG and BG PFC active)"
-        },
-        {
-          "name": "MemoryToMemoryPFCBlendingFixedColorBG",
-          "value": 5,
-          "description": "Memory-to-memory with blending and fixed color BG (FG fetch only with FG and BG PFC active)"
-        }
-      ]
-    },
-    "OPFCCR_AI": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "RegularAlpha",
-          "value": 0,
-          "description": "Regular alpha"
-        },
-        {
-          "name": "InvertedAlpha",
-          "value": 1,
-          "description": "Inverted alpha"
-        }
-      ]
-    },
-    "OPFCCR_CM": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "ARGB8888",
-          "value": 0,
-          "description": "ARGB8888"
-        },
-        {
-          "name": "RGB888",
-          "value": 1,
-          "description": "RGB888"
-        },
-        {
-          "name": "RGB565",
-          "value": 2,
-          "description": "RGB565"
-        },
-        {
-          "name": "ARGB1555",
-          "value": 3,
-          "description": "ARGB1555"
-        },
-        {
-          "name": "ARGB4444",
-          "value": 4,
-          "description": "ARGB4444"
-        }
-      ]
-    },
-    "OPFCCR_RBS": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Regular",
-          "value": 0,
-          "description": "No red blue swap (RGB or ARGB)"
-        },
-        {
-          "name": "Swap",
-          "value": 1,
-          "description": "Red blue swap (BGR or ABGR)"
-        }
-      ]
-    },
-    "SB": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Regular",
-          "value": 0,
-          "description": "Regular byte order"
-        },
-        {
-          "name": "SwapBytes",
-          "value": 1,
-          "description": "Bytes are swapped two by two"
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

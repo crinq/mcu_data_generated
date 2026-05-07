@@ -2,9 +2,12 @@
   "schema": 1,
   "kind": "i2c",
   "version": "v2",
+  "source": "stm32rs_svd",
+  "source_device": "stm32wba50ke",
+  "source_file": "stm32wba50.svd.patched",
   "blocks": {
-    "I2C": {
-      "name": "I2C",
+    "I2C3": {
+      "name": "I2C3",
       "description": "Inter-integrated circuit",
       "extends": null,
       "registers": [
@@ -12,143 +15,518 @@
           "name": "CR1",
           "offset": 0,
           "size": 32,
-          "description": "Control register 1",
+          "access": null,
+          "reset_value": 0,
+          "description": "I2C control register 1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Control register 1",
           "fields": [
             {
               "name": "PE",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Peripheral enable",
-              "enum": null
+              "description": "Peripheral enable Note: When PE = 0, the I2C SCL and SDA lines are released. Internal state machines and status bits are put back to their reset value. When cleared, PE must be kept low for at least 3 APB clock cycles.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Peripheral disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Peripheral enabled"
+                }
+              ]
             },
             {
               "name": "TXIE",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "TX Interrupt enable",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Transmit (TXIS) interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Transmit (TXIS) interrupt enabled"
+                }
+              ]
             },
             {
               "name": "RXIE",
               "bit_offset": 2,
               "bit_width": 1,
               "description": "RX Interrupt enable",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Receive (RXNE) interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Receive (RXNE) interrupt enabled"
+                }
+              ]
             },
             {
               "name": "ADDRIE",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "Address match interrupt enable (slave only)",
-              "enum": null
+              "description": "Address match Interrupt enable (slave only)",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Address match (ADDR) interrupts disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Address match (ADDR) interrupts enabled"
+                }
+              ]
             },
             {
               "name": "NACKIE",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "Not acknowledge received interrupt enable",
-              "enum": null
+              "description": "Not acknowledge received Interrupt enable",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Not acknowledge (NACKF) received interrupts disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Not acknowledge (NACKF) received interrupts enabled"
+                }
+              ]
             },
             {
               "name": "STOPIE",
               "bit_offset": 5,
               "bit_width": 1,
-              "description": "STOP detection Interrupt enable",
-              "enum": null
+              "description": "Stop detection Interrupt enable",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Stop detection (STOPF) interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Stop detection (STOPF) interrupt enabled"
+                }
+              ]
             },
             {
               "name": "TCIE",
               "bit_offset": 6,
               "bit_width": 1,
-              "description": "Transfer Complete interrupt enable",
-              "enum": null
+              "description": "Transfer Complete interrupt enable Note: Any of these events generate an interrupt: Note: Transfer Complete (TC) Note: Transfer Complete Reload (TCR)",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Transfer Complete interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Transfer Complete interrupt enabled"
+                }
+              ]
             },
             {
               "name": "ERRIE",
               "bit_offset": 7,
               "bit_width": 1,
-              "description": "Error interrupts enable",
-              "enum": null
+              "description": "Error interrupts enable Note: Any of these errors generate an interrupt: Note: Arbitration Loss (ARLO) Note: Bus Error detection (BERR) Note: Overrun/Underrun (OVR) Note: Timeout detection (TIMEOUT) Note: PEC error detection (PECERR) Note: Alert pin event detection (ALERT)",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Error detection interrupts disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Error detection interrupts enabled"
+                }
+              ]
             },
             {
               "name": "DNF",
               "bit_offset": 8,
               "bit_width": 4,
-              "description": "Digital noise filter",
-              "enum": "DNF"
+              "description": "Digital noise filter These bits are used to configure the digital noise filter on SDA and SCL input. The digital filter, filters spikes with a length of up to DNF[3:0] * tsubI2CCLK/sub sub.../sub Note: If the analog filter is also enabled, the digital filter is added to the analog filter. Note: This filter can only be programmed when the I2C is disabled (PE = 0).",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoFilter",
+                  "value": 0,
+                  "description": "Digital filter disabled"
+                },
+                {
+                  "name": "Filter1",
+                  "value": 1,
+                  "description": "Digital filter enabled and filtering capability up to 1 tI2CCLK"
+                },
+                {
+                  "name": "Filter2",
+                  "value": 2,
+                  "description": "Digital filter enabled and filtering capability up to 2 tI2CCLK"
+                },
+                {
+                  "name": "Filter3",
+                  "value": 3,
+                  "description": "Digital filter enabled and filtering capability up to 3 tI2CCLK"
+                },
+                {
+                  "name": "Filter4",
+                  "value": 4,
+                  "description": "Digital filter enabled and filtering capability up to 4 tI2CCLK"
+                },
+                {
+                  "name": "Filter5",
+                  "value": 5,
+                  "description": "Digital filter enabled and filtering capability up to 5 tI2CCLK"
+                },
+                {
+                  "name": "Filter6",
+                  "value": 6,
+                  "description": "Digital filter enabled and filtering capability up to 6 tI2CCLK"
+                },
+                {
+                  "name": "Filter7",
+                  "value": 7,
+                  "description": "Digital filter enabled and filtering capability up to 7 tI2CCLK"
+                },
+                {
+                  "name": "Filter8",
+                  "value": 8,
+                  "description": "Digital filter enabled and filtering capability up to 8 tI2CCLK"
+                },
+                {
+                  "name": "Filter9",
+                  "value": 9,
+                  "description": "Digital filter enabled and filtering capability up to 9 tI2CCLK"
+                },
+                {
+                  "name": "Filter10",
+                  "value": 10,
+                  "description": "Digital filter enabled and filtering capability up to 10 tI2CCLK"
+                },
+                {
+                  "name": "Filter11",
+                  "value": 11,
+                  "description": "Digital filter enabled and filtering capability up to 11 tI2CCLK"
+                },
+                {
+                  "name": "Filter12",
+                  "value": 12,
+                  "description": "Digital filter enabled and filtering capability up to 12 tI2CCLK"
+                },
+                {
+                  "name": "Filter13",
+                  "value": 13,
+                  "description": "Digital filter enabled and filtering capability up to 13 tI2CCLK"
+                },
+                {
+                  "name": "Filter14",
+                  "value": 14,
+                  "description": "Digital filter enabled and filtering capability up to 14 tI2CCLK"
+                },
+                {
+                  "name": "Filter15",
+                  "value": 15,
+                  "description": "Digital filter enabled and filtering capability up to 15 tI2CCLK"
+                }
+              ]
             },
             {
               "name": "ANFOFF",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "Analog noise filter OFF",
-              "enum": null
+              "description": "Analog noise filter OFF Note: This bit can only be programmed when the I2C is disabled (PE = 0).",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Enabled",
+                  "value": 0,
+                  "description": "Analog noise filter enabled"
+                },
+                {
+                  "name": "Disabled",
+                  "value": 1,
+                  "description": "Analog noise filter disabled"
+                }
+              ]
             },
             {
               "name": "TXDMAEN",
               "bit_offset": 14,
               "bit_width": 1,
               "description": "DMA transmission requests enable",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "DMA mode disabled for transmission"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "DMA mode enabled for transmission"
+                }
+              ]
             },
             {
               "name": "RXDMAEN",
               "bit_offset": 15,
               "bit_width": 1,
               "description": "DMA reception requests enable",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "DMA mode disabled for reception"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "DMA mode enabled for reception"
+                }
+              ]
             },
             {
               "name": "SBC",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "Slave byte control",
-              "enum": null
+              "description": "Slave byte control This bit is used to enable hardware byte control in slave mode.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Slave byte control disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Slave byte control enabled"
+                }
+              ]
             },
             {
               "name": "NOSTRETCH",
               "bit_offset": 17,
               "bit_width": 1,
-              "description": "Clock stretching disable",
-              "enum": null
+              "description": "Clock stretching disable This bit is used to disable clock stretching in slave mode. It must be kept cleared in master mode. Note: This bit can only be programmed when the I2C is disabled (PE = 0).",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Enabled",
+                  "value": 0,
+                  "description": "Clock stretching enabled"
+                },
+                {
+                  "name": "Disabled",
+                  "value": 1,
+                  "description": "Clock stretching disabled"
+                }
+              ]
+            },
+            {
+              "name": "WUPEN",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "Wakeup from Stop mode enable Note: If the Wakeup from Stop mode feature is not supported, this bit is reserved and forced by hardware to '0'. Refer to Section 52.3: FMPI2C implementation. Note: WUPEN can be set only when DNF = '0000'",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Wakeup from Stop mode disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Wakeup from Stop mode enabled"
+                }
+              ]
             },
             {
               "name": "GCEN",
               "bit_offset": 19,
               "bit_width": 1,
               "description": "General call enable",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "General call disabled. Address 0b00000000 is NACKed"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "General call enabled. Address 0b00000000 is ACKed"
+                }
+              ]
             },
             {
               "name": "SMBHEN",
               "bit_offset": 20,
               "bit_width": 1,
-              "description": "SMBus Host address enable",
-              "enum": null
+              "description": "SMBus host address enable Note: If the SMBus feature is not supported, this bit is reserved and forced by hardware to '0'. Refer to Section 52.3: FMPI2C implementation.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Host address disabled. Address 0b0001000x is NACKed"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Host address enabled. Address 0b0001000x is ACKed"
+                }
+              ]
             },
             {
               "name": "SMBDEN",
               "bit_offset": 21,
               "bit_width": 1,
-              "description": "SMBus Device Default address enable",
-              "enum": null
+              "description": "SMBus device default address enable Note: If the SMBus feature is not supported, this bit is reserved and forced by hardware to '0'. Refer to Section 52.3: FMPI2C implementation.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Device default address disabled. Address 0b1100001x is NACKed"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Device default address enabled. Address 0b1100001x is ACKed"
+                }
+              ]
             },
             {
               "name": "ALERTEN",
               "bit_offset": 22,
               "bit_width": 1,
-              "description": "SMBUS alert enable",
-              "enum": null
+              "description": "SMBus alert enable Note: When ALERTEN=0, the SMBA pin can be used as a standard GPIO. Note: If the SMBus feature is not supported, this bit is reserved and forced by hardware to '0'. Refer to Section 52.3: FMPI2C implementation.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "In device mode (SMBHEN=Disabled) Releases SMBA pin high and Alert Response Address Header disabled (0001100x) followed by NACK. In host mode (SMBHEN=Enabled) SMBus Alert pin (SMBA) not supported"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "In device mode (SMBHEN=Disabled) Drives SMBA pin low and Alert Response Address Header enabled (0001100x) followed by ACK.In host mode (SMBHEN=Enabled) SMBus Alert pin (SMBA) supported"
+                }
+              ]
             },
             {
               "name": "PECEN",
               "bit_offset": 23,
               "bit_width": 1,
-              "description": "PEC enable",
-              "enum": null
+              "description": "PEC enable Note: If the SMBus feature is not supported, this bit is reserved and forced by hardware to '0'. Refer to Section 52.3: FMPI2C implementation.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "PEC calculation disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "PEC calculation enabled"
+                }
+              ]
+            },
+            {
+              "name": "FMP",
+              "bit_offset": 24,
+              "bit_width": 1,
+              "description": "Fast-mode Plus 20 mA drive enable",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "20 mA I/O drive disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "20 mA I/O drive enabled"
+                }
+              ]
+            },
+            {
+              "name": "ADDRACLR",
+              "bit_offset": 30,
+              "bit_width": 1,
+              "description": "Address match flag (ADDR) automatic clear",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "ADDR flag is set by hardware, cleared by software"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "ADDR flag remains cleared by hardware"
+                }
+              ]
+            },
+            {
+              "name": "STOPFACLR",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "STOP detection flag (STOPF) automatic clear",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "STOPF flag is set by hardware, cleared by software"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "STOPF flag remains cleared by hardware"
+                }
+              ]
             }
           ]
         },
@@ -156,87 +534,216 @@
           "name": "CR2",
           "offset": 4,
           "size": 32,
-          "description": "Control register 2",
+          "access": null,
+          "reset_value": 0,
+          "description": "I2C control register 2",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Control register 2",
           "fields": [
             {
               "name": "SADD",
               "bit_offset": 0,
               "bit_width": 10,
-              "description": "Slave address bit (master mode)",
-              "enum": null
+              "description": "Slave address (master mode) In 7-bit addressing mode (ADD10 = 0): SADD[7:1] should be written with the 7-bit slave address to be sent. The bits SADD[9], SADD[8] and SADD[0] are don't care. In 10-bit addressing mode (ADD10 = 1): SADD[9:0] should be written with the 10-bit slave address to be sent. Note: Changing these bits when the START bit is set is not allowed.",
+              "access": "read-write"
             },
             {
-              "name": "DIR",
+              "name": "RD_WRN",
               "bit_offset": 10,
               "bit_width": 1,
-              "description": "Transfer direction (master mode)",
-              "enum": "DIR"
+              "description": "Transfer direction (master mode) Note: Changing this bit when the START bit is set is not allowed.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Write",
+                  "value": 0,
+                  "description": "Master requests a write transfer"
+                },
+                {
+                  "name": "Read",
+                  "value": 1,
+                  "description": "Master requests a read transfer"
+                }
+              ]
             },
             {
               "name": "ADD10",
               "bit_offset": 11,
               "bit_width": 1,
-              "description": "10-bit addressing mode (master mode)",
-              "enum": "ADDMODE"
+              "description": "10-bit addressing mode (master mode) Note: Changing this bit when the START bit is set is not allowed.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Bit7",
+                  "value": 0,
+                  "description": "The master operates in 7-bit addressing mode"
+                },
+                {
+                  "name": "Bit10",
+                  "value": 1,
+                  "description": "The master operates in 10-bit addressing mode"
+                }
+              ]
             },
             {
               "name": "HEAD10R",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "10-bit address header only read direction (master receiver mode)",
-              "enum": "HEADR"
+              "description": "10-bit address header only read direction (master receiver mode) Note: Changing this bit when the START bit is set is not allowed.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Complete",
+                  "value": 0,
+                  "description": "The master sends the complete 10 bit slave address read sequence"
+                },
+                {
+                  "name": "Partial",
+                  "value": 1,
+                  "description": "The master only sends the 1st 7 bits of the 10 bit address, followed by Read direction"
+                }
+              ]
             },
             {
               "name": "START",
               "bit_offset": 13,
               "bit_width": 1,
-              "description": "Start generation",
-              "enum": null
+              "description": "Start generation This bit is set by software, and cleared by hardware after the Start followed by the address sequence is sent, by an arbitration loss, by an address matched in slave mode, by a timeout error detection, or when PE = 0. If the I2C is already in master mode with AUTOEND = 0, setting this bit generates a Repeated Start condition when RELOAD=0, after the end of the NBYTES transfer. Otherwise setting this bit generates a START condition once the bus is free. Note: Writing '0' to this bit has no effect. Note: The START bit can be set even if the bus is BUSY or I2C is in slave mode. Note: This bit has no effect when RELOAD is set.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoStart",
+                  "value": 0,
+                  "description": "No Start generation"
+                },
+                {
+                  "name": "Start",
+                  "value": 1,
+                  "description": "Restart/Start generation"
+                },
+                {
+                  "name": "Start",
+                  "value": 1,
+                  "description": "Restart/Start generation"
+                }
+              ]
             },
             {
               "name": "STOP",
               "bit_offset": 14,
               "bit_width": 1,
-              "description": "Stop generation (master mode)",
-              "enum": null
+              "description": "Stop generation (master mode) The bit is set by software, cleared by hardware when a STOP condition is detected, or when PE = 0. In Master Mode: Note: Writing '0' to this bit has no effect.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoStop",
+                  "value": 0,
+                  "description": "No Stop generation"
+                },
+                {
+                  "name": "Stop",
+                  "value": 1,
+                  "description": "Stop generation after current byte transfer"
+                },
+                {
+                  "name": "Stop",
+                  "value": 1,
+                  "description": "Stop generation after current byte transfer"
+                }
+              ]
             },
             {
               "name": "NACK",
               "bit_offset": 15,
               "bit_width": 1,
-              "description": "NACK generation (slave mode)",
-              "enum": null
+              "description": "NACK generation (slave mode) The bit is set by software, cleared by hardware when the NACK is sent, or when a STOP condition or an Address matched is received, or when PE = 0. Note: Writing '0' to this bit has no effect. Note: This bit is used in slave mode only: in master receiver mode, NACK is automatically generated after last byte preceding STOP or RESTART condition, whatever the NACK bit value. Note: When an overrun occurs in slave receiver NOSTRETCH mode, a NACK is automatically generated whatever the NACK bit value. Note: When hardware PEC checking is enabled (PECBYTE=1), the PEC acknowledge value does not depend on the NACK value.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Ack",
+                  "value": 0,
+                  "description": "an ACK is sent after current received byte"
+                },
+                {
+                  "name": "Nack",
+                  "value": 1,
+                  "description": "a NACK is sent after current received byte"
+                },
+                {
+                  "name": "Nack",
+                  "value": 1,
+                  "description": "a NACK is sent after current received byte"
+                }
+              ]
             },
             {
               "name": "NBYTES",
               "bit_offset": 16,
               "bit_width": 8,
-              "description": "Number of bytes",
-              "enum": null
+              "description": "Number of bytes The number of bytes to be transmitted/received is programmed there. This field is don't care in slave mode with SBC=0. Note: Changing these bits when the START bit is set is not allowed.",
+              "access": "read-write"
             },
             {
               "name": "RELOAD",
               "bit_offset": 24,
               "bit_width": 1,
-              "description": "NBYTES reload mode",
-              "enum": "RELOAD"
+              "description": "NBYTES reload mode This bit is set and cleared by software.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Completed",
+                  "value": 0,
+                  "description": "The transfer is completed after the NBYTES data transfer (STOP or RESTART will follow)"
+                },
+                {
+                  "name": "NotCompleted",
+                  "value": 1,
+                  "description": "The transfer is not completed after the NBYTES data transfer (NBYTES will be reloaded)"
+                }
+              ]
             },
             {
               "name": "AUTOEND",
               "bit_offset": 25,
               "bit_width": 1,
-              "description": "Automatic end mode (master mode)",
-              "enum": "AUTOEND"
+              "description": "Automatic end mode (master mode) This bit is set and cleared by software. Note: This bit has no effect in slave mode or when the RELOAD bit is set.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Software",
+                  "value": 0,
+                  "description": "Software end mode: TC flag is set when NBYTES data are transferred, stretching SCL low"
+                },
+                {
+                  "name": "Automatic",
+                  "value": 1,
+                  "description": "Automatic end mode: a STOP condition is automatically sent when NBYTES data are transferred"
+                }
+              ]
             },
             {
               "name": "PECBYTE",
               "bit_offset": 26,
               "bit_width": 1,
-              "description": "Packet error checking byte",
-              "enum": null
+              "description": "Packet error checking byte This bit is set by software, and cleared by hardware when the PEC is transferred, or when a STOP condition or an Address matched is received, also when PE = 0. Note: Writing '0' to this bit has no effect. Note: This bit has no effect when RELOAD is set. Note: This bit has no effect is slave mode when SBC=0. Note: If the SMBus feature is not supported, this bit is reserved and forced by hardware to '0'. Refer to Section 52.3: FMPI2C implementation.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoPec",
+                  "value": 0,
+                  "description": "No PEC transfer"
+                },
+                {
+                  "name": "Pec",
+                  "value": 1,
+                  "description": "PEC transmission/reception is requested"
+                },
+                {
+                  "name": "Pec",
+                  "value": 1,
+                  "description": "PEC transmission/reception is requested"
+                }
+              ]
             }
           ]
         },
@@ -244,31 +751,56 @@
           "name": "OAR1",
           "offset": 8,
           "size": 32,
-          "description": "Own address register 1",
+          "access": null,
+          "reset_value": 0,
+          "description": "I2C own address 1 register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Own address register 1",
           "fields": [
             {
               "name": "OA1",
               "bit_offset": 0,
               "bit_width": 10,
-              "description": "Interface address",
-              "enum": null
+              "description": "Interface own slave address 7-bit addressing mode: OA1[7:1] contains the 7-bit own slave address. The bits OA1[9], OA1[8] and OA1[0] are don't care. 10-bit addressing mode: OA1[9:0] contains the 10-bit own slave address. Note: These bits can be written only when OA1EN=0.",
+              "access": "read-write"
             },
             {
               "name": "OA1MODE",
               "bit_offset": 10,
               "bit_width": 1,
-              "description": "Own Address 1 10-bit mode",
-              "enum": "ADDMODE"
+              "description": "Own Address 1 10-bit mode Note: This bit can be written only when OA1EN=0.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Bit7",
+                  "value": 0,
+                  "description": "Own address 1 is a 7-bit address"
+                },
+                {
+                  "name": "Bit10",
+                  "value": 1,
+                  "description": "Own address 1 is a 10-bit address"
+                }
+              ]
             },
             {
               "name": "OA1EN",
               "bit_offset": 15,
               "bit_width": 1,
               "description": "Own Address 1 enable",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Own address 1 disabled. The received slave address OA1 is NACKed"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Own address 1 enabled. The received slave address OA1 is ACKed"
+                }
+              ]
             }
           ]
         },
@@ -276,31 +808,86 @@
           "name": "OAR2",
           "offset": 12,
           "size": 32,
-          "description": "Own address register 2",
+          "access": null,
+          "reset_value": 0,
+          "description": "I2C own address 2 register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Own address register 2",
           "fields": [
             {
               "name": "OA2",
               "bit_offset": 1,
               "bit_width": 7,
-              "description": "Interface address",
-              "enum": null
+              "description": "Interface address 7-bit addressing mode: 7-bit address Note: These bits can be written only when OA2EN=0.",
+              "access": "read-write"
             },
             {
               "name": "OA2MSK",
               "bit_offset": 8,
               "bit_width": 3,
-              "description": "Own Address 2 masks",
-              "enum": "OAMSK"
+              "description": "Own Address 2 masks Note: These bits can be written only when OA2EN=0. Note: As soon as OA2MSK is not equal to 0, the reserved I2C addresses (0b0000xxx and 0b1111xxx) are not acknowledged even if the comparison matches.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoMask",
+                  "value": 0,
+                  "description": "No mask"
+                },
+                {
+                  "name": "Mask1",
+                  "value": 1,
+                  "description": "OA2[1] is masked and don’t care. Only OA2[7:2] are compared"
+                },
+                {
+                  "name": "Mask2",
+                  "value": 2,
+                  "description": "OA2[2:1] are masked and don’t care. Only OA2[7:3] are compared"
+                },
+                {
+                  "name": "Mask3",
+                  "value": 3,
+                  "description": "OA2[3:1] are masked and don’t care. Only OA2[7:4] are compared"
+                },
+                {
+                  "name": "Mask4",
+                  "value": 4,
+                  "description": "OA2[4:1] are masked and don’t care. Only OA2[7:5] are compared"
+                },
+                {
+                  "name": "Mask5",
+                  "value": 5,
+                  "description": "OA2[5:1] are masked and don’t care. Only OA2[7:6] are compared"
+                },
+                {
+                  "name": "Mask6",
+                  "value": 6,
+                  "description": "OA2[6:1] are masked and don’t care. Only OA2[7] is compared."
+                },
+                {
+                  "name": "Mask7",
+                  "value": 7,
+                  "description": "OA2[7:1] are masked and don’t care. No comparison is done, and all (except reserved) 7-bit received addresses are acknowledged"
+                }
+              ]
             },
             {
               "name": "OA2EN",
               "bit_offset": 15,
               "bit_width": 1,
               "description": "Own Address 2 enable",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Own address 2 disabled. The received slave address OA2 is NACKed"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Own address 2 enabled. The received slave address OA2 is ACKed"
+                }
+              ]
             }
           ]
         },
@@ -308,45 +895,46 @@
           "name": "TIMINGR",
           "offset": 16,
           "size": 32,
-          "description": "Timing register",
+          "access": null,
+          "reset_value": 0,
+          "description": "I2C timing register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Timing register",
           "fields": [
             {
               "name": "SCLL",
               "bit_offset": 0,
               "bit_width": 8,
-              "description": "SCL low period (master mode)",
-              "enum": null
+              "description": "SCL low period (master mode) This field is used to generate the SCL low period in master mode. tsubSCLL /sub= (SCLL+1) x tsubPRESC/sub Note: SCLL is also used to generate tsubBUF /suband tsubSU:STA /subtimings.",
+              "access": "read-write"
             },
             {
               "name": "SCLH",
               "bit_offset": 8,
               "bit_width": 8,
-              "description": "SCL high period (master mode)",
-              "enum": null
+              "description": "SCL high period (master mode) This field is used to generate the SCL high period in master mode. tsubSCLH /sub= (SCLH+1) x tsubPRESC/sub Note: SCLH is also used to generate tsubSU:STO /suband tsubHD:STA /subtiming.",
+              "access": "read-write"
             },
             {
               "name": "SDADEL",
               "bit_offset": 16,
               "bit_width": 4,
-              "description": "Data hold time",
-              "enum": null
+              "description": "Data hold time This field is used to generate the delay tsubSDADEL /subbetween SCL falling edge and SDA edge. In master mode and in slave mode with NOSTRETCH = 0, the SCL line is stretched low during tsubSDADEL/sub. tsubSDADEL/sub= SDADEL x tsubPRESC/sub Note: SDADEL is used to generate tsubHD:DAT /subtiming.",
+              "access": "read-write"
             },
             {
               "name": "SCLDEL",
               "bit_offset": 20,
               "bit_width": 4,
-              "description": "Data setup time",
-              "enum": null
+              "description": "Data setup time This field is used to generate a delay tsubSCLDEL /subbetween SDA edge and SCL rising edge. In master mode and in slave mode with NOSTRETCH = 0, the SCL line is stretched low during tsubSCLDEL/sub. tsubSCLDEL /sub= (SCLDEL+1) x tsubPRESC/sub Note: tsubSCLDEL/sub is used to generate tsubSU:DAT /subtiming.",
+              "access": "read-write"
             },
             {
               "name": "PRESC",
               "bit_offset": 28,
               "bit_width": 4,
-              "description": "Timing prescaler",
-              "enum": null
+              "description": "Timing prescaler This field is used to prescale i2c_ker_ck in order to generate the clock period tsubPRESC /subused for data setup and hold counters (refer to FMPI2C timings on page 1928) and for SCL high and low level counters (refer to FMPI2C master initialization on page 1951). tsubPRESC /sub= (PRESC+1) x tsubI2CCLK/sub",
+              "access": "read-write"
             }
           ]
         },
@@ -354,45 +942,82 @@
           "name": "TIMEOUTR",
           "offset": 20,
           "size": 32,
-          "description": "Timeout register",
+          "access": null,
+          "reset_value": 0,
+          "description": "I2C timeout register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Timeout register",
           "fields": [
             {
               "name": "TIMEOUTA",
               "bit_offset": 0,
               "bit_width": 12,
-              "description": "Bus timeout A",
-              "enum": null
+              "description": "Bus Timeout A This field is used to configure: The SCL low timeout condition tsubTIMEOUT/sub when TIDLE=0 tsubTIMEOUT/sub= (TIMEOUTA+1) x 2048 x tsubI2CCLK/sub The bus idle condition (both SCL and SDA high) when TIDLE=1 tsubIDLE/sub= (TIMEOUTA+1) x 4 x tsubI2CCLK/sub Note: These bits can be written only when TIMOUTEN=0.",
+              "access": "read-write"
             },
             {
               "name": "TIDLE",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "Idle clock timeout detection",
-              "enum": null
+              "description": "Idle clock timeout detection Note: This bit can be written only when TIMOUTEN=0.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "TIMEOUTA is used to detect SCL low timeout"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "TIMEOUTA is used to detect both SCL and SDA high timeout (bus idle condition)"
+                }
+              ]
             },
             {
               "name": "TIMOUTEN",
               "bit_offset": 15,
               "bit_width": 1,
               "description": "Clock timeout enable",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "SCL timeout detection is disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "SCL timeout detection is enabled"
+                }
+              ]
             },
             {
               "name": "TIMEOUTB",
               "bit_offset": 16,
               "bit_width": 12,
-              "description": "Bus timeout B",
-              "enum": null
+              "description": "Bus timeout B This field is used to configure the cumulative clock extension timeout: In master mode, the master cumulative clock low extend time (tsubLOW:MEXT/sub) is detected In slave mode, the slave cumulative clock low extend time (tsubLOW:SEXT/sub) is detected tsubLOW:EXT/sub= (TIMEOUTB+1) x 2048 x tsubI2CCLK/sub Note: These bits can be written only when TEXTEN=0.",
+              "access": "read-write"
             },
             {
               "name": "TEXTEN",
               "bit_offset": 31,
               "bit_width": 1,
               "description": "Extended clock timeout enable",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Extended clock timeout detection is disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Extended clock timeout detection is enabled"
+                }
+              ]
             }
           ]
         },
@@ -400,129 +1025,332 @@
           "name": "ISR",
           "offset": 24,
           "size": 32,
-          "description": "Interrupt and Status register",
+          "access": null,
+          "reset_value": 1,
+          "description": "I2C interrupt and status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Interrupt and Status register",
           "fields": [
             {
               "name": "TXE",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Transmit data register empty (transmitters)",
-              "enum": null
+              "description": "Transmit data register empty (transmitters) This bit is set by hardware when the I2C_TXDR register is empty. It is cleared when the next data to be sent is written in the I2C_TXDR register. This bit can be written to '1' by software in order to flush the transmit data register I2C_TXDR. Note: This bit is set by hardware when PE = 0.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NotEmpty",
+                  "value": 0,
+                  "description": "TXDR register not empty"
+                },
+                {
+                  "name": "Empty",
+                  "value": 1,
+                  "description": "TXDR register empty"
+                },
+                {
+                  "name": "Flush",
+                  "value": 1,
+                  "description": "Flush the transmit data register"
+                }
+              ]
             },
             {
               "name": "TXIS",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Transmit interrupt status (transmitters)",
-              "enum": null
+              "description": "Transmit interrupt status (transmitters) This bit is set by hardware when the I2C_TXDR register is empty and the data to be transmitted must be written in the I2C_TXDR register. It is cleared when the next data to be sent is written in the I2C_TXDR register. This bit can be written to '1' by software when NOSTRETCH = 1 only, in order to generate a TXIS event (interrupt if TXIE=1 or DMA request if TXDMAEN = 1). Note: This bit is cleared by hardware when PE = 0.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NotEmpty",
+                  "value": 0,
+                  "description": "The TXDR register is not empty"
+                },
+                {
+                  "name": "Empty",
+                  "value": 1,
+                  "description": "The TXDR register is empty and the data to be transmitted must be written in the TXDR register"
+                },
+                {
+                  "name": "Trigger",
+                  "value": 1,
+                  "description": "Generate a TXIS event"
+                }
+              ]
             },
             {
               "name": "RXNE",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "Receive data register not empty (receivers)",
-              "enum": null
+              "description": "Receive data register not empty (receivers) This bit is set by hardware when the received data is copied into the I2C_RXDR register, and is ready to be read. It is cleared when I2C_RXDR is read. Note: This bit is cleared by hardware when PE = 0.",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "Empty",
+                  "value": 0,
+                  "description": "The RXDR register is empty"
+                },
+                {
+                  "name": "NotEmpty",
+                  "value": 1,
+                  "description": "Received data is copied into the RXDR register, and is ready to be read"
+                }
+              ]
             },
             {
               "name": "ADDR",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "Address matched (slave mode)",
-              "enum": null
+              "description": "Address matched (slave mode) This bit is set by hardware as soon as the received slave address matched with one of the enabled slave addresses. It is cleared by software by setting ADDRCF bit. Note: This bit is cleared by hardware when PE = 0.",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotMatch",
+                  "value": 0,
+                  "description": "Adress mismatched or not received"
+                },
+                {
+                  "name": "Match",
+                  "value": 1,
+                  "description": "Received slave address matched with one of the enabled slave addresses"
+                }
+              ]
             },
             {
               "name": "NACKF",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "Not acknowledge received flag",
-              "enum": null
+              "description": "Not Acknowledge received flag This flag is set by hardware when a NACK is received after a byte transmission. It is cleared by software by setting the NACKCF bit. Note: This bit is cleared by hardware when PE = 0.",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NoNack",
+                  "value": 0,
+                  "description": "No NACK has been received"
+                },
+                {
+                  "name": "Nack",
+                  "value": 1,
+                  "description": "NACK has been received"
+                }
+              ]
             },
             {
               "name": "STOPF",
               "bit_offset": 5,
               "bit_width": 1,
-              "description": "Stop detection flag",
-              "enum": null
+              "description": "Stop detection flag This flag is set by hardware when a STOP condition is detected on the bus and the peripheral is involved in this transfer: either as a master, provided that the STOP condition is generated by the peripheral. or as a slave, provided that the peripheral has been addressed previously during this transfer. It is cleared by software by setting the STOPCF bit. Note: This bit is cleared by hardware when PE = 0.",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NoStop",
+                  "value": 0,
+                  "description": "No Stop condition detected"
+                },
+                {
+                  "name": "Stop",
+                  "value": 1,
+                  "description": "Stop condition detected"
+                }
+              ]
             },
             {
               "name": "TC",
               "bit_offset": 6,
               "bit_width": 1,
-              "description": "Transfer Complete (master mode)",
-              "enum": null
+              "description": "Transfer Complete (master mode) This flag is set by hardware when RELOAD=0, AUTOEND=0 and NBYTES data have been transferred. It is cleared by software when START bit or STOP bit is set. Note: This bit is cleared by hardware when PE = 0.",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotComplete",
+                  "value": 0,
+                  "description": "Transfer is not complete"
+                },
+                {
+                  "name": "Complete",
+                  "value": 1,
+                  "description": "NBYTES has been transfered"
+                }
+              ]
             },
             {
               "name": "TCR",
               "bit_offset": 7,
               "bit_width": 1,
-              "description": "Transfer Complete Reload",
-              "enum": null
+              "description": "Transfer Complete Reload This flag is set by hardware when RELOAD=1 and NBYTES data have been transferred. It is cleared by software when NBYTES is written to a non-zero value. Note: This bit is cleared by hardware when PE = 0. Note: This flag is only for master mode, or for slave mode when the SBC bit is set.",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotComplete",
+                  "value": 0,
+                  "description": "Transfer is not complete"
+                },
+                {
+                  "name": "Complete",
+                  "value": 1,
+                  "description": "NBYTES has been transfered"
+                }
+              ]
             },
             {
               "name": "BERR",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "Bus error",
-              "enum": null
+              "description": "Bus error This flag is set by hardware when a misplaced Start or STOP condition is detected whereas the peripheral is involved in the transfer. The flag is not set during the address phase in slave mode. It is cleared by software by setting BERRCF bit. Note: This bit is cleared by hardware when PE = 0.",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NoError",
+                  "value": 0,
+                  "description": "No bus error"
+                },
+                {
+                  "name": "Error",
+                  "value": 1,
+                  "description": "Misplaced Start and Stop condition is detected"
+                }
+              ]
             },
             {
               "name": "ARLO",
               "bit_offset": 9,
               "bit_width": 1,
-              "description": "Arbitration lost",
-              "enum": null
+              "description": "Arbitration lost This flag is set by hardware in case of arbitration loss. It is cleared by software by setting the ARLOCF bit. Note: This bit is cleared by hardware when PE = 0.",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotLost",
+                  "value": 0,
+                  "description": "No arbitration lost"
+                },
+                {
+                  "name": "Lost",
+                  "value": 1,
+                  "description": "Arbitration lost"
+                }
+              ]
             },
             {
               "name": "OVR",
               "bit_offset": 10,
               "bit_width": 1,
-              "description": "Overrun/Underrun (slave mode)",
-              "enum": null
+              "description": "Overrun/Underrun (slave mode) This flag is set by hardware in slave mode with NOSTRETCH = 1, when an overrun/underrun error occurs. It is cleared by software by setting the OVRCF bit. Note: This bit is cleared by hardware when PE = 0.",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NoOverrun",
+                  "value": 0,
+                  "description": "No overrun/underrun error occurs"
+                },
+                {
+                  "name": "Overrun",
+                  "value": 1,
+                  "description": "slave mode with NOSTRETCH=1, when an overrun/underrun error occurs"
+                }
+              ]
             },
             {
               "name": "PECERR",
               "bit_offset": 11,
               "bit_width": 1,
-              "description": "PEC Error in reception",
-              "enum": null
+              "description": "PEC Error in reception This flag is set by hardware when the received PEC does not match with the PEC register content. A NACK is automatically sent after the wrong PEC reception. It is cleared by software by setting the PECCF bit. Note: This bit is cleared by hardware when PE = 0. Note: If the SMBus feature is not supported, this bit is reserved and forced by hardware to '0'. Refer to Section 52.3: FMPI2C implementation.",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "Match",
+                  "value": 0,
+                  "description": "Received PEC does match with PEC register"
+                },
+                {
+                  "name": "NoMatch",
+                  "value": 1,
+                  "description": "Received PEC does not match with PEC register"
+                }
+              ]
             },
             {
               "name": "TIMEOUT",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "Timeout or t_low detection flag",
-              "enum": null
+              "description": "Timeout or tsubLOW/sub detection flag This flag is set by hardware when a timeout or extended clock timeout occurred. It is cleared by software by setting the TIMEOUTCF bit. Note: This bit is cleared by hardware when PE = 0. Note: If the SMBus feature is not supported, this bit is reserved and forced by hardware to '0'. Refer to Section 52.3: FMPI2C implementation.",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NoTimeout",
+                  "value": 0,
+                  "description": "No timeout occured"
+                },
+                {
+                  "name": "Timeout",
+                  "value": 1,
+                  "description": "Timeout occured"
+                }
+              ]
             },
             {
               "name": "ALERT",
               "bit_offset": 13,
               "bit_width": 1,
-              "description": "SMBus alert",
-              "enum": null
+              "description": "SMBus alert This flag is set by hardware when SMBHEN=1 (SMBus host configuration), ALERTEN=1 and a SMBALERT event (falling edge) is detected on SMBA pin. It is cleared by software by setting the ALERTCF bit. Note: This bit is cleared by hardware when PE = 0. Note: If the SMBus feature is not supported, this bit is reserved and forced by hardware to '0'. Refer to Section 52.3: FMPI2C implementation.",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NoAlert",
+                  "value": 0,
+                  "description": "SMBA alert is not detected"
+                },
+                {
+                  "name": "Alert",
+                  "value": 1,
+                  "description": "SMBA alert event is detected on SMBA pin"
+                }
+              ]
             },
             {
               "name": "BUSY",
               "bit_offset": 15,
               "bit_width": 1,
-              "description": "Bus busy",
-              "enum": null
+              "description": "Bus busy This flag indicates that a communication is in progress on the bus. It is set by hardware when a START condition is detected. It is cleared by hardware when a STOP condition is detected, or when PE = 0.",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotBusy",
+                  "value": 0,
+                  "description": "No communication is in progress on the bus"
+                },
+                {
+                  "name": "Busy",
+                  "value": 1,
+                  "description": "A communication is in progress on the bus"
+                }
+              ]
             },
             {
               "name": "DIR",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "Transfer direction (Slave mode)",
-              "enum": "DIR"
+              "description": "Transfer direction (Slave mode) This flag is updated when an address match event occurs (ADDR = 1).",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "Write",
+                  "value": 0,
+                  "description": "Write transfer, slave enters receiver mode"
+                },
+                {
+                  "name": "Read",
+                  "value": 1,
+                  "description": "Read transfer, slave enters transmitter mode"
+                }
+              ]
             },
             {
               "name": "ADDCODE",
               "bit_offset": 17,
               "bit_width": 7,
-              "description": "Address match code (Slave mode)",
-              "enum": null
+              "description": "Address match code (Slave mode) These bits are updated with the received address when an address match event occurs (ADDR = 1). In the case of a 10-bit address, ADDCODE provides the 10-bit header followed by the 2 MSBs of the address.",
+              "access": "read-only"
             }
           ]
         },
@@ -530,73 +1358,137 @@
           "name": "ICR",
           "offset": 28,
           "size": 32,
-          "description": "Interrupt clear register",
+          "access": null,
+          "reset_value": 0,
+          "description": "I2C interrupt clear register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Interrupt clear register",
           "fields": [
             {
               "name": "ADDRCF",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "Address Matched flag clear",
-              "enum": null
+              "description": "Address matched flag clear Writing 1 to this bit clears the ADDR flag in the I2C_ISR register. Writing 1 to this bit also clears the START bit in the I2C_CR2 register.",
+              "access": "write-only",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clears the ADDR flag in ISR register"
+                }
+              ]
             },
             {
               "name": "NACKCF",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "Not Acknowledge flag clear",
-              "enum": null
+              "description": "Not Acknowledge flag clear Writing 1 to this bit clears the NACKF flag in I2C_ISR register.",
+              "access": "write-only",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clears the NACK flag in ISR register"
+                }
+              ]
             },
             {
               "name": "STOPCF",
               "bit_offset": 5,
               "bit_width": 1,
-              "description": "Stop detection flag clear",
-              "enum": null
+              "description": "STOP detection flag clear Writing 1 to this bit clears the STOPF flag in the I2C_ISR register.",
+              "access": "write-only",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clears the STOP flag in ISR register"
+                }
+              ]
             },
             {
               "name": "BERRCF",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "Bus error flag clear",
-              "enum": null
+              "description": "Bus error flag clear Writing 1 to this bit clears the BERRF flag in the I2C_ISR register.",
+              "access": "write-only",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clears the BERR flag in ISR register"
+                }
+              ]
             },
             {
               "name": "ARLOCF",
               "bit_offset": 9,
               "bit_width": 1,
-              "description": "Arbitration lost flag clear",
-              "enum": null
+              "description": "Arbitration lost flag clear Writing 1 to this bit clears the ARLO flag in the I2C_ISR register.",
+              "access": "write-only",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clears the ARLO flag in ISR register"
+                }
+              ]
             },
             {
               "name": "OVRCF",
               "bit_offset": 10,
               "bit_width": 1,
-              "description": "Overrun/Underrun flag clear",
-              "enum": null
+              "description": "Overrun/Underrun flag clear Writing 1 to this bit clears the OVR flag in the I2C_ISR register.",
+              "access": "write-only",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clears the OVR flag in ISR register"
+                }
+              ]
             },
             {
               "name": "PECCF",
               "bit_offset": 11,
               "bit_width": 1,
-              "description": "PEC Error flag clear",
-              "enum": null
+              "description": "PEC Error flag clear Writing 1 to this bit clears the PECERR flag in the I2C_ISR register. Note: If the SMBus feature is not supported, this bit is reserved and forced by hardware to '0'. Refer to Section 52.3: FMPI2C implementation.",
+              "access": "write-only",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clears the PEC flag in ISR register"
+                }
+              ]
             },
             {
               "name": "TIMOUTCF",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "Timeout detection flag clear",
-              "enum": null
+              "description": "Timeout detection flag clear Writing 1 to this bit clears the TIMEOUT flag in the I2C_ISR register. Note: If the SMBus feature is not supported, this bit is reserved and forced by hardware to '0'. Refer to Section 52.3: FMPI2C implementation.",
+              "access": "write-only",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clears the TIMOUT flag in ISR register"
+                }
+              ]
             },
             {
               "name": "ALERTCF",
               "bit_offset": 13,
               "bit_width": 1,
-              "description": "Alert flag clear",
-              "enum": null
+              "description": "Alert flag clear Writing 1 to this bit clears the ALERT flag in the I2C_ISR register. Note: If the SMBus feature is not supported, this bit is reserved and forced by hardware to '0'. Refer to Section 52.3: FMPI2C implementation.",
+              "access": "write-only",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Clears the ALERT flag in ISR register"
+                }
+              ]
             }
           ]
         },
@@ -604,17 +1496,18 @@
           "name": "PECR",
           "offset": 32,
           "size": 32,
-          "description": "PEC register",
+          "access": null,
+          "reset_value": 0,
+          "description": "I2C PEC register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "PEC register",
           "fields": [
             {
               "name": "PEC",
               "bit_offset": 0,
               "bit_width": 8,
-              "description": "Packet error checking register",
-              "enum": null
+              "description": "Packet error checking register This field contains the internal PEC when PECEN=1. The PEC is cleared by hardware when PE = 0.",
+              "access": "read-only"
             }
           ]
         },
@@ -622,17 +1515,18 @@
           "name": "RXDR",
           "offset": 36,
           "size": 32,
-          "description": "Receive data register",
+          "access": null,
+          "reset_value": 0,
+          "description": "I2C receive data register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Receive data register",
           "fields": [
             {
               "name": "RXDATA",
               "bit_offset": 0,
               "bit_width": 8,
-              "description": "8-bit receive data",
-              "enum": null
+              "description": "8-bit receive data Data byte received from the Isup2/supC bus",
+              "access": "read-only"
             }
           ]
         },
@@ -640,228 +1534,70 @@
           "name": "TXDR",
           "offset": 40,
           "size": 32,
-          "description": "Transmit data register",
+          "access": null,
+          "reset_value": 0,
+          "description": "I2C transmit data register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Transmit data register",
           "fields": [
             {
               "name": "TXDATA",
               "bit_offset": 0,
               "bit_width": 8,
-              "description": "8-bit transmit data",
-              "enum": null
+              "description": "8-bit transmit data Data byte to be transmitted to the Isup2/supC bus Note: These bits can be written only when TXE = 1.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "AUTOCR",
+          "offset": 44,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "I2C Autonomous mode control register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "TCDMAEN",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "DMA request enable on Transfer Complete event",
+              "access": "read-write"
+            },
+            {
+              "name": "TCRDMAEN",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "DMA request enable on Transfer Complete Reload event",
+              "access": "read-write"
+            },
+            {
+              "name": "TRIGSEL",
+              "bit_offset": 16,
+              "bit_width": 4,
+              "description": "Trigger selection (refer to Section 52.4.3: FMPI2C pins and internal signals I2C interconnections tables). ... Note: This bit can be written only when PE = 0",
+              "access": "read-write"
+            },
+            {
+              "name": "TRIGPOL",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "Trigger polarity Note: This bit can be written only when PE = 0",
+              "access": "read-write"
+            },
+            {
+              "name": "TRIGEN",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "Trigger enable When a trigger is detected, a START condition is sent and the transfer is launched as defined in I2C_CR2.",
+              "access": "read-write"
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "ADDMODE": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Bit7",
-          "value": 0,
-          "description": "7-bit addressing mode"
-        },
-        {
-          "name": "Bit10",
-          "value": 1,
-          "description": "10-bit addressing mode"
-        }
-      ]
-    },
-    "AUTOEND": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Software",
-          "value": 0,
-          "description": "Software end mode: TC flag is set when NBYTES data are transferred, stretching SCL low"
-        },
-        {
-          "name": "Automatic",
-          "value": 1,
-          "description": "Automatic end mode: a STOP condition is automatically sent when NBYTES data are transferred"
-        }
-      ]
-    },
-    "DIR": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Write",
-          "value": 0,
-          "description": "Write transfer, slave enters receiver mode"
-        },
-        {
-          "name": "Read",
-          "value": 1,
-          "description": "Read transfer, slave enters transmitter mode"
-        }
-      ]
-    },
-    "DNF": {
-      "bit_size": 4,
-      "variants": [
-        {
-          "name": "NoFilter",
-          "value": 0,
-          "description": "Digital filter disabled"
-        },
-        {
-          "name": "Filter1",
-          "value": 1,
-          "description": "Digital filter enabled and filtering capability up to 1 tI2CCLK"
-        },
-        {
-          "name": "Filter2",
-          "value": 2,
-          "description": "Digital filter enabled and filtering capability up to 2 tI2CCLK"
-        },
-        {
-          "name": "Filter3",
-          "value": 3,
-          "description": "Digital filter enabled and filtering capability up to 3 tI2CCLK"
-        },
-        {
-          "name": "Filter4",
-          "value": 4,
-          "description": "Digital filter enabled and filtering capability up to 4 tI2CCLK"
-        },
-        {
-          "name": "Filter5",
-          "value": 5,
-          "description": "Digital filter enabled and filtering capability up to 5 tI2CCLK"
-        },
-        {
-          "name": "Filter6",
-          "value": 6,
-          "description": "Digital filter enabled and filtering capability up to 6 tI2CCLK"
-        },
-        {
-          "name": "Filter7",
-          "value": 7,
-          "description": "Digital filter enabled and filtering capability up to 7 tI2CCLK"
-        },
-        {
-          "name": "Filter8",
-          "value": 8,
-          "description": "Digital filter enabled and filtering capability up to 8 tI2CCLK"
-        },
-        {
-          "name": "Filter9",
-          "value": 9,
-          "description": "Digital filter enabled and filtering capability up to 9 tI2CCLK"
-        },
-        {
-          "name": "Filter10",
-          "value": 10,
-          "description": "Digital filter enabled and filtering capability up to 10 tI2CCLK"
-        },
-        {
-          "name": "Filter11",
-          "value": 11,
-          "description": "Digital filter enabled and filtering capability up to 11 tI2CCLK"
-        },
-        {
-          "name": "Filter12",
-          "value": 12,
-          "description": "Digital filter enabled and filtering capability up to 12 tI2CCLK"
-        },
-        {
-          "name": "Filter13",
-          "value": 13,
-          "description": "Digital filter enabled and filtering capability up to 13 tI2CCLK"
-        },
-        {
-          "name": "Filter14",
-          "value": 14,
-          "description": "Digital filter enabled and filtering capability up to 14 tI2CCLK"
-        },
-        {
-          "name": "Filter15",
-          "value": 15,
-          "description": "Digital filter enabled and filtering capability up to 15 tI2CCLK"
-        }
-      ]
-    },
-    "HEADR": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Complete",
-          "value": 0,
-          "description": "The master sends the complete 10 bit slave address read sequence"
-        },
-        {
-          "name": "Partial",
-          "value": 1,
-          "description": "The master only sends the 1st 7 bits of the 10 bit address, followed by Read direction"
-        }
-      ]
-    },
-    "OAMSK": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "NoMask",
-          "value": 0,
-          "description": "No mask"
-        },
-        {
-          "name": "Mask1",
-          "value": 1,
-          "description": "OA2[1] is masked and don’t care. Only OA2[7:2] are compared"
-        },
-        {
-          "name": "Mask2",
-          "value": 2,
-          "description": "OA2[2:1] are masked and don’t care. Only OA2[7:3] are compared"
-        },
-        {
-          "name": "Mask3",
-          "value": 3,
-          "description": "OA2[3:1] are masked and don’t care. Only OA2[7:4] are compared"
-        },
-        {
-          "name": "Mask4",
-          "value": 4,
-          "description": "OA2[4:1] are masked and don’t care. Only OA2[7:5] are compared"
-        },
-        {
-          "name": "Mask5",
-          "value": 5,
-          "description": "OA2[5:1] are masked and don’t care. Only OA2[7:6] are compared"
-        },
-        {
-          "name": "Mask6",
-          "value": 6,
-          "description": "OA2[6:1] are masked and don’t care. Only OA2[7] is compared."
-        },
-        {
-          "name": "Mask7",
-          "value": 7,
-          "description": "OA2[7:1] are masked and don’t care. No comparison is done, and all (except reserved) 7-bit received addresses are acknowledged"
-        }
-      ]
-    },
-    "RELOAD": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Completed",
-          "value": 0,
-          "description": "The transfer is completed after the NBYTES data transfer (STOP or RESTART will follow)"
-        },
-        {
-          "name": "NotCompleted",
-          "value": 1,
-          "description": "The transfer is not completed after the NBYTES data transfer (NBYTES will be reloaded)"
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

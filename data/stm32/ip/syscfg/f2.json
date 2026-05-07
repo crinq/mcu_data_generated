@@ -2,6 +2,9 @@
   "schema": 1,
   "kind": "syscfg",
   "version": "f2",
+  "source": "stm32rs_svd",
+  "source_device": "stm32f205rb",
+  "source_file": "stm32f215.svd.patched",
   "blocks": {
     "SYSCFG": {
       "name": "SYSCFG",
@@ -9,20 +12,20 @@
       "extends": null,
       "registers": [
         {
-          "name": "MEMRMP",
+          "name": "MEMRM",
           "offset": 0,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "memory remap register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "memory remap register",
           "fields": [
             {
               "name": "MEM_MODE",
               "bit_offset": 0,
               "bit_width": 2,
-              "description": "Memory mapping selection",
-              "enum": "MEM_MODE"
+              "description": "MEM_MODE"
             }
           ]
         },
@@ -30,35 +33,161 @@
           "name": "PMC",
           "offset": 4,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "peripheral mode configuration register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "peripheral mode configuration register",
           "fields": [
             {
               "name": "MII_RMII_SEL",
               "bit_offset": 23,
               "bit_width": 1,
-              "description": "Ethernet PHY interface selection",
-              "enum": null
+              "description": "Ethernet PHY interface selection"
             }
           ]
         },
         {
-          "name": "EXTICR",
+          "name": "EXTICR1",
           "offset": 8,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "external interrupt configuration register 1",
-          "array_len": 4,
-          "array_stride": 4,
-          "fieldset_description": "external interrupt configuration register 1",
+          "array_len": null,
+          "array_stride": null,
           "fields": [
             {
-              "name": "EXTI",
+              "name": "EXTI3",
+              "bit_offset": 12,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 0 to 3)"
+            },
+            {
+              "name": "EXTI2",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 0 to 3)"
+            },
+            {
+              "name": "EXTI1",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 0 to 3)"
+            },
+            {
+              "name": "EXTI0",
               "bit_offset": 0,
               "bit_width": 4,
-              "description": "EXTI x configuration (x = 0 to 3)",
-              "enum": null
+              "description": "EXTI x configuration (x = 0 to 3)"
+            }
+          ]
+        },
+        {
+          "name": "EXTICR2",
+          "offset": 12,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "external interrupt configuration register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "EXTI7",
+              "bit_offset": 12,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 4 to 7)"
+            },
+            {
+              "name": "EXTI6",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 4 to 7)"
+            },
+            {
+              "name": "EXTI5",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 4 to 7)"
+            },
+            {
+              "name": "EXTI4",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 4 to 7)"
+            }
+          ]
+        },
+        {
+          "name": "EXTICR3",
+          "offset": 16,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "external interrupt configuration register 3",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "EXTI11",
+              "bit_offset": 12,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 8 to 11)"
+            },
+            {
+              "name": "EXTI10",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "EXTI10"
+            },
+            {
+              "name": "EXTI9",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 8 to 11)"
+            },
+            {
+              "name": "EXTI8",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 8 to 11)"
+            }
+          ]
+        },
+        {
+          "name": "EXTICR4",
+          "offset": 20,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "external interrupt configuration register 4",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "EXTI15",
+              "bit_offset": 12,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 12 to 15)"
+            },
+            {
+              "name": "EXTI14",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 12 to 15)"
+            },
+            {
+              "name": "EXTI13",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 12 to 15)"
+            },
+            {
+              "name": "EXTI12",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 12 to 15)"
             }
           ]
         },
@@ -66,55 +195,30 @@
           "name": "CMPCR",
           "offset": 32,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "Compensation cell control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Compensation cell control register",
           "fields": [
+            {
+              "name": "READY",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "READY",
+              "access": "read-only"
+            },
             {
               "name": "CMP_PD",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "Compensation cell power-down",
-              "enum": null
-            },
-            {
-              "name": "READY",
-              "bit_offset": 8,
-              "bit_width": 1,
-              "description": "Compensation cell ready flag",
-              "enum": null
+              "access": "read-write"
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "MEM_MODE": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "MainFlash",
-          "value": 0,
-          "description": "Main Flash memory mapped at 0x0000_0000"
-        },
-        {
-          "name": "SystemFlash",
-          "value": 1,
-          "description": "System Flash memory mapped at 0x0000_0000"
-        },
-        {
-          "name": "FSMC",
-          "value": 2,
-          "description": "FSMC Bank1 (NOR/PSRAM 1 and 2) mapped at 0x0000_0000"
-        },
-        {
-          "name": "SRAM",
-          "value": 3,
-          "description": "Embedded SRAM mapped at 0x0000_0000"
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

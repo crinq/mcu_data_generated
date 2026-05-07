@@ -28,63 +28,63 @@
               "name": "HSIKERDIV",
               "bit_offset": 5,
               "bit_width": 3,
-              "description": "HSI kernel clock division factor\r This bitfield controlled by software sets the division factor of the kernel clock divider to produce HSIKER clock:",
+              "description": "HSI kernel clock division factor This bitfield controlled by software sets the division factor of the kernel clock divider to produce HSIKER clock:",
               "enum": "HSIKERDIV"
             },
             {
               "name": "HSION",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "HSI clock enable\r Set and cleared by software and hardware, with hardware taking priority.\r Kept low by hardware as long as the device is in a low-power mode.\r Kept high by hardware as long as the system is clocked with a clock derived from HSI. This includes the exit from low-power modes and the system clock fall-back to HSI upon failing HSE oscillator clock selected as system clock source.",
+              "description": "HSI clock enable Set and cleared by software and hardware, with hardware taking priority. Kept low by hardware as long as the device is in a low-power mode. Kept high by hardware as long as the system is clocked with a clock derived from HSI. This includes the exit from low-power modes and the system clock fall-back to HSI upon failing HSE oscillator clock selected as system clock source.",
               "enum": null
             },
             {
               "name": "HSIKERON",
               "bit_offset": 9,
               "bit_width": 1,
-              "description": "HSI always-enable for peripheral kernels.\r Set and cleared by software.\r Setting the bit activates the HSI oscillator in Run and Stop modes, regardless of the HSION bit state. The HSI clock can only feed USART1, USART2, and I2C1 peripherals configured with HSI as kernel clock.\r Note: Keeping the HSI active in Stop mode allows speeding up the serial interface communication as the HSI clock is ready immediately upon exiting Stop mode.",
+              "description": "HSI always-enable for peripheral kernels. Set and cleared by software. Setting the bit activates the HSI oscillator in Run and Stop modes, regardless of the HSION bit state. The HSI clock can only feed USART1, USART2, and I2C1 peripherals configured with HSI as kernel clock. Note: Keeping the HSI active in Stop mode allows speeding up the serial interface communication as the HSI clock is ready immediately upon exiting Stop mode.",
               "enum": null
             },
             {
               "name": "HSIRDY",
               "bit_offset": 10,
               "bit_width": 1,
-              "description": "HSI clock ready flag\r Set by hardware when the HSI oscillator is enabled through HSION and ready to use (stable).\r Note: Upon clearing HSION, HSIRDY goes low after six HSI clock cycles.",
+              "description": "HSI clock ready flag Set by hardware when the HSI oscillator is enabled through HSION and ready to use (stable). Note: Upon clearing HSION, HSIRDY goes low after six HSI clock cycles.",
               "enum": null
             },
             {
               "name": "HSIDIV",
               "bit_offset": 11,
               "bit_width": 3,
-              "description": "HSI clock division factor\r This bitfield controlled by software sets the division factor of the HSI clock divider to produce HSISYS clock:",
+              "description": "HSI clock division factor This bitfield controlled by software sets the division factor of the HSI clock divider to produce HSISYS clock:",
               "enum": "HSIDIV"
             },
             {
               "name": "HSEON",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "HSE clock enable\r Set and cleared by software.\r Cleared by hardware to stop the HSE oscillator when entering Stop, or Standby, or Shutdown mode. This bit cannot be cleared if the HSE oscillator is used directly or indirectly as the system clock.",
+              "description": "HSE clock enable Set and cleared by software. Cleared by hardware to stop the HSE oscillator when entering Stop, or Standby, or Shutdown mode. This bit cannot be cleared if the HSE oscillator is used directly or indirectly as the system clock.",
               "enum": null
             },
             {
               "name": "HSERDY",
               "bit_offset": 17,
               "bit_width": 1,
-              "description": "HSE clock ready flag\r Set by hardware to indicate that the HSE oscillator is stable and ready for use.\r Note: Upon clearing HSEON, HSERDY goes low after six HSE clock cycles.",
+              "description": "HSE clock ready flag Set by hardware to indicate that the HSE oscillator is stable and ready for use. Note: Upon clearing HSEON, HSERDY goes low after six HSE clock cycles.",
               "enum": null
             },
             {
               "name": "HSEBYP",
               "bit_offset": 18,
               "bit_width": 1,
-              "description": "HSE crystal oscillator bypass\r Set and cleared by software.\r When the bit is set, the internal HSE oscillator is bypassed for use of an external clock. The external clock must then be enabled with the HSEON bit set. Write access to the bit is only effective when the HSE oscillator is disabled.",
+              "description": "HSE crystal oscillator bypass Set and cleared by software. When the bit is set, the internal HSE oscillator is bypassed for use of an external clock. The external clock must then be enabled with the HSEON bit set. Write access to the bit is only effective when the HSE oscillator is disabled.",
               "enum": null
             },
             {
               "name": "CSSON",
               "bit_offset": 19,
               "bit_width": 1,
-              "description": "Clock security system enable\r Set by software to enable the clock security system. When the bit is set, the clock detector is enabled by hardware when the HSE oscillator is ready, and disabled by hardware if a HSE clock failure is detected. The bit is cleared by hardware upon reset.",
+              "description": "Clock security system enable Set by software to enable the clock security system. When the bit is set, the clock detector is enabled by hardware when the HSE oscillator is ready, and disabled by hardware if a HSE clock failure is detected. The bit is cleared by hardware upon reset.",
               "enum": null
             },
             {
@@ -116,14 +116,14 @@
               "name": "HSICAL",
               "bit_offset": 0,
               "bit_width": 8,
-              "description": "HSI clock calibration\r This bitfield directly acts on the HSI clock frequency. Its value is a sum of an internal factory-programmed number and the value of the HSITRIM[6:0] bitfield. In the factory, the internal number is set to calibrate the HSI clock frequency to 48 MHz (with HSITRIM[6:0] left at its reset value). Refer to the device datasheet for HSI calibration accuracy and for the frequency trimming granularity.\r Note: The trimming effect presents discontinuities at HSICAL[7:0] multiples of 64.",
+              "description": "HSI clock calibration This bitfield directly acts on the HSI clock frequency. Its value is a sum of an internal factory-programmed number and the value of the HSITRIM[6:0] bitfield. In the factory, the internal number is set to calibrate the HSI clock frequency to 48 MHz (with HSITRIM[6:0] left at its reset value). Refer to the device datasheet for HSI calibration accuracy and for the frequency trimming granularity. Note: The trimming effect presents discontinuities at HSICAL[7:0] multiples of 64.",
               "enum": null
             },
             {
               "name": "HSITRIM",
               "bit_offset": 8,
               "bit_width": 7,
-              "description": "HSI clock trimming\r The value of this bitfield contributes to the HSICAL[7:0] bitfield value.\r It allows HSI clock frequency user trimming.\r The HSI frequency accuracy as stated in the device datasheet applies when this bitfield is left at its reset value.",
+              "description": "HSI clock trimming The value of this bitfield contributes to the HSICAL[7:0] bitfield value. It allows HSI clock frequency user trimming. The HSI frequency accuracy as stated in the device datasheet applies when this bitfield is left at its reset value.",
               "enum": null
             }
           ]
@@ -141,56 +141,56 @@
               "name": "SW",
               "bit_offset": 0,
               "bit_width": 3,
-              "description": "System clock switch\r This bitfield is controlled by software and hardware. The bitfield selects the clock for SYSCLK as follows:\r Others: Reserved\r The setting is forced by hardware to 000 (HSISYS selected) when the MCU exits Stop, or Standby, or Shutdown mode, or when the setting is 001 (HSE selected) and HSE oscillator failure is detected.",
+              "description": "System clock switch This bitfield is controlled by software and hardware. The bitfield selects the clock for SYSCLK as follows: Others: Reserved The setting is forced by hardware to 000 (HSISYS selected) when the MCU exits Stop, or Standby, or Shutdown mode, or when the setting is 001 (HSE selected) and HSE oscillator failure is detected.",
               "enum": "SW"
             },
             {
               "name": "SWS",
               "bit_offset": 3,
               "bit_width": 3,
-              "description": "System clock switch status\r This bitfield is controlled by hardware to indicate the clock source used as system clock:\r Others: Reserved",
+              "description": "System clock switch status This bitfield is controlled by hardware to indicate the clock source used as system clock: Others: Reserved",
               "enum": "SW"
             },
             {
               "name": "HPRE",
               "bit_offset": 8,
               "bit_width": 4,
-              "description": "AHB prescaler\r This bitfield is controlled by software. To produce HCLK clock, it sets the division factor of SYSCLK clock as follows:\r 0xxx: 1",
+              "description": "AHB prescaler This bitfield is controlled by software. To produce HCLK clock, it sets the division factor of SYSCLK clock as follows: 0xxx: 1",
               "enum": "HPRE"
             },
             {
               "name": "PPRE",
               "bit_offset": 12,
               "bit_width": 3,
-              "description": "APB prescaler\r This bitfield is controlled by software. To produce PCLK clock, it sets the division factor of HCLK clock as follows:\r 0xx: 1",
+              "description": "APB prescaler This bitfield is controlled by software. To produce PCLK clock, it sets the division factor of HCLK clock as follows: 0xx: 1",
               "enum": "PPRE"
             },
             {
               "name": "MCO2SEL",
               "bit_offset": 16,
               "bit_width": 4,
-              "description": "Microcontroller clock output 2 clock selector\r This bitfield is controlled by software. It sets the clock selector for MCO2 output as follows:\r This bitfield is controlled by software. It sets the clock selector for MCO output as follows:\r Note: This clock output may have some truncated cycles at startup or during MCO2 clock source switching.",
+              "description": "Microcontroller clock output 2 clock selector This bitfield is controlled by software. It sets the clock selector for MCO2 output as follows: This bitfield is controlled by software. It sets the clock selector for MCO output as follows: Note: This clock output may have some truncated cycles at startup or during MCO2 clock source switching.",
               "enum": "MCOSEL"
             },
             {
               "name": "MCO2PRE",
               "bit_offset": 20,
               "bit_width": 4,
-              "description": "Microcontroller clock output 2 prescaler\r This bitfield is controlled by software. It sets the division factor of the clock sent to the MCO2 output as follows:\r ...\r It is highly recommended to set this field before the MCO2 output is enabled.",
+              "description": "Microcontroller clock output 2 prescaler This bitfield is controlled by software. It sets the division factor of the clock sent to the MCO2 output as follows: ... It is highly recommended to set this field before the MCO2 output is enabled.",
               "enum": "MCOPRE"
             },
             {
               "name": "MCO1SEL",
               "bit_offset": 24,
               "bit_width": 4,
-              "description": "Microcontroller clock output clock selector\r This bitfield is controlled by software. It sets the clock selector for MCO output as follows:\r Note: This clock output may have some truncated cycles at startup or during MCO clock source switching. Any other value means no clock on MCO.",
+              "description": "Microcontroller clock output clock selector This bitfield is controlled by software. It sets the clock selector for MCO output as follows: Note: This clock output may have some truncated cycles at startup or during MCO clock source switching. Any other value means no clock on MCO.",
               "enum": "MCOSEL"
             },
             {
               "name": "MCO1PRE",
               "bit_offset": 28,
               "bit_width": 4,
-              "description": "Microcontroller clock output prescaler\r This bitfield is controlled by software. It sets the division factor of the clock sent to the MCO output as follows:\r ...\r It is highly recommended to set this field before the MCO output is enabled.",
+              "description": "Microcontroller clock output prescaler This bitfield is controlled by software. It sets the division factor of the clock sent to the MCO output as follows: ... It is highly recommended to set this field before the MCO output is enabled.",
               "enum": "MCOPRE"
             }
           ]
@@ -226,14 +226,14 @@
               "name": "LSIRDYIE",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "LSI ready interrupt enable\r Set and cleared by software to enable/disable interrupt caused by the LSI oscillator stabilization:",
+              "description": "LSI ready interrupt enable Set and cleared by software to enable/disable interrupt caused by the LSI oscillator stabilization:",
               "enum": null
             },
             {
               "name": "LSERDYIE",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "LSE ready interrupt enable\r Set and cleared by software to enable/disable interrupt caused by the LSE oscillator stabilization:",
+              "description": "LSE ready interrupt enable Set and cleared by software to enable/disable interrupt caused by the LSE oscillator stabilization:",
               "enum": null
             },
             {
@@ -247,14 +247,14 @@
               "name": "HSIRDYIE",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "HSI ready interrupt enable\r Set and cleared by software to enable/disable interrupt caused by the HSI oscillator stabilization:",
+              "description": "HSI ready interrupt enable Set and cleared by software to enable/disable interrupt caused by the HSI oscillator stabilization:",
               "enum": null
             },
             {
               "name": "HSERDYIE",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "HSE ready interrupt enable\r Set and cleared by software to enable/disable interrupt caused by the HSE oscillator stabilization:",
+              "description": "HSE ready interrupt enable Set and cleared by software to enable/disable interrupt caused by the HSE oscillator stabilization:",
               "enum": null
             }
           ]
@@ -272,14 +272,14 @@
               "name": "LSIRDYF",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "LSI ready interrupt flag\r This flag indicates a pending interrupt upon LSE clock getting ready.\r Set by hardware when the LSI clock becomes stable and LSIRDYDIE is set.\r Cleared by software setting the LSIRDYC bit.",
+              "description": "LSI ready interrupt flag This flag indicates a pending interrupt upon LSE clock getting ready. Set by hardware when the LSI clock becomes stable and LSIRDYDIE is set. Cleared by software setting the LSIRDYC bit.",
               "enum": null
             },
             {
               "name": "LSERDYF",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "LSE ready interrupt flag\r This flag indicates a pending interrupt upon LSE clock getting ready.\r Set by hardware when the LSE clock becomes stable and LSERDYDIE is set.\r Cleared by software setting the LSERDYC bit.",
+              "description": "LSE ready interrupt flag This flag indicates a pending interrupt upon LSE clock getting ready. Set by hardware when the LSE clock becomes stable and LSERDYDIE is set. Cleared by software setting the LSERDYC bit.",
               "enum": null
             },
             {
@@ -293,28 +293,28 @@
               "name": "HSIRDYF",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "HSI ready interrupt flag\r This flag indicates a pending interrupt upon HSI clock getting ready.\r Set by hardware when the HSI clock becomes stable and HSIRDYIE is set in response to setting the HSION (refer to ). When HSION is not set but the HSI oscillator is enabled by the peripheral through a clock request, this bit is not set and no interrupt is generated.\r Cleared by software setting the HSIRDYC bit.",
+              "description": "HSI ready interrupt flag This flag indicates a pending interrupt upon HSI clock getting ready. Set by hardware when the HSI clock becomes stable and HSIRDYIE is set in response to setting the HSION (refer to ). When HSION is not set but the HSI oscillator is enabled by the peripheral through a clock request, this bit is not set and no interrupt is generated. Cleared by software setting the HSIRDYC bit.",
               "enum": null
             },
             {
               "name": "HSERDYF",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "HSE ready interrupt flag\r This flag indicates a pending interrupt upon HSE clock getting ready.\r Set by hardware when the HSE clock becomes stable and HSERDYIE is set.\r Cleared by software setting the HSERDYC bit.",
+              "description": "HSE ready interrupt flag This flag indicates a pending interrupt upon HSE clock getting ready. Set by hardware when the HSE clock becomes stable and HSERDYIE is set. Cleared by software setting the HSERDYC bit.",
               "enum": null
             },
             {
               "name": "CSSF",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "HSE clock security system interrupt flag\r This flag indicates a pending interrupt upon HSE clock failure.\r Set by hardware when a failure is detected in the HSE oscillator.\r Cleared by software setting the CSSC bit.",
+              "description": "HSE clock security system interrupt flag This flag indicates a pending interrupt upon HSE clock failure. Set by hardware when a failure is detected in the HSE oscillator. Cleared by software setting the CSSC bit.",
               "enum": null
             },
             {
               "name": "LSECSSF",
               "bit_offset": 9,
               "bit_width": 1,
-              "description": "LSE clock security system interrupt flag\r This flag indicates a pending interrupt upon LSE clock failure.\r Set by hardware when a failure is detected in the LSE oscillator.\r Cleared by software by setting the LSECSSC bit.",
+              "description": "LSE clock security system interrupt flag This flag indicates a pending interrupt upon LSE clock failure. Set by hardware when a failure is detected in the LSE oscillator. Cleared by software by setting the LSECSSC bit.",
               "enum": null
             }
           ]
@@ -332,14 +332,14 @@
               "name": "LSIRDYC",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "LSI ready interrupt clear\r This bit is set by software to clear the LSIRDYF flag.",
+              "description": "LSI ready interrupt clear This bit is set by software to clear the LSIRDYF flag.",
               "enum": null
             },
             {
               "name": "LSERDYC",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "LSE ready interrupt clear\r This bit is set by software to clear the LSERDYF flag.",
+              "description": "LSE ready interrupt clear This bit is set by software to clear the LSERDYF flag.",
               "enum": null
             },
             {
@@ -353,28 +353,28 @@
               "name": "HSIRDYC",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "HSI ready interrupt clear\r This bit is set software to clear the HSIRDYF flag.",
+              "description": "HSI ready interrupt clear This bit is set software to clear the HSIRDYF flag.",
               "enum": null
             },
             {
               "name": "HSERDYC",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "HSE ready interrupt clear\r This bit is set by software to clear the HSERDYF flag.",
+              "description": "HSE ready interrupt clear This bit is set by software to clear the HSERDYF flag.",
               "enum": null
             },
             {
               "name": "CSSC",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "Clock security system interrupt clear\r This bit is set by software to clear the HSECSSF flag.",
+              "description": "Clock security system interrupt clear This bit is set by software to clear the HSECSSF flag.",
               "enum": null
             },
             {
               "name": "LSECSSC",
               "bit_offset": 9,
               "bit_width": 1,
-              "description": "LSE Clock security system interrupt clear\r This bit is set by software to clear the LSECSSF flag.",
+              "description": "LSE Clock security system interrupt clear This bit is set by software to clear the LSECSSF flag.",
               "enum": null
             }
           ]
@@ -392,35 +392,35 @@
               "name": "GPIOARST",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "I/O port A reset\r This bit is set and cleared by software.",
+              "description": "I/O port A reset This bit is set and cleared by software.",
               "enum": null
             },
             {
               "name": "GPIOBRST",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "I/O port B reset\r This bit is set and cleared by software.",
+              "description": "I/O port B reset This bit is set and cleared by software.",
               "enum": null
             },
             {
               "name": "GPIOCRST",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "I/O port C reset\r This bit is set and cleared by software.",
+              "description": "I/O port C reset This bit is set and cleared by software.",
               "enum": null
             },
             {
               "name": "GPIODRST",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "I/O port D reset\r This bit is set and cleared by software.",
+              "description": "I/O port D reset This bit is set and cleared by software.",
               "enum": null
             },
             {
               "name": "GPIOFRST",
               "bit_offset": 5,
               "bit_width": 1,
-              "description": "I/O port F reset\r This bit is set and cleared by software.",
+              "description": "I/O port F reset This bit is set and cleared by software.",
               "enum": null
             }
           ]
@@ -438,21 +438,21 @@
               "name": "DMA1RST",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "DMA1 and DMAMUX reset\r Set and cleared by software.",
+              "description": "DMA1 and DMAMUX reset Set and cleared by software.",
               "enum": null
             },
             {
               "name": "FLASHRST",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "Flash memory interface reset\r Set and cleared by software.\r This bit can only be set when the Flash memory is in power down mode.",
+              "description": "Flash memory interface reset Set and cleared by software. This bit can only be set when the Flash memory is in power down mode.",
               "enum": null
             },
             {
               "name": "CRCRST",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "CRC reset\r Set and cleared by software.",
+              "description": "CRC reset Set and cleared by software.",
               "enum": null
             }
           ]
@@ -477,7 +477,7 @@
               "name": "TIM3RST",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "TIM3 timer reset\r Set and cleared by software.",
+              "description": "TIM3 timer reset Set and cleared by software.",
               "enum": null
             },
             {
@@ -512,28 +512,28 @@
               "name": "USART2RST",
               "bit_offset": 17,
               "bit_width": 1,
-              "description": "USART2 reset\r Set and cleared by software.",
+              "description": "USART2 reset Set and cleared by software.",
               "enum": null
             },
             {
               "name": "USART3RST",
               "bit_offset": 18,
               "bit_width": 1,
-              "description": "USART3 reset\r Set and cleared by software.",
+              "description": "USART3 reset Set and cleared by software.",
               "enum": null
             },
             {
               "name": "USART4RST",
               "bit_offset": 19,
               "bit_width": 1,
-              "description": "USART4 reset\r Set and cleared by software.",
+              "description": "USART4 reset Set and cleared by software.",
               "enum": null
             },
             {
               "name": "I2C1RST",
               "bit_offset": 21,
               "bit_width": 1,
-              "description": "I2C1 reset\r Set and cleared by software.",
+              "description": "I2C1 reset Set and cleared by software.",
               "enum": null
             },
             {
@@ -547,14 +547,14 @@
               "name": "DBGRST",
               "bit_offset": 27,
               "bit_width": 1,
-              "description": "Debug support reset\r Set and cleared by software.",
+              "description": "Debug support reset Set and cleared by software.",
               "enum": null
             },
             {
               "name": "PWRRST",
               "bit_offset": 28,
               "bit_width": 1,
-              "description": "Power interface reset\r Set and cleared by software.",
+              "description": "Power interface reset Set and cleared by software.",
               "enum": null
             }
           ]
@@ -572,63 +572,63 @@
               "name": "SYSCFGRST",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "SYSCFG reset\r Set and cleared by software.",
+              "description": "SYSCFG reset Set and cleared by software.",
               "enum": null
             },
             {
               "name": "TIM1RST",
               "bit_offset": 11,
               "bit_width": 1,
-              "description": "TIM1 timer reset\r Set and cleared by software.",
+              "description": "TIM1 timer reset Set and cleared by software.",
               "enum": null
             },
             {
               "name": "SPI1RST",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "SPI1 reset\r Set and cleared by software.",
+              "description": "SPI1 reset Set and cleared by software.",
               "enum": null
             },
             {
               "name": "USART1RST",
               "bit_offset": 14,
               "bit_width": 1,
-              "description": "USART1 reset\r Set and cleared by software.",
+              "description": "USART1 reset Set and cleared by software.",
               "enum": null
             },
             {
               "name": "TIM14RST",
               "bit_offset": 15,
               "bit_width": 1,
-              "description": "TIM14 timer reset\r Set and cleared by software.",
+              "description": "TIM14 timer reset Set and cleared by software.",
               "enum": null
             },
             {
               "name": "TIM15RST",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "TIM15 timer reset\r Set and cleared by software.",
+              "description": "TIM15 timer reset Set and cleared by software.",
               "enum": null
             },
             {
               "name": "TIM16RST",
               "bit_offset": 17,
               "bit_width": 1,
-              "description": "TIM16 timer reset\r Set and cleared by software.",
+              "description": "TIM16 timer reset Set and cleared by software.",
               "enum": null
             },
             {
               "name": "TIM17RST",
               "bit_offset": 18,
               "bit_width": 1,
-              "description": "TIM16 timer reset\r Set and cleared by software.",
+              "description": "TIM16 timer reset Set and cleared by software.",
               "enum": null
             },
             {
               "name": "ADC1RST",
               "bit_offset": 20,
               "bit_width": 1,
-              "description": "ADC reset\r Set and cleared by software.",
+              "description": "ADC reset Set and cleared by software.",
               "enum": null
             }
           ]
@@ -646,35 +646,35 @@
               "name": "GPIOAEN",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "I/O port A clock enable\r This bit is set and cleared by software.",
+              "description": "I/O port A clock enable This bit is set and cleared by software.",
               "enum": null
             },
             {
               "name": "GPIOBEN",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "I/O port B clock enable\r This bit is set and cleared by software.",
+              "description": "I/O port B clock enable This bit is set and cleared by software.",
               "enum": null
             },
             {
               "name": "GPIOCEN",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "I/O port C clock enable\r This bit is set and cleared by software.",
+              "description": "I/O port C clock enable This bit is set and cleared by software.",
               "enum": null
             },
             {
               "name": "GPIODEN",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "I/O port D clock enable\r This bit is set and cleared by software.",
+              "description": "I/O port D clock enable This bit is set and cleared by software.",
               "enum": null
             },
             {
               "name": "GPIOFEN",
               "bit_offset": 5,
               "bit_width": 1,
-              "description": "I/O port F clock enable\r This bit is set and cleared by software.",
+              "description": "I/O port F clock enable This bit is set and cleared by software.",
               "enum": null
             }
           ]
@@ -692,21 +692,21 @@
               "name": "DMA1EN",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "DMA1 and DMAMUX clock enable\r Set and cleared by software.\r DMAMUX is enabled as long as at least one DMA peripheral is enabled.",
+              "description": "DMA1 and DMAMUX clock enable Set and cleared by software. DMAMUX is enabled as long as at least one DMA peripheral is enabled.",
               "enum": null
             },
             {
               "name": "FLASHEN",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "Flash memory interface clock enable\r Set and cleared by software.\r This bit can only be cleared when the Flash memory is in power down mode.",
+              "description": "Flash memory interface clock enable Set and cleared by software. This bit can only be cleared when the Flash memory is in power down mode.",
               "enum": null
             },
             {
               "name": "CRCEN",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "CRC clock enable\r Set and cleared by software.",
+              "description": "CRC clock enable Set and cleared by software.",
               "enum": null
             }
           ]
@@ -731,28 +731,28 @@
               "name": "TIM3EN",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "TIM3 timer clock enable\r Set and cleared by software.",
+              "description": "TIM3 timer clock enable Set and cleared by software.",
               "enum": null
             },
             {
               "name": "RTCAPBEN",
               "bit_offset": 10,
               "bit_width": 1,
-              "description": "RTC APB clock enable\r Set and cleared by software.",
+              "description": "RTC APB clock enable Set and cleared by software.",
               "enum": null
             },
             {
               "name": "WWDGEN",
               "bit_offset": 11,
               "bit_width": 1,
-              "description": "WWDG clock enable\r Set by software to enable the window watchdog clock. Cleared by hardware system reset\r This bit can also be set by hardware if the WWDG_SW option bit is 0.",
+              "description": "WWDG clock enable Set by software to enable the window watchdog clock. Cleared by hardware system reset This bit can also be set by hardware if the WWDG_SW option bit is 0.",
               "enum": null
             },
             {
               "name": "FDCAN1EN",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "FDCAN1 clock enable\r Set and cleared by software.",
+              "description": "FDCAN1 clock enable Set and cleared by software.",
               "enum": null
             },
             {
@@ -780,28 +780,28 @@
               "name": "USART2EN",
               "bit_offset": 17,
               "bit_width": 1,
-              "description": "USART2 clock enable\r Set and cleared by software.",
+              "description": "USART2 clock enable Set and cleared by software.",
               "enum": null
             },
             {
               "name": "USART3EN",
               "bit_offset": 18,
               "bit_width": 1,
-              "description": "USART3 clock enable\r Set and cleared by software.",
+              "description": "USART3 clock enable Set and cleared by software.",
               "enum": null
             },
             {
               "name": "USART4EN",
               "bit_offset": 19,
               "bit_width": 1,
-              "description": "USART4 clock enable\r Set and cleared by software.",
+              "description": "USART4 clock enable Set and cleared by software.",
               "enum": null
             },
             {
               "name": "I2C1EN",
               "bit_offset": 21,
               "bit_width": 1,
-              "description": "I2C1 clock enable\r Set and cleared by software.",
+              "description": "I2C1 clock enable Set and cleared by software.",
               "enum": null
             },
             {
@@ -815,14 +815,14 @@
               "name": "DBGEN",
               "bit_offset": 27,
               "bit_width": 1,
-              "description": "Debug support clock enable\r Set and cleared by software.",
+              "description": "Debug support clock enable Set and cleared by software.",
               "enum": null
             },
             {
               "name": "PWREN",
               "bit_offset": 28,
               "bit_width": 1,
-              "description": "Power interface clock enable\r Set and cleared by software.",
+              "description": "Power interface clock enable Set and cleared by software.",
               "enum": null
             }
           ]
@@ -840,63 +840,63 @@
               "name": "SYSCFGEN",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "SYSCFG clock enable\r Set and cleared by software.",
+              "description": "SYSCFG clock enable Set and cleared by software.",
               "enum": null
             },
             {
               "name": "TIM1EN",
               "bit_offset": 11,
               "bit_width": 1,
-              "description": "TIM1 timer clock enable\r Set and cleared by software.",
+              "description": "TIM1 timer clock enable Set and cleared by software.",
               "enum": null
             },
             {
               "name": "SPI1EN",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "SPI1 clock enable\r Set and cleared by software.",
+              "description": "SPI1 clock enable Set and cleared by software.",
               "enum": null
             },
             {
               "name": "USART1EN",
               "bit_offset": 14,
               "bit_width": 1,
-              "description": "USART1 clock enable\r Set and cleared by software.",
+              "description": "USART1 clock enable Set and cleared by software.",
               "enum": null
             },
             {
               "name": "TIM14EN",
               "bit_offset": 15,
               "bit_width": 1,
-              "description": "TIM14 timer clock enable\r Set and cleared by software.",
+              "description": "TIM14 timer clock enable Set and cleared by software.",
               "enum": null
             },
             {
               "name": "TIM15EN",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "TIM15 timer clock enable\r Set and cleared by software.",
+              "description": "TIM15 timer clock enable Set and cleared by software.",
               "enum": null
             },
             {
               "name": "TIM16EN",
               "bit_offset": 17,
               "bit_width": 1,
-              "description": "TIM16 timer clock enable\r Set and cleared by software.",
+              "description": "TIM16 timer clock enable Set and cleared by software.",
               "enum": null
             },
             {
               "name": "TIM17EN",
               "bit_offset": 18,
               "bit_width": 1,
-              "description": "TIM16 timer clock enable\r Set and cleared by software.",
+              "description": "TIM16 timer clock enable Set and cleared by software.",
               "enum": null
             },
             {
               "name": "ADC1EN",
               "bit_offset": 20,
               "bit_width": 1,
-              "description": "ADC clock enable\r Set and cleared by software.",
+              "description": "ADC clock enable Set and cleared by software.",
               "enum": null
             }
           ]
@@ -914,35 +914,35 @@
               "name": "GPIOASMEN",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "I/O port A clock enable during Sleep mode\r Set and cleared by software.",
+              "description": "I/O port A clock enable during Sleep mode Set and cleared by software.",
               "enum": null
             },
             {
               "name": "GPIOBSMEN",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "I/O port B clock enable during Sleep mode\r Set and cleared by software.",
+              "description": "I/O port B clock enable during Sleep mode Set and cleared by software.",
               "enum": null
             },
             {
               "name": "GPIOCSMEN",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "I/O port C clock enable during Sleep mode\r Set and cleared by software.",
+              "description": "I/O port C clock enable during Sleep mode Set and cleared by software.",
               "enum": null
             },
             {
               "name": "GPIODSMEN",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "I/O port D clock enable during Sleep mode\r Set and cleared by software.",
+              "description": "I/O port D clock enable during Sleep mode Set and cleared by software.",
               "enum": null
             },
             {
               "name": "GPIOFSMEN",
               "bit_offset": 5,
               "bit_width": 1,
-              "description": "I/O port F clock enable during Sleep mode\r Set and cleared by software.",
+              "description": "I/O port F clock enable during Sleep mode Set and cleared by software.",
               "enum": null
             }
           ]
@@ -960,28 +960,28 @@
               "name": "DMA1SMEN",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "DMA1 and DMAMUX clock enable during Sleep mode\r Set and cleared by software.\r Clock to DMAMUX during Sleep mode is enabled as long as the clock in Sleep mode is enabled to at least one DMA peripheral.",
+              "description": "DMA1 and DMAMUX clock enable during Sleep mode Set and cleared by software. Clock to DMAMUX during Sleep mode is enabled as long as the clock in Sleep mode is enabled to at least one DMA peripheral.",
               "enum": null
             },
             {
               "name": "FLASHSMEN",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "Flash memory interface clock enable during Sleep mode\r Set and cleared by software.\r This bit can be activated only when the Flash memory is in power down mode.",
+              "description": "Flash memory interface clock enable during Sleep mode Set and cleared by software. This bit can be activated only when the Flash memory is in power down mode.",
               "enum": null
             },
             {
               "name": "SRAMSMEN",
               "bit_offset": 9,
               "bit_width": 1,
-              "description": "SRAM clock enable during Sleep mode\r Set and cleared by software.",
+              "description": "SRAM clock enable during Sleep mode Set and cleared by software.",
               "enum": null
             },
             {
               "name": "CRCSMEN",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "CRC clock enable during Sleep mode\r Set and cleared by software.",
+              "description": "CRC clock enable during Sleep mode Set and cleared by software.",
               "enum": null
             }
           ]
@@ -1006,28 +1006,28 @@
               "name": "TIM3SMEN",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "TIM3 timer clock enable during Sleep mode\r Set and cleared by software.",
+              "description": "TIM3 timer clock enable during Sleep mode Set and cleared by software.",
               "enum": null
             },
             {
               "name": "RTCAPBSMEN",
               "bit_offset": 10,
               "bit_width": 1,
-              "description": "RTC APB clock enable during Sleep mode\r Set and cleared by software.",
+              "description": "RTC APB clock enable during Sleep mode Set and cleared by software.",
               "enum": null
             },
             {
               "name": "WWDGSMEN",
               "bit_offset": 11,
               "bit_width": 1,
-              "description": "WWDG clock enable during Sleep and Stop modes\r Set and cleared by software.",
+              "description": "WWDG clock enable during Sleep and Stop modes Set and cleared by software.",
               "enum": null
             },
             {
               "name": "FDCAN1EN",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "FDCAN1 clock enable during Sleep and Stop modes\r Set and cleared by software.",
+              "description": "FDCAN1 clock enable during Sleep and Stop modes Set and cleared by software.",
               "enum": null
             },
             {
@@ -1055,28 +1055,28 @@
               "name": "USART2SMEN",
               "bit_offset": 17,
               "bit_width": 1,
-              "description": "USART2 clock enable during Sleep and Stop modes\r Set and cleared by software.",
+              "description": "USART2 clock enable during Sleep and Stop modes Set and cleared by software.",
               "enum": null
             },
             {
               "name": "USART3SMEN",
               "bit_offset": 18,
               "bit_width": 1,
-              "description": "USART3 clock enable during Sleep and Stop modes\r Set and cleared by software.",
+              "description": "USART3 clock enable during Sleep and Stop modes Set and cleared by software.",
               "enum": null
             },
             {
               "name": "USART4SMEN",
               "bit_offset": 19,
               "bit_width": 1,
-              "description": "USART4 clock enable during Sleep and Stop modes\r Set and cleared by software.",
+              "description": "USART4 clock enable during Sleep and Stop modes Set and cleared by software.",
               "enum": null
             },
             {
               "name": "I2C1SMEN",
               "bit_offset": 21,
               "bit_width": 1,
-              "description": "I2C1 clock enable during Sleep and Stop modes\r Set and cleared by software.",
+              "description": "I2C1 clock enable during Sleep and Stop modes Set and cleared by software.",
               "enum": null
             },
             {
@@ -1090,14 +1090,14 @@
               "name": "DBGSMEN",
               "bit_offset": 27,
               "bit_width": 1,
-              "description": "Debug support clock enable during Sleep mode\r Set and cleared by software.",
+              "description": "Debug support clock enable during Sleep mode Set and cleared by software.",
               "enum": null
             },
             {
               "name": "PWRSMEN",
               "bit_offset": 28,
               "bit_width": 1,
-              "description": "Power interface clock enable during Sleep mode\r Set and cleared by software.",
+              "description": "Power interface clock enable during Sleep mode Set and cleared by software.",
               "enum": null
             }
           ]
@@ -1115,63 +1115,63 @@
               "name": "SYSCFGSMEN",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "SYSCFG clock enable during Sleep and Stop modes\r Set and cleared by software.",
+              "description": "SYSCFG clock enable during Sleep and Stop modes Set and cleared by software.",
               "enum": null
             },
             {
               "name": "TIM1SMEN",
               "bit_offset": 11,
               "bit_width": 1,
-              "description": "TIM1 timer clock enable during Sleep mode\r Set and cleared by software.",
+              "description": "TIM1 timer clock enable during Sleep mode Set and cleared by software.",
               "enum": null
             },
             {
               "name": "SPI1SMEN",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "SPI1 clock enable during Sleep mode\r Set and cleared by software.",
+              "description": "SPI1 clock enable during Sleep mode Set and cleared by software.",
               "enum": null
             },
             {
               "name": "USART1SMEN",
               "bit_offset": 14,
               "bit_width": 1,
-              "description": "USART1 clock enable during Sleep and Stop modes\r Set and cleared by software.",
+              "description": "USART1 clock enable during Sleep and Stop modes Set and cleared by software.",
               "enum": null
             },
             {
               "name": "TIM14SMEN",
               "bit_offset": 15,
               "bit_width": 1,
-              "description": "TIM14 timer clock enable during Sleep mode\r Set and cleared by software.",
+              "description": "TIM14 timer clock enable during Sleep mode Set and cleared by software.",
               "enum": null
             },
             {
               "name": "TIM15SMEN",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "TIM15 timer clock enable during Sleep mode\r Set and cleared by software.",
+              "description": "TIM15 timer clock enable during Sleep mode Set and cleared by software.",
               "enum": null
             },
             {
               "name": "TIM16SMEN",
               "bit_offset": 17,
               "bit_width": 1,
-              "description": "TIM16 timer clock enable during Sleep mode\r Set and cleared by software.",
+              "description": "TIM16 timer clock enable during Sleep mode Set and cleared by software.",
               "enum": null
             },
             {
               "name": "TIM17SMEN",
               "bit_offset": 18,
               "bit_width": 1,
-              "description": "TIM16 timer clock enable during Sleep mode\r Set and cleared by software.",
+              "description": "TIM16 timer clock enable during Sleep mode Set and cleared by software.",
               "enum": null
             },
             {
               "name": "ADC1SMEN",
               "bit_offset": 20,
               "bit_width": 1,
-              "description": "ADC clock enable during Sleep mode\r Set and cleared by software.",
+              "description": "ADC clock enable during Sleep mode Set and cleared by software.",
               "enum": null
             }
           ]
@@ -1189,28 +1189,28 @@
               "name": "USART1SEL",
               "bit_offset": 0,
               "bit_width": 2,
-              "description": "USART1 clock source selection\r This bitfield is controlled by software to select USART1 clock source as follows:",
+              "description": "USART1 clock source selection This bitfield is controlled by software to select USART1 clock source as follows:",
               "enum": "USART1SEL"
             },
             {
               "name": "I2C1SEL",
               "bit_offset": 12,
               "bit_width": 2,
-              "description": "I2C1 clock source selection\r This bitfield is controlled by software to select I2C1 clock source as follows:",
+              "description": "I2C1 clock source selection This bitfield is controlled by software to select I2C1 clock source as follows:",
               "enum": "I2C1SEL"
             },
             {
               "name": "I2S1SEL",
               "bit_offset": 14,
               "bit_width": 2,
-              "description": "I2S1 clock source selection\r This bitfield is controlled by software to select I2S1 clock source as follows:",
+              "description": "I2S1 clock source selection This bitfield is controlled by software to select I2S1 clock source as follows:",
               "enum": "I2S1SEL"
             },
             {
               "name": "ADC1SEL",
               "bit_offset": 30,
               "bit_width": 2,
-              "description": "ADCs clock source selection\r This bitfield is controlled by software to select the clock source for ADC:",
+              "description": "ADCs clock source selection This bitfield is controlled by software to select the clock source for ADC:",
               "enum": "ADCSEL"
             }
           ]
@@ -1246,77 +1246,77 @@
               "name": "LSEON",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "LSE oscillator enable\r Set and cleared by software to enable LSE oscillator:",
+              "description": "LSE oscillator enable Set and cleared by software to enable LSE oscillator:",
               "enum": null
             },
             {
               "name": "LSERDY",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "LSE oscillator ready\r Set and cleared by hardware to indicate when the external 32 kHz oscillator is ready (stable):\r After the LSEON bit is cleared, LSERDY goes low after 6 external low-speed oscillator clock cycles.",
+              "description": "LSE oscillator ready Set and cleared by hardware to indicate when the external 32 kHz oscillator is ready (stable): After the LSEON bit is cleared, LSERDY goes low after 6 external low-speed oscillator clock cycles.",
               "enum": null
             },
             {
               "name": "LSEBYP",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "LSE oscillator bypass\r Set and cleared by software to bypass the LSE oscillator (in debug mode).\r This bit can be written only when the external 32 kHz oscillator is disabled (LSEON=0 and LSERDY=0).",
+              "description": "LSE oscillator bypass Set and cleared by software to bypass the LSE oscillator (in debug mode). This bit can be written only when the external 32 kHz oscillator is disabled (LSEON=0 and LSERDY=0).",
               "enum": null
             },
             {
               "name": "LSEDRV",
               "bit_offset": 3,
               "bit_width": 2,
-              "description": "LSE oscillator drive capability\r Set by software to select the LSE oscillator drive capability as follows:\r Applicable when the LSE oscillator is in Xtal mode, as opposed to bypass mode.",
+              "description": "LSE oscillator drive capability Set by software to select the LSE oscillator drive capability as follows: Applicable when the LSE oscillator is in Xtal mode, as opposed to bypass mode.",
               "enum": "LSEDRV"
             },
             {
               "name": "LSECSSON",
               "bit_offset": 5,
               "bit_width": 1,
-              "description": "CSS on LSE enable\r Set by software to enable the clock security system on LSE (32 kHz) oscillator as follows:\r LSECSSON must be enabled after the LSE oscillator is enabled (LSEON bit enabled) and ready (LSERDY flag set by hardware), and after the RTCSEL bit is selected.\r Once enabled, this bit cannot be disabled, except after a LSE failure detection (LSECSSD\r =1). In that case the software must disable the LSECSSON bit.",
+              "description": "CSS on LSE enable Set by software to enable the clock security system on LSE (32 kHz) oscillator as follows: LSECSSON must be enabled after the LSE oscillator is enabled (LSEON bit enabled) and ready (LSERDY flag set by hardware), and after the RTCSEL bit is selected. Once enabled, this bit cannot be disabled, except after a LSE failure detection (LSECSSD =1). In that case the software must disable the LSECSSON bit.",
               "enum": null
             },
             {
               "name": "LSECSSD",
               "bit_offset": 6,
               "bit_width": 1,
-              "description": "CSS on LSE failure Detection\r Set by hardware to indicate when a failure is detected by the clock security system\r on the external 32 kHz oscillator (LSE):",
+              "description": "CSS on LSE failure Detection Set by hardware to indicate when a failure is detected by the clock security system on the external 32 kHz oscillator (LSE):",
               "enum": null
             },
             {
               "name": "RTCSEL",
               "bit_offset": 8,
               "bit_width": 2,
-              "description": "RTC clock source selection\r Set by software to select the clock source for the RTC as follows:\r Once the RTC clock source is selected, it cannot be changed anymore unless the RTC domain is reset, or unless a failure is detected on LSE (LSECSSD is set). The RTCRST bit can be used to reset this bitfield to 00.",
+              "description": "RTC clock source selection Set by software to select the clock source for the RTC as follows: Once the RTC clock source is selected, it cannot be changed anymore unless the RTC domain is reset, or unless a failure is detected on LSE (LSECSSD is set). The RTCRST bit can be used to reset this bitfield to 00.",
               "enum": "RTCSEL"
             },
             {
               "name": "RTCEN",
               "bit_offset": 15,
               "bit_width": 1,
-              "description": "RTC clock enable\r Set and cleared by software. The bit enables clock to RTC and TAMP.",
+              "description": "RTC clock enable Set and cleared by software. The bit enables clock to RTC and TAMP.",
               "enum": null
             },
             {
               "name": "RTCRST",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "RTC domain software reset\r Set and cleared by software to reset the RTC domain:",
+              "description": "RTC domain software reset Set and cleared by software to reset the RTC domain:",
               "enum": null
             },
             {
               "name": "LSCOEN",
               "bit_offset": 24,
               "bit_width": 1,
-              "description": "Low-speed clock output (LSCO) enable\r Set and cleared by software.",
+              "description": "Low-speed clock output (LSCO) enable Set and cleared by software.",
               "enum": null
             },
             {
               "name": "LSCOSEL",
               "bit_offset": 25,
               "bit_width": 1,
-              "description": "Low-speed clock output selection\r Set and cleared by software to select the low-speed output clock:",
+              "description": "Low-speed clock output selection Set and cleared by software to select the low-speed output clock:",
               "enum": "LSCOSEL"
             }
           ]
@@ -1334,70 +1334,70 @@
               "name": "LSION",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "LSI oscillator enable\r Set and cleared by software to enable/disable the LSI oscillator:",
+              "description": "LSI oscillator enable Set and cleared by software to enable/disable the LSI oscillator:",
               "enum": null
             },
             {
               "name": "LSIRDY",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "LSI oscillator ready\r Set and cleared by hardware to indicate when the LSI oscillator is ready (stable):\r After the LSION bit is cleared, LSIRDY goes low after 3 LSI oscillator clock cycles. This bit can be set even if LSION = 0 if the LSI is requested by the Clock Security System on LSE, by the Independent Watchdog or by the RTC.",
+              "description": "LSI oscillator ready Set and cleared by hardware to indicate when the LSI oscillator is ready (stable): After the LSION bit is cleared, LSIRDY goes low after 3 LSI oscillator clock cycles. This bit can be set even if LSION = 0 if the LSI is requested by the Clock Security System on LSE, by the Independent Watchdog or by the RTC.",
               "enum": null
             },
             {
               "name": "RMVF",
               "bit_offset": 23,
               "bit_width": 1,
-              "description": "Remove reset flags\r Set by software to clear the reset flags.",
+              "description": "Remove reset flags Set by software to clear the reset flags.",
               "enum": null
             },
             {
               "name": "OBLRSTF",
               "bit_offset": 25,
               "bit_width": 1,
-              "description": "Option byte loader reset flag\r Set by hardware when a reset from the Option byte loading occurs.\r Cleared by setting the RMVF bit.",
+              "description": "Option byte loader reset flag Set by hardware when a reset from the Option byte loading occurs. Cleared by setting the RMVF bit.",
               "enum": null
             },
             {
               "name": "PINRSTF",
               "bit_offset": 26,
               "bit_width": 1,
-              "description": "Pin reset flag\r Set by hardware when a reset from the NRST pin occurs.\r Cleared by setting the RMVF bit.",
+              "description": "Pin reset flag Set by hardware when a reset from the NRST pin occurs. Cleared by setting the RMVF bit.",
               "enum": null
             },
             {
               "name": "PWRRSTF",
               "bit_offset": 27,
               "bit_width": 1,
-              "description": "BOR or POR/PDR flag\r Set by hardware when a BOR or POR/PDR occurs.\r Cleared by setting the RMVF bit.",
+              "description": "BOR or POR/PDR flag Set by hardware when a BOR or POR/PDR occurs. Cleared by setting the RMVF bit.",
               "enum": null
             },
             {
               "name": "SFTRSTF",
               "bit_offset": 28,
               "bit_width": 1,
-              "description": "Software reset flag\r Set by hardware when a software reset occurs.\r Cleared by setting the RMVF bit.",
+              "description": "Software reset flag Set by hardware when a software reset occurs. Cleared by setting the RMVF bit.",
               "enum": null
             },
             {
               "name": "IWDGRSTF",
               "bit_offset": 29,
               "bit_width": 1,
-              "description": "Independent window watchdog reset flag\r Set by hardware when an independent watchdog reset domain occurs.\r Cleared by setting the RMVF bit.",
+              "description": "Independent window watchdog reset flag Set by hardware when an independent watchdog reset domain occurs. Cleared by setting the RMVF bit.",
               "enum": null
             },
             {
               "name": "WWDGRSTF",
               "bit_offset": 30,
               "bit_width": 1,
-              "description": "Window watchdog reset flag\r Set by hardware when a window watchdog reset occurs.\r Cleared by setting the RMVF bit.",
+              "description": "Window watchdog reset flag Set by hardware when a window watchdog reset occurs. Cleared by setting the RMVF bit.",
               "enum": null
             },
             {
               "name": "LPWRRSTF",
               "bit_offset": 31,
               "bit_width": 1,
-              "description": "Low-power reset flag\r Set by hardware when a reset occurs due to illegal Stop, or Standby, or Shutdown mode entry.\r Cleared by setting the RMVF bit.\r This operates only if nRST_STOP, or nRST_STDBY or nRST_SHDW option bits are cleared.",
+              "description": "Low-power reset flag Set by hardware when a reset occurs due to illegal Stop, or Standby, or Shutdown mode entry. Cleared by setting the RMVF bit. This operates only if nRST_STOP, or nRST_STDBY or nRST_SHDW option bits are cleared.",
               "enum": null
             }
           ]

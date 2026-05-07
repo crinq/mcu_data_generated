@@ -2,27 +2,31 @@
   "schema": 1,
   "kind": "otfdec",
   "version": "v1",
+  "source": "stm32rs_svd",
+  "source_device": "stm32h573ai",
+  "source_file": "stm32h573.svd.patched",
   "blocks": {
-    "OTFDEC": {
-      "name": "OTFDEC",
-      "description": "On-The-Fly Decryption engine.",
+    "OTFDEC1": {
+      "name": "OTFDEC1",
+      "description": "On-The-Fly Decryption engine",
       "extends": null,
       "registers": [
         {
           "name": "CR",
           "offset": 0,
           "size": 32,
-          "description": "OTFDEC control register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "OTFDEC control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "OTFDEC control register.",
           "fields": [
             {
               "name": "ENC",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Encryption mode bit When this bit is set, OTFDEC is used in encryption mode, during which application can write clear text data then read back encrypted data. When this bit is cleared (default), OTFDEC is used in decryption mode, during which application only read back decrypted data. For both modes, cryptographic context (keys, nonces, firmware versions) must be properly initialized. When this bit is set, only data accesses are allowed (zeros are returned otherwise, and XONEIF is set). When MODE = 11, enhanced encryption mode is automatically selected. Note: When ENC bit is set, no access to OCTOSPI must be done (registers and Memory‑mapped region).",
-              "enum": "ENC"
+              "description": "Encryption mode bit When this bit is set, OTFDEC is used in encryption mode, during which application can write clear text data then read back encrypted data. When this bit is cleared (default), OTFDEC is used in decryption mode, during which application only read back decrypted data. For both modes, cryptographic context (keys, nonces, firmware versions) must be properly initialized. When this bit is set, only data accesses are allowed (zeros are returned otherwise, and XONEIF is set). When MODE = 11, enhanced encryption mode is automatically selected. Note: When ENC bit is set, no access to OCTOSPI must be done (registers and Memory mapped region).",
+              "access": "read-write"
             }
           ]
         },
@@ -30,57 +34,875 @@
           "name": "PRIVCFGR",
           "offset": 16,
           "size": 32,
-          "description": "OTFDEC_PRIVCFGR.",
+          "access": null,
+          "reset_value": 0,
+          "description": "OTFDEC_PRIVCFGR",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "OTFDEC_PRIVCFGR.",
           "fields": [
             {
               "name": "PRIV",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "Privileged access protection. Unprivileged read accesses to registers return zeros Unprivileged write accesses to registers are ignored. Note: This bit can only be written in privileged mode. There is no limitations on reads.",
-              "enum": null
+              "access": "read-write"
             }
           ]
         },
         {
-          "name": "Region",
+          "name": "R1CFGR",
           "offset": 32,
-          "description": null,
-          "array_len": 4,
-          "array_stride": 48,
-          "fields": []
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "OTFDEC region 1 configuration register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "REG_EN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "region on-the-fly decryption enable Note: Garbage is decrypted if region context (version, key, nonce) is not valid when this bit is set.",
+              "access": "read-write"
+            },
+            {
+              "name": "CONFIGLOCK",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "region config lock Note: This bit is set once. If this bit is set, it can only be reset to 0 if OTFDEC is reset. Setting this bit forces KEYLOCK bit to 1.",
+              "access": "read-write"
+            },
+            {
+              "name": "KEYLOCK",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "region key lock Note: This bit is set once: if this bit is set, it can only be reset to 0 if the OTFDEC is reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "MODE",
+              "bit_offset": 4,
+              "bit_width": 2,
+              "description": "operating mode This bitfield selects the OTFDEC operating mode for this region: Others: Reserved When MODE different 11, the standard AES encryption mode is activated. When either of the MODE bits are changed, the region key and associated CRC are zeroed.",
+              "access": "read-write"
+            },
+            {
+              "name": "KEYCRC",
+              "bit_offset": 8,
+              "bit_width": 8,
+              "description": "region key 8-bit CRC When KEYLOCK = 0, KEYCRC bitfield is automatically computed by hardware while loading the key of this region in this exact sequence: KEYR0 then KEYR1 then KEYR2 then finally KEYR3 (all written once). A new computation starts as soon as a new valid sequence is initiated, and KEYCRC is read as zero until a valid sequence is completed. When KEYLOCK = 1, KEYCRC remains unchanged until the next reset. CRC computation is an 8-bit checksum using the standard CRC-8-CCITT algorithm X8 + X2 + X + 1 (according the convention). Source code is available in . This field is read only. Note: CRC information is updated only after the last bit of the key has been written.",
+              "access": "read-only"
+            },
+            {
+              "name": "REGx_VERSION",
+              "bit_offset": 16,
+              "bit_width": 16,
+              "description": "region firmware version This 16-bit bitfield must be correctly initialized before the region corresponding REG_EN bit is set in OTFDEC_RxCFGR.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "R1STARTADDR",
+          "offset": 36,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "OTFDEC region 1 start address register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "REGx_START_ADDR",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Region AHB start address This register must be written before the region corresponding REG_EN bit in the OTFDEC_RxCFGR register is set. Writing to this register is discarded if performed while the region CONFIGLOCK bit in the OTFDEC_RxCFGR register is set. Note: When determining the region the first 12 bits (lsb) and the last 4 bits (msb) are ignored. When this register is accessed in read the 4 msb bits and the 12 lsb bits return zeros .",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "R1ENDADDR",
+          "offset": 40,
+          "size": 32,
+          "access": null,
+          "reset_value": 4095,
+          "description": "OTFDEC region 1 end address register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "REGx_END_ADDR",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Region AHB end address This register must be written before the region corresponding REG_EN bit in the OTFDEC_RxCFGR register is set, and OTFDEC_RxENDADDR must be strictly greater than OTFDEC_RxSTARTADDR to be valid. Writing to this register is discarded if performed while the region CONFIGLOCK bit in OTFDEC_RxCFGR is set. Note: When determining the region the first 12 bits (lsb) and the last 4 bits (msb) are ignored. When this register is accessed in read the 4 msb bits return zeros and the 12 lsb bits return ones.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "R1NONCER0",
+          "offset": 44,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "OTFDEC region 1 nonce register 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "REGx_NONCE",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Region nonce, bits [31:0] This register must be written before the region corresponding REG_EN bit in OTFDEC_RxCFGR is set. Writing is discarded in this register if performed while the region CONFIGLOCK bit in the OTFDEC_RxCFGR is set.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "R1NONCER1",
+          "offset": 48,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "OTFDEC region 1 nonce register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "REGx_NONCE",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Region nonce, bits [63:32] Refer to the OTFDEC_RxNONCER0 register for description of the NONCE[63:0] bitfield.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "R1KEYR0",
+          "offset": 52,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "OTFDEC region 1 key register 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "REGx_KEY",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Region key, bits [31:0] This register must be written before the region corresponding REG_EN bit in OTFDEC_RxCFGR is set. Reading this register returns a zero value. Writing to this register is discarded if performed while the region CONFIGLOCK or KEYLOCK bit is set in the OTFDEC_RxCFGR. Note: When application successfully changes MODE bits in OTFDEC_RxCFGR and OTFDEC_RxKEYR, and associated KEYCRC are erased.",
+              "access": "write-only"
+            }
+          ]
+        },
+        {
+          "name": "R1KEYR1",
+          "offset": 56,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "OTFDEC region 1 key register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "REGx_KEY",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Region key, bits [63:32] Refer to the OTFDEC_RxKEYR0 register for description of the KEY[127:0] bitfield.",
+              "access": "write-only"
+            }
+          ]
+        },
+        {
+          "name": "R1KEYR2",
+          "offset": 60,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "OTFDEC region 1 key register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "REGx_KEY",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Region key, bits [95:64] Refer to the OTFDEC_RxKEYR0 register for description of the KEY[127:0] bitfield.",
+              "access": "write-only"
+            }
+          ]
+        },
+        {
+          "name": "R1KEYR3",
+          "offset": 64,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "OTFDEC region 1 key register 3",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "REGx_KEY",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Region key, bits [127:96] Refer to the OTFDEC_RxKEYR0 register for description of the KEY[127:0] bitfield.",
+              "access": "write-only"
+            }
+          ]
+        },
+        {
+          "name": "R2CFGR",
+          "offset": 80,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "OTFDEC region 2 configuration register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "REG_EN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "region on-the-fly decryption enable Note: Garbage is decrypted if region context (version, key, nonce) is not valid when this bit is set.",
+              "access": "read-write"
+            },
+            {
+              "name": "CONFIGLOCK",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "region config lock Note: This bit is set once. If this bit is set, it can only be reset to 0 if OTFDEC is reset. Setting this bit forces KEYLOCK bit to 1.",
+              "access": "read-write"
+            },
+            {
+              "name": "KEYLOCK",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "region key lock Note: This bit is set once: if this bit is set, it can only be reset to 0 if the OTFDEC is reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "MODE",
+              "bit_offset": 4,
+              "bit_width": 2,
+              "description": "operating mode This bitfield selects the OTFDEC operating mode for this region: Others: Reserved When MODE different 11, the standard AES encryption mode is activated. When either of the MODE bits are changed, the region key and associated CRC are zeroed.",
+              "access": "read-write"
+            },
+            {
+              "name": "KEYCRC",
+              "bit_offset": 8,
+              "bit_width": 8,
+              "description": "region key 8-bit CRC When KEYLOCK = 0, KEYCRC bitfield is automatically computed by hardware while loading the key of this region in this exact sequence: KEYR0 then KEYR1 then KEYR2 then finally KEYR3 (all written once). A new computation starts as soon as a new valid sequence is initiated, and KEYCRC is read as zero until a valid sequence is completed. When KEYLOCK = 1, KEYCRC remains unchanged until the next reset. CRC computation is an 8-bit checksum using the standard CRC-8-CCITT algorithm X8 + X2 + X + 1 (according the convention). Source code is available in . This field is read only. Note: CRC information is updated only after the last bit of the key has been written.",
+              "access": "read-only"
+            },
+            {
+              "name": "REGx_VERSION",
+              "bit_offset": 16,
+              "bit_width": 16,
+              "description": "region firmware version This 16-bit bitfield must be correctly initialized before the region corresponding REG_EN bit is set in OTFDEC_RxCFGR.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "R2STARTADDR",
+          "offset": 84,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "OTFDEC region 2 start address register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "REGx_START_ADDR",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Region AHB start address This register must be written before the region corresponding REG_EN bit in the OTFDEC_RxCFGR register is set. Writing to this register is discarded if performed while the region CONFIGLOCK bit in the OTFDEC_RxCFGR register is set. Note: When determining the region the first 12 bits (lsb) and the last 4 bits (msb) are ignored. When this register is accessed in read the 4 msb bits and the 12 lsb bits return zeros .",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "R2ENDADDR",
+          "offset": 88,
+          "size": 32,
+          "access": null,
+          "reset_value": 4095,
+          "description": "OTFDEC region 2 end address register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "REGx_END_ADDR",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Region AHB end address This register must be written before the region corresponding REG_EN bit in the OTFDEC_RxCFGR register is set, and OTFDEC_RxENDADDR must be strictly greater than OTFDEC_RxSTARTADDR to be valid. Writing to this register is discarded if performed while the region CONFIGLOCK bit in OTFDEC_RxCFGR is set. Note: When determining the region the first 12 bits (lsb) and the last 4 bits (msb) are ignored. When this register is accessed in read the 4 msb bits return zeros and the 12 lsb bits return ones.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "R2NONCER0",
+          "offset": 92,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "OTFDEC region 2 nonce register 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "REGx_NONCE",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Region nonce, bits [31:0] This register must be written before the region corresponding REG_EN bit in OTFDEC_RxCFGR is set. Writing is discarded in this register if performed while the region CONFIGLOCK bit in the OTFDEC_RxCFGR is set.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "R2NONCER1",
+          "offset": 96,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "OTFDEC region 2 nonce register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "REGx_NONCE",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Region nonce, bits [63:32] Refer to the OTFDEC_RxNONCER0 register for description of the NONCE[63:0] bitfield.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "R2KEYR0",
+          "offset": 100,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "OTFDEC region 2 key register 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "REGx_KEY",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Region key, bits [31:0] This register must be written before the region corresponding REG_EN bit in OTFDEC_RxCFGR is set. Reading this register returns a zero value. Writing to this register is discarded if performed while the region CONFIGLOCK or KEYLOCK bit is set in the OTFDEC_RxCFGR. Note: When application successfully changes MODE bits in OTFDEC_RxCFGR and OTFDEC_RxKEYR, and associated KEYCRC are erased.",
+              "access": "write-only"
+            }
+          ]
+        },
+        {
+          "name": "R2KEYR1",
+          "offset": 104,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "OTFDEC region 2 key register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "REGx_KEY",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Region key, bits [63:32] Refer to the OTFDEC_RxKEYR0 register for description of the KEY[127:0] bitfield.",
+              "access": "write-only"
+            }
+          ]
+        },
+        {
+          "name": "R2KEYR2",
+          "offset": 108,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "OTFDEC region 2 key register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "REGx_KEY",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Region key, bits [95:64] Refer to the OTFDEC_RxKEYR0 register for description of the KEY[127:0] bitfield.",
+              "access": "write-only"
+            }
+          ]
+        },
+        {
+          "name": "R2KEYR3",
+          "offset": 112,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "OTFDEC region 2 key register 3",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "REGx_KEY",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Region key, bits [127:96] Refer to the OTFDEC_RxKEYR0 register for description of the KEY[127:0] bitfield.",
+              "access": "write-only"
+            }
+          ]
+        },
+        {
+          "name": "R3CFGR",
+          "offset": 128,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "OTFDEC region 3 configuration register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "REG_EN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "region on-the-fly decryption enable Note: Garbage is decrypted if region context (version, key, nonce) is not valid when this bit is set.",
+              "access": "read-write"
+            },
+            {
+              "name": "CONFIGLOCK",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "region config lock Note: This bit is set once. If this bit is set, it can only be reset to 0 if OTFDEC is reset. Setting this bit forces KEYLOCK bit to 1.",
+              "access": "read-write"
+            },
+            {
+              "name": "KEYLOCK",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "region key lock Note: This bit is set once: if this bit is set, it can only be reset to 0 if the OTFDEC is reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "MODE",
+              "bit_offset": 4,
+              "bit_width": 2,
+              "description": "operating mode This bitfield selects the OTFDEC operating mode for this region: Others: Reserved When MODE different 11, the standard AES encryption mode is activated. When either of the MODE bits are changed, the region key and associated CRC are zeroed.",
+              "access": "read-write"
+            },
+            {
+              "name": "KEYCRC",
+              "bit_offset": 8,
+              "bit_width": 8,
+              "description": "region key 8-bit CRC When KEYLOCK = 0, KEYCRC bitfield is automatically computed by hardware while loading the key of this region in this exact sequence: KEYR0 then KEYR1 then KEYR2 then finally KEYR3 (all written once). A new computation starts as soon as a new valid sequence is initiated, and KEYCRC is read as zero until a valid sequence is completed. When KEYLOCK = 1, KEYCRC remains unchanged until the next reset. CRC computation is an 8-bit checksum using the standard CRC-8-CCITT algorithm X8 + X2 + X + 1 (according the convention). Source code is available in . This field is read only. Note: CRC information is updated only after the last bit of the key has been written.",
+              "access": "read-only"
+            },
+            {
+              "name": "REGx_VERSION",
+              "bit_offset": 16,
+              "bit_width": 16,
+              "description": "region firmware version This 16-bit bitfield must be correctly initialized before the region corresponding REG_EN bit is set in OTFDEC_RxCFGR.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "R3STARTADDR",
+          "offset": 132,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "OTFDEC region 3 start address register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "REGx_START_ADDR",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Region AHB start address This register must be written before the region corresponding REG_EN bit in the OTFDEC_RxCFGR register is set. Writing to this register is discarded if performed while the region CONFIGLOCK bit in the OTFDEC_RxCFGR register is set. Note: When determining the region the first 12 bits (lsb) and the last 4 bits (msb) are ignored. When this register is accessed in read the 4 msb bits and the 12 lsb bits return zeros .",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "R3ENDADDR",
+          "offset": 136,
+          "size": 32,
+          "access": null,
+          "reset_value": 4095,
+          "description": "OTFDEC region 3 end address register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "REGx_END_ADDR",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Region AHB end address This register must be written before the region corresponding REG_EN bit in the OTFDEC_RxCFGR register is set, and OTFDEC_RxENDADDR must be strictly greater than OTFDEC_RxSTARTADDR to be valid. Writing to this register is discarded if performed while the region CONFIGLOCK bit in OTFDEC_RxCFGR is set. Note: When determining the region the first 12 bits (lsb) and the last 4 bits (msb) are ignored. When this register is accessed in read the 4 msb bits return zeros and the 12 lsb bits return ones.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "R3NONCER0",
+          "offset": 140,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "OTFDEC region 3 nonce register 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "REGx_NONCE",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Region nonce, bits [31:0] This register must be written before the region corresponding REG_EN bit in OTFDEC_RxCFGR is set. Writing is discarded in this register if performed while the region CONFIGLOCK bit in the OTFDEC_RxCFGR is set.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "R3NONCER1",
+          "offset": 144,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "OTFDEC region 3 nonce register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "REGx_NONCE",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Region nonce, bits [63:32] Refer to the OTFDEC_RxNONCER0 register for description of the NONCE[63:0] bitfield.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "R3KEYR0",
+          "offset": 148,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "OTFDEC region 3 key register 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "REGx_KEY",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Region key, bits [31:0] This register must be written before the region corresponding REG_EN bit in OTFDEC_RxCFGR is set. Reading this register returns a zero value. Writing to this register is discarded if performed while the region CONFIGLOCK or KEYLOCK bit is set in the OTFDEC_RxCFGR. Note: When application successfully changes MODE bits in OTFDEC_RxCFGR and OTFDEC_RxKEYR, and associated KEYCRC are erased.",
+              "access": "write-only"
+            }
+          ]
+        },
+        {
+          "name": "R3KEYR1",
+          "offset": 152,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "OTFDEC region 3 key register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "REGx_KEY",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Region key, bits [63:32] Refer to the OTFDEC_RxKEYR0 register for description of the KEY[127:0] bitfield.",
+              "access": "write-only"
+            }
+          ]
+        },
+        {
+          "name": "R3KEYR2",
+          "offset": 156,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "OTFDEC region 3 key register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "REGx_KEY",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Region key, bits [95:64] Refer to the OTFDEC_RxKEYR0 register for description of the KEY[127:0] bitfield.",
+              "access": "write-only"
+            }
+          ]
+        },
+        {
+          "name": "R3KEYR3",
+          "offset": 160,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "OTFDEC region 3 key register 3",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "REGx_KEY",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Region key, bits [127:96] Refer to the OTFDEC_RxKEYR0 register for description of the KEY[127:0] bitfield.",
+              "access": "write-only"
+            }
+          ]
+        },
+        {
+          "name": "R4CFGR",
+          "offset": 176,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "OTFDEC region 4 configuration register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "REG_EN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "region on-the-fly decryption enable Note: Garbage is decrypted if region context (version, key, nonce) is not valid when this bit is set.",
+              "access": "read-write"
+            },
+            {
+              "name": "CONFIGLOCK",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "region config lock Note: This bit is set once. If this bit is set, it can only be reset to 0 if OTFDEC is reset. Setting this bit forces KEYLOCK bit to 1.",
+              "access": "read-write"
+            },
+            {
+              "name": "KEYLOCK",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "region key lock Note: This bit is set once: if this bit is set, it can only be reset to 0 if the OTFDEC is reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "MODE",
+              "bit_offset": 4,
+              "bit_width": 2,
+              "description": "operating mode This bitfield selects the OTFDEC operating mode for this region: Others: Reserved When MODE different 11, the standard AES encryption mode is activated. When either of the MODE bits are changed, the region key and associated CRC are zeroed.",
+              "access": "read-write"
+            },
+            {
+              "name": "KEYCRC",
+              "bit_offset": 8,
+              "bit_width": 8,
+              "description": "region key 8-bit CRC When KEYLOCK = 0, KEYCRC bitfield is automatically computed by hardware while loading the key of this region in this exact sequence: KEYR0 then KEYR1 then KEYR2 then finally KEYR3 (all written once). A new computation starts as soon as a new valid sequence is initiated, and KEYCRC is read as zero until a valid sequence is completed. When KEYLOCK = 1, KEYCRC remains unchanged until the next reset. CRC computation is an 8-bit checksum using the standard CRC-8-CCITT algorithm X8 + X2 + X + 1 (according the convention). Source code is available in . This field is read only. Note: CRC information is updated only after the last bit of the key has been written.",
+              "access": "read-only"
+            },
+            {
+              "name": "REGx_VERSION",
+              "bit_offset": 16,
+              "bit_width": 16,
+              "description": "region firmware version This 16-bit bitfield must be correctly initialized before the region corresponding REG_EN bit is set in OTFDEC_RxCFGR.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "R4STARTADDR",
+          "offset": 180,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "OTFDEC region 4 start address register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "REGx_START_ADDR",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Region AHB start address This register must be written before the region corresponding REG_EN bit in the OTFDEC_RxCFGR register is set. Writing to this register is discarded if performed while the region CONFIGLOCK bit in the OTFDEC_RxCFGR register is set. Note: When determining the region the first 12 bits (lsb) and the last 4 bits (msb) are ignored. When this register is accessed in read the 4 msb bits and the 12 lsb bits return zeros .",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "R4ENDADDR",
+          "offset": 184,
+          "size": 32,
+          "access": null,
+          "reset_value": 4095,
+          "description": "OTFDEC region 4 end address register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "REGx_END_ADDR",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Region AHB end address This register must be written before the region corresponding REG_EN bit in the OTFDEC_RxCFGR register is set, and OTFDEC_RxENDADDR must be strictly greater than OTFDEC_RxSTARTADDR to be valid. Writing to this register is discarded if performed while the region CONFIGLOCK bit in OTFDEC_RxCFGR is set. Note: When determining the region the first 12 bits (lsb) and the last 4 bits (msb) are ignored. When this register is accessed in read the 4 msb bits return zeros and the 12 lsb bits return ones.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "R4NONCER0",
+          "offset": 188,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "OTFDEC region 4 nonce register 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "REGx_NONCE",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Region nonce, bits [31:0] This register must be written before the region corresponding REG_EN bit in OTFDEC_RxCFGR is set. Writing is discarded in this register if performed while the region CONFIGLOCK bit in the OTFDEC_RxCFGR is set.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "R4NONCER1",
+          "offset": 192,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "OTFDEC region 4 nonce register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "REGx_NONCE",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Region nonce, bits [63:32] Refer to the OTFDEC_RxNONCER0 register for description of the NONCE[63:0] bitfield.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "R4KEYR0",
+          "offset": 196,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "OTFDEC region 4 key register 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "REGx_KEY",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Region key, bits [31:0] This register must be written before the region corresponding REG_EN bit in OTFDEC_RxCFGR is set. Reading this register returns a zero value. Writing to this register is discarded if performed while the region CONFIGLOCK or KEYLOCK bit is set in the OTFDEC_RxCFGR. Note: When application successfully changes MODE bits in OTFDEC_RxCFGR and OTFDEC_RxKEYR, and associated KEYCRC are erased.",
+              "access": "write-only"
+            }
+          ]
+        },
+        {
+          "name": "R4KEYR1",
+          "offset": 200,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "OTFDEC region 4 key register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "REGx_KEY",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Region key, bits [63:32] Refer to the OTFDEC_RxKEYR0 register for description of the KEY[127:0] bitfield.",
+              "access": "write-only"
+            }
+          ]
+        },
+        {
+          "name": "R4KEYR2",
+          "offset": 204,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "OTFDEC region 4 key register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "REGx_KEY",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Region key, bits [95:64] Refer to the OTFDEC_RxKEYR0 register for description of the KEY[127:0] bitfield.",
+              "access": "write-only"
+            }
+          ]
+        },
+        {
+          "name": "R4KEYR3",
+          "offset": 208,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "OTFDEC region 4 key register 3",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "REGx_KEY",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Region key, bits [127:96] Refer to the OTFDEC_RxKEYR0 register for description of the KEY[127:0] bitfield.",
+              "access": "write-only"
+            }
+          ]
         },
         {
           "name": "ISR",
           "offset": 768,
           "size": 32,
-          "description": "OTFDEC interrupt status register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "OTFDEC interrupt status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "OTFDEC interrupt status register.",
           "fields": [
             {
               "name": "SEIF",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "Security error interrupt flag status This bit is set by hardware and read only by application. This bit is set when at least one security error has been detected. This bit is cleared when application sets in OTFDEC_ICR the corresponding bit to 1.",
-              "enum": null
+              "access": "read-only"
             },
             {
               "name": "XONEIF",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "Execute-only execute-never error interrupt flag status This bit is set by hardware and read only by application. This bit is set when a read access and not an instruction fetch is detected on any encrypted region with MODE bits set to 11. Lastly, XONEIF is also set when an execute access is detected while encryption mode is enabled. This bit is cleared when application sets in OTFDEC_ICR the corresponding bit to 1.",
-              "enum": null
+              "access": "read-only"
             },
             {
               "name": "KEIF",
               "bit_offset": 2,
               "bit_width": 1,
               "description": "Key error interrupt flag status This bit is set by hardware and read only by application. The bit is set when a read access occurs on an encrypted region, while its key registers is null or not properly initialized (KEYCRC = 0x0). This bit is cleared when the application sets in OTFDEC_ICR the corresponding bit to 1. After KEIF is set any subsequent read to the region with bad key registers returns a zeroed value. This state remains until those key registers are properly initialized (KEYCRC not zero).",
-              "enum": null
+              "access": "read-only"
             }
           ]
         },
@@ -88,31 +910,32 @@
           "name": "ICR",
           "offset": 772,
           "size": 32,
-          "description": "OTFDEC interrupt clear register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "OTFDEC interrupt clear register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "OTFDEC interrupt clear register.",
           "fields": [
             {
               "name": "SEIF",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "Security error interrupt flag clear This bit is written by application, and always read as 0.",
-              "enum": null
+              "access": "write-only"
             },
             {
               "name": "XONEIF",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "Execute-only execute-never error interrupt flag clear This bit is written by application, and always read as 0.",
-              "enum": null
+              "access": "write-only"
             },
             {
               "name": "KEIF",
               "bit_offset": 2,
               "bit_width": 1,
               "description": "Key error interrupt flag clear This bit is written by application, and always read as 0. Note: Clearing KEIF does not solve the source of the problem (bad key registers). To be able to access again any encrypted region, OTFDEC key registers must be properly initialized again.",
-              "enum": null
+              "access": "write-only"
             }
           ]
         },
@@ -120,159 +943,37 @@
           "name": "IER",
           "offset": 776,
           "size": 32,
-          "description": "OTFDEC interrupt enable register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "OTFDEC interrupt enable register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "OTFDEC interrupt enable register.",
           "fields": [
             {
               "name": "SEIE",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "Security error interrupt enable This bit is read and written by application. It controls the OTFDEC interrupt generation when SEIF flag status is set.",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "XONEIE",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "Execute-only execute-never error interrupt enable This bit is read and written by application. It controls the OTFDEC interrupt generation when XONEIF flag status is set.",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "KEIE",
               "bit_offset": 2,
               "bit_width": 1,
               "description": "Key error interrupt enable This bit is read and written by application. It controls the OTFDEC interrupt generation when KEIF flag status is set.",
-              "enum": null
+              "access": "read-write"
             }
           ]
-        }
-      ]
-    },
-    "Region": {
-      "name": "Region",
-      "description": null,
-      "extends": null,
-      "registers": [
-        {
-          "name": "CFGR",
-          "offset": 0,
-          "size": 32,
-          "description": "OTFDEC region 3 configuration register.",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "OTFDEC region 3 configuration register.",
-          "fields": [
-            {
-              "name": "REG_EN",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "region on-the-fly decryption enable Note: Garbage is decrypted if region context (version, key, nonce) is not valid when this bit is set.",
-              "enum": null
-            },
-            {
-              "name": "CONFIGLOCK",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "region config lock Note: This bit is set once. If this bit is set, it can only be reset to 0 if OTFDEC is reset. Setting this bit forces KEYLOCK bit to 1.",
-              "enum": null
-            },
-            {
-              "name": "KEYLOCK",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "region key lock Note: This bit is set once: if this bit is set, it can only be reset to 0 if the OTFDEC is reset.",
-              "enum": null
-            },
-            {
-              "name": "MODE",
-              "bit_offset": 4,
-              "bit_width": 2,
-              "description": "operating mode This bitfield selects the OTFDEC operating mode for this region: Others: Reserved When MODE ≠ 11, the standard AES encryption mode is activated. When either of the MODE bits are changed, the region key and associated CRC are zeroed.",
-              "enum": "MODE"
-            },
-            {
-              "name": "KEYCRC",
-              "bit_offset": 8,
-              "bit_width": 8,
-              "description": "region key 8-bit CRC When KEYLOCK = 0, KEYCRC bitfield is automatically computed by hardware while loading the key of this region in this exact sequence: KEYR0 then KEYR1 then KEYR2 then finally KEYR3 (all written once). A new computation starts as soon as a new valid sequence is initiated, and KEYCRC is read as zero until a valid sequence is completed. When KEYLOCK = 1, KEYCRC remains unchanged until the next reset. CRC computation is an 8-bit checksum using the standard CRC-8-CCITT algorithm X8 + X2 + X + 1 (according the convention). Source code is available in . This field is read only. Note: CRC information is updated only after the last bit of the key has been written.",
-              "enum": null
-            },
-            {
-              "name": "REG_VERSION",
-              "bit_offset": 16,
-              "bit_width": 16,
-              "description": "region firmware version This 16-bit bitfield must be correctly initialized before the region corresponding REG_EN bit is set in OTFDEC_RxCFGR.",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "STARTADDR",
-          "offset": 4,
-          "description": "OTFDEC region 3 start address register.",
-          "array_len": null,
-          "array_stride": null,
-          "fields": []
-        },
-        {
-          "name": "ENDADDR",
-          "offset": 8,
-          "description": "OTFDEC region 3 end address register.",
-          "array_len": null,
-          "array_stride": null,
-          "fields": []
-        },
-        {
-          "name": "NONCER",
-          "offset": 12,
-          "description": "OTFDEC region 3 nonce register 0.",
-          "array_len": 2,
-          "array_stride": 4,
-          "fields": []
-        },
-        {
-          "name": "KEYR",
-          "offset": 20,
-          "description": "OTFDEC region 3 key register 0.",
-          "array_len": 4,
-          "array_stride": 4,
-          "fields": []
         }
       ]
     }
   },
-  "enums": {
-    "ENC": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Decryption",
-          "value": 0,
-          "description": "OTFDEC working in decryption mode"
-        },
-        {
-          "name": "Encryption",
-          "value": 1,
-          "description": "OTFDEC working in encryption mode"
-        }
-      ]
-    },
-    "MODE": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Standard",
-          "value": 2,
-          "description": "All read accesses are decrypted (instruction or data)."
-        },
-        {
-          "name": "Enhanced",
-          "value": 3,
-          "description": "Enhanced encryption mode is activated, and only instruction accesses are decrypted"
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

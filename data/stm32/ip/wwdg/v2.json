@@ -2,135 +2,171 @@
   "schema": 1,
   "kind": "wwdg",
   "version": "v2",
+  "source": "stm32rs_svd",
+  "source_device": "stm32g050c8",
+  "source_file": "stm32g050.svd.patched",
   "blocks": {
     "WWDG": {
       "name": "WWDG",
-      "description": "Window watchdog",
+      "description": "System window watchdog",
       "extends": null,
       "registers": [
         {
           "name": "CR",
           "offset": 0,
-          "size": 32,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 127,
           "description": "Control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Control register",
           "fields": [
             {
               "name": "T",
               "bit_offset": 0,
               "bit_width": 7,
-              "description": "7-bit counter (MSB to LSB)",
-              "enum": null
+              "description": "7-bit counter (MSB to LSB) These bits contain the value of the watchdog counter, decremented every (4096 x 2WDGTB[1:0]) PCLK cycles. A reset is produced when it is decremented from 0x40 to 0x3F (T6 becomes cleared).",
+              "access": "read-write"
             },
             {
               "name": "WDGA",
               "bit_offset": 7,
               "bit_width": 1,
-              "description": "Activation bit (true is enabled, false is disabled)",
-              "enum": null
+              "description": "Activation bit This bit is set by software and only cleared by hardware after a reset. When WDGA=1, the watchdog can generate a reset.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Watchdog disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Watchdog enabled"
+                }
+              ]
             }
           ]
         },
         {
           "name": "CFR",
           "offset": 4,
-          "size": 32,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 127,
           "description": "Configuration register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Configuration register",
           "fields": [
             {
               "name": "W",
               "bit_offset": 0,
               "bit_width": 7,
-              "description": "7-bit window value",
-              "enum": null
+              "description": "7-bit window value These bits contain the window value to be compared with the down-counter.",
+              "access": "read-write"
             },
             {
               "name": "EWI",
               "bit_offset": 9,
               "bit_width": 1,
-              "description": "Early wakeup interrupt",
-              "enum": null
+              "description": "Early wakeup interrupt When set, an interrupt occurs whenever the counter reaches the value 0x40. This interrupt is only cleared by hardware after a reset.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Enable",
+                  "value": 1,
+                  "description": "interrupt occurs whenever the counter reaches the value 0x40"
+                }
+              ]
             },
             {
               "name": "WDGTB",
               "bit_offset": 11,
               "bit_width": 3,
-              "description": "Timer base",
-              "enum": "WDGTB"
+              "description": "Timer base The timebase of the prescaler can be modified as follows:",
+              "enum_values": [
+                {
+                  "name": "Div1",
+                  "value": 0,
+                  "description": "Counter clock (PCLK1 div 4096) div 1"
+                },
+                {
+                  "name": "Div2",
+                  "value": 1,
+                  "description": "Counter clock (PCLK1 div 4096) div 2"
+                },
+                {
+                  "name": "Div4",
+                  "value": 2,
+                  "description": "Counter clock (PCLK1 div 4096) div 4"
+                },
+                {
+                  "name": "Div8",
+                  "value": 3,
+                  "description": "Counter clock (PCLK1 div 4096) div 8"
+                },
+                {
+                  "name": "Div16",
+                  "value": 4,
+                  "description": "Counter clock (PCLK1 div 4096) div 16"
+                },
+                {
+                  "name": "Div32",
+                  "value": 5,
+                  "description": "Counter clock (PCLK1 div 4096) div 32"
+                },
+                {
+                  "name": "Div64",
+                  "value": 6,
+                  "description": "Counter clock (PCLK1 div 4096) div 64"
+                },
+                {
+                  "name": "Div128",
+                  "value": 7,
+                  "description": "Counter clock (PCLK1 div 4096) div 128"
+                }
+              ]
             }
           ]
         },
         {
           "name": "SR",
           "offset": 8,
-          "size": 32,
+          "size": 16,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "Status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Status register",
           "fields": [
             {
               "name": "EWIF",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "Early wakeup interrupt flag",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Finished",
+                  "value": 0,
+                  "description": "The EWI Interrupt Service Routine has been serviced"
+                },
+                {
+                  "name": "Pending",
+                  "value": 1,
+                  "description": "The EWI Interrupt Service Routine has been triggered"
+                },
+                {
+                  "name": "Finished",
+                  "value": 0,
+                  "description": "The EWI Interrupt Service Routine has been serviced"
+                }
+              ]
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "WDGTB": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "Div1",
-          "value": 0,
-          "description": "Counter clock (PCLK1 div 4096) div 1"
-        },
-        {
-          "name": "Div2",
-          "value": 1,
-          "description": "Counter clock (PCLK1 div 4096) div 2"
-        },
-        {
-          "name": "Div4",
-          "value": 2,
-          "description": "Counter clock (PCLK1 div 4096) div 4"
-        },
-        {
-          "name": "Div8",
-          "value": 3,
-          "description": "Counter clock (PCLK1 div 4096) div 8"
-        },
-        {
-          "name": "Div16",
-          "value": 4,
-          "description": "Counter clock (PCLK1 div 4096) div 16"
-        },
-        {
-          "name": "Div32",
-          "value": 5,
-          "description": "Counter clock (PCLK1 div 4096) div 32"
-        },
-        {
-          "name": "Div64",
-          "value": 6,
-          "description": "Counter clock (PCLK1 div 4096) div 64"
-        },
-        {
-          "name": "Div128",
-          "value": 7,
-          "description": "Counter clock (PCLK1 div 4096) div 128"
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

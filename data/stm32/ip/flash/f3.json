@@ -2,6 +2,9 @@
   "schema": 1,
   "kind": "flash",
   "version": "f3",
+  "source": "stm32rs_svd",
+  "source_device": "stm32f373v8",
+  "source_file": "stm32f373.svd.patched",
   "blocks": {
     "FLASH": {
       "name": "FLASH",
@@ -12,93 +15,212 @@
           "name": "ACR",
           "offset": 0,
           "size": 32,
+          "access": null,
+          "reset_value": 48,
           "description": "Flash access control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Flash access control register",
           "fields": [
             {
               "name": "LATENCY",
               "bit_offset": 0,
               "bit_width": 3,
               "description": "LATENCY",
-              "enum": "LATENCY"
-            },
-            {
-              "name": "HLFCYA",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Flash half cycle access enable",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "WS0",
+                  "value": 0,
+                  "description": "0 wait states, if 0 < HCLK <= 24 MHz"
+                },
+                {
+                  "name": "WS1",
+                  "value": 1,
+                  "description": "1 wait state, if 24 < HCLK <= 48 MHz"
+                },
+                {
+                  "name": "WS2",
+                  "value": 2,
+                  "description": "2 wait states, if 48 < HCLK <= 72 MHz"
+                }
+              ]
             },
             {
               "name": "PRFTBE",
               "bit_offset": 4,
               "bit_width": 1,
               "description": "PRFTBE",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Prefetch is disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Prefetch is enabled"
+                }
+              ]
             },
             {
               "name": "PRFTBS",
               "bit_offset": 5,
               "bit_width": 1,
               "description": "PRFTBS",
-              "enum": null
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Prefetch buffer is disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Prefetch buffer is enabled"
+                }
+              ]
             }
           ]
         },
         {
           "name": "KEYR",
           "offset": 4,
+          "size": 32,
+          "access": "write-only",
+          "reset_value": 0,
           "description": "Flash key register",
           "array_len": null,
           "array_stride": null,
-          "fields": []
+          "fields": [
+            {
+              "name": "FKEYR",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Flash Key"
+            }
+          ]
         },
         {
           "name": "OPTKEYR",
           "offset": 8,
+          "size": 32,
+          "access": "write-only",
+          "reset_value": 0,
           "description": "Flash option key register",
           "array_len": null,
           "array_stride": null,
-          "fields": []
+          "fields": [
+            {
+              "name": "OPTKEYR",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "Option byte key"
+            }
+          ]
         },
         {
           "name": "SR",
           "offset": 12,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "Flash status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Flash status register",
           "fields": [
             {
-              "name": "BSY",
-              "bit_offset": 0,
+              "name": "EOP",
+              "bit_offset": 5,
               "bit_width": 1,
-              "description": "Busy",
-              "enum": null
-            },
-            {
-              "name": "PGERR",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Programming error",
-              "enum": null
+              "description": "End of operation",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoEvent",
+                  "value": 0,
+                  "description": "No EOP event occurred"
+                },
+                {
+                  "name": "Event",
+                  "value": 1,
+                  "description": "An EOP event occurred"
+                },
+                {
+                  "name": "Reset",
+                  "value": 1,
+                  "description": "Reset EOP event"
+                }
+              ]
             },
             {
               "name": "WRPRTERR",
               "bit_offset": 4,
               "bit_width": 1,
               "description": "Write protection error",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoError",
+                  "value": 0,
+                  "description": "No write protection error occurred"
+                },
+                {
+                  "name": "Error",
+                  "value": 1,
+                  "description": "A write protection error occurred"
+                },
+                {
+                  "name": "Reset",
+                  "value": 1,
+                  "description": "Reset write protection error"
+                }
+              ]
             },
             {
-              "name": "EOP",
-              "bit_offset": 5,
+              "name": "PGERR",
+              "bit_offset": 2,
               "bit_width": 1,
-              "description": "End of operation",
-              "enum": null
+              "description": "Programming error",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoError",
+                  "value": 0,
+                  "description": "No programming error occurred"
+                },
+                {
+                  "name": "Error",
+                  "value": 1,
+                  "description": "A programming error occurred"
+                },
+                {
+                  "name": "Reset",
+                  "value": 1,
+                  "description": "Reset programming error"
+                }
+              ]
+            },
+            {
+              "name": "BSY",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Busy",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "Inactive",
+                  "value": 0,
+                  "description": "No write/erase operation is in progress"
+                },
+                {
+                  "name": "Active",
+                  "value": 1,
+                  "description": "No write/erase operation is in progress"
+                }
+              ]
             }
           ]
         },
@@ -106,87 +228,184 @@
           "name": "CR",
           "offset": 16,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 128,
           "description": "Flash control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Flash control register",
           "fields": [
             {
-              "name": "PG",
-              "bit_offset": 0,
+              "name": "OBL_LAUNCH",
+              "bit_offset": 13,
               "bit_width": 1,
-              "description": "Programming",
-              "enum": null
-            },
-            {
-              "name": "PER",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Page erase",
-              "enum": null
-            },
-            {
-              "name": "MER",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Mass erase",
-              "enum": null
-            },
-            {
-              "name": "OPTPG",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "Option byte programming",
-              "enum": null
-            },
-            {
-              "name": "OPTER",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "Option byte erase",
-              "enum": null
-            },
-            {
-              "name": "STRT",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "Start",
-              "enum": null
-            },
-            {
-              "name": "LOCK",
-              "bit_offset": 7,
-              "bit_width": 1,
-              "description": "Lock",
-              "enum": null
-            },
-            {
-              "name": "OPTWRE",
-              "bit_offset": 9,
-              "bit_width": 1,
-              "description": "Option bytes write enable",
-              "enum": null
-            },
-            {
-              "name": "ERRIE",
-              "bit_offset": 10,
-              "bit_width": 1,
-              "description": "Error interrupt enable",
-              "enum": null
+              "description": "Force option byte loading",
+              "enum_values": [
+                {
+                  "name": "Inactive",
+                  "value": 0,
+                  "description": "Force option byte loading inactive"
+                },
+                {
+                  "name": "Active",
+                  "value": 1,
+                  "description": "Force option byte loading active"
+                }
+              ]
             },
             {
               "name": "EOPIE",
               "bit_offset": 12,
               "bit_width": 1,
               "description": "End of operation interrupt enable",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "End of operation interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "End of operation interrupt enabled"
+                }
+              ]
             },
             {
-              "name": "OBL_LAUNCH",
-              "bit_offset": 13,
+              "name": "ERRIE",
+              "bit_offset": 10,
               "bit_width": 1,
-              "description": "Force option byte loading",
-              "enum": null
+              "description": "Error interrupt enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Error interrupt generation disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Error interrupt generation enabled"
+                }
+              ]
+            },
+            {
+              "name": "OPTWRE",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Option bytes write enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Option byte write enabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Option byte write disabled"
+                }
+              ]
+            },
+            {
+              "name": "LOCK",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Lock",
+              "enum_values": [
+                {
+                  "name": "Unlocked",
+                  "value": 0,
+                  "description": "FLASH_CR register is unlocked"
+                },
+                {
+                  "name": "Locked",
+                  "value": 1,
+                  "description": "FLASH_CR register is locked"
+                },
+                {
+                  "name": "Lock",
+                  "value": 1,
+                  "description": "Lock the FLASH_CR register"
+                }
+              ]
+            },
+            {
+              "name": "STRT",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Start",
+              "enum_values": [
+                {
+                  "name": "Start",
+                  "value": 1,
+                  "description": "Trigger an erase operation"
+                }
+              ]
+            },
+            {
+              "name": "OPTER",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Option byte erase",
+              "enum_values": [
+                {
+                  "name": "OptionByteErase",
+                  "value": 1,
+                  "description": "Erase option byte activated"
+                }
+              ]
+            },
+            {
+              "name": "OPTPG",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Option byte programming",
+              "enum_values": [
+                {
+                  "name": "OptionByteProgramming",
+                  "value": 1,
+                  "description": "Program option byte activated"
+                }
+              ]
+            },
+            {
+              "name": "MER",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Mass erase",
+              "enum_values": [
+                {
+                  "name": "MassErase",
+                  "value": 1,
+                  "description": "Erase activated for all user sectors"
+                }
+              ]
+            },
+            {
+              "name": "PER",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Page erase",
+              "enum_values": [
+                {
+                  "name": "PageErase",
+                  "value": 1,
+                  "description": "Erase activated for selected page"
+                }
+              ]
+            },
+            {
+              "name": "PG",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Programming",
+              "enum_values": [
+                {
+                  "name": "Program",
+                  "value": 1,
+                  "description": "Flash programming activated"
+                }
+              ]
             }
           ]
         },
@@ -194,17 +413,17 @@
           "name": "AR",
           "offset": 20,
           "size": 32,
+          "access": "write-only",
+          "reset_value": 0,
           "description": "Flash address register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Flash address register",
           "fields": [
             {
               "name": "FAR",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Flash address",
-              "enum": null
+              "description": "Flash address"
             }
           ]
         },
@@ -212,87 +431,185 @@
           "name": "OBR",
           "offset": 28,
           "size": 32,
+          "access": "read-only",
+          "reset_value": 4294967055,
           "description": "Option byte register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Option byte register",
           "fields": [
             {
               "name": "OPTERR",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "Option byte error",
-              "enum": null
-            },
-            {
-              "name": "RDPRT",
-              "bit_offset": 1,
-              "bit_width": 2,
-              "description": "Read protection Level status",
-              "enum": "RDPRT"
+              "enum_values": [
+                {
+                  "name": "OptionByteError",
+                  "value": 1,
+                  "description": "The loaded option byte and its complement do not match"
+                }
+              ]
             },
             {
               "name": "WDG_SW",
               "bit_offset": 8,
               "bit_width": 1,
               "description": "WDG_SW",
-              "enum": "WDG_SW"
+              "enum_values": [
+                {
+                  "name": "Hardware",
+                  "value": 0,
+                  "description": "Hardware watchdog"
+                },
+                {
+                  "name": "Software",
+                  "value": 1,
+                  "description": "Software watchdog"
+                }
+              ]
             },
             {
               "name": "nRST_STOP",
               "bit_offset": 9,
               "bit_width": 1,
               "description": "nRST_STOP",
-              "enum": "nRST_STOP"
+              "enum_values": [
+                {
+                  "name": "Reset",
+                  "value": 0,
+                  "description": "Reset generated when entering Stop mode"
+                },
+                {
+                  "name": "NoReset",
+                  "value": 1,
+                  "description": "No reset generated"
+                }
+              ]
             },
             {
               "name": "nRST_STDBY",
               "bit_offset": 10,
               "bit_width": 1,
               "description": "nRST_STDBY",
-              "enum": "nRST_STDBY"
+              "enum_values": [
+                {
+                  "name": "Reset",
+                  "value": 0,
+                  "description": "Reset generated when entering Standby mode"
+                },
+                {
+                  "name": "NoReset",
+                  "value": 1,
+                  "description": "No reset generated"
+                }
+              ]
             },
             {
               "name": "nBOOT1",
               "bit_offset": 12,
               "bit_width": 1,
               "description": "BOOT1",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Together with BOOT0, select the device boot mode"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Together with BOOT0, select the device boot mode"
+                }
+              ]
             },
             {
               "name": "VDDA_MONITOR",
               "bit_offset": 13,
               "bit_width": 1,
               "description": "VDDA_MONITOR",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "VDDA power supply supervisor disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "VDDA power supply supervisor enabled"
+                }
+              ]
             },
             {
               "name": "SRAM_PARITY_CHECK",
               "bit_offset": 14,
               "bit_width": 1,
               "description": "SRAM_PARITY_CHECK",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "RAM parity check disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "RAM parity check enabled"
+                }
+              ]
             },
             {
               "name": "SDADC12_VDD_MONITOR",
               "bit_offset": 15,
               "bit_width": 1,
               "description": "SDADC12_VDD_MONITOR",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "VDDSD12 monitoring disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "VDDSD12 monitoring enabled"
+                }
+              ]
             },
             {
               "name": "Data0",
               "bit_offset": 16,
               "bit_width": 8,
-              "description": "Data0",
-              "enum": null
+              "description": "Data0"
             },
             {
               "name": "Data1",
               "bit_offset": 24,
               "bit_width": 8,
-              "description": "Data1",
-              "enum": null
+              "description": "Data1"
+            },
+            {
+              "name": "RDPRT",
+              "bit_offset": 1,
+              "bit_width": 2,
+              "description": "Read protection Level status",
+              "enum_values": [
+                {
+                  "name": "Level0",
+                  "value": 0,
+                  "description": "Level 0"
+                },
+                {
+                  "name": "Level1",
+                  "value": 1,
+                  "description": "Level 1"
+                },
+                {
+                  "name": "Level2",
+                  "value": 3,
+                  "description": "Level 2"
+                }
+              ]
             }
           ]
         },
@@ -300,108 +617,22 @@
           "name": "WRPR",
           "offset": 32,
           "size": 32,
+          "access": "read-only",
+          "reset_value": 4294967295,
           "description": "Write protection register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Write protection register",
           "fields": [
             {
               "name": "WRP",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Write protect",
-              "enum": null
+              "description": "Write protect"
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "LATENCY": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "WS0",
-          "value": 0,
-          "description": "0 wait states, if 0 < HCLK <= 24 MHz"
-        },
-        {
-          "name": "WS1",
-          "value": 1,
-          "description": "1 wait state, if 24 < HCLK <= 48 MHz"
-        },
-        {
-          "name": "WS2",
-          "value": 2,
-          "description": "2 wait states, if 48 < HCLK <= 72 MHz"
-        }
-      ]
-    },
-    "RDPRT": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Level0",
-          "value": 0,
-          "description": "Level 0"
-        },
-        {
-          "name": "Level1",
-          "value": 1,
-          "description": "Level 1"
-        },
-        {
-          "name": "Level2",
-          "value": 3,
-          "description": "Level 2"
-        }
-      ]
-    },
-    "WDG_SW": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Hardware",
-          "value": 0,
-          "description": "Hardware watchdog"
-        },
-        {
-          "name": "Software",
-          "value": 1,
-          "description": "Software watchdog"
-        }
-      ]
-    },
-    "nRST_STDBY": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Reset",
-          "value": 0,
-          "description": "Reset generated when entering Standby mode"
-        },
-        {
-          "name": "NoReset",
-          "value": 1,
-          "description": "No reset generated"
-        }
-      ]
-    },
-    "nRST_STOP": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Reset",
-          "value": 0,
-          "description": "Reset generated when entering Stop mode"
-        },
-        {
-          "name": "NoReset",
-          "value": 1,
-          "description": "No reset generated"
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

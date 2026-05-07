@@ -2,6 +2,9 @@
   "schema": 1,
   "kind": "pwr",
   "version": "wl5",
+  "source": "stm32rs_svd",
+  "source_device": "stm32wle5c8",
+  "source_file": "stm32wle5.svd.patched",
   "blocks": {
     "PWR": {
       "name": "PWR",
@@ -12,59 +15,152 @@
           "name": "CR1",
           "offset": 0,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 512,
           "description": "Power control register 1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Power control register 1",
           "fields": [
             {
-              "name": "LPMS",
-              "bit_offset": 0,
-              "bit_width": 3,
-              "description": "Low-power mode selection for CPU1",
-              "enum": "LPMS"
-            },
-            {
-              "name": "SUBGHZSPINSSSEL",
-              "bit_offset": 3,
+              "name": "LPR",
+              "bit_offset": 14,
               "bit_width": 1,
-              "description": "sub-GHz SPI NSS source select",
-              "enum": "SUBGHZSPINSSSEL"
-            },
-            {
-              "name": "FPDR",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "Flash memory power down mode during LPRun for CPU1",
-              "enum": "FPDR"
-            },
-            {
-              "name": "FPDS",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "Flash memory power down mode during LPSleep for CPU1",
-              "enum": "FPDS"
-            },
-            {
-              "name": "DBP",
-              "bit_offset": 8,
-              "bit_width": 1,
-              "description": "Disable backup domain write protection",
-              "enum": null
+              "description": "Low-power run",
+              "enum_values": [
+                {
+                  "name": "MainMode",
+                  "value": 0,
+                  "description": "Voltage regulator in Main mode in Low-power run mode"
+                },
+                {
+                  "name": "LowPowerMode",
+                  "value": 1,
+                  "description": "Voltage regulator in low-power mode in Low-power run mode"
+                }
+              ]
             },
             {
               "name": "VOS",
               "bit_offset": 9,
               "bit_width": 2,
               "description": "Voltage scaling range selection",
-              "enum": "VOS"
+              "enum_values": [
+                {
+                  "name": "V1_2",
+                  "value": 1,
+                  "description": "1.2 V (range 1)"
+                },
+                {
+                  "name": "V1_0",
+                  "value": 2,
+                  "description": "1.0 V (range 2)"
+                }
+              ]
             },
             {
-              "name": "LPR",
-              "bit_offset": 14,
+              "name": "DBP",
+              "bit_offset": 8,
               "bit_width": 1,
-              "description": "Low-power run",
-              "enum": "LPR"
+              "description": "Disable backup domain write protection",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Access to RTC and backup registers disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Access to RTC and backup registers enabled"
+                }
+              ]
+            },
+            {
+              "name": "FPDS",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Flash memory power down mode during LPSleep for CPU1",
+              "enum_values": [
+                {
+                  "name": "Idle",
+                  "value": 0,
+                  "description": "Flash memory in Idle mode when system is in LPSleep mode"
+                },
+                {
+                  "name": "PowerDown",
+                  "value": 1,
+                  "description": "Flash memory in Power-down mode when system is in LPSleep mode"
+                }
+              ]
+            },
+            {
+              "name": "FPDR",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Flash memory power down mode during LPRun for CPU1",
+              "enum_values": [
+                {
+                  "name": "Idle",
+                  "value": 0,
+                  "description": "Flash memory in Idle mode when system is in LPRun mode"
+                },
+                {
+                  "name": "PowerDown",
+                  "value": 1,
+                  "description": "Flash memory in Power-down mode when system is in LPRun mode"
+                }
+              ]
+            },
+            {
+              "name": "SUBGHZSPINSSSEL",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "sub-GHz SPI NSS source select",
+              "enum_values": [
+                {
+                  "name": "SUBGHZSPICR",
+                  "value": 0,
+                  "description": "sub-GHz SPI NSS signal driven from PWR_SUBGHZSPICR.NSS (RFBUSYMS functionality enabled)"
+                },
+                {
+                  "name": "LPTIM3",
+                  "value": 1,
+                  "description": "sub-GHz SPI NSS signal driven from LPTIM3_OUT (RFBUSYMS functionality disabled)"
+                }
+              ]
+            },
+            {
+              "name": "LPMS",
+              "bit_offset": 0,
+              "bit_width": 3,
+              "description": "Low-power mode selection for CPU1",
+              "enum_values": [
+                {
+                  "name": "Stop0",
+                  "value": 0,
+                  "description": "Stop 0 mode"
+                },
+                {
+                  "name": "Stop1",
+                  "value": 1,
+                  "description": "Stop 1 mode"
+                },
+                {
+                  "name": "Stop2",
+                  "value": 2,
+                  "description": "Stop 2 mode"
+                },
+                {
+                  "name": "Standby",
+                  "value": 3,
+                  "description": "Standby mode"
+                },
+                {
+                  "name": "Shutdown",
+                  "value": 4,
+                  "description": "Shutdown mode"
+                }
+              ]
             }
           ]
         },
@@ -72,31 +168,95 @@
           "name": "CR2",
           "offset": 4,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "Power control register 2",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Power control register 2",
           "fields": [
             {
-              "name": "PVDE",
-              "bit_offset": 0,
+              "name": "PVME3",
+              "bit_offset": 6,
               "bit_width": 1,
-              "description": "Power voltage detector enable",
-              "enum": null
+              "description": "Peripheral voltage monitoring 3 enable: VDDA vs. 1.62V",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "PVM3 (VDDA monitoring versus 1.62 V threshold) disable"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "PVM3 (VDDA monitoring versus 1.62 V threshold) enable"
+                }
+              ]
             },
             {
               "name": "PLS",
               "bit_offset": 1,
               "bit_width": 3,
               "description": "Power voltage detector level selection.",
-              "enum": "PLS"
+              "enum_values": [
+                {
+                  "name": "V2_0",
+                  "value": 0,
+                  "description": "2.0V"
+                },
+                {
+                  "name": "V2_2",
+                  "value": 1,
+                  "description": "2.2V"
+                },
+                {
+                  "name": "V2_4",
+                  "value": 2,
+                  "description": "2.4V"
+                },
+                {
+                  "name": "V2_5",
+                  "value": 3,
+                  "description": "2.5V"
+                },
+                {
+                  "name": "V2_6",
+                  "value": 4,
+                  "description": "2.6V"
+                },
+                {
+                  "name": "V2_8",
+                  "value": 5,
+                  "description": "2.8V"
+                },
+                {
+                  "name": "V2_9",
+                  "value": 6,
+                  "description": "2.9V"
+                },
+                {
+                  "name": "External",
+                  "value": 7,
+                  "description": "External input analog voltage PVD_IN (compared internally to VREFINT)"
+                }
+              ]
             },
             {
-              "name": "PVME",
-              "bit_offset": 6,
+              "name": "PVDE",
+              "bit_offset": 0,
               "bit_width": 1,
-              "description": "Peripheral voltage monitoring 3 enable: VDDA vs. 1.62V",
-              "enum": null
+              "description": "Power voltage detector enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "PVD Disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "PVD Enabled"
+                }
+              ]
             }
           ]
         },
@@ -104,73 +264,191 @@
           "name": "CR3",
           "offset": 8,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 32768,
           "description": "Power control register 3",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Power control register 3",
           "fields": [
             {
-              "name": "EWUP",
-              "bit_offset": 0,
+              "name": "EIWUL",
+              "bit_offset": 15,
               "bit_width": 1,
-              "description": "Enable Wakeup pin WKUP1 for CPU1",
-              "enum": null
+              "description": "Enable internal wakeup line for CPU1",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Internal wakeup line interrupt to CPU1 disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Internal wakeup line interrupt to CPU1 enabled"
+                }
+              ]
             },
             {
-              "name": "EULPEN",
-              "bit_offset": 7,
+              "name": "EWRFIRQ",
+              "bit_offset": 13,
               "bit_width": 1,
-              "description": "Ultra-low-power enable",
-              "enum": null
-            },
-            {
-              "name": "EWPVD",
-              "bit_offset": 8,
-              "bit_width": 1,
-              "description": "Enable wakeup PVD for CPU1",
-              "enum": null
-            },
-            {
-              "name": "RRS",
-              "bit_offset": 9,
-              "bit_width": 1,
-              "description": "SRAM2 retention in Standby mode",
-              "enum": null
-            },
-            {
-              "name": "APC",
-              "bit_offset": 10,
-              "bit_width": 1,
-              "description": "Apply pull-up and pull-down configuration from CPU1",
-              "enum": null
+              "description": "akeup for CPU1",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Radio IRQ[2:0] is disabled and does not trigger a wakeup from Standby event to CPU1."
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Radio IRQ[2:0] is enabled and triggers a wakeup from Standby event to CPU1."
+                }
+              ]
             },
             {
               "name": "EWRFBUSY",
               "bit_offset": 11,
               "bit_width": 1,
               "description": "Enable Radio BUSY Wakeup from Standby for CPU1",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Radio Busy is disabled and does not trigger a wakeup from Standby event to CPU1 when a rising or a falling edge occurs"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Radio Busy is enabled and triggers a wakeup from Standby event to CPU1 when a rising or a falling edge occurs. The active edge is configured via the WRFBUSYP bit in PWR_CR4"
+                }
+              ]
             },
             {
-              "name": "EWRFIRQ",
-              "bit_offset": 13,
+              "name": "APC",
+              "bit_offset": 10,
               "bit_width": 1,
-              "description": "Wakeup for CPU1",
-              "enum": null
+              "description": "Apply pull-up and pull-down configuration from CPU1",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "I/O pull-up and pull-down configurations defined in the PWR_PUCRx and PWR_PDCRx registers are applied"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "PWR_PUCRx and PWR_PDCRx registers are NOT applied to the I/Os"
+                }
+              ]
             },
             {
-              "name": "EC2H",
-              "bit_offset": 14,
+              "name": "RRS",
+              "bit_offset": 9,
               "bit_width": 1,
-              "description": "nable CPU2 Hold interrupt for CPU1",
-              "enum": null
+              "description": "SRAM2 retention in Standby mode",
+              "enum_values": [
+                {
+                  "name": "PowerOff",
+                  "value": 0,
+                  "description": "SRAM2 powered off in Standby mode (SRAM2 content lost)"
+                },
+                {
+                  "name": "OnLPR",
+                  "value": 1,
+                  "description": "SRAM2 powered by the low-power regulator in Standby mode (SRAM2 content kept)"
+                }
+              ]
             },
             {
-              "name": "EIWUL",
-              "bit_offset": 15,
+              "name": "EWPVD",
+              "bit_offset": 8,
               "bit_width": 1,
-              "description": "Enable internal wakeup line for CPU1",
-              "enum": null
+              "description": "Enable wakeup PVD for CPU1",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "PVD not enabled by the sub-GHz radio active state"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "PVD enabled while the sub-GHz radio is active"
+                }
+              ]
+            },
+            {
+              "name": "EULPEN",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Ultra-low-power enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Disable (the supply voltage is monitored continuously)"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Enable, when set, the supply voltage is sampled for PDR/BOR reset condition only periodically"
+                }
+              ]
+            },
+            {
+              "name": "EWUP3",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Enable Wakeup pin WKUP3 for CPU1",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "WKUP pin 3 is used for general purpose I/Os. An event on the WKUP pin 3 does not wakeup the device from Standby mode"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "WKUP pin 3 is used for wakeup from Standby mode and forced in input pull down configuration (rising edge on WKUP pin 3wakes-up the system from Standby mode)"
+                }
+              ]
+            },
+            {
+              "name": "EWUP2",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Enable Wakeup pin WKUP2 for CPU1",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "WKUP pin 2 is used for general purpose I/Os. An event on the WKUP pin 2 does not wakeup the device from Standby mode"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "WKUP pin 2 is used for wakeup from Standby mode and forced in input pull down configuration (rising edge on WKUP pin 2 wakes-up the system from Standby mode)"
+                }
+              ]
+            },
+            {
+              "name": "EWUP1",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Enable Wakeup pin WKUP1 for CPU1",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "WKUP pin 1 is used for general purpose I/Os. An event on the WKUP pin 1 does not wakeup the device from Standby mode"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "WKUP pin 1 is used for wakeup from Standby mode and forced in input pull down configuration (rising edge on WKUP pin 1 wakes-up the system from Standby mode)"
+                }
+              ]
             }
           ]
         },
@@ -178,45 +456,119 @@
           "name": "CR4",
           "offset": 12,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "Power control register 4",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Power control register 4",
           "fields": [
             {
-              "name": "WP",
-              "bit_offset": 0,
+              "name": "WRFBUSYP",
+              "bit_offset": 11,
               "bit_width": 1,
-              "description": "Wakeup pin WKUP1 polarity",
-              "enum": "WP"
-            },
-            {
-              "name": "VBE",
-              "bit_offset": 8,
-              "bit_width": 1,
-              "description": "VBAT battery charging enable",
-              "enum": null
+              "description": "Wakeup Radio BUSY polarity",
+              "enum_values": [
+                {
+                  "name": "RisingEdge",
+                  "value": 0,
+                  "description": "Detection on high level (rising edge)"
+                },
+                {
+                  "name": "FallingEdge",
+                  "value": 1,
+                  "description": "Detection on low level (falling edge)"
+                }
+              ]
             },
             {
               "name": "VBRS",
               "bit_offset": 9,
               "bit_width": 1,
               "description": "VBAT battery charging resistor selection",
-              "enum": "VBRS"
+              "enum_values": [
+                {
+                  "name": "R5k",
+                  "value": 0,
+                  "description": "VBAT charging through a 5 kΩ resistor"
+                },
+                {
+                  "name": "R1_5k",
+                  "value": 1,
+                  "description": "VBAT charging through a 1.5 kΩ resistor"
+                }
+              ]
             },
             {
-              "name": "WRFBUSYP",
-              "bit_offset": 11,
+              "name": "VBE",
+              "bit_offset": 8,
               "bit_width": 1,
-              "description": "Wakeup Radio BUSY polarity",
-              "enum": null
+              "description": "VBAT battery charging enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "VBAT battery charging disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "VBAT battery charging enabled"
+                }
+              ]
             },
             {
-              "name": "C2BOOT",
-              "bit_offset": 15,
+              "name": "WP3",
+              "bit_offset": 2,
               "bit_width": 1,
-              "description": "oot CPU2 after reset or wakeup from Stop or Standby modes.",
-              "enum": null
+              "description": "Wakeup pin WKUP3 polarity",
+              "enum_values": [
+                {
+                  "name": "RisingEdge",
+                  "value": 0,
+                  "description": "Detection on high level (rising edge)"
+                },
+                {
+                  "name": "FallingEdge",
+                  "value": 1,
+                  "description": "Detection on low level (falling edge)"
+                }
+              ]
+            },
+            {
+              "name": "WP2",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Wakeup pin WKUP2 polarity",
+              "enum_values": [
+                {
+                  "name": "RisingEdge",
+                  "value": 0,
+                  "description": "Detection on high level (rising edge)"
+                },
+                {
+                  "name": "FallingEdge",
+                  "value": 1,
+                  "description": "Detection on low level (falling edge)"
+                }
+              ]
+            },
+            {
+              "name": "WP1",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Wakeup pin WKUP1 polarity",
+              "enum_values": [
+                {
+                  "name": "RisingEdge",
+                  "value": 0,
+                  "description": "Detection on high level (rising edge)"
+                },
+                {
+                  "name": "FallingEdge",
+                  "value": 1,
+                  "description": "Detection on low level (falling edge)"
+                }
+              ]
             }
           ]
         },
@@ -224,45 +576,119 @@
           "name": "SR1",
           "offset": 16,
           "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
           "description": "Power status register 1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Power status register 1",
           "fields": [
             {
-              "name": "WUF",
-              "bit_offset": 0,
+              "name": "WUFI",
+              "bit_offset": 15,
               "bit_width": 1,
-              "description": "Wakeup flag 1",
-              "enum": null
-            },
-            {
-              "name": "WPVDF",
-              "bit_offset": 8,
-              "bit_width": 1,
-              "description": "Wakeup PVD flag",
-              "enum": null
+              "description": "Internal wakeup interrupt flag",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 0,
+                  "description": "All internal wakeup sources are cleared"
+                },
+                {
+                  "name": "Wakeup",
+                  "value": 1,
+                  "description": "wakeup is detected on the internal wakeup line"
+                }
+              ]
             },
             {
               "name": "WRFBUSYF",
               "bit_offset": 11,
               "bit_width": 1,
               "description": "Radio BUSY wakeup flag",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 0,
+                  "description": "No wakeup event detected on radio busy"
+                },
+                {
+                  "name": "Wakeup",
+                  "value": 1,
+                  "description": "Wakeup event detected on radio busy"
+                }
+              ]
             },
             {
-              "name": "C2HF",
-              "bit_offset": 14,
+              "name": "WPVDF",
+              "bit_offset": 8,
               "bit_width": 1,
-              "description": "PU2 Hold interrupt flag",
-              "enum": null
+              "description": "Wakeup PVD flag",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 0,
+                  "description": "No wakeup event detected on PVD"
+                },
+                {
+                  "name": "Wakeup",
+                  "value": 1,
+                  "description": "Wakeup event detected on PVD"
+                }
+              ]
             },
             {
-              "name": "WUFI",
-              "bit_offset": 15,
+              "name": "WUF3",
+              "bit_offset": 2,
               "bit_width": 1,
-              "description": "Internal wakeup interrupt flag",
-              "enum": null
+              "description": "Wakeup flag 3",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 0,
+                  "description": "No wakeup event detected on WKUP3"
+                },
+                {
+                  "name": "Wakeup",
+                  "value": 1,
+                  "description": "Wakeup event detected on WKUP3"
+                }
+              ]
+            },
+            {
+              "name": "WUF2",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Wakeup flag 2",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 0,
+                  "description": "No wakeup event detected on WKUP2"
+                },
+                {
+                  "name": "Wakeup",
+                  "value": 1,
+                  "description": "Wakeup event detected on WKUP2"
+                }
+              ]
+            },
+            {
+              "name": "WUF1",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Wakeup flag 1",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 0,
+                  "description": "No wakeup event detected on WKUP1"
+                },
+                {
+                  "name": "Wakeup",
+                  "value": 1,
+                  "description": "Wakeup event detected on WKUP1"
+                }
+              ]
             }
           ]
         },
@@ -270,101 +696,227 @@
           "name": "SR2",
           "offset": 20,
           "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
           "description": "Power status register 2",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Power status register 2",
           "fields": [
             {
-              "name": "C2BOOTS",
-              "bit_offset": 0,
+              "name": "PVMO3",
+              "bit_offset": 14,
               "bit_width": 1,
-              "description": "PU2 boot/wakeup request source information",
-              "enum": null
-            },
-            {
-              "name": "RFBUSYS",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Radio BUSY signal status",
-              "enum": null
-            },
-            {
-              "name": "RFBUSYMS",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Radio BUSY masked signal status",
-              "enum": null
-            },
-            {
-              "name": "SMPSRDY",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "SMPS ready flag",
-              "enum": null
-            },
-            {
-              "name": "LDORDY",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "LDO ready flag",
-              "enum": null
-            },
-            {
-              "name": "RFEOLF",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "Radio end of life flag",
-              "enum": null
-            },
-            {
-              "name": "REGMRS",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "regulator2 low power flag",
-              "enum": null
-            },
-            {
-              "name": "FLASHRDY",
-              "bit_offset": 7,
-              "bit_width": 1,
-              "description": "Flash ready",
-              "enum": null
-            },
-            {
-              "name": "REGLPS",
-              "bit_offset": 8,
-              "bit_width": 1,
-              "description": "regulator1 started",
-              "enum": null
-            },
-            {
-              "name": "REGLPF",
-              "bit_offset": 9,
-              "bit_width": 1,
-              "description": "regulator1 low power flag",
-              "enum": null
-            },
-            {
-              "name": "VOSF",
-              "bit_offset": 10,
-              "bit_width": 1,
-              "description": "Voltage scaling flag",
-              "enum": null
+              "description": "Peripheral voltage monitoring output: VDDA vs. 1.62 V",
+              "enum_values": [
+                {
+                  "name": "Above",
+                  "value": 0,
+                  "description": "VDDA voltage above PVM3 threshold (around 1.62 V)"
+                },
+                {
+                  "name": "Below",
+                  "value": 1,
+                  "description": "VDDA voltage below PVM3 threshold (around 1.62 V)"
+                }
+              ]
             },
             {
               "name": "PVDO",
               "bit_offset": 11,
               "bit_width": 1,
               "description": "Power voltage detector output",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Above",
+                  "value": 0,
+                  "description": "VDD or voltage level on PVD_IN above the selected PVD threshold"
+                },
+                {
+                  "name": "Below",
+                  "value": 1,
+                  "description": "VDD or voltage level on PVD_IN below the selected PVD threshold"
+                }
+              ]
             },
             {
-              "name": "PVMO",
-              "bit_offset": 14,
+              "name": "VOSF",
+              "bit_offset": 10,
               "bit_width": 1,
-              "description": "Peripheral voltage monitoring output: VDDA vs. 1.62 V",
-              "enum": null
+              "description": "Voltage scaling flag",
+              "enum_values": [
+                {
+                  "name": "Ready",
+                  "value": 0,
+                  "description": "Regulator ready in the selected voltage range"
+                },
+                {
+                  "name": "Change",
+                  "value": 1,
+                  "description": "Regulator output voltage changed to the required voltage level"
+                }
+              ]
+            },
+            {
+              "name": "REGLPF",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "regulator1 low power flag",
+              "enum_values": [
+                {
+                  "name": "Main",
+                  "value": 0,
+                  "description": "Main regulator (MR) ready and used"
+                },
+                {
+                  "name": "LowPower",
+                  "value": 1,
+                  "description": "Low-power regulator (LPR) used"
+                }
+              ]
+            },
+            {
+              "name": "REGLPS",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "regulator1 started",
+              "enum_values": [
+                {
+                  "name": "NotReady",
+                  "value": 0,
+                  "description": "LPR not ready"
+                },
+                {
+                  "name": "Ready",
+                  "value": 1,
+                  "description": "LPR ready"
+                }
+              ]
+            },
+            {
+              "name": "FLASHRDY",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Flash ready",
+              "enum_values": [
+                {
+                  "name": "NotReady",
+                  "value": 0,
+                  "description": "Flash memory not ready to be accessed"
+                },
+                {
+                  "name": "Ready",
+                  "value": 1,
+                  "description": "Flash memory ready to be accessed"
+                }
+              ]
+            },
+            {
+              "name": "REGMRS",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "regulator2 low power flag",
+              "enum_values": [
+                {
+                  "name": "V_DD",
+                  "value": 0,
+                  "description": "Main regulator supplied directly from VDD"
+                },
+                {
+                  "name": "LDO_SMPS",
+                  "value": 1,
+                  "description": "Main regulator supplied through LDO or SMPS"
+                }
+              ]
+            },
+            {
+              "name": "RFEOLF",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "Radio end of life flag",
+              "enum_values": [
+                {
+                  "name": "Above",
+                  "value": 0,
+                  "description": "Supply voltage above radio end-of-life operating low level"
+                },
+                {
+                  "name": "Below",
+                  "value": 1,
+                  "description": "Supply voltage below radio end-of-life operating low level"
+                }
+              ]
+            },
+            {
+              "name": "LDORDY",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "LDO ready flag",
+              "enum_values": [
+                {
+                  "name": "NotReady",
+                  "value": 0,
+                  "description": "LDO not ready or off"
+                },
+                {
+                  "name": "Ready",
+                  "value": 1,
+                  "description": "LDO ready"
+                }
+              ]
+            },
+            {
+              "name": "SMPSRDY",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "SMPS ready flag",
+              "enum_values": [
+                {
+                  "name": "NotReady",
+                  "value": 0,
+                  "description": "SMPS step-down converter not ready or off"
+                },
+                {
+                  "name": "Ready",
+                  "value": 1,
+                  "description": "SMPS step-down converter ready"
+                }
+              ]
+            },
+            {
+              "name": "RFBUSYMS",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Radio BUSY masked signal status",
+              "enum_values": [
+                {
+                  "name": "NotBusy",
+                  "value": 0,
+                  "description": "radio busy masked signal low (not busy)"
+                },
+                {
+                  "name": "Busy",
+                  "value": 1,
+                  "description": "radio busy masked signal high (busy)"
+                }
+              ]
+            },
+            {
+              "name": "RFBUSYS",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Radio BUSY signal status",
+              "enum_values": [
+                {
+                  "name": "NotBusy",
+                  "value": 0,
+                  "description": "radio busy signal low (not busy)"
+                },
+                {
+                  "name": "Busy",
+                  "value": 1,
+                  "description": "radio busy signal high (busy)"
+                }
+              ]
             }
           ]
         },
@@ -372,38 +924,76 @@
           "name": "SCR",
           "offset": 24,
           "size": 32,
+          "access": "write-only",
+          "reset_value": 0,
           "description": "Power status clear register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Power status clear register",
           "fields": [
             {
-              "name": "CWUF",
-              "bit_offset": 0,
+              "name": "CWRFBUSYF",
+              "bit_offset": 11,
               "bit_width": 1,
-              "description": "Clear wakeup flag 1",
-              "enum": null
+              "description": "Clear wakeup Radio BUSY flag",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Setting this bit clears the WRFBUSYF flag in the PWR_SR1. This bit is always read 0."
+                }
+              ]
             },
             {
               "name": "CWPVDF",
               "bit_offset": 8,
               "bit_width": 1,
               "description": "Clear wakeup PVD interrupt flag",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Setting this bit clears the WPVDF flag in the PWR_SR1. This bit is always read as 0."
+                }
+              ]
             },
             {
-              "name": "CWRFBUSYF",
-              "bit_offset": 11,
+              "name": "CWUF3",
+              "bit_offset": 2,
               "bit_width": 1,
-              "description": "Clear wakeup Radio BUSY flag",
-              "enum": null
+              "description": "Clear wakeup flag 3",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Setting this bit clears the WUF3 flag in the PWR_SR1 register. This bit is always read as 0."
+                }
+              ]
             },
             {
-              "name": "CC2HF",
-              "bit_offset": 14,
+              "name": "CWUF2",
+              "bit_offset": 1,
               "bit_width": 1,
-              "description": "lear CPU2 Hold interrupt flag",
-              "enum": null
+              "description": "Clear wakeup flag 2",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Setting this bit clears the WUF2 flag in the PWR_SR1 register. This bit is always read as 0."
+                }
+              ]
+            },
+            {
+              "name": "CWUF1",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Clear wakeup flag 1",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Setting this bit clears the WUF1 flag in the PWR_SR1 register. This bit is always read as 0."
+                }
+              ]
             }
           ]
         },
@@ -411,145 +1001,827 @@
           "name": "CR5",
           "offset": 28,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "Power control register 5",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Power control register 5",
           "fields": [
-            {
-              "name": "RFEOLEN",
-              "bit_offset": 14,
-              "bit_width": 1,
-              "description": "Enable Radio End Of Life detector enabled",
-              "enum": null
-            },
             {
               "name": "SMPSEN",
               "bit_offset": 15,
               "bit_width": 1,
               "description": "Enable SMPS Step Down converter SMPS mode enabled.",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "SMPS step-down converter SMPS mode disabled (LDO mode enabled)"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "SMPS step-down converter SMPS mode enabled"
+                }
+              ]
+            },
+            {
+              "name": "RFEOLEN",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "Enable Radio End Of Life detector enabled",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Radio end-of-life detector disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Radio end-of-life detector enabled"
+                }
+              ]
             }
           ]
         },
         {
-          "name": "PUCR",
+          "name": "PUCRA",
           "offset": 32,
           "size": 32,
-          "description": "Power Port pull-up control register",
-          "array_len": 8,
-          "array_stride": 8,
-          "fieldset_description": "Power Port pull control register",
-          "fields": [
-            {
-              "name": "P",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Port pull bit y (y=0..15)",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "PDCR",
-          "offset": 36,
-          "size": 32,
-          "description": "Power Port pull-down control register",
-          "array_len": 8,
-          "array_stride": 8,
-          "fieldset_description": "Power Port pull control register",
-          "fields": [
-            {
-              "name": "P",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Port pull bit y (y=0..15)",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "C2CR1",
-          "offset": 128,
-          "size": 32,
-          "description": "Power CPU2 control register 1 [dual core device only]",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Power Port A pull-up control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Power CPU2 control register 1 [dual core device only]",
           "fields": [
             {
-              "name": "LPMS",
-              "bit_offset": 0,
-              "bit_width": 3,
-              "description": "Low-power mode selection for CPU2",
-              "enum": "LPMS"
-            },
-            {
-              "name": "FPDR",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "Flash memory power down mode during LPRun for CPU2",
-              "enum": "FPDR"
-            },
-            {
-              "name": "FPDS",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "Flash memory power down mode during LPSleep for CPU2",
-              "enum": "FPDS"
-            }
-          ]
-        },
-        {
-          "name": "C2CR3",
-          "offset": 132,
-          "size": 32,
-          "description": "Power CPU2 control register 3 [dual core device only]",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "Power CPU2 control register 3 [dual core device only]",
-          "fields": [
-            {
-              "name": "EWUP",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Enable Wakeup pin WKUP1 for CPU2",
-              "enum": null
-            },
-            {
-              "name": "EWPVD",
-              "bit_offset": 8,
-              "bit_width": 1,
-              "description": "Enable wakeup PVD for CPU2",
-              "enum": null
-            },
-            {
-              "name": "APC",
+              "name": "PU10",
               "bit_offset": 10,
               "bit_width": 1,
-              "description": "Apply pull-up and pull-down configuration for CPU2",
-              "enum": null
+              "description": "PU10",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Disable pull-up on PA[y] when both APC bits are set in PWR control register 3 (PWR_CR3)"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Enable pull-up on PA[y] when both APC bits are set in PWR control register 3 (PWR_CR3). The pull-up is not activated if the corresponding PA[y] bit is also set"
+                }
+              ]
             },
             {
-              "name": "EWRFBUSY",
-              "bit_offset": 11,
-              "bit_width": 1,
-              "description": "EWRFBUSY",
-              "enum": null
-            },
-            {
-              "name": "EWRFIRQ",
-              "bit_offset": 13,
-              "bit_width": 1,
-              "description": "akeup for CPU2",
-              "enum": null
-            },
-            {
-              "name": "EIWUL",
+              "name": "PU15",
               "bit_offset": 15,
               "bit_width": 1,
-              "description": "Enable internal wakeup line for CPU2",
-              "enum": null
+              "description": "Port PA15 pull-up"
+            },
+            {
+              "name": "PU14",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "PU14"
+            },
+            {
+              "name": "PU13",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Port PA[y] pull-up bit y (y=0 to 13)"
+            },
+            {
+              "name": "PU12",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "PU12"
+            },
+            {
+              "name": "PU11",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "PU11"
+            },
+            {
+              "name": "PU0",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "PU0",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Disable pull-up on PA[y] when both APC bits are set in PWR control register 3 (PWR_CR3)"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Enable pull-up on PA[y] when both APC bits are set in PWR control register 3 (PWR_CR3). The pull-up is not activated if the corresponding PA[y] bit is also set"
+                }
+              ]
+            },
+            {
+              "name": "PU9",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "PU9"
+            },
+            {
+              "name": "PU8",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "PU8"
+            },
+            {
+              "name": "PU7",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "PU7"
+            },
+            {
+              "name": "PU6",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "PU6"
+            },
+            {
+              "name": "PU5",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "PU5"
+            },
+            {
+              "name": "PU4",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "PU4"
+            },
+            {
+              "name": "PU3",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "PU3"
+            },
+            {
+              "name": "PU2",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "PU2"
+            },
+            {
+              "name": "PU1",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "PU1"
+            }
+          ]
+        },
+        {
+          "name": "PDCRA",
+          "offset": 36,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Power Port A pull-down control register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "PD10",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "PD10",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Disable the pull-down on PA[y] when both APC bits are set in PWR control register 3 (PWR_CR3)"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Enable the pull-down on PA[y] when both APC bits are set in PWR control register 3 (PWR_CR3)"
+                }
+              ]
+            },
+            {
+              "name": "PD15",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "PD15"
+            },
+            {
+              "name": "PD14",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "ull-down"
+            },
+            {
+              "name": "PD13",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "PD13"
+            },
+            {
+              "name": "PD12",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "Port PA[y] pull-down (y=0 to 12)"
+            },
+            {
+              "name": "PD11",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "PD11"
+            },
+            {
+              "name": "PD0",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "PD0",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Disable the pull-down on PA[y] when both APC bits are set in PWR control register 3 (PWR_CR3)"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Enable the pull-down on PA[y] when both APC bits are set in PWR control register 3 (PWR_CR3)"
+                }
+              ]
+            },
+            {
+              "name": "PD9",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "PD9"
+            },
+            {
+              "name": "PD8",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "PD8"
+            },
+            {
+              "name": "PD7",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "PD7"
+            },
+            {
+              "name": "PD6",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "PD6"
+            },
+            {
+              "name": "PD5",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "PD5"
+            },
+            {
+              "name": "PD4",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "PD4"
+            },
+            {
+              "name": "PD3",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "PD3"
+            },
+            {
+              "name": "PD2",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "PD2"
+            },
+            {
+              "name": "PD1",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "PD1"
+            }
+          ]
+        },
+        {
+          "name": "PUCRB",
+          "offset": 40,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Power Port B pull-up control register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "PU10",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "PU10",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Disable pull-up on PB[y] when both APC bits are set in PWR control register 3 (PWR_CR3)"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Enable pull-up on PB[y] when both APC bits are set in PWR control register 3 (PWR_CR3). The pull-up is not activated if the corresponding PB[y] bit is also set"
+                }
+              ]
+            },
+            {
+              "name": "PU15",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Port PB[y] pull-up (y=0 to 15)"
+            },
+            {
+              "name": "PU14",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "PU14"
+            },
+            {
+              "name": "PU13",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "PU13"
+            },
+            {
+              "name": "PU12",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "PU12"
+            },
+            {
+              "name": "PU11",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "PU11"
+            },
+            {
+              "name": "PU0",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "PU0",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Disable pull-up on PB[y] when both APC bits are set in PWR control register 3 (PWR_CR3)"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Enable pull-up on PB[y] when both APC bits are set in PWR control register 3 (PWR_CR3). The pull-up is not activated if the corresponding PB[y] bit is also set"
+                }
+              ]
+            },
+            {
+              "name": "PU9",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "PU9"
+            },
+            {
+              "name": "PU8",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "PU8"
+            },
+            {
+              "name": "PU7",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "PU7"
+            },
+            {
+              "name": "PU6",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "PU6"
+            },
+            {
+              "name": "PU5",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "PU5"
+            },
+            {
+              "name": "PU4",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "PU4"
+            },
+            {
+              "name": "PU3",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "PU3"
+            },
+            {
+              "name": "PU2",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "PU2"
+            },
+            {
+              "name": "PU1",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "PU1"
+            }
+          ]
+        },
+        {
+          "name": "PDCRB",
+          "offset": 44,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Power Port B pull-down control register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "PD10",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "PD10",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Disable the pull-down on PB[y] when both APC bits are set in PWR control register 3 (PWR_CR3)"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Enable the pull-down on PB[y] when both APC bits are set in PWR control register 3 (PWR_CR3)"
+                }
+              ]
+            },
+            {
+              "name": "PD15",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Port PB[y] pull-down (y=5 to 15)"
+            },
+            {
+              "name": "PD14",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "PD14"
+            },
+            {
+              "name": "PD13",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "PD13"
+            },
+            {
+              "name": "PD12",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "PD12"
+            },
+            {
+              "name": "PD11",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "PD11"
+            },
+            {
+              "name": "PD0",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "PD0",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Disable the pull-down on PB[y] when both APC bits are set in PWR control register 3 (PWR_CR3)"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Enable the pull-down on PB[y] when both APC bits are set in PWR control register 3 (PWR_CR3)"
+                }
+              ]
+            },
+            {
+              "name": "PD9",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "PD9"
+            },
+            {
+              "name": "PD8",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "PD8"
+            },
+            {
+              "name": "PD7",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "PD7"
+            },
+            {
+              "name": "PD6",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "PD6"
+            },
+            {
+              "name": "PD5",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "PD5"
+            },
+            {
+              "name": "PD4",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "PD4"
+            },
+            {
+              "name": "PD3",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Port PB[y] pull-down (y=0 to 3)"
+            },
+            {
+              "name": "PD2",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "PD2"
+            },
+            {
+              "name": "PD1",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "PD1"
+            }
+          ]
+        },
+        {
+          "name": "PUCRC",
+          "offset": 48,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Power Port C pull-up control register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "PU13",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "PU13",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Disable pull-up on PC[y] when both APC bits are set in PWR control register 3 (PWR_CR3)"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Enable pull-up on PC[y] when both APC bits are set in PWR control register 3 (PWR_CR3). The pull-up is not activated if the corresponding PC[y] bit is also set"
+                }
+              ]
+            },
+            {
+              "name": "PU15",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Port PC[y] pull-up (y=13 to 15)"
+            },
+            {
+              "name": "PU14",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "PU14"
+            },
+            {
+              "name": "PU0",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "PU0",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Disable pull-up on PC[y] when both APC bits are set in PWR control register 3 (PWR_CR3)"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Enable pull-up on PC[y] when both APC bits are set in PWR control register 3 (PWR_CR3). The pull-up is not activated if the corresponding PC[y] bit is also set"
+                }
+              ]
+            },
+            {
+              "name": "PU2",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "PU2"
+            },
+            {
+              "name": "PU1",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "PU1"
+            },
+            {
+              "name": "PU3",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "PU3"
+            },
+            {
+              "name": "PU4",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "PU4"
+            },
+            {
+              "name": "PU5",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "PU5"
+            },
+            {
+              "name": "PU6",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "PU6"
+            }
+          ]
+        },
+        {
+          "name": "PDCRC",
+          "offset": 52,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Power Port C pull-down control register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "PD13",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "PD13",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Disable the pull-down on PC[y] when both APC bits are set in PWR control register 3 (PWR_CR3)"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Enable the pull-down on PC[y] when both APC bits are set in PWR control register 3 (PWR_CR3)"
+                }
+              ]
+            },
+            {
+              "name": "PD15",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Port PC[y] pull-down (y=13 to 15)"
+            },
+            {
+              "name": "PD14",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "PD14"
+            },
+            {
+              "name": "PD0",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "PD0",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Disable the pull-down on PC[y] when both APC bits are set in PWR control register 3 (PWR_CR3)"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Enable the pull-down on PC[y] when both APC bits are set in PWR control register 3 (PWR_CR3)"
+                }
+              ]
+            },
+            {
+              "name": "PD2",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "PD2"
+            },
+            {
+              "name": "PD1",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "PD1"
+            },
+            {
+              "name": "PD3",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "PD3"
+            },
+            {
+              "name": "PD4",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "PD4"
+            },
+            {
+              "name": "PD5",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "PD5"
+            },
+            {
+              "name": "PD6",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "PD6"
+            }
+          ]
+        },
+        {
+          "name": "PUCRH",
+          "offset": 88,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Power Port H pull-up control register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "PU3",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "pull-up",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Disable pull-up on PH[y] when both APC bits are set in PWR control register 3 (PWR_CR3)"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Enable pull-up on PH[y] when both APC bits are set in PWR control register 3 (PWR_CR3). The pull-up is not activated if the corresponding PH[y] bit is also set"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "PDCRH",
+          "offset": 92,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Power Port H pull-down control register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "PD3",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "pull-down",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Disable the pull-down on PH[y] when both APC bits are set in PWR control register 3 (PWR_CR3)"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Enable the pull-down on PH[y] when both APC bits are set in PWR control register 3 (PWR_CR3)"
+                }
+              ]
             }
           ]
         },
@@ -557,98 +1829,101 @@
           "name": "EXTSCR",
           "offset": 136,
           "size": 32,
+          "access": null,
+          "reset_value": 0,
           "description": "Power extended status and status clear register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Power extended status and status clear register",
           "fields": [
             {
-              "name": "C1CSSF",
-              "bit_offset": 0,
+              "name": "C1DS",
+              "bit_offset": 14,
               "bit_width": 1,
-              "description": "Clear CPU1 Stop Standby flags",
-              "enum": null
-            },
-            {
-              "name": "C2CSSF",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "lear CPU2 Stop Standby flags",
-              "enum": null
-            },
-            {
-              "name": "C1SBF",
-              "bit_offset": 8,
-              "bit_width": 1,
-              "description": "System Standby flag for CPU1. (no core states retained)",
-              "enum": null
-            },
-            {
-              "name": "C1STOP2F",
-              "bit_offset": 9,
-              "bit_width": 1,
-              "description": "System Stop2 flag for CPU1. (partial core states retained)",
-              "enum": null
+              "description": "CPU1 deepsleep mode",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "RunningOrSleep",
+                  "value": 0,
+                  "description": "CPU is running or in sleep"
+                },
+                {
+                  "name": "DeepSleep",
+                  "value": 1,
+                  "description": "CPU is in Deep-Sleep"
+                }
+              ]
             },
             {
               "name": "C1STOPF",
               "bit_offset": 10,
               "bit_width": 1,
               "description": "System Stop0, 1 flag for CPU1. (All core states retained)",
-              "enum": null
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NoStop",
+                  "value": 0,
+                  "description": "System has not been in Stop 0 or 1 mode"
+                },
+                {
+                  "name": "Stop",
+                  "value": 1,
+                  "description": "System has been in Stop 0 or 1 mode"
+                }
+              ]
             },
             {
-              "name": "C2SBF",
-              "bit_offset": 11,
+              "name": "C1STOP2F",
+              "bit_offset": 9,
               "bit_width": 1,
-              "description": "ystem Standby flag for CPU2. (no core states retained)",
-              "enum": null
+              "description": "System Stop2 flag for CPU1. (partial core states retained)",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NoStop",
+                  "value": 0,
+                  "description": "System has not been in Stop 2 mode"
+                },
+                {
+                  "name": "Stop",
+                  "value": 1,
+                  "description": "System has been in Stop 2 mode"
+                }
+              ]
             },
             {
-              "name": "C2STOP2F",
-              "bit_offset": 12,
+              "name": "C1SBF",
+              "bit_offset": 8,
               "bit_width": 1,
-              "description": "ystem Stop2 flag for CPU2. (partial core states retained)",
-              "enum": null
+              "description": "System Standby flag for CPU1. (no core states retained)",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NoStandby",
+                  "value": 0,
+                  "description": "System has not been in Standby mode"
+                },
+                {
+                  "name": "Standby",
+                  "value": 1,
+                  "description": "System has been in Standby mode"
+                }
+              ]
             },
             {
-              "name": "C2STOPF",
-              "bit_offset": 13,
+              "name": "C1CSSF",
+              "bit_offset": 0,
               "bit_width": 1,
-              "description": "ystem Stop0, 1 flag for CPU2. (All core states retained)",
-              "enum": null
-            },
-            {
-              "name": "C1DS",
-              "bit_offset": 14,
-              "bit_width": 1,
-              "description": "CPU1 deepsleep mode",
-              "enum": "CDS"
-            },
-            {
-              "name": "C2DS",
-              "bit_offset": 15,
-              "bit_width": 1,
-              "description": "PU2 deepsleep mode",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "SECCFGR",
-          "offset": 140,
-          "size": 32,
-          "description": "Power security configuration register [dual core device only]",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "Power security configuration register [dual core device only]",
-          "fields": [
-            {
-              "name": "C2EWILA",
-              "bit_offset": 15,
-              "bit_width": 1,
-              "description": "wakeup on CPU2 illegal access interrupt enable",
-              "enum": null
+              "description": "Clear CPU1 Stop Standby flags",
+              "access": "write-only",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Setting this bit clears the C1STOPF and C1SBF bits"
+                }
+              ]
             }
           ]
         },
@@ -656,236 +1931,34 @@
           "name": "SUBGHZSPICR",
           "offset": 144,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 32768,
           "description": "Power SPI3 control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "Power SPI3 control register",
           "fields": [
             {
               "name": "NSS",
               "bit_offset": 15,
               "bit_width": 1,
               "description": "sub-GHz SPI NSS control",
-              "enum": null
-            }
-          ]
-        },
-        {
-          "name": "RSSCMDR",
-          "offset": 152,
-          "size": 32,
-          "description": "RSS Command register [dual core device only]",
-          "array_len": null,
-          "array_stride": null,
-          "fieldset_description": "RSS Command register [dual core device only]",
-          "fields": [
-            {
-              "name": "RSSCMD",
-              "bit_offset": 0,
-              "bit_width": 8,
-              "description": "RSS command",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Low",
+                  "value": 0,
+                  "description": "Sub-GHz SPI NSS signal at level low"
+                },
+                {
+                  "name": "High",
+                  "value": 1,
+                  "description": "Sub-GHz SPI NSS signal is at level high"
+                }
+              ]
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "CDS": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "RunningOrSleep",
-          "value": 0,
-          "description": "CPU is running or in sleep"
-        },
-        {
-          "name": "DeepSleep",
-          "value": 1,
-          "description": "CPU is in Deep-Sleep"
-        }
-      ]
-    },
-    "FPDR": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Idle",
-          "value": 0,
-          "description": "Flash memory in Idle mode when system is in LPRun mode"
-        },
-        {
-          "name": "PowerDown",
-          "value": 1,
-          "description": "Flash memory in Power-down mode when system is in LPRun mode"
-        }
-      ]
-    },
-    "FPDS": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "Idle",
-          "value": 0,
-          "description": "Flash memory in Idle mode when system is in LPSleep mode"
-        },
-        {
-          "name": "PowerDown",
-          "value": 1,
-          "description": "Flash memory in Power-down mode when system is in LPSleep mode"
-        }
-      ]
-    },
-    "LPMS": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "Stop0",
-          "value": 0,
-          "description": "Stop 0 mode"
-        },
-        {
-          "name": "Stop1",
-          "value": 1,
-          "description": "Stop 1 mode"
-        },
-        {
-          "name": "Stop2",
-          "value": 2,
-          "description": "Stop 2 mode"
-        },
-        {
-          "name": "Standby",
-          "value": 3,
-          "description": "Standby mode"
-        },
-        {
-          "name": "Shutdown",
-          "value": 4,
-          "description": "Shutdown mode"
-        }
-      ]
-    },
-    "LPR": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "MainMode",
-          "value": 0,
-          "description": "Voltage regulator in Main mode in Low-power run mode"
-        },
-        {
-          "name": "LowPowerMode",
-          "value": 1,
-          "description": "Voltage regulator in low-power mode in Low-power run mode"
-        }
-      ]
-    },
-    "PLS": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "V2_0",
-          "value": 0,
-          "description": "2.0V"
-        },
-        {
-          "name": "V2_2",
-          "value": 1,
-          "description": "2.2V"
-        },
-        {
-          "name": "V2_4",
-          "value": 2,
-          "description": "2.4V"
-        },
-        {
-          "name": "V2_5",
-          "value": 3,
-          "description": "2.5V"
-        },
-        {
-          "name": "V2_6",
-          "value": 4,
-          "description": "2.6V"
-        },
-        {
-          "name": "V2_8",
-          "value": 5,
-          "description": "2.8V"
-        },
-        {
-          "name": "V2_9",
-          "value": 6,
-          "description": "2.9V"
-        },
-        {
-          "name": "External",
-          "value": 7,
-          "description": "External input analog voltage PVD_IN (compared internally to VREFINT)"
-        }
-      ]
-    },
-    "SUBGHZSPINSSSEL": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "SUBGHZSPICR",
-          "value": 0,
-          "description": "sub-GHz SPI NSS signal driven from PWR_SUBGHZSPICR.NSS (RFBUSYMS functionality enabled)"
-        },
-        {
-          "name": "LPTIM3",
-          "value": 1,
-          "description": "sub-GHz SPI NSS signal driven from LPTIM3_OUT (RFBUSYMS functionality disabled)"
-        }
-      ]
-    },
-    "VBRS": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "R5k",
-          "value": 0,
-          "description": "VBAT charging through a 5 kΩ resistor"
-        },
-        {
-          "name": "R1_5k",
-          "value": 1,
-          "description": "VBAT charging through a 1.5 kΩ resistor"
-        }
-      ]
-    },
-    "VOS": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "Range1",
-          "value": 1,
-          "description": "1.2 V (range 1)"
-        },
-        {
-          "name": "Range2",
-          "value": 2,
-          "description": "1.0 V (range 2)"
-        }
-      ]
-    },
-    "WP": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "RisingEdge",
-          "value": 0,
-          "description": "Detection on high level (rising edge)"
-        },
-        {
-          "name": "FallingEdge",
-          "value": 1,
-          "description": "Detection on low level (falling edge)"
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

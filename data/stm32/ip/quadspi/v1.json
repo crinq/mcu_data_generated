@@ -2,6 +2,9 @@
   "schema": 1,
   "kind": "quadspi",
   "version": "v1",
+  "source": "stm32rs_svd",
+  "source_device": "stm32f412re",
+  "source_file": "stm32f412.svd.patched",
   "blocks": {
     "QUADSPI": {
       "name": "QUADSPI",
@@ -12,122 +15,227 @@
           "name": "CR",
           "offset": 0,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "control register",
           "fields": [
             {
-              "name": "EN",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Enable",
-              "enum": null
-            },
-            {
-              "name": "ABORT",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Abort request",
-              "enum": null
-            },
-            {
-              "name": "DMAEN",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "DMA enable (not available on all chips!)",
-              "enum": null
-            },
-            {
-              "name": "TCEN",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Timeout counter enable",
-              "enum": null
-            },
-            {
-              "name": "SSHIFT",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "Sample shift",
-              "enum": null
-            },
-            {
-              "name": "DFM",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "Dual-flash mode",
-              "enum": null
-            },
-            {
-              "name": "FSEL",
-              "bit_offset": 7,
-              "bit_width": 1,
-              "description": "FLASH memory selection",
-              "enum": null
-            },
-            {
-              "name": "FTHRES",
-              "bit_offset": 8,
-              "bit_width": 4,
-              "description": "IFO threshold level",
-              "enum": null
-            },
-            {
-              "name": "TEIE",
-              "bit_offset": 16,
-              "bit_width": 1,
-              "description": "Transfer error interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "TCIE",
-              "bit_offset": 17,
-              "bit_width": 1,
-              "description": "Transfer complete interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "FTIE",
-              "bit_offset": 18,
-              "bit_width": 1,
-              "description": "FIFO threshold interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "SMIE",
-              "bit_offset": 19,
-              "bit_width": 1,
-              "description": "Status match interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "TOIE",
-              "bit_offset": 20,
-              "bit_width": 1,
-              "description": "TimeOut interrupt enable",
-              "enum": null
-            },
-            {
-              "name": "APMS",
-              "bit_offset": 22,
-              "bit_width": 1,
-              "description": "Automatic poll mode stop",
-              "enum": null
+              "name": "PRESCALER",
+              "bit_offset": 24,
+              "bit_width": 8,
+              "description": "Clock prescaler"
             },
             {
               "name": "PMM",
               "bit_offset": 23,
               "bit_width": 1,
               "description": "Polling match mode",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "AndMatch",
+                  "value": 0,
+                  "description": "AND match mode. SMF is set if all the unmasked bits received from the Flash memory match the corresponding bits in the match register."
+                },
+                {
+                  "name": "OrMatch",
+                  "value": 1,
+                  "description": "OR match mode. SMF is set if any one of the unmasked bits received from the Flash memory matches its corresponding bit in the match register."
+                }
+              ]
             },
             {
-              "name": "PRESCALER",
-              "bit_offset": 24,
-              "bit_width": 8,
-              "description": "Clock prescaler",
-              "enum": null
+              "name": "APMS",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "Automatic poll mode stop",
+              "enum_values": [
+                {
+                  "name": "NotStopOnMatch",
+                  "value": 0,
+                  "description": "Automatic polling mode is stopped only by abort or by disabling the QUADSPI."
+                },
+                {
+                  "name": "StopOnMatch",
+                  "value": 1,
+                  "description": "Automatic polling mode stops as soon as there is a match."
+                }
+              ]
+            },
+            {
+              "name": "TEIE",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Transfer error interrupt enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Interrupt disable"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Interrupt enabled"
+                }
+              ]
+            },
+            {
+              "name": "TOIE",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "TimeOut interrupt enable"
+            },
+            {
+              "name": "SMIE",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "Status match interrupt enable"
+            },
+            {
+              "name": "FTIE",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "FIFO threshold interrupt enable"
+            },
+            {
+              "name": "TCIE",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "Transfer complete interrupt enable"
+            },
+            {
+              "name": "FTHRES",
+              "bit_offset": 8,
+              "bit_width": 5,
+              "description": "IFO threshold level"
+            },
+            {
+              "name": "FSEL",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "FLASH memory selection",
+              "enum_values": [
+                {
+                  "name": "SelectFlash1",
+                  "value": 0,
+                  "description": "FLASH 1 selected"
+                },
+                {
+                  "name": "SelectFlash2",
+                  "value": 1,
+                  "description": "FLASH 2 selected"
+                }
+              ]
+            },
+            {
+              "name": "DFM",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Dual-flash mode",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Dual-flash mode disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Dual-flash mode enabled"
+                }
+              ]
+            },
+            {
+              "name": "SSHIFT",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Sample shift",
+              "enum_values": [
+                {
+                  "name": "NoShift",
+                  "value": 0,
+                  "description": "No shift"
+                },
+                {
+                  "name": "OneHalfCycleShift",
+                  "value": 1,
+                  "description": "1/2 cycle shift"
+                }
+              ]
+            },
+            {
+              "name": "TCEN",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Timeout counter enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Timeout counter is disabled, and thus the chip select (nCS) remains active indefinitely after an access in memory-mapped mode."
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Timeout counter is enabled, and thus the chip select is released in memory-mapped mode after TIMEOUT[15:0] cycles of Flash memory inactivity."
+                }
+              ]
+            },
+            {
+              "name": "DMAEN",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "DMA enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "DMA is disabled for indirect mode"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "DMA is enabled for indirect mode"
+                }
+              ]
+            },
+            {
+              "name": "ABORT",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Abort request",
+              "enum_values": [
+                {
+                  "name": "NoAbortRequested",
+                  "value": 0,
+                  "description": "No abort requested"
+                },
+                {
+                  "name": "AbortRequested",
+                  "value": 1,
+                  "description": "Abort requested"
+                }
+              ]
+            },
+            {
+              "name": "EN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "QUADSPI is disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "QUADSPI is enabled"
+                }
+              ]
             }
           ]
         },
@@ -135,31 +243,41 @@
           "name": "DCR",
           "offset": 4,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "device configuration register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "device configuration register",
           "fields": [
             {
-              "name": "CKMODE",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Mode 0 / mode 3",
-              "enum": null
+              "name": "FSIZE",
+              "bit_offset": 16,
+              "bit_width": 5,
+              "description": "FLASH memory size"
             },
             {
               "name": "CSHT",
               "bit_offset": 8,
               "bit_width": 3,
-              "description": "Chip select high time",
-              "enum": null
+              "description": "Chip select high time"
             },
             {
-              "name": "FSIZE",
-              "bit_offset": 16,
-              "bit_width": 5,
-              "description": "FLASH memory size",
-              "enum": null
+              "name": "CKMODE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Mode 0 / mode 3",
+              "enum_values": [
+                {
+                  "name": "Mode0",
+                  "value": 0,
+                  "description": "CLK must stay low while nCS is high (chip select released). This is referred to as mode 0."
+                },
+                {
+                  "name": "Mode3",
+                  "value": 1,
+                  "description": "CLK must stay high while nCS is high (chip select released). This is referred to as mode 3."
+                }
+              ]
             }
           ]
         },
@@ -167,59 +285,125 @@
           "name": "SR",
           "offset": 8,
           "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
           "description": "status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "status register",
           "fields": [
             {
-              "name": "TEF",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Transfer error flag",
-              "enum": null
-            },
-            {
-              "name": "TCF",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Transfer complete flag",
-              "enum": null
-            },
-            {
-              "name": "FTF",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "FIFO threshold flag",
-              "enum": null
-            },
-            {
-              "name": "SMF",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Status match flag",
-              "enum": null
-            },
-            {
-              "name": "TOF",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "Timeout flag",
-              "enum": null
+              "name": "FLEVEL",
+              "bit_offset": 8,
+              "bit_width": 7,
+              "description": "FIFO level"
             },
             {
               "name": "BUSY",
               "bit_offset": 5,
               "bit_width": 1,
               "description": "Busy",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "NotBusy",
+                  "value": 0,
+                  "description": null
+                },
+                {
+                  "name": "Busy",
+                  "value": 1,
+                  "description": null
+                }
+              ]
             },
             {
-              "name": "FLEVEL",
-              "bit_offset": 8,
-              "bit_width": 7,
-              "description": "FIFO level",
-              "enum": null
+              "name": "TOF",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Timeout flag",
+              "enum_values": [
+                {
+                  "name": "NotTimeout",
+                  "value": 0,
+                  "description": null
+                },
+                {
+                  "name": "Timeout",
+                  "value": 1,
+                  "description": null
+                }
+              ]
+            },
+            {
+              "name": "SMF",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Status match flag",
+              "enum_values": [
+                {
+                  "name": "NotMatched",
+                  "value": 0,
+                  "description": null
+                },
+                {
+                  "name": "Matched",
+                  "value": 1,
+                  "description": null
+                }
+              ]
+            },
+            {
+              "name": "FTF",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "FIFO threshold flag",
+              "enum_values": [
+                {
+                  "name": "NotReached",
+                  "value": 0,
+                  "description": null
+                },
+                {
+                  "name": "Reached",
+                  "value": 1,
+                  "description": null
+                }
+              ]
+            },
+            {
+              "name": "TCF",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Transfer complete flag",
+              "enum_values": [
+                {
+                  "name": "NotComplete",
+                  "value": 0,
+                  "description": null
+                },
+                {
+                  "name": "Complete",
+                  "value": 1,
+                  "description": null
+                }
+              ]
+            },
+            {
+              "name": "TEF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Transfer error flag",
+              "enum_values": [
+                {
+                  "name": "NoError",
+                  "value": 0,
+                  "description": null
+                },
+                {
+                  "name": "Error",
+                  "value": 1,
+                  "description": null
+                }
+              ]
             }
           ]
         },
@@ -227,38 +411,63 @@
           "name": "FCR",
           "offset": 12,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "flag clear register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "flag clear register",
           "fields": [
             {
-              "name": "CTEF",
-              "bit_offset": 0,
+              "name": "CTOF",
+              "bit_offset": 4,
               "bit_width": 1,
-              "description": "Clear transfer error flag",
-              "enum": null
-            },
-            {
-              "name": "CTCF",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Clear transfer complete flag",
-              "enum": null
+              "description": "Clear timeout flag",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "clears the TOF flag in the QUADSPI_SR register"
+                }
+              ]
             },
             {
               "name": "CSMF",
               "bit_offset": 3,
               "bit_width": 1,
               "description": "Clear status match flag",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "clears the SMF flag in the QUADSPI_SR register"
+                }
+              ]
             },
             {
-              "name": "CTOF",
-              "bit_offset": 4,
+              "name": "CTCF",
+              "bit_offset": 1,
               "bit_width": 1,
-              "description": "Clear timeout flag",
-              "enum": null
+              "description": "Clear transfer complete flag",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "clears the TCF flag in the QUADSPI_SR register"
+                }
+              ]
+            },
+            {
+              "name": "CTEF",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Clear transfer error flag",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "clears the TEF flag in the QUADSPI_SR register"
+                }
+              ]
             }
           ]
         },
@@ -266,17 +475,17 @@
           "name": "DLR",
           "offset": 16,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "data length register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "data length register",
           "fields": [
             {
               "name": "DL",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Data length",
-              "enum": null
+              "description": "Data length"
             }
           ]
         },
@@ -284,101 +493,273 @@
           "name": "CCR",
           "offset": 20,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "communication configuration register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "communication configuration register",
           "fields": [
             {
-              "name": "INSTRUCTION",
-              "bit_offset": 0,
-              "bit_width": 8,
-              "description": "Instruction",
-              "enum": null
-            },
-            {
-              "name": "IMODE",
-              "bit_offset": 8,
-              "bit_width": 2,
-              "description": "Instruction mode",
-              "enum": null
-            },
-            {
-              "name": "ADMODE",
-              "bit_offset": 10,
-              "bit_width": 2,
-              "description": "Address mode",
-              "enum": null
-            },
-            {
-              "name": "ADSIZE",
-              "bit_offset": 12,
-              "bit_width": 2,
-              "description": "Address size",
-              "enum": null
-            },
-            {
-              "name": "ABMODE",
-              "bit_offset": 14,
-              "bit_width": 2,
-              "description": "Alternate bytes mode",
-              "enum": null
-            },
-            {
-              "name": "ABSIZE",
-              "bit_offset": 16,
-              "bit_width": 2,
-              "description": "Alternate bytes size",
-              "enum": null
-            },
-            {
-              "name": "DCYC",
-              "bit_offset": 18,
-              "bit_width": 5,
-              "description": "Number of dummy cycles",
-              "enum": null
-            },
-            {
-              "name": "DMODE",
-              "bit_offset": 24,
-              "bit_width": 2,
-              "description": "Data mode",
-              "enum": null
-            },
-            {
-              "name": "FMODE",
-              "bit_offset": 26,
-              "bit_width": 2,
-              "description": "Functional mode",
-              "enum": null
-            },
-            {
-              "name": "SIOO",
-              "bit_offset": 28,
+              "name": "DDRM",
+              "bit_offset": 31,
               "bit_width": 1,
-              "description": "Send instruction only once mode",
-              "enum": null
-            },
-            {
-              "name": "FRCM",
-              "bit_offset": 29,
-              "bit_width": 1,
-              "description": "Free-running clock mode (not available on all chips!)",
-              "enum": null
+              "description": "Double data rate mode",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "DDR Mode disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "DDR Mode enabled"
+                }
+              ]
             },
             {
               "name": "DHHC",
               "bit_offset": 30,
               "bit_width": 1,
               "description": "DDR hold half cycle",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "NoDelay",
+                  "value": 0,
+                  "description": "Delay the data output using analog delay"
+                },
+                {
+                  "name": "Delayed",
+                  "value": 1,
+                  "description": "Delay the data output by 1/4 of a QUADSPI output clock cycle."
+                }
+              ]
             },
             {
-              "name": "DDRM",
-              "bit_offset": 31,
+              "name": "SIOO",
+              "bit_offset": 28,
               "bit_width": 1,
-              "description": "Double data rate mode",
-              "enum": null
+              "description": "Send instruction only once mode",
+              "enum_values": [
+                {
+                  "name": "SendEveryTransaction",
+                  "value": 0,
+                  "description": "Send instruction on every transaction"
+                },
+                {
+                  "name": "SendFirstCommand",
+                  "value": 1,
+                  "description": "Send instruction only for the first command"
+                }
+              ]
+            },
+            {
+              "name": "FMODE",
+              "bit_offset": 26,
+              "bit_width": 2,
+              "description": "Functional mode",
+              "enum_values": [
+                {
+                  "name": "IndirectWrite",
+                  "value": 0,
+                  "description": "Indirect write mode"
+                },
+                {
+                  "name": "IndirectRead",
+                  "value": 1,
+                  "description": "Indirect read mode"
+                },
+                {
+                  "name": "AutomaticPolling",
+                  "value": 2,
+                  "description": "Automatic polling mode"
+                },
+                {
+                  "name": "MemoryMapped",
+                  "value": 3,
+                  "description": "Memory-mapped mode"
+                }
+              ]
+            },
+            {
+              "name": "DMODE",
+              "bit_offset": 24,
+              "bit_width": 2,
+              "description": "Data mode",
+              "enum_values": [
+                {
+                  "name": "NoData",
+                  "value": 0,
+                  "description": "No data"
+                },
+                {
+                  "name": "SingleLine",
+                  "value": 1,
+                  "description": "Data on a single line"
+                },
+                {
+                  "name": "TwoLines",
+                  "value": 2,
+                  "description": "Data on two lines"
+                },
+                {
+                  "name": "FourLines",
+                  "value": 3,
+                  "description": "Data on four lines"
+                }
+              ]
+            },
+            {
+              "name": "DCYC",
+              "bit_offset": 18,
+              "bit_width": 5,
+              "description": "Number of dummy cycles"
+            },
+            {
+              "name": "ABSIZE",
+              "bit_offset": 16,
+              "bit_width": 2,
+              "description": "Alternate bytes size",
+              "enum_values": [
+                {
+                  "name": "Bit8",
+                  "value": 0,
+                  "description": "8-bit alternate byte"
+                },
+                {
+                  "name": "Bit16",
+                  "value": 1,
+                  "description": "16-bit alternate bytes"
+                },
+                {
+                  "name": "Bit24",
+                  "value": 2,
+                  "description": "24-bit alternate bytes"
+                },
+                {
+                  "name": "Bit32",
+                  "value": 3,
+                  "description": "32-bit alternate bytes"
+                }
+              ]
+            },
+            {
+              "name": "ABMODE",
+              "bit_offset": 14,
+              "bit_width": 2,
+              "description": "Alternate bytes mode",
+              "enum_values": [
+                {
+                  "name": "NoAlternateBytes",
+                  "value": 0,
+                  "description": "No alternate bytes"
+                },
+                {
+                  "name": "SingleLine",
+                  "value": 1,
+                  "description": "Alternate bytes on a single line"
+                },
+                {
+                  "name": "TwoLines",
+                  "value": 2,
+                  "description": "Alternate bytes on two lines"
+                },
+                {
+                  "name": "FourLines",
+                  "value": 3,
+                  "description": "Alternate bytes on four lines"
+                }
+              ]
+            },
+            {
+              "name": "ADSIZE",
+              "bit_offset": 12,
+              "bit_width": 2,
+              "description": "Address size",
+              "enum_values": [
+                {
+                  "name": "Bit8",
+                  "value": 0,
+                  "description": "8-bit address"
+                },
+                {
+                  "name": "Bit16",
+                  "value": 1,
+                  "description": "16-bit address"
+                },
+                {
+                  "name": "Bit24",
+                  "value": 2,
+                  "description": "24-bit address"
+                },
+                {
+                  "name": "Bit32",
+                  "value": 3,
+                  "description": "32-bit address"
+                }
+              ]
+            },
+            {
+              "name": "ADMODE",
+              "bit_offset": 10,
+              "bit_width": 2,
+              "description": "Address mode",
+              "enum_values": [
+                {
+                  "name": "NoAddress",
+                  "value": 0,
+                  "description": "No address"
+                },
+                {
+                  "name": "SingleLine",
+                  "value": 1,
+                  "description": "Address on a single line"
+                },
+                {
+                  "name": "TwoLines",
+                  "value": 2,
+                  "description": "Address on two lines"
+                },
+                {
+                  "name": "FourLines",
+                  "value": 3,
+                  "description": "Address on four lines"
+                }
+              ]
+            },
+            {
+              "name": "IMODE",
+              "bit_offset": 8,
+              "bit_width": 2,
+              "description": "Instruction mode",
+              "enum_values": [
+                {
+                  "name": "NoInstruction",
+                  "value": 0,
+                  "description": "No instruction"
+                },
+                {
+                  "name": "SingleLine",
+                  "value": 1,
+                  "description": "Instruction on a single line"
+                },
+                {
+                  "name": "TwoLines",
+                  "value": 2,
+                  "description": "Instruction on two lines"
+                },
+                {
+                  "name": "FourLines",
+                  "value": 3,
+                  "description": "Instruction on four lines"
+                }
+              ]
+            },
+            {
+              "name": "INSTRUCTION",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "Instruction"
             }
           ]
         },
@@ -386,17 +767,17 @@
           "name": "AR",
           "offset": 24,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "address register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "address register",
           "fields": [
             {
               "name": "ADDRESS",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Address",
-              "enum": null
+              "description": "Address"
             }
           ]
         },
@@ -404,17 +785,17 @@
           "name": "ABR",
           "offset": 28,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "ABR",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "ABR",
           "fields": [
             {
               "name": "ALTERNATE",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "ALTERNATE",
-              "enum": null
+              "description": "ALTERNATE"
             }
           ]
         },
@@ -422,17 +803,53 @@
           "name": "DR",
           "offset": 32,
           "size": 32,
-          "description": "data register",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Data register: full word (32 bit) access",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "data register",
           "fields": [
             {
               "name": "DATA",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Data",
-              "enum": null
+              "description": "Data"
+            }
+          ]
+        },
+        {
+          "name": "DR16",
+          "offset": 32,
+          "size": 16,
+          "access": null,
+          "reset_value": null,
+          "description": "Data register: half word (16 bit) access",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DATA",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Data"
+            }
+          ]
+        },
+        {
+          "name": "DR8",
+          "offset": 32,
+          "size": 8,
+          "access": null,
+          "reset_value": null,
+          "description": "Data register: one byte (8 bit) access",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "DATA",
+              "bit_offset": 0,
+              "bit_width": 8,
+              "description": "Data"
             }
           ]
         },
@@ -440,17 +857,17 @@
           "name": "PSMKR",
           "offset": 36,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "polling status mask register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "polling status mask register",
           "fields": [
             {
               "name": "MASK",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Status mask",
-              "enum": null
+              "description": "Status mask"
             }
           ]
         },
@@ -458,17 +875,17 @@
           "name": "PSMAR",
           "offset": 40,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "polling status match register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "polling status match register",
           "fields": [
             {
               "name": "MATCH",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Status match",
-              "enum": null
+              "description": "Status match"
             }
           ]
         },
@@ -476,17 +893,17 @@
           "name": "PIR",
           "offset": 44,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "polling interval register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "polling interval register",
           "fields": [
             {
               "name": "INTERVAL",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "Polling interval",
-              "enum": null
+              "description": "Polling interval"
             }
           ]
         },
@@ -494,17 +911,17 @@
           "name": "LPTR",
           "offset": 48,
           "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
           "description": "low-power timeout register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "low-power timeout register",
           "fields": [
             {
               "name": "TIMEOUT",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "Timeout period",
-              "enum": null
+              "description": "Timeout period"
             }
           ]
         }

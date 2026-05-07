@@ -2,41 +2,90 @@
   "schema": 1,
   "kind": "syscfg",
   "version": "l0",
+  "source": "stm32rs_svd",
+  "source_device": "stm32l011d3",
+  "source_file": "stm32l0x1.svd.patched",
   "blocks": {
     "SYSCFG": {
       "name": "SYSCFG",
-      "description": "System configuration controller",
+      "description": "System configuration controller and COMP register",
       "extends": null,
       "registers": [
         {
           "name": "CFGR1",
           "offset": 0,
           "size": 32,
-          "description": "configuration register 1",
+          "access": null,
+          "reset_value": 0,
+          "description": "SYSCFG configuration register 1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "configuration register 1",
           "fields": [
+            {
+              "name": "BOOT_MODE",
+              "bit_offset": 8,
+              "bit_width": 2,
+              "description": "Boot mode selected by the boot pins status bits",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "MainFlash",
+                  "value": 0,
+                  "description": "Main Flash memory boot mode"
+                },
+                {
+                  "name": "SystemFlash",
+                  "value": 1,
+                  "description": "System Flash memory boot mode"
+                },
+                {
+                  "name": "SRAM",
+                  "value": 3,
+                  "description": "Embedded SRAM boot mode"
+                }
+              ]
+            },
             {
               "name": "MEM_MODE",
               "bit_offset": 0,
               "bit_width": 2,
               "description": "Memory mapping selection bits",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "MainFlash",
+                  "value": 0,
+                  "description": "Main Flash memory mapped at 0x0000_0000"
+                },
+                {
+                  "name": "SystemFlash",
+                  "value": 1,
+                  "description": "System Flash memory mapped at 0x0000_0000"
+                },
+                {
+                  "name": "SRAM",
+                  "value": 3,
+                  "description": "Embedded SRAM mapped at 0x0000_0000"
+                }
+              ]
             },
             {
               "name": "UFB",
               "bit_offset": 3,
               "bit_width": 1,
               "description": "User bank swapping",
-              "enum": null
-            },
-            {
-              "name": "BOOT_MODE",
-              "bit_offset": 8,
-              "bit_width": 2,
-              "description": "Boot mode selected by the boot pins status bits",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Bank1",
+                  "value": 0,
+                  "description": "Flash Program memory Bank 1 is mapped at 0x0800 0000 (and aliased at 0x0000 0000 if MEM_MODE=00) and Data EEPROM Bank 1 at 0x0808 0000 (aliased at 0x0008 0000 if MEM_MODE=00)"
+                },
+                {
+                  "name": "Bank2",
+                  "value": 1,
+                  "description": "Flash Program memory Bank 2 is mapped at 0x0800 0000 (and aliased at 0x0000 0000 if MEM_MODE=00) and Data EEPROM Bank 2 at 0x0808 0000 (and aliased at 0x0008 0000 if MEM_MODE=00)"
+                }
+              ]
             }
           ]
         },
@@ -44,84 +93,358 @@
           "name": "CFGR2",
           "offset": 4,
           "size": 32,
-          "description": "CFGR2",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "SYSCFG configuration register 2",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "CFGR2",
           "fields": [
             {
-              "name": "FWDIS",
-              "bit_offset": 0,
+              "name": "I2C2_FMP",
+              "bit_offset": 13,
               "bit_width": 1,
-              "description": "Firewall disable bit",
-              "enum": null
-            },
-            {
-              "name": "I2C_PB6_FMP",
-              "bit_offset": 8,
-              "bit_width": 1,
-              "description": "Fm+ drive capability on PB6 enable bit",
-              "enum": null
-            },
-            {
-              "name": "I2C_PB7_FMP",
-              "bit_offset": 9,
-              "bit_width": 1,
-              "description": "Fm+ drive capability on PB7 enable bit",
-              "enum": null
-            },
-            {
-              "name": "I2C_PB8_FMP",
-              "bit_offset": 10,
-              "bit_width": 1,
-              "description": "Fm+ drive capability on PB8 enable bit",
-              "enum": null
-            },
-            {
-              "name": "I2C_PB9_FMP",
-              "bit_offset": 11,
-              "bit_width": 1,
-              "description": "Fm+ drive capability on PB9 enable bit",
-              "enum": null
+              "description": "I2C2 Fm+ drive capability enable bit",
+              "enum_values": [
+                {
+                  "name": "Standard",
+                  "value": 0,
+                  "description": "FM+ mode is controlled by I2C_Pxx_FMP bits only"
+                },
+                {
+                  "name": "FMP",
+                  "value": 1,
+                  "description": "FM+ mode is enabled on all I2C2 pins selected through selection bits in GPIOx_AFR registers"
+                }
+              ]
             },
             {
               "name": "I2C1_FMP",
               "bit_offset": 12,
               "bit_width": 1,
               "description": "I2C1 Fm+ drive capability enable bit",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Standard",
+                  "value": 0,
+                  "description": "FM+ mode is controlled by I2C_Pxx_FMP bits only"
+                },
+                {
+                  "name": "FMP",
+                  "value": 1,
+                  "description": "FM+ mode is enabled on all I2C1 pins selected through selection bits in GPIOx_AFR registers"
+                }
+              ]
             },
             {
-              "name": "I2C2_FMP",
-              "bit_offset": 13,
+              "name": "I2C_PB9_FMP",
+              "bit_offset": 11,
               "bit_width": 1,
-              "description": "I2C2 Fm+ drive capability enable bit",
-              "enum": null
+              "description": "Fm+ drive capability on PB9 enable bit",
+              "enum_values": [
+                {
+                  "name": "Standard",
+                  "value": 0,
+                  "description": "PB9 pin operate in standard mode"
+                },
+                {
+                  "name": "FMP",
+                  "value": 1,
+                  "description": "I2C FM+ mode enabled on PB9 and the Speed control is bypassed"
+                }
+              ]
+            },
+            {
+              "name": "I2C_PB8_FMP",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Fm+ drive capability on PB8 enable bit",
+              "enum_values": [
+                {
+                  "name": "Standard",
+                  "value": 0,
+                  "description": "PB8 pin operate in standard mode"
+                },
+                {
+                  "name": "FMP",
+                  "value": 1,
+                  "description": "I2C FM+ mode enabled on PB8 and the Speed control is bypassed"
+                }
+              ]
+            },
+            {
+              "name": "I2C_PB7_FMP",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Fm+ drive capability on PB7 enable bit",
+              "enum_values": [
+                {
+                  "name": "Standard",
+                  "value": 0,
+                  "description": "PB7 pin operate in standard mode"
+                },
+                {
+                  "name": "FMP",
+                  "value": 1,
+                  "description": "I2C FM+ mode enabled on PB7 and the Speed control is bypassed"
+                }
+              ]
+            },
+            {
+              "name": "I2C_PB6_FMP",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Fm+ drive capability on PB6 enable bit",
+              "enum_values": [
+                {
+                  "name": "Standard",
+                  "value": 0,
+                  "description": "PB6 pin operate in standard mode"
+                },
+                {
+                  "name": "FMP",
+                  "value": 1,
+                  "description": "I2C FM+ mode enabled on PB6 and the Speed control is bypassed"
+                }
+              ]
             },
             {
               "name": "I2C3_FMP",
               "bit_offset": 14,
               "bit_width": 1,
               "description": "I2C3 Fm+ drive capability enable bit",
-              "enum": null
+              "enum_values": [
+                {
+                  "name": "Standard",
+                  "value": 0,
+                  "description": "FM+ mode is controlled by I2C_Pxx_FMP bits only"
+                },
+                {
+                  "name": "FMP",
+                  "value": 1,
+                  "description": "FM+ mode is enabled on all I2C3 pins selected through selection bits in GPIOx_AFR registers"
+                }
+              ]
+            },
+            {
+              "name": "FWDIS",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Firewall disable bit",
+              "enum_values": [
+                {
+                  "name": "Enabled",
+                  "value": 0,
+                  "description": "Firewall access enabled"
+                },
+                {
+                  "name": "Disabled",
+                  "value": 1,
+                  "description": "Firewall access disabled"
+                }
+              ]
             }
           ]
         },
         {
-          "name": "EXTICR",
+          "name": "EXTICR1",
           "offset": 8,
           "size": 32,
-          "description": "external interrupt configuration register",
-          "array_len": 4,
-          "array_stride": 4,
-          "fieldset_description": "external interrupt configuration register 1-4",
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "external interrupt configuration register 1",
+          "array_len": null,
+          "array_stride": null,
           "fields": [
             {
-              "name": "EXTI",
+              "name": "EXTI3",
+              "bit_offset": 12,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 0 to 3)"
+            },
+            {
+              "name": "EXTI2",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 0 to 3)"
+            },
+            {
+              "name": "EXTI1",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 0 to 3)"
+            },
+            {
+              "name": "EXTI0",
               "bit_offset": 0,
               "bit_width": 4,
-              "description": "EXTI configuration bits",
-              "enum": null
+              "description": "EXTI x configuration (x = 0 to 3)",
+              "enum_values": [
+                {
+                  "name": "PA",
+                  "value": 0,
+                  "description": "Select PAx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PB",
+                  "value": 1,
+                  "description": "Select PBx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PC",
+                  "value": 2,
+                  "description": "Select PCx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PD",
+                  "value": 3,
+                  "description": "Select PDx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PE",
+                  "value": 4,
+                  "description": "Select PEx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PH",
+                  "value": 5,
+                  "description": "Select PHx as the source input for the EXTIx external interrupt"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "EXTICR2",
+          "offset": 12,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "external interrupt configuration register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "EXTI7",
+              "bit_offset": 12,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 4 to 7)"
+            },
+            {
+              "name": "EXTI6",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 4 to 7)"
+            },
+            {
+              "name": "EXTI5",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 4 to 7)"
+            },
+            {
+              "name": "EXTI4",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 4 to 7)",
+              "enum_values": [
+                {
+                  "name": "PA",
+                  "value": 0,
+                  "description": "Select PAx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PB",
+                  "value": 1,
+                  "description": "Select PBx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PC",
+                  "value": 2,
+                  "description": "Select PCx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PD",
+                  "value": 3,
+                  "description": "Select PDx as the source input for the EXTIx external interrupt"
+                },
+                {
+                  "name": "PE",
+                  "value": 4,
+                  "description": "Select PEx as the source input for the EXTIx external interrupt"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "EXTICR3",
+          "offset": 16,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "external interrupt configuration register 3",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "EXTI11",
+              "bit_offset": 12,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 8 to 11)"
+            },
+            {
+              "name": "EXTI10",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "EXTI10"
+            },
+            {
+              "name": "EXTI9",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 8 to 11)"
+            },
+            {
+              "name": "EXTI8",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 8 to 11)"
+            }
+          ]
+        },
+        {
+          "name": "EXTICR4",
+          "offset": 20,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "external interrupt configuration register 4",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "EXTI15",
+              "bit_offset": 12,
+              "bit_width": 4,
+              "description": "EXTI x configuration (x = 12 to 15)"
+            },
+            {
+              "name": "EXTI14",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "EXTI14"
+            },
+            {
+              "name": "EXTI13",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "EXTI13"
+            },
+            {
+              "name": "EXTI12",
+              "bit_offset": 0,
+              "bit_width": 4,
+              "description": "EXTI12"
             }
           ]
         },
@@ -129,66 +452,523 @@
           "name": "CFGR3",
           "offset": 32,
           "size": 32,
-          "description": "CFGR3",
+          "access": null,
+          "reset_value": 0,
+          "description": "SYSCFG configuration register 3",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "CFGR3",
           "fields": [
-            {
-              "name": "EN_VREFINT",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "VREFINT enable and scaler control for COMP2 enable bit",
-              "enum": null
-            },
-            {
-              "name": "SEL_VREF_OUT",
-              "bit_offset": 4,
-              "bit_width": 2,
-              "description": "VREFINT_ADC connection bit",
-              "enum": null
-            },
-            {
-              "name": "ENBUF_VREFINT_ADC",
-              "bit_offset": 8,
-              "bit_width": 1,
-              "description": "VREFINT reference for ADC enable bit",
-              "enum": null
-            },
-            {
-              "name": "ENBUF_SENSOR_ADC",
-              "bit_offset": 9,
-              "bit_width": 1,
-              "description": "Temperature sensor reference for ADC enable bit",
-              "enum": null
-            },
-            {
-              "name": "ENBUF_VREFINT_COMP2",
-              "bit_offset": 12,
-              "bit_width": 1,
-              "description": "VREFINT reference for COMP2 scaler enable bit",
-              "enum": null
-            },
-            {
-              "name": "ENREF_HSI48",
-              "bit_offset": 13,
-              "bit_width": 1,
-              "description": "VREFINT reference for HSI48 oscillator enable bit",
-              "enum": null
-            },
             {
               "name": "VREFINT_RDYF",
               "bit_offset": 30,
               "bit_width": 1,
               "description": "VREFINT ready flag",
-              "enum": null
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotReady",
+                  "value": 0,
+                  "description": "VREFINT OFF"
+                },
+                {
+                  "name": "Ready",
+                  "value": 1,
+                  "description": "VREFINT ready"
+                }
+              ]
+            },
+            {
+              "name": "ENBUF_SENSOR_ADC",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Sensor reference for ADC enable bit",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Disables the buffer used to generate VREFINT reference for the temperature sensor"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Enables the buffer used to generate VREFINT reference for the temperature sensor"
+                }
+              ]
+            },
+            {
+              "name": "SEL_VREF_OUT",
+              "bit_offset": 4,
+              "bit_width": 2,
+              "description": "BGAP_ADC connection bit",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NoConnection",
+                  "value": 0,
+                  "description": "no pad connected"
+                },
+                {
+                  "name": "PB0",
+                  "value": 1,
+                  "description": "PB0 connected"
+                },
+                {
+                  "name": "PB1",
+                  "value": 2,
+                  "description": "PB1 connected"
+                },
+                {
+                  "name": "Both",
+                  "value": 3,
+                  "description": "PB0 and PB1 connected"
+                }
+              ]
             },
             {
               "name": "REF_LOCK",
               "bit_offset": 31,
               "bit_width": 1,
               "description": "SYSCFG_CFGR3 lock bit",
-              "enum": null
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "ReadWrite",
+                  "value": 0,
+                  "description": "SYSCFG_CFGR3[31:0] bits are read/write"
+                },
+                {
+                  "name": "ReadOnly",
+                  "value": 1,
+                  "description": "SYSCFG_CFGR3[31:0] bits are read-only"
+                }
+              ]
+            },
+            {
+              "name": "ENBUF_VREFINT_COMP2",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "VREFINT reference for COMP2 scaler enable bit",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Disables the buffer used to generate VREFINT references for COMP2"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Enables the buffer used to generate VREFINT references for COMP2"
+                }
+              ]
+            },
+            {
+              "name": "ENBUF_VREFINT_ADC",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "VREFINT reference for ADC enable bit",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Disables the buffer used to generate VREFINT reference for the ADC"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Enables the buffer used to generate VREFINT reference for the ADC"
+                }
+              ]
+            },
+            {
+              "name": "EN_VREFINT",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "VREFINT enable and scaler control for COMP2 enable bit",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "VREFINT voltage disabled in low-power mode (if ULP=1) and scaler for COMP2 disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "VREFINT voltage enabled in low-power mode and scaler for COMP2 enabled"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "COMP1_CSR",
+          "offset": 24,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Comparator 1 control and status register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "COMP1EN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Comparator 1 enable bit",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Comparator 1 switched OFF"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Comparator 1 switched ON"
+                }
+              ]
+            },
+            {
+              "name": "COMP1INNSEL",
+              "bit_offset": 4,
+              "bit_width": 2,
+              "description": "Comparator 1 Input Minus connection configuration bit",
+              "enum_values": [
+                {
+                  "name": "VREFINT",
+                  "value": 0,
+                  "description": "VREFINT"
+                },
+                {
+                  "name": "PA0",
+                  "value": 1,
+                  "description": "PA0"
+                },
+                {
+                  "name": "PA4",
+                  "value": 2,
+                  "description": "PA4"
+                },
+                {
+                  "name": "PA5",
+                  "value": 3,
+                  "description": "PA5"
+                }
+              ]
+            },
+            {
+              "name": "COMP1WM",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Comparator 1 window mode selection bit",
+              "enum_values": [
+                {
+                  "name": "PA1",
+                  "value": 0,
+                  "description": "Plus input of comparator 1 connected to PA1"
+                },
+                {
+                  "name": "Comp2Plus",
+                  "value": 1,
+                  "description": "Plus input of comparator 1 shorted with Plus input of comparator 2 (see COMP1_CSR)"
+                }
+              ]
+            },
+            {
+              "name": "COMP1LPTIMIN1",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "Comparator 1 LPTIM input propagation bit",
+              "enum_values": [
+                {
+                  "name": "Gated",
+                  "value": 0,
+                  "description": "Comparator 1 output gated"
+                },
+                {
+                  "name": "NotGated",
+                  "value": 1,
+                  "description": "Comparator 1 output sent to LPTIM input 1"
+                }
+              ]
+            },
+            {
+              "name": "COMP1POLARITY",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Comparator 1 polarity selection bit",
+              "enum_values": [
+                {
+                  "name": "NotInverted",
+                  "value": 0,
+                  "description": "Comparator 1 output value not inverted"
+                },
+                {
+                  "name": "Inverted",
+                  "value": 1,
+                  "description": "Comparator 1 output value inverted"
+                }
+              ]
+            },
+            {
+              "name": "COMP1VALUE",
+              "bit_offset": 30,
+              "bit_width": 1,
+              "description": "Comparator 1 output status bit",
+              "enum_values": [
+                {
+                  "name": "NotEqual",
+                  "value": 0,
+                  "description": "Comparator values are not equal"
+                },
+                {
+                  "name": "Equal",
+                  "value": 1,
+                  "description": "Comparator values are equal"
+                }
+              ]
+            },
+            {
+              "name": "COMP1LOCK",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "COMP1_CSR register lock bit",
+              "enum_values": [
+                {
+                  "name": "ReadWrite",
+                  "value": 0,
+                  "description": "COMP1_CSR[31:0] for comparator 1 are read/write"
+                },
+                {
+                  "name": "ReadOnly",
+                  "value": 1,
+                  "description": "COMP1_CSR[31:0] for comparator 1 are read-only"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "COMP2_CSR",
+          "offset": 28,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "Comparator 2 control and status register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "COMP2EN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Comparator 2 enable bit",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Comparator 2 switched OFF"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Comparator 2 switched ON"
+                }
+              ]
+            },
+            {
+              "name": "COMP2SPEED",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Comparator 2 power mode selection bit",
+              "enum_values": [
+                {
+                  "name": "Slow",
+                  "value": 0,
+                  "description": "Slow speed"
+                },
+                {
+                  "name": "Fast",
+                  "value": 1,
+                  "description": "Fast speed"
+                }
+              ]
+            },
+            {
+              "name": "COMP2INNSEL",
+              "bit_offset": 4,
+              "bit_width": 3,
+              "description": "Comparator 2 Input Minus connection configuration bit",
+              "enum_values": [
+                {
+                  "name": "VREFINT",
+                  "value": 0,
+                  "description": "VREFINT"
+                },
+                {
+                  "name": "PA2",
+                  "value": 1,
+                  "description": "PA2"
+                },
+                {
+                  "name": "PA4",
+                  "value": 2,
+                  "description": "PA4"
+                },
+                {
+                  "name": "PA5",
+                  "value": 3,
+                  "description": "PA5"
+                },
+                {
+                  "name": "VREFINT_Div4",
+                  "value": 4,
+                  "description": "1/4 VREFINT"
+                },
+                {
+                  "name": "VREFINT_Div2",
+                  "value": 5,
+                  "description": "1/2 VREFINT"
+                },
+                {
+                  "name": "VREFINT_Div3_4",
+                  "value": 6,
+                  "description": "3/4 VREFINT"
+                },
+                {
+                  "name": "PB3",
+                  "value": 7,
+                  "description": "PB3"
+                }
+              ]
+            },
+            {
+              "name": "COMP2INPSEL",
+              "bit_offset": 8,
+              "bit_width": 3,
+              "description": "Comparator 2 Input Plus connection configuration bit",
+              "enum_values": [
+                {
+                  "name": "PA3",
+                  "value": 0,
+                  "description": "PA3"
+                },
+                {
+                  "name": "PB4",
+                  "value": 1,
+                  "description": "PB4"
+                },
+                {
+                  "name": "PB5",
+                  "value": 2,
+                  "description": "PB5"
+                },
+                {
+                  "name": "PB6",
+                  "value": 3,
+                  "description": "PB6"
+                },
+                {
+                  "name": "PB7",
+                  "value": 4,
+                  "description": "PB7"
+                },
+                {
+                  "name": "PA7",
+                  "value": 5,
+                  "description": "PA7"
+                }
+              ]
+            },
+            {
+              "name": "COMP2LPTIMIN2",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "Comparator 2 LPTIM input 2 propagation bit",
+              "enum_values": [
+                {
+                  "name": "Gated",
+                  "value": 0,
+                  "description": "Comparator 2 output gated"
+                },
+                {
+                  "name": "NotGated",
+                  "value": 1,
+                  "description": "Comparator 2 output sent to LPTIM input 2"
+                }
+              ]
+            },
+            {
+              "name": "COMP2LPTIMIN1",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Comparator 2 LPTIM input 1 propagation bit",
+              "enum_values": [
+                {
+                  "name": "Gated",
+                  "value": 0,
+                  "description": "Comparator 2 output gated"
+                },
+                {
+                  "name": "NotGated",
+                  "value": 1,
+                  "description": "Comparator 2 output sent to LPTIM input 1"
+                }
+              ]
+            },
+            {
+              "name": "COMP2POLARITY",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Comparator 2 polarity selection bit",
+              "enum_values": [
+                {
+                  "name": "NotInverted",
+                  "value": 0,
+                  "description": "Comparator 2 output value not inverted"
+                },
+                {
+                  "name": "Inverted",
+                  "value": 1,
+                  "description": "Comparator 2 output value inverted"
+                }
+              ]
+            },
+            {
+              "name": "COMP2VALUE",
+              "bit_offset": 30,
+              "bit_width": 1,
+              "description": "Comparator 2 output status bit",
+              "enum_values": [
+                {
+                  "name": "NotEqual",
+                  "value": 0,
+                  "description": "Comparator values are not equal"
+                },
+                {
+                  "name": "Equal",
+                  "value": 1,
+                  "description": "Comparator values are equal"
+                }
+              ]
+            },
+            {
+              "name": "COMP2LOCK",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "COMP2_CSR register lock bit",
+              "enum_values": [
+                {
+                  "name": "ReadWrite",
+                  "value": 0,
+                  "description": "COMP2_CSR[31:0] for comparator 2 are read/write"
+                },
+                {
+                  "name": "ReadOnly",
+                  "value": 1,
+                  "description": "COMP2_CSR[31:0] for comparator 2 are read-only"
+                }
+              ]
             }
           ]
         }

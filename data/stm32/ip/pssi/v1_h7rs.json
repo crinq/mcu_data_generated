@@ -2,83 +2,213 @@
   "schema": 1,
   "kind": "pssi",
   "version": "v1_h7rs",
+  "source": "stm32rs_svd",
+  "source_device": "stm32h7r3a8",
+  "source_file": "stm32h7r.svd.patched",
   "blocks": {
     "PSSI": {
       "name": "PSSI",
-      "description": "Parallel synchronous slave interface.",
+      "description": "Parallel synchronous slave interface",
       "extends": null,
       "registers": [
         {
           "name": "CR",
           "offset": 0,
           "size": 32,
-          "description": "PSSI control register.",
+          "access": null,
+          "reset_value": 1073741824,
+          "description": "PSSI control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "PSSI control register.",
           "fields": [
             {
               "name": "CKPOL",
               "bit_offset": 5,
               "bit_width": 1,
               "description": "Parallel data clock polarity This bit configures the capture edge of the parallel clock or the edge used for driving outputs, depending on OUTEN.",
-              "enum": "CKPOL"
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "FallingEdge",
+                  "value": 0,
+                  "description": "Falling edge active for inputs or rising edge active for outputs"
+                },
+                {
+                  "name": "RisingEdge",
+                  "value": 1,
+                  "description": "Rising edge active for inputs or falling edge active for outputs"
+                }
+              ]
             },
             {
               "name": "DEPOL",
               "bit_offset": 6,
               "bit_width": 1,
               "description": "Data enable (PSSI_DE) polarity This bit indicates the level on the PSSI_DE pin when the data are not valid on the parallel interface.",
-              "enum": "DEPOL"
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "ActiveLow",
+                  "value": 0,
+                  "description": "PSSI_DE active low (0 indicates that data is valid)"
+                },
+                {
+                  "name": "ActiveHigh",
+                  "value": 1,
+                  "description": "PSSI_DE active high (1 indicates that data is valid)"
+                }
+              ]
             },
             {
               "name": "RDYPOL",
               "bit_offset": 8,
               "bit_width": 1,
               "description": "Ready (PSSI_RDY) polarity This bit indicates the level on the PSSI_RDY pin when the data are not valid on the parallel interface.",
-              "enum": "RDYPOL"
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "ActiveLow",
+                  "value": 0,
+                  "description": "PSSI_RDY active low (0 indicates that the receiver is ready to receive)"
+                },
+                {
+                  "name": "ActiveHigh",
+                  "value": 1,
+                  "description": "PSSI_RDY active high (1 indicates that the receiver is ready to receive)"
+                }
+              ]
             },
             {
               "name": "EDM",
               "bit_offset": 10,
               "bit_width": 2,
-              "description": "Extended data mode.",
-              "enum": "EDM"
+              "description": "Extended data mode",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "BitWidth8",
+                  "value": 0,
+                  "description": "Interface captures 8-bit data on every parallel data clock"
+                },
+                {
+                  "name": "BitWidth16",
+                  "value": 3,
+                  "description": "The interface captures 16-bit data on every parallel data clock"
+                }
+              ]
             },
             {
               "name": "ENABLE",
               "bit_offset": 14,
               "bit_width": 1,
-              "description": "PSSI enable The contents of the FIFO are flushed when ENABLE is cleared to 0. Note: When ENABLE=1, the content of PSSI_CR must not be changed, except for the ENABLE bit itself. All configuration bits can change as soon as ENABLE changes from 0 to 1. The DMA controller and all PSSI configuration registers must be programmed correctly before setting the ENABLE bit to 1. The ENABLE bit and the DCMI ENABLE bit (bit 15 of DCMI_CR) must not be set to 1 at the same time.",
-              "enum": null
+              "description": "PSSI enable The contents of the FIFO are flushed when ENABLE is cleared to 0. Note: When ENABLE=1, the content of PSSI_CR must not be changed, except for the ENABLE bit itself. All configuration bits can change as soon as ENABLE changes from 0 to 1. Note: The DMA controller and all PSSI configuration registers must be programmed correctly before setting the ENABLE bit to 1.",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "PSSI disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "PSSI enabled"
+                }
+              ]
             },
             {
               "name": "DERDYCFG",
               "bit_offset": 18,
               "bit_width": 3,
               "description": "Data enable and ready configuration When the PSSI_RDY function is mapped to the PSSI_DE pin (settings 101 or 111), it is still the RDYPOL bit which determines its polarity. Similarly, when the PSSI_DE function is mapped to the PSSI_RDY pin (settings 110 or 111), it is still the DEPOL bit which determines its polarity.",
-              "enum": "DERDYCFG"
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "PSSI_DE and PSSI_RDY both disabled"
+                },
+                {
+                  "name": "Rdy",
+                  "value": 1,
+                  "description": "Only PSSI_RDY enabled"
+                },
+                {
+                  "name": "De",
+                  "value": 2,
+                  "description": "Only PSSI_DE enabled"
+                },
+                {
+                  "name": "RdyDeAlt",
+                  "value": 3,
+                  "description": "Both PSSI_RDY and PSSI_DE alternate functions enabled"
+                },
+                {
+                  "name": "RdyDe",
+                  "value": 4,
+                  "description": "Both PSSI_RDY and PSSI_DE features enabled - bidirectional on PSSI_RDY pin"
+                },
+                {
+                  "name": "RdyRemapped",
+                  "value": 5,
+                  "description": "Only PSSI_RDY function enabled, but mapped to PSSI_DE pin"
+                },
+                {
+                  "name": "DeRemapped",
+                  "value": 6,
+                  "description": "Only PSSI_DE function enabled, but mapped to PSSI_RDY pin"
+                },
+                {
+                  "name": "RdyDeBidi",
+                  "value": 7,
+                  "description": "Both PSSI_RDY and PSSI_DE features enabled - bidirectional on PSSI_DE pin"
+                }
+              ]
             },
             {
               "name": "CKSRC",
               "bit_offset": 29,
               "bit_width": 1,
-              "description": "Clock source.",
-              "enum": "CKSRC"
+              "description": "Clock source This bit configures the clock source of the PSSI_PDCK.",
+              "access": "read-write"
             },
             {
               "name": "DMAEN",
               "bit_offset": 30,
               "bit_width": 1,
-              "description": "DMA enable bit.",
-              "enum": null
+              "description": "DMA enable bit",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "DMA transfers are disabled. The user application can directly access the PSSI_DR register when DMA transfers are disabled."
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "DMA transfers are enabled (default configuration). A DMA channel in the general-purpose DMA controller must be configured to perform transfers from/to PSSI_DR"
+                }
+              ]
             },
             {
               "name": "OUTEN",
               "bit_offset": 31,
               "bit_width": 1,
-              "description": "Data direction selection bit.",
-              "enum": "OUTEN"
+              "description": "Data direction selection bit",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "ReceiveMode",
+                  "value": 0,
+                  "description": "Data is input synchronously with PSSI_PDCK"
+                },
+                {
+                  "name": "TransmitMode",
+                  "value": 1,
+                  "description": "Data is output synchronously with PSSI_PDCK"
+                }
+              ]
             }
           ]
         },
@@ -86,24 +216,49 @@
           "name": "SR",
           "offset": 4,
           "size": 32,
-          "description": "PSSI status register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "PSSI status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "PSSI status register.",
           "fields": [
             {
               "name": "RTT4B",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "FIFO is ready to transfer four bytes.",
-              "enum": null
+              "description": "FIFO is ready to transfer four bytes",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotReady",
+                  "value": 0,
+                  "description": "FIFO is not ready for a four-byte transfer"
+                },
+                {
+                  "name": "Ready",
+                  "value": 1,
+                  "description": "FIFO is ready for a four-byte (32-bit) transfer. In receive mode, this means that at least four valid data bytes are in the FIFO. In transmit mode, this means that there are at least four bytes free in the FIFO"
+                }
+              ]
             },
             {
               "name": "RTT1B",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "FIFO is ready to transfer one byte.",
-              "enum": null
+              "description": "FIFO is ready to transfer one byte",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotReady",
+                  "value": 0,
+                  "description": "FIFO is not ready for a 1-byte transfer"
+                },
+                {
+                  "name": "Ready",
+                  "value": 1,
+                  "description": "FIFO is ready for a one byte (32-bit) transfer. In receive mode, this means that at least one valid data byte is in the FIFO. In transmit mode, this means that there is at least one byte free in the FIFO"
+                }
+              ]
             }
           ]
         },
@@ -111,17 +266,30 @@
           "name": "RIS",
           "offset": 8,
           "size": 32,
-          "description": "PSSI raw interrupt status register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "PSSI raw interrupt status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "PSSI raw interrupt status register.",
           "fields": [
             {
               "name": "OVR_RIS",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "Data buffer overrun/underrun raw interrupt status This bit is cleared by writing a 1 to the OVR_ISC bit in PSSI_ICR.",
-              "enum": null
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "Cleared",
+                  "value": 0,
+                  "description": "No overrun/underrun occurred"
+                },
+                {
+                  "name": "Occurred",
+                  "value": 1,
+                  "description": "An overrun/underrun occurred: overrun in receive mode, underrun in transmit mode. This bit is cleared by writing a 1 to the OVR_ISC bit in PSSI_ICR"
+                }
+              ]
             }
           ]
         },
@@ -129,17 +297,30 @@
           "name": "IER",
           "offset": 12,
           "size": 32,
-          "description": "PSSI interrupt enable register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "PSSI interrupt enable register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "PSSI interrupt enable register.",
           "fields": [
             {
               "name": "OVR_IE",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Data buffer overrun/underrun interrupt enable.",
-              "enum": null
+              "description": "Data buffer overrun/underrun interrupt enable",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "No interrupt generation"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "An interrupt is generated if either an overrun or an underrun error occurred"
+                }
+              ]
             }
           ]
         },
@@ -147,17 +328,30 @@
           "name": "MIS",
           "offset": 16,
           "size": 32,
-          "description": "PSSI masked interrupt status register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "PSSI masked interrupt status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "PSSI masked interrupt status register.",
           "fields": [
             {
               "name": "OVR_MIS",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "Data buffer overrun/underrun masked interrupt status This bit is set to 1 only when PSSI_IER/OVR_IE and PSSI_RIS/OVR_RIS are both set to 1.",
-              "enum": null
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "No interrupt is generated when an overrun/underrun error occurs"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "An interrupt is generated if there is either an overrun or an underrun error and the OVR_IE bit is set in PSSI_IER"
+                }
+              ]
             }
           ]
         },
@@ -165,17 +359,25 @@
           "name": "ICR",
           "offset": 20,
           "size": 32,
-          "description": "PSSI interrupt clear register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "PSSI interrupt clear register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "PSSI interrupt clear register.",
           "fields": [
             {
               "name": "OVR_ISC",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "Data buffer overrun/underrun interrupt status clear Writing this bit to 1 clears the OVR_RIS bit in PSSI_RIS.",
-              "enum": null
+              "access": "write-only",
+              "enum_values": [
+                {
+                  "name": "Clear",
+                  "value": 1,
+                  "description": "Writing this bit to 1 clears the OVR_RIS bit in PSSI_RIS"
+                }
+              ]
             }
           ]
         },
@@ -183,158 +385,44 @@
           "name": "DR",
           "offset": 40,
           "size": 32,
-          "description": "PSSI data register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "PSSI data register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "PSSI data register.",
           "fields": [
             {
-              "name": "BYTE",
+              "name": "BYTE0",
               "bit_offset": 0,
               "bit_width": 8,
-              "description": "Data byte 0.",
-              "enum": null
+              "description": "Data byte 0",
+              "access": "read-write"
+            },
+            {
+              "name": "BYTE1",
+              "bit_offset": 8,
+              "bit_width": 8,
+              "description": "Data byte 1",
+              "access": "read-write"
+            },
+            {
+              "name": "BYTE2",
+              "bit_offset": 16,
+              "bit_width": 8,
+              "description": "Data byte 2",
+              "access": "read-write"
+            },
+            {
+              "name": "BYTE3",
+              "bit_offset": 24,
+              "bit_width": 8,
+              "description": "Data byte 3",
+              "access": "read-write"
             }
           ]
         }
       ]
     }
   },
-  "enums": {
-    "CKPOL": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "FallingEdge",
-          "value": 0,
-          "description": "Falling edge active for inputs or rising edge active for outputs."
-        },
-        {
-          "name": "RisingEdge",
-          "value": 1,
-          "description": "Rising edge active for inputs or falling edge active for outputs."
-        }
-      ]
-    },
-    "CKSRC": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "ExternalClock",
-          "value": 0,
-          "description": "External clock (PSSI_PDCK in input)."
-        },
-        {
-          "name": "InternalClock",
-          "value": 1,
-          "description": "Internal clock (PSSI_PDCK in output)."
-        }
-      ]
-    },
-    "DEPOL": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "ActiveLow",
-          "value": 0,
-          "description": "PSSI_DE active low (0 indicates that data is valid)."
-        },
-        {
-          "name": "ActiveHigh",
-          "value": 1,
-          "description": "PSSI_DE active high (1 indicates that data is valid)."
-        }
-      ]
-    },
-    "DERDYCFG": {
-      "bit_size": 3,
-      "variants": [
-        {
-          "name": "Disabled",
-          "value": 0,
-          "description": "PSSI_DE and PSSI_RDY both disabled."
-        },
-        {
-          "name": "Rdy",
-          "value": 1,
-          "description": "Only PSSI_RDY enabled."
-        },
-        {
-          "name": "De",
-          "value": 2,
-          "description": "Only PSSI_DE enabled."
-        },
-        {
-          "name": "RdyDeAlt",
-          "value": 3,
-          "description": "Both PSSI_RDY and PSSI_DE alternate functions enabled."
-        },
-        {
-          "name": "RdyDe",
-          "value": 4,
-          "description": "Both PSSI_RDY and PSSI_DE features enabled - bidirectional on PSSI_RDY pin."
-        },
-        {
-          "name": "RdyRemapped",
-          "value": 5,
-          "description": "Only PSSI_RDY function enabled, but mapped to PSSI_DE pin."
-        },
-        {
-          "name": "DeRemapped",
-          "value": 6,
-          "description": "Only PSSI_DE function enabled, but mapped to PSSI_RDY pin."
-        },
-        {
-          "name": "RdyDeBidi",
-          "value": 7,
-          "description": "Both PSSI_RDY and PSSI_DE features enabled - bidirectional on PSSI_DE pin."
-        }
-      ]
-    },
-    "EDM": {
-      "bit_size": 2,
-      "variants": [
-        {
-          "name": "BitWidth8",
-          "value": 0,
-          "description": "Interface captures 8-bit data on every parallel data clock."
-        },
-        {
-          "name": "BitWidth16",
-          "value": 3,
-          "description": "The interface captures 16-bit data on every parallel data clock."
-        }
-      ]
-    },
-    "OUTEN": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "ReceiveMode",
-          "value": 0,
-          "description": "Data is input synchronously with PSSI_PDCK."
-        },
-        {
-          "name": "TransmitMode",
-          "value": 1,
-          "description": "Data is output synchronously with PSSI_PDCK."
-        }
-      ]
-    },
-    "RDYPOL": {
-      "bit_size": 1,
-      "variants": [
-        {
-          "name": "ActiveLow",
-          "value": 0,
-          "description": "PSSI_RDY active low (0 indicates that the receiver is ready to receive)."
-        },
-        {
-          "name": "ActiveHigh",
-          "value": 1,
-          "description": "PSSI_RDY active high (1 indicates that the receiver is ready to receive)."
-        }
-      ]
-    }
-  }
+  "enums": {}
 }

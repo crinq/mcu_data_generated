@@ -2,41 +2,45 @@
   "schema": 1,
   "kind": "ramcfg",
   "version": "h5",
+  "source": "stm32rs_svd",
+  "source_device": "stm32h562ag",
+  "source_file": "stm32h562.svd.patched",
   "blocks": {
     "RAMCFG": {
       "name": "RAMCFG",
-      "description": "RAMs configuration controller.",
+      "description": "RAMs configuration controller",
       "extends": null,
       "registers": [
         {
           "name": "M1CR",
           "offset": 0,
           "size": 32,
-          "description": "RAMCFG memory 1 control register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG memory 1 control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG memory 1 control register.",
           "fields": [
             {
               "name": "ECCE",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "ECC enable. This bit reset value is defined by the user option bit configuration. When set, it can be cleared by software only after writing the unlock sequence in the MxECCKEYR register. Note: This bit is reserved and must be kept at reset value in SRAM1 control register.",
-              "enum": null
+              "description": "ECC enable. This bit reset value is defined by the user option bit configuration. When set, it can be cleared by software only after writing the unlock sequence in the RAMCFG_MxECCKEYR register. Note: This bit is reserved and must be kept at reset value in SRAM1 control register.",
+              "access": "read-write"
             },
             {
               "name": "ALE",
               "bit_offset": 4,
               "bit_width": 1,
               "description": "Address latch enable Note: This bit is reserved and must be kept at reset value in SRAM1 control register.",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "SRAMER",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "SRAM erase This bit can be set by software only after writing the unlock sequence in the ERASEKEY field of the MxERKEYR register. Setting this bit starts the SRAM erase. This bit is automatically cleared by hardware at the end of the erase operation.",
-              "enum": null
+              "description": "SRAM erase This bit can be set by software only after writing the unlock sequence in the ERASEKEY field of the RAMCFG_MxERKEYR register. Setting this bit starts the SRAM erase. This bit is automatically cleared by hardware at the end of the erase operation.",
+              "access": "read-write"
             }
           ]
         },
@@ -44,31 +48,32 @@
           "name": "M1ISR",
           "offset": 8,
           "size": 32,
-          "description": "RAMCFG memory interrupt status register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG memory interrupt status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG memory interrupt status register.",
           "fields": [
             {
               "name": "SEDC",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "ECC single error detected and corrected Note: This bit is reserved and must be kept at reset value in SRAM1 interrupt status register.",
-              "enum": null
+              "access": "read-only"
             },
             {
               "name": "DED",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "ECC double error detected Note: This bit is reserved and must be kept at reset value in SRAM1 interrupt status register.",
-              "enum": null
+              "access": "read-only"
             },
             {
               "name": "SRAMBUSY",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "SRAM busy with erase operation Note: Depending on the SRAM, the erase operation can be performed due to software request, system reset if the option bit is enabled, tamper detection or product state regression. Refer to Table 9: Internal SRAMs features.",
-              "enum": null
+              "description": "SRAM busy with erase operation Note: Depending on the SRAM, the erase operation can be performed due to software request, system reset if the option bit is enabled, tamper detection or readout protection regression. Refer to Table 18: Internal SRAMs features.",
+              "access": "read-only"
             }
           ]
         },
@@ -76,17 +81,18 @@
           "name": "M1ERKEYR",
           "offset": 40,
           "size": 32,
-          "description": "RAMCFG memory 1 erase key register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG memory 1 erase key register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG memory 1 erase key register.",
           "fields": [
             {
               "name": "ERASEKEY",
               "bit_offset": 0,
               "bit_width": 8,
-              "description": "Erase write protection key The following steps are required to unlock the write protection of the SRAMER bit in the MxCR register. 1) Write 0xCA into ERASEKEY[7:0]. 2) Write 0x53 into ERASEKEY[7:0]. Note: Writing a wrong key reactivates the write protection.",
-              "enum": null
+              "description": "Erase write protection key The following steps are required to unlock the write protection of the SRAMER bit in the RAMCFG_MxCR register. 1) Write 0xCA into ERASEKEY[7:0]. 2) Write 0x53 into ERASEKEY[7:0]. Note: Writing a wrong key reactivates the write protection.",
+              "access": "write-only"
             }
           ]
         },
@@ -94,31 +100,32 @@
           "name": "M2CR",
           "offset": 64,
           "size": 32,
-          "description": "RAMCFG memory 2 control register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG memory 2 control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG memory 2 control register.",
           "fields": [
             {
               "name": "ECCE",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "ECC enable. This bit reset value is defined by the user option bit configuration. When set, it can be cleared by software only after writing the unlock sequence in the MxECCKEYR register. Note: This bit is reserved and must be kept at reset value in SRAM1 control register.",
-              "enum": null
+              "description": "ECC enable. This bit reset value is defined by the user option bit configuration. When set, it can be cleared by software only after writing the unlock sequence in the RAMCFG_MxECCKEYR register. Note: This bit is reserved and must be kept at reset value in SRAM1 control register.",
+              "access": "read-write"
             },
             {
               "name": "ALE",
               "bit_offset": 4,
               "bit_width": 1,
               "description": "Address latch enable Note: This bit is reserved and must be kept at reset value in SRAM1 control register.",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "SRAMER",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "SRAM erase This bit can be set by software only after writing the unlock sequence in the ERASEKEY field of the MxERKEYR register. Setting this bit starts the SRAM erase. This bit is automatically cleared by hardware at the end of the erase operation.",
-              "enum": null
+              "description": "SRAM erase This bit can be set by software only after writing the unlock sequence in the ERASEKEY field of the RAMCFG_MxERKEYR register. Setting this bit starts the SRAM erase. This bit is automatically cleared by hardware at the end of the erase operation.",
+              "access": "read-write"
             }
           ]
         },
@@ -126,31 +133,32 @@
           "name": "M2IER",
           "offset": 68,
           "size": 32,
-          "description": "RAMCFG memory 2 interrupt enable register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG memory 2 interrupt enable register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG memory 2 interrupt enable register.",
           "fields": [
             {
               "name": "SEIE",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "ECC single error interrupt enable.",
-              "enum": null
+              "description": "ECC single error interrupt enable",
+              "access": "read-write"
             },
             {
               "name": "DEIE",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "ECC double error interrupt enable.",
-              "enum": null
+              "description": "ECC double error interrupt enable",
+              "access": "read-write"
             },
             {
               "name": "ECCNMI",
               "bit_offset": 3,
               "bit_width": 1,
               "description": "Double error NMI This bit is set by software and cleared only by a global RAMCFG reset. Note: if ECCNMI is set, the RAMCFG maskable interrupt is not generated whatever DEIE bit value.",
-              "enum": null
+              "access": "read-write"
             }
           ]
         },
@@ -158,31 +166,32 @@
           "name": "M2ISR",
           "offset": 72,
           "size": 32,
-          "description": "RAMCFG memory interrupt status register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG memory interrupt status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG memory interrupt status register.",
           "fields": [
             {
               "name": "SEDC",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "ECC single error detected and corrected Note: This bit is reserved and must be kept at reset value in SRAM1 interrupt status register.",
-              "enum": null
+              "access": "read-only"
             },
             {
               "name": "DED",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "ECC double error detected Note: This bit is reserved and must be kept at reset value in SRAM1 interrupt status register.",
-              "enum": null
+              "access": "read-only"
             },
             {
               "name": "SRAMBUSY",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "SRAM busy with erase operation Note: Depending on the SRAM, the erase operation can be performed due to software request, system reset if the option bit is enabled, tamper detection or product state regression. Refer to Table 9: Internal SRAMs features.",
-              "enum": null
+              "description": "SRAM busy with erase operation Note: Depending on the SRAM, the erase operation can be performed due to software request, system reset if the option bit is enabled, tamper detection or readout protection regression. Refer to Table 18: Internal SRAMs features.",
+              "access": "read-only"
             }
           ]
         },
@@ -190,17 +199,18 @@
           "name": "M2SEAR",
           "offset": 76,
           "size": 32,
-          "description": "RAMCFG memory 2 ECC single error address register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG memory 2 ECC single error address register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG memory 2 ECC single error address register.",
           "fields": [
             {
               "name": "ESEA",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "ECC single error address When the ALE bit is set in the MxCR register, this field is updated with the address corresponding to the ECC single error.",
-              "enum": null
+              "description": "ECC single error address When the ALE bit is set in the RAMCFG_MxCR register, this field is updated with the address corresponding to the ECC single error.",
+              "access": "read-only"
             }
           ]
         },
@@ -208,17 +218,18 @@
           "name": "M2DEAR",
           "offset": 80,
           "size": 32,
-          "description": "RAMCFG memory 2 ECC double error address register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG memory 2 ECC double error address register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG memory 2 ECC double error address register.",
           "fields": [
             {
               "name": "EDEA",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "ECC double error address When the ALE bit is set in the MxCR register, this field is updated with the address corresponding to the ECC double error.",
-              "enum": null
+              "description": "ECC double error address When the ALE bit is set in the RAMCFG_MxCR register, this field is updated with the address corresponding to the ECC double error.",
+              "access": "read-only"
             }
           ]
         },
@@ -226,24 +237,25 @@
           "name": "M2ICR",
           "offset": 84,
           "size": 32,
-          "description": "RAMCFG memory 2 interrupt clear register 2.",
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG memory 2 interrupt clear register 2",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG memory 2 interrupt clear register 2.",
           "fields": [
             {
               "name": "CSEDC",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Clear ECC single error detected and corrected Writing 1 to this flag clears the SEDC bit in the MxISR register. Reading this flag returns the SEDC value.",
-              "enum": null
+              "description": "Clear ECC single error detected and corrected Writing 1 to this flag clears the SEDC bit in the RAMCFG_MxISR register. Reading this flag returns the SEDC value.",
+              "access": "read-write"
             },
             {
               "name": "CDED",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Clear ECC double error detected Writing 1 to this flag clears the DED bit in the MxISR register. Reading this flag returns the DED value.",
-              "enum": null
+              "description": "Clear ECC double error detected Writing 1 to this flag clears the DED bit in the RAMCFG_MxISR register. Reading this flag returns the DED value.",
+              "access": "read-write"
             }
           ]
         },
@@ -251,17 +263,471 @@
           "name": "M2WPR1",
           "offset": 88,
           "size": 32,
-          "description": "RAMCFG memory 2 write protection register 1.",
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG memory 2 write protection register 1",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG memory 2 write protection register 1.",
           "fields": [
             {
-              "name": "PWP",
+              "name": "P0WP",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
-              "enum": null
+              "access": "read-write"
+            },
+            {
+              "name": "P1WP",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P2WP",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P3WP",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P4WP",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P5WP",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P6WP",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P7WP",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P8WP",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P9WP",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P10WP",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P11WP",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P12WP",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P13WP",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P14WP",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P15WP",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P16WP",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P17WP",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P18WP",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P19WP",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P20WP",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P21WP",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P22WP",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P23WP",
+              "bit_offset": 23,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P24WP",
+              "bit_offset": 24,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P25WP",
+              "bit_offset": 25,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P26WP",
+              "bit_offset": 26,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P27WP",
+              "bit_offset": 27,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P28WP",
+              "bit_offset": 28,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P29WP",
+              "bit_offset": 29,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P30WP",
+              "bit_offset": 30,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P31WP",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            }
+          ]
+        },
+        {
+          "name": "M2WPR2",
+          "offset": 92,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG memory 2 write protection register 2",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "P32WP",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P33WP",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P34WP",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P35WP",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P36WP",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P37WP",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P38WP",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P39WP",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P40WP",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P41WP",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P42WP",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P43WP",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P44WP",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P45WP",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P46WP",
+              "bit_offset": 14,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P47WP",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P48WP",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P49WP",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P50WP",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P51WP",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P52WP",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P53WP",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P54WP",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P55WP",
+              "bit_offset": 23,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P56WP",
+              "bit_offset": 24,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P57WP",
+              "bit_offset": 25,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P58WP",
+              "bit_offset": 26,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P59WP",
+              "bit_offset": 27,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P60WP",
+              "bit_offset": 28,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P61WP",
+              "bit_offset": 29,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P62WP",
+              "bit_offset": 30,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
+            },
+            {
+              "name": "P63WP",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "SRAM2 1-Kbyte page y write protection These bits are set by software and cleared only by a global RAMCFG reset.",
+              "access": "read-write"
             }
           ]
         },
@@ -269,17 +735,18 @@
           "name": "M2ECCKEYR",
           "offset": 100,
           "size": 32,
-          "description": "RAMCFG memory 2 ECC key register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG memory 2 ECC key register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG memory 2 ECC key register.",
           "fields": [
             {
               "name": "ECCKEY",
               "bit_offset": 0,
               "bit_width": 8,
-              "description": "ECC write protection key The following steps are required to unlock the write protection of the ECCE bit in the MxCR register. 1) Write 0xAE into ECCKEY[7:0]. 2) Write 0x75 into ECCKEY[7:0]. Note: Writing a wrong key reactivates the write protection.",
-              "enum": null
+              "description": "ECC write protection key The following steps are required to unlock the write protection of the ECCE bit in the RAMCFG_MxCR register. 1) Write 0xAE into ECCKEY[7:0]. 2) Write 0x75 into ECCKEY[7:0]. Note: Writing a wrong key reactivates the write protection.",
+              "access": "write-only"
             }
           ]
         },
@@ -287,17 +754,51 @@
           "name": "M2ERKEYR",
           "offset": 104,
           "size": 32,
-          "description": "RAMCFG memory 2 erase key register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG memory 2 erase key register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG memory 2 erase key register.",
           "fields": [
             {
               "name": "ERASEKEY",
               "bit_offset": 0,
               "bit_width": 8,
-              "description": "Erase write protection key The following steps are required to unlock the write protection of the SRAMER bit in the MxCR register. 1) Write 0xCA into ERASEKEY[7:0]. 2) Write 0x53 into ERASEKEY[7:0]. Note: Writing a wrong key reactivates the write protection.",
-              "enum": null
+              "description": "Erase write protection key The following steps are required to unlock the write protection of the SRAMER bit in the RAMCFG_MxCR register. 1) Write 0xCA into ERASEKEY[7:0]. 2) Write 0x53 into ERASEKEY[7:0]. Note: Writing a wrong key reactivates the write protection.",
+              "access": "write-only"
+            }
+          ]
+        },
+        {
+          "name": "M3CR",
+          "offset": 128,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG memory 3 control register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "ECCE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "ECC enable. This bit reset value is defined by the user option bit configuration. When set, it can be cleared by software only after writing the unlock sequence in the RAMCFG_MxECCKEYR register. Note: This bit is reserved and must be kept at reset value in SRAM1 control register.",
+              "access": "read-write"
+            },
+            {
+              "name": "ALE",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Address latch enable Note: This bit is reserved and must be kept at reset value in SRAM1 control register.",
+              "access": "read-write"
+            },
+            {
+              "name": "SRAMER",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "SRAM erase This bit can be set by software only after writing the unlock sequence in the ERASEKEY field of the RAMCFG_MxERKEYR register. Setting this bit starts the SRAM erase. This bit is automatically cleared by hardware at the end of the erase operation.",
+              "access": "read-write"
             }
           ]
         },
@@ -305,31 +806,32 @@
           "name": "M3IER",
           "offset": 132,
           "size": 32,
-          "description": "RAMCFG memory 3 interrupt enable register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG memory 3 interrupt enable register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG memory 3 interrupt enable register.",
           "fields": [
             {
               "name": "SEIE",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "ECC single error interrupt enable.",
-              "enum": null
+              "description": "ECC single error interrupt enable",
+              "access": "read-write"
             },
             {
               "name": "DEIE",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "ECC double error interrupt enable.",
-              "enum": null
+              "description": "ECC double error interrupt enable",
+              "access": "read-write"
             },
             {
               "name": "ECCNMI",
               "bit_offset": 3,
               "bit_width": 1,
               "description": "Double error NMI This bit is set by software and cleared only by a global RAMCFG reset. Note: if ECCNMI is set, the RAMCFG maskable interrupt is not generated whatever DEIE bit value.",
-              "enum": null
+              "access": "read-write"
             }
           ]
         },
@@ -337,31 +839,32 @@
           "name": "M3ISR",
           "offset": 136,
           "size": 32,
-          "description": "RAMCFG memory interrupt status register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG memory interrupt status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG memory interrupt status register.",
           "fields": [
             {
               "name": "SEDC",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "ECC single error detected and corrected Note: This bit is reserved and must be kept at reset value in SRAM1 interrupt status register.",
-              "enum": null
+              "access": "read-only"
             },
             {
               "name": "DED",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "ECC double error detected Note: This bit is reserved and must be kept at reset value in SRAM1 interrupt status register.",
-              "enum": null
+              "access": "read-only"
             },
             {
               "name": "SRAMBUSY",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "SRAM busy with erase operation Note: Depending on the SRAM, the erase operation can be performed due to software request, system reset if the option bit is enabled, tamper detection or product state regression. Refer to Table 9: Internal SRAMs features.",
-              "enum": null
+              "description": "SRAM busy with erase operation Note: Depending on the SRAM, the erase operation can be performed due to software request, system reset if the option bit is enabled, tamper detection or readout protection regression. Refer to Table 18: Internal SRAMs features.",
+              "access": "read-only"
             }
           ]
         },
@@ -369,17 +872,18 @@
           "name": "M3SEAR",
           "offset": 140,
           "size": 32,
-          "description": "RAMCFG memory 3 ECC single error address register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG memory 3 ECC single error address register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG memory 3 ECC single error address register.",
           "fields": [
             {
               "name": "ESEA",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "ECC single error address When the ALE bit is set in the MxCR register, this field is updated with the address corresponding to the ECC single error.",
-              "enum": null
+              "description": "ECC single error address When the ALE bit is set in the RAMCFG_MxCR register, this field is updated with the address corresponding to the ECC single error.",
+              "access": "read-only"
             }
           ]
         },
@@ -387,17 +891,18 @@
           "name": "M3DEAR",
           "offset": 144,
           "size": 32,
-          "description": "RAMCFG memory 3 ECC double error address register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG memory 3 ECC double error address register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG memory 3 ECC double error address register.",
           "fields": [
             {
               "name": "EDEA",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "ECC double error address When the ALE bit is set in the MxCR register, this field is updated with the address corresponding to the ECC double error.",
-              "enum": null
+              "description": "ECC double error address When the ALE bit is set in the RAMCFG_MxCR register, this field is updated with the address corresponding to the ECC double error.",
+              "access": "read-only"
             }
           ]
         },
@@ -405,24 +910,25 @@
           "name": "M3ICR",
           "offset": 148,
           "size": 32,
-          "description": "RAMCFG memory 3 interrupt clear register 3.",
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG memory 3 interrupt clear register 3",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG memory 3 interrupt clear register 3.",
           "fields": [
             {
               "name": "CSEDC",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Clear ECC single error detected and corrected Writing 1 to this flag clears the SEDC bit in the MxISR register. Reading this flag returns the SEDC value.",
-              "enum": null
+              "description": "Clear ECC single error detected and corrected Writing 1 to this flag clears the SEDC bit in the RAMCFG_MxISR register. Reading this flag returns the SEDC value.",
+              "access": "read-write"
             },
             {
               "name": "CDED",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Clear ECC double error detected Writing 1 to this flag clears the DED bit in the MxISR register. Reading this flag returns the DED value.",
-              "enum": null
+              "description": "Clear ECC double error detected Writing 1 to this flag clears the DED bit in the RAMCFG_MxISR register. Reading this flag returns the DED value.",
+              "access": "read-write"
             }
           ]
         },
@@ -430,17 +936,18 @@
           "name": "M3ECCKEYR",
           "offset": 164,
           "size": 32,
-          "description": "RAMCFG memory 3 ECC key register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG memory 3 ECC key register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG memory 3 ECC key register.",
           "fields": [
             {
               "name": "ECCKEY",
               "bit_offset": 0,
               "bit_width": 8,
-              "description": "ECC write protection key The following steps are required to unlock the write protection of the ECCE bit in the MxCR register. 1) Write 0xAE into ECCKEY[7:0]. 2) Write 0x75 into ECCKEY[7:0]. Note: Writing a wrong key reactivates the write protection.",
-              "enum": null
+              "description": "ECC write protection key The following steps are required to unlock the write protection of the ECCE bit in the RAMCFG_MxCR register. 1) Write 0xAE into ECCKEY[7:0]. 2) Write 0x75 into ECCKEY[7:0]. Note: Writing a wrong key reactivates the write protection.",
+              "access": "write-only"
             }
           ]
         },
@@ -448,17 +955,18 @@
           "name": "M3ERKEYR",
           "offset": 168,
           "size": 32,
-          "description": "RAMCFG memory 3 erase key register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG memory 3 erase key register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG memory 3 erase key register.",
           "fields": [
             {
               "name": "ERASEKEY",
               "bit_offset": 0,
               "bit_width": 8,
-              "description": "Erase write protection key The following steps are required to unlock the write protection of the SRAMER bit in the MxCR register. 1) Write 0xCA into ERASEKEY[7:0]. 2) Write 0x53 into ERASEKEY[7:0]. Note: Writing a wrong key reactivates the write protection.",
-              "enum": null
+              "description": "Erase write protection key The following steps are required to unlock the write protection of the SRAMER bit in the RAMCFG_MxCR register. 1) Write 0xCA into ERASEKEY[7:0]. 2) Write 0x53 into ERASEKEY[7:0]. Note: Writing a wrong key reactivates the write protection.",
+              "access": "write-only"
             }
           ]
         },
@@ -466,17 +974,18 @@
           "name": "M4ERKEYR",
           "offset": 232,
           "size": 32,
-          "description": "RAMCFG memory 4 erase key register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG memory 4 erase key register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG memory 4 erase key register.",
           "fields": [
             {
               "name": "ERASEKEY",
               "bit_offset": 0,
               "bit_width": 8,
-              "description": "Erase write protection key The following steps are required to unlock the write protection of the SRAMER bit in the MxCR register. 1) Write 0xCA into ERASEKEY[7:0]. 2) Write 0x53 into ERASEKEY[7:0]. Note: Writing a wrong key reactivates the write protection.",
-              "enum": null
+              "description": "Erase write protection key The following steps are required to unlock the write protection of the SRAMER bit in the RAMCFG_MxCR register. 1) Write 0xCA into ERASEKEY[7:0]. 2) Write 0x53 into ERASEKEY[7:0]. Note: Writing a wrong key reactivates the write protection.",
+              "access": "write-only"
             }
           ]
         },
@@ -484,31 +993,32 @@
           "name": "M5CR",
           "offset": 256,
           "size": 32,
-          "description": "RAMCFG memory 5 control register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG memory 5 control register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG memory 5 control register.",
           "fields": [
             {
               "name": "ECCE",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "ECC enable. This bit reset value is defined by the user option bit configuration. When set, it can be cleared by software only after writing the unlock sequence in the MxECCKEYR register. Note: This bit is reserved and must be kept at reset value in SRAM1 control register.",
-              "enum": null
+              "description": "ECC enable. This bit reset value is defined by the user option bit configuration. When set, it can be cleared by software only after writing the unlock sequence in the RAMCFG_MxECCKEYR register. Note: This bit is reserved and must be kept at reset value in SRAM1 control register.",
+              "access": "read-write"
             },
             {
               "name": "ALE",
               "bit_offset": 4,
               "bit_width": 1,
               "description": "Address latch enable Note: This bit is reserved and must be kept at reset value in SRAM1 control register.",
-              "enum": null
+              "access": "read-write"
             },
             {
               "name": "SRAMER",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "SRAM erase This bit can be set by software only after writing the unlock sequence in the ERASEKEY field of the MxERKEYR register. Setting this bit starts the SRAM erase. This bit is automatically cleared by hardware at the end of the erase operation.",
-              "enum": null
+              "description": "SRAM erase This bit can be set by software only after writing the unlock sequence in the ERASEKEY field of the RAMCFG_MxERKEYR register. Setting this bit starts the SRAM erase. This bit is automatically cleared by hardware at the end of the erase operation.",
+              "access": "read-write"
             }
           ]
         },
@@ -516,31 +1026,32 @@
           "name": "M5IER",
           "offset": 260,
           "size": 32,
-          "description": "RAMCFG memory 5 interrupt enable register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG memory 5 interrupt enable register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG memory 5 interrupt enable register.",
           "fields": [
             {
               "name": "SEIE",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "ECC single error interrupt enable.",
-              "enum": null
+              "description": "ECC single error interrupt enable",
+              "access": "read-write"
             },
             {
               "name": "DEIE",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "ECC double error interrupt enable.",
-              "enum": null
+              "description": "ECC double error interrupt enable",
+              "access": "read-write"
             },
             {
               "name": "ECCNMI",
               "bit_offset": 3,
               "bit_width": 1,
               "description": "Double error NMI This bit is set by software and cleared only by a global RAMCFG reset. Note: if ECCNMI is set, the RAMCFG maskable interrupt is not generated whatever DEIE bit value.",
-              "enum": null
+              "access": "read-write"
             }
           ]
         },
@@ -548,31 +1059,32 @@
           "name": "M5ISR",
           "offset": 264,
           "size": 32,
-          "description": "RAMCFG memory interrupt status register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG memory interrupt status register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG memory interrupt status register.",
           "fields": [
             {
               "name": "SEDC",
               "bit_offset": 0,
               "bit_width": 1,
               "description": "ECC single error detected and corrected Note: This bit is reserved and must be kept at reset value in SRAM1 interrupt status register.",
-              "enum": null
+              "access": "read-only"
             },
             {
               "name": "DED",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "ECC double error detected Note: This bit is reserved and must be kept at reset value in SRAM1 interrupt status register.",
-              "enum": null
+              "access": "read-only"
             },
             {
               "name": "SRAMBUSY",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "SRAM busy with erase operation Note: Depending on the SRAM, the erase operation can be performed due to software request, system reset if the option bit is enabled, tamper detection or product state regression. Refer to Table 9: Internal SRAMs features.",
-              "enum": null
+              "description": "SRAM busy with erase operation Note: Depending on the SRAM, the erase operation can be performed due to software request, system reset if the option bit is enabled, tamper detection or readout protection regression. Refer to Table 18: Internal SRAMs features.",
+              "access": "read-only"
             }
           ]
         },
@@ -580,17 +1092,18 @@
           "name": "M5SEAR",
           "offset": 268,
           "size": 32,
-          "description": "RAMCFG memory 5 ECC single error address register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG memory 5 ECC single error address register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG memory 5 ECC single error address register.",
           "fields": [
             {
               "name": "ESEA",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "ECC single error address When the ALE bit is set in the MxCR register, this field is updated with the address corresponding to the ECC single error.",
-              "enum": null
+              "description": "ECC single error address When the ALE bit is set in the RAMCFG_MxCR register, this field is updated with the address corresponding to the ECC single error.",
+              "access": "read-only"
             }
           ]
         },
@@ -598,17 +1111,18 @@
           "name": "M5DEAR",
           "offset": 272,
           "size": 32,
-          "description": "RAMCFG memory 5 ECC double error address register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG memory 5 ECC double error address register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG memory 5 ECC double error address register.",
           "fields": [
             {
               "name": "EDEA",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "ECC double error address When the ALE bit is set in the MxCR register, this field is updated with the address corresponding to the ECC double error.",
-              "enum": null
+              "description": "ECC double error address When the ALE bit is set in the RAMCFG_MxCR register, this field is updated with the address corresponding to the ECC double error.",
+              "access": "read-only"
             }
           ]
         },
@@ -616,24 +1130,25 @@
           "name": "M5ICR",
           "offset": 276,
           "size": 32,
-          "description": "RAMCFG memory 5 interrupt clear register 5.",
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG memory 5 interrupt clear register 5",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG memory 5 interrupt clear register 5.",
           "fields": [
             {
               "name": "CSEDC",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Clear ECC single error detected and corrected Writing 1 to this flag clears the SEDC bit in the MxISR register. Reading this flag returns the SEDC value.",
-              "enum": null
+              "description": "Clear ECC single error detected and corrected Writing 1 to this flag clears the SEDC bit in the RAMCFG_MxISR register. Reading this flag returns the SEDC value.",
+              "access": "read-write"
             },
             {
               "name": "CDED",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Clear ECC double error detected Writing 1 to this flag clears the DED bit in the MxISR register. Reading this flag returns the DED value.",
-              "enum": null
+              "description": "Clear ECC double error detected Writing 1 to this flag clears the DED bit in the RAMCFG_MxISR register. Reading this flag returns the DED value.",
+              "access": "read-write"
             }
           ]
         },
@@ -641,17 +1156,18 @@
           "name": "M5ECCKEYR",
           "offset": 292,
           "size": 32,
-          "description": "RAMCFG memory 5 ECC key register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG memory 5 ECC key register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG memory 5 ECC key register.",
           "fields": [
             {
               "name": "ECCKEY",
               "bit_offset": 0,
               "bit_width": 8,
-              "description": "ECC write protection key The following steps are required to unlock the write protection of the ECCE bit in the MxCR register. 1) Write 0xAE into ECCKEY[7:0]. 2) Write 0x75 into ECCKEY[7:0]. Note: Writing a wrong key reactivates the write protection.",
-              "enum": null
+              "description": "ECC write protection key The following steps are required to unlock the write protection of the ECCE bit in the RAMCFG_MxCR register. 1) Write 0xAE into ECCKEY[7:0]. 2) Write 0x75 into ECCKEY[7:0]. Note: Writing a wrong key reactivates the write protection.",
+              "access": "write-only"
             }
           ]
         },
@@ -659,17 +1175,18 @@
           "name": "M5ERKEYR",
           "offset": 296,
           "size": 32,
-          "description": "RAMCFG memory 5 erase key register.",
+          "access": null,
+          "reset_value": 0,
+          "description": "RAMCFG memory 5 erase key register",
           "array_len": null,
           "array_stride": null,
-          "fieldset_description": "RAMCFG memory 5 erase key register.",
           "fields": [
             {
               "name": "ERASEKEY",
               "bit_offset": 0,
               "bit_width": 8,
-              "description": "Erase write protection key The following steps are required to unlock the write protection of the SRAMER bit in the MxCR register. 1) Write 0xCA into ERASEKEY[7:0]. 2) Write 0x53 into ERASEKEY[7:0]. Note: Writing a wrong key reactivates the write protection.",
-              "enum": null
+              "description": "Erase write protection key The following steps are required to unlock the write protection of the SRAMER bit in the RAMCFG_MxCR register. 1) Write 0xCA into ERASEKEY[7:0]. 2) Write 0x53 into ERASEKEY[7:0]. Note: Writing a wrong key reactivates the write protection.",
+              "access": "write-only"
             }
           ]
         }
