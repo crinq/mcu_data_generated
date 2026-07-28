@@ -3,8 +3,8 @@
   "kind": "wwdg",
   "version": "v1",
   "source": "stm32rs_svd",
-  "source_device": "stm32f100v8",
-  "source_file": "stm32f100.svd.patched",
+  "source_device": "stm32f217zg",
+  "source_file": "stm32f217.svd.patched",
   "blocks": {
     "WWDG": {
       "name": "WWDG",
@@ -17,16 +17,10 @@
           "size": 16,
           "access": "read-write",
           "reset_value": 127,
-          "description": "Control register (WWDG_CR)",
+          "description": "Control register",
           "array_len": null,
           "array_stride": null,
           "fields": [
-            {
-              "name": "T",
-              "bit_offset": 0,
-              "bit_width": 7,
-              "description": "7-bit counter (MSB to LSB)"
-            },
             {
               "name": "WDGA",
               "bit_offset": 7,
@@ -44,6 +38,12 @@
                   "description": "Watchdog enabled"
                 }
               ]
+            },
+            {
+              "name": "T",
+              "bit_offset": 0,
+              "bit_width": 7,
+              "description": "7-bit counter (MSB to LSB)"
             }
           ]
         },
@@ -53,21 +53,28 @@
           "size": 16,
           "access": "read-write",
           "reset_value": 127,
-          "description": "Configuration register (WWDG_CFR)",
+          "description": "Configuration register",
           "array_len": null,
           "array_stride": null,
           "fields": [
             {
-              "name": "W",
-              "bit_offset": 0,
-              "bit_width": 7,
-              "description": "7-bit window value"
+              "name": "EWI",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Early wakeup interrupt",
+              "enum_values": [
+                {
+                  "name": "Enable",
+                  "value": 1,
+                  "description": "interrupt occurs whenever the counter reaches the value 0x40"
+                }
+              ]
             },
             {
               "name": "WDGTB",
               "bit_offset": 7,
               "bit_width": 2,
-              "description": "Timer Base",
+              "description": "Timer base",
               "enum_values": [
                 {
                   "name": "Div1",
@@ -92,17 +99,10 @@
               ]
             },
             {
-              "name": "EWI",
-              "bit_offset": 9,
-              "bit_width": 1,
-              "description": "Early Wakeup Interrupt",
-              "enum_values": [
-                {
-                  "name": "Enable",
-                  "value": 1,
-                  "description": "interrupt occurs whenever the counter reaches the value 0x40"
-                }
-              ]
+              "name": "W",
+              "bit_offset": 0,
+              "bit_width": 7,
+              "description": "7-bit window value"
             }
           ]
         },
@@ -112,7 +112,7 @@
           "size": 16,
           "access": "read-write",
           "reset_value": 0,
-          "description": "Status register (WWDG_SR)",
+          "description": "Status register",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -120,7 +120,7 @@
               "name": "EWIF",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Early Wakeup Interrupt",
+              "description": "Early wakeup interrupt flag",
               "enum_values": [
                 {
                   "name": "Finished",

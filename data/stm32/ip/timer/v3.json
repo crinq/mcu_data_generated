@@ -3,8 +3,8 @@
   "kind": "timer",
   "version": "v3",
   "source": "stm32rs_svd",
-  "source_device": "stm32g051c6",
-  "source_file": "stm32g051.svd.patched",
+  "source_device": "stm32g041g8",
+  "source_file": "stm32g041.svd.patched",
   "blocks": {
     "TIM1": {
       "name": "TIM1",
@@ -25,8 +25,7 @@
               "name": "CEN",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Counter enable Note: External clock, gated mode and encoder mode can work only if the CEN bit has been previously set by software. However trigger mode can set the CEN bit automatically by hardware.",
-              "access": "read-write",
+              "description": "Counter enable",
               "enum_values": [
                 {
                   "name": "Disabled",
@@ -41,11 +40,28 @@
               ]
             },
             {
+              "name": "OPM",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "One-pulse mode",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Counter is not stopped at update event"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Counter stops counting at the next update event (clearing the CEN bit)"
+                }
+              ]
+            },
+            {
               "name": "UDIS",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Update disable This bit is set and cleared by software to enable/disable UEV event generation. Counter overflow/underflow Setting the UG bit Update generation through the slave mode controller Buffered registers are then loaded with their preload values.",
-              "access": "read-write",
+              "description": "Update disable",
               "enum_values": [
                 {
                   "name": "Enabled",
@@ -63,8 +79,7 @@
               "name": "URS",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "Update request source This bit is set and cleared by software to select the UEV event sources. Counter overflow/underflow Setting the UG bit Update generation through the slave mode controller",
-              "access": "read-write",
+              "description": "Update request source",
               "enum_values": [
                 {
                   "name": "AnyEvent",
@@ -79,30 +94,10 @@
               ]
             },
             {
-              "name": "OPM",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "One pulse mode",
-              "access": "read-write",
-              "enum_values": [
-                {
-                  "name": "Disabled",
-                  "value": 0,
-                  "description": "Counter is not stopped at update event"
-                },
-                {
-                  "name": "Enabled",
-                  "value": 1,
-                  "description": "Counter stops counting at the next update event (clearing the CEN bit)"
-                }
-              ]
-            },
-            {
               "name": "DIR",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "Direction Note: This bit is read only when the timer is configured in Center-aligned mode or Encoder mode.",
-              "access": "read-write",
+              "description": "Direction",
               "enum_values": [
                 {
                   "name": "Up",
@@ -120,8 +115,7 @@
               "name": "CMS",
               "bit_offset": 5,
               "bit_width": 2,
-              "description": "Center-aligned mode selection Note: Switch from edge-aligned mode to center-aligned mode as long as the counter is enabled (CEN=1) is not allowed",
-              "access": "read-write",
+              "description": "Center-aligned mode selection",
               "enum_values": [
                 {
                   "name": "EdgeAligned",
@@ -150,7 +144,6 @@
               "bit_offset": 7,
               "bit_width": 1,
               "description": "Auto-reload preload enable",
-              "access": "read-write",
               "enum_values": [
                 {
                   "name": "Disabled",
@@ -168,8 +161,7 @@
               "name": "CKD",
               "bit_offset": 8,
               "bit_width": 2,
-              "description": "Clock division This bit-field indicates the division ratio between the timer clock (CK_INT) frequency and the dead-time and sampling clock (tDTS)used by the dead-time generators and the digital filters (ETR, TIx): Note: tDTS = 1/fDTS, tCK_INT = 1/fCK_INT.",
-              "access": "read-write",
+              "description": "Clock division",
               "enum_values": [
                 {
                   "name": "Div1",
@@ -192,8 +184,7 @@
               "name": "UIFREMAP",
               "bit_offset": 11,
               "bit_width": 1,
-              "description": "UIF status bit remapping",
-              "access": "read-write"
+              "description": "UIF status bit remapping"
             }
           ]
         },
@@ -208,94 +199,16 @@
           "array_stride": null,
           "fields": [
             {
-              "name": "CCPC",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Capture/compare preloaded control Note: This bit acts only on channels that have a complementary output.",
-              "access": "read-write",
-              "enum_values": [
-                {
-                  "name": "NotPreloaded",
-                  "value": 0,
-                  "description": "CCxE, CCxNE and OCxM bits are not preloaded"
-                },
-                {
-                  "name": "Preloaded",
-                  "value": 1,
-                  "description": "CCxE, CCxNE and OCxM bits are preloaded"
-                }
-              ]
-            },
-            {
-              "name": "CCUS",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Capture/compare control update selection Note: This bit acts only on channels that have a complementary output.",
-              "access": "read-write",
-              "enum_values": [
-                {
-                  "name": "Sw",
-                  "value": 0,
-                  "description": "When capture/compare control bits are preloaded (CCPC=1), they are updated by setting the COMG bit only"
-                },
-                {
-                  "name": "SwOrEdge",
-                  "value": 1,
-                  "description": "When capture/compare control bits are preloaded (CCPC=1), they are updated by setting the COMG bit or when an rising edge occurs on TRGI"
-                }
-              ]
-            },
-            {
-              "name": "CCDS",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Capture/compare DMA selection",
-              "access": "read-write",
-              "enum_values": [
-                {
-                  "name": "OnCompare",
-                  "value": 0,
-                  "description": "CCx DMA request sent when CCx event occurs"
-                },
-                {
-                  "name": "OnUpdate",
-                  "value": 1,
-                  "description": "CCx DMA request sent when update event occurs"
-                }
-              ]
-            },
-            {
-              "name": "MMS",
-              "bit_offset": 4,
-              "bit_width": 3,
-              "description": "Master mode selection These bits allow selected information to be sent in master mode to slave timers for synchronization (TRGO). The combination is as follows: Note: The clock of the slave timer or ADC must be enabled prior to receive events from the master timer, and must not be changed on-the-fly while triggers are received from the master timer.",
-              "access": "read-write"
-            },
-            {
-              "name": "TI1S",
-              "bit_offset": 7,
-              "bit_width": 1,
-              "description": "TI1 selection",
-              "access": "read-write",
-              "enum_values": [
-                {
-                  "name": "Normal",
-                  "value": 0,
-                  "description": "The TIMx_CH1 pin is connected to TI1 input"
-                },
-                {
-                  "name": "XOR",
-                  "value": 1,
-                  "description": "The TIMx_CH1, CH2, CH3 pins are connected to TI1 input"
-                }
-              ]
+              "name": "MMS2",
+              "bit_offset": 20,
+              "bit_width": 4,
+              "description": "Master mode selection 2"
             },
             {
               "name": "OIS%s",
               "bit_offset": 8,
               "bit_width": 1,
               "description": "Output Idle state (OC%s output)",
-              "access": "read-write",
               "enum_values": [
                 {
                   "name": "Reset",
@@ -314,7 +227,6 @@
               "bit_offset": 9,
               "bit_width": 1,
               "description": "Output Idle state (OC%sN output)",
-              "access": "read-write",
               "enum_values": [
                 {
                   "name": "Reset",
@@ -329,11 +241,82 @@
               ]
             },
             {
-              "name": "MMS2",
-              "bit_offset": 20,
-              "bit_width": 4,
-              "description": "Master mode selection 2 These bits allow the information to be sent to ADC for synchronization (TRGO2) to be selected. The combination is as follows: Note: The clock of the slave timer or ADC must be enabled prior to receive events from the master timer, and must not be changed on-the-fly while triggers are received from the master timer.",
-              "access": "read-write"
+              "name": "TI1S",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "TI1 selection",
+              "enum_values": [
+                {
+                  "name": "Normal",
+                  "value": 0,
+                  "description": "The TIMx_CH1 pin is connected to TI1 input"
+                },
+                {
+                  "name": "XOR",
+                  "value": 1,
+                  "description": "The TIMx_CH1, CH2, CH3 pins are connected to TI1 input"
+                }
+              ]
+            },
+            {
+              "name": "MMS",
+              "bit_offset": 4,
+              "bit_width": 3,
+              "description": "Master mode selection"
+            },
+            {
+              "name": "CCDS",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Capture/compare DMA selection",
+              "enum_values": [
+                {
+                  "name": "OnCompare",
+                  "value": 0,
+                  "description": "CCx DMA request sent when CCx event occurs"
+                },
+                {
+                  "name": "OnUpdate",
+                  "value": 1,
+                  "description": "CCx DMA request sent when update event occurs"
+                }
+              ]
+            },
+            {
+              "name": "CCUS",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Capture/compare control update selection",
+              "enum_values": [
+                {
+                  "name": "Sw",
+                  "value": 0,
+                  "description": "When capture/compare control bits are preloaded (CCPC=1), they are updated by setting the COMG bit only"
+                },
+                {
+                  "name": "SwOrEdge",
+                  "value": 1,
+                  "description": "When capture/compare control bits are preloaded (CCPC=1), they are updated by setting the COMG bit or when an rising edge occurs on TRGI"
+                }
+              ]
+            },
+            {
+              "name": "CCPC",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Capture/compare preloaded control",
+              "enum_values": [
+                {
+                  "name": "NotPreloaded",
+                  "value": 0,
+                  "description": "CCxE, CCxNE and OCxM bits are not preloaded"
+                },
+                {
+                  "name": "Preloaded",
+                  "value": 1,
+                  "description": "CCxE, CCxNE and OCxM bits are preloaded"
+                }
+              ]
             }
           ]
         },
@@ -351,29 +334,25 @@
               "name": "SMS",
               "bit_offset": 0,
               "bit_width": 3,
-              "description": "Slave mode selection When external signals are selected the active edge of the trigger signal (TRGI) is linked to the polarity selected on the external input (see Input Control register and Control Register description. Note: The gated mode must not be used if TI1F_ED is selected as the trigger input (TS=00100). Indeed, TI1F_ED outputs 1 pulse for each transition on TI1F, whereas the gated mode checks the level of the trigger signal. Note: The clock of the slave peripherals (timer, ADC, ...) receiving the TRGO or the TRGO2 signals must be enabled prior to receive events from the master timer, and the clock frequency (prescaler) must not be changed on-the-fly while triggers are received from the master timer.",
-              "access": "read-write"
+              "description": "Slave mode selection"
             },
             {
               "name": "OCCS",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "OCREF clear selection This bit is used to select the OCREF clear source.",
-              "access": "read-write"
+              "description": "OCREF clear selection"
             },
             {
               "name": "TS",
               "bit_offset": 4,
               "bit_width": 3,
-              "description": "Trigger selection This bit-field selects the trigger input to be used to synchronize the counter. Others: Reserved See for more details on ITRx meaning for each Timer. Note: These bits must be changed only when they are not used (e.g. when SMS=000) to avoid wrong edge detections at the transition.",
-              "access": "read-write"
+              "description": "Trigger selection"
             },
             {
               "name": "MSM",
               "bit_offset": 7,
               "bit_width": 1,
-              "description": "Master/slave mode",
-              "access": "read-write",
+              "description": "Master/Slave mode",
               "enum_values": [
                 {
                   "name": "NoSync",
@@ -391,8 +370,7 @@
               "name": "ETF",
               "bit_offset": 8,
               "bit_width": 4,
-              "description": "External trigger filter This bit-field then defines the frequency used to sample ETRP signal and the length of the digital filter applied to ETRP. The digital filter is made of an event counter in which N consecutive events are needed to validate a transition on the output:",
-              "access": "read-write",
+              "description": "External trigger filter",
               "enum_values": [
                 {
                   "name": "NoFilter",
@@ -480,8 +458,7 @@
               "name": "ETPS",
               "bit_offset": 12,
               "bit_width": 2,
-              "description": "External trigger prescaler External trigger signal ETRP frequency must be at most 1/4 of fCK_INT frequency. A prescaler can be enabled to reduce ETRP frequency. It is useful when inputting fast external clocks.",
-              "access": "read-write",
+              "description": "External trigger prescaler",
               "enum_values": [
                 {
                   "name": "Div1",
@@ -509,8 +486,7 @@
               "name": "ECE",
               "bit_offset": 14,
               "bit_width": 1,
-              "description": "External clock enable This bit enables External clock mode 2. Note: Setting the ECE bit has the same effect as selecting external clock mode 1 with TRGI connected to ETRF (SMS=111 and TS=00111). It is possible to simultaneously use external clock mode 2 with the following slave modes: reset mode, gated mode and trigger mode. Nevertheless, TRGI must not be connected to ETRF in this case (TS bits must not be 00111). If external clock mode 1 and external clock mode 2 are enabled at the same time, the external clock input is ETRF.",
-              "access": "read-write",
+              "description": "External clock enable",
               "enum_values": [
                 {
                   "name": "Disabled",
@@ -528,8 +504,7 @@
               "name": "ETP",
               "bit_offset": 15,
               "bit_width": 1,
-              "description": "External trigger polarity This bit selects whether ETR or ETR is used for trigger operations",
-              "access": "read-write",
+              "description": "External trigger polarity",
               "enum_values": [
                 {
                   "name": "NotInverted",
@@ -547,15 +522,13 @@
               "name": "SMS_3",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "Slave mode selection When external signals are selected the active edge of the trigger signal (TRGI) is linked to the polarity selected on the external input (see Input Control register and Control Register description. Note: The gated mode must not be used if TI1F_ED is selected as the trigger input (TS=00100). Indeed, TI1F_ED outputs 1 pulse for each transition on TI1F, whereas the gated mode checks the level of the trigger signal. Note: The clock of the slave peripherals (timer, ADC, ...) receiving the TRGO or the TRGO2 signals must be enabled prior to receive events from the master timer, and the clock frequency (prescaler) must not be changed on-the-fly while triggers are received from the master timer.",
-              "access": "read-write"
+              "description": "Slave mode selection - bit 3"
             },
             {
               "name": "TS2",
               "bit_offset": 20,
               "bit_width": 2,
-              "description": "Trigger selection This bit-field selects the trigger input to be used to synchronize the counter. Others: Reserved See for more details on ITRx meaning for each Timer. Note: These bits must be changed only when they are not used (e.g. when SMS=000) to avoid wrong edge detections at the transition.",
-              "access": "read-write"
+              "description": "Trigger selection"
             }
           ]
         },
@@ -574,7 +547,6 @@
               "bit_offset": 0,
               "bit_width": 1,
               "description": "Update interrupt enable",
-              "access": "read-write",
               "enum_values": [
                 {
                   "name": "Disabled",
@@ -593,7 +565,6 @@
               "bit_offset": 1,
               "bit_width": 1,
               "description": "Capture/Compare %s interrupt enable",
-              "access": "read-write",
               "enum_values": [
                 {
                   "name": "Disabled",
@@ -612,7 +583,6 @@
               "bit_offset": 5,
               "bit_width": 1,
               "description": "COM interrupt enable",
-              "access": "read-write",
               "enum_values": [
                 {
                   "name": "Disabled",
@@ -631,7 +601,6 @@
               "bit_offset": 6,
               "bit_width": 1,
               "description": "Trigger interrupt enable",
-              "access": "read-write",
               "enum_values": [
                 {
                   "name": "Disabled",
@@ -650,7 +619,6 @@
               "bit_offset": 7,
               "bit_width": 1,
               "description": "Break interrupt enable",
-              "access": "read-write",
               "enum_values": [
                 {
                   "name": "Disabled",
@@ -669,7 +637,6 @@
               "bit_offset": 8,
               "bit_width": 1,
               "description": "Update DMA request enable",
-              "access": "read-write",
               "enum_values": [
                 {
                   "name": "Disabled",
@@ -688,7 +655,6 @@
               "bit_offset": 9,
               "bit_width": 1,
               "description": "Capture/Compare %s DMA request enable",
-              "access": "read-write",
               "enum_values": [
                 {
                   "name": "Disabled",
@@ -707,7 +673,6 @@
               "bit_offset": 13,
               "bit_width": 1,
               "description": "COM DMA request enable",
-              "access": "read-write",
               "enum_values": [
                 {
                   "name": "Disabled",
@@ -726,7 +691,6 @@
               "bit_offset": 14,
               "bit_width": 1,
               "description": "Trigger DMA request enable",
-              "access": "read-write",
               "enum_values": [
                 {
                   "name": "Disabled",
@@ -756,8 +720,7 @@
               "name": "UIF",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Update interrupt flag This bit is set by hardware on an update event. It is cleared by software. At overflow or underflow regarding the repetition counter value (update if repetition counter = 0) and if the UDIS=0 in the TIMx_CR1 register. When CNT is reinitialized by software using the UG bit in TIMx_EGR register, if URS=0 and UDIS=0 in the TIMx_CR1 register. When CNT is reinitialized by a trigger event (refer to control register (TIM1_SMCRTIMx_SMCR)N/A), if URS=0 and UDIS=0 in the TIMx_CR1 register.",
-              "access": "read-write",
+              "description": "Update interrupt flag",
               "enum_values": [
                 {
                   "name": "NoUpdateOccurred",
@@ -781,7 +744,6 @@
               "bit_offset": 1,
               "bit_width": 1,
               "description": "Capture/compare %s interrupt flag",
-              "access": "read-write",
               "enum_values": [
                 {
                   "name": "NoMatch",
@@ -805,7 +767,6 @@
               "bit_offset": 5,
               "bit_width": 1,
               "description": "COM interrupt flag",
-              "access": "read-write",
               "enum_values": [
                 {
                   "name": "NoCOM",
@@ -828,8 +789,7 @@
               "name": "TIF",
               "bit_offset": 6,
               "bit_width": 1,
-              "description": "Trigger interrupt flag This flag is set by hardware on the TRG trigger event (active edge detected on TRGI input when the slave mode controller is enabled in all modes but gated mode. It is set when the counter starts or stops when gated mode is selected. It is cleared by software.",
-              "access": "read-write",
+              "description": "Trigger interrupt flag",
               "enum_values": [
                 {
                   "name": "NoTrigger",
@@ -852,8 +812,7 @@
               "name": "BIF",
               "bit_offset": 7,
               "bit_width": 1,
-              "description": "Break interrupt flag This flag is set by hardware as soon as the break input goes active. It can be cleared by software if the break input is not active.",
-              "access": "read-write",
+              "description": "Break interrupt flag",
               "enum_values": [
                 {
                   "name": "NoTrigger",
@@ -876,8 +835,7 @@
               "name": "B2IF",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "Break 2 interrupt flag This flag is set by hardware as soon as the break 2 input goes active. It can be cleared by software if the break 2 input is not active.",
-              "access": "read-write",
+              "description": "Break 2 interrupt flag",
               "enum_values": [
                 {
                   "name": "NoTrigger",
@@ -901,7 +859,6 @@
               "bit_offset": 9,
               "bit_width": 1,
               "description": "Capture/Compare %s overcapture flag",
-              "access": "read-write",
               "enum_values": [
                 {
                   "name": "NoOvercapture",
@@ -924,8 +881,7 @@
               "name": "SBIF",
               "bit_offset": 13,
               "bit_width": 1,
-              "description": "System Break interrupt flag This flag is set by hardware as soon as the system break input goes active. It can be cleared by software if the system break input is not active. This flag must be reset to re-start PWM operation.",
-              "access": "read-write",
+              "description": "System Break interrupt flag",
               "enum_values": [
                 {
                   "name": "NoTrigger",
@@ -948,15 +904,13 @@
               "name": "CC5IF",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "Compare 5 interrupt flag Refer to CC1IF description (Note: Channel 5 can only be configured as output)",
-              "access": "read-write"
+              "description": "Compare 5 interrupt flag"
             },
             {
               "name": "CC6IF",
               "bit_offset": 17,
               "bit_width": 1,
-              "description": "Compare 6 interrupt flag Refer to CC1IF description (Note: Channel 6 can only be configured as output)",
-              "access": "read-write"
+              "description": "Compare 6 interrupt flag"
             }
           ]
         },
@@ -974,8 +928,7 @@
               "name": "UG",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Update generation This bit can be set by software, it is automatically cleared by hardware.",
-              "access": "write-only",
+              "description": "Update generation",
               "enum_values": [
                 {
                   "name": "Update",
@@ -989,7 +942,6 @@
               "bit_offset": 1,
               "bit_width": 1,
               "description": "Capture/compare %s generation",
-              "access": "write-only",
               "enum_values": [
                 {
                   "name": "Trigger",
@@ -1002,8 +954,7 @@
               "name": "COMG",
               "bit_offset": 5,
               "bit_width": 1,
-              "description": "Capture/Compare control update generation This bit can be set by software, it is automatically cleared by hardware Note: This bit acts only on channels having a complementary output.",
-              "access": "write-only",
+              "description": "Capture/Compare control update generation",
               "enum_values": [
                 {
                   "name": "Trigger",
@@ -1016,8 +967,7 @@
               "name": "TG",
               "bit_offset": 6,
               "bit_width": 1,
-              "description": "Trigger generation This bit is set by software in order to generate an event, it is automatically cleared by hardware.",
-              "access": "write-only",
+              "description": "Trigger generation",
               "enum_values": [
                 {
                   "name": "Trigger",
@@ -1030,8 +980,7 @@
               "name": "BG",
               "bit_offset": 7,
               "bit_width": 1,
-              "description": "Break generation This bit is set by software in order to generate an event, it is automatically cleared by hardware.",
-              "access": "write-only",
+              "description": "Break generation",
               "enum_values": [
                 {
                   "name": "Trigger",
@@ -1044,8 +993,7 @@
               "name": "B2G",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "Break 2 generation This bit is set by software in order to generate an event, it is automatically cleared by hardware.",
-              "access": "write-only",
+              "description": "Break 2 generation",
               "enum_values": [
                 {
                   "name": "Trigger",
@@ -1071,7 +1019,6 @@
               "bit_offset": 0,
               "bit_width": 2,
               "description": "Capture/Compare %s selection",
-              "access": "read-write",
               "enum_values": [
                 {
                   "name": "Output",
@@ -1085,7 +1032,6 @@
               "bit_offset": 2,
               "bit_width": 1,
               "description": "Output compare %s fast enable",
-              "access": "read-write",
               "enum_values": [
                 {
                   "name": "Disabled",
@@ -1104,7 +1050,6 @@
               "bit_offset": 3,
               "bit_width": 1,
               "description": "Output compare %s preload enable",
-              "access": "read-write",
               "enum_values": [
                 {
                   "name": "Disabled",
@@ -1123,7 +1068,6 @@
               "bit_offset": 4,
               "bit_width": 3,
               "description": "Output compare %s mode",
-              "access": "read-write",
               "enum_values": [
                 {
                   "name": "Frozen",
@@ -1172,7 +1116,6 @@
               "bit_offset": 7,
               "bit_width": 1,
               "description": "Output compare %s clear enable",
-              "access": "read-write",
               "enum_values": [
                 {
                   "name": "Disabled",
@@ -1191,7 +1134,6 @@
               "bit_offset": 16,
               "bit_width": 1,
               "description": "Output compare %s mode, bit 3",
-              "access": "read-write",
               "enum_values": [
                 {
                   "name": "Normal",
@@ -1221,8 +1163,7 @@
               "name": "CC1S",
               "bit_offset": 0,
               "bit_width": 2,
-              "description": "Capture/Compare 1 Selection This bit-field defines the direction of the channel (input/output) as well as the used input. Note: CC1S bits are writable only when the channel is OFF (CC1E = '0' in TIMx_CCER).",
-              "access": "read-write",
+              "description": "Capture/Compare 1 selection",
               "enum_values": [
                 {
                   "name": "TI1",
@@ -1242,11 +1183,33 @@
               ]
             },
             {
+              "name": "CC2S",
+              "bit_offset": 8,
+              "bit_width": 2,
+              "description": "Capture/Compare 2 selection",
+              "enum_values": [
+                {
+                  "name": "TI2",
+                  "value": 1,
+                  "description": "CC2 channel is configured as input, IC2 is mapped on TI2"
+                },
+                {
+                  "name": "TI1",
+                  "value": 2,
+                  "description": "CC2 channel is configured as input, IC2 is mapped on TI1"
+                },
+                {
+                  "name": "TRC",
+                  "value": 3,
+                  "description": "CC2 channel is configured as input, IC2 is mapped on TRC"
+                }
+              ]
+            },
+            {
               "name": "IC%sPSC",
               "bit_offset": 2,
               "bit_width": 2,
               "description": "Input capture %s prescaler",
-              "access": "read-write",
               "enum_values": [
                 {
                   "name": "NoPrescaler",
@@ -1275,7 +1238,6 @@
               "bit_offset": 4,
               "bit_width": 4,
               "description": "Input capture %s filter",
-              "access": "read-write",
               "enum_values": [
                 {
                   "name": "NoFilter",
@@ -1358,30 +1320,6 @@
                   "description": "fSAMPLING=fDTS/32, N=8"
                 }
               ]
-            },
-            {
-              "name": "CC2S",
-              "bit_offset": 8,
-              "bit_width": 2,
-              "description": "Capture/Compare 2 selection This bit-field defines the direction of the channel (input/output) as well as the used input. Note: CC2S bits are writable only when the channel is OFF (CC2E = '0' in TIMx_CCER).",
-              "access": "read-write",
-              "enum_values": [
-                {
-                  "name": "TI2",
-                  "value": 1,
-                  "description": "CC2 channel is configured as input, IC2 is mapped on TI2"
-                },
-                {
-                  "name": "TI1",
-                  "value": 2,
-                  "description": "CC2 channel is configured as input, IC2 is mapped on TI1"
-                },
-                {
-                  "name": "TRC",
-                  "value": 3,
-                  "description": "CC2 channel is configured as input, IC2 is mapped on TRC"
-                }
-              ]
             }
           ]
         },
@@ -1399,43 +1337,37 @@
               "name": "CC%sS",
               "bit_offset": 0,
               "bit_width": 2,
-              "description": "Capture/Compare %s selection",
-              "access": "read-write"
+              "description": "Capture/Compare %s selection"
             },
             {
               "name": "OC%sFE",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "Output compare %s fast enable",
-              "access": "read-write"
+              "description": "Output compare %s fast enable"
             },
             {
               "name": "OC%sPE",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "Output compare %s preload enable",
-              "access": "read-write"
+              "description": "Output compare %s preload enable"
             },
             {
               "name": "OC%sM",
               "bit_offset": 4,
               "bit_width": 3,
-              "description": "Output compare %s mode",
-              "access": "read-write"
+              "description": "Output compare %s mode"
             },
             {
               "name": "OC%sCE",
               "bit_offset": 7,
               "bit_width": 1,
-              "description": "Output compare %s clear enable",
-              "access": "read-write"
+              "description": "Output compare %s clear enable"
             },
             {
               "name": "OC%sM_3",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "Output compare %s mode, bit 3",
-              "access": "read-write"
+              "description": "Output compare %s mode, bit 3"
             }
           ]
         },
@@ -1453,8 +1385,7 @@
               "name": "CC3S",
               "bit_offset": 0,
               "bit_width": 2,
-              "description": "Capture/compare 3 selection This bit-field defines the direction of the channel (input/output) as well as the used input. Note: CC3S bits are writable only when the channel is OFF (CC3E = '0' in TIMx_CCER).",
-              "access": "read-write",
+              "description": "Capture/Compare 3 selection",
               "enum_values": [
                 {
                   "name": "TI3",
@@ -1474,25 +1405,10 @@
               ]
             },
             {
-              "name": "IC%sPSC",
-              "bit_offset": 2,
-              "bit_width": 2,
-              "description": "Input capture %s prescaler",
-              "access": "read-write"
-            },
-            {
-              "name": "IC%sF",
-              "bit_offset": 4,
-              "bit_width": 4,
-              "description": "Input capture %s filter",
-              "access": "read-write"
-            },
-            {
               "name": "CC4S",
               "bit_offset": 8,
               "bit_width": 2,
-              "description": "Capture/Compare 4 selection This bit-field defines the direction of the channel (input/output) as well as the used input. Note: CC4S bits are writable only when the channel is OFF (CC4E = '0' in TIMx_CCER).",
-              "access": "read-write",
+              "description": "Capture/Compare 4 selection",
               "enum_values": [
                 {
                   "name": "TI4",
@@ -1510,6 +1426,18 @@
                   "description": "CC4 channel is configured as input, IC4 is mapped on TRC"
                 }
               ]
+            },
+            {
+              "name": "IC%sPSC",
+              "bit_offset": 2,
+              "bit_width": 2,
+              "description": "Input capture %s prescaler"
+            },
+            {
+              "name": "IC%sF",
+              "bit_offset": 4,
+              "bit_width": 4,
+              "description": "Input capture %s filter"
             }
           ]
         },
@@ -1528,7 +1456,6 @@
               "bit_offset": 0,
               "bit_width": 1,
               "description": "Capture/Compare %s output enable",
-              "access": "read-write",
               "enum_values": [
                 {
                   "name": "Disabled",
@@ -1547,7 +1474,6 @@
               "bit_offset": 1,
               "bit_width": 1,
               "description": "Capture/Compare %s output Polarity",
-              "access": "read-write",
               "enum_values": [
                 {
                   "name": "RisingEdge",
@@ -1566,7 +1492,6 @@
               "bit_offset": 2,
               "bit_width": 1,
               "description": "Capture/Compare %s complementary output enable",
-              "access": "read-write",
               "enum_values": [
                 {
                   "name": "Disabled",
@@ -1585,7 +1510,6 @@
               "bit_offset": 3,
               "bit_width": 1,
               "description": "Capture/Compare %s output Polarity",
-              "access": "read-write",
               "enum_values": [
                 {
                   "name": "ActiveHigh",
@@ -1615,14 +1539,14 @@
               "name": "CNT",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "Counter value",
+              "description": "counter value",
               "access": "read-write"
             },
             {
               "name": "UIFCPY",
               "bit_offset": 31,
               "bit_width": 1,
-              "description": "UIF copy This bit is a read-only copy of the UIF bit of the TIMx_ISR register. If the UIFREMAP bit in the TIMxCR1 is reset, bit 31 is reserved and read at 0.",
+              "description": "UIF copy",
               "access": "read-only"
             }
           ]
@@ -1660,8 +1584,7 @@
               "name": "PSC",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "Prescaler value The counter clock frequency (CK_CNT) is equal to fCK_PSC / (PSC[15:0] + 1). PSC contains the value to be loaded in the active prescaler register at each update event (including when the counter is cleared through UG bit of TIMx_EGR register or through trigger controller when configured in 'reset mode').",
-              "access": "read-write"
+              "description": "Prescaler value"
             }
           ]
         },
@@ -1679,8 +1602,7 @@
               "name": "ARR",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "Auto-reload value ARR is the value to be loaded in the actual auto-reload register. Refer to the for more details about ARR update and behavior. The counter is blocked while the auto-reload value is null.",
-              "access": "read-write"
+              "description": "Auto-reload value"
             }
           ]
         },
@@ -1734,15 +1656,13 @@
               "name": "DTG",
               "bit_offset": 0,
               "bit_width": 8,
-              "description": "Dead-time generator setup",
-              "access": "read-write"
+              "description": "Dead-time generator setup"
             },
             {
               "name": "LOCK",
               "bit_offset": 8,
               "bit_width": 2,
-              "description": "Lock configuration These bits offer a write protection against software errors. Note: The LOCK bits can be written only once after the reset. Once the TIMx_BDTR register has been written, their content is frozen until the next reset.",
-              "access": "read-write",
+              "description": "Lock configuration",
               "enum_values": [
                 {
                   "name": "Off",
@@ -1770,8 +1690,7 @@
               "name": "OSSI",
               "bit_offset": 10,
               "bit_width": 1,
-              "description": "Off-state selection for Idle mode This bit is used when MOE=0 due to a break event or by a software write, on channels configured as outputs. See OC/OCN enable description for more details (enable register (TIM1_CCERTIMx_CCER)N/A). Note: This bit can not be modified as soon as the LOCK level 2 has been programmed (LOCK bits in TIMx_BDTR register).",
-              "access": "read-write",
+              "description": "Off-state selection for Idle mode",
               "enum_values": [
                 {
                   "name": "HiZ",
@@ -1789,8 +1708,7 @@
               "name": "OSSR",
               "bit_offset": 11,
               "bit_width": 1,
-              "description": "Off-state selection for Run mode This bit is used when MOE=1 on channels having a complementary output which are configured as outputs. OSSR is not implemented if no complementary output is implemented in the timer. See OC/OCN enable description for more details (enable register (TIM1_CCERTIMx_CCER)N/A). Note: This bit can not be modified as soon as the LOCK level 2 has been programmed (LOCK bits in TIMx_BDTR register).",
-              "access": "read-write",
+              "description": "Off-state selection for Run mode",
               "enum_values": [
                 {
                   "name": "HiZ",
@@ -1808,8 +1726,7 @@
               "name": "BKE",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "Break enable This bit enables the complete break protection (including all sources connected to bk_acth and BKIN sources, as per ). Note: This bit cannot be modified when LOCK level 1 has been programmed (LOCK bits in TIMx_BDTR register). Note: Any write operation to this bit takes a delay of 1 APB clock cycle to become effective.",
-              "access": "read-write",
+              "description": "Break enable",
               "enum_values": [
                 {
                   "name": "Disabled",
@@ -1827,8 +1744,7 @@
               "name": "BKP",
               "bit_offset": 13,
               "bit_width": 1,
-              "description": "Break polarity Note: This bit can not be modified as long as LOCK level 1 has been programmed (LOCK bits in TIMx_BDTR register). Note: Any write operation to this bit takes a delay of 1 APB clock cycle to become effective.",
-              "access": "read-write",
+              "description": "Break polarity",
               "enum_values": [
                 {
                   "name": "ActiveLow",
@@ -1846,8 +1762,7 @@
               "name": "AOE",
               "bit_offset": 14,
               "bit_width": 1,
-              "description": "Automatic output enable Note: This bit can not be modified as long as LOCK level 1 has been programmed (LOCK bits in TIMx_BDTR register).",
-              "access": "read-write",
+              "description": "Automatic output enable",
               "enum_values": [
                 {
                   "name": "Manual",
@@ -1865,8 +1780,7 @@
               "name": "MOE",
               "bit_offset": 15,
               "bit_width": 1,
-              "description": "Main output enable This bit is cleared asynchronously by hardware as soon as one of the break inputs is active (BRK or BRK2). It is set by software or automatically depending on the AOE bit. It is acting only on the channels which are configured in output. In response to a break event or if MOE is written to 0: OC and OCN outputs are disabled or forced to idle state depending on the OSSI bit. See OC/OCN enable description for more details (enable register (TIM1_CCERTIMx_CCER)N/A).",
-              "access": "read-write",
+              "description": "Main output enable",
               "enum_values": [
                 {
                   "name": "DisabledIdle",
@@ -1884,57 +1798,49 @@
               "name": "BKF",
               "bit_offset": 16,
               "bit_width": 4,
-              "description": "Break filter This bit-field defines the frequency used to sample BRK input and the length of the digital filter applied to BRK. The digital filter is made of an event counter in which N consecutive events are needed to validate a transition on the output: Note: This bit cannot be modified when LOCK level 1 has been programmed (LOCK bits in TIMx_BDTR register).",
-              "access": "read-write"
+              "description": "Break filter"
             },
             {
               "name": "BK2F",
               "bit_offset": 20,
               "bit_width": 4,
-              "description": "Break 2 filter This bit-field defines the frequency used to sample BRK2 input and the length of the digital filter applied to BRK2. The digital filter is made of an event counter in which N consecutive events are needed to validate a transition on the output: Note: This bit cannot be modified when LOCK level 1 has been programmed (LOCK bits in TIMx_BDTR register).",
-              "access": "read-write"
+              "description": "Break 2 filter"
             },
             {
               "name": "BK2E",
               "bit_offset": 24,
               "bit_width": 1,
-              "description": "Break 2 enable Note: The BRK2 must only be used with OSSR = OSSI = 1. Note: This bit cannot be modified when LOCK level 1 has been programmed (LOCK bits in TIMx_BDTR register). Note: Any write operation to this bit takes a delay of 1 APB clock cycle to become effective.",
-              "access": "read-write"
+              "description": "Break 2 enable"
             },
             {
               "name": "BK2P",
               "bit_offset": 25,
               "bit_width": 1,
-              "description": "Break 2 polarity Note: This bit cannot be modified as long as LOCK level 1 has been programmed (LOCK bits in TIMx_BDTR register). Note: Any write operation to this bit takes a delay of 1 APB clock cycle to become effective.",
-              "access": "read-write"
+              "description": "Break 2 polarity"
             },
             {
               "name": "BKDSRM",
               "bit_offset": 26,
               "bit_width": 1,
-              "description": "Break Disarm This bit is cleared by hardware when no break source is active. The BKDSRM bit must be set by software to release the bidirectional output control (open-drain output in Hi-Z state) and then be polled it until it is reset by hardware, indicating that the fault condition has disappeared. Note: Any write operation to this bit takes a delay of 1 APB clock cycle to become effective.",
-              "access": "read-write"
+              "description": "Break Disarm"
             },
             {
               "name": "BK2DSRM",
               "bit_offset": 27,
               "bit_width": 1,
-              "description": "Break2 Disarm Refer to BKDSRM description",
-              "access": "read-write"
+              "description": "Break2 Disarm"
             },
             {
               "name": "BKBID",
               "bit_offset": 28,
               "bit_width": 1,
-              "description": "Break Bidirectional In the bidirectional mode (BKBID bit set to 1), the break input is configured both in input mode and in open drain output mode. Any active break event asserts a low logic level on the Break input to indicate an internal break event to external devices. Note: This bit cannot be modified as long as LOCK level 1 has been programmed (LOCK bits in TIMx_BDTR register). Note: Any write operation to this bit takes a delay of 1 APB clock cycle to become effective.",
-              "access": "read-write"
+              "description": "Break Bidirectional"
             },
             {
-              "name": "BK2BID",
+              "name": "BK2ID",
               "bit_offset": 29,
               "bit_width": 1,
-              "description": "Break2 bidirectional Refer to BKBID description",
-              "access": "read-write"
+              "description": "Break2 bidirectional"
             }
           ]
         },
@@ -1949,18 +1855,16 @@
           "array_stride": null,
           "fields": [
             {
-              "name": "DBA",
-              "bit_offset": 0,
-              "bit_width": 5,
-              "description": "DMA base address This 5-bits vector defines the base-address for DMA transfers (when read/write access are done through the TIMx_DMAR address). DBA is defined as an offset starting from the address of the TIMx_CR1 register. Example: ...",
-              "access": "read-write"
-            },
-            {
               "name": "DBL",
               "bit_offset": 8,
               "bit_width": 5,
-              "description": "DMA burst length This 5-bit vector defines the length of DMA transfers (the timer recognizes a burst transfer when a read or a write access is done to the TIMx_DMAR address), i.e. the number of transfers. Transfers can be in half-words or in bytes (see example below). ... Example: Let us consider the following transfer: DBL = 7 bytes & DBA = TIMx_CR1. If DBL = 7 bytes and DBA = TIMx_CR1 represents the address of the byte to be transferred, the address of the transfer should be given by the following equation: (TIMx_CR1 address) + DBA + (DMA index), where DMA index = DBL In this example, 7 bytes are added to (TIMx_CR1 address) + DBA, which gives us the address from/to which the data is copied. In this case, the transfer is done to 7 registers starting from the following address: (TIMx_CR1 address) + DBA According to the configuration of the DMA Data Size, several cases may occur: If the DMA Data Size is configured in half-words, 16-bit data is transferred to each of the 7 registers. If the DMA Data Size is configured in bytes, the data is also transferred to 7 registers: the first register contains the first MSB byte, the second register, the first LSB byte and so on. So with the transfer Timer, one also has to specify the size of data transferred by DMA.",
-              "access": "read-write"
+              "description": "DMA burst length"
+            },
+            {
+              "name": "DBA",
+              "bit_offset": 0,
+              "bit_width": 5,
+              "description": "DMA base address"
             }
           ]
         },
@@ -1978,8 +1882,7 @@
               "name": "DMAB",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "DMA register for burst accesses A read or write operation to the DMAR register accesses the register located at the address (TIMx_CR1 address) + (DBA + DMA index) x 4 where TIMx_CR1 address is the address of the control register 1, DBA is the DMA base address configured in TIMx_DCR register, DMA index is automatically controlled by the DMA transfer, and ranges from 0 to DBL (DBL configured in TIMx_DCR).",
-              "access": "read-write"
+              "description": "DMA register for burst accesses"
             }
           ]
         },
@@ -1997,8 +1900,7 @@
               "name": "OCREF_CLR",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Ocref_clr source selection This bit selects the ocref_clr input source.",
-              "access": "read-write"
+              "description": "Ocref_clr source selection"
             }
           ]
         },
@@ -2058,29 +1960,25 @@
               "name": "CCR",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "Capture/Compare value",
-              "access": "read-write"
+              "description": "Capture/Compare value"
             },
             {
               "name": "GC5C1",
               "bit_offset": 29,
               "bit_width": 1,
-              "description": "Group Channel 5 and Channel 1 Distortion on Channel 1 output: This bit can either have immediate effect or be preloaded and taken into account after an update event (if preload feature is selected in TIMxCCMR1). Note: it is also possible to apply this distortion on combined PWM signals.",
-              "access": "read-write"
+              "description": "Group Channel 5 and Channel 1"
             },
             {
               "name": "GC5C2",
               "bit_offset": 30,
               "bit_width": 1,
-              "description": "Group Channel 5 and Channel 2 Distortion on Channel 2 output: This bit can either have immediate effect or be preloaded and taken into account after an update event (if preload feature is selected in TIMxCCMR1). Note: it is also possible to apply this distortion on combined PWM signals.",
-              "access": "read-write"
+              "description": "Group Channel 5 and Channel 2"
             },
             {
               "name": "GC5C3",
               "bit_offset": 31,
               "bit_width": 1,
-              "description": "Group Channel 5 and Channel 3 Distortion on Channel 3 output: This bit can either have immediate effect or be preloaded and taken into account after an update event (if preload feature is selected in TIMxCCMR2). Note: it is also possible to apply this distortion on combined PWM signals.",
-              "access": "read-write"
+              "description": "Group Channel 5 and Channel 3"
             }
           ]
         },
@@ -2116,50 +2014,43 @@
               "name": "BKINE",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "BRK BKIN input enable This bit enables the BKIN alternate function input for the timer's BRK input. BKIN input is 'ORed' with the other BRK sources. Note: This bit can not be modified as long as LOCK level 1 has been programmed (LOCK bits in TIMx_BDTR register).",
-              "access": "read-write"
+              "description": "BRK BKIN input enable"
             },
             {
               "name": "BKCMP1E",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "BRK COMP1 enable This bit enables the COMP1 for the timer's BRK input. COMP1 output is 'ORed' with the other BRK sources. Note: This bit can not be modified as long as LOCK level 1 has been programmed (LOCK bits in TIMx_BDTR register).",
-              "access": "read-write"
+              "description": "BRK COMP1 enable"
             },
             {
               "name": "BKCMP2E",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "BRK COMP2 enable This bit enables the COMP2 for the timer's BRK input. COMP2 output is 'ORed' with the other BRK sources. Note: This bit can not be modified as long as LOCK level 1 has been programmed (LOCK bits in TIMx_BDTR register).",
-              "access": "read-write"
+              "description": "BRK COMP2 enable"
             },
             {
               "name": "BKINP",
               "bit_offset": 9,
               "bit_width": 1,
-              "description": "BRK BKIN input polarity This bit selects the BKIN alternate function input sensitivity. It must be programmed together with the BKP polarity bit. Note: This bit can not be modified as long as LOCK level 1 has been programmed (LOCK bits in TIMx_BDTR register).",
-              "access": "read-write"
+              "description": "BRK BKIN input polarity"
             },
             {
               "name": "BKCMP1P",
               "bit_offset": 10,
               "bit_width": 1,
-              "description": "BRK COMP1 input polarity This bit selects the COMP1 input sensitivity. It must be programmed together with the BKP polarity bit. Note: This bit can not be modified as long as LOCK level 1 has been programmed (LOCK bits in TIMx_BDTR register).",
-              "access": "read-write"
+              "description": "BRK COMP1 input polarity"
             },
             {
               "name": "BKCMP2P",
               "bit_offset": 11,
               "bit_width": 1,
-              "description": "BRK COMP2 input polarity This bit selects the COMP2 input sensitivity. It must be programmed together with the BKP polarity bit. Note: This bit can not be modified as long as LOCK level 1 has been programmed (LOCK bits in TIMx_BDTR register).",
-              "access": "read-write"
+              "description": "BRK COMP2 input polarity"
             },
             {
               "name": "ETRSEL",
               "bit_offset": 14,
-              "bit_width": 4,
-              "description": "ETR source selection These bits select the ETR input source. Others: Reserved Note: These bits can not be modified as long as LOCK level 1 has been programmed (LOCK bits in TIMx_BDTR register).",
-              "access": "read-write"
+              "bit_width": 3,
+              "description": "ETR source selection"
             }
           ]
         },
@@ -2177,43 +2068,43 @@
               "name": "BK2INE",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "BRK2 BKIN input enable This bit enables the BKIN2 alternate function input for the timer's BRK2 input. BKIN2 input is 'ORed' with the other BRK2 sources. Note: This bit can not be modified as long as LOCK level 1 has been programmed (LOCK bits in TIMx_BDTR register).",
-              "access": "read-write"
+              "description": "BRK2 BKIN input enable"
             },
             {
               "name": "BK2CMP1E",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "BRK2 COMP1 enable This bit enables the COMP1 for the timer's BRK2 input. COMP1 output is 'ORed' with the other BRK2 sources. Note: This bit can not be modified as long as LOCK level 1 has been programmed (LOCK bits in TIMx_BDTR register).",
-              "access": "read-write"
+              "description": "BRK2 COMP1 enable"
             },
             {
               "name": "BK2CMP2E",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "BRK2 COMP2 enable This bit enables the COMP2 for the timer's BRK2 input. COMP2 output is 'ORed' with the other BRK2 sources. Note: This bit can not be modified as long as LOCK level 1 has been programmed (LOCK bits in TIMx_BDTR register).",
-              "access": "read-write"
+              "description": "BRK2 COMP2 enable"
+            },
+            {
+              "name": "BK2DFBK0E",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "BRK2 DFSDM_BREAK0 enable"
             },
             {
               "name": "BK2INP",
               "bit_offset": 9,
               "bit_width": 1,
-              "description": "BRK2 BKIN2 input polarity This bit selects the BKIN2 alternate function input sensitivity. It must be programmed together with the BK2P polarity bit. Note: This bit can not be modified as long as LOCK level 1 has been programmed (LOCK bits in TIMx_BDTR register).",
-              "access": "read-write"
+              "description": "BRK2 BKIN input polarity"
             },
             {
               "name": "BK2CMP1P",
               "bit_offset": 10,
               "bit_width": 1,
-              "description": "BRK2 COMP1 input polarity This bit selects the COMP1 input sensitivity. It must be programmed together with the BK2P polarity bit. Note: This bit can not be modified as long as LOCK level 1 has been programmed (LOCK bits in TIMx_BDTR register).",
-              "access": "read-write"
+              "description": "BRK2 COMP1 input polarity"
             },
             {
               "name": "BK2CMP2P",
               "bit_offset": 11,
               "bit_width": 1,
-              "description": "BRK2 COMP2 input polarity This bit selects the COMP2 input sensitivity. It must be programmed together with the BK2P polarity bit. Note: This bit can not be modified as long as LOCK level 1 has been programmed (LOCK bits in TIMx_BDTR register).",
-              "access": "read-write"
+              "description": "BRK2 COMP2 input polarity"
             }
           ]
         },
@@ -2228,32 +2119,28 @@
           "array_stride": null,
           "fields": [
             {
-              "name": "TI1SEL",
+              "name": "TI1SEL3_0",
               "bit_offset": 0,
               "bit_width": 4,
-              "description": "selects TI1[0] to TI1[15] input Others: Reserved",
-              "access": "read-write"
+              "description": "selects TI1[0] to TI1[15] input"
             },
             {
-              "name": "TI2SEL",
+              "name": "TI2SEL3_0",
               "bit_offset": 8,
               "bit_width": 4,
-              "description": "selects TI2[0] to TI2[15] input Others: Reserved",
-              "access": "read-write"
+              "description": "selects TI2[0] to TI2[15] input"
             },
             {
-              "name": "TI3SEL",
+              "name": "TI3SEL3_0",
               "bit_offset": 16,
               "bit_width": 4,
-              "description": "selects TI3[0] to TI3[15] input Others: Reserved",
-              "access": "read-write"
+              "description": "selects TI3[0] to TI3[15] input"
             },
             {
-              "name": "TI4SEL",
+              "name": "TI4SEL3_0",
               "bit_offset": 24,
               "bit_width": 4,
-              "description": "selects TI4[0] to TI4[15] input Others: Reserved",
-              "access": "read-write"
+              "description": "selects TI4[0] to TI4[15] input"
             }
           ]
         }

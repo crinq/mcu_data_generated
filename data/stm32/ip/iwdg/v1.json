@@ -3,8 +3,8 @@
   "kind": "iwdg",
   "version": "v1",
   "source": "stm32rs_svd",
-  "source_device": "stm32f100v8",
-  "source_file": "stm32f100.svd.patched",
+  "source_device": "stm32f217zg",
+  "source_file": "stm32f217.svd.patched",
   "blocks": {
     "IWDG": {
       "name": "IWDG",
@@ -17,7 +17,7 @@
           "size": 16,
           "access": "write-only",
           "reset_value": 0,
-          "description": "Key register (IWDG_KR)",
+          "description": "Key register",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -25,7 +25,7 @@
               "name": "KEY",
               "bit_offset": 0,
               "bit_width": 16,
-              "description": "Key value",
+              "description": "Key value (write only, read 0000h)",
               "enum_values": [
                 {
                   "name": "Unlock",
@@ -52,7 +52,7 @@
           "size": 16,
           "access": "read-write",
           "reset_value": 0,
-          "description": "Prescaler register (IWDG_PR)",
+          "description": "Prescaler register",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -102,7 +102,7 @@
           "size": 16,
           "access": "read-write",
           "reset_value": 4095,
-          "description": "Reload register (IWDG_RLR)",
+          "description": "Reload register",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -120,21 +120,21 @@
           "size": 16,
           "access": "read-only",
           "reset_value": 0,
-          "description": "Status register (IWDG_SR)",
+          "description": "Status register",
           "array_len": null,
           "array_stride": null,
           "fields": [
-            {
-              "name": "PVU",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Watchdog prescaler value update"
-            },
             {
               "name": "RVU",
               "bit_offset": 1,
               "bit_width": 1,
               "description": "Watchdog counter reload value update"
+            },
+            {
+              "name": "PVU",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Watchdog prescaler value update"
             }
           ]
         }

@@ -3,8 +3,8 @@
   "kind": "spi",
   "version": "v2",
   "source": "stm32rs_svd",
-  "source_device": "stm32l010c6",
-  "source_file": "stm32l0x0.svd.patched",
+  "source_device": "stm32l100c6",
+  "source_file": "stm32l100.svd.patched",
   "blocks": {
     "SPI1": {
       "name": "SPI1",
@@ -316,80 +316,20 @@
           "array_stride": null,
           "fields": [
             {
-              "name": "RXDMAEN",
-              "bit_offset": 0,
+              "name": "TXEIE",
+              "bit_offset": 7,
               "bit_width": 1,
-              "description": "Rx buffer DMA enable",
-              "enum_values": [
-                {
-                  "name": "Disabled",
-                  "value": 0,
-                  "description": "Rx buffer DMA disabled"
-                },
-                {
-                  "name": "Enabled",
-                  "value": 1,
-                  "description": "Rx buffer DMA enabled"
-                }
-              ]
-            },
-            {
-              "name": "TXDMAEN",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Tx buffer DMA enable",
-              "enum_values": [
-                {
-                  "name": "Disabled",
-                  "value": 0,
-                  "description": "Tx buffer DMA disabled"
-                },
-                {
-                  "name": "Enabled",
-                  "value": 1,
-                  "description": "Tx buffer DMA enabled"
-                }
-              ]
-            },
-            {
-              "name": "SSOE",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "SS output enable",
-              "enum_values": [
-                {
-                  "name": "Disabled",
-                  "value": 0,
-                  "description": "SS output is disabled in master mode"
-                },
-                {
-                  "name": "Enabled",
-                  "value": 1,
-                  "description": "SS output is enabled in master mode"
-                }
-              ]
-            },
-            {
-              "name": "FRF",
-              "bit_offset": 4,
-              "bit_width": 1,
-              "description": "Frame format"
-            },
-            {
-              "name": "ERRIE",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "Error interrupt enable",
+              "description": "Tx buffer empty interrupt enable",
               "enum_values": [
                 {
                   "name": "Masked",
                   "value": 0,
-                  "description": "Error interrupt masked"
+                  "description": "TXE interrupt masked"
                 },
                 {
                   "name": "NotMasked",
                   "value": 1,
-                  "description": "Error interrupt not masked"
+                  "description": "TXE interrupt not masked"
                 }
               ]
             },
@@ -412,20 +352,92 @@
               ]
             },
             {
-              "name": "TXEIE",
-              "bit_offset": 7,
+              "name": "ERRIE",
+              "bit_offset": 5,
               "bit_width": 1,
-              "description": "Tx buffer empty interrupt enable",
+              "description": "Error interrupt enable",
               "enum_values": [
                 {
                   "name": "Masked",
                   "value": 0,
-                  "description": "TXE interrupt masked"
+                  "description": "Error interrupt masked"
                 },
                 {
                   "name": "NotMasked",
                   "value": 1,
-                  "description": "TXE interrupt not masked"
+                  "description": "Error interrupt not masked"
+                }
+              ]
+            },
+            {
+              "name": "FRF",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "Frame format",
+              "enum_values": [
+                {
+                  "name": "Motorola",
+                  "value": 0,
+                  "description": "SPI Motorola mode"
+                },
+                {
+                  "name": "TI",
+                  "value": 1,
+                  "description": "SPI TI mode"
+                }
+              ]
+            },
+            {
+              "name": "SSOE",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "SS output enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "SS output is disabled in master mode"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "SS output is enabled in master mode"
+                }
+              ]
+            },
+            {
+              "name": "TXDMAEN",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Tx buffer DMA enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Tx buffer DMA disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Tx buffer DMA enabled"
+                }
+              ]
+            },
+            {
+              "name": "RXDMAEN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Rx buffer DMA enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Rx buffer DMA disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Rx buffer DMA enabled"
                 }
               ]
             }
@@ -442,56 +454,80 @@
           "array_stride": null,
           "fields": [
             {
-              "name": "RXNE",
-              "bit_offset": 0,
+              "name": "FRE",
+              "bit_offset": 8,
               "bit_width": 1,
-              "description": "Receive buffer not empty",
+              "description": "Frame Error",
               "access": "read-only",
               "enum_values": [
                 {
-                  "name": "Empty",
+                  "name": "NoError",
                   "value": 0,
-                  "description": "Rx buffer empty"
+                  "description": "No frame format error"
                 },
                 {
-                  "name": "NotEmpty",
+                  "name": "Error",
                   "value": 1,
-                  "description": "Rx buffer not empty"
+                  "description": "A frame format error occurred"
                 }
               ]
             },
             {
-              "name": "TXE",
-              "bit_offset": 1,
+              "name": "BSY",
+              "bit_offset": 7,
               "bit_width": 1,
-              "description": "Transmit buffer empty",
+              "description": "Busy flag",
               "access": "read-only",
               "enum_values": [
                 {
-                  "name": "NotEmpty",
+                  "name": "NotBusy",
                   "value": 0,
-                  "description": "Tx buffer not empty"
+                  "description": "SPI not busy"
                 },
                 {
-                  "name": "Empty",
+                  "name": "Busy",
                   "value": 1,
-                  "description": "Tx buffer empty"
+                  "description": "SPI busy"
                 }
               ]
             },
             {
-              "name": "CHSIDE",
-              "bit_offset": 2,
+              "name": "OVR",
+              "bit_offset": 6,
               "bit_width": 1,
-              "description": "Channel side",
-              "access": "read-only"
+              "description": "Overrun flag",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NoOverrun",
+                  "value": 0,
+                  "description": "No overrun occurred"
+                },
+                {
+                  "name": "Overrun",
+                  "value": 1,
+                  "description": "Overrun occurred"
+                }
+              ]
             },
             {
-              "name": "UDR",
-              "bit_offset": 3,
+              "name": "MODF",
+              "bit_offset": 5,
               "bit_width": 1,
-              "description": "Underrun flag",
-              "access": "read-only"
+              "description": "Mode fault",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NoFault",
+                  "value": 0,
+                  "description": "No mode fault occurred"
+                },
+                {
+                  "name": "Fault",
+                  "value": 1,
+                  "description": "Mode fault occurred"
+                }
+              ]
             },
             {
               "name": "CRCERR",
@@ -518,68 +554,80 @@
               ]
             },
             {
-              "name": "MODF",
-              "bit_offset": 5,
+              "name": "UDR",
+              "bit_offset": 3,
               "bit_width": 1,
-              "description": "Mode fault",
+              "description": "Underrun flag",
               "access": "read-only",
               "enum_values": [
                 {
-                  "name": "NoFault",
+                  "name": "NoUnderrun",
                   "value": 0,
-                  "description": "No mode fault occurred"
+                  "description": "No underrun occurred"
                 },
                 {
-                  "name": "Fault",
+                  "name": "Underrun",
                   "value": 1,
-                  "description": "Mode fault occurred"
+                  "description": "Underrun occurred"
                 }
               ]
             },
             {
-              "name": "OVR",
-              "bit_offset": 6,
+              "name": "CHSIDE",
+              "bit_offset": 2,
               "bit_width": 1,
-              "description": "Overrun flag",
+              "description": "Channel side",
               "access": "read-only",
               "enum_values": [
                 {
-                  "name": "NoOverrun",
+                  "name": "Left",
                   "value": 0,
-                  "description": "No overrun occurred"
+                  "description": "Channel left has to be transmitted or has been received"
                 },
                 {
-                  "name": "Overrun",
+                  "name": "Right",
                   "value": 1,
-                  "description": "Overrun occurred"
+                  "description": "Channel right has to be transmitted or has been received"
                 }
               ]
             },
             {
-              "name": "BSY",
-              "bit_offset": 7,
+              "name": "TXE",
+              "bit_offset": 1,
               "bit_width": 1,
-              "description": "Busy flag",
+              "description": "Transmit buffer empty",
               "access": "read-only",
               "enum_values": [
                 {
-                  "name": "NotBusy",
+                  "name": "NotEmpty",
                   "value": 0,
-                  "description": "SPI not busy"
+                  "description": "Tx buffer not empty"
                 },
                 {
-                  "name": "Busy",
+                  "name": "Empty",
                   "value": 1,
-                  "description": "SPI busy"
+                  "description": "Tx buffer empty"
                 }
               ]
             },
             {
-              "name": "FRE",
-              "bit_offset": 8,
+              "name": "RXNE",
+              "bit_offset": 0,
               "bit_width": 1,
-              "description": "TI frame format error",
-              "access": "read-only"
+              "description": "Receive buffer not empty",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "Empty",
+                  "value": 0,
+                  "description": "Rx buffer empty"
+                },
+                {
+                  "name": "NotEmpty",
+                  "value": 1,
+                  "description": "Rx buffer not empty"
+                }
+              ]
             }
           ]
         },
@@ -687,49 +735,170 @@
               "name": "I2SMOD",
               "bit_offset": 11,
               "bit_width": 1,
-              "description": "I2S mode selection"
+              "description": "I2S mode selection",
+              "enum_values": [
+                {
+                  "name": "SPIMode",
+                  "value": 0,
+                  "description": "SPI mode is selected"
+                },
+                {
+                  "name": "I2SMode",
+                  "value": 1,
+                  "description": "I2S mode is selected"
+                }
+              ]
             },
             {
               "name": "I2SE",
               "bit_offset": 10,
               "bit_width": 1,
-              "description": "I2S Enable"
+              "description": "I2S Enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "I2S peripheral is disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "I2S peripheral is enabled"
+                }
+              ]
             },
             {
               "name": "I2SCFG",
               "bit_offset": 8,
               "bit_width": 2,
-              "description": "I2S configuration mode"
+              "description": "I2S configuration mode",
+              "enum_values": [
+                {
+                  "name": "SlaveTx",
+                  "value": 0,
+                  "description": "Slave - transmit"
+                },
+                {
+                  "name": "SlaveRx",
+                  "value": 1,
+                  "description": "Slave - receive"
+                },
+                {
+                  "name": "MasterTx",
+                  "value": 2,
+                  "description": "Master - transmit"
+                },
+                {
+                  "name": "MasterRx",
+                  "value": 3,
+                  "description": "Master - receive"
+                }
+              ]
             },
             {
               "name": "PCMSYNC",
               "bit_offset": 7,
               "bit_width": 1,
-              "description": "PCM frame synchronization"
+              "description": "PCM frame synchronization",
+              "enum_values": [
+                {
+                  "name": "Short",
+                  "value": 0,
+                  "description": "Short frame synchronisation"
+                },
+                {
+                  "name": "Long",
+                  "value": 1,
+                  "description": "Long frame synchronisation"
+                }
+              ]
             },
             {
               "name": "I2SSTD",
               "bit_offset": 4,
               "bit_width": 2,
-              "description": "I2S standard selection"
+              "description": "I2S standard selection",
+              "enum_values": [
+                {
+                  "name": "Philips",
+                  "value": 0,
+                  "description": "I2S Philips standard"
+                },
+                {
+                  "name": "MSB",
+                  "value": 1,
+                  "description": "MSB justified standard"
+                },
+                {
+                  "name": "LSB",
+                  "value": 2,
+                  "description": "LSB justified standard"
+                },
+                {
+                  "name": "PCM",
+                  "value": 3,
+                  "description": "PCM standard"
+                }
+              ]
             },
             {
               "name": "CKPOL",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "Steady state clock polarity"
+              "description": "Steady state clock polarity",
+              "enum_values": [
+                {
+                  "name": "IdleLow",
+                  "value": 0,
+                  "description": "I2S clock inactive state is low level"
+                },
+                {
+                  "name": "IdleHigh",
+                  "value": 1,
+                  "description": "I2S clock inactive state is high level"
+                }
+              ]
             },
             {
               "name": "DATLEN",
               "bit_offset": 1,
               "bit_width": 2,
-              "description": "Data length to be transferred"
+              "description": "Data length to be transferred",
+              "enum_values": [
+                {
+                  "name": "SixteenBit",
+                  "value": 0,
+                  "description": "16-bit data length"
+                },
+                {
+                  "name": "TwentyFourBit",
+                  "value": 1,
+                  "description": "24-bit data length"
+                },
+                {
+                  "name": "ThirtyTwoBit",
+                  "value": 2,
+                  "description": "32-bit data length"
+                }
+              ]
             },
             {
               "name": "CHLEN",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Channel length (number of bits per audio channel)"
+              "description": "Channel length (number of bits per audio channel)",
+              "enum_values": [
+                {
+                  "name": "SixteenBit",
+                  "value": 0,
+                  "description": "16-bit wide"
+                },
+                {
+                  "name": "ThirtyTwoBit",
+                  "value": 1,
+                  "description": "32-bit wide"
+                }
+              ]
             }
           ]
         },
@@ -738,7 +907,7 @@
           "offset": 32,
           "size": 16,
           "access": "read-write",
-          "reset_value": 16,
+          "reset_value": 2,
           "description": "I2S prescaler register",
           "array_len": null,
           "array_stride": null,
@@ -747,13 +916,37 @@
               "name": "MCKOE",
               "bit_offset": 9,
               "bit_width": 1,
-              "description": "Master clock output enable"
+              "description": "Master clock output enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Master clock output is disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Master clock output is enabled"
+                }
+              ]
             },
             {
               "name": "ODD",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "Odd factor for the prescaler"
+              "description": "Odd factor for the prescaler",
+              "enum_values": [
+                {
+                  "name": "Even",
+                  "value": 0,
+                  "description": "Real divider value is I2SDIV * 2"
+                },
+                {
+                  "name": "Odd",
+                  "value": 1,
+                  "description": "Real divider value is (I2SDIV * 2) + 1"
+                }
+              ]
             },
             {
               "name": "I2SDIV",

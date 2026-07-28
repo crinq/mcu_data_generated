@@ -80,7 +80,7 @@ catalog browsing without a second fetch.
       ],
       "flash_bytes":  1049104,
       "ram_bytes":    196608,
-      "packages":     ["LQFP64"]
+      "packages":     { "STM32F405RGTx": "LQFP64" }
     },
     // ... one entry per device
   },
@@ -94,6 +94,10 @@ catalog browsing without a second fetch.
 `devices[did].file` is relative to the vendor directory. The other fields
 are a summary of what's in the per-device JSON — sufficient for filtering,
 search, and table rendering without opening every device file.
+
+`packages` maps each orderable variant SKU (ST RefName, e.g.
+`STM32H755IIKx`) to its physical package name (e.g. `UFBGA176`), so
+consumers can resolve full part numbers without downloading the device file.
 
 `peripherals[kind].versions` is the set of register-block versions for which
 an IP file exists at `ip/<kind>/<version>.json`.

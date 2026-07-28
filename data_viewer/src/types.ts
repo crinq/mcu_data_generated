@@ -21,7 +21,13 @@ export interface DeviceSummary {
   cores: { name: string; freq_max_hz?: number }[];
   flash_bytes?: number;
   ram_bytes?: number;
-  packages: string[];
+  /** Variant SKU (ST RefName, e.g. STM32H755IIKx) -> package name. */
+  packages: Record<string, string>;
+}
+
+/** Distinct package names from a summary's variant->package map. */
+export function packageNames(pkgs: Record<string, string> | undefined): string[] {
+  return [...new Set(Object.values(pkgs || {}))];
 }
 
 export interface VendorPeripheralEntry {

@@ -1,6 +1,6 @@
 import type { RootIndex, VendorIndex, Mcu, DeviceSummary } from './types';
 
-const DATA_BASE = '/data';
+const DATA_BASE = (import.meta.env.BASE_URL || '/').replace(/\/+$/, '') + '/data';
 
 let rootCache: RootIndex | null = null;
 const vendorIndexCache = new Map<string, VendorIndex>();

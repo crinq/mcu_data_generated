@@ -3,21 +3,21 @@
   "kind": "hash",
   "version": "v4",
   "source": "stm32rs_svd",
-  "source_device": "stm32wba50ke",
-  "source_file": "stm32wba50.svd.patched",
+  "source_device": "stm32u535cb",
+  "source_file": "stm32u535.svd.patched",
   "blocks": {
     "HASH": {
       "name": "HASH",
-      "description": "HASH register block",
+      "description": "Hash processor",
       "extends": null,
       "registers": [
         {
           "name": "CR",
           "offset": 0,
           "size": 32,
-          "access": "read-write",
+          "access": null,
           "reset_value": 0,
-          "description": "HASH control register",
+          "description": "control register",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -25,63 +25,63 @@
               "name": "INIT",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "Initialize message digest calculation Writing this bit to 1 resets the hash processor core, so that the HASH is ready to compute the message digest of a new message. Writing this bit to 0 has no effect. Reading this bit always return 0.",
-              "access": "read-write"
+              "description": "Initialize message digest calculation",
+              "access": "write-only"
             },
             {
               "name": "DMAE",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "DMA enable After this bit is set it is cleared by hardware while the last data of the message is written into the hash processor. Setting this bit to 0 while a DMA transfer is ongoing is not aborting this current transfer. Instead, the DMA interface of the IP remains internally enabled until the transfer is completed or INIT is written to 1. Setting INIT bit to 1 does not clear DMAE bit.",
+              "description": "DMA enable",
               "access": "read-write"
             },
             {
               "name": "DATATYPE",
               "bit_offset": 4,
               "bit_width": 2,
-              "description": "Data type selection Defines the format of the data entered into the HASH_DIN register:",
+              "description": "Data type selection",
               "access": "read-write"
             },
             {
               "name": "MODE",
               "bit_offset": 6,
               "bit_width": 1,
-              "description": "Mode selection This bit selects the HASH or HMAC mode for the selected algorithm: This selection is only taken into account when the INIT bit is set. Changing this bit during a computation has no effect.",
-              "access": "read-write"
-            },
-            {
-              "name": "NBW",
-              "bit_offset": 8,
-              "bit_width": 4,
-              "description": "Number of words already pushed Refer to NBWP[3:0] bitfield of HASH_SR for the description. This bitfield is read-only.",
-              "access": "read-only"
-            },
-            {
-              "name": "DINNE",
-              "bit_offset": 12,
-              "bit_width": 1,
-              "description": "DIN not empty Refer to DINNE bit of HASH_SR for the description. This bit is read-only.",
-              "access": "read-only"
-            },
-            {
-              "name": "MDMAT",
-              "bit_offset": 13,
-              "bit_width": 1,
-              "description": "Multiple DMA transfers This bit is set when hashing large files when multiple DMA transfers are needed.",
-              "access": "read-write"
-            },
-            {
-              "name": "LKEY",
-              "bit_offset": 16,
-              "bit_width": 1,
-              "description": "Long key selection This bit selects between short key (less than or equal 64 bytes) or long key ( 64 bytes) in HMAC mode. This selection is only taken into account when the INIT and MODE bits are both set. Changing this bit during a computation has no effect.",
+              "description": "Mode selection",
               "access": "read-write"
             },
             {
               "name": "ALGO",
               "bit_offset": 17,
               "bit_width": 2,
-              "description": "Algorithm selection These bits select the hash algorithm. This selection is only taken into account when the INIT bit is set. Changing this bitfield during a computation has no effect. When ALGO bitfield is updated and INIT bit is set, NBWE in HASH_SR is automatically updated to 0x11.",
+              "description": "Algorithm selection",
+              "access": "read-write"
+            },
+            {
+              "name": "NBW",
+              "bit_offset": 8,
+              "bit_width": 4,
+              "description": "Number of words already pushed",
+              "access": "read-only"
+            },
+            {
+              "name": "DINNE",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "DIN not empty",
+              "access": "read-only"
+            },
+            {
+              "name": "MDMAT",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "Multiple DMA Transfers",
+              "access": "read-write"
+            },
+            {
+              "name": "LKEY",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Long key selection",
               "access": "read-write"
             }
           ]
@@ -92,7 +92,7 @@
           "size": 32,
           "access": "write-only",
           "reset_value": 0,
-          "description": "HASH data input register",
+          "description": "data input register",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -100,8 +100,7 @@
               "name": "DATAIN",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Data input Writing this register pushes the current register content into the IN FIFO, and the register takes the new value presented on the AHB databus. Reading this register returns zeros.",
-              "access": "write-only"
+              "description": "Data input"
             }
           ]
         },
@@ -109,24 +108,24 @@
           "name": "STR",
           "offset": 8,
           "size": 32,
-          "access": "read-write",
+          "access": null,
           "reset_value": 0,
-          "description": "HASH start register",
+          "description": "start register",
           "array_len": null,
           "array_stride": null,
           "fields": [
             {
-              "name": "NBLW",
-              "bit_offset": 0,
-              "bit_width": 5,
-              "description": "Number of valid bits in the last word When the last word of the message bit string is written in HASH_DIN register, the hash processor takes only the valid bits specified as below, after internal data swapping: ... The above mechanism is valid only if DCAL = 0. If NBLW[4:0] bitfield is written while DCAL is set to 1, the NBLW[4:0] bitfield remains unchanged. In other words it is not possible to configure NBLW[4:0] and set DCAL at the same time. Reading NBLW[4:0] bitfield returns the last value written to NBLW[4:0].",
-              "access": "read-write"
-            },
-            {
               "name": "DCAL",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "Digest calculation Writing this bit to 1 starts the message padding, using the previously written value of NBLW[4:0], and starts the calculation of the final message digest with all data words written to the input FIFO since the INIT bit was last written to 1. Reading this bit returns 0.",
+              "description": "Digest calculation",
+              "access": "write-only"
+            },
+            {
+              "name": "NBLW",
+              "bit_offset": 0,
+              "bit_width": 5,
+              "description": "Number of valid bits in the last word of the message",
               "access": "read-write"
             }
           ]
@@ -145,8 +144,7 @@
               "name": "H0",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Hash data x Refer to Section 25.7.4: HASH digest registers introduction.",
-              "access": "read-only"
+              "description": "H0"
             }
           ]
         },
@@ -164,8 +162,7 @@
               "name": "H1",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Hash data x Refer to Section 25.7.4: HASH digest registers introduction.",
-              "access": "read-only"
+              "description": "H1"
             }
           ]
         },
@@ -183,8 +180,7 @@
               "name": "H2",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Hash data x Refer to Section 25.7.4: HASH digest registers introduction.",
-              "access": "read-only"
+              "description": "H2"
             }
           ]
         },
@@ -202,8 +198,7 @@
               "name": "H3",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Hash data x Refer to Section 25.7.4: HASH digest registers introduction.",
-              "access": "read-only"
+              "description": "H3"
             }
           ]
         },
@@ -221,8 +216,151 @@
               "name": "H4",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Hash data x Refer to Section 25.7.4: HASH digest registers introduction.",
-              "access": "read-only"
+              "description": "H4"
+            }
+          ]
+        },
+        {
+          "name": "HR0",
+          "offset": 784,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "digest register 0",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "H0",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "H0"
+            }
+          ]
+        },
+        {
+          "name": "HR1",
+          "offset": 788,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "digest register 1",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "H1",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "H1"
+            }
+          ]
+        },
+        {
+          "name": "HR2",
+          "offset": 792,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "digest register 4",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "H2",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "H2"
+            }
+          ]
+        },
+        {
+          "name": "HR3",
+          "offset": 796,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "digest register 3",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "H3",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "H3"
+            }
+          ]
+        },
+        {
+          "name": "HR4",
+          "offset": 800,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "digest register 4",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "H4",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "H4"
+            }
+          ]
+        },
+        {
+          "name": "HR5",
+          "offset": 804,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "supplementary digest register 5",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "H5",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "H5"
+            }
+          ]
+        },
+        {
+          "name": "HR6",
+          "offset": 808,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "supplementary digest register 6",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "H6",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "H6"
+            }
+          ]
+        },
+        {
+          "name": "HR7",
+          "offset": 812,
+          "size": 32,
+          "access": "read-only",
+          "reset_value": 0,
+          "description": "supplementary digest register 7",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "H7",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "H7"
             }
           ]
         },
@@ -232,23 +370,21 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH interrupt enable register",
+          "description": "interrupt enable register",
           "array_len": null,
           "array_stride": null,
           "fields": [
             {
-              "name": "DINIE",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Data input interrupt enable",
-              "access": "read-write"
-            },
-            {
               "name": "DCIE",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Digest calculation completion interrupt enable",
-              "access": "read-write"
+              "description": "Digest calculation completion interrupt enable"
+            },
+            {
+              "name": "DINIE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Data input interrupt enable"
             }
           ]
         },
@@ -256,33 +392,12 @@
           "name": "SR",
           "offset": 36,
           "size": 32,
-          "access": "read-write",
+          "access": null,
           "reset_value": 1,
-          "description": "HASH status register",
+          "description": "status register",
           "array_len": null,
           "array_stride": null,
           "fields": [
-            {
-              "name": "DINIS",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Data input interrupt status This bit is set by hardware when the FIFO is ready to get a new block (16 locations are free). It is cleared by writing it to 0 or by writing the HASH_DIN register. When DINIS=0, HASH_CSRx registers reads as zero.",
-              "access": "read-write"
-            },
-            {
-              "name": "DCIS",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Digest calculation completion interrupt status This bit is set by hardware when a digest becomes ready (the whole message has been processed). It is cleared by writing it to 0 or by writing the INIT bit to 1 in the HASH_CR register.",
-              "access": "read-write"
-            },
-            {
-              "name": "DMAS",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "DMA Status This bit provides information on the DMA interface activity. It is set with DMAE and cleared when DMAE = 0 and no DMA transfer is ongoing. No interrupt is associated with this bit.",
-              "access": "read-only"
-            },
             {
               "name": "BUSY",
               "bit_offset": 3,
@@ -291,24 +406,45 @@
               "access": "read-only"
             },
             {
-              "name": "NBWP",
-              "bit_offset": 9,
+              "name": "DMAS",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "DMA Status",
+              "access": "read-only"
+            },
+            {
+              "name": "DCIS",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Digest calculation completion interrupt status",
+              "access": "read-write"
+            },
+            {
+              "name": "DINIS",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Data input interrupt status",
+              "access": "read-write"
+            },
+            {
+              "name": "NBWE",
+              "bit_offset": 16,
               "bit_width": 5,
-              "description": "Number of words already pushed This bitfield is the exact number of words in the message that have already been pushed into the FIFO. NBWP is incremented by one when a write access is performed to the HASH_DIN register. When a digest calculation starts, NBWP is updated to NBWP- block size (in words), and NBWP goes to zero when the INIT bit is written to 1.",
+              "description": "Number of words expected",
               "access": "read-only"
             },
             {
               "name": "DINNE",
               "bit_offset": 15,
               "bit_width": 1,
-              "description": "DIN not empty This bit is set when the HASH_DIN register holds valid data (that is after being written at least once). It is cleared when either the INIT bit (initialization) or the DCAL bit (completion of the previous message processing) is written to 1.",
+              "description": "DIN not empty",
               "access": "read-only"
             },
             {
-              "name": "NBWE",
-              "bit_offset": 16,
+              "name": "NBWP",
+              "bit_offset": 9,
               "bit_width": 5,
-              "description": "Number of words expected This bitfield reflects the number of words in the message that must be pushed into the FIFO to trigger a partial computation. NBWE is decremented by 1 when a write access is performed to the HASH_DIN register. NBWE is set to the expected block size +1 in words (0x11) when INIT bit is set in HASH_CR, and it is set to the expected block size when partial digest calculation ends.",
+              "description": "Number of words already pushed",
               "access": "read-only"
             }
           ]
@@ -319,7 +455,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 0",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -327,8 +463,7 @@
               "name": "CS0",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS0"
             }
           ]
         },
@@ -338,7 +473,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 1",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -346,8 +481,7 @@
               "name": "CS1",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS1"
             }
           ]
         },
@@ -357,7 +491,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 2",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -365,8 +499,7 @@
               "name": "CS2",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS2"
             }
           ]
         },
@@ -376,7 +509,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 3",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -384,8 +517,7 @@
               "name": "CS3",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS3"
             }
           ]
         },
@@ -395,7 +527,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 4",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -403,8 +535,7 @@
               "name": "CS4",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS4"
             }
           ]
         },
@@ -414,7 +545,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 5",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -422,8 +553,7 @@
               "name": "CS5",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS5"
             }
           ]
         },
@@ -433,7 +563,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 6",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -441,8 +571,7 @@
               "name": "CS6",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS6"
             }
           ]
         },
@@ -452,7 +581,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 7",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -460,8 +589,7 @@
               "name": "CS7",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS7"
             }
           ]
         },
@@ -471,7 +599,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 8",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -479,8 +607,7 @@
               "name": "CS8",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS8"
             }
           ]
         },
@@ -490,7 +617,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 9",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -498,8 +625,7 @@
               "name": "CS9",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS9"
             }
           ]
         },
@@ -509,7 +635,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 10",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -517,8 +643,7 @@
               "name": "CS10",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS10"
             }
           ]
         },
@@ -528,7 +653,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 11",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -536,8 +661,7 @@
               "name": "CS11",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS11"
             }
           ]
         },
@@ -547,7 +671,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 12",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -555,8 +679,7 @@
               "name": "CS12",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS12"
             }
           ]
         },
@@ -566,7 +689,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 13",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -574,8 +697,7 @@
               "name": "CS13",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS13"
             }
           ]
         },
@@ -585,7 +707,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 14",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -593,8 +715,7 @@
               "name": "CS14",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS14"
             }
           ]
         },
@@ -604,7 +725,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 15",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -612,8 +733,7 @@
               "name": "CS15",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS15"
             }
           ]
         },
@@ -623,7 +743,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 16",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -631,8 +751,7 @@
               "name": "CS16",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS16"
             }
           ]
         },
@@ -642,7 +761,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 17",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -650,8 +769,7 @@
               "name": "CS17",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS17"
             }
           ]
         },
@@ -661,7 +779,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 18",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -669,8 +787,7 @@
               "name": "CS18",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS18"
             }
           ]
         },
@@ -680,7 +797,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 19",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -688,8 +805,7 @@
               "name": "CS19",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS19"
             }
           ]
         },
@@ -699,7 +815,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 20",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -707,8 +823,7 @@
               "name": "CS20",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS20"
             }
           ]
         },
@@ -718,7 +833,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 21",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -726,8 +841,7 @@
               "name": "CS21",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS21"
             }
           ]
         },
@@ -737,7 +851,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 22",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -745,8 +859,7 @@
               "name": "CS22",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS22"
             }
           ]
         },
@@ -756,7 +869,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 23",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -764,8 +877,7 @@
               "name": "CS23",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS23"
             }
           ]
         },
@@ -775,7 +887,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 24",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -783,8 +895,7 @@
               "name": "CS24",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS24"
             }
           ]
         },
@@ -794,7 +905,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 25",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -802,8 +913,7 @@
               "name": "CS25",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS25"
             }
           ]
         },
@@ -813,7 +923,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 26",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -821,8 +931,7 @@
               "name": "CS26",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS26"
             }
           ]
         },
@@ -832,7 +941,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 27",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -840,8 +949,7 @@
               "name": "CS27",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS27"
             }
           ]
         },
@@ -851,7 +959,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 28",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -859,8 +967,7 @@
               "name": "CS28",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS28"
             }
           ]
         },
@@ -870,7 +977,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 29",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -878,8 +985,7 @@
               "name": "CS29",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS29"
             }
           ]
         },
@@ -889,7 +995,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 30",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -897,8 +1003,7 @@
               "name": "CS30",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS30"
             }
           ]
         },
@@ -908,7 +1013,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 31",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -916,8 +1021,7 @@
               "name": "CS31",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS31"
             }
           ]
         },
@@ -927,7 +1031,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 32",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -935,8 +1039,7 @@
               "name": "CS32",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS32"
             }
           ]
         },
@@ -946,7 +1049,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 33",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -954,8 +1057,7 @@
               "name": "CS33",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS33"
             }
           ]
         },
@@ -965,7 +1067,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 34",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -973,8 +1075,7 @@
               "name": "CS34",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS34"
             }
           ]
         },
@@ -984,7 +1085,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 35",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -992,8 +1093,7 @@
               "name": "CS35",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS35"
             }
           ]
         },
@@ -1003,7 +1103,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 36",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -1011,8 +1111,7 @@
               "name": "CS36",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS36"
             }
           ]
         },
@@ -1022,7 +1121,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 37",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -1030,8 +1129,7 @@
               "name": "CS37",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS37"
             }
           ]
         },
@@ -1041,7 +1139,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 38",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -1049,8 +1147,7 @@
               "name": "CS38",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS38"
             }
           ]
         },
@@ -1060,7 +1157,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 39",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -1068,8 +1165,7 @@
               "name": "CS39",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS39"
             }
           ]
         },
@@ -1079,7 +1175,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 40",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -1087,8 +1183,7 @@
               "name": "CS40",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS40"
             }
           ]
         },
@@ -1098,7 +1193,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 41",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -1106,8 +1201,7 @@
               "name": "CS41",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS41"
             }
           ]
         },
@@ -1117,7 +1211,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 42",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -1125,8 +1219,7 @@
               "name": "CS42",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS42"
             }
           ]
         },
@@ -1136,7 +1229,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 43",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -1144,8 +1237,7 @@
               "name": "CS43",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS43"
             }
           ]
         },
@@ -1155,7 +1247,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 44",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -1163,8 +1255,7 @@
               "name": "CS44",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS44"
             }
           ]
         },
@@ -1174,7 +1265,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 45",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -1182,8 +1273,7 @@
               "name": "CS45",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS45"
             }
           ]
         },
@@ -1193,7 +1283,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 46",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -1201,8 +1291,7 @@
               "name": "CS46",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS46"
             }
           ]
         },
@@ -1212,7 +1301,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 47",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -1220,8 +1309,7 @@
               "name": "CS47",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS47"
             }
           ]
         },
@@ -1231,7 +1319,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 48",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -1239,8 +1327,7 @@
               "name": "CS48",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS48"
             }
           ]
         },
@@ -1250,7 +1337,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 49",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -1258,8 +1345,7 @@
               "name": "CS49",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS49"
             }
           ]
         },
@@ -1269,7 +1355,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 50",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -1277,8 +1363,7 @@
               "name": "CS50",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS50"
             }
           ]
         },
@@ -1288,7 +1373,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 51",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -1296,8 +1381,7 @@
               "name": "CS51",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS51"
             }
           ]
         },
@@ -1307,7 +1391,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 52",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -1315,8 +1399,7 @@
               "name": "CS52",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
+              "description": "CS52"
             }
           ]
         },
@@ -1326,7 +1409,7 @@
           "size": 32,
           "access": "read-write",
           "reset_value": 0,
-          "description": "HASH context swap register 53",
+          "description": "context swap registers",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -1334,160 +1417,7 @@
               "name": "CS53",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Context swap x Refer to Section 25.7.7: HASH context swap registers introduction.",
-              "access": "read-write"
-            }
-          ]
-        },
-        {
-          "name": "HR0",
-          "offset": 784,
-          "size": 32,
-          "access": "read-only",
-          "reset_value": 0,
-          "description": "HASH digest register 0",
-          "array_len": null,
-          "array_stride": null,
-          "fields": [
-            {
-              "name": "H0",
-              "bit_offset": 0,
-              "bit_width": 32,
-              "description": "Hash data x Refer to Section 25.7.4: HASH digest registers introduction.",
-              "access": "read-only"
-            }
-          ]
-        },
-        {
-          "name": "HR1",
-          "offset": 788,
-          "size": 32,
-          "access": "read-only",
-          "reset_value": 0,
-          "description": "HASH digest register 1",
-          "array_len": null,
-          "array_stride": null,
-          "fields": [
-            {
-              "name": "H1",
-              "bit_offset": 0,
-              "bit_width": 32,
-              "description": "Hash data x Refer to Section 25.7.4: HASH digest registers introduction.",
-              "access": "read-only"
-            }
-          ]
-        },
-        {
-          "name": "HR2",
-          "offset": 792,
-          "size": 32,
-          "access": "read-only",
-          "reset_value": 0,
-          "description": "HASH digest register 2",
-          "array_len": null,
-          "array_stride": null,
-          "fields": [
-            {
-              "name": "H2",
-              "bit_offset": 0,
-              "bit_width": 32,
-              "description": "Hash data x Refer to Section 25.7.4: HASH digest registers introduction.",
-              "access": "read-only"
-            }
-          ]
-        },
-        {
-          "name": "HR3",
-          "offset": 796,
-          "size": 32,
-          "access": "read-only",
-          "reset_value": 0,
-          "description": "HASH digest register 3",
-          "array_len": null,
-          "array_stride": null,
-          "fields": [
-            {
-              "name": "H3",
-              "bit_offset": 0,
-              "bit_width": 32,
-              "description": "Hash data x Refer to Section 25.7.4: HASH digest registers introduction.",
-              "access": "read-only"
-            }
-          ]
-        },
-        {
-          "name": "HR4",
-          "offset": 800,
-          "size": 32,
-          "access": "read-only",
-          "reset_value": 0,
-          "description": "HASH digest register 4",
-          "array_len": null,
-          "array_stride": null,
-          "fields": [
-            {
-              "name": "H4",
-              "bit_offset": 0,
-              "bit_width": 32,
-              "description": "Hash data x Refer to Section 25.7.4: HASH digest registers introduction.",
-              "access": "read-only"
-            }
-          ]
-        },
-        {
-          "name": "HR5",
-          "offset": 804,
-          "size": 32,
-          "access": "read-only",
-          "reset_value": 0,
-          "description": "HASH supplementary digest register 5",
-          "array_len": null,
-          "array_stride": null,
-          "fields": [
-            {
-              "name": "H5",
-              "bit_offset": 0,
-              "bit_width": 32,
-              "description": "Hash data x Refer to Section 25.7.4: HASH digest registers introduction.",
-              "access": "read-only"
-            }
-          ]
-        },
-        {
-          "name": "HR6",
-          "offset": 808,
-          "size": 32,
-          "access": "read-only",
-          "reset_value": 0,
-          "description": "HASH supplementary digest register 6",
-          "array_len": null,
-          "array_stride": null,
-          "fields": [
-            {
-              "name": "H6",
-              "bit_offset": 0,
-              "bit_width": 32,
-              "description": "Hash data x Refer to Section 25.7.4: HASH digest registers introduction.",
-              "access": "read-only"
-            }
-          ]
-        },
-        {
-          "name": "HR7",
-          "offset": 812,
-          "size": 32,
-          "access": "read-only",
-          "reset_value": 0,
-          "description": "HASH supplementary digest register 7",
-          "array_len": null,
-          "array_stride": null,
-          "fields": [
-            {
-              "name": "H7",
-              "bit_offset": 0,
-              "bit_width": 32,
-              "description": "Hash data x Refer to Section 25.7.4: HASH digest registers introduction.",
-              "access": "read-only"
+              "description": "CS53"
             }
           ]
         }

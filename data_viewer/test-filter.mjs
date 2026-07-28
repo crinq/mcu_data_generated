@@ -1,7 +1,10 @@
 // Mirrors search.ts and grouping.ts against the on-disk dataset.
 import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const DATA_ROOT = '/Users/crinq/sandbox/ai/mcu_data/data';
+const here = fileURLToPath(new URL('.', import.meta.url));
+const DATA_ROOT = resolve(here, '../data');
 const root = JSON.parse(readFileSync(`${DATA_ROOT}/index.json`, 'utf8'));
 const VENDOR = 'stm32';
 const vendorEntry = root.vendors[VENDOR];
@@ -53,7 +56,9 @@ function parseScaledSI(v) {
   return n * (s === 'k' ? 1e3 : s === 'm' ? 1e6 : s === 'g' ? 1e9 : 1);
 }
 function pinCountFromPackages(pkgs) {
-  let mx = 0; for (const p of pkgs || []) { const m = p.match(/(\d+)\s*$/); if (m) mx = Math.max(mx, parseInt(m[1], 10)); }
+  // pkgs: {variant: package} map (or legacy array)
+  const names = Array.isArray(pkgs) ? pkgs : Object.values(pkgs || {});
+  let mx = 0; for (const p of names) { const m = p.match(/(\d+)\s*$/); if (m) mx = Math.max(mx, parseInt(m[1], 10)); }
   return mx;
 }
 const ALIAS_GROUPS = [['uart', 'usart'], ['tim', 'timer']];

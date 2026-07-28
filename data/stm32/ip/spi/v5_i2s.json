@@ -3,8 +3,8 @@
   "kind": "spi",
   "version": "v5_i2s",
   "source": "stm32rs_svd",
-  "source_device": "stm32h503cb",
-  "source_file": "stm32h503.svd.patched",
+  "source_device": "stm32h562ag",
+  "source_file": "stm32h562.svd.patched",
   "blocks": {
     "SPI1": {
       "name": "SPI1",
@@ -253,7 +253,7 @@
               "name": "FTHLV",
               "bit_offset": 5,
               "bit_width": 4,
-              "description": "FIFO threshold level Defines number of data frames at single data packet. Size of the packet should not exceed 1/2 of FIFO space.",
+              "description": "FIFO threshold level Defines number of data frames at single data packet. Size of the packet should not exceed 1/2 of FIFO space. SPI interface is more efficient if configured packet sizes are aligned with data register access parallelism: If SPI data register is accessed as a 16-bit register and DSIZE less than or equal 8 bit, better to select FTHLV = 2, 4, 6. If SPI data register is accessed as a 32-bit register and DSIZE 8 bit, better to select FTHLV = 2, 4, 6, while if DSIZE less than or equal 8bit, better to select FTHLV = 4, 8, 12. Note: FTHLV[3:2] bits are reserved at instances with limited set of features",
               "access": "read-write",
               "enum_values": [
                 {
@@ -1129,7 +1129,7 @@
               "name": "RXPLVL",
               "bit_offset": 13,
               "bit_width": 2,
-              "description": "RxFIFO packing level When RXWNE=0 and data size is set up to 16-bit, the value gives number of remaining data frames persisting at RxFIFO. Note: (*): Optional value when data size is set up to 8-bit only. When data size is greater than 16-bit, these bits are always read as 00. In that consequence, the single data frame received at the FIFO cannot be detected neither by RWNE nor by RXPLVL bits if data size is set from 17 to 24 bits. The user then must apply other methods like TSIZE0 or FTHLV=0.",
+              "description": "RxFIFO packing level When RXWNE=0 and data size is set up to 16-bit, the value gives number of remaining data frames persisting at RxFIFO. Note: (*): Optional value when data size is set up to 8-bit only. When data size is greater than 16-bit, these bits are always read as 00. In that consequence, the single data frame received at the FIFO cannot be detected neither by RWNE nor by RXPLVL bits if data size is set from 17 to 24 bits. The user then must apply other methods like TSIZE 0 or FTHLV=0.",
               "access": "read-only",
               "enum_values": [
                 {

@@ -3,8 +3,8 @@
   "kind": "timer",
   "version": "v2",
   "source": "stm32rs_svd",
-  "source_device": "stm32h503cb",
-  "source_file": "stm32h503.svd.patched",
+  "source_device": "stm32h562ag",
+  "source_file": "stm32h562.svd.patched",
   "blocks": {
     "TIM1": {
       "name": "TIM1",
@@ -389,7 +389,7 @@
               "name": "SMS",
               "bit_offset": 0,
               "bit_width": 3,
-              "description": "SMS[2:0]: Slave mode selection",
+              "description": "SMS[2:0]: Slave mode selection When external signals are selected the active edge of the trigger signal (tim_trgi) is linked to the polarity selected on the external input (see Input Control register and Control Register description. Note: The gated mode must not be used if tim_ti1f_ed is selected as the trigger input (TS=00100). Indeed, tim_ti1f_ed outputs 1 pulse for each transition on TI1F, whereas the gated mode checks the level of the trigger signal. Note: The clock of the slave peripherals (timer, ADC, ...) receiving the tim_trgo or the tim_trgo2 signals must be enabled prior to receive events from the master timer, and the clock frequency (prescaler) must not be changed on-the-fly while triggers are received from the master timer.",
               "access": "read-write"
             },
             {
@@ -585,14 +585,14 @@
               "name": "SMS_3",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "SMS[3]",
+              "description": "Slave mode selection When external signals are selected the active edge of the trigger signal (tim_trgi) is linked to the polarity selected on the external input (see Input Control register and Control Register description. Note: The gated mode must not be used if tim_ti1f_ed is selected as the trigger input (TS=00100). Indeed, tim_ti1f_ed outputs 1 pulse for each transition on tim_ti1f, whereas the gated mode checks the level of the trigger signal. Note: The clock of the slave peripherals (timer, ADC, ...) receiving the tim_trgo signal must be enabled prior to receive events from the master timer, and the clock frequency (prescaler) must not be changed on-the-fly while triggers are received from the master timer.",
               "access": "read-write"
             },
             {
               "name": "TS2",
               "bit_offset": 20,
               "bit_width": 2,
-              "description": "TS[4:3]",
+              "description": "Trigger selection This bit-field selects the trigger input to be used to synchronize the counter. Others: Reserved See for product specific implementation details. Note: These bits must be changed only when they are not used (e.g. when SMS=000) to avoid wrong edge detections at the transition.",
               "access": "read-write"
             },
             {
@@ -956,7 +956,7 @@
               "name": "COMIF",
               "bit_offset": 5,
               "bit_width": 1,
-              "description": "COM interrupt flag This flag is set by hardware on COM event (when capture/compare Control bits - CCxE, CCxNE, OCxM - have been updated). It is cleared by software.",
+              "description": "COM interrupt flag This flag is set by hardware on COM event (when capture/compare Control bits CCxE, CCxNE, OCxM have been updated). It is cleared by software.",
               "access": "read-write",
               "enum_values": [
                 {
@@ -2506,7 +2506,7 @@
               "name": "PWPRSC",
               "bit_offset": 24,
               "bit_width": 3,
-              "description": "Pulse width prescaler This bitfield sets the clock prescaler for the pulse generator, as following: t PWG = (2sup(PWPRSC[2:0])/sup) x t tim_ker_ck",
+              "description": "Pulse width prescaler This bitfield sets the clock prescaler for the pulse generator, as following: t PWG = (2sup (PWPRSC[2:0])/sup ) x t tim_ker_ck",
               "access": "read-write"
             }
           ]

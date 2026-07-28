@@ -3,8 +3,8 @@
   "kind": "rcc",
   "version": "f0v2",
   "source": "stm32rs_svd",
-  "source_device": "stm32f030c8",
-  "source_file": "stm32f0x0.svd.patched",
+  "source_device": "stm32f038k6",
+  "source_file": "stm32f0x8.svd.patched",
   "blocks": {
     "RCC": {
       "name": "RCC",
@@ -296,8 +296,8 @@
             },
             {
               "name": "PLLSRC",
-              "bit_offset": 16,
-              "bit_width": 1,
+              "bit_offset": 15,
+              "bit_width": 2,
               "description": "PLL input clock source",
               "access": "read-write",
               "enum_values": [
@@ -307,9 +307,19 @@
                   "description": "HSI divided by 2 selected as PLL input clock"
                 },
                 {
-                  "name": "HSE_Div_PREDIV",
+                  "name": "HSI_Div_PREDIV",
                   "value": 1,
+                  "description": "HSI divided by PREDIV selected as PLL input clock"
+                },
+                {
+                  "name": "HSE_Div_PREDIV",
+                  "value": 2,
                   "description": "HSE divided by PREDIV selected as PLL input clock"
+                },
+                {
+                  "name": "HSI48_Div_PREDIV",
+                  "value": 3,
+                  "description": "HSI48 divided by PREDIV selected as PLL input clock"
                 }
               ]
             },
@@ -844,6 +854,18 @@
               "bit_offset": 5,
               "bit_width": 1,
               "description": "USART6 reset"
+            },
+            {
+              "name": "USART8RST",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "USART8 reset"
+            },
+            {
+              "name": "USART7RST",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "USART7 reset"
             }
           ]
         },
@@ -858,10 +880,10 @@
           "array_stride": null,
           "fields": [
             {
-              "name": "TIM3RST",
-              "bit_offset": 1,
+              "name": "TIM2RST",
+              "bit_offset": 0,
               "bit_width": 1,
-              "description": "Timer 3 reset",
+              "description": "Timer 2 reset",
               "enum_values": [
                 {
                   "name": "Reset",
@@ -869,6 +891,12 @@
                   "description": "Reset the selected module"
                 }
               ]
+            },
+            {
+              "name": "TIM3RST",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Timer 3 reset"
             },
             {
               "name": "TIM6RST",
@@ -943,10 +971,34 @@
               "description": "USB interface reset"
             },
             {
+              "name": "CANRST",
+              "bit_offset": 25,
+              "bit_width": 1,
+              "description": "CAN interface reset"
+            },
+            {
+              "name": "CRSRST",
+              "bit_offset": 27,
+              "bit_width": 1,
+              "description": "Clock Recovery System interface reset"
+            },
+            {
               "name": "PWRRST",
               "bit_offset": 28,
               "bit_width": 1,
               "description": "Power interface reset"
+            },
+            {
+              "name": "DACRST",
+              "bit_offset": 29,
+              "bit_width": 1,
+              "description": "DAC interface reset"
+            },
+            {
+              "name": "CECRST",
+              "bit_offset": 30,
+              "bit_width": 1,
+              "description": "HDMI CEC reset"
             }
           ]
         },
@@ -977,6 +1029,12 @@
                   "description": "The selected clock is enabled"
                 }
               ]
+            },
+            {
+              "name": "DMA2EN",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "DMA2 clock enable"
             },
             {
               "name": "SRAMEN",
@@ -1015,16 +1073,28 @@
               "description": "I/O port C clock enable"
             },
             {
+              "name": "IOPDEN",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "I/O port D clock enable"
+            },
+            {
               "name": "IOPFEN",
               "bit_offset": 22,
               "bit_width": 1,
               "description": "I/O port F clock enable"
             },
             {
-              "name": "IOPDEN",
-              "bit_offset": 20,
+              "name": "TSCEN",
+              "bit_offset": 24,
               "bit_width": 1,
-              "description": "I/O port D clock enable"
+              "description": "Touch sensing controller clock enable"
+            },
+            {
+              "name": "IOPEEN",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "I/O port E clock enable"
             }
           ]
         },
@@ -1109,6 +1179,18 @@
               "bit_offset": 5,
               "bit_width": 1,
               "description": "USART6 clock enable"
+            },
+            {
+              "name": "USART8EN",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "USART8 clock enable"
+            },
+            {
+              "name": "USART7EN",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "USART7 clock enable"
             }
           ]
         },
@@ -1123,10 +1205,10 @@
           "array_stride": null,
           "fields": [
             {
-              "name": "TIM3EN",
-              "bit_offset": 1,
+              "name": "TIM2EN",
+              "bit_offset": 0,
               "bit_width": 1,
-              "description": "Timer 3 clock enable",
+              "description": "Timer 2 clock enable",
               "enum_values": [
                 {
                   "name": "Disabled",
@@ -1139,6 +1221,12 @@
                   "description": "The selected clock is enabled"
                 }
               ]
+            },
+            {
+              "name": "TIM3EN",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Timer 3 clock enable"
             },
             {
               "name": "TIM6EN",
@@ -1213,10 +1301,34 @@
               "description": "USB interface clock enable"
             },
             {
+              "name": "CANEN",
+              "bit_offset": 25,
+              "bit_width": 1,
+              "description": "CAN interface clock enable"
+            },
+            {
+              "name": "CRSEN",
+              "bit_offset": 27,
+              "bit_width": 1,
+              "description": "Clock Recovery System interface clock enable"
+            },
+            {
               "name": "PWREN",
               "bit_offset": 28,
               "bit_width": 1,
               "description": "Power interface clock enable"
+            },
+            {
+              "name": "DACEN",
+              "bit_offset": 29,
+              "bit_width": 1,
+              "description": "DAC interface clock enable"
+            },
+            {
+              "name": "CECEN",
+              "bit_offset": 30,
+              "bit_width": 1,
+              "description": "HDMI CEC interface clock enable"
             }
           ]
         },
@@ -1563,6 +1675,18 @@
               "bit_offset": 22,
               "bit_width": 1,
               "description": "I/O port F reset"
+            },
+            {
+              "name": "TSCRST",
+              "bit_offset": 24,
+              "bit_width": 1,
+              "description": "Touch sensing controller reset"
+            },
+            {
+              "name": "IOPERST",
+              "bit_offset": 21,
+              "bit_width": 1,
+              "description": "I/O port E reset"
             }
           ]
         },
@@ -1723,15 +1847,33 @@
               ]
             },
             {
+              "name": "CECSW",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "HDMI CEC clock source selection",
+              "enum_values": [
+                {
+                  "name": "HSI_Div244",
+                  "value": 0,
+                  "description": "HSI clock divided by 244 selected as CEC clock source"
+                },
+                {
+                  "name": "LSE",
+                  "value": 1,
+                  "description": "LSE clock selected as CEC clock source"
+                }
+              ]
+            },
+            {
               "name": "USBSW",
               "bit_offset": 7,
               "bit_width": 1,
               "description": "USB clock source selection",
               "enum_values": [
                 {
-                  "name": "Disabled",
+                  "name": "HSI48",
                   "value": 0,
-                  "description": "USB clock disabled"
+                  "description": "HSI48 selected as USB clock source"
                 },
                 {
                   "name": "PLLCLK",

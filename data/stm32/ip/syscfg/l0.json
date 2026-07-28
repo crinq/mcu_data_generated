@@ -3,12 +3,12 @@
   "kind": "syscfg",
   "version": "l0",
   "source": "stm32rs_svd",
-  "source_device": "stm32l011d3",
-  "source_file": "stm32l0x1.svd.patched",
+  "source_device": "stm32l083rb",
+  "source_file": "stm32l0x3.svd.patched",
   "blocks": {
     "SYSCFG": {
       "name": "SYSCFG",
-      "description": "System configuration controller and COMP register",
+      "description": "System configuration controller and Comparator",
       "extends": null,
       "registers": [
         {
@@ -526,6 +526,12 @@
               ]
             },
             {
+              "name": "ENREF_HSI48",
+              "bit_offset": 13,
+              "bit_width": 1,
+              "description": "VREFINT reference for HSI48 oscillator enable bit"
+            },
+            {
               "name": "REF_LOCK",
               "bit_offset": 31,
               "bit_width": 1,
@@ -604,27 +610,104 @@
           "name": "COMP1_CSR",
           "offset": 24,
           "size": 32,
-          "access": "read-write",
+          "access": null,
           "reset_value": 0,
           "description": "Comparator 1 control and status register",
           "array_len": null,
           "array_stride": null,
           "fields": [
             {
-              "name": "COMP1EN",
-              "bit_offset": 0,
+              "name": "COMP1LOCK",
+              "bit_offset": 31,
               "bit_width": 1,
-              "description": "Comparator 1 enable bit",
+              "description": "COMP1_CSR register lock bit",
+              "access": "read-only",
               "enum_values": [
                 {
-                  "name": "Disabled",
+                  "name": "ReadWrite",
                   "value": 0,
-                  "description": "Comparator 1 switched OFF"
+                  "description": "COMP1_CSR[31:0] for comparator 1 are read/write"
                 },
                 {
-                  "name": "Enabled",
+                  "name": "ReadOnly",
                   "value": 1,
-                  "description": "Comparator 1 switched ON"
+                  "description": "COMP1_CSR[31:0] for comparator 1 are read-only"
+                }
+              ]
+            },
+            {
+              "name": "COMP1VALUE",
+              "bit_offset": 30,
+              "bit_width": 1,
+              "description": "Comparator 1 output status bit",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "NotEqual",
+                  "value": 0,
+                  "description": "Comparator values are not equal"
+                },
+                {
+                  "name": "Equal",
+                  "value": 1,
+                  "description": "Comparator values are equal"
+                }
+              ]
+            },
+            {
+              "name": "COMP1POLARITY",
+              "bit_offset": 15,
+              "bit_width": 1,
+              "description": "Comparator 1 polarity selection bit",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "NotInverted",
+                  "value": 0,
+                  "description": "Comparator 1 output value not inverted"
+                },
+                {
+                  "name": "Inverted",
+                  "value": 1,
+                  "description": "Comparator 1 output value inverted"
+                }
+              ]
+            },
+            {
+              "name": "COMP1LPTIMIN1",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "Comparator 1 LPTIM input propagation bit",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Gated",
+                  "value": 0,
+                  "description": "Comparator 1 output gated"
+                },
+                {
+                  "name": "NotGated",
+                  "value": 1,
+                  "description": "Comparator 1 output sent to LPTIM input 1"
+                }
+              ]
+            },
+            {
+              "name": "COMP1WM",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "Comparator 1 window mode selection bit",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "PA1",
+                  "value": 0,
+                  "description": "Plus input of comparator 1 connected to PA1"
+                },
+                {
+                  "name": "Comp2Plus",
+                  "value": 1,
+                  "description": "Plus input of comparator 1 shorted with Plus input of comparator 2 (see COMP1_CSR)"
                 }
               ]
             },
@@ -633,6 +716,7 @@
               "bit_offset": 4,
               "bit_width": 2,
               "description": "Comparator 1 Input Minus connection configuration bit",
+              "access": "read-write",
               "enum_values": [
                 {
                   "name": "VREFINT",
@@ -657,64 +741,61 @@
               ]
             },
             {
-              "name": "COMP1WM",
-              "bit_offset": 8,
+              "name": "COMP1EN",
+              "bit_offset": 0,
               "bit_width": 1,
-              "description": "Comparator 1 window mode selection bit",
+              "description": "Comparator 1 enable bit",
+              "access": "read-write",
               "enum_values": [
                 {
-                  "name": "PA1",
+                  "name": "Disabled",
                   "value": 0,
-                  "description": "Plus input of comparator 1 connected to PA1"
+                  "description": "Comparator 1 switched OFF"
                 },
                 {
-                  "name": "Comp2Plus",
+                  "name": "Enabled",
                   "value": 1,
-                  "description": "Plus input of comparator 1 shorted with Plus input of comparator 2 (see COMP1_CSR)"
+                  "description": "Comparator 1 switched ON"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "COMP2_CSR",
+          "offset": 28,
+          "size": 32,
+          "access": null,
+          "reset_value": 0,
+          "description": "Comparator 2 control and status register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "COMP2LOCK",
+              "bit_offset": 31,
+              "bit_width": 1,
+              "description": "COMP2_CSR register lock bit",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "ReadWrite",
+                  "value": 0,
+                  "description": "COMP2_CSR[31:0] for comparator 2 are read/write"
+                },
+                {
+                  "name": "ReadOnly",
+                  "value": 1,
+                  "description": "COMP2_CSR[31:0] for comparator 2 are read-only"
                 }
               ]
             },
             {
-              "name": "COMP1LPTIMIN1",
-              "bit_offset": 12,
+              "name": "COMP2VALUE",
+              "bit_offset": 20,
               "bit_width": 1,
-              "description": "Comparator 1 LPTIM input propagation bit",
-              "enum_values": [
-                {
-                  "name": "Gated",
-                  "value": 0,
-                  "description": "Comparator 1 output gated"
-                },
-                {
-                  "name": "NotGated",
-                  "value": 1,
-                  "description": "Comparator 1 output sent to LPTIM input 1"
-                }
-              ]
-            },
-            {
-              "name": "COMP1POLARITY",
-              "bit_offset": 15,
-              "bit_width": 1,
-              "description": "Comparator 1 polarity selection bit",
-              "enum_values": [
-                {
-                  "name": "NotInverted",
-                  "value": 0,
-                  "description": "Comparator 1 output value not inverted"
-                },
-                {
-                  "name": "Inverted",
-                  "value": 1,
-                  "description": "Comparator 1 output value inverted"
-                }
-              ]
-            },
-            {
-              "name": "COMP1VALUE",
-              "bit_offset": 30,
-              "bit_width": 1,
-              "description": "Comparator 1 output status bit",
+              "description": "Comparator 2 output status bit",
+              "access": "read-only",
               "enum_values": [
                 {
                   "name": "NotEqual",
@@ -729,68 +810,98 @@
               ]
             },
             {
-              "name": "COMP1LOCK",
-              "bit_offset": 31,
+              "name": "COMP2POLARITY",
+              "bit_offset": 15,
               "bit_width": 1,
-              "description": "COMP1_CSR register lock bit",
+              "description": "Comparator 2 polarity selection bit",
+              "access": "read-write",
               "enum_values": [
                 {
-                  "name": "ReadWrite",
+                  "name": "NotInverted",
                   "value": 0,
-                  "description": "COMP1_CSR[31:0] for comparator 1 are read/write"
+                  "description": "Comparator 2 output value not inverted"
                 },
                 {
-                  "name": "ReadOnly",
+                  "name": "Inverted",
                   "value": 1,
-                  "description": "COMP1_CSR[31:0] for comparator 1 are read-only"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "COMP2_CSR",
-          "offset": 28,
-          "size": 32,
-          "access": "read-write",
-          "reset_value": 0,
-          "description": "Comparator 2 control and status register",
-          "array_len": null,
-          "array_stride": null,
-          "fields": [
-            {
-              "name": "COMP2EN",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Comparator 2 enable bit",
-              "enum_values": [
-                {
-                  "name": "Disabled",
-                  "value": 0,
-                  "description": "Comparator 2 switched OFF"
-                },
-                {
-                  "name": "Enabled",
-                  "value": 1,
-                  "description": "Comparator 2 switched ON"
+                  "description": "Comparator 2 output value inverted"
                 }
               ]
             },
             {
-              "name": "COMP2SPEED",
-              "bit_offset": 3,
+              "name": "COMP2LPTIMIN1",
+              "bit_offset": 13,
               "bit_width": 1,
-              "description": "Comparator 2 power mode selection bit",
+              "description": "Comparator 2 LPTIM input 1 propagation bit",
+              "access": "read-write",
               "enum_values": [
                 {
-                  "name": "Slow",
+                  "name": "Gated",
                   "value": 0,
-                  "description": "Slow speed"
+                  "description": "Comparator 2 output gated"
                 },
                 {
-                  "name": "Fast",
+                  "name": "NotGated",
                   "value": 1,
-                  "description": "Fast speed"
+                  "description": "Comparator 2 output sent to LPTIM input 1"
+                }
+              ]
+            },
+            {
+              "name": "COMP2LPTIMIN2",
+              "bit_offset": 12,
+              "bit_width": 1,
+              "description": "Comparator 2 LPTIM input 2 propagation bit",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "Gated",
+                  "value": 0,
+                  "description": "Comparator 2 output gated"
+                },
+                {
+                  "name": "NotGated",
+                  "value": 1,
+                  "description": "Comparator 2 output sent to LPTIM input 2"
+                }
+              ]
+            },
+            {
+              "name": "COMP2INPSEL",
+              "bit_offset": 8,
+              "bit_width": 3,
+              "description": "Comparator 2 Input Plus connection configuration bit",
+              "access": "read-write",
+              "enum_values": [
+                {
+                  "name": "PA3",
+                  "value": 0,
+                  "description": "PA3"
+                },
+                {
+                  "name": "PB4",
+                  "value": 1,
+                  "description": "PB4"
+                },
+                {
+                  "name": "PB5",
+                  "value": 2,
+                  "description": "PB5"
+                },
+                {
+                  "name": "PB6",
+                  "value": 3,
+                  "description": "PB6"
+                },
+                {
+                  "name": "PB7",
+                  "value": 4,
+                  "description": "PB7"
+                },
+                {
+                  "name": "PA7",
+                  "value": 5,
+                  "description": "PA7"
                 }
               ]
             },
@@ -799,6 +910,7 @@
               "bit_offset": 4,
               "bit_width": 3,
               "description": "Comparator 2 Input Minus connection configuration bit",
+              "access": "read-write",
               "enum_values": [
                 {
                   "name": "VREFINT",
@@ -843,130 +955,40 @@
               ]
             },
             {
-              "name": "COMP2INPSEL",
-              "bit_offset": 8,
-              "bit_width": 3,
-              "description": "Comparator 2 Input Plus connection configuration bit",
+              "name": "COMP2SPEED",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Comparator 2 power mode selection bit",
+              "access": "read-write",
               "enum_values": [
                 {
-                  "name": "PA3",
+                  "name": "Slow",
                   "value": 0,
-                  "description": "PA3"
+                  "description": "Slow speed"
                 },
                 {
-                  "name": "PB4",
+                  "name": "Fast",
                   "value": 1,
-                  "description": "PB4"
-                },
-                {
-                  "name": "PB5",
-                  "value": 2,
-                  "description": "PB5"
-                },
-                {
-                  "name": "PB6",
-                  "value": 3,
-                  "description": "PB6"
-                },
-                {
-                  "name": "PB7",
-                  "value": 4,
-                  "description": "PB7"
-                },
-                {
-                  "name": "PA7",
-                  "value": 5,
-                  "description": "PA7"
+                  "description": "Fast speed"
                 }
               ]
             },
             {
-              "name": "COMP2LPTIMIN2",
-              "bit_offset": 12,
+              "name": "COMP2EN",
+              "bit_offset": 0,
               "bit_width": 1,
-              "description": "Comparator 2 LPTIM input 2 propagation bit",
+              "description": "Comparator 2 enable bit",
+              "access": "read-write",
               "enum_values": [
                 {
-                  "name": "Gated",
+                  "name": "Disabled",
                   "value": 0,
-                  "description": "Comparator 2 output gated"
+                  "description": "Comparator 2 switched OFF"
                 },
                 {
-                  "name": "NotGated",
+                  "name": "Enabled",
                   "value": 1,
-                  "description": "Comparator 2 output sent to LPTIM input 2"
-                }
-              ]
-            },
-            {
-              "name": "COMP2LPTIMIN1",
-              "bit_offset": 13,
-              "bit_width": 1,
-              "description": "Comparator 2 LPTIM input 1 propagation bit",
-              "enum_values": [
-                {
-                  "name": "Gated",
-                  "value": 0,
-                  "description": "Comparator 2 output gated"
-                },
-                {
-                  "name": "NotGated",
-                  "value": 1,
-                  "description": "Comparator 2 output sent to LPTIM input 1"
-                }
-              ]
-            },
-            {
-              "name": "COMP2POLARITY",
-              "bit_offset": 15,
-              "bit_width": 1,
-              "description": "Comparator 2 polarity selection bit",
-              "enum_values": [
-                {
-                  "name": "NotInverted",
-                  "value": 0,
-                  "description": "Comparator 2 output value not inverted"
-                },
-                {
-                  "name": "Inverted",
-                  "value": 1,
-                  "description": "Comparator 2 output value inverted"
-                }
-              ]
-            },
-            {
-              "name": "COMP2VALUE",
-              "bit_offset": 30,
-              "bit_width": 1,
-              "description": "Comparator 2 output status bit",
-              "enum_values": [
-                {
-                  "name": "NotEqual",
-                  "value": 0,
-                  "description": "Comparator values are not equal"
-                },
-                {
-                  "name": "Equal",
-                  "value": 1,
-                  "description": "Comparator values are equal"
-                }
-              ]
-            },
-            {
-              "name": "COMP2LOCK",
-              "bit_offset": 31,
-              "bit_width": 1,
-              "description": "COMP2_CSR register lock bit",
-              "enum_values": [
-                {
-                  "name": "ReadWrite",
-                  "value": 0,
-                  "description": "COMP2_CSR[31:0] for comparator 2 are read/write"
-                },
-                {
-                  "name": "ReadOnly",
-                  "value": 1,
-                  "description": "COMP2_CSR[31:0] for comparator 2 are read-only"
+                  "description": "Comparator 2 switched ON"
                 }
               ]
             }

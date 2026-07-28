@@ -3,8 +3,8 @@
   "kind": "usart",
   "version": "v3",
   "source": "stm32rs_svd",
-  "source_device": "stm32f030c6",
-  "source_file": "stm32f0x0.svd.patched",
+  "source_device": "stm32f301c6",
+  "source_file": "stm32f301.svd.patched",
   "blocks": {
     "USART1": {
       "name": "USART1",
@@ -22,254 +22,68 @@
           "array_stride": null,
           "fields": [
             {
-              "name": "UE",
-              "bit_offset": 0,
+              "name": "EOBIE",
+              "bit_offset": 27,
               "bit_width": 1,
-              "description": "USART enable",
+              "description": "End of Block interrupt enable",
               "enum_values": [
                 {
                   "name": "Disabled",
                   "value": 0,
-                  "description": "UART is disabled"
+                  "description": "Interrupt is inhibited"
                 },
                 {
                   "name": "Enabled",
                   "value": 1,
-                  "description": "UART is enabled"
+                  "description": "A USART interrupt is generated when the EOBF flag is set in the ISR register"
                 }
               ]
             },
             {
-              "name": "UESM",
-              "bit_offset": 1,
+              "name": "RTOIE",
+              "bit_offset": 26,
               "bit_width": 1,
-              "description": "USART enable in Stop mode",
+              "description": "Receiver timeout interrupt enable",
               "enum_values": [
                 {
                   "name": "Disabled",
                   "value": 0,
-                  "description": "USART not able to wake up the MCU from Stop mode"
+                  "description": "Interrupt is inhibited"
                 },
                 {
                   "name": "Enabled",
                   "value": 1,
-                  "description": "USART able to wake up the MCU from Stop mode"
+                  "description": "An USART interrupt is generated when the RTOF bit is set in the ISR register"
                 }
               ]
             },
             {
-              "name": "RE",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "Receiver enable",
-              "enum_values": [
-                {
-                  "name": "Disabled",
-                  "value": 0,
-                  "description": "Receiver is disabled"
-                },
-                {
-                  "name": "Enabled",
-                  "value": 1,
-                  "description": "Receiver is enabled"
-                }
-              ]
+              "name": "DEAT",
+              "bit_offset": 21,
+              "bit_width": 5,
+              "description": "Driver Enable assertion time"
             },
             {
-              "name": "TE",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Transmitter enable",
-              "enum_values": [
-                {
-                  "name": "Disabled",
-                  "value": 0,
-                  "description": "Transmitter is disabled"
-                },
-                {
-                  "name": "Enabled",
-                  "value": 1,
-                  "description": "Transmitter is enabled"
-                }
-              ]
+              "name": "DEDT",
+              "bit_offset": 16,
+              "bit_width": 5,
+              "description": "Driver Enable deassertion time"
             },
             {
-              "name": "IDLEIE",
-              "bit_offset": 4,
+              "name": "OVER8",
+              "bit_offset": 15,
               "bit_width": 1,
-              "description": "IDLE interrupt enable",
+              "description": "Oversampling mode",
               "enum_values": [
                 {
-                  "name": "Disabled",
+                  "name": "Oversampling16",
                   "value": 0,
-                  "description": "Interrupt is disabled"
+                  "description": "Oversampling by 16"
                 },
                 {
-                  "name": "Enabled",
+                  "name": "Oversampling8",
                   "value": 1,
-                  "description": "Interrupt is generated whenever IDLE=1 in the ISR register"
-                }
-              ]
-            },
-            {
-              "name": "RXNEIE",
-              "bit_offset": 5,
-              "bit_width": 1,
-              "description": "RXNE interrupt enable",
-              "enum_values": [
-                {
-                  "name": "Disabled",
-                  "value": 0,
-                  "description": "Interrupt is disabled"
-                },
-                {
-                  "name": "Enabled",
-                  "value": 1,
-                  "description": "Interrupt is generated whenever ORE=1 or RXNE=1 in the ISR register"
-                }
-              ]
-            },
-            {
-              "name": "TCIE",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "Transmission complete interrupt enable",
-              "enum_values": [
-                {
-                  "name": "Disabled",
-                  "value": 0,
-                  "description": "Interrupt is disabled"
-                },
-                {
-                  "name": "Enabled",
-                  "value": 1,
-                  "description": "Interrupt is generated whenever TC=1 in the ISR register"
-                }
-              ]
-            },
-            {
-              "name": "TXEIE",
-              "bit_offset": 7,
-              "bit_width": 1,
-              "description": "interrupt enable",
-              "enum_values": [
-                {
-                  "name": "Disabled",
-                  "value": 0,
-                  "description": "Interrupt is disabled"
-                },
-                {
-                  "name": "Enabled",
-                  "value": 1,
-                  "description": "Interrupt is generated whenever TXE=1 in the ISR register"
-                }
-              ]
-            },
-            {
-              "name": "PEIE",
-              "bit_offset": 8,
-              "bit_width": 1,
-              "description": "PE interrupt enable",
-              "enum_values": [
-                {
-                  "name": "Disabled",
-                  "value": 0,
-                  "description": "Interrupt is disabled"
-                },
-                {
-                  "name": "Enabled",
-                  "value": 1,
-                  "description": "Interrupt is generated whenever PE=1 in the ISR register"
-                }
-              ]
-            },
-            {
-              "name": "PS",
-              "bit_offset": 9,
-              "bit_width": 1,
-              "description": "Parity selection",
-              "enum_values": [
-                {
-                  "name": "Even",
-                  "value": 0,
-                  "description": "Even parity"
-                },
-                {
-                  "name": "Odd",
-                  "value": 1,
-                  "description": "Odd parity"
-                }
-              ]
-            },
-            {
-              "name": "PCE",
-              "bit_offset": 10,
-              "bit_width": 1,
-              "description": "Parity control enable",
-              "enum_values": [
-                {
-                  "name": "Disabled",
-                  "value": 0,
-                  "description": "Parity control disabled"
-                },
-                {
-                  "name": "Enabled",
-                  "value": 1,
-                  "description": "Parity control enabled"
-                }
-              ]
-            },
-            {
-              "name": "WAKE",
-              "bit_offset": 11,
-              "bit_width": 1,
-              "description": "Receiver wakeup method",
-              "enum_values": [
-                {
-                  "name": "Idle",
-                  "value": 0,
-                  "description": "Idle line"
-                },
-                {
-                  "name": "Address",
-                  "value": 1,
-                  "description": "Address mask"
-                }
-              ]
-            },
-            {
-              "name": "M0",
-              "bit_offset": 12,
-              "bit_width": 1,
-              "description": "Word length",
-              "enum_values": [
-                {
-                  "name": "Bit8",
-                  "value": 0,
-                  "description": "1 start bit, 8 data bits, n stop bits"
-                },
-                {
-                  "name": "Bit9",
-                  "value": 1,
-                  "description": "1 start bit, 9 data bits, n stop bits"
-                }
-              ]
-            },
-            {
-              "name": "MME",
-              "bit_offset": 13,
-              "bit_width": 1,
-              "description": "Mute mode enable",
-              "enum_values": [
-                {
-                  "name": "Disabled",
-                  "value": 0,
-                  "description": "Receiver in active mode permanently"
-                },
-                {
-                  "name": "Enabled",
-                  "value": 1,
-                  "description": "Receiver can switch between mute mode and active mode"
+                  "description": "Oversampling by 8"
                 }
               ]
             },
@@ -292,86 +106,254 @@
               ]
             },
             {
-              "name": "OVER8",
-              "bit_offset": 15,
+              "name": "MME",
+              "bit_offset": 13,
               "bit_width": 1,
-              "description": "Oversampling mode",
-              "enum_values": [
-                {
-                  "name": "Oversampling16",
-                  "value": 0,
-                  "description": "Oversampling by 16"
-                },
-                {
-                  "name": "Oversampling8",
-                  "value": 1,
-                  "description": "Oversampling by 8"
-                }
-              ]
-            },
-            {
-              "name": "DEDT",
-              "bit_offset": 16,
-              "bit_width": 5,
-              "description": "Driver Enable deassertion time"
-            },
-            {
-              "name": "DEAT",
-              "bit_offset": 21,
-              "bit_width": 5,
-              "description": "Driver Enable assertion time"
-            },
-            {
-              "name": "RTOIE",
-              "bit_offset": 26,
-              "bit_width": 1,
-              "description": "Receiver timeout interrupt enable",
+              "description": "Mute mode enable",
               "enum_values": [
                 {
                   "name": "Disabled",
                   "value": 0,
-                  "description": "Interrupt is inhibited"
+                  "description": "Receiver in active mode permanently"
                 },
                 {
                   "name": "Enabled",
                   "value": 1,
-                  "description": "An USART interrupt is generated when the RTOF bit is set in the ISR register"
+                  "description": "Receiver can switch between mute mode and active mode"
                 }
               ]
             },
             {
-              "name": "EOBIE",
-              "bit_offset": 27,
-              "bit_width": 1,
-              "description": "End of Block interrupt enable",
-              "enum_values": [
-                {
-                  "name": "Disabled",
-                  "value": 0,
-                  "description": "Interrupt is inhibited"
-                },
-                {
-                  "name": "Enabled",
-                  "value": 1,
-                  "description": "A USART interrupt is generated when the EOBF flag is set in the ISR register"
-                }
-              ]
-            },
-            {
-              "name": "M1",
-              "bit_offset": 28,
+              "name": "M",
+              "bit_offset": 12,
               "bit_width": 1,
               "description": "Word length",
               "enum_values": [
                 {
-                  "name": "M0",
+                  "name": "Bit8",
                   "value": 0,
-                  "description": "Use M0 to set the data bits"
+                  "description": "1 start bit, 8 data bits, n stop bits"
                 },
                 {
-                  "name": "Bit7",
+                  "name": "Bit9",
                   "value": 1,
-                  "description": "1 start bit, 7 data bits, n stop bits"
+                  "description": "1 start bit, 9 data bits, n stop bits"
+                }
+              ]
+            },
+            {
+              "name": "WAKE",
+              "bit_offset": 11,
+              "bit_width": 1,
+              "description": "Receiver wakeup method",
+              "enum_values": [
+                {
+                  "name": "Idle",
+                  "value": 0,
+                  "description": "Idle line"
+                },
+                {
+                  "name": "Address",
+                  "value": 1,
+                  "description": "Address mask"
+                }
+              ]
+            },
+            {
+              "name": "PCE",
+              "bit_offset": 10,
+              "bit_width": 1,
+              "description": "Parity control enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Parity control disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Parity control enabled"
+                }
+              ]
+            },
+            {
+              "name": "PS",
+              "bit_offset": 9,
+              "bit_width": 1,
+              "description": "Parity selection",
+              "enum_values": [
+                {
+                  "name": "Even",
+                  "value": 0,
+                  "description": "Even parity"
+                },
+                {
+                  "name": "Odd",
+                  "value": 1,
+                  "description": "Odd parity"
+                }
+              ]
+            },
+            {
+              "name": "PEIE",
+              "bit_offset": 8,
+              "bit_width": 1,
+              "description": "PE interrupt enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Interrupt is disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Interrupt is generated whenever PE=1 in the ISR register"
+                }
+              ]
+            },
+            {
+              "name": "TXEIE",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "interrupt enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Interrupt is disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Interrupt is generated whenever TXE=1 in the ISR register"
+                }
+              ]
+            },
+            {
+              "name": "TCIE",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Transmission complete interrupt enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Interrupt is disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Interrupt is generated whenever TC=1 in the ISR register"
+                }
+              ]
+            },
+            {
+              "name": "RXNEIE",
+              "bit_offset": 5,
+              "bit_width": 1,
+              "description": "RXNE interrupt enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Interrupt is disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Interrupt is generated whenever ORE=1 or RXNE=1 in the ISR register"
+                }
+              ]
+            },
+            {
+              "name": "IDLEIE",
+              "bit_offset": 4,
+              "bit_width": 1,
+              "description": "IDLE interrupt enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Interrupt is disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Interrupt is generated whenever IDLE=1 in the ISR register"
+                }
+              ]
+            },
+            {
+              "name": "TE",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Transmitter enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Transmitter is disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Transmitter is enabled"
+                }
+              ]
+            },
+            {
+              "name": "RE",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "Receiver enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Receiver is disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Receiver is enabled"
+                }
+              ]
+            },
+            {
+              "name": "UESM",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "USART enable in Stop mode",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "USART not able to wake up the MCU from Stop mode"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "USART able to wake up the MCU from Stop mode"
+                }
+              ]
+            },
+            {
+              "name": "UE",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "USART enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "UART is disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "UART is enabled"
                 }
               ]
             }

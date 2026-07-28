@@ -1,4 +1,4 @@
-import type { Mcu, DeviceSummary } from './types';
+import { packageNames, type Mcu, type DeviceSummary } from './types';
 
 export interface FilterToken {
   key: string;
@@ -131,7 +131,7 @@ export function checkSummaryFilter(s: DeviceSummary, f: FilterToken): boolean {
     case 'pins': {
       const want = parseInt(f.value, 10);
       if (isNaN(want)) return false;
-      return pinCountFromPackages(s.packages || []) >= want;
+      return pinCountFromPackages(packageNames(s.packages)) >= want;
     }
     case 'freq':
     case 'mhz': {

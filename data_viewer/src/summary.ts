@@ -1,4 +1,4 @@
-import type { DeviceSummary } from './types';
+import { packageNames, type DeviceSummary } from './types';
 import { formatBytesCompact, formatHzCompact } from './format';
 import { escapeHtml } from '../ts_lib/src/index';
 
@@ -12,7 +12,7 @@ export interface SummaryParts {
 /** Render a summary as discrete HTML pills, ready for ` `-joined display. */
 export function summaryParts(s: DeviceSummary | undefined): SummaryParts {
   if (!s) return { packages: '', cores: '', ram: '', rom: '' };
-  const pkgs = (s.packages || []).map(p => escapeHtml(p)).join(', ');
+  const pkgs = packageNames(s.packages).map(p => escapeHtml(p)).join(', ');
   const cores = (s.cores || [])
     .map(c => `${formatHzCompact(c.freq_max_hz)} ${escapeHtml(c.name)}`)
     .join(' · ');
