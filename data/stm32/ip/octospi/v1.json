@@ -3,8 +3,8 @@
   "kind": "octospi",
   "version": "v1",
   "source": "stm32rs_svd",
-  "source_device": "stm32h723ve",
-  "source_file": "stm32h735.svd.patched",
+  "source_device": "stm32h7b3zi",
+  "source_file": "stm32h7b3.svd.patched",
   "blocks": {
     "OCTOSPI1": {
       "name": "OCTOSPI1",
@@ -21,198 +21,6 @@
           "array_len": null,
           "array_stride": null,
           "fields": [
-            {
-              "name": "EN",
-              "bit_offset": 0,
-              "bit_width": 1,
-              "description": "Enable",
-              "enum_values": [
-                {
-                  "name": "Disabled",
-                  "value": 0,
-                  "description": "OCTOSPI disabled"
-                },
-                {
-                  "name": "Enabled",
-                  "value": 1,
-                  "description": "OCTOSPI enabled"
-                }
-              ]
-            },
-            {
-              "name": "ABORT",
-              "bit_offset": 1,
-              "bit_width": 1,
-              "description": "Abort request",
-              "enum_values": [
-                {
-                  "name": "NotRequested",
-                  "value": 0,
-                  "description": "No abort requested"
-                },
-                {
-                  "name": "Requested",
-                  "value": 1,
-                  "description": "Abort requested"
-                }
-              ]
-            },
-            {
-              "name": "DMAEN",
-              "bit_offset": 2,
-              "bit_width": 1,
-              "description": "DMA enable",
-              "enum_values": [
-                {
-                  "name": "Disabled",
-                  "value": 0,
-                  "description": "DMA disabled for Indirect mode"
-                },
-                {
-                  "name": "Enabled",
-                  "value": 1,
-                  "description": "DMA enabled for Indirect mode"
-                }
-              ]
-            },
-            {
-              "name": "TCEN",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Timeout counter enable",
-              "enum_values": [
-                {
-                  "name": "Disabled",
-                  "value": 0,
-                  "description": "Timeout counter is disabled, and thus the chip-select (NCS) remains active indefinitely after an access in Memory-mapped mode"
-                },
-                {
-                  "name": "Enabled",
-                  "value": 1,
-                  "description": "Timeout counter is enabled, and thus the chip-select is released in the Memory-mapped mode after TIMEOUT[15:0] cycles of external device inactivity"
-                }
-              ]
-            },
-            {
-              "name": "DMM",
-              "bit_offset": 6,
-              "bit_width": 1,
-              "description": "Dual-memory configuration",
-              "enum_values": [
-                {
-                  "name": "Disabled",
-                  "value": 0,
-                  "description": "Dual-quad configuration disabled"
-                },
-                {
-                  "name": "Enabled",
-                  "value": 1,
-                  "description": "Dual-quad configuration enabled"
-                }
-              ]
-            },
-            {
-              "name": "FSEL",
-              "bit_offset": 7,
-              "bit_width": 1,
-              "description": "FLASH memory selection",
-              "enum_values": [
-                {
-                  "name": "FLASH1",
-                  "value": 0,
-                  "description": "FLASH 1 selected (data exchanged over IO[3:0])"
-                },
-                {
-                  "name": "FLASH2",
-                  "value": 1,
-                  "description": "FLASH 2 selected (data exchanged over IO[7:4])"
-                }
-              ]
-            },
-            {
-              "name": "FTHRES",
-              "bit_offset": 8,
-              "bit_width": 5,
-              "description": "IFO threshold level"
-            },
-            {
-              "name": "TEIE",
-              "bit_offset": 16,
-              "bit_width": 1,
-              "description": "Transfer error interrupt enable",
-              "enum_values": [
-                {
-                  "name": "Disabled",
-                  "value": 0,
-                  "description": "Interrupt disabled"
-                },
-                {
-                  "name": "Enabled",
-                  "value": 1,
-                  "description": "Interrupt enabled"
-                }
-              ]
-            },
-            {
-              "name": "TCIE",
-              "bit_offset": 17,
-              "bit_width": 1,
-              "description": "Transfer complete interrupt enable"
-            },
-            {
-              "name": "FTIE",
-              "bit_offset": 18,
-              "bit_width": 1,
-              "description": "FIFO threshold interrupt enable"
-            },
-            {
-              "name": "SMIE",
-              "bit_offset": 19,
-              "bit_width": 1,
-              "description": "Status match interrupt enable"
-            },
-            {
-              "name": "TOIE",
-              "bit_offset": 20,
-              "bit_width": 1,
-              "description": "TimeOut interrupt enable"
-            },
-            {
-              "name": "APMS",
-              "bit_offset": 22,
-              "bit_width": 1,
-              "description": "Automatic poll mode stop",
-              "enum_values": [
-                {
-                  "name": "Running",
-                  "value": 0,
-                  "description": "Automatic status-polling mode is stopped only by abort or by disabling the OCTOSPI"
-                },
-                {
-                  "name": "StopMatch",
-                  "value": 1,
-                  "description": "Automatic status-polling mode stops as soon as there is a match"
-                }
-              ]
-            },
-            {
-              "name": "PMM",
-              "bit_offset": 23,
-              "bit_width": 1,
-              "description": "Polling match mode",
-              "enum_values": [
-                {
-                  "name": "ANDMatchMode",
-                  "value": 0,
-                  "description": "AND-match mode, SMF is set if all the unmasked bits received from the device match the corresponding bits in the match register"
-                },
-                {
-                  "name": "ORMatchmode",
-                  "value": 1,
-                  "description": "OR-match mode, SMF is set if any of the unmasked bits received from the device matches its corresponding bit in the match register"
-                }
-              ]
-            },
             {
               "name": "FMODE",
               "bit_offset": 28,
@@ -238,6 +46,198 @@
                   "name": "MemoryMapped",
                   "value": 3,
                   "description": "Memory-mapped mode"
+                }
+              ]
+            },
+            {
+              "name": "PMM",
+              "bit_offset": 23,
+              "bit_width": 1,
+              "description": "Polling match mode",
+              "enum_values": [
+                {
+                  "name": "ANDMatchMode",
+                  "value": 0,
+                  "description": "AND-match mode, SMF is set if all the unmasked bits received from the device match the corresponding bits in the match register"
+                },
+                {
+                  "name": "ORMatchmode",
+                  "value": 1,
+                  "description": "OR-match mode, SMF is set if any of the unmasked bits received from the device matches its corresponding bit in the match register"
+                }
+              ]
+            },
+            {
+              "name": "APMS",
+              "bit_offset": 22,
+              "bit_width": 1,
+              "description": "Automatic poll mode stop",
+              "enum_values": [
+                {
+                  "name": "Running",
+                  "value": 0,
+                  "description": "Automatic status-polling mode is stopped only by abort or by disabling the OCTOSPI"
+                },
+                {
+                  "name": "StopMatch",
+                  "value": 1,
+                  "description": "Automatic status-polling mode stops as soon as there is a match"
+                }
+              ]
+            },
+            {
+              "name": "TEIE",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Transfer error interrupt enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Interrupt disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Interrupt enabled"
+                }
+              ]
+            },
+            {
+              "name": "TOIE",
+              "bit_offset": 20,
+              "bit_width": 1,
+              "description": "TimeOut interrupt enable"
+            },
+            {
+              "name": "SMIE",
+              "bit_offset": 19,
+              "bit_width": 1,
+              "description": "Status match interrupt enable"
+            },
+            {
+              "name": "FTIE",
+              "bit_offset": 18,
+              "bit_width": 1,
+              "description": "FIFO threshold interrupt enable"
+            },
+            {
+              "name": "TCIE",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "Transfer complete interrupt enable"
+            },
+            {
+              "name": "FTHRES",
+              "bit_offset": 8,
+              "bit_width": 5,
+              "description": "IFO threshold level"
+            },
+            {
+              "name": "FSEL",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "FLASH memory selection",
+              "enum_values": [
+                {
+                  "name": "FLASH1",
+                  "value": 0,
+                  "description": "FLASH 1 selected (data exchanged over IO[3:0])"
+                },
+                {
+                  "name": "FLASH2",
+                  "value": 1,
+                  "description": "FLASH 2 selected (data exchanged over IO[7:4])"
+                }
+              ]
+            },
+            {
+              "name": "DMM",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "Dual-memory configuration",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Dual-quad configuration disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Dual-quad configuration enabled"
+                }
+              ]
+            },
+            {
+              "name": "TCEN",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Timeout counter enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "Timeout counter is disabled, and thus the chip-select (NCS) remains active indefinitely after an access in Memory-mapped mode"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "Timeout counter is enabled, and thus the chip-select is released in the Memory-mapped mode after TIMEOUT[15:0] cycles of external device inactivity"
+                }
+              ]
+            },
+            {
+              "name": "DMAEN",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "DMA enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "DMA disabled for Indirect mode"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "DMA enabled for Indirect mode"
+                }
+              ]
+            },
+            {
+              "name": "ABORT",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "Abort request",
+              "enum_values": [
+                {
+                  "name": "NotRequested",
+                  "value": 0,
+                  "description": "No abort requested"
+                },
+                {
+                  "name": "Requested",
+                  "value": 1,
+                  "description": "Abort requested"
+                }
+              ]
+            },
+            {
+              "name": "EN",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "Enable",
+              "enum_values": [
+                {
+                  "name": "Disabled",
+                  "value": 0,
+                  "description": "OCTOSPI disabled"
+                },
+                {
+                  "name": "Enabled",
+                  "value": 1,
+                  "description": "OCTOSPI enabled"
                 }
               ]
             }
@@ -290,27 +290,9 @@
               ]
             },
             {
-              "name": "DLYBYP",
-              "bit_offset": 3,
-              "bit_width": 1,
-              "description": "Delay block bypass",
-              "enum_values": [
-                {
-                  "name": "DelayBlockEnabled",
-                  "value": 0,
-                  "description": "The internal sampling clock (called feedback clock) or the DQS data strobe external signal is delayed by the delay block (for more details on this block, refer to the dedicated section of the reference manual as it is not part of the OCTOSPI peripheral)"
-                },
-                {
-                  "name": "DelayBlockBypassed",
-                  "value": 1,
-                  "description": "The delay block is bypassed, so the internal sampling clock or the DQS data strobe external signal is not affected by the delay block. The delay is shorter than when the delay block is not bypassed, even with the delay value set to minimum value in delay block"
-                }
-              ]
-            },
-            {
               "name": "CSHT",
               "bit_offset": 8,
-              "bit_width": 6,
+              "bit_width": 3,
               "description": "Chip-select high time"
             },
             {
@@ -354,6 +336,24 @@
                   "name": "HyperBusMode",
                   "value": 5,
                   "description": "HyperBus register mode, addressing register space. The memory-mapped accesses in this mode must be non-cacheable, or Indirect read/write modes must be used"
+                }
+              ]
+            },
+            {
+              "name": "DLYBYP",
+              "bit_offset": 3,
+              "bit_width": 1,
+              "description": "Delay block bypass",
+              "enum_values": [
+                {
+                  "name": "DelayBlockEnabled",
+                  "value": 0,
+                  "description": "The internal sampling clock (called feedback clock) or the DQS data strobe external signal is delayed by the delay block (for more details on this block, refer to the dedicated section of the reference manual as it is not part of the OCTOSPI peripheral)"
+                },
+                {
+                  "name": "DelayBlockBypassed",
+                  "value": 1,
+                  "description": "The delay block is bypassed, so the internal sampling clock or the DQS data strobe external signal is not affected by the delay block. The delay is shorter than when the delay block is not bypassed, even with the delay value set to minimum value in delay block"
                 }
               ]
             }
@@ -466,7 +466,7 @@
               "name": "TEF",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Clear transfer error flag",
+              "description": "Transfer error flag",
               "enum_values": [
                 {
                   "name": "Cleared",
@@ -484,7 +484,7 @@
               "name": "TCF",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Clear transfer complete flag",
+              "description": "Transfer complete flag",
               "enum_values": [
                 {
                   "name": "Cleared",
@@ -520,7 +520,7 @@
               "name": "SMF",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "Clear status match flag",
+              "description": "Status match flag",
               "enum_values": [
                 {
                   "name": "Cleared",
@@ -538,7 +538,7 @@
               "name": "TOF",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "Clear timeout flag",
+              "description": "Timeout flag",
               "enum_values": [
                 {
                   "name": "Cleared",
@@ -729,24 +729,6 @@
               "bit_offset": 0,
               "bit_width": 32,
               "description": "Match"
-            }
-          ]
-        },
-        {
-          "name": "PIR",
-          "offset": 144,
-          "size": 32,
-          "access": "read-write",
-          "reset_value": 0,
-          "description": "OCTOSPI polling interval register",
-          "array_len": null,
-          "array_stride": null,
-          "fields": [
-            {
-              "name": "INTERVAL",
-              "bit_offset": 0,
-              "bit_width": 16,
-              "description": "Polling interval"
             }
           ]
         },
@@ -1939,25 +1921,6 @@
           ]
         },
         {
-          "name": "WIR",
-          "offset": 400,
-          "size": 32,
-          "access": null,
-          "reset_value": 0,
-          "description": "OCTOSPI write instruction register",
-          "array_len": null,
-          "array_stride": null,
-          "fields": [
-            {
-              "name": "INSTRUCTION",
-              "bit_offset": 0,
-              "bit_width": 32,
-              "description": "Instruction Instruction to be sent to the external SPI device",
-              "access": "read-write"
-            }
-          ]
-        },
-        {
           "name": "WABR",
           "offset": 416,
           "size": 32,
@@ -2032,6 +1995,42 @@
               "bit_offset": 16,
               "bit_width": 8,
               "description": "Read write recovery time"
+            }
+          ]
+        },
+        {
+          "name": "PIR",
+          "offset": 144,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "OCTOSPI polling interval register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "INTERVAL",
+              "bit_offset": 0,
+              "bit_width": 16,
+              "description": "Polling interval"
+            }
+          ]
+        },
+        {
+          "name": "WIR",
+          "offset": 400,
+          "size": 32,
+          "access": "read-write",
+          "reset_value": 0,
+          "description": "instruction register",
+          "array_len": null,
+          "array_stride": null,
+          "fields": [
+            {
+              "name": "INSTRUCTION",
+              "bit_offset": 0,
+              "bit_width": 32,
+              "description": "INSTRUCTION"
             }
           ]
         }

@@ -3,8 +3,8 @@
   "kind": "rng",
   "version": "v3",
   "source": "stm32rs_svd",
-  "source_device": "stm32h562ag",
-  "source_file": "stm32h562.svd.patched",
+  "source_device": "stm32h503cb",
+  "source_file": "stm32h503.svd.patched",
   "blocks": {
     "RNG": {
       "name": "RNG",
@@ -16,7 +16,7 @@
           "offset": 0,
           "size": 32,
           "access": null,
-          "reset_value": 8855296,
+          "reset_value": 8388816,
           "description": "RNG control register",
           "array_len": null,
           "array_stride": null,
@@ -63,7 +63,7 @@
               "name": "CED",
               "bit_offset": 5,
               "bit_width": 1,
-              "description": "Clock error detection The clock error detection cannot be enabled nor disabled on-the-fly when the RNG is enabled, i.e. to enable or disable CED the RNG must be disabled. Writing this bit is taken into account only if CONDRST bit is set to 1 in the same access, while CONFIGLOCK remains at 0. Writing to this bit is ignored if CONFIGLOCK=1.",
+              "description": "Clock error detection The clock error detection cannot be enabled nor disabled on-the-fly when the RNG is enabled, i.e. to enable or disable CED the RNG must be disabled. Writing this bit is taken into account only if CONDRST bit is set to 1 in the same access, while CONFIGLOCK remains at 0. Writing to this bit is ignored if CONFIGLOCK = 1.",
               "access": "read-write",
               "enum_values": [
                 {
@@ -82,7 +82,7 @@
               "name": "ARDIS",
               "bit_offset": 7,
               "bit_width": 1,
-              "description": "Auto reset disable When auto-reset is enabled application still need to clear SEIS bit after a noise source error. Writing this bit is taken into account only if CONDRST bit is set to 1 in the same access, while CONFIGLOCK remains at 0. Writing to this bit is ignored if CONFIGLOCK=1.",
+              "description": "Auto reset disable When auto-reset is enabled application still need to clear SEIS bit after a noise source error. Writing this bit is taken into account only if CONDRST bit is set to 1 in the same access, while CONFIGLOCK remains at 0. Writing to this bit is ignored if CONFIGLOCK = 1.",
               "access": "read-write"
             },
             {
@@ -108,7 +108,7 @@
               "name": "NISTC",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "Non NIST compliant four conditioning loops are performed and 512 bits of noise source are used. Writing this bit is taken into account only if CONDRST bit is set to 1 in the same access, while CONFIGLOCK remains at 0. Writing to this bit is ignored if CONFIGLOCK=1.",
+              "description": "Non NIST compliant two conditioning loops are performed and 256 bits of noise source are used. Writing this bit is taken into account only if CONDRST bit is set to 1 in the same access, while CONFIGLOCK remains at 0. Writing to this bit is ignored if CONFIGLOCK = 1.",
               "access": "read-write",
               "enum_values": [
                 {
@@ -141,7 +141,7 @@
               "name": "CLKDIV",
               "bit_offset": 16,
               "bit_width": 4,
-              "description": "Clock divider factor This value used to configure an internal programmable divider (from 1 to 16) acting on the incoming RNG clock. These bits can be written only when the core is disabled (RNGEN=0). ... Writing these bits is taken into account only if CONDRST bit is set to 1 in the same access, while CONFIGLOCK remains at 0. Writing to this bit is ignored if CONFIGLOCK=1.",
+              "description": "Clock divider factor This value used to configure an internal programmable divider (from 1 to 16) acting on the incoming RNG clock. These bits can be written only when the core is disabled (RNGEN = 0). ... Writing these bits is taken into account only if CONDRST bit is set to 1 in the same access, while CONFIGLOCK remains at 0. Writing to this bit is ignored if CONFIGLOCK = 1.",
               "access": "read-write",
               "enum_values": [
                 {
@@ -230,7 +230,7 @@
               "name": "RNG_CONFIG1",
               "bit_offset": 20,
               "bit_width": 6,
-              "description": "RNG configuration 1 Reserved to the RNG configuration (bitfield 1). Must be initialized using the recommended value documented in . Writing any bit of RNG_CONFIG1 is taken into account only if CONDRST bit is set to 1 in the same access, while CONFIGLOCK remains at 0. Writing to this bit is ignored if CONFIGLOCK=1.",
+              "description": "RNG configuration 1 Reserved to the RNG configuration (bitfield 1). Must be initialized using the recommended value documented in Section 23.6: RNG entropy source validation. Writing any bit of RNG_CONFIG1 is taken into account only if CONDRST bit is set to 1 in the same access, while CONFIGLOCK remains at 0. Writing to this bit is ignored if CONFIGLOCK = 1.",
               "access": "read-write",
               "enum_values": [
                 {
@@ -256,7 +256,7 @@
               "name": "CONFIGLOCK",
               "bit_offset": 31,
               "bit_width": 1,
-              "description": "RNG Config Lock This bitfield is set once: if this bit is set it can only be reset to 0 if RNG is reset.",
+              "description": "RNG Config lock This bitfield is set once: if this bit is set it can only be reset to 0 if RNG is reset.",
               "access": "read-write",
               "enum_values": [
                 {
@@ -287,7 +287,7 @@
               "name": "DRDY",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Data Ready Once the output buffer becomes empty (after reading the RNG_DR register), this bit returns to 0 until a new random value is generated. Note: The DRDY bit can rise when the peripheral is disabled (RNGEN=0 in the RNG_CR register). If IE=1 in the RNG_CR register, an interrupt is generated when DRDY=1.",
+              "description": "Data Ready Once the output buffer becomes empty (after reading the RNG_DR register), this bit returns to 0 until a new random value is generated. Note: The DRDY bit can rise when the peripheral is disabled (RNGEN = 0 in the RNG_CR register). If IE=1 in the RNG_CR register, an interrupt is generated when DRDY = 1.",
               "access": "read-only",
               "enum_values": [
                 {
@@ -325,7 +325,7 @@
               "name": "SECS",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "Seed error current status Run-time repetition count test failed (noise source has provided more than 24 consecutive bits at a constant value 0' or 1', or more than 32 consecutive occurrence of two bits patterns 01' or 10') Start-up or continuous adaptive proportion test on noise source failed. Start-up post-processing/conditioning sanity check failed.",
+              "description": "Seed error current status Run-time repetition count test failed (noise source has provided more than 24 consecutive bits at a constant value 0 or 1, or more than 32 consecutive occurrence of two bits patterns 01 or 10) Start-up or continuous adaptive proportion test on noise source failed. Start-up post-processing/conditioning sanity check failed.",
               "access": "read-only",
               "enum_values": [
                 {
@@ -399,7 +399,7 @@
               "name": "RNDATA",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Random data 32-bit random data which are valid when DRDY=1. When DRDY=0 RNDATA value is zero. It is recommended to always verify that RNG_DR is different from zero. Because when it is the case a seed error occurred between RNG_SR polling and RND_DR output reading (rare event).",
+              "description": "Random data 32-bit random data which are valid when DRDY = 1. When DRDY = 0 RNDATA value is zero. It is recommended to always verify that RNG_DR is different from zero. Because when it is the case a seed error occurred between RNG_SR polling and RND_DR output reading (rare event).",
               "access": "read-only"
             }
           ]
@@ -418,43 +418,37 @@
               "name": "EN_OSC1",
               "bit_offset": 0,
               "bit_width": 3,
-              "description": "When the RNG is enabled (RNGEN bit set), each bit of this bitfield enables one of the three inputs from the oscillator instance number 1.",
-              "access": "read-write"
+              "description": "Each bit drives one oscillator enable signal input of instance number 1, gated with the RNGEN bit in RNG_CR (set bit to enable the oscillator)."
             },
             {
               "name": "EN_OSC2",
               "bit_offset": 3,
               "bit_width": 3,
-              "description": "When the RNG is enabled (RNGEN bit set), each bit of this bitfield enables one of the three inputs from the oscillator instance number 2.",
-              "access": "read-write"
+              "description": "Each bit drives one oscillator enable signal input of instance number 2, gated with the RNGEN bit in RNG_CR (set bit to enable the oscillator)."
             },
             {
               "name": "EN_OSC3",
               "bit_offset": 6,
               "bit_width": 3,
-              "description": "When the RNG is enabled (RNGEN bit set), each bit of this bitfield enables one of the three inputs from the oscillator instance number 3.",
-              "access": "read-write"
+              "description": "Each bit drives one oscillator enable signal input of instance number 3, gated with the RNGEN bit in RNG_CR (set bit to enable the oscillator)."
             },
             {
               "name": "EN_OSC4",
               "bit_offset": 9,
               "bit_width": 3,
-              "description": "When the RNG is enabled (RNGEN bit set), each bit of this bitfield enables one of the three inputs from the oscillator instance number 4.",
-              "access": "read-write"
+              "description": "Each bit drives one oscillator enable signal input of instance number 4, gated with the RNGEN bit in RNG_CR (set bit to enable the oscillator)."
             },
             {
               "name": "EN_OSC5",
               "bit_offset": 12,
               "bit_width": 3,
-              "description": "When the RNG is enabled (RNGEN bit set), each bit of this bitfield enables one of the three inputs from the oscillator instance number 5.",
-              "access": "read-write"
+              "description": "Each bit drives one oscillator enable signal input of instance number 5, gated with the RNGEN bit in RNG_CR (set bit to enable the oscillator)."
             },
             {
               "name": "EN_OSC6",
               "bit_offset": 15,
               "bit_width": 3,
-              "description": "When the RNG is enabled (RNGEN bit set), each bit of this bitfield enables one of the three inputs from the oscillator instance number 6.",
-              "access": "read-write"
+              "description": "Each bit drives one oscillator enable signal input of instance number 6, gated with the RNGEN bit in RNG_CR (set bit to enable the oscillator)."
             }
           ]
         },
@@ -472,7 +466,7 @@
               "name": "HTCFG",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "health test configuration This configuration is used by RNG to configure the health tests. See entropy source validation for the recommended value. Note: The RNG behavior, including the read to this register, is not guaranteed if a different value from the recommended value is written.",
+              "description": "health test configuration This configuration is used by RNG to configure the health tests. See Section 23.6: RNG entropy source validation for the recommended value. Note: The RNG behavior, including the read to this register, is not guaranteed if a different value from the recommended value is written.",
               "access": "read-write",
               "enum_values": [
                 {

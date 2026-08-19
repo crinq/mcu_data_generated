@@ -3,8 +3,8 @@
   "kind": "dmamux",
   "version": "v1",
   "source": "stm32rs_svd",
-  "source_device": "stm32h723ve",
-  "source_file": "stm32h735.svd.patched",
+  "source_device": "stm32h7b3zi",
+  "source_file": "stm32h7b3.svd.patched",
   "blocks": {
     "DMAMUX1": {
       "name": "DMAMUX1",
@@ -15,7 +15,7 @@
           "name": "C%sCR",
           "offset": 0,
           "size": 32,
-          "access": null,
+          "access": "read-write",
           "reset_value": 0,
           "description": null,
           "array_len": 16,
@@ -25,7 +25,7 @@
               "name": "DMAREQ_ID",
               "bit_offset": 0,
               "bit_width": 7,
-              "description": "DMA request identification Selects the input DMA request. See the DMAMUX table about assignments of multiplexer inputs to resources.",
+              "description": "DMA request identification",
               "access": "read-write",
               "enum_values": [
                 {
@@ -666,7 +666,7 @@
               "name": "SPOL",
               "bit_offset": 17,
               "bit_width": 2,
-              "description": "Synchronization polarity Defines the edge polarity of the selected synchronization input:",
+              "description": "Synchronization polarity",
               "access": "read-write",
               "enum_values": [
                 {
@@ -695,14 +695,14 @@
               "name": "NBREQ",
               "bit_offset": 19,
               "bit_width": 5,
-              "description": "Number of DMA requests minus 1 to forward Defines the number of DMA requests to forward to the DMA controller after a synchronization event, and/or the number of DMA requests before an output event is generated. This field shall only be written when both SE and EGE bits are low.",
+              "description": "Number of DMA requests minus 1 to forward",
               "access": "read-write"
             },
             {
               "name": "SYNC_ID",
               "bit_offset": 24,
               "bit_width": 3,
-              "description": "Synchronization identification Selects the synchronization input (see inputs to resources).",
+              "description": "Synchronization identification",
               "access": "read-write",
               "enum_values": [
                 {
@@ -753,7 +753,7 @@
           "name": "CSR",
           "offset": 128,
           "size": 32,
-          "access": null,
+          "access": "read-only",
           "reset_value": 0,
           "description": null,
           "array_len": null,
@@ -763,7 +763,7 @@
               "name": "SOF%s",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Synchronization overrun event flag The flag is set when a synchronization event occurs on a DMA request line multiplexer channel x, while the DMA request counter value is lower than NBREQ. The flag is cleared by writing 1 to the corresponding CSOFx bit in DMAMUX_CFR register. For DMAMUX2 bits 15:8 are reserved, keep them at reset value.",
+              "description": "Synchronization overrun event flag",
               "access": "read-only",
               "enum_values": [
                 {
@@ -784,7 +784,7 @@
           "name": "CFR",
           "offset": 132,
           "size": 32,
-          "access": null,
+          "access": "read-write",
           "reset_value": 0,
           "description": null,
           "array_len": null,
@@ -794,7 +794,7 @@
               "name": "CSOF%s",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Clear synchronization overrun event flag Writing 1 in each bit clears the corresponding overrun flag SOFx in the DMAMUX_CSR register.",
+              "description": "Clear synchronization overrun event flag",
               "access": "write-only",
               "enum_values": [
                 {
@@ -810,7 +810,7 @@
           "name": "RG%sCR",
           "offset": 256,
           "size": 32,
-          "access": null,
+          "access": "read-write",
           "reset_value": 0,
           "description": null,
           "array_len": 8,
@@ -820,7 +820,7 @@
               "name": "SIG_ID",
               "bit_offset": 0,
               "bit_width": 3,
-              "description": "Signal identification Selects the DMA request trigger input used for the channel x of the DMA request generator",
+              "description": "Signal identification",
               "access": "read-write",
               "enum_values": [
                 {
@@ -907,7 +907,7 @@
               "name": "GPOL",
               "bit_offset": 17,
               "bit_width": 2,
-              "description": "DMA request generator trigger polarity Defines the edge polarity of the selected trigger input",
+              "description": "DMA request generator trigger polarity",
               "access": "read-write",
               "enum_values": [
                 {
@@ -936,7 +936,7 @@
               "name": "GNBREQ",
               "bit_offset": 19,
               "bit_width": 5,
-              "description": "Number of DMA requests to be generated (minus 1) Defines the number of DMA requests to be generated after a trigger event. The actual number of generated DMA requests is GNBREQ +1. Note: This field must be written only when GE bit is disabled.",
+              "description": "Number of DMA requests to be generated (minus 1)",
               "access": "read-write"
             }
           ]
@@ -945,7 +945,7 @@
           "name": "RGSR",
           "offset": 320,
           "size": 32,
-          "access": null,
+          "access": "read-only",
           "reset_value": 0,
           "description": null,
           "array_len": null,
@@ -955,7 +955,7 @@
               "name": "OF%s",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "[:0]: Trigger overrun event flag The flag is set when a new trigger event occurs on DMA request generator channel x, before the request counter underrun (the internal request counter programmed via the GNBREQ field of the DMAMUX_RGxCR register). The flag is cleared by writing 1 to the corresponding COFx bit in the DMAMUX_RGCFR register.",
+              "description": "[:0]: Trigger overrun event flag",
               "access": "read-only",
               "enum_values": [
                 {
@@ -976,7 +976,7 @@
           "name": "RGCFR",
           "offset": 324,
           "size": 32,
-          "access": null,
+          "access": "read-write",
           "reset_value": 0,
           "description": null,
           "array_len": null,
@@ -986,7 +986,7 @@
               "name": "COF%s",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Clear trigger overrun event flag Writing 1 in each bit clears the corresponding overrun flag OFx in the DMAMUX_RGSR register.",
+              "description": "Clear trigger overrun event flag",
               "access": "write-only",
               "enum_values": [
                 {

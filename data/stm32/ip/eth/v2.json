@@ -3,12 +3,12 @@
   "kind": "eth",
   "version": "v2",
   "source": "stm32rs_svd",
-  "source_device": "stm32h563ag",
-  "source_file": "stm32h563.svd.patched",
+  "source_device": "stm32h7r3a8",
+  "source_file": "stm32h7r.svd.patched",
   "blocks": {
     "ETH": {
       "name": "ETH",
-      "description": "Ethernet media access control",
+      "description": "Ethernet register block",
       "extends": null,
       "registers": [
         {
@@ -53,7 +53,7 @@
               "name": "BL",
               "bit_offset": 5,
               "bit_width": 2,
-              "description": "Back-Off Limit The back-off limit determines the random integer number (r) of slot time delays (512 bit times for 10/100 Mbps) for which the MAC waits before rescheduling a transmission attempt during retries after a collision: where n = retransmission attempt The random integer r takes the value in the range 0 = r 2^k. This bit is applicable only in the Half-duplex mode.",
+              "description": "Back-Off Limit The back-off limit determines the random integer number (r) of slot time delays (512 bit times for 10/100 Mbps) for which the MAC waits before rescheduling a transmission attempt during retries after a collision: where n = retransmission attempt The random integer r takes the value in the range 0 <= r < 2^k. This bit is applicable only in the Half-duplex mode.",
               "access": "read-write"
             },
             {
@@ -109,7 +109,7 @@
               "name": "JE",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "Jumbo Packet Enable When this bit is set, the MAC allows jumbo packets of 9,018 bytes (9,022 bytes for VLAN tagged packets) without reporting a giant packet error in the Rx packet status. For more information about how the setting of this bit and the JE bit impact the Giant packet status, see Table679: Giant Packet Status based on S2KP and JE Bits.",
+              "description": "Jumbo Packet Enable When this bit is set, the MAC allows jumbo packets of 9,018 bytes (9,022 bytes for VLAN tagged packets) without reporting a giant packet error in the Rx packet status. For more information about how the setting of this bit and the JE bit impact the Giant packet status, see Table 563: Giant Packet Status based on S2KP and JE Bits.",
               "access": "read-write"
             },
             {
@@ -130,21 +130,21 @@
               "name": "ACS",
               "bit_offset": 20,
               "bit_width": 1,
-              "description": "Automatic Pad or CRC Stripping When this bit is set, the MAC strips the Pad or FCS field on the incoming packets only if the value of the length field is less than 1,536 bytes. All received packets with length field greater than or equal to 1,536 bytes are passed to the application without stripping the Pad or FCS field. When this bit is reset, the MAC passes all incoming packets to the application, without any modification. Note: For information about how the settings of CST bit and this bit impact the packet length, see Table680: Packet Length based on the CST and ACS bits.",
+              "description": "Automatic Pad or CRC Stripping When this bit is set, the MAC strips the Pad or FCS field on the incoming packets only if the value of the length field is less than 1,536 bytes. All received packets with length field greater than or equal to 1,536 bytes are passed to the application without stripping the Pad or FCS field. When this bit is reset, the MAC passes all incoming packets to the application, without any modification. Note: For information about how the settings of CST bit and this bit impact the packet length, see Table 564: Packet Length based on the CST and ACS bits.",
               "access": "read-write"
             },
             {
               "name": "CST",
               "bit_offset": 21,
               "bit_width": 1,
-              "description": "CRC stripping for Type packets When this bit is set, the last four bytes (FCS) of all packets of Ether type (type field greater than 1,536) are stripped and dropped before forwarding the packet to the application. This function is not valid when the IP Checksum Engine (Type 1) is enabled in the MAC receiver. This function is valid when Type 2 Checksum Offload Engine is enabled. Note: For information about how the settings of the ACS bit and this bit impact the packet length, see Table680: Packet Length based on the CST and ACS bits.",
+              "description": "CRC stripping for Type packets When this bit is set, the last four bytes (FCS) of all packets of Ether type (type field greater than 1,536) are stripped and dropped before forwarding the packet to the application. This function is not valid when the IP Checksum Engine (Type 1) is enabled in the MAC receiver. This function is valid when Type 2 Checksum Offload Engine is enabled. Note: For information about how the settings of the ACS bit and this bit impact the packet length, see Table 564: Packet Length based on the CST and ACS bits.",
               "access": "read-write"
             },
             {
               "name": "S2KP",
               "bit_offset": 22,
               "bit_width": 1,
-              "description": "IEEE 802.3as Support for 2K Packets When this bit is set, the MAC considers all packets with up to 2,000 bytes length as normal packets. When the JE bit is not set, the MAC considers all received packets of size more than 2K bytes as Giant packets. When this bit is reset and the JE bit is not set, the MAC considers all received packets of size more than 1,518 bytes (1,522 bytes for tagged) as giant packets. For more information about how the setting of this bit and the JE bit impact the Giant packet status, see Table679: Giant Packet Status based on S2KP and JE Bits. Note: When the JE bit is set, setting this bit has no effect on the giant packet status.",
+              "description": "IEEE 802.3as Support for 2K Packets When this bit is set, the MAC considers all packets with up to 2,000 bytes length as normal packets. When the JE bit is not set, the MAC considers all received packets of size more than 2K bytes as Giant packets. When this bit is reset and the JE bit is not set, the MAC considers all received packets of size more than 1,518 bytes (1,522 bytes for tagged) as giant packets. For more information about how the setting of this bit and the JE bit impact the Giant packet status, see Table 563: Giant Packet Status based on S2KP and JE Bits. Note: When the JE bit is set, setting this bit has no effect on the giant packet status.",
               "access": "read-write"
             },
             {
@@ -233,7 +233,7 @@
               "name": "EIPG",
               "bit_offset": 25,
               "bit_width": 5,
-              "description": "Extended Inter-Packet Gap The value in this field is applicable when the EIPGEN bit is set. This field (as Most Significant bits) along with IPG field in Operating mode configuration register (ETH_MACCR), gives the minimum IPG greater than 96 bit times in steps of 8 bit times. For example: EIPG= 0 and IPG=0 give 104 bit times EIPG= 0 and IPG=1 give 112 bit times EIPG= 0 and IPG=2 give 120 bit times .. EIPG=7 and IPG=31 give 2144 bit times",
+              "description": "Extended Inter-Packet Gap The value in this field is applicable when the EIPGEN bit is set. This field (as Most Significant bits) along with IPG field in Operating mode configuration register (ETH_MACCR), gives the minimum IPG greater than 96 bit times in steps of 8 bit times. For example: EIPG = 0 and IPG = 0 give 104 bit times EIPG = 0 and IPG = 1 give 112 bit times EIPG = 0 and IPG = 2 give 120 bit times .. EIPG = 7 and IPG = 31 give 2144 bit times",
               "access": "read-write"
             }
           ]
@@ -926,7 +926,7 @@
               "name": "MGKPRCVD",
               "bit_offset": 5,
               "bit_width": 1,
-              "description": "Magic Packet Received When this bit is set, it indicates that the power management event is generated because of the reception of a magic packet. This bit is cleared when this register is read (or written to 1 when RCWE bit in CSR software control register (ETH_MACCSRSWCR) is set).",
+              "description": "Magic Packet Received When this bit is set, it indicates that the power management event is generated because of the reception of a magic packet. This bit is cleared when this register is read (or write of 1 when RCWE bit in CSR software control register (ETH_MACCSRSWCR) is set).",
               "access": "read-write"
             },
             {
@@ -980,7 +980,7 @@
               "name": "MACRWKPFR",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Remote wakeup packet filter Refer to Table648, Table649 and Table650 for details on register content and programming sequence.",
+              "description": "Remote wakeup packet filter Refer to Table 532, Table 533 and Table 534 for details on register content and programming sequence.",
               "access": "read-write"
             }
           ]
@@ -999,28 +999,28 @@
               "name": "TLPIEN",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Transmit LPI Entry When this bit is set, it indicates that the MAC Transmitter has entered the LPI state because of the setting of the LPIEN bit. This bit is cleared by a read into this register (or by writing it to 1 when RCWE bit in CSR software control register (ETH_MACCSRSWCR) is set).",
+              "description": "Transmit LPI Entry When this bit is set, it indicates that the MAC Transmitter has entered the LPI state because of the setting of the LPIEN bit. This bit is cleared by a read into this register (or write of 1 when RCWE bit in CSR software control register (ETH_MACCSRSWCR) is set).",
               "access": "read-only"
             },
             {
               "name": "TLPIEX",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Transmit LPI Exit When this bit is set, it indicates that the MAC transmitter exited the LPI state after the application cleared the LPIEN bit and the LPI TW Timer has expired. This bit is cleared by a read into this register (or by writing it to 1 when RCWE bit in CSR software control register (ETH_MACCSRSWCR) is set).",
+              "description": "Transmit LPI Exit When this bit is set, it indicates that the MAC transmitter exited the LPI state after the application cleared the LPIEN bit and the LPI TW Timer has expired. This bit is cleared by a read into this register (or write of 1 when RCWE bit in CSR software control register (ETH_MACCSRSWCR) is set).",
               "access": "read-only"
             },
             {
               "name": "RLPIEN",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "Receive LPI Entry When this bit is set, it indicates that the MAC Receiver has received an LPI pattern and entered the LPI state. This bit is cleared by a read into this register (or by writing it to 1 when RCWE bit in CSR software control register (ETH_MACCSRSWCR) is set). Note: This bit may not be set if the MAC stops receiving the LPI pattern for a very short duration, such as, less than three clock cycles of CSR clock.",
+              "description": "Receive LPI Entry When this bit is set, it indicates that the MAC Receiver has received an LPI pattern and entered the LPI state. This bit is cleared by a read into this register (or write of 1 when RCWE bit in CSR software control register (ETH_MACCSRSWCR) is set). Note: This bit may not be set if the MAC stops receiving the LPI pattern for a very short duration, such as, less than three clock cycles of CSR clock.",
               "access": "read-only"
             },
             {
               "name": "RLPIEX",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "Receive LPI Exit When this bit is set, it indicates that the MAC Receiver has stopped receiving the LPI pattern on the MII interface, exited the LPI state, and resumed the normal reception. This bit is cleared by a read into this register (or by writing it to 1 when RCWE bit in CSR software control register (ETH_MACCSRSWCR) is set). Note: This bit may not be set if the MAC stops receiving the LPI pattern for a very short duration, such as, less than three clock cycles of CSR clock.",
+              "description": "Receive LPI Exit When this bit is set, it indicates that the MAC Receiver has stopped receiving the LPI pattern on the MII interface, exited the LPI state, and resumed the normal reception. This bit is cleared by a read into this register (or write of 1 when RCWE bit in CSR software control register (ETH_MACCSRSWCR) is set). Note: This bit may not be set if the MAC stops receiving the LPI pattern for a very short duration, such as, less than three clock cycles of CSR clock.",
               "access": "read-only"
             },
             {
@@ -1133,7 +1133,7 @@
               "name": "TIC_1US_CNTR",
               "bit_offset": 0,
               "bit_width": 12,
-              "description": "1s tick Counter The application must program this counter so that the number of clock cycles of CSR clock is 1s (subtract 1 from the value before programming). For example if the CSR clock is 100MHz then this field needs to be programmed to 1001 = 99 (which is 0x63). This is required to generate the 1s events that are used to update some of the EEE related counters.",
+              "description": "1 s tick Counter The application must program this counter so that the number of clock cycles of CSR clock is 1 s (subtract 1 from the value before programming). For example if the CSR clock is 100 MHz then this field needs to be programmed to 100 - 1 = 99 (which is 0x63). This is required to generate the 1 s events that are used to update some of the EEE related counters.",
               "access": "read-write"
             }
           ]
@@ -2345,7 +2345,7 @@
               "name": "TXLPITRC",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Tx LPI Transition counter This field indicates the number of times Tx LPI Entry has occurred. Even if Tx LPI Entry occurs in Automate mode (because of LPITXA bit set in the LPI control and status register (ETH_MACLCSR)), the counter is incremented.",
+              "description": "Tx LPI Transition counter This field indicates the number of times Tx LPI Entry has occurred. Even if Tx LPI Entry occurs in Automate mode (because of LPITXA bit set in the LPI control and status register (ETH_MACLCSR)), the counter increments.",
               "access": "read-only"
             }
           ]
@@ -2875,7 +2875,7 @@
               "name": "TSEVNTENA",
               "bit_offset": 14,
               "bit_width": 1,
-              "description": "Enable Timestamp Snapshot for Event Messages When this bit is set, the timestamp snapshot is taken only for event messages (SYNC, Delay_Req, Pdelay_Req, or Pdelay_Resp). When this bit is reset, the snapshot is taken for all messages except Announce, Management, and Signaling. For more information about the timestamp snapshots, see Table634: Timestamp Snapshot Dependency on ETH_MACTSCR bits.",
+              "description": "Enable Timestamp Snapshot for Event Messages When this bit is set, the timestamp snapshot is taken only for event messages (SYNC, Delay_Req, Pdelay_Req, or Pdelay_Resp). When this bit is reset, the snapshot is taken for all messages except Announce, Management, and Signaling. For more information about the timestamp snapshots, see Table 518: Timestamp Snapshot Dependency on ETH_MACTSCR Bits.",
               "access": "read-write"
             },
             {
@@ -2889,7 +2889,7 @@
               "name": "SNAPTYPSEL",
               "bit_offset": 16,
               "bit_width": 2,
-              "description": "Select PTP packets for Taking Snapshots These bits, along with Bits 15 and 14, define the set of PTP packet types for which snapshot needs to be taken. The encoding is given in Table634: Timestamp Snapshot Dependency on ETH_MACTSCR bits.",
+              "description": "Select PTP packets for Taking Snapshots These bits, along with Bits 15 and 14, define the set of PTP packet types for which snapshot needs to be taken. The encoding is given in Table 518: Timestamp Snapshot Dependency on ETH_MACTSCR Bits.",
               "access": "read-write"
             },
             {
@@ -2986,7 +2986,7 @@
               "name": "TSS",
               "bit_offset": 0,
               "bit_width": 32,
-              "description": "Timestamp Seconds The value in this field is the seconds part of the update.",
+              "description": "Timestamp Seconds The value in this field is the seconds part of the update. When ADDSUB is reset, this field must be programmed with the seconds part of the update value. When ADDSUB is set, this field must be programmed with the complement of the seconds part of the update value. For example, to subtract 2.000000001 seconds from the system time, the TSS field in the ETH_MACSTSUR register must be 0xFFFF_FFFE (that is, 2^32 2). When the ADDSUB bit is set, TSSS[30:0] field cannot be set to 0 in System time nanoseconds update register (ETH_MACSTNUR). The TSSS bitfield must be programmed to 0x7FFF FFFF (resulting in 0.46 ns) even if 0 ns must be subtracted. For example, to subtract 2.000000000 seconds from the system time, the TSS field in the System time seconds update register (ETH_MACSTSUR) must be 0xFFFF FFFE (that is, 2^32 1) and the System time nanoseconds update register (ETH_MACSTNUR) must be 0xFFFF FFFF (ADDSUB = 1 and TSSS[30:0] field = 0x7FFF_FFFF)",
               "access": "read-write"
             }
           ]
@@ -3005,7 +3005,7 @@
               "name": "TSSS",
               "bit_offset": 0,
               "bit_width": 31,
-              "description": "Timestamp subseconds The value in this field is the subseconds part of the update.",
+              "description": "Timestamp subseconds The value in this field is the subseconds part of the update. ADDSUB is 1: This field must be programmed with the complement of the subseconds part of the update value as described. ADDSUB is 0: This field must be programmed with the subseconds part of the update value, with an accuracy based on the TSCTRLSSR bit of the Timestamp control Register (ETH_MACTSCR). TSCTRLSSR field in the Timestamp control Register (ETH_MACTSCR)is 1: - The programmed value must be 10^9 <subsecond value>. - Each bit represents 1 ns and the programmed value should not exceed 0x3B9A_C9FF. TSCTRLSSR field in the Timestamp control Register (ETH_MACTSCR) is 0: - The programmed value must be 2^31 - <subsecond_value>. - Each bit represents an accuracy of 0.46 ns. For example, to subtract 2.000000001 seconds from the system time, then the TSSS field in the ETH_MACSTNUR register must be 0x7FFF_FFFF (that is, 2^31 1), when TSCTRLSSR bit in Timestamp control Register (ETH_MACTSCR) is reset and 0x3B9A_C9FF (that is, 10^9 1), when TSCTRLSSR bit in Timestamp control Register (ETH_MACTSCR) is set. When the ADDSUB bit is set, TSSS[30:0] field cannot be set to 0. The TSSS bitfield must be programmed to 0x7FFF FFFF (resulting in 0.46 ns) even if 0 ns must be subtracted. For example, to subtract 2.000000000 seconds from the system time, System time nanoseconds update register (ETH_MACSTNUR) must be 0xFFFF FFFF (ADDSUB = 1 and TSSS[30:0] = 0) and the TSS field in the System time seconds update register (ETH_MACSTSUR) must be 0xFFFF FFFE (that is, 2^32 1).",
               "access": "read-write"
             },
             {
@@ -3050,35 +3050,35 @@
               "name": "TSSOVF",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Timestamp Seconds Overflow When this bit is set, it indicates that the seconds value of the timestamp (when supporting version 2 format) has overflowed beyond 32'hFFFF_FFFF. This bit is cleared when the application reads this bit (or writes it to 1 when RCWE bit in CSR software control register (ETH_MACCSRSWCR) is set)",
+              "description": "Timestamp Seconds Overflow When this bit is set, it indicates that the seconds value of the timestamp (when supporting version 2 format) has overflowed beyond 32'hFFFF_FFFF. This bit is cleared when the application reads this bit (or write of 1 when RCWE bit in CSR software control register (ETH_MACCSRSWCR) is set)",
               "access": "read-write"
             },
             {
               "name": "TSTARGT0",
               "bit_offset": 1,
               "bit_width": 1,
-              "description": "Timestamp Target Time Reached When set, this bit indicates that the value of system time is greater than or equal to the value specified in the ETH_MACPPSTTSR and ETH_MACPPSTTSNR registers (see PPS target time seconds register (ETH_MACPPSTTSR) and PPS target time nanoseconds register (ETH_MACPPSTTNR)). This bit is cleared when the application reads this bit (or writes of 1 when RCWE bit in CSR software control register (ETH_MACCSRSWCR) is set)",
+              "description": "Timestamp Target Time Reached When set, this bit indicates that the value of system time is greater than or equal to the value specified in the PPS target time seconds register (ETH_MACPPSTTSR) and PPS target time nanoseconds register (ETH_MACPPSTTNR). This bit is cleared when the application reads this bit (or write of 1 when RCWE bit in CSR software control register (ETH_MACCSRSWCR) is set)",
               "access": "read-write"
             },
             {
               "name": "AUXTSTRIG",
               "bit_offset": 2,
               "bit_width": 1,
-              "description": "Auxiliary Timestamp Trigger Snapshot This bit is set high when the auxiliary snapshot is written to the FIFO. This bit is cleared when the application reads this bit (or writes it to 1 when RCWE bit in CSR software control register (ETH_MACCSRSWCR) is set).",
+              "description": "Auxiliary Timestamp Trigger Snapshot This bit is set high when the auxiliary snapshot is written to the FIFO. This bit is cleared when the application reads this bit (or write of 1 when RCWE bit in CSR software control register (ETH_MACCSRSWCR) is set).",
               "access": "read-write"
             },
             {
               "name": "TSTRGTERR0",
               "bit_offset": 3,
               "bit_width": 1,
-              "description": "Timestamp Target Time Error This bit is set when the latest target time programmed in the ETH_MACPPSTTSR and ETH_MACPPSTTSNR elapses (see PPS target time seconds register (ETH_MACPPSTTSR) and PPS target time nanoseconds register (ETH_MACPPSTTNR)). This bit is cleared when the application reads this bit (or writes it to 1 when RCWE bit in CSR software control register (ETH_MACCSRSWCR) is set).",
+              "description": "Timestamp Target Time Error This bit is set when the latest target time programmed in the PPS target time seconds register (ETH_MACPPSTTSR) and PPS target time nanoseconds register (ETH_MACPPSTTNR) elapses. This bit is cleared when the application reads this bit (or write of 1 when RCWE bit in CSR software control register (ETH_MACCSRSWCR) is set).",
               "access": "read-write"
             },
             {
               "name": "TXTSSIS",
               "bit_offset": 15,
               "bit_width": 1,
-              "description": "Tx Timestamp Status Interrupt Status When drop transmit status is enabled in MTL, this bit is set when the captured transmit timestamp is updated in the Tx timestamp status nanoseconds register (ETH_MACTXTSSNR) and Tx timestamp status seconds register (ETH_MACTXTSSSR). When PTP offload feature is enabled, this bit is set when the captured transmit timestamp is updated in the Tx timestamp status nanoseconds register (ETH_MACTXTSSNR) and Tx timestamp status seconds register (ETH_MACTXTSSSR), for PTO generated Delay Request and Pdelay request packets. This bit is cleared when the Tx timestamp status seconds register (ETH_MACTXTSSSR) is read (or written to 1 when RCWE bit in CSR software control register (ETH_MACCSRSWCR) is set).",
+              "description": "Tx Timestamp Status Interrupt Status When drop transmit status is enabled in MTL, this bit is set when the captured transmit timestamp is updated in the Tx timestamp status nanoseconds register (ETH_MACTXTSSNR) and Tx timestamp status seconds register (ETH_MACTXTSSSR). When PTP offload feature is enabled, this bit is set when the captured transmit timestamp is updated in the Tx timestamp status nanoseconds register (ETH_MACTXTSSNR) and Tx timestamp status seconds register (ETH_MACTXTSSSR), for PTO generated Delay Request and Pdelay request packets. This bit is cleared when the Tx timestamp status seconds register (ETH_MACTXTSSSR) is read (or write of 1 when RCWE bit in CSR software control register (ETH_MACCSRSWCR) is set).",
               "access": "read-write"
             },
             {
@@ -3344,7 +3344,7 @@
           ]
         },
         {
-          "name": "MACPPSCR_ALTERNATE",
+          "name": "MACPPSCR_alternate",
           "offset": 2928,
           "size": 32,
           "access": null,
@@ -3357,21 +3357,21 @@
               "name": "PPSCMD",
               "bit_offset": 0,
               "bit_width": 4,
-              "description": "Flexible PPS Output (eth_ptp_pps_out) Control Programming these bits with a non-zero value instructs the MAC to initiate an event. When the command is transferred or synchronized to the PTP clock domain, these bits get cleared automatically. The software should ensure that these bits are programmed only when they are 'all zero'. The following list describes the values of PPSCMD0: This command generates single pulse rising at the start point defined in Target Time Registers (register 455 and 456) and of a duration defined in the PPS Width Register. This command generates the train of pulses rising at the start point defined in the Target Time Registers and of a duration defined in the PPS Width Register and repeated at interval defined in the PPS Interval Register. By default, the PPS pulse train is free-running unless stopped by the Stop Pulse train at time or Stop Pulse Train immediately commands. This command cancels the START Single Pulse and START Pulse Train commands if the system time has not crossed the programmed start time. This command stops the train of pulses initiated by the START Pulse Train command (PPSCMD[3:0] = 0010) after the time programmed in the Target Time registers elapses. This command immediately stops the train of pulses initiated by the START Pulse Train command (PPSCMD[3:0] = 0010). This command cancels the STOP pulse train at time command if the programmed stop time has not elapsed. The PPS pulse train becomes free-running on the successful execution of this command. 0111 to 1111: Reserved, must not be used",
+              "description": "Flexible PPS Output (eth_ptp_pps_out) Control Programming these bits with a non-zero value instructs the MAC to initiate an event. When the command is transferred or synchronized to the PTP clock domain, these bits get cleared automatically. The software should ensure that these bits are programmed only when they are all zero. The following list describes the values of PPSCMD0: This command generates single pulse rising at the start point defined in Target Time Registers (register 455 and 456) and of a duration defined in the PPS Width Register. This command generates the train of pulses rising at the start point defined in the Target Time Registers and of a duration defined in the PPS Width Register and repeated at interval defined in the PPS Interval Register. By default, the PPS pulse train is free-running unless stopped by the 'Stop Pulse train at time' or 'Stop Pulse Train immediately' commands. This command cancels the START Single Pulse and START Pulse Train commands if the system time has not crossed the programmed start time. This command stops the train of pulses initiated by the START Pulse Train command (PPSCMD[3:0] = 0010) after the time programmed in the Target Time registers elapses. This command immediately stops the train of pulses initiated by the START Pulse Train command (PPSCMD[3:0] = 0010). This command cancels the STOP pulse train at time command if the programmed stop time has not elapsed. The PPS pulse train becomes free-running on the successful execution of this command. 0111 to 1111: Reserved, must not be used",
               "access": "read-write"
             },
             {
               "name": "PPSEN0",
               "bit_offset": 4,
               "bit_width": 1,
-              "description": "Flexible PPS Output Mode Enable When this bit is set, Bits[3:0] function as PPSCMD[3:0]. When this bit is reset, Bits[3:0] function as PPSCTRL(Fixed PPS mode).",
+              "description": "Flexible PPS Output Mode Enable When this bit is set, Bits[3:0] function as PPSCMD[3:0]. When this bit is reset, Bits[3:0] function as PPSCTRL (Fixed PPS mode).",
               "access": "read-write"
             },
             {
               "name": "TRGTMODSEL0",
               "bit_offset": 5,
               "bit_width": 2,
-              "description": "Target Time Register Mode for PPS Output This field indicates the Target Time registers (PPS target time seconds register (ETH_MACPPSTTSR) and PPS target time nanoseconds register (ETH_MACPPSTTNR)) mode for PPS output signal:",
+              "description": "Target Time Register Mode for PPS Output This field indicates the Target Time registers (MAC registers 96 and 97) mode for PPS output signal:",
               "access": "read-write"
             }
           ]
@@ -3741,7 +3741,7 @@
           "size": 32,
           "access": null,
           "reset_value": 0,
-          "description": "Tx queue debug register",
+          "description": "Tx queue debug Register",
           "array_len": null,
           "array_stride": null,
           "fields": [
@@ -3885,7 +3885,7 @@
               "name": "RQS",
               "bit_offset": 20,
               "bit_width": 3,
-              "description": "Receive Queue Size This field is read-only and the configured Rx FIFO size in blocks of 256 bytes is reflected in the reset value. The size of the Queue is (RQS+1)*256 bytes.",
+              "description": "Receive Queue Size This field is read-only and the configured Rx FIFO size in blocks of 256 bytes is reflected in the reset value. The size of the Queue is (RQS + 1) * 256 bytes.",
               "access": "read-only"
             }
           ]
@@ -4012,7 +4012,7 @@
               "name": "INTM",
               "bit_offset": 16,
               "bit_width": 2,
-              "description": "Interrupt Mode This field defines the interrupt mode of the Ethernet peripheral. The behavior of the interrupt signal and of the RI/TI bits in the ETH_DMACSR register changes depending on the INTM value (refer to Table651: Transfer complete interrupt behavior).",
+              "description": "Interrupt Mode This field defines the interrupt mode of the Ethernet peripheral. The behavior of the interrupt signal and of the RI/TI bits in the ETH_DMACSR register changes depending on the INTM value (refer to Table 535: Transfer complete interrupt behavior).",
               "access": "read-write"
             }
           ]
@@ -4184,7 +4184,7 @@
               "name": "TSE",
               "bit_offset": 12,
               "bit_width": 1,
-              "description": "TCP Segmentation Enabled When this bit is set, the DMA performs the TCP segmentation for packets in Channel x. The TCP segmentation is done only for those packets for which the TSE bit (TDES0[19]) is set in the Tx Normal descriptor. When this bit is set, the TxPBL value must be greater than or equal to 4.",
+              "description": "TCP Segmentation Enabled When this bit is set, the DMA performs the TCP segmentation for packets in Channel i. The TCP segmentation is done only for those packets for which the TSE bit (TDES0[19]) is set in the Tx Normal descriptor. When this bit is set, the TxPBL value must be greater than or equal to 4.",
               "access": "read-write"
             },
             {
@@ -4217,7 +4217,7 @@
               "name": "RBSZ",
               "bit_offset": 1,
               "bit_width": 14,
-              "description": "Receive Buffer size This field indicates the size of the Rx buffers specified in bytes. The maximum buffer size is limited to 16Kbytes. Note: The buffer size must be a multiple of 4. This is required even if the value of buffer address pointer is not aligned to bus width. If the buffer size is not a multiple of 4, it may result into an undefined behavior. Note: The LSB bits (1:0) are ignored and the DMA internally takes the LSB bits as all-zero. Therefore, these LSB bits are read-only (RO).",
+              "description": "Receive Buffer size This field indicates the size of the Rx buffers specified in bytes. The maximum buffer size is limited to 16 Kbytes. Note: The buffer size must be a multiple of 4. This is required even if the value of buffer address pointer is not aligned to bus width. If the buffer size is not a multiple of 4, it may result into an undefined behavior. Note: The LSB bits (1:0) are ignored and the DMA internally takes the LSB bits as all-zero. Therefore, these LSB bits are read-only (RO).",
               "access": "read-write"
             },
             {
@@ -4231,7 +4231,7 @@
               "name": "RPF",
               "bit_offset": 31,
               "bit_width": 1,
-              "description": "DMA Rx Channel Packet Flush When this bit is set to 1, the Ethernet peripheral will automatically flush the packet from the Rx queues destined to DMA Rx Channel when the DMA Rx Channel is stopped after a system bus error has occurred. When this bit remains set and the DMA is re-started by the software driver, the packets residing in the Rx Queues that were received when this RxDMA was stopped, are flushed out. The packets that are received by the MAC after the RxDMA is re-started are routed to the RxDMA. The flushing happens on the Read side of the Rx queue. When this bit is set to 0 the Ethernet peripheral does not flush the packet in the Rx queue destined to DMA Rx Channel after the DMA is stopped due to a system bus error. This might cause head-of-line blocking in the corresponding RxQueue. Note: The stopping of packet flow from a Rx DMA Channel to the application by setting RPF works only when there is one-to-one mapping of Rx Queue to Rx DMA channels. In Dynamic mapping mode, setting RPF bit in ETH_DMACRXCR register might flush packets from unintended Rx Queues which are destined to the stopped Rx DMA Channel.",
+              "description": "DMA Rx Channel Packet Flush When this bit is set to 1, the Ethernet peripheral automatically flushes the packet from the Rx queues destined to DMA Rx Channel when the DMA Rx Channel is stopped after a system bus error has occurred. When this bit remains set and the DMA is re-started by the software driver, the packets residing in the Rx Queues that were received when this RxDMA was stopped, are flushed out. The packets that are received by the MAC after the RxDMA is re-started are routed to the RxDMA. The flushing happens on the Read side of the Rx queue. When this bit is set to 0 the Ethernet peripheral does not flush the packet in the Rx queue destined to DMA Rx Channel after the DMA is stopped due to a system bus error. This might cause head-of-line blocking in the corresponding RxQueue. Note: The stopping of packet flow from a Rx DMA Channel to the application by setting RPF works only when there is one-to-one mapping of Rx Queue to Rx DMA channels. In Dynamic mapping mode, setting RPF bit in ETH_DMACRXCR register might flush packets from unintended Rx Queues which are destined to the stopped Rx DMA Channel.",
               "access": "read-write"
             }
           ]
@@ -4352,7 +4352,7 @@
               "name": "ARBS",
               "bit_offset": 16,
               "bit_width": 8,
-              "description": "Alternate Receive Buffer Size Indicates size in bytes for Buffer 1 when ARBS[7:0] is programmed to a non-zero value. When ARBS[7:0]=0, Rx Buffer1 and Rx Buffer2 sizes are based on RBSZ[13:0] field of Channel receive control register (ETH_DMACRXCR).",
+              "description": "Alternate Receive Buffer Size Indicates size in bytes for Buffer 1 when ARBS[7:0] is programmed to a non-zero value. When ARBS[7:0] = 0, Rx Buffer1 and Rx Buffer2 sizes are based on RBSZ[13:0] field of Channel receive control register (ETH_DMACRXCR).",
               "access": "read-write"
             }
           ]
@@ -4481,7 +4481,7 @@
               "name": "RWTU",
               "bit_offset": 16,
               "bit_width": 2,
-              "description": "Receive Interrupt Watchdog Timer Count Units This field indicates the number of system clock cycles corresponding to one unit in RWT[7:0] field. For example, when RWT[7:0]=2 and RWTU[1:0]=1, the watchdog timer is set for 2*512=1024 system clock cycles.",
+              "description": "Receive Interrupt Watchdog Timer Count Units This field indicates the number of system clock cycles corresponding to one unit in RWT[7:0] field. For example, when RWT[7:0] = 2 and RWTU[1:0] = 1, the watchdog timer is set for 2 * 512 = 1024 system clock cycles.",
               "access": "read-write"
             }
           ]
@@ -4646,7 +4646,7 @@
               "name": "CDE",
               "bit_offset": 13,
               "bit_width": 1,
-              "description": "Context Descriptor Error This bit indicates that the DMA Tx/Rx engine received a descriptor error, which indicates invalid context in the middle of packet flow (intermediate descriptor) or all one's descriptor in Tx case and on Rx side it indicates DMA has read a descriptor with either of the buffer address as ones which is considered to be invalid.",
+              "description": "Context Descriptor Error This bit indicates that the DMA Tx/Rx engine received a descriptor error, which indicates invalid context in the middle of packet flow (intermediate descriptor) or all ones descriptor in Tx case and on Rx side it indicates DMA has read a descriptor with either of the buffer address as ones which is considered to be invalid.",
               "access": "read-write"
             },
             {

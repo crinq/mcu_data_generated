@@ -3,8 +3,8 @@
   "kind": "pwr",
   "version": "l0",
   "source": "stm32rs_svd",
-  "source_device": "stm32l083rb",
-  "source_file": "stm32l0x3.svd.patched",
+  "source_device": "stm32l031f6",
+  "source_file": "stm32l0x1.svd.patched",
   "blocks": {
     "PWR": {
       "name": "PWR",
@@ -261,6 +261,24 @@
                   "description": "Voltage regulator in low-power mode in Low-power run mode"
                 }
               ]
+            },
+            {
+              "name": "LPDS",
+              "bit_offset": 16,
+              "bit_width": 1,
+              "description": "Regulator in Low-power deepsleep mode This bit allows switching the regulator to low-power mode when the CPU enters Stop mode. Its behavior depends on LPSDSR bit",
+              "enum_values": [
+                {
+                  "name": "MAIN_MODE",
+                  "value": 0,
+                  "description": "Voltage regulator in Main mode during Deepsleep mode (Stop mode)"
+                },
+                {
+                  "name": "LOW_POWER_MODE",
+                  "value": 1,
+                  "description": "Voltage regulator switches to low-power mode when the CPU enters Deepsleep mode (Stop mode)"
+                }
+              ]
             }
           ]
         },
@@ -385,6 +403,25 @@
                   "name": "Ready",
                   "value": 1,
                   "description": "VREFINT is ready"
+                }
+              ]
+            },
+            {
+              "name": "PVDO",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "PVD output",
+              "access": "read-only",
+              "enum_values": [
+                {
+                  "name": "AboveThreshold",
+                  "value": 0,
+                  "description": "VDD is higher than the PVD threshold selected with the PLS[2:0] bits"
+                },
+                {
+                  "name": "BelowThreshold",
+                  "value": 1,
+                  "description": "VDD is lower than the PVD threshold selected with the PLS[2:0] bits"
                 }
               ]
             },

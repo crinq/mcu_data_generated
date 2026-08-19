@@ -3,8 +3,8 @@
   "kind": "syscfg",
   "version": "f7",
   "source": "stm32rs_svd",
-  "source_device": "stm32f750n8",
-  "source_file": "stm32f750.svd.patched",
+  "source_device": "stm32f730i8",
+  "source_file": "stm32f730.svd.patched",
   "blocks": {
     "SYSCFG": {
       "name": "SYSCFG",
@@ -25,37 +25,13 @@
               "name": "MEM_BOOT",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Memory mapping selection",
-              "enum_values": [
-                {
-                  "name": "Add0",
-                  "value": 0,
-                  "description": "Boot memory base address is defined by FLASH.OPTCR1.BOOT_ADD0"
-                },
-                {
-                  "name": "Add1",
-                  "value": 1,
-                  "description": "Boot memory base address is defined by FLASH.OPTCR1.BOOT_ADD1"
-                }
-              ]
+              "description": "Memory boot mapping"
             },
             {
               "name": "SWP_FMC",
               "bit_offset": 10,
               "bit_width": 2,
-              "description": "FMC memory mapping swap",
-              "enum_values": [
-                {
-                  "name": "NoSwap",
-                  "value": 0,
-                  "description": "No FMC memory mapping swap"
-                },
-                {
-                  "name": "Swapped",
-                  "value": 1,
-                  "description": "SDRAM banks and NOR/RAM mapping are swapped"
-                }
-              ]
+              "description": "FMC memory mapping swap"
             }
           ]
         },
@@ -70,40 +46,64 @@
           "array_stride": null,
           "fields": [
             {
-              "name": "MII_RMII_SEL",
-              "bit_offset": 23,
+              "name": "PB7_FMP",
+              "bit_offset": 5,
               "bit_width": 1,
-              "description": "Ethernet PHY interface selection",
-              "enum_values": [
-                {
-                  "name": "MII",
-                  "value": 0,
-                  "description": "MII interface is selected"
-                },
-                {
-                  "name": "RMII_PHY",
-                  "value": 1,
-                  "description": "RMII PHY interface is selected"
-                }
-              ]
+              "description": "PB7_FMP Fast Mode + Enable"
+            },
+            {
+              "name": "PB8_FMP",
+              "bit_offset": 6,
+              "bit_width": 1,
+              "description": "PB8_FMP Fast Mode + Enable"
+            },
+            {
+              "name": "PB9_FMP",
+              "bit_offset": 7,
+              "bit_width": 1,
+              "description": "Fast Mode + Enable"
             },
             {
               "name": "ADC1DC2",
               "bit_offset": 16,
               "bit_width": 1,
-              "description": "ADC1DC2"
+              "description": "ADC3DC2"
             },
             {
-              "name": "ADC2DC2",
-              "bit_offset": 17,
+              "name": "PB6_FMP",
+              "bit_offset": 4,
               "bit_width": 1,
-              "description": "ADC2DC2"
+              "description": "PB6_FMP Fast Mode"
+            },
+            {
+              "name": "I2C3_FMP",
+              "bit_offset": 2,
+              "bit_width": 1,
+              "description": "I2C3_FMP I2C3 Fast Mode + Enable"
+            },
+            {
+              "name": "I2C2_FMP",
+              "bit_offset": 1,
+              "bit_width": 1,
+              "description": "I2C2_FMP I2C2 Fast Mode + Enable"
+            },
+            {
+              "name": "I2C1_FMP",
+              "bit_offset": 0,
+              "bit_width": 1,
+              "description": "I2C1_FMP I2C1 Fast Mode + Enable"
             },
             {
               "name": "ADC3DC2",
               "bit_offset": 18,
               "bit_width": 1,
               "description": "ADC3DC2"
+            },
+            {
+              "name": "ADC2DC2",
+              "bit_offset": 17,
+              "bit_width": 1,
+              "description": "ADC2DC2"
             }
           ]
         },
@@ -139,64 +139,7 @@
               "name": "EXTI0",
               "bit_offset": 0,
               "bit_width": 4,
-              "description": "EXTI x configuration (x = 0 to 3)",
-              "enum_values": [
-                {
-                  "name": "PA",
-                  "value": 0,
-                  "description": "Select PAx as the source input for the EXTIx external interrupt"
-                },
-                {
-                  "name": "PB",
-                  "value": 1,
-                  "description": "Select PBx as the source input for the EXTIx external interrupt"
-                },
-                {
-                  "name": "PC",
-                  "value": 2,
-                  "description": "Select PCx as the source input for the EXTIx external interrupt"
-                },
-                {
-                  "name": "PD",
-                  "value": 3,
-                  "description": "Select PDx as the source input for the EXTIx external interrupt"
-                },
-                {
-                  "name": "PE",
-                  "value": 4,
-                  "description": "Select PEx as the source input for the EXTIx external interrupt"
-                },
-                {
-                  "name": "PF",
-                  "value": 5,
-                  "description": "Select PFx as the source input for the EXTIx external interrupt"
-                },
-                {
-                  "name": "PG",
-                  "value": 6,
-                  "description": "Select PGx as the source input for the EXTIx external interrupt"
-                },
-                {
-                  "name": "PH",
-                  "value": 7,
-                  "description": "Select PHx as the source input for the EXTIx external interrupt"
-                },
-                {
-                  "name": "PI",
-                  "value": 8,
-                  "description": "Select PIx as the source input for the EXTIx external interrupt"
-                },
-                {
-                  "name": "PJ",
-                  "value": 9,
-                  "description": "Select PJx as the source input for the EXTIx external interrupt"
-                },
-                {
-                  "name": "PK",
-                  "value": 10,
-                  "description": "Select PKx as the source input for the EXTIx external interrupt"
-                }
-              ]
+              "description": "EXTI x configuration (x = 0 to 3)"
             }
           ]
         },
@@ -322,37 +265,13 @@
               "name": "READY",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "READY",
-              "enum_values": [
-                {
-                  "name": "NotReady",
-                  "value": 0,
-                  "description": "I/O compensation cell not ready"
-                },
-                {
-                  "name": "Ready",
-                  "value": 1,
-                  "description": "I/O compensation cell ready"
-                }
-              ]
+              "description": "READY"
             },
             {
               "name": "CMP_PD",
               "bit_offset": 0,
               "bit_width": 1,
-              "description": "Compensation cell power-down",
-              "enum_values": [
-                {
-                  "name": "PowerDown",
-                  "value": 0,
-                  "description": "I/O compensation cell power-down mode"
-                },
-                {
-                  "name": "Enabled",
-                  "value": 1,
-                  "description": "I/O compensation cell enabled"
-                }
-              ]
+              "description": "Compensation cell power-down"
             }
           ]
         }

@@ -3,8 +3,8 @@
   "kind": "usb",
   "version": "v1",
   "source": "stm32rs_svd",
-  "source_device": "stm32f302cb",
-  "source_file": "stm32f302.svd.patched",
+  "source_device": "stm32f102c4",
+  "source_file": "stm32f102.svd.patched",
   "blocks": {
     "USB": {
       "name": "USB",
@@ -15,7 +15,7 @@
           "name": "EP%sR",
           "offset": 0,
           "size": 32,
-          "access": null,
+          "access": "read-write",
           "reset_value": 0,
           "description": "endpoint %s register",
           "array_len": 8,
@@ -25,8 +25,7 @@
               "name": "EA",
               "bit_offset": 0,
               "bit_width": 4,
-              "description": "Endpoint address",
-              "access": "read-write"
+              "description": "Endpoint address"
             },
             {
               "name": "STAT_TX",
@@ -61,29 +60,25 @@
               "name": "DTOG_TX",
               "bit_offset": 6,
               "bit_width": 1,
-              "description": "Data Toggle, for transmission transfers",
-              "access": "read-write"
+              "description": "Data Toggle, for transmission transfers"
             },
             {
               "name": "CTR_TX",
               "bit_offset": 7,
               "bit_width": 1,
-              "description": "Correct Transfer for transmission",
-              "access": "read-write"
+              "description": "Correct Transfer for transmission"
             },
             {
               "name": "EP_KIND",
               "bit_offset": 8,
               "bit_width": 1,
-              "description": "Endpoint kind",
-              "access": "read-write"
+              "description": "Endpoint kind"
             },
             {
               "name": "EP_TYPE",
               "bit_offset": 9,
               "bit_width": 2,
               "description": "Endpoint type",
-              "access": "read-write",
               "enum_values": [
                 {
                   "name": "Bulk",
@@ -111,8 +106,7 @@
               "name": "SETUP",
               "bit_offset": 11,
               "bit_width": 1,
-              "description": "Setup transaction completed",
-              "access": "read-only"
+              "description": "Setup transaction completed"
             },
             {
               "name": "STAT_RX",
@@ -147,15 +141,13 @@
               "name": "DTOG_RX",
               "bit_offset": 14,
               "bit_width": 1,
-              "description": "Data Toggle, for reception transfers",
-              "access": "read-write"
+              "description": "Data Toggle, for reception transfers"
             },
             {
               "name": "CTR_RX",
               "bit_offset": 15,
               "bit_width": 1,
-              "description": "Correct transfer for reception",
-              "access": "read-write"
+              "description": "Correct transfer for reception"
             }
           ]
         },
@@ -404,7 +396,7 @@
           "name": "ISTR",
           "offset": 68,
           "size": 32,
-          "access": null,
+          "access": "read-write",
           "reset_value": 0,
           "description": "interrupt status register",
           "array_len": null,
@@ -414,15 +406,13 @@
               "name": "EP_ID",
               "bit_offset": 0,
               "bit_width": 4,
-              "description": "Endpoint Identifier",
-              "access": "read-only"
+              "description": "Endpoint Identifier"
             },
             {
               "name": "DIR",
               "bit_offset": 4,
               "bit_width": 1,
               "description": "Direction of transaction",
-              "access": "read-only",
               "enum_values": [
                 {
                   "name": "To",
@@ -441,7 +431,6 @@
               "bit_offset": 8,
               "bit_width": 1,
               "description": "Expected start frame",
-              "access": "read-write",
               "enum_values": [
                 {
                   "name": "NotExpectedStartOfFrame",
@@ -465,7 +454,6 @@
               "bit_offset": 9,
               "bit_width": 1,
               "description": "start of frame",
-              "access": "read-write",
               "enum_values": [
                 {
                   "name": "NotStartOfFrame",
@@ -489,7 +477,6 @@
               "bit_offset": 10,
               "bit_width": 1,
               "description": "reset request",
-              "access": "read-write",
               "enum_values": [
                 {
                   "name": "NotReset",
@@ -513,7 +500,6 @@
               "bit_offset": 11,
               "bit_width": 1,
               "description": "Suspend mode request",
-              "access": "read-write",
               "enum_values": [
                 {
                   "name": "NotSuspend",
@@ -537,7 +523,6 @@
               "bit_offset": 12,
               "bit_width": 1,
               "description": "Wakeup",
-              "access": "read-write",
               "enum_values": [
                 {
                   "name": "NotWakeup",
@@ -561,7 +546,6 @@
               "bit_offset": 13,
               "bit_width": 1,
               "description": "Error",
-              "access": "read-write",
               "enum_values": [
                 {
                   "name": "NotOverrun",
@@ -585,7 +569,6 @@
               "bit_offset": 14,
               "bit_width": 1,
               "description": "Packet memory area over / underrun",
-              "access": "read-write",
               "enum_values": [
                 {
                   "name": "NotOverrun",
@@ -609,7 +592,6 @@
               "bit_offset": 15,
               "bit_width": 1,
               "description": "Correct transfer",
-              "access": "read-only",
               "enum_values": [
                 {
                   "name": "Completed",
@@ -694,6 +676,12 @@
           "array_stride": null,
           "fields": [
             {
+              "name": "ADD",
+              "bit_offset": 0,
+              "bit_width": 7,
+              "description": "Device address"
+            },
+            {
               "name": "EF",
               "bit_offset": 7,
               "bit_width": 1,
@@ -710,12 +698,6 @@
                   "description": "USB device enabled"
                 }
               ]
-            },
-            {
-              "name": "ADD",
-              "bit_offset": 0,
-              "bit_width": 7,
-              "description": "Device address"
             }
           ]
         },
