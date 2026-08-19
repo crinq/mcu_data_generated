@@ -269,7 +269,10 @@ Top-level GPIO catalog. One entry per logical GPIO pad on the die.
   "additional_functions": [
     "ADC1_EXTI10",
     "EXTI10"
-  ]
+  ],
+  "flags": {
+    "5V_tolerant": true
+  }
 }
 ```
 
@@ -286,6 +289,14 @@ Top-level GPIO catalog. One entry per logical GPIO pad on the die.
   RCC oscillator pins, debug (SWD/JTAG) signals. Format mirrors AF entries
   where applicable. Dash-joined dual signals are split with the prefix
   preserved (`SYS_JTMS-SWDIO` → `SYS_JTMS`, `SYS_SWDIO`).
+
+- `flags` is an optional dict of per-pad electrical/feature flags sourced
+  from the datasheet pin table ("I/O structure" column, extracted by
+  `stm32_pins.py`). Currently defined: `5V_tolerant` (bool) — `true` for
+  FT* codes, `false` for TT*/TC codes and F1-era blank-cell convention.
+  The key is absent when the datasheet gives no rating (`-` cells) or no
+  datasheet extraction exists for the device (e.g. C0/U0/WBA/N6/H5).
+  Never assume a missing flag means tolerant.
 
 Cross-reference: `packages[*].pins[*].names` → look up matching `gpios[*].name`.
 Use the regex `^P[A-Z]\d+(_C)?$` to filter package pin names down to
