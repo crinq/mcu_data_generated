@@ -22,8 +22,11 @@ export function showHelp(openModal: OpenModal): void {
         <section>
           <h3>Filters</h3>
           <p>Add space-separated <code>key:value</code> tokens. All filters AND together.</p>
+          <p>Numeric filters take optional ranges (bounds inclusive):
+            <code>pin:100</code> ≥100 · <code>pin:&lt;100</code> ≤100 ·
+            <code>pin:50&lt;100</code> 50–100. Spaces allowed: <code>pin: 50 &lt; 100</code>.</p>
           <table class="help-table">
-            <tr><th><code>pin:N</code></th><td>min pin count (max across packages)</td></tr>
+            <tr><th><code>pin:N</code></th><td>pin count (max across packages)</td></tr>
             <tr><th><code>freq:100M</code></th><td>min frequency. SI suffixes: <code>k</code>=1e3 <code>M</code>=1e6 <code>G</code>=1e9</td></tr>
             <tr><th><code>mhz:100</code></th><td>min frequency in MHz</td></tr>
             <tr><th><code>ram:32k</code></th><td>min RAM. Binary suffixes: <code>k</code>=1024 <code>M</code>=1024² <code>G</code>=1024³</td></tr>
@@ -32,6 +35,7 @@ export function showHelp(openModal: OpenModal): void {
             <tr><th><code>family:stm32h*</code></th><td>family wildcard match</td></tr>
             <tr><th><code>sub_family:stm32f405</code></th><td>sub-family wildcard match</td></tr>
             <tr><th><code>core:cm7</code></th><td>core name wildcard match</td></tr>
+            <tr><th><code>package:lqfp48</code></th><td>package name or variant SKU wildcard match (alias <code>pkg:</code>)</td></tr>
           </table>
         </section>
         <section>

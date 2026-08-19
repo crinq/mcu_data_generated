@@ -15,10 +15,23 @@ export function parseQuery(input: string): ParsedQuery {
   const tokens = input.trim().split(/\s+/).filter(Boolean);
   let namePattern: string | null = null;
   const filters: FilterToken[] = [];
-  for (const t of tokens) {
+  for (let i = 0; i < tokens.length; i++) {
+    const t = tokens[i];
     const colon = t.indexOf(':');
     if (colon > 0) {
-      filters.push({ key: t.slice(0, colon).toLowerCase(), value: t.slice(colon + 1), raw: t });
+      let value = t.slice(colon + 1);
+      // Absorb continuation tokens so `pin: 50 < 100`, `pin: <100`, and
+      // `pin: 100` all parse as one filter.
+      while (i + 1 < tokens.length) {
+        const next = tokens[i + 1];
+        if (value === '' || value.endsWith('<') || next === '<' || next.startsWith('<')) {
+          value += next;
+          i++;
+        } else {
+          break;
+        }
+      }
+      filters.push({ key: t.slice(0, colon).toLowerCase(), value, raw: t });
     } else if (namePattern === null) {
       namePattern = t.toLowerCase();
     } else {
@@ -26,6 +39,41 @@ export function parseQuery(input: string): ParsedQuery {
     }
   }
   return { namePattern, filters };
+}
+
+/** Inclusive numeric range from a filter value. `null` bound = unbounded. */
+export interface NumRange { min: number | null; max: number | null }
+
+/**
+ * Parse a numeric filter value with optional range syntax:
+ *   "100"      → min 100            (at least)
+ *   "<100"     → max 100            (at most, inclusive)
+ *   "50<100"   → min 50, max 100    (between, inclusive)
+ * `parse` converts one number literal (handles suffixes like k/M/G).
+ */
+export function parseNumRange(
+  v: string,
+  parse: (s: string) => number | null,
+): NumRange | null {
+  const parts = v.split('<');
+  if (parts.length > 2) return null;
+  const norm = (s: string): number | null => {
+    const n = parse(s.trim());
+    return n === null || isNaN(n) ? null : n;
+  };
+  if (parts.length === 1) {
+    const n = norm(parts[0]);
+    return n === null ? null : { min: n, max: null };
+  }
+  const max = norm(parts[1]);
+  if (max === null) return null;
+  if (parts[0].trim() === '') return { min: null, max };
+  const min = norm(parts[0]);
+  return min === null ? null : { min, max };
+}
+
+export function inRange(x: number, r: NumRange): boolean {
+  return (r.min === null || x >= r.min) && (r.max === null || x <= r.max);
 }
 
 /**
@@ -112,6 +160,7 @@ function peripheralCountInMcu(m: Mcu, kind: string): number {
 
 const SUMMARY_KEYS = new Set([
   'pin', 'pins', 'freq', 'mhz', 'ram', 'rom', 'flash', 'family', 'sub_family', 'sub-family', 'core',
+  'package', 'pkg',
 ]);
 
 export function isSummaryFilter(f: FilterToken): boolean {
@@ -125,33 +174,41 @@ export function partitionFilters(filters: FilterToken[]): { summary: FilterToken
   return { summary, detail };
 }
 
+const parseIntStrict = (s: string): number | null => {
+  const n = parseInt(s, 10);
+  return isNaN(n) ? null : n;
+};
+
+const parseMhz = (s: string): number | null => {
+  const n = parseFloat(s);
+  return isNaN(n) ? null : n * 1e6;
+};
+
 export function checkSummaryFilter(s: DeviceSummary, f: FilterToken): boolean {
   switch (f.key) {
     case 'pin':
     case 'pins': {
-      const want = parseInt(f.value, 10);
-      if (isNaN(want)) return false;
-      return pinCountFromPackages(packageNames(s.packages)) >= want;
+      const r = parseNumRange(f.value, parseIntStrict);
+      if (r === null) return false;
+      return inRange(pinCountFromPackages(packageNames(s.packages)), r);
     }
     case 'freq':
     case 'mhz': {
-      const want = f.key === 'mhz'
-        ? parseFloat(f.value) * 1e6
-        : parseScaledSI(f.value);
-      if (want === null || isNaN(want)) return false;
+      const r = parseNumRange(f.value, f.key === 'mhz' ? parseMhz : parseScaledSI);
+      if (r === null) return false;
       const max = (s.cores || []).reduce((m, c) => Math.max(m, c.freq_max_hz ?? 0), 0);
-      return max >= want;
+      return inRange(max, r);
     }
     case 'ram': {
-      const want = parseScaled(f.value);
-      if (want === null) return false;
-      return (s.ram_bytes ?? 0) >= want;
+      const r = parseNumRange(f.value, parseScaled);
+      if (r === null) return false;
+      return inRange(s.ram_bytes ?? 0, r);
     }
     case 'rom':
     case 'flash': {
-      const want = parseScaled(f.value);
-      if (want === null) return false;
-      return (s.flash_bytes ?? 0) >= want;
+      const r = parseNumRange(f.value, parseScaled);
+      if (r === null) return false;
+      return inRange(s.flash_bytes ?? 0, r);
     }
     case 'family':
       return wildcardMatch(s.family || '', f.value);
@@ -160,6 +217,11 @@ export function checkSummaryFilter(s: DeviceSummary, f: FilterToken): boolean {
       return wildcardMatch(s.sub_family || '', f.value);
     case 'core':
       return (s.cores || []).some(c => wildcardMatch(c.name || '', f.value));
+    case 'package':
+    case 'pkg':
+      // Match package names (LQFP48) or variant SKUs (STM32F405RGTx).
+      return packageNames(s.packages).some(p => wildcardMatch(p, f.value))
+        || Object.keys(s.packages || {}).some(v => wildcardMatch(v, f.value));
     default:
       return false;
   }
@@ -167,9 +229,9 @@ export function checkSummaryFilter(s: DeviceSummary, f: FilterToken): boolean {
 
 export function checkDetailFilter(m: Mcu, f: FilterToken): boolean {
   // Only peripheral-kind counts here. Anything else is treated as a peripheral kind.
-  const want = parseInt(f.value, 10);
-  if (isNaN(want)) return false;
-  return peripheralCountInMcu(m, f.key) >= want;
+  const r = parseNumRange(f.value, parseIntStrict);
+  if (r === null) return false;
+  return inRange(peripheralCountInMcu(m, f.key), r);
 }
 
 export function filterByName(devices: string[], pattern: string | null): string[] {

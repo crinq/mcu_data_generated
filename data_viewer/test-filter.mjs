@@ -24,14 +24,39 @@ function parseQuery(input) {
   const tokens = input.trim().split(/\s+/).filter(Boolean);
   let namePattern = null;
   const filters = [];
-  for (const t of tokens) {
+  for (let i = 0; i < tokens.length; i++) {
+    const t = tokens[i];
     const c = t.indexOf(':');
-    if (c > 0) filters.push({ key: t.slice(0, c).toLowerCase(), value: t.slice(c + 1) });
+    if (c > 0) {
+      let value = t.slice(c + 1);
+      while (i + 1 < tokens.length) {
+        const next = tokens[i + 1];
+        if (value === '' || value.endsWith('<') || next === '<' || next.startsWith('<')) { value += next; i++; }
+        else break;
+      }
+      filters.push({ key: t.slice(0, c).toLowerCase(), value });
+    }
     else if (namePattern === null) namePattern = t.toLowerCase();
     else namePattern += t.toLowerCase();
   }
   return { namePattern, filters };
 }
+function parseNumRange(v, parse) {
+  const parts = v.split('<');
+  if (parts.length > 2) return null;
+  const norm = (s) => { const n = parse(s.trim()); return n === null || isNaN(n) ? null : n; };
+  if (parts.length === 1) { const n = norm(parts[0]); return n === null ? null : { min: n, max: null }; }
+  const max = norm(parts[1]);
+  if (max === null) return null;
+  if (parts[0].trim() === '') return { min: null, max };
+  const min = norm(parts[0]);
+  return min === null ? null : { min, max };
+}
+function inRange(x, r) {
+  return (r.min === null || x >= r.min) && (r.max === null || x <= r.max);
+}
+const parseIntStrict = (s) => { const n = parseInt(s, 10); return isNaN(n) ? null : n; };
+const parseMhz = (s) => { const n = parseFloat(s); return isNaN(n) ? null : n * 1e6; };
 function wildcardMatch(name, pattern) {
   if (!pattern) return true;
   const lower = name.toLowerCase();
@@ -66,27 +91,35 @@ const ALIAS = new Map();
 for (const g of ALIAS_GROUPS) { const s = new Set(g); for (const n of s) ALIAS.set(n, s); }
 function expandAliases(k) { return ALIAS.get(k.toLowerCase()) ?? new Set([k.toLowerCase()]); }
 
-const SUMMARY_KEYS = new Set(['pin','pins','freq','mhz','ram','rom','flash','family','sub_family','sub-family','core']);
+const SUMMARY_KEYS = new Set(['pin','pins','freq','mhz','ram','rom','flash','family','sub_family','sub-family','core','package','pkg']);
 function checkSummary(s, f) {
   switch (f.key) {
-    case 'pin': case 'pins': { const w = parseInt(f.value, 10); return !isNaN(w) && pinCountFromPackages(s.packages) >= w; }
-    case 'freq': case 'mhz': {
-      const w = f.key === 'mhz' ? parseFloat(f.value) * 1e6 : parseScaledSI(f.value);
-      const mx = (s.cores || []).reduce((a, c) => Math.max(a, c.freq_max_hz ?? 0), 0);
-      return w !== null && !isNaN(w) && mx >= w;
+    case 'pin': case 'pins': {
+      const r = parseNumRange(f.value, parseIntStrict);
+      return r !== null && inRange(pinCountFromPackages(s.packages), r);
     }
-    case 'ram': { const w = parseScaled(f.value); return w !== null && (s.ram_bytes ?? 0) >= w; }
-    case 'rom': case 'flash': { const w = parseScaled(f.value); return w !== null && (s.flash_bytes ?? 0) >= w; }
+    case 'freq': case 'mhz': {
+      const r = parseNumRange(f.value, f.key === 'mhz' ? parseMhz : parseScaledSI);
+      const mx = (s.cores || []).reduce((a, c) => Math.max(a, c.freq_max_hz ?? 0), 0);
+      return r !== null && inRange(mx, r);
+    }
+    case 'ram': { const r = parseNumRange(f.value, parseScaled); return r !== null && inRange(s.ram_bytes ?? 0, r); }
+    case 'rom': case 'flash': { const r = parseNumRange(f.value, parseScaled); return r !== null && inRange(s.flash_bytes ?? 0, r); }
     case 'family': return wildcardMatch(s.family || '', f.value);
     case 'sub_family': case 'sub-family': return wildcardMatch(s.sub_family || '', f.value);
     case 'core': return (s.cores || []).some(c => wildcardMatch(c.name || '', f.value));
+    case 'package': case 'pkg': {
+      const names = Array.isArray(s.packages) ? s.packages : Object.values(s.packages || {});
+      const variants = Array.isArray(s.packages) ? [] : Object.keys(s.packages || {});
+      return names.some(p => wildcardMatch(p, f.value)) || variants.some(v => wildcardMatch(v, f.value));
+    }
     default: return false;
   }
 }
 function checkDetail(m, f) {
-  const w = parseInt(f.value, 10); if (isNaN(w)) return false;
+  const r = parseNumRange(f.value, parseIntStrict); if (r === null) return false;
   const accepted = expandAliases(f.key);
-  return (m.peripherals || []).filter(p => p.kind && accepted.has(p.kind.toLowerCase())).length >= w;
+  return inRange((m.peripherals || []).filter(p => p.kind && accepted.has(p.kind.toLowerCase())).length, r);
 }
 function search(query) {
   const q = parseQuery(query);
@@ -108,6 +141,22 @@ console.log('parseQuery:');
 expect('bare name', parseQuery('stm32f4'), q => q.namePattern === 'stm32f4' && q.filters.length === 0);
 expect('name + filter', parseQuery('stm32h7 pin:144'), q => q.namePattern === 'stm32h7' && q.filters.length === 1);
 expect('two filters', parseQuery('adc:3 ram:32k'), q => q.filters.length === 2);
+expect('spaced value', parseQuery('pin: 100'), q => q.filters.length === 1 && q.filters[0].value === '100');
+expect('spaced max range', parseQuery('pin: < 100'), q => q.filters.length === 1 && q.filters[0].value === '<100');
+expect('spaced between', parseQuery('pin: 50 < 100 stm32f4'),
+  q => q.filters[0].value === '50<100' && q.namePattern === 'stm32f4');
+expect('compact between', parseQuery('pin:50<100'), q => q.filters[0].value === '50<100');
+
+console.log('parseNumRange:');
+expect('min only', parseNumRange('100', parseIntStrict), r => r.min === 100 && r.max === null);
+expect('max only', parseNumRange('<100', parseIntStrict), r => r.min === null && r.max === 100);
+expect('between', parseNumRange('50<100', parseIntStrict), r => r.min === 50 && r.max === 100);
+expect('garbage null', parseNumRange('abc', parseIntStrict), r => r === null);
+expect('double < null', parseNumRange('1<2<3', parseIntStrict), r => r === null);
+expect('inRange between', inRange(64, { min: 50, max: 100 }), v => v === true);
+expect('inRange below', inRange(49, { min: 50, max: 100 }), v => v === false);
+expect('inRange above', inRange(101, { min: 50, max: 100 }), v => v === false);
+expect('inRange bounds inclusive', inRange(100, { min: 50, max: 100 }) && inRange(50, { min: 50, max: 100 }), v => v === true);
 
 console.log('wildcardMatch:');
 expect('substring', wildcardMatch('stm32f401vc', 'stm32f4'), v => v === true);
@@ -129,6 +178,39 @@ expect('rom:256k has matches', search('rom:256k'), r => r.length > 100);
 expect('family:stm32h*', search('family:stm32h*'), r => r.every(n => n.startsWith('stm32h')) && r.length > 50);
 expect('sub_family filter', search('sub_family:stm32f405'), r => r.length > 0 && r.every(n => summaryOf(n).sub_family === 'stm32f405'));
 expect('core:cm7', search('core:cm7'), r => r.length > 0);
+
+console.log('package filter:');
+const lqfp = search('package:lqfp');
+const lqfp48 = search('package:lqfp48');
+expect('package:lqfp non-empty', lqfp, r => r.length > 100);
+expect('package:lqfp48 non-empty', lqfp48, r => r.length > 0);
+expect('lqfp48 subset of lqfp', lqfp48.every(n => lqfp.includes(n)), v => v === true);
+expect('package:lqfp48 all have LQFP48', lqfp48, r => r.every(n => {
+  const pkgs = summaryOf(n).packages;
+  return Object.values(pkgs).some(p => p.toLowerCase().includes('lqfp48'));
+}));
+expect('pkg alias works', search('pkg:lqfp48'), r => r.length === lqfp48.length);
+expect('variant SKU match', search('package:STM32F405RGTx'), r => r.includes('stm32f405rg'));
+expect('package wildcard', search('package:ufbga*'), r => r.length > 0);
+expect('bogus package empty', search('package:zzz999'), r => r.length === 0);
+
+console.log('range filters:');
+const pinMax64 = search('pin:<64');
+const pinBetween = search('pin:64<100');
+const pinAll = search('pin:1');
+expect('pin:<64 non-empty', pinMax64, r => r.length > 0);
+expect('pin:<64 excludes 144-pin', pinMax64, r => !r.includes('stm32h743zi'));
+expect('pin:64<100 non-empty', pinBetween, r => r.length > 0);
+expect('pin ranges partition', pinMax64.length + search('pin:64').length >= pinAll.length,
+  v => v === true);
+expect('spaced range same as compact', search('pin: 64 < 100'), r => r.length === pinBetween.length);
+expect('freq:<100M excludes H7', search('freq:<100M stm32h743'), r => r.length === 0);
+expect('mhz:100<200 non-empty', search('mhz:100<200'), r => r.length > 0);
+expect('ram:32k<64k non-empty', search('ram:32k<64k'), r => r.length > 0);
+expect('adc:2<3 detail range', search('stm32f40 adc:2<3'), r => r.every(n => {
+  const c = (loadMcu(n).peripherals || []).filter(p => p.kind === 'adc').length;
+  return c >= 2 && c <= 3;
+}));
 
 console.log('detail filters (with fetch):');
 const adc3 = search('adc:3');
